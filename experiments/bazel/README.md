@@ -100,3 +100,9 @@ recommended making many granular `cc_library`s and one `cc_test` per
 
 - [Bazel](https://www.bazel.build/)
 - [C/C++ Rules](https://docs.bazel.build/versions/master/be/c-cpp.html)
+- https://docs.bazel.build/versions/master/be/overview.html
+- https://docs.bazel.build/versions/master/build-ref.html
+- https://docs.bazel.build/versions/master/user-manual.html
+- https://docs.bazel.build/versions/master/tutorial/cc-toolchain-config.html
+- https://groups.google.com/forum/#!topic/bazel-discuss/-8T30fYg3UM
+- https://github.com/prattmic/embedded-bazel
