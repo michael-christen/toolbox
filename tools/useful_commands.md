@@ -28,3 +28,11 @@ https://stackoverflow.com/questions/4009412/how-to-use-arguments-from-previous-c
 !:0     the command
 !!      repeat the previous line
 ```
+
+#### Package Commands
+
+Get package dependencies:
+
+```
+apt-cache depends --recurse --no-recommends --no-suggests --no-replaces --no-breaks --no-conflicts <package>
+```
