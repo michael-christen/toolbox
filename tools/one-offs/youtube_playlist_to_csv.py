@@ -2,7 +2,10 @@
 import csv
 import json
 import sys
+import re
 
+RECIPE_RE = re.compile(
+    r'[Rr]ecipe( here)?: (?P<url>http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\), ]|(?:%0-9a-fA-F][0-9a-fA-F]))+)')
 
 def main():
     rows = get_rows()
@@ -12,10 +15,18 @@ def main():
 def write_rows(rows):
     writer = csv.DictWriter(
         sys.stdout,
-        fieldnames=['video_id', 'image_url', 'title', 'description'])
+        fieldnames=['video_id', 'image_url', 'title', 'recipe_url', 'description'])
     writer.writeheader()
     for row in rows:
         writer.writerow(row)
+
+
+def get_recipe_url_from_description(description):
+    match = RECIPE_RE.search(description)
+    if not match:
+        return ''
+    else:
+        return match.group('url')
 
 
 def get_rows():
@@ -36,12 +47,13 @@ def get_rows():
             raise KeyError(f'No thumbnail found in {item}')
         title = item['snippet']['title']
         description = item['snippet']['description']
-        # TODO: Look for recipe url in description
+        recipe_url = get_recipe_url_from_description(description)
         row = {
             'video_id': video_id,
             'image_url': image_url,
             'title': title,
             'description': description,
+            'recipe_url': recipe_url,
         }
         rows.append(row)
     return rows
