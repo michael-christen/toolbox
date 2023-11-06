@@ -21,6 +21,8 @@ latest insights into best practices, design principles, dev-ops usage, etc.
 - hermetic tools
 - github workflow
 - using gazelle?
+- dotconfig
+- ssh agent and commit signing
 - show it all
   - protobuf
   - python
@@ -36,3 +38,5 @@ latest insights into best practices, design principles, dev-ops usage, etc.
     - C++
     - Rust
     - RTOS build
+  - tools
+    - stats tracking
