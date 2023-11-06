@@ -99,3 +99,9 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# bazel
+bazel-bin
+bazel-out
+bazel-testlogs
+bazel-toolbox
