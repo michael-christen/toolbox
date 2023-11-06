@@ -32,7 +32,6 @@ latest insights into best practices, design principles, dev-ops usage, etc.
 - ssh agent and commit signing
 - configure caching
 - show it all
-  - python
   - rust
   - nanopb
   - embedded
@@ -56,12 +55,13 @@ latest insights into best practices, design principles, dev-ops usage, etc.
   - tools
     - stats tracking
 - libraries like absl
-- python protos, use py_proto_library or generate .py and .pyi?
+- python protos, do we need .py and .pyi?
 - github squash strategy
 - decide on rough rules for directory structure, likely don't separate by
   language
 - code gen tools
 - setup [buildifier](https://github.com/bazelbuild/buildtools/blob/master/buildifier/README.md)
+- python dev workflow with bazel only, eg) ipython equivalent?
 
 ### Personal
 - switch to ubuntu
@@ -69,6 +69,7 @@ latest insights into best practices, design principles, dev-ops usage, etc.
 - tmux use previous directory
 - vim settings
   - std::cout "no member named 'cout' in namespace 'std'"
+  - python setup
 - bazel completion
 - personal jira
 

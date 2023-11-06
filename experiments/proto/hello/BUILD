@@ -20,3 +20,12 @@ py_proto_library(
   name = "hello_py_pb2",
   deps = [":hello_proto"],
 )
+
+py_test(
+  name = "hello_test",
+  srcs = ["hello_test.py"],
+  deps = [
+    ":hello_py_pb2",
+  ],
+)
+
