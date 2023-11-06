@@ -17,6 +17,7 @@ latest insights into best practices, design principles, dev-ops usage, etc.
 ## To Do
 
 - Setup basic Bazel WORKSPACE
+- gh tools
 - hermetic tools
 - github workflow
 - using gazelle?
