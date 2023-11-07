@@ -77,6 +77,9 @@ latest insights into best practices, design principles, dev-ops usage, etc.
 - https://docs.platformio.org/ play with / utilize bazel rules
 - make my own custom bazel "workspace?" for new rules
 - lots of good documentation
+- specify .bazelrc, .bazelversion
+- cancel actions if other is going on
+- setup bazel remote caching
 
 ### Personal
 - switch to ubuntu
@@ -101,6 +104,11 @@ Bazel:
   - https://www.tweag.io/blog/2023-07-27-building-rust-workspace-with-bazel/
   - `CARGO_BAZEL_REPIN=1 bazel sync --only=crate_index`
     - need to run this whenever updating dependencies
+
+misc. articles:
+- [bazel and github](https://dev.to/davidb31/experimentations-on-bazel-github-action-5639)
+
+Github Actions:
 
 ## Installation Instructions
 
