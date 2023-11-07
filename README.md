@@ -74,6 +74,9 @@ latest insights into best practices, design principles, dev-ops usage, etc.
   - crate_universe, should we only have 1 lock file then?
 - py03 for building python?
 - mix c++ and rust
+- https://docs.platformio.org/ play with / utilize bazel rules
+- make my own custom bazel "workspace?" for new rules
+- lots of good documentation
 
 ### Personal
 - switch to ubuntu
