@@ -14,62 +14,11 @@ latest insights into best practices, design principles, dev-ops usage, etc.
 - tools: directory of various tools
 - experiments: miscellaneous experiments I'm trying out
 
-## To Do
-
-- gitignore
-- pyright, etc.
-- gh tools
-- handle security issues & re-enable dependabot:
-  https://github.com/michael-christen/toolbox/security/dependabot
-- hermetic tools
-- github workflow
-- using gazelle?
-- dotconfig
-- ssh agent and commit signing
-- configure caching
-- show it all
-  - protobuf
-  - python
-  - rust
-  - nanopb
-  - embedded
-  - javascript
-  - fast api
-  - django
-- how to include third party code, etc.
-- code format: clang-format, yapf, etc.
-- XXX checks
-- build install with docker, puppet, ansible or something
-- testing
-- serialization in general
-- libraries
-  - bit manipulation
-- projects
-  - embedded
-    - C++
-    - Rust
-    - RTOS build
-  - tools
-    - stats tracking
-- github squash strategy
-- decide on rough rules for directory structure, likely don't separate by
+## TODO
+- [ ] decide on rough rules for directory structure, likely don't separate by
   language
-
-### Personal
-- switch to ubuntu
-- get tmux copy/paste working
-- tmux use previous directory
-- vim settings
-  - std::cout "no member named 'cout' in namespace 'std'"
-- bazel completion
-- personal jira
-
-## Notes
-
-Bazel:
-- use via bazelisk, keeps up to date
-- [cpp](https://bazel.build/start/cpp)
-  - put in experiments/cpp/hello
+- [ ] handle security issues & re-enable dependabot:
+  https://github.com/michael-christen/toolbox/security/dependabot
 
 ## Installation Instructions
 
@@ -80,5 +29,20 @@ chmod +x ~/tools/bazel
 # Add to path
 ```
 
-## Cross-referenced
-- how to reproducibly install bazelisk, download and use
+## Issues
+
+```
+INFO: From Compiling src/google/protobuf/generated_message_tctable_lite.cc [for tool]:
+In file included from bazel-out/k8-opt-exec-2B5CBBC6/bin/external/com_google_protobuf/src/google/protobuf/_virtual_includes/protobuf_lite/google/protobuf/generated_message_tctable_decl.h:45:0,
+from external/com_google_protobuf/src/google/protobuf/generated_message_tctable_lite.cc:42:
+bazel-out/k8-opt-exec-2B5CBBC6/bin/external/com_google_protobuf/src/google/protobuf/_virtual_includes/protobuf_lite/google/protobuf/parse_context.h:1147:1: warning: always_inline function might not be inlinable [
+-Wattributes]
+ParseContext::ParseLengthDelimitedInlined(const char* ptr, const Func& func) {
+^~~~~~~~~~~~
+external/com_google_protobuf/src/google/protobuf/generated_message_tctable_lite.cc:867:36: warning: always_inline function might not be inlinable [-Wattributes]
+PROTOBUF_ALWAYS_INLINE const char* TcParser::FastVarintS1(
+^~~~~~~~
+external/com_google_protobuf/src/google/protobuf/generated_message_tctable_lite.cc:867:36: warning: always_inline function might not be inlinable [-Wattributes]
+```
+- externla/com_google_protobuf warning directory does not exist
+

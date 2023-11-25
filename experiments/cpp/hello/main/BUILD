@@ -12,5 +12,6 @@ cc_binary(
     deps = [
         ":hello-greet",
         "//experiments/cpp/hello/lib:hello-time",
+        "//experiments/proto/hello:hello_cc_proto",
     ],
 )
