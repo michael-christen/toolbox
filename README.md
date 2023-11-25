@@ -14,90 +14,11 @@ latest insights into best practices, design principles, dev-ops usage, etc.
 - tools: directory of various tools
 - experiments: miscellaneous experiments I'm trying out
 
-## To Do
-
-- add tests
-- grpc
-- gitignore
-- config generation / management
-- pyright, etc.
-- gh tools
-- rust all_crate_deps not working
-  - could python and cpp do something similar?
-- handle security issues & re-enable dependabot:
-  https://github.com/michael-christen/toolbox/security/dependabot
-- hermetic tools
-- github workflow
-- using gazelle
-  - commented out in workspace, not used yet
-- dotconfig
-- ssh agent and commit signing
-- configure caching
-- show it all
-  - rust
-  - nanopb
-  - embedded
-  - javascript
-  - fast api
-  - django
-- how to include third party code, etc.
-  - https://bazel.build/external/overview#bzlmod seems interesting
-- code format: clang-format, yapf, etc.
-- XXX checks
-- build install with docker, puppet, ansible or something
-- testing
-- serialization in general
-- libraries
-  - bit manipulation
-- projects
-  - embedded
-    - C++
-    - Rust
-    - RTOS build
-  - tools
-    - stats tracking
-- libraries like absl
-- python protos, do we need .py and .pyi?
-- github squash strategy
-- decide on rough rules for directory structure, likely don't separate by
+## TODO
+- [ ] decide on rough rules for directory structure, likely don't separate by
   language
-- code gen tools
-- setup [buildifier](https://github.com/bazelbuild/buildtools/blob/master/buildifier/README.md)
-- python dev workflow with bazel only, eg) ipython equivalent?
-- multiple python build types
-- release generation
-- deployment
-- register specific toolchains / lock em down
-- different dependency chains
-- document common uses of the build system
-- how do we share rust around / have separate packages, but shared dependecies?
-  - crate_universe, should we only have 1 lock file then?
-- py03 for building python?
-- mix c++ and rust
-
-### Personal
-- switch to ubuntu
-- get tmux copy/paste working
-- tmux use previous directory
-- vim settings
-  - std::cout "no member named 'cout' in namespace 'std'"
-  - python setup
-- bazel completion
-- personal jira
-
-## Notes
-
-Bazel:
-- use via bazelisk, keeps up to date
-- [cpp](https://bazel.build/start/cpp)
-  - put in experiments/cpp/hello
-- proto
-  - example: https://github.com/cgrushko/proto_library
-- python: https://github.com/bazelbuild/rules_python/tree/main/examples
-- rust: https://github.com/bazelbuild/rules_rust/tree/main/examples
-  - https://www.tweag.io/blog/2023-07-27-building-rust-workspace-with-bazel/
-  - `CARGO_BAZEL_REPIN=1 bazel sync --only=crate_index`
-    - need to run this whenever updating dependencies
+- [ ] handle security issues & re-enable dependabot:
+  https://github.com/michael-christen/toolbox/security/dependabot
 
 ## Installation Instructions
 
@@ -108,10 +29,7 @@ chmod +x ~/tools/bazel
 # Add to path
 ```
 
-## Cross-referenced
-- how to reproducibly install bazelisk, download and use
-
-## Issues:
+## Issues
 
 ```
 INFO: From Compiling src/google/protobuf/generated_message_tctable_lite.cc [for tool]:

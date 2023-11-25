@@ -1,0 +1,27 @@
+name: Build and Test
+run-name: ${{ github.actor }} is building and testing ${{ github.repository }}
+on: [pull_request]
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "The job was triggered by a ${{ github.event_name }} event, running on ${{ runner.os }}, ${{ github.ref }} @ ${{ github.repository }}."
+      - uses: actions/checkout@v4
+      - name: Cache Bazel
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cache/bazelisk
+            ~/.cache/bazel
+          # key: ${{ runner.os }}-bazel
+          # Add .bazelrc, .bazelversion, MODULE.bazel, possibly other
+          # dependencies too
+          # Or should we just setup remote caching more fully?
+          key: ${{ hashFiles('WORKSPACE') }}
+      - name: Build
+        run: |
+          bazel build //...
+      - name: Test
+        run: |
+          bazel test //...
+      - run: echo "Status is ${{ job.status }}."
