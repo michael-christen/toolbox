@@ -1,0 +1,8 @@
+syntax = "proto2";
+
+package experiments.proto.hello;
+
+
+message Hello {
+  optional uint32 id = 1;
+};
