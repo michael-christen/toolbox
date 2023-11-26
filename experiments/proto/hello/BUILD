@@ -13,7 +13,7 @@ cc_proto_library(
   name = "hello_cc_proto",
   deps = [":hello_proto"],
   visibility = [
-    "//experiments/cpp/hello/main:__subpackages__",
+    "//examples/basic/main:__subpackages__",
   ],
 )
 
