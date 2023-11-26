@@ -15,7 +15,8 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+# XXX: Interferes with typical lib directories
+# lib/
 lib64/
 parts/
 sdist/
@@ -102,3 +103,10 @@ ENV/
 
 # pytest cache
 .pytest_cache/
+
+
+# bazel
+bazel-bin
+bazel-out
+bazel-testlogs
+bazel-toolbox
