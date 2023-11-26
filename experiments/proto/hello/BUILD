@@ -1,3 +1,4 @@
+load("@aspect_rules_py//py:defs.bzl", "py_binary")
 load("@rules_proto//proto:defs.bzl", "proto_library")
 load("@rules_cc//cc:defs.bzl", "cc_library")
 load("@rules_python//python:proto.bzl", "py_proto_library")
@@ -29,3 +30,7 @@ py_test(
   ],
 )
 
+py_binary(
+  name = "main",
+  srcs = ["main.py"],
+)
