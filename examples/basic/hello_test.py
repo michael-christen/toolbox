@@ -1,6 +1,6 @@
 import unittest
 
-from experiments.proto.hello import hello_pb2
+from examples.basic import hello_pb2
 
 
 class TestHello(unittest.TestCase):
