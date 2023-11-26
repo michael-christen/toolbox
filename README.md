@@ -46,3 +46,12 @@ external/com_google_protobuf/src/google/protobuf/generated_message_tctable_lite.
 ```
 - externla/com_google_protobuf warning directory does not exist
 
+
+## References
+
+### Bazel
+
+- [query](https://bazel.build/query/language)
+
+#### Notes
+- bzlmod is where things will be moving to better share dependency information and use a central regirstry: https://bazel.build/external/migration
