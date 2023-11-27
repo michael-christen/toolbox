@@ -110,3 +110,12 @@ load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_
 rules_proto_dependencies()
 
 rules_proto_toolchains()
+
+# Git LFS
+http_archive(
+  name = "git_lfs",
+  build_file = "//tools/git_lfs:git_lfs.BUILD",
+  sha256="60b7e9b9b4bca04405af58a2cd5dff3e68a5607c5bc39ee88a5256dd7a07f58c",
+  strip_prefix = "git-lfs-3.4.0",
+  url = "https://github.com/git-lfs/git-lfs/releases/download/v3.4.0/git-lfs-linux-amd64-v3.4.0.tar.gz",
+)

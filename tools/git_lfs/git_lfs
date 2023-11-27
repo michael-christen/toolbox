@@ -1,0 +1,3 @@
+#!/bin/bash
+set -e
+bazel run --config quiet //tools/git_lfs:git_lfs -- $@

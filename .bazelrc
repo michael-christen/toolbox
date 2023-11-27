@@ -1,0 +1,5 @@
+
+
+# Run without bazel otput
+build:quiet --ui_event_filters=-info,-stdout,-stderr
+build:quiet --noshow_progress
