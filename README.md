@@ -77,3 +77,14 @@ Copied from "Bazel"
 # https://www.tweag.io/blog/2023-07-27-building-rust-workspace-with-bazel/
 CARGO_BAZEL_REPIN=1 bazel sync --only=crate_index
 ```
+
+## Language FAQs
+
+Generally, each language needs a way to answer these questions:
+- How to check & enforce style and typing? (linter & formatter)
+- How to bulid?
+- How to test?
+- How to run?
+- How to add dependencies?
+- How to package?
+- How to release / distribute?
