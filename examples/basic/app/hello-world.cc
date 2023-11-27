@@ -1,9 +1,9 @@
 #include <iostream>
 #include <string>
 
-#include "experiments/cpp/hello/lib/hello-time.h"
-#include "experiments/cpp/hello/main/hello-greet.h"
-#include "experiments/proto/hello/hello.pb.h"
+#include "examples/basic/app/hello-greet.h"
+#include "examples/basic/hello.pb.h"
+#include "examples/basic/lib/hello-time.h"
 
 int main(int argc, char** argv) {
   experiments::proto::hello::Hello msg;

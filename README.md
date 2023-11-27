@@ -53,5 +53,38 @@ external/com_google_protobuf/src/google/protobuf/generated_message_tctable_lite.
 
 - [query](https://bazel.build/query/language)
 
+#### Command Quick Reference
+
+```
+# Completely clean
+bazel clean --expunge
+
+# Update cargo dependencies
+# https://www.tweag.io/blog/2023-07-27-building-rust-workspace-with-bazel/
+CARGO_BAZEL_REPIN=1 bazel sync --only=crate_index
+```
+
 #### Notes
 - bzlmod is where things will be moving to better share dependency information and use a central regirstry: https://bazel.build/external/migration
+
+### Rust
+
+#### Command Quick Reference
+
+Copied from "Bazel"
+```
+# Update cargo dependencies
+# https://www.tweag.io/blog/2023-07-27-building-rust-workspace-with-bazel/
+CARGO_BAZEL_REPIN=1 bazel sync --only=crate_index
+```
+
+## Language FAQs
+
+Generally, each language needs a way to answer these questions:
+- How to check & enforce style and typing? (linter & formatter)
+- How to bulid?
+- How to test?
+- How to run?
+- How to add dependencies?
+- How to package?
+- How to release / distribute?
