@@ -17,7 +17,13 @@ def main():
 def write_rows(rows):
     writer = csv.DictWriter(
         sys.stdout,
-        fieldnames=['video_id', 'image_url', 'title', 'recipe_url', 'description'],
+        fieldnames=[
+            'video_id',
+            'image_url',
+            'title',
+            'recipe_url',
+            'description',
+        ],
     )
     writer.writeheader()
     for row in rows:

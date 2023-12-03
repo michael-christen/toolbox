@@ -47,7 +47,9 @@ def main():
                     href=link.attrs['href'],
                     title=link.text,
                     timestamp=int(link.attrs['time_added']),
-                    tags=link.attrs['tags'].split(',') if link.attrs['tags'] else [],
+                    tags=link.attrs['tags'].split(',')
+                    if link.attrs['tags']
+                    else [],
                     is_read=is_read,
                 )
             )

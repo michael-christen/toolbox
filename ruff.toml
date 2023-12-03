@@ -1,3 +1,5 @@
+# Set the maximum line length to 79
+line-length = 79
 
 [format]
 # Find options here: https://docs.astral.sh/ruff/settings/
