@@ -1,0 +1,3 @@
+# When updating this, rerun this
+# bazel run //:requirements.update
+flake8

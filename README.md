@@ -31,6 +31,9 @@ chmod +x ~/tools/bazel
 
 ## Issues
 
+- formatting starting to work, need to configure, install more, and get linting setup
+- XXX: how do we update pnpm-lock.yaml?
+- WARNING: the legacy dependency resolver is deprecated and will be removed in future versions of pip-tools. The default resolver will be changed to 'backtracking' in pip-tools 7.0.0. Specify --resolver=backtracking to silence this warning.
 ```
 INFO: From Compiling src/google/protobuf/generated_message_tctable_lite.cc [for tool]:
 In file included from bazel-out/k8-opt-exec-2B5CBBC6/bin/external/com_google_protobuf/src/google/protobuf/_virtual_includes/protobuf_lite/google/protobuf/generated_message_tctable_decl.h:45:0,
