@@ -10,8 +10,7 @@ load("@aspect_rules_lint//lint:shellcheck.bzl", "shellcheck_binary")
 # load("@npm//:eslint/package_json.bzl", eslint_bin = "bin")
 # load("@npm//:prettier/package_json.bzl", prettier = "bin")
 load("@rules_java//java:defs.bzl", "java_binary")
-# XXX
-# load("@rules_python//python/entry_points:py_console_script_binary.bzl", "py_console_script_binary")
+load("@rules_python//python/entry_points:py_console_script_binary.bzl", "py_console_script_binary")
 
 package(default_visibility = ["//:__subpackages__"])
 
@@ -98,11 +97,10 @@ java_binary(
 
 # We can test that it works with:
 # bazel run :flake8 -- --help
-# XXX
-# py_console_script_binary(
-#     name = "flake8",
-#     pkg = "@pip//flake8:pkg",
-# )
+py_console_script_binary(
+    name = "flake8",
+    pkg = "@pip//flake8:pkg",
+)
 
 # eslint_bin.eslint_binary(name = "eslint")
 
