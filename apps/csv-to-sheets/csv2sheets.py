@@ -28,7 +28,6 @@ class EntryNotFound(BaseError):
     pass
 
 
-
 def read_csv(f=None):
     f = f or sys.stdin
     reader = csv.reader(f)
@@ -54,12 +53,16 @@ def update_sheet(entries, sheet_name):
         'https://www.googleapis.com/auth/drive',
     ]
     credentials = ServiceAccountCredentials.from_json_keyfile_name(
-        'credentials.json', scope)
+        'credentials.json', scope
+    )
     gc = gspread.authorize(credentials)
     # TODO: Select custom sheet
     wks = gc.open(sheet_name).sheet1
     cell_list = wks.range(
-        1, 1, wks.row_count, wks.col_count,
+        1,
+        1,
+        wks.row_count,
+        wks.col_count,
     )
     for cell in cell_list:
         try:

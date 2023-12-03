@@ -22,4 +22,4 @@ def get_weighted_random(probability_distribution):
         if rchoice < probability:
             return idx
         rchoice -= probability
-    raise ValueError("Should never get here")
+    raise ValueError('Should never get here')

@@ -5,7 +5,9 @@ import sys
 import re
 
 RECIPE_RE = re.compile(
-    r'[Rr]ecipe( here)?: (?P<url>http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\), ]|(?:%0-9a-fA-F][0-9a-fA-F]))+)')
+    r'[Rr]ecipe( here)?: (?P<url>http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\), ]|(?:%0-9a-fA-F][0-9a-fA-F]))+)'
+)
+
 
 def main():
     rows = get_rows()
@@ -15,7 +17,8 @@ def main():
 def write_rows(rows):
     writer = csv.DictWriter(
         sys.stdout,
-        fieldnames=['video_id', 'image_url', 'title', 'recipe_url', 'description'])
+        fieldnames=['video_id', 'image_url', 'title', 'recipe_url', 'description'],
+    )
     writer.writeheader()
     for row in rows:
         writer.writerow(row)
