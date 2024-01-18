@@ -11,16 +11,15 @@ latest insights into best practices, design principles, dev-ops usage, etc.
 
 ## Layout
 
+- docs: various writings and documentation of the repo and tools used
 - tools: directory of various tools
 - experiments: miscellaneous experiments I'm trying out
 
-## TODO
-- [ ] decide on rough rules for directory structure, likely don't separate by
-  language
-- [ ] handle security issues & re-enable dependabot:
-  https://github.com/michael-christen/toolbox/security/dependabot
+## Configuration / Tools Used
 
-## Installation Instructions
+This section describes how the various tools are setup and used in the repo.
+
+### Installation Instructions
 
 ```
 wget -O ~/tools/bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.18.0/bazelisk-linux-amd64
@@ -28,6 +27,14 @@ chmod +x ~/tools/bazel
 ~/tools/bazel
 # Add to path
 ```
+
+### Getting Started
+
+## TODO
+- [ ] decide on rough rules for directory structure, likely don't separate by
+  language
+- [ ] handle security issues & re-enable dependabot:
+  https://github.com/michael-christen/toolbox/security/dependabot
 
 ## Issues
 
