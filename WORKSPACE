@@ -141,6 +141,20 @@ rules_proto_dependencies()
 
 rules_proto_toolchains()
 
+
+http_archive(
+    name = "rules_buf",
+    sha256 = "523a4e06f0746661e092d083757263a249fedca535bd6dd819a8c50de074731a",
+    strip_prefix = "rules_buf-0.1.1",
+    urls = [
+        "https://github.com/bufbuild/rules_buf/archive/refs/tags/v0.1.1.zip",
+    ],
+)
+
+load("@rules_buf//buf:repositories.bzl", "rules_buf_dependencies", "rules_buf_toolchains")
+
+rules_buf_dependencies()
+
 http_archive(
     name = "aspect_rules_js",
     sha256 = "7ab9776bcca823af361577a1a2ebb9a30d2eb5b94ecc964b8be360f443f714b2",
@@ -206,6 +220,31 @@ load("@buildifier_prebuilt//:defs.bzl", "buildifier_prebuilt_register_toolchains
 
 buildifier_prebuilt_register_toolchains()
 
+load("@rules_jvm_external//:repositories.bzl", "rules_jvm_external_deps")
+
+rules_jvm_external_deps()
+
+load("@rules_jvm_external//:setup.bzl", "rules_jvm_external_setup")
+
+rules_jvm_external_setup()
+
+load("@rules_jvm_external//:defs.bzl", "maven_install")
+
+maven_install(
+    artifacts = [
+        "org.scalameta:scalafmt-cli_2.13:3.7.14",
+    ],
+    maven_install_json = "//:maven_install.json",
+    repositories = [
+        "https://maven.google.com",
+        "https://repo1.maven.org/maven2",
+    ],
+)
+
+load("@maven//:defs.bzl", "pinned_maven_install")
+
+pinned_maven_install()
+
 http_archive(
     name = "aspect_rules_lint",
     sha256 = "ddc21b1399c03708f82e5a46d6c747bf23d55484bad1efdaa92a22d5fee20ea1",
@@ -225,7 +264,7 @@ load(
     "fetch_terraform",
 )
 
-# XXX: PIck which specific ones to use
+# XXX: Pick which specific ones to use
 fetch_pmd()
 
 fetch_jsonnet()

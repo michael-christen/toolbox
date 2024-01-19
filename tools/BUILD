@@ -7,7 +7,7 @@ we don't want to trigger eager fetches of these for builds that don't want to ru
 load("@aspect_rules_lint//format:defs.bzl", "multi_formatter_binary")
 load("@aspect_rules_lint//lint:shellcheck.bzl", "shellcheck_binary")
 # XXX
-# load("@npm//:eslint/package_json.bzl", eslint_bin = "bin")
+load("@npm//:eslint/package_json.bzl", eslint_bin = "bin")
 # load("@npm//:prettier/package_json.bzl", prettier = "bin")
 load("@rules_java//java:defs.bzl", "java_binary")
 load("@rules_python//python/entry_points:py_console_script_binary.bzl", "py_console_script_binary")
@@ -102,7 +102,7 @@ py_console_script_binary(
     pkg = "@pip//flake8:pkg",
 )
 
-# eslint_bin.eslint_binary(name = "eslint")
+eslint_bin.eslint_binary(name = "eslint")
 
 java_binary(
     name = "pmd",
