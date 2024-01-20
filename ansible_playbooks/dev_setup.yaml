@@ -63,6 +63,11 @@
               - build-essential
               # For development purposes
               - python3.10-venv
+              # Directory Viewing Utilities
+              - tree
+              - ranger
+              # Searching
+              - silversearcher-ag
 - name: Configure Dynamic DNS
   hosts: all
   tasks:
