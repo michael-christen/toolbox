@@ -18,14 +18,14 @@ http_archive(
 load("@aspect_rules_py//py:repositories.bzl", "rules_py_dependencies")
 rules_py_dependencies()
 
-load("@rules_python//python:repositories.bzl", "py_repositories", "python_register_toolchains")
-
-# We install the rules_python dependencies using the function below.
-py_repositories()
-python_register_toolchains(
-    name = "python39",
-    python_version = "3.9",
-)
+# load("@rules_python//python:repositories.bzl", "py_repositories", "python_register_toolchains")
+#
+# # We install the rules_python dependencies using the function below.
+# py_repositories()
+# python_register_toolchains(
+#     name = "python39",
+#     python_version = "3.9",
+# )
 
 http_archive(
     name = "aspect_gcc_toolchain",
@@ -162,12 +162,12 @@ gazelle_dependencies()
 
 # Remaining setup is for rules_python.
 
-http_archive(
-    name = "rules_python",
-    sha256 = "d70cd72a7a4880f0000a6346253414825c19cdd40a28289bdf67b8e6480edff8",
-    strip_prefix = "rules_python-0.28.0",
-    url = "https://github.com/bazelbuild/rules_python/releases/download/0.28.0/rules_python-0.28.0.tar.gz",
-)
+# http_archive(
+#     name = "rules_python",
+#     sha256 = "d70cd72a7a4880f0000a6346253414825c19cdd40a28289bdf67b8e6480edff8",
+#     strip_prefix = "rules_python-0.28.0",
+#     url = "https://github.com/bazelbuild/rules_python/releases/download/0.28.0/rules_python-0.28.0.tar.gz",
+# )
 
 http_archive(
     name = "rules_python_gazelle_plugin",
@@ -199,7 +199,7 @@ python_register_toolchains(
     python_version = "3.9",
 )
 
-load("@python39//:defs.bzl", "interpreter")
+# load("@python39//:defs.bzl", "interpreter")
 
 load("@rules_python//python:pip.bzl", "pip_parse")
 
@@ -212,7 +212,7 @@ pip_parse(
     # XXX: Use with compile_pip_requirements?
     requirements_lock = "//:requirements_lock.txt",
     # Here, we use the interpreter constant that resolves to the host interpreter from the default Python toolchain.
-    python_interpreter_target = interpreter,
+    # python_interpreter_target = interpreter,
 
     # # # Requirement groups allow Bazel to tolerate PyPi cycles by putting dependencies
     # # # which are known to form cycles into groups together.
