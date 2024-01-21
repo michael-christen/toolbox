@@ -1,11 +1,14 @@
 load("@rules_python//python:defs.bzl", "py_library")
 load("@aspect_rules_py//py:defs.bzl", "py_binary")
+load("@pip//:requirements.bzl", "requirement")
 
 py_binary(
     name = "pocket_export_html_to_csv_bin",
     srcs = ["pocket_export_html_to_csv.py"],
     visibility = ["//:__subpackages__"],
-    deps = ["@pip//beautifulsoup4"],
+    deps = [
+	requirement("beautifulsoup4"),
+    ],
 )
 
 py_binary(
@@ -20,7 +23,9 @@ py_library(
     name = "pocket_export_html_to_csv",
     srcs = ["pocket_export_html_to_csv.py"],
     visibility = ["//:__subpackages__"],
-    deps = ["@pip//beautifulsoup4"],
+    deps = [
+	requirement("beautifulsoup4"),
+    ],
 )
 
 py_library(
