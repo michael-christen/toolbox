@@ -51,10 +51,10 @@ py_test(
     ],
 )
 
-py_binary(
+package(default_visibility = ["//visibility:private"])
+
+py_library(
     name = "main",
     srcs = ["main.py"],
     visibility = ["//:__subpackages__"],
 )
-
-package(default_visibility = ["//visibility:private"])

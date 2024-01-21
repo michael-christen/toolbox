@@ -163,6 +163,7 @@ gazelle_dependencies()
 
 # Remaining setup is for rules_python.
 
+# XXX: Install the newest version once #1664 gets released to fix py_binary issues
 # http_archive(
 #     name = "rules_python",
 #     sha256 = "d70cd72a7a4880f0000a6346253414825c19cdd40a28289bdf67b8e6480edff8",

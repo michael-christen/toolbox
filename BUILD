@@ -99,5 +99,4 @@ gazelle(
 # XXX: Figure out a way to not need these
 # gazelle:resolve py examples.basic.hello_pb2 //examples/basic:hello_py_pb2
 
-
 package(default_visibility = ["//visibility:private"])
