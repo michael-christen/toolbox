@@ -11,7 +11,7 @@ cc_binary(
     srcs = ["hello-world.cc"],
     deps = [
         ":hello-greet",
-        "//examples/basic/lib:hello-time",
         "//examples/basic:hello_cc_proto",
+        "//examples/basic/lib:hello-time",
     ],
 )
