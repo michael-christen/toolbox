@@ -1,4 +1,4 @@
-load("@aspect_rules_py//py:defs.bzl", "py_binary", "py_test")
+load("@aspect_rules_py//py:defs.bzl", "py_binary", "py_library", "py_test")
 load("@rules_proto//proto:defs.bzl", "proto_library")
 load("@rules_cc//cc:defs.bzl", "cc_library")
 load("@rules_python//python:proto.bzl", "py_proto_library")
@@ -27,7 +27,7 @@ rust_doc(
 proto_library(
     name = "hello_proto",
     srcs = ["hello.proto"],
-    deps = [],
+    visibility = ["//visibility:public"],
 )
 
 cc_proto_library(
@@ -47,11 +47,14 @@ py_test(
     name = "hello_test",
     srcs = ["hello_test.py"],
     deps = [
-        ":hello_py_pb2",
+        "//examples/basic:hello_py_pb2",
     ],
 )
 
 py_binary(
     name = "main",
     srcs = ["main.py"],
+    visibility = ["//:__subpackages__"],
 )
+
+package(default_visibility = ["//visibility:private"])

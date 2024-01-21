@@ -49,13 +49,13 @@ gazelle_python_manifest(
 gazelle_binary(
     name = "gazelle_bin",
     languages = [
-	"@bazel_gazelle//language/bazel/visibility",  # bazel visibility rules
-	"@bazel_gazelle//language/go",  # Built-in rule from gazelle for Golang
-	"@bazel_gazelle//language/proto",  # Built-in rule from gazelle for Protos
-	# Any languages that depend on the proto plugin must come after it
-	"@rules_python_gazelle_plugin//python:python",  # Use gazelle from rules_python
-	# TODO: Add buf suppport
-	# "@rules_buf//gazelle/buf:buf",  # Generates buf lint and buf breaking detection rules
+        "@bazel_gazelle//language/bazel/visibility",  # bazel visibility rules
+        "@bazel_gazelle//language/go",  # Built-in rule from gazelle for Golang
+        "@bazel_gazelle//language/proto",  # Built-in rule from gazelle for Protos
+        # Any languages that depend on the proto plugin must come after it
+        "@rules_python_gazelle_plugin//python:python",  # Use gazelle from rules_python
+        # TODO: Add buf suppport
+        # "@rules_buf//gazelle/buf:buf",  # Generates buf lint and buf breaking detection rules
     ],
 )
 
@@ -87,11 +87,17 @@ gazelle(
 # Generate 1 proto rule per file
 # gazelle:proto file
 
+# Set default BUILD rule visibility
+# gazelle:default_visibility //visibility:private
+
 # Tell gazelle where to find imports
 # gazelle:resolve py google.protobuf.message @com_google_protobuf//:protobuf_python
 
 # TODO: Setup nanopb
 # kgazelle:resolve proto nanopb.proto @com_github_nanopb_nanopb//:nanopb_proto
 
-# Set default BUILD rule visibility
-# gazelle:default_visibility //visibility:private
+# XXX: Figure out a way to not need these
+# gazelle:resolve py examples.basic.hello_pb2 //examples/basic:hello_py_pb2
+
+
+package(default_visibility = ["//visibility:private"])

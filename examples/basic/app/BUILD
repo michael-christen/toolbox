@@ -15,3 +15,5 @@ cc_binary(
         "//examples/basic/lib:hello-time",
     ],
 )
+
+package(default_visibility = ["//visibility:private"])
