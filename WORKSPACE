@@ -234,3 +234,25 @@ load("@rules_python_gazelle_plugin//:deps.bzl", _py_gazelle_deps = "gazelle_deps
 # This rule loads and compiles various go dependencies that running gazelle
 # for python requirements.
 _py_gazelle_deps()
+
+# Load stackb/rules_proto
+http_archive(
+    name = "build_stack_rules_proto",
+    sha256 = "ac7e2966a78660e83e1ba84a06db6eda9a7659a841b6a7fd93028cd8757afbfb",
+    strip_prefix = "rules_proto-2.0.1",
+    urls = ["https://github.com/stackb/rules_proto/archive/v2.0.1.tar.gz"],
+)
+register_toolchains("@build_stack_rules_proto//toolchain:standard")
+
+# Bring in @io_bazel_rules_go, @bazel_gazelle, @rules_proto if not already present
+load("@build_stack_rules_proto//deps:core_deps.bzl", "core_deps")
+
+core_deps()
+
+load("@build_stack_rules_proto//:go_deps.bzl", "gazelle_protobuf_extension_go_deps")
+
+gazelle_protobuf_extension_go_deps()
+
+load("@build_stack_rules_proto//deps:protobuf_core_deps.bzl", "protobuf_core_deps")
+
+protobuf_core_deps()
