@@ -11,7 +11,8 @@ cc_binary(
     srcs = ["hello-world.cc"],
     deps = [
         ":hello-greet",
-        "//examples/basic:hello_cc_proto",
+        # XXX: Gazelle doesn't add this automatically ...
+        "//examples/basic:hello_cc_library",
         "//examples/basic/lib:hello-time",
     ],
 )
