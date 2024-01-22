@@ -99,7 +99,7 @@ gazelle(
 # Tell gazelle where to find imports
 # gazelle:resolve py google.protobuf.message @com_google_protobuf//:protobuf_python
 
-# XXX: Figure out a way to not need these
+# TODO: Figure out a way to not need these
 # gazelle:resolve py examples.basic.hello_pb2 //examples/basic:hello_py_library
 
 package(default_visibility = ["//visibility:private"])
