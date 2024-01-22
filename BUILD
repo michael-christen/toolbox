@@ -4,9 +4,6 @@
 # ruleset. When the symbol is loaded you can use the rule.
 load("@bazel_gazelle//:def.bzl", "gazelle", "gazelle_binary")
 load("@pip//:requirements.bzl", "all_whl_requirements")
-
-# XXX: Get gazelle to use aspect_rules_py instead of rules_python?
-# load("@rules_python//python:defs.bzl", "py_binary", "py_library", "py_test")
 load("@rules_python//python:pip.bzl", "compile_pip_requirements")
 load("@rules_python_gazelle_plugin//manifest:defs.bzl", "gazelle_python_manifest")
 load("@rules_python_gazelle_plugin//modules_mapping:def.bzl", "modules_mapping")
@@ -93,6 +90,11 @@ gazelle(
 
 # Set default BUILD rule visibility
 # gazelle:default_visibility //visibility:private
+
+# Configure aspect_rules_py to be used for py_test, py_binary, py_library
+# gazelle:map_kind py_binary py_binary @aspect_rules_py//py:defs.bzl
+# gazelle:map_kind py_library py_library @aspect_rules_py//py:defs.bzl
+# gazelle:map_kind py_test py_test @aspect_rules_py//py:defs.bzl
 
 # Tell gazelle where to find imports
 # gazelle:resolve py google.protobuf.message @com_google_protobuf//:protobuf_python
