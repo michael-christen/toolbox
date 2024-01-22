@@ -21,9 +21,11 @@ http_archive(
     strip_prefix = "rules_py-0.4.0",
     url = "https://github.com/aspect-build/rules_py/releases/download/v0.4.0/rules_py-v0.4.0.tar.gz",
 )
+
 # Fetches the rules_py dependencies.
 # (must come before aspect's gcc toolchain dependencies)
 load("@aspect_rules_py//py:repositories.bzl", "rules_py_dependencies")
+
 rules_py_dependencies()
 
 http_archive(
@@ -34,15 +36,17 @@ http_archive(
         "https://github.com/aspect-build/gcc-toolchain/archive/refs/tags/0.4.2.tar.gz",
     ],
 )
+
 load("@aspect_gcc_toolchain//toolchain:repositories.bzl", "gcc_toolchain_dependencies")
+
 gcc_toolchain_dependencies()
 
-load("@aspect_gcc_toolchain//toolchain:defs.bzl", "gcc_register_toolchain", "ARCHS")
+load("@aspect_gcc_toolchain//toolchain:defs.bzl", "ARCHS", "gcc_register_toolchain")
+
 gcc_register_toolchain(
     name = "gcc_toolchain_x86_64",
     target_arch = ARCHS.x86_64,
 )
-
 
 http_archive(
     name = "rules_rust",
@@ -55,7 +59,7 @@ load("@rules_rust//rust:repositories.bzl", "rules_rust_dependencies", "rust_regi
 rules_rust_dependencies()
 
 rust_register_toolchains(
-  edition = "2021",
+    edition = "2021",
 )
 
 load("@rules_rust//crate_universe:repositories.bzl", "crate_universe_dependencies")
@@ -77,7 +81,6 @@ crates_repository(
 load("@crate_index//:defs.bzl", "crate_repositories")
 
 crate_repositories()
-
 
 http_archive(
     name = "com_google_protobuf",
@@ -105,7 +108,6 @@ rules_proto_dependencies()
 rules_proto_toolchains()
 
 # XXX: Example
-
 
 ######################################################################
 # We need rules_go and bazel_gazelle, to build the gazelle plugin from source.
@@ -136,10 +138,9 @@ http_archive(
     ],
 )
 
-
 # Load rules_go ruleset and expose the toolchain and dep rules.
 load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
-load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies", "go_repository")
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
 
 ############################################################
 # Define your own dependencies here using go_repository.
@@ -161,7 +162,6 @@ go_register_toolchains(version = "1.20.5")
 gazelle_dependencies()
 
 # Remaining setup is for rules_python.
-
 
 http_archive(
     name = "rules_python_gazelle_plugin",
@@ -242,6 +242,7 @@ http_archive(
     strip_prefix = "rules_proto-2.0.1",
     urls = ["https://github.com/stackb/rules_proto/archive/v2.0.1.tar.gz"],
 )
+
 register_toolchains("@build_stack_rules_proto//toolchain:standard")
 
 # Bring in @io_bazel_rules_go, @bazel_gazelle, @rules_proto if not already present

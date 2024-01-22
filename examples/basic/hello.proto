@@ -1,5 +1,6 @@
 syntax = "proto2";
 
+// XXX: Update package
 package experiments.proto.hello;
 
 
