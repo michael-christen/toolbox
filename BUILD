@@ -97,9 +97,6 @@ gazelle(
 # Tell gazelle where to find imports
 # gazelle:resolve py google.protobuf.message @com_google_protobuf//:protobuf_python
 
-# TODO: Setup nanopb
-# kgazelle:resolve proto nanopb.proto @com_github_nanopb_nanopb//:nanopb_proto
-
 # XXX: Figure out a way to not need these
 # gazelle:resolve py examples.basic.hello_pb2 //examples/basic:hello_py_library
 

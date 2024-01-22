@@ -1,5 +1,4 @@
-load("@rules_python//python:defs.bzl", "py_library")
-load("@aspect_rules_py//py:defs.bzl", "py_binary")
+load("@aspect_rules_py//py:defs.bzl", "py_binary", "py_library")
 
 py_binary(
     name = "pocket_export_html_to_csv_bin",
