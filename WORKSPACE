@@ -7,7 +7,7 @@ workspace(name = "mchristen")
 # file.  When the symbol is loaded you can use the rule.
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-# XXX: Install the newest version once #1664 gets released to fix py_binary issues
+# TODO: Install the newest version once #1664 gets released to fix py_binary issues
 http_archive(
     name = "rules_python",
     sha256 = "d70cd72a7a4880f0000a6346253414825c19cdd40a28289bdf67b8e6480edff8",
@@ -107,8 +107,6 @@ rules_proto_dependencies()
 
 rules_proto_toolchains()
 
-# XXX: Example
-
 ######################################################################
 # We need rules_go and bazel_gazelle, to build the gazelle plugin from source.
 # Setup instructions for this section are at
@@ -184,7 +182,7 @@ python_register_toolchains(
     python_version = "3.9",
 )
 
-# load("@python39//:defs.bzl", "interpreter")
+load("@python39//:defs.bzl", "interpreter")
 
 load("@rules_python//python:pip.bzl", "pip_parse")
 
@@ -194,30 +192,15 @@ load("@rules_python//python:pip.bzl", "pip_parse")
 # You can instead check this `requirements.bzl` file into your repo.
 pip_parse(
     name = "pip",
-    # XXX: Use with compile_pip_requirements?
-    requirements_lock = "//:requirements_lock.txt",
-    # Here, we use the interpreter constant that resolves to the host interpreter from the default Python toolchain.
-    # python_interpreter_target = interpreter,
-
-    # # # Requirement groups allow Bazel to tolerate PyPi cycles by putting dependencies
-    # # # which are known to form cycles into groups together.
-    # # experimental_requirement_cycles = {
-    # #     "sphinx": [
-    # #         "sphinx",
-    # #         "sphinxcontrib-qthelp",
-    # #         "sphinxcontrib-htmlhelp",
-    # #         "sphinxcontrib-devhelp",
-    # #         "sphinxcontrib-applehelp",
-    # #         "sphinxcontrib-serializinghtml",
-    # #     ],
-    # # },
-    # # (Optional) You can provide a python_interpreter (path) or a python_interpreter_target (a Bazel target, that
-    # # acts as an executable). The latter can be anything that could be used as Python interpreter. E.g.:
-    # # 1. Python interpreter that you compile in the build file.
-    # # 2. Pre-compiled python interpreter included with http_archive.
-    # # 3. Wrapper script, like in the autodetecting python toolchain.
-    # #
     # Set the location of the lock file.
+    requirements_lock = "//:requirements_lock.txt",
+    # (Optional) You can provide a python_interpreter (path) or a python_interpreter_target (a Bazel target, that
+    # acts as an executable). The latter can be anything that could be used as Python interpreter. E.g.:
+    # 1. Python interpreter that you compile in the build file.
+    # 2. Pre-compiled python interpreter included with http_archive.
+    # 3. Wrapper script, like in the autodetecting python toolchain.
+    # Here, we use the interpreter constant that resolves to the host interpreter from the default Python toolchain.
+    python_interpreter_target = interpreter,
 )
 
 # Load the install_deps macro.
