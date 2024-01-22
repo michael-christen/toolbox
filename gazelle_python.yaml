@@ -1,0 +1,23 @@
+# GENERATED FILE - DO NOT EDIT!
+#
+# To update this file, run:
+#   bazel run //:gazelle_python_manifest.update
+
+manifest:
+  modules_mapping:
+    bs4: beautifulsoup4
+    bs4.builder: beautifulsoup4
+    bs4.css: beautifulsoup4
+    bs4.dammit: beautifulsoup4
+    bs4.diagnose: beautifulsoup4
+    bs4.element: beautifulsoup4
+    bs4.formatter: beautifulsoup4
+    soupsieve: soupsieve
+    soupsieve.css_match: soupsieve
+    soupsieve.css_parser: soupsieve
+    soupsieve.css_types: soupsieve
+    soupsieve.pretty: soupsieve
+    soupsieve.util: soupsieve
+  pip_repository:
+    name: pip
+integrity: 675826c452185d2c18f02cefd99c96e770c1ef1a3fa528c428b1fdc75a098cc2

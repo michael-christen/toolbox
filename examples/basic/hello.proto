@@ -1,6 +1,6 @@
 syntax = "proto2";
 
-package experiments.proto.hello;
+package examples.basic;
 
 
 message Hello {

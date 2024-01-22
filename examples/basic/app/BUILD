@@ -11,7 +11,9 @@ cc_binary(
     srcs = ["hello-world.cc"],
     deps = [
         ":hello-greet",
+        "//examples/basic:hello_cc_library",
         "//examples/basic/lib:hello-time",
-        "//examples/basic:hello_cc_proto",
     ],
 )
+
+package(default_visibility = ["//visibility:private"])

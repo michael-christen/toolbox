@@ -6,3 +6,5 @@ cc_library(
     hdrs = ["hello-time.h"],
     visibility = ["//examples/basic/app:__pkg__"],
 )
+
+package(default_visibility = ["//visibility:private"])

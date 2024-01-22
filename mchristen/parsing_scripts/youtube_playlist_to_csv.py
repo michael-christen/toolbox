@@ -59,5 +59,6 @@ def get_rows():
     return rows
 
 
-if __name__ == '__main__':
-    main()
+# TODO(https://github.com/bazelbuild/rules_python/pull/1664) fixes this, add with next release
+# if __name__ == '__main__':
+#     main()

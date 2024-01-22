@@ -6,7 +6,7 @@
 #include "examples/basic/lib/hello-time.h"
 
 int main(int argc, char** argv) {
-  experiments::proto::hello::Hello msg;
+  examples::basic::Hello msg;
   msg.set_id(4);
   std::string who = "world";
   if (argc > 1) {
