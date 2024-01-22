@@ -183,7 +183,6 @@ python_register_toolchains(
 )
 
 load("@python39//:defs.bzl", "interpreter")
-
 load("@rules_python//python:pip.bzl", "pip_parse")
 
 # This macro wraps the `pip_repository` rule that invokes `pip`, with `incremental` set.
@@ -192,8 +191,6 @@ load("@rules_python//python:pip.bzl", "pip_parse")
 # You can instead check this `requirements.bzl` file into your repo.
 pip_parse(
     name = "pip",
-    # Set the location of the lock file.
-    requirements_lock = "//:requirements_lock.txt",
     # (Optional) You can provide a python_interpreter (path) or a python_interpreter_target (a Bazel target, that
     # acts as an executable). The latter can be anything that could be used as Python interpreter. E.g.:
     # 1. Python interpreter that you compile in the build file.
@@ -201,6 +198,8 @@ pip_parse(
     # 3. Wrapper script, like in the autodetecting python toolchain.
     # Here, we use the interpreter constant that resolves to the host interpreter from the default Python toolchain.
     python_interpreter_target = interpreter,
+    # Set the location of the lock file.
+    requirements_lock = "//:requirements_lock.txt",
 )
 
 # Load the install_deps macro.
@@ -240,3 +239,12 @@ gazelle_protobuf_extension_go_deps()
 load("@build_stack_rules_proto//deps:protobuf_core_deps.bzl", "protobuf_core_deps")
 
 protobuf_core_deps()
+
+http_archive(
+    name = "com_github_bazelbuild_buildtools",
+    sha256 = "ae34c344514e08c23e90da0e2d6cb700fcd28e80c02e23e4d5715dddcb42f7b3",
+    strip_prefix = "buildtools-4.2.2",
+    urls = [
+        "https://github.com/bazelbuild/buildtools/archive/refs/tags/4.2.2.tar.gz",
+    ],
+)
