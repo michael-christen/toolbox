@@ -7,6 +7,14 @@ workspace(name = "mchristen")
 # file.  When the symbol is loaded you can use the rule.
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
+# XXX: Install the newest version once #1664 gets released to fix py_binary issues
+http_archive(
+    name = "rules_python",
+    sha256 = "d70cd72a7a4880f0000a6346253414825c19cdd40a28289bdf67b8e6480edff8",
+    strip_prefix = "rules_python-0.28.0",
+    url = "https://github.com/bazelbuild/rules_python/releases/download/0.28.0/rules_python-0.28.0.tar.gz",
+)
+
 http_archive(
     name = "aspect_rules_py",
     sha256 = "50b4b43491cdfc13238c29cb159b7ccacf0a1e54bd27b65ff2d5fac69af4d46f",
@@ -17,15 +25,6 @@ http_archive(
 # (must come before aspect's gcc toolchain dependencies)
 load("@aspect_rules_py//py:repositories.bzl", "rules_py_dependencies")
 rules_py_dependencies()
-
-# load("@rules_python//python:repositories.bzl", "py_repositories", "python_register_toolchains")
-#
-# # We install the rules_python dependencies using the function below.
-# py_repositories()
-# python_register_toolchains(
-#     name = "python39",
-#     python_version = "3.9",
-# )
 
 http_archive(
     name = "aspect_gcc_toolchain",
@@ -163,13 +162,6 @@ gazelle_dependencies()
 
 # Remaining setup is for rules_python.
 
-# XXX: Install the newest version once #1664 gets released to fix py_binary issues
-# http_archive(
-#     name = "rules_python",
-#     sha256 = "d70cd72a7a4880f0000a6346253414825c19cdd40a28289bdf67b8e6480edff8",
-#     strip_prefix = "rules_python-0.28.0",
-#     url = "https://github.com/bazelbuild/rules_python/releases/download/0.28.0/rules_python-0.28.0.tar.gz",
-# )
 
 http_archive(
     name = "rules_python_gazelle_plugin",
@@ -177,15 +169,6 @@ http_archive(
     strip_prefix = "rules_python-0.28.0/gazelle",
     url = "https://github.com/bazelbuild/rules_python/releases/download/0.28.0/rules_python-0.28.0.tar.gz",
 )
-
-# The rules_python gazelle extension has some third-party go dependencies
-# which we need to fetch in order to compile it.
-load("@rules_python_gazelle_plugin//:deps.bzl", _py_gazelle_deps = "gazelle_deps")
-
-# See: https://github.com/bazelbuild/rules_python/blob/main/gazelle/README.md
-# This rule loads and compiles various go dependencies that running gazelle
-# for python requirements.
-_py_gazelle_deps()
 
 # Next we load the setup and toolchain from rules_python.
 load("@rules_python//python:repositories.bzl", "py_repositories", "python_register_toolchains")
@@ -242,3 +225,12 @@ load("@pip//:requirements.bzl", "install_deps")
 
 # Initialize repositories for all packages in requirements_lock.txt.
 install_deps()
+
+# The rules_python gazelle extension has some third-party go dependencies
+# which we need to fetch in order to compile it.
+load("@rules_python_gazelle_plugin//:deps.bzl", _py_gazelle_deps = "gazelle_deps")
+
+# See: https://github.com/bazelbuild/rules_python/blob/main/gazelle/README.md
+# This rule loads and compiles various go dependencies that running gazelle
+# for python requirements.
+_py_gazelle_deps()
