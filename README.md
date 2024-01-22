@@ -74,16 +74,6 @@ CARGO_BAZEL_REPIN=1 bazel sync --only=crate_index
 #### Notes
 - bzlmod is where things will be moving to better share dependency information and use a central regirstry: https://bazel.build/external/migration
 
-### Rust
-
-#### Command Quick Reference
-
-Copied from "Bazel"
-```
-# Update cargo dependencies
-# https://www.tweag.io/blog/2023-07-27-building-rust-workspace-with-bazel/
-CARGO_BAZEL_REPIN=1 bazel sync --only=crate_index
-```
 
 ## Language FAQs
 
@@ -95,3 +85,24 @@ Generally, each language needs a way to answer these questions:
 - How to add dependencies?
 - How to package?
 - How to release / distribute?
+
+### Rust
+
+#### Command Quick Reference
+
+Copied from "Bazel"
+```
+# Update cargo dependencies
+# https://www.tweag.io/blog/2023-07-27-building-rust-workspace-with-bazel/
+CARGO_BAZEL_REPIN=1 bazel sync --only=crate_index
+```
+
+### Python
+
+#### Adding / Modifying External Dependencies
+
+1. Update `requirements.in`
+2. `bazel run //:requirements.update` to modify `requirements_lock.txt`
+3. `bazel run //:gazelle_python_manifest.update` to modify `gazelle_python.yaml`
+
+NOTE: Once `requirements.in` is modified, tests will ensure the above commands have been run (or CI will fail)
