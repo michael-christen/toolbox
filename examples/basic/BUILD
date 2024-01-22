@@ -62,7 +62,7 @@ rust_binary(
     deps = [
         "@crate_index//:ferris-says",
     ],
-    # XXX: Not getting to work ...
+    # TODO: Get rust dependencies working
     # deps = all_crate_deps(),
     # proc_macro_deps = all_crate_deps(
     #     proc_macro = True,

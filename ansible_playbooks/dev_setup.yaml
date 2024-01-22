@@ -59,10 +59,10 @@
               - xclip
               - curl
               # gcc
-              # XXX: Determine how to get bazel running without this installed
+              # TODO: Determine how to get bazel running without this installed
               - build-essential
               # java
-              # XXX: same deal as build-essential
+              # TODO: same deal as build-essential
               - openjdk-19-jre-headless
               # For development purposes
               - python3.10-venv

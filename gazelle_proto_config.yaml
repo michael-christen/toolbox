@@ -17,7 +17,7 @@ rules:
   - name: proto_cc_library
     implementation: stackb:rules_proto:proto_cc_library
     visibility:
-      # XXX: Reconsider visibility
+      # NOTE: We're defaulting to having generated protobuf libraries public, open to changing in the future.
       -  //visibility:public
     deps:
       - "@com_google_protobuf//:protobuf"
@@ -38,7 +38,7 @@ rules:
     implementation: stackb:rules_proto:grpc_py_library
     visibility:
       -  //visibility:public
-    # XXX: Add grpc_py_library deps
+    # TODO: Add grpc_py_library deps
 languages:
   - name: "cpp"
     plugins:

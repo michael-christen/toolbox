@@ -92,7 +92,7 @@ http_archive(
 load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
 
 protobuf_deps()
-# XXX: Should add buf too
+# TODO: Should add buf too
 
 http_archive(
     name = "rules_proto",
