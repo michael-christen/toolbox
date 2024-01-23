@@ -7,12 +7,11 @@ workspace(name = "mchristen")
 # file.  When the symbol is loaded you can use the rule.
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-# TODO: Install the newest version once #1664 gets released to fix py_binary issues
 http_archive(
     name = "rules_python",
-    sha256 = "d70cd72a7a4880f0000a6346253414825c19cdd40a28289bdf67b8e6480edff8",
-    strip_prefix = "rules_python-0.28.0",
-    url = "https://github.com/bazelbuild/rules_python/releases/download/0.28.0/rules_python-0.28.0.tar.gz",
+    sha256 = "d71d2c67e0bce986e1c5a7731b4693226867c45bfe0b7c5e0067228a536fc580",
+    strip_prefix = "rules_python-0.29.0",
+    url = "https://github.com/bazelbuild/rules_python/releases/download/0.29.0/rules_python-0.29.0.tar.gz",
 )
 
 http_archive(
@@ -163,10 +162,11 @@ gazelle_dependencies()
 
 http_archive(
     name = "rules_python_gazelle_plugin",
-    sha256 = "d70cd72a7a4880f0000a6346253414825c19cdd40a28289bdf67b8e6480edff8",
-    strip_prefix = "rules_python-0.28.0/gazelle",
-    url = "https://github.com/bazelbuild/rules_python/releases/download/0.28.0/rules_python-0.28.0.tar.gz",
+    sha256 = "d71d2c67e0bce986e1c5a7731b4693226867c45bfe0b7c5e0067228a536fc580",
+    strip_prefix = "rules_python-0.29.0/gazelle",
+    url = "https://github.com/bazelbuild/rules_python/releases/download/0.29.0/rules_python-0.29.0.tar.gz",
 )
+
 
 # Next we load the setup and toolchain from rules_python.
 load("@rules_python//python:repositories.bzl", "py_repositories", "python_register_toolchains")
