@@ -4,7 +4,7 @@
 #   - Installing core packages
 #   - Bootstrapping shared config (git directory that sets up links)
 # Thoughts?
-# - 
+# -
 #  remote_user: "{{ lookup('env', 'USER') }}"
 #  become_flags: "--preserve-env=SSH_AUTH_SOCK"
 #  vars:
@@ -39,7 +39,7 @@
 #     - name: Gather the package facts
 #       ansible.builtin.package_facts:
 #         manager: auto
-#     
+#
 #     - name: Print the package facts
 #       ansible.builtin.debug:
 #         var: ansible_facts.packages
@@ -48,6 +48,17 @@
   tasks:
     - become: true
       block:
+        - name: Configure apt for syncthing
+          block:
+            - name: syncthing |no apt key
+              ansible.builtin.get_url:
+                url: https://syncthing.net/release-key.gpg
+                dest: /etc/apt/keyrings/syncthing-archive-keyring.gpg
+            - name: syncthing | apt source
+              ansible.builtin.apt_repository:
+                repo: "deb [signed-by=/etc/apt/keyrings/syncthing-archive-keyring.gpg] https://apt.syncthing.net/ syncthing stable"
+                state: present
+
         - name: Install Packages
           ansible.builtin.package:
             # TODO: versions?
@@ -71,6 +82,8 @@
               - ranger
               # Searching
               - silversearcher-ag
+              # Sharing notes
+              - syncthing
 - name: Configure Dynamic DNS
   hosts: all
   tasks:
