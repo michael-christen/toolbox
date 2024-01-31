@@ -103,8 +103,13 @@ gazelle(
 # TODO: Figure out a way to not need these
 # gazelle:resolve py examples.basic.hello_pb2 //examples/basic:hello_py_library
 
+# XYZ
 package(default_visibility = ["//visibility:private"])
 
+# Run as:
+# bazel run //:buildifier -- <args>
 buildifier(
     name = "buildifier",
 )
+# Run buildozer as:
+# bazel run --run_under="cd $PWD && " @com_github_bazelbuild_buildtools//buildozer --  <args>

@@ -167,7 +167,6 @@ http_archive(
     url = "https://github.com/bazelbuild/rules_python/releases/download/0.29.0/rules_python-0.29.0.tar.gz",
 )
 
-
 # Next we load the setup and toolchain from rules_python.
 load("@rules_python//python:repositories.bzl", "py_repositories", "python_register_toolchains")
 
