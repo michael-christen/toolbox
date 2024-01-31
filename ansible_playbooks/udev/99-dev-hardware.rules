@@ -1,0 +1,84 @@
+# lsusb output
+# Bus 001 Device 025: ID <vendor>:<product> STMicroelectronics ST-LINK/V2.1
+# [How to Interpret lsusb](https://dassencio.org/21)
+#
+# usb-devices gives even more information and seems to be even better, spells
+# out things and gives SerialNumber.
+#
+# udevadm info --name=/dev/ttyX | grep ID_SERIAL_SHORT
+#
+# Reload:
+# sudo udevadm control --reload-rules && sudo udevadm trigger
+#
+# NOTE: Largely dependent on manufacturer for unique SerialNumbers
+#
+# udev rules for multi-channel FTDIs.
+# $env{.LOCAL_PORT_NUM}"
+# SUBSYSTEMS=="usb", ENV{.LOCAL_PORT_NUM}="$attr{bInterfaceNumber}"
+# https://unix.stackexchange.com/questions/86728/udev-rule-to-match-multiple-node-usb-device
+#
+# TODO: When should MODE not be 0666
+
+# 1BitSquared ICEBreaker FPGA
+SUBSYSTEM=="tty" \
+, ATTRS{idVendor}=="0403" \
+, ATTRS{idProduct}=="6010" \
+, ATTRS{serial}=="ibmJq5vb" \
+, MODE="0666" \
+, SYMLINK+="ttyUSB.icebreaker-fpga-0"
+
+# STM32F3 Discovery STLink
+SUBSYSTEM=="tty" \
+, ATTRS{idVendor}=="0483" \
+, ATTRS{idProduct}=="374b" \
+, ATTRS{serial}=="066BFF575285514867193424" \
+, MODE="0666" \
+, SYMLINK+="ttyUSB.stm32f3-discovery-0"
+# TODO: Not working
+# # Joystick for ^
+# SUBSYSTEM=="tty" \
+# , ATTRS{idVendor}=="0483" \
+# , ATTRS{idProduct}=="5710" \
+# , ATTRS{serial}=="066BFF575285514867193424" \
+# , MODE="0666" \
+# , SYMLINK+="ttyUSB.stm32f3-discovery-0-user-input"
+
+# Lattice ICE FPGA Interface Cable
+# There's also 2 ports?
+SUBSYSTEM=="tty" \
+, ATTRS{idVendor}=="0403" \
+, ATTRS{idProduct}=="6010" \
+, ATTRS{serial}=="ibmJq5vb" \
+, MODE="0666" \
+, SYMLINK+="ttyUSB.lattice-icestick-fpga-0"
+
+# Get registered differently / waveforms can still detect them regardless
+# # Analog Discovery V1: 210244580803
+# SUBSYSTEM=="tty" \
+# , ATTRS{idVendor}=="0403" \
+# , ATTRS{idProduct}=="6014" \
+# , ATTRS{serial}=="210244580803" \
+# , MODE="0666" \
+# , SYMLINK+="ttyUSB.analog-discovery-v1-0"
+#
+# # Analog Discovery V3: 210415BB063E
+# SUBSYSTEM=="tty" \
+# , ATTRS{idVendor}=="1443" \
+# , ATTRS{idProduct}=="7003" \
+# , ATTRS{serial}=="066BFF575285514867193424" \
+# , MODE="0666" \
+# , SYMLINK+="ttyUSB.analog-discovery-v3-0"
+
+SUBSYSTEM=="tty" \
+, ATTRS{idVendor}=="2341" \
+, ATTRS{idProduct}=="0042" \
+, ATTRS{serial}=="74133353437351206081" \
+, MODE="0666" \
+, SYMLINK+="ttyUSB.arduino-mega-2560-0"
+
+SUBSYSTEM=="tty" \
+, ATTRS{idVendor}=="0403" \
+, ATTRS{idProduct}=="6001" \
+, ATTRS{serial}=="A700dZjI" \
+, MODE="0666" \
+, SYMLINK+="ttyUSB.arduino-duemilanove-0"

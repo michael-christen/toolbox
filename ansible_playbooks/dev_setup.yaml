@@ -4,7 +4,7 @@
 #   - Installing core packages
 #   - Bootstrapping shared config (git directory that sets up links)
 # Thoughts?
-# - 
+# -
 #  remote_user: "{{ lookup('env', 'USER') }}"
 #  become_flags: "--preserve-env=SSH_AUTH_SOCK"
 #  vars:
@@ -39,15 +39,31 @@
 #     - name: Gather the package facts
 #       ansible.builtin.package_facts:
 #         manager: auto
-#     
+#
 #     - name: Print the package facts
 #       ansible.builtin.debug:
 #         var: ansible_facts.packages
+# TODO:
+# - register users with dialout
+# - passwordless sudo?
 - name: Setup a new machine for a developer
   hosts: all
   tasks:
     - become: true
       block:
+        - name: Configure apt for syncthing
+          block:
+            - name: syncthing |no apt key
+              ansible.builtin.get_url:
+                url: https://syncthing.net/release-key.gpg
+                dest: /etc/apt/keyrings/syncthing-archive-keyring.gpg
+            - name: syncthing | apt source
+              ansible.builtin.apt_repository:
+                repo: "deb [signed-by=/etc/apt/keyrings/syncthing-archive-keyring.gpg] https://apt.syncthing.net/ syncthing stable"
+                state: present
+        - name: Configure kicad apt repositories
+          ansible.builtin.apt_repository:
+            repo: "ppa:kicad/kicad-7.0-releases"
         - name: Install Packages
           ansible.builtin.package:
             # TODO: versions?
@@ -63,7 +79,9 @@
               - build-essential
               # java
               # TODO: same deal as build-essential
-              - openjdk-19-jre-headless
+              # - openjdk-19-jre-headless
+              # Switched from ^ to have gui
+              - openjdk-19-jre
               # For development purposes
               - python3.10-venv
               # Directory Viewing Utilities
@@ -71,6 +89,51 @@
               - ranger
               # Searching
               - silversearcher-ag
+              # AppImage Support
+              - fuse
+              - libfuse2
+              # Sharing notes
+              # TODO: COnfigure as a service
+              - syncthing
+              # XXX: waveforms is crashing when attempting to start
+              # NOTE: Can start fine from application launcher :shrug:
+              # TODO: digilent-agent isn't working though / no launcher
+              - libqt5serialport5-dev
+              - xterm
+              - libxcb-xinput-dev
+              # - qt5-default  # XXX: This should fix, but is unavailable
+              - arduino
+              - blender
+              - kicad
+              # XXX: None of this worked, uninstall it
+              # - xcb
+              # - qtbase5-dev
+              # - qtchooser
+              # - qt5-qmake
+              # - qtbase5-dev-tools
+              # - name: Uninstall Packages
+              #   ansible.builtin.package:
+              #     name:
+              #       - xcb
+              #       - qtbase5-dev
+              #       - qtchooser
+              #       - qtbase5-dev-tools
+              #     state: absent
+              # https://code.visualstudio.com/download#
+              #
+        # TODO: Improve speed of these (seems to re-download each time)
+        # - name: Install Digilent Adept for Waveforms
+        #   ansible.builtin.apt:
+        #     deb: https://digilent.s3.us-west-2.amazonaws.com/Software/Adept2+Runtime/2.27.9/digilent.adept.runtime_2.27.9-amd64.deb
+        # - name: Install Waveforms
+        #   ansible.builtin.apt:
+        #     deb: https://digilent.s3.us-west-2.amazonaws.com/Software/Waveforms2015/3.21.3/digilent.waveforms_3.21.3_amd64.deb
+        # - name: Install Waveforms Agent
+        #   ansible.builtin.apt:
+        #     deb: https://s3-us-west-2.amazonaws.com/digilent/Software/Digilent+Agent/1.0.1/digilent-agent_1.0.1-1_amd64.deb
+        # - name: Install vscode
+        #   ansible.builtin.apt:
+        #     deb: https://code.visualstudio.com/sha/download?build=stable&os=linux-deb-x64
 - name: Configure Dynamic DNS
   hosts: all
   tasks:
@@ -118,5 +181,20 @@
           with_file:
             - ssh_keys/mchristen_work
             - ssh_keys/mchristen_phone
-
-# TODO: usb setup? or just a script?
+# XXX: This doesn't seem to properly be setting us up
+# Instead, we are simply linked to input/event..
+- name: Configure udev rules
+  hosts: all
+  tasks:
+    - become: true
+      block:
+        - name: "Set dev-hardware rules"
+          ansible.builtin.copy:
+            src: udev/99-dev-hardware.rules
+            dest: /etc/udev/rules.d/99-dev-hardware.rules
+            mode: 0644
+          notify: Reload udev
+          # TODO: Do this, iterating over all the files
+  handlers:
+    - name: Reload udev
+      include_tasks: tasks/reload_udev.yaml

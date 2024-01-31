@@ -106,3 +106,6 @@ bazel-bin
 bazel-out
 bazel-testlogs
 bazel-toolbox
+
+# VS Code
+.vscode/arduino.json

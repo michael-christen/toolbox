@@ -1,32 +1,15 @@
-load("@aspect_rules_py//py:defs.bzl", "py_binary", "py_library")
-
-py_binary(
-    name = "pocket_export_html_to_csv_bin",
-    srcs = ["pocket_export_html_to_csv.py"],
-    visibility = ["//:__subpackages__"],
-    deps = [
-        "@pip//beautifulsoup4",
-    ],
-)
-
-py_binary(
-    name = "youtube_playlist_to_csv_bin",
-    srcs = ["youtube_playlist_to_csv.py"],
-    visibility = ["//:__subpackages__"],
-)
+load("@aspect_rules_py//py:defs.bzl", "py_binary")
 
 package(default_visibility = ["//visibility:private"])
 
-py_library(
+py_binary(
     name = "pocket_export_html_to_csv",
     srcs = ["pocket_export_html_to_csv.py"],
     visibility = ["//:__subpackages__"],
-    deps = [
-        "@pip//beautifulsoup4",
-    ],
+    deps = ["@pip//beautifulsoup4"],
 )
 
-py_library(
+py_binary(
     name = "youtube_playlist_to_csv",
     srcs = ["youtube_playlist_to_csv.py"],
     visibility = ["//:__subpackages__"],

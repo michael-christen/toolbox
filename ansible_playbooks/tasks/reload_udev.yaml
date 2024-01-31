@@ -1,0 +1,13 @@
+---
+- name: Reload udev
+  become: true
+  block:
+    # - name: Debug
+    #   ansible.builtin.debug:
+    #     msg: Reloading udev
+    - name: Reload
+      ansible.builtin.command:
+        cmd: "udevadm control --reload-rules"
+    - name: Trigger
+      ansible.builtin.command:
+        cmd: "udevadm trigger"
