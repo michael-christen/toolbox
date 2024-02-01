@@ -1,0 +1,34 @@
+bazel_dep(name = "rules_python", dev_dependency = True, version = "0.29.0")
+bazel_dep(name = "aspect_rules_py", version = "0.5.0")
+# Skip aspect_gcc_toolchain
+bazel_dep(name = "rules_rust", version = "0.38.0")
+# XXX: Best as 24.4
+bazel_dep(name = "protobuf", version = "23.1")
+bazel_dep(name = "rules_proto", version = "6.0.0-rc1")
+bazel_dep(name = "rules_go", version = "0.44.2")
+bazel_dep(name = "gazelle", version = "0.33.0")
+# Skip rules_python gazelle_plugin
+# Skip stackb_rules_proto
+# Skip buildtools
+
+# python = use_extension("@rules_python//python/extensions:python.bzl", "python")
+# python.toolchain(
+#     name = "python3",
+#     # configure_coverage_tool = True,
+#     python_version = "3.9",
+# )
+# use_repo(python, "python3_toolchains")
+# 
+# register_toolchains(
+#     "@python3_toolchains//:all",
+# )
+# 
+# pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip")
+# 
+# pip.parse(
+#     hub_name = "pip",
+#     python_version = "3.9",
+#     requirements_lock = "//:requirements_lock.txt",
+# )
+# 
+# use_repo(pip, "pip")

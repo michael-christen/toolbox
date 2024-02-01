@@ -1,6 +1,3 @@
-# Don't use bzlmod yet
-common --noenable_bzlmod
-
 # https://github.com/aspect-build/gcc-toolchain/issues/161
 build --noincompatible_sandbox_hermetic_tmp
 
