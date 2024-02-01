@@ -107,5 +107,8 @@ bazel-out
 bazel-testlogs
 bazel-toolbox
 
+# user override
+user.bazelrc
+
 # VS Code
 .vscode/arduino.json
