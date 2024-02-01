@@ -1,35 +1,114 @@
+# Don't use bzlmod yet
 common --noenable_bzlmod
 
 # https://github.com/aspect-build/gcc-toolchain/issues/161
 build --noincompatible_sandbox_hermetic_tmp
 
-# XXX: Should uncomment this
-# https://github.com/aspect-build/gcc-toolchain/issues/85
-# build --incompatible_enable_cc_toolchain_resolution
-# build --action_env=BAZEL_DO_NOT_DETECT_CPP_TOOLCHAIN=1
-# Performance per #85
-build --experimental_reuse_sandbox_directories
-# Have rules_rust use the right hermetic toolchain sysroot, symlink folders
-# into execution directory
-build --@rules_rust//cargo/settings:experimental_symlink_execroot=True
-
-# https://github.com/bazelbuild/bazel/issues/20161
-build --experimental_remote_cache_eviction_retries=5
-
 # Prevent python use of ~/.local/lib
 build --action_env=PYTHONNOUSERSITE=1
 build --test_env=PYTHONNOUSERSITE=1
 
+# C Compiler Options: https://gcc.gnu.org/onlinedocs/gcc/Option-Summary.html
 
-# C Compiler Options
-
-# All Warnings
-build --copt -Wall
+# All Warnings and then some, mark em as errors too
+build --copt -Wall 
+# -Wextra, with a few exceptions
+build --copt -Wmemset-transposed-args
+build --copt -Wcast-function-type
+build --copt -Wclobbered
+build --copt -Wempty-body
+build --copt -Wenum-conversion
+build --copt -Wexpansion-to-defined
+build --copt -Wignored-qualifiers
+build --copt -Wimplicit-fallthrough=3
+build --copt -Wmaybe-uninitialized
+build --copt -Wshift-negative-value
+build --copt -Wsign-compare
+build --copt -Wstring-compare
+build --copt -Wtype-limits
+build --copt -Wuninitialized
+build --copt -Wunused-but-set-parameter
+build --conlyopt -Wabsolute-value
+build --conlyopt -Wmissing-parameter-type
+build --conlyopt -Wold-style-declaration
+build --conlyopt -Woverride-init
+build --cxxopt -Wsized-deallocation
+build --cxxopt -Wdeprecated-copy
+# Unrecognized
+# build --copt -Walloc-size
+# com_google_protobuf does these:
+# build --copt -Wmissing-field-initializers
+# build --copt -Wredundant-move
+# build --copt -Wunused-parameter
 
 # Warnings are errors
 build --copt -Werror
 
-# Choose your Vehicle ... Hydro Thunder
-# XXX: Update to 21?
-# XXX: Not working
-build --cxxopt='-std=c++17' --host_cxxopt='-std=c++17'
+# Colored output
+build --copt -fdiagnostics-color=always
+
+# Don't rebuild when python virtualenv is de/activated
+# build --incompatible_strict_action_env
+
+# Let's use the latest and greatest we can
+build --cxxopt='-std=c++20' --host_cxxopt='-std=c++20'
+# NOTE: Can also specify --linkopt
+
+# Only build tests
+test --build_tests_only
+
+# View failed test output
+test --test_output=errors
+
+# Have silent builds
+build:quiet --ui_event_filters=-info,-stdout,-stderr
+build:quiet --noshow_progress
+
+# Allow user to extend .bazelrc
+try-import %workspace%/user.bazelrc
+
+
+# Ensure manual tests still can build
+# XXX: The rules_python currently can't
+# build --build_manual_tests
+
+# # Play nicely on your machine
+# startup --batch_cpu_scheduling --io_nice_level 7
+# build --local_cpu_resources=HOST_CPUS*0.5 --local_ram_resources=HOST_RAM*0.5
+# test --local_cpu_resources=HOST_CPUS*0.5
+# 
+# build --jobs=HOST_CPUS*0.5
+# test --jobs=HOST_CPUS*0.5
+
+# --config=<x> options
+
+# Notes on custom platforms
+# build:my_plat --platforms=//platforms:my_plat
+# # Don't invalidate the cache
+# # https://github.com/bazelbuild/bazel/issues/675
+# build:my_plat --platform_suffix=-my_plat
+
+# Misc. notes / arguments to look into
+# --workspace_status_command for stamping
+# # Address/ThreadSanitizer -fsanitize=...
+
+# # XXX: Hermetic toolchain isn't playing nicely with rules_rust atm
+# # https://github.com/aspect-build/gcc-toolchain/issues/85
+# build --incompatible_enable_cc_toolchain_resolution
+# build --action_env=BAZEL_DO_NOT_DETECT_CPP_TOOLCHAIN=1
+# # Performance per #85
+# build --experimental_reuse_sandbox_directories
+# # Have rules_rust use the right hermetic toolchain sysroot, symlink folders
+# # into execution directory
+# build --@rules_rust//cargo/settings:experimental_symlink_execroot=True
+
+# Remote Cache Notes:
+# - https://www.buildbuddy.io/blog/bazels-remote-caching-and-remote-execution-explained/
+# - https://github.com/bazelbuild/bazel/issues/6038
+# common --experimental_allow_tags_propagation
+# # Skip downloading intermediates
+# build --remote_download_toplevel
+# # https://github.com/bazelbuild/bazel/issues/20161
+# build --experimental_remote_cache_eviction_retries=5
+# build --remote_cache=<mygrpc_cache>
+# build --remote_local_fallback
