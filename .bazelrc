@@ -11,7 +11,7 @@ build --test_env=PYTHONNOUSERSITE=1
 # C Compiler Options: https://gcc.gnu.org/onlinedocs/gcc/Option-Summary.html
 
 # All Warnings and then some, mark em as errors too
-build --copt -Wall 
+build --copt -Wall
 # -Wextra, with a few exceptions
 build --copt -Wmemset-transposed-args
 build --copt -Wcast-function-type
@@ -47,52 +47,24 @@ build --copt -Werror
 # Colored output
 build --copt -fdiagnostics-color=always
 
-# Don't rebuild when python virtualenv is de/activated
-# build --incompatible_strict_action_env
-
 # Let's use the latest and greatest we can
 build --cxxopt='-std=c++20' --host_cxxopt='-std=c++20'
 # NOTE: Can also specify --linkopt
 
-# Only build tests
+# Only build tests when testing
 test --build_tests_only
 
 # View failed test output
 test --test_output=errors
 
-# Have silent builds
+# Allow silent builds with --config=quiet
 build:quiet --ui_event_filters=-info,-stdout,-stderr
 build:quiet --noshow_progress
 
 # Allow user to extend .bazelrc
 try-import %workspace%/user.bazelrc
 
-
-# Ensure manual tests still can build
-# XXX: The rules_python currently can't
-# build --build_manual_tests
-
-# # Play nicely on your machine
-# startup --batch_cpu_scheduling --io_nice_level 7
-# build --local_cpu_resources=HOST_CPUS*0.5 --local_ram_resources=HOST_RAM*0.5
-# test --local_cpu_resources=HOST_CPUS*0.5
-# 
-# build --jobs=HOST_CPUS*0.5
-# test --jobs=HOST_CPUS*0.5
-
-# --config=<x> options
-
-# Notes on custom platforms
-# build:my_plat --platforms=//platforms:my_plat
-# # Don't invalidate the cache
-# # https://github.com/bazelbuild/bazel/issues/675
-# build:my_plat --platform_suffix=-my_plat
-
-# Misc. notes / arguments to look into
-# --workspace_status_command for stamping
-# # Address/ThreadSanitizer -fsanitize=...
-
-# # XXX: Hermetic toolchain isn't playing nicely with rules_rust atm
+# TODO(https://github.com/michael-christen/toolbox/issues/28): stop interference with rules_rust
 # # https://github.com/aspect-build/gcc-toolchain/issues/85
 # build --incompatible_enable_cc_toolchain_resolution
 # build --action_env=BAZEL_DO_NOT_DETECT_CPP_TOOLCHAIN=1
@@ -101,14 +73,3 @@ try-import %workspace%/user.bazelrc
 # # Have rules_rust use the right hermetic toolchain sysroot, symlink folders
 # # into execution directory
 # build --@rules_rust//cargo/settings:experimental_symlink_execroot=True
-
-# Remote Cache Notes:
-# - https://www.buildbuddy.io/blog/bazels-remote-caching-and-remote-execution-explained/
-# - https://github.com/bazelbuild/bazel/issues/6038
-# common --experimental_allow_tags_propagation
-# # Skip downloading intermediates
-# build --remote_download_toplevel
-# # https://github.com/bazelbuild/bazel/issues/20161
-# build --experimental_remote_cache_eviction_retries=5
-# build --remote_cache=<mygrpc_cache>
-# build --remote_local_fallback
