@@ -55,24 +55,26 @@ proto_py_library(
     deps = ["@com_google_protobuf//:protobuf_python"],
 )
 
-rust_binary(
-    name = "hello_world",
-    srcs = ["src/main.rs"],
-    aliases = aliases(),
-    deps = [
-        "@crate_index//:ferris-says",
-    ],
-    # TODO: Get rust dependencies working
-    # deps = all_crate_deps(),
-    # proc_macro_deps = all_crate_deps(
-    #     proc_macro = True,
-    # ),
-)
-
-rust_doc(
-    name = "hello_world_doc",
-    crate = ":hello_world",
-)
+# XXX: Fails with hermetic gcc
+# - external/gcc_toolchain_x86_64/bin/gcc: line 24: realpath: command not found
+# rust_binary(
+#     name = "hello_world",
+#     srcs = ["src/main.rs"],
+#     aliases = aliases(),
+#     deps = [
+#         "@crate_index//:ferris-says",
+#     ],
+#     # TODO: Get rust dependencies working
+#     # deps = all_crate_deps(),
+#     # proc_macro_deps = all_crate_deps(
+#     #     proc_macro = True,
+#     # ),
+# )
+# 
+# rust_doc(
+#     name = "hello_world_doc",
+#     crate = ":hello_world",
+# )
 
 py_test(
     name = "hello_test",

@@ -1,5 +1,5 @@
 {
-  "checksum": "c9a75ecee30b409715db8ef066f2d6b3376786883875e0896646898909d82ec0",
+  "checksum": "8ea90c9d5a46cebff64f60b0817805f016b8f906c597a7d4e6135860c0a7c72a",
   "crates": {
     "ferris-says 0.3.1": {
       "name": "ferris-says",
@@ -246,6 +246,12 @@
     "aarch64-unknown-linux-gnu": [
       "aarch64-unknown-linux-gnu"
     ],
+    "aarch64-unknown-nixos-gnu": [
+      "aarch64-unknown-nixos-gnu"
+    ],
+    "aarch64-unknown-nto-qnx710": [
+      "aarch64-unknown-nto-qnx710"
+    ],
     "arm-unknown-linux-gnueabi": [
       "arm-unknown-linux-gnueabi"
     ],
@@ -315,8 +321,15 @@
     "x86_64-unknown-linux-gnu": [
       "x86_64-unknown-linux-gnu"
     ],
+    "x86_64-unknown-nixos-gnu": [
+      "x86_64-unknown-nixos-gnu"
+    ],
     "x86_64-unknown-none": [
       "x86_64-unknown-none"
     ]
-  }
+  },
+  "direct_deps": [
+    "ferris-says 0.3.1"
+  ],
+  "direct_dev_deps": []
 }
