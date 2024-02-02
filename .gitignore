@@ -144,6 +144,5 @@ fp-info-cache
 *.xml
 *.csv
 
-# Output directory
-# XXX: Rename to be more specific
-output_files/
+# Output directory you should select when making schematics
+kicad_generated_output/
