@@ -93,7 +93,7 @@
               # Searching
               - silversearcher-ag
               # AppImage Support
-              - fuse
+              - fuse3  # was originally fuse, but hopefully this is fine (fuse conflicts w/ ubuntu-desktop)
               - libfuse2
               # Sharing notes
               # TODO: COnfigure as a service
@@ -108,21 +108,15 @@
               - arduino
               - blender
               - kicad
-              # XXX: None of this worked, uninstall it
-              # - xcb
-              # - qtbase5-dev
-              # - qtchooser
-              # - qt5-qmake
-              # - qtbase5-dev-tools
-              # - name: Uninstall Packages
-              #   ansible.builtin.package:
-              #     name:
-              #       - xcb
-              #       - qtbase5-dev
-              #       - qtchooser
-              #       - qtbase5-dev-tools
-              #     state: absent
               # https://code.visualstudio.com/download#
+              # Visualization of system metrics in toolbar
+              - gnome-system-monitor
+              - chrome-gnome-shell  # post 22.04 use gnome-browser-connector
+              - gir1.2-gtop-2.0
+              - gir1.2-nm-1.0
+              - gir1.2-clutter-1.0
+              # Ensure usual settings, etc. are accessible, reruns every time ...
+              - ubuntu-desktop
               #
         # TODO: Improve speed of these (seems to re-download each time)
         # - name: Install Digilent Adept for Waveforms
