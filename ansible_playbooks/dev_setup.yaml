@@ -12,6 +12,9 @@
 # - how do we bootstrap the first little bit, eg) setup a ssh server?
 # - how to keep these separate? maybe different roles that are linked here?
 #
+# Run as is:
+# ./venv/bin/ansible-playbook -i localhost, --connection=local ansible_playbooks/dev_setup.yaml --ask-become-pass
+#
 # Notes from setup.md:
 # - Document installation
 # - Get monorepo going
