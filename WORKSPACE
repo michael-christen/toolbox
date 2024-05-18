@@ -36,17 +36,16 @@ http_archive(
     ],
 )
 
-# TODO(https://github.com/michael-christen/toolbox/issues/28): stop interference with rules_rust
-# load("@aspect_gcc_toolchain//toolchain:repositories.bzl", "gcc_toolchain_dependencies")
-#
-# gcc_toolchain_dependencies()
-#
-# load("@aspect_gcc_toolchain//toolchain:defs.bzl", "ARCHS", "gcc_register_toolchain")
-#
-# gcc_register_toolchain(
-#     name = "gcc_toolchain_x86_64",
-#     target_arch = ARCHS.x86_64,
-# )
+load("@aspect_gcc_toolchain//toolchain:repositories.bzl", "gcc_toolchain_dependencies")
+
+gcc_toolchain_dependencies()
+
+load("@aspect_gcc_toolchain//toolchain:defs.bzl", "ARCHS", "gcc_register_toolchain")
+
+gcc_register_toolchain(
+    name = "gcc_toolchain_x86_64",
+    target_arch = ARCHS.x86_64,
+)
 
 http_archive(
     name = "rules_rust",
