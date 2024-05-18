@@ -1,0 +1,2 @@
+# Have bazel ignore this directory
+nobazel

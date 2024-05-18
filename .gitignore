@@ -146,3 +146,7 @@ fp-info-cache
 
 # Output directory you should select when making schematics
 kicad_generated_output/
+*~*.lck
+
+# venv
+.main.venv
