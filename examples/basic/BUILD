@@ -118,19 +118,6 @@ py_binary(
     ],
 )
 
-# grpc_cc_library(
-#     name = "hello_grpc_cc_library",
-#     srcs = ["hello.grpc.pb.cc"],
-#     hdrs = ["hello.grpc.pb.h"],
-#     visibility = ["//visibility:public"],
-#     deps = [
-#         ":hello_cc_library",
-#         "@com_github_grpc_grpc//:grpc++",
-#         "@com_github_grpc_grpc//:grpc++_reflection",
-#         "@com_google_protobuf//:protobuf",
-#     ],
-# )
-
 grpc_py_library(
     name = "hello_grpc_py_library",
     srcs = ["hello_pb2_grpc.py"],
