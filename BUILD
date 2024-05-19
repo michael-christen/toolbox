@@ -102,6 +102,7 @@ gazelle(
 
 # TODO: Figure out a way to not need these
 # gazelle:resolve py examples.basic.hello_pb2 //examples/basic:hello_py_library
+# gazelle:resolve py examples.basic.hello_pb2_grpc //examples/basic:hello_grpc_py_library
 
 package(default_visibility = ["//visibility:private"])
 
