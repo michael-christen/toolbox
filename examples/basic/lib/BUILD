@@ -4,6 +4,10 @@ cc_library(
     name = "hello-time",
     srcs = ["hello-time.cc"],
     hdrs = ["hello-time.h"],
+    deps = [
+        # "@com_google_protobuf//:protobuf",
+        "//external:protobuf",
+    ],
     visibility = ["//examples/basic/app:__pkg__"],
 )
 

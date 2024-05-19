@@ -1,3 +1,5 @@
+load("@build_stack_rules_proto//rules/cc:grpc_cc_library.bzl", "grpc_cc_library")
+load("@build_stack_rules_proto//rules/py:grpc_py_library.bzl", "grpc_py_library")
 load("@build_stack_rules_proto//rules/py:proto_py_library.bzl", "proto_py_library")
 load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_library")
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
@@ -20,8 +22,13 @@ proto_compile(
     outputs = [
         "hello.pb.cc",
         "hello.pb.h",
+        "hello.grpc.pb.cc",
+        "hello.grpc.pb.h",
     ],
-    plugins = ["@build_stack_rules_proto//plugin/builtin:cpp"],
+    plugins = [
+        "@build_stack_rules_proto//plugin/builtin:cpp",
+        "@build_stack_rules_proto//plugin/grpc/grpc:protoc-gen-grpc-cpp",
+    ],
     proto = "hello_proto",
     visibility = ["//visibility:public"],
 )
@@ -31,10 +38,12 @@ proto_compile(
     outputs = [
         "hello_pb2.py",
         "hello_pb2.pyi",
+        "hello_pb2_grpc.py",
     ],
     plugins = [
         "@build_stack_rules_proto//plugin/builtin:pyi",
         "@build_stack_rules_proto//plugin/builtin:python",
+        "@build_stack_rules_proto//plugin/grpc/grpc:protoc-gen-grpc-python",
     ],
     proto = "hello_proto",
     visibility = ["//visibility:public"],
@@ -86,4 +95,24 @@ py_binary(
     name = "main",
     srcs = ["main.py"],
     visibility = ["//:__subpackages__"],
+)
+
+grpc_cc_library(
+    name = "hello_grpc_cc_library",
+    srcs = ["hello.grpc.pb.cc"],
+    hdrs = ["hello.grpc.pb.h"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":hello_cc_library",
+        "@com_github_grpc_grpc//:grpc++",
+        "@com_github_grpc_grpc//:grpc++_reflection",
+        "@com_google_protobuf//:protobuf",
+    ],
+)
+
+grpc_py_library(
+    name = "hello_grpc_py_library",
+    srcs = ["hello_pb2_grpc.py"],
+    visibility = ["//visibility:public"],
+    deps = [":hello_py_library"],
 )

@@ -8,6 +8,73 @@ workspace(name = "mchristen")
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
+        name = "com_google_protobuf",
+        sha256 = "d594b561fb41bf243233d8f411c7f2b7d913e5c9c1be4ca439baf7e48384c893",
+        strip_prefix = "protobuf-f0dc78d7e6e331b8c6bb2d5283e06aa26883ca7c",
+        urls = [
+            "https://github.com/protocolbuffers/protobuf/archive/f0dc78d7e6e331b8c6bb2d5283e06aa26883ca7c.tar.gz",
+        ],
+    )
+
+http_archive(
+    name = "build_stack_rules_proto",
+    sha256 = "ee7a11d66e7bbc5b0f7a35ca3e960cb9a5f8a314b22252e19912dfbc6e22782d",
+    strip_prefix = "rules_proto-3.1.0",
+    urls = ["https://github.com/stackb/rules_proto/archive/v3.1.0.tar.gz"],
+)
+register_toolchains("@build_stack_rules_proto//toolchain:standard")
+
+
+# Bring in @io_bazel_rules_go, @bazel_gazelle, @rules_proto if not already present
+load("@build_stack_rules_proto//deps:core_deps.bzl", "core_deps")
+core_deps()
+
+load(
+    "@io_bazel_rules_go//go:deps.bzl",
+    "go_register_toolchains",
+    "go_rules_dependencies",
+)
+go_rules_dependencies()
+go_register_toolchains(version = "1.18.2")
+
+load( "@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+gazelle_dependencies()
+
+load("@build_stack_rules_proto//:go_deps.bzl", "gazelle_protobuf_extension_go_deps")
+gazelle_protobuf_extension_go_deps()
+
+load("@build_stack_rules_proto//deps:protobuf_core_deps.bzl", "protobuf_core_deps")
+protobuf_core_deps()
+
+load("@rules_python//python:repositories.bzl", "py_repositories")
+
+py_repositories()
+
+# I added
+load("@build_stack_rules_proto//deps:grpc_core_deps.bzl", "grpc_core_deps")
+grpc_core_deps()
+
+load(
+    "@com_github_grpc_grpc//bazel:grpc_deps.bzl",
+    "grpc_deps",
+)
+
+grpc_deps()
+
+load("@com_google_googleapis//:repository_rules.bzl", "switched_rules_by_language")
+# Initialize Google APIs with only C++ and Python targets
+switched_rules_by_language(
+    name = "com_google_googleapis_imports",
+    cc = True,
+    grpc = True,
+    python = True,
+)
+
+load("@build_bazel_rules_apple//apple:repositories.bzl", "apple_rules_dependencies")
+
+apple_rules_dependencies(ignore_version_differences = False)
+
+http_archive(
     name = "rules_python",
     sha256 = "d71d2c67e0bce986e1c5a7731b4693226867c45bfe0b7c5e0067228a536fc580",
     strip_prefix = "rules_python-0.29.0",
@@ -93,71 +160,6 @@ load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
 protobuf_deps()
 # TODO: Should add buf too
 
-http_archive(
-    name = "rules_proto",
-    sha256 = "903af49528dc37ad2adbb744b317da520f133bc1cbbecbdd2a6c546c9ead080b",
-    strip_prefix = "rules_proto-6.0.0-rc0",
-    url = "https://github.com/bazelbuild/rules_proto/releases/download/6.0.0-rc0/rules_proto-6.0.0-rc0.tar.gz",
-)
-
-load("@rules_proto//proto:repositories.bzl", "rules_proto_dependencies", "rules_proto_toolchains")
-
-rules_proto_dependencies()
-
-rules_proto_toolchains()
-
-######################################################################
-# We need rules_go and bazel_gazelle, to build the gazelle plugin from source.
-# Setup instructions for this section are at
-# https://github.com/bazelbuild/bazel-gazelle#running-gazelle-with-bazel
-# You may need to update the version of the rule, which is listed in the above
-# documentation.
-######################################################################
-
-# Define an http_archive rule that will download the below ruleset,
-# test the sha, and extract the ruleset to you local bazel cache.
-
-http_archive(
-    name = "io_bazel_rules_go",
-    integrity = "sha256-fHbWI2so/2laoozzX5XeMXqUcv0fsUrHl8m/aE8Js3w=",
-    urls = [
-        "https://mirror.bazel.build/github.com/bazelbuild/rules_go/releases/download/v0.44.2/rules_go-v0.44.2.zip",
-        "https://github.com/bazelbuild/rules_go/releases/download/v0.44.2/rules_go-v0.44.2.zip",
-    ],
-)
-
-http_archive(
-    name = "bazel_gazelle",
-    sha256 = "d3fa66a39028e97d76f9e2db8f1b0c11c099e8e01bf363a923074784e451f809",
-    urls = [
-        "https://mirror.bazel.build/github.com/bazelbuild/bazel-gazelle/releases/download/v0.33.0/bazel-gazelle-v0.33.0.tar.gz",
-        "https://github.com/bazelbuild/bazel-gazelle/releases/download/v0.33.0/bazel-gazelle-v0.33.0.tar.gz",
-    ],
-)
-
-# Load rules_go ruleset and expose the toolchain and dep rules.
-load("@io_bazel_rules_go//go:deps.bzl", "go_register_toolchains", "go_rules_dependencies")
-load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
-
-############################################################
-# Define your own dependencies here using go_repository.
-# Else, dependencies declared by rules_go/gazelle will be used.
-# The first declaration of an external repository "wins".
-############################################################
-
-# go_rules_dependencies is a function that registers external dependencies
-# needed by the Go rules.
-# See: https://github.com/bazelbuild/rules_go/blob/master/go/dependencies.rst#go_rules_dependencies
-go_rules_dependencies()
-
-# go_rules_dependencies is a function that registers external dependencies
-# needed by the Go rules.
-# See: https://github.com/bazelbuild/rules_go/blob/master/go/dependencies.rst#go_rules_dependencies
-go_register_toolchains(version = "1.20.5")
-
-# The following call configured the gazelle dependencies, Go environment and Go SDK.
-gazelle_dependencies()
-
 # Remaining setup is for rules_python.
 
 http_archive(
@@ -216,37 +218,7 @@ load("@rules_python_gazelle_plugin//:deps.bzl", _py_gazelle_deps = "gazelle_deps
 # for python requirements.
 _py_gazelle_deps()
 
-# Load stackb/rules_proto
-http_archive(
-    name = "build_stack_rules_proto",
-    sha256 = "ac7e2966a78660e83e1ba84a06db6eda9a7659a841b6a7fd93028cd8757afbfb",
-    strip_prefix = "rules_proto-2.0.1",
-    urls = ["https://github.com/stackb/rules_proto/archive/v2.0.1.tar.gz"],
-)
-
-register_toolchains("@build_stack_rules_proto//toolchain:standard")
-
-# Bring in @io_bazel_rules_go, @bazel_gazelle, @rules_proto if not already present
-load("@build_stack_rules_proto//deps:core_deps.bzl", "core_deps")
-
-core_deps()
-
-load("@build_stack_rules_proto//:go_deps.bzl", "gazelle_protobuf_extension_go_deps")
-
-gazelle_protobuf_extension_go_deps()
-
-load("@build_stack_rules_proto//deps:protobuf_core_deps.bzl", "protobuf_core_deps")
-
-protobuf_core_deps()
-
-# load("@build_stack_rules_proto//deps:grpc_core_deps.bzl", "grpc_core_deps")
-# 
-# grpc_core_deps()
-
-load("@build_stack_rules_proto//deps:grpc_deps.bzl", "grpc_deps")
-
-grpc_deps()
-
+# buildozer and buildifier
 http_archive(
     name = "com_github_bazelbuild_buildtools",
     sha256 = "ae34c344514e08c23e90da0e2d6cb700fcd28e80c02e23e4d5715dddcb42f7b3",
