@@ -239,6 +239,14 @@ load("@build_stack_rules_proto//deps:protobuf_core_deps.bzl", "protobuf_core_dep
 
 protobuf_core_deps()
 
+# load("@build_stack_rules_proto//deps:grpc_core_deps.bzl", "grpc_core_deps")
+# 
+# grpc_core_deps()
+
+load("@build_stack_rules_proto//deps:grpc_deps.bzl", "grpc_deps")
+
+grpc_deps()
+
 http_archive(
     name = "com_github_bazelbuild_buildtools",
     sha256 = "ae34c344514e08c23e90da0e2d6cb700fcd28e80c02e23e4d5715dddcb42f7b3",
