@@ -12,6 +12,34 @@ manifest:
     bs4.diagnose: beautifulsoup4
     bs4.element: beautifulsoup4
     bs4.formatter: beautifulsoup4
+    grpc: grpcio
+    grpc.aio: grpcio
+    grpc.beta: grpcio
+    grpc.beta.implementations: grpcio
+    grpc.beta.interfaces: grpcio
+    grpc.beta.utilities: grpcio
+    grpc.experimental: grpcio
+    grpc.experimental.aio: grpcio
+    grpc.experimental.gevent: grpcio
+    grpc.experimental.session_cache: grpcio
+    grpc.framework: grpcio
+    grpc.framework.common: grpcio
+    grpc.framework.common.cardinality: grpcio
+    grpc.framework.common.style: grpcio
+    grpc.framework.foundation: grpcio
+    grpc.framework.foundation.abandonment: grpcio
+    grpc.framework.foundation.callable_util: grpcio
+    grpc.framework.foundation.future: grpcio
+    grpc.framework.foundation.logging_pool: grpcio
+    grpc.framework.foundation.stream: grpcio
+    grpc.framework.foundation.stream_util: grpcio
+    grpc.framework.interfaces: grpcio
+    grpc.framework.interfaces.base: grpcio
+    grpc.framework.interfaces.base.base: grpcio
+    grpc.framework.interfaces.base.utilities: grpcio
+    grpc.framework.interfaces.face: grpcio
+    grpc.framework.interfaces.face.face: grpcio
+    grpc.framework.interfaces.face.utilities: grpcio
     soupsieve: soupsieve
     soupsieve.css_match: soupsieve
     soupsieve.css_parser: soupsieve
@@ -20,4 +48,4 @@ manifest:
     soupsieve.util: soupsieve
   pip_repository:
     name: pip
-integrity: 675826c452185d2c18f02cefd99c96e770c1ef1a3fa528c428b1fdc75a098cc2
+integrity: 1655a0cea16caa4fad04c8b35f9f729241ff2f2176cc978371422265b8000158

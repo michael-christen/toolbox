@@ -20,7 +20,8 @@ build --copt -Wempty-body
 build --copt -Wenum-conversion
 build --copt -Wexpansion-to-defined
 build --copt -Wignored-qualifiers
-build --copt -Wimplicit-fallthrough=3
+# XXX: zlib
+# build --copt -Wimplicit-fallthrough=3
 build --copt -Wmaybe-uninitialized
 build --copt -Wshift-negative-value
 build --copt -Wsign-compare

@@ -38,7 +38,6 @@ rules:
     implementation: stackb:rules_proto:grpc_py_library
     visibility:
       -  //visibility:public
-    # TODO: Add grpc_py_library deps
 languages:
   - name: "cpp"
     plugins:
@@ -47,7 +46,8 @@ languages:
     rules:
       - proto_compile
       - proto_cc_library
-      - grpc_cc_library
+      # TODO(https://github.com/michael-christen/toolbox/issues/40): re-enable
+      # - grpc_cc_library
   - name: "python"
     plugins:
       - python
