@@ -137,3 +137,13 @@ grpc_py_library(
     visibility = ["//visibility:public"],
     deps = [":hello_py_library"],
 )
+
+py_test(
+    name = "grpc_test",
+    srcs = ["grpc_test.py"],
+    deps = [
+        ":client",
+        ":server",
+        "//examples/basic:hello_py_library",
+    ],
+)
