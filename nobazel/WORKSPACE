@@ -1,9 +1,0 @@
-workspace(name = "experiment")
-
-load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-
-# Release: v3.1.0
-# TargetCommitish: master
-# Date: 2024-02-13 05:53:39 +0000 UTC
-# URL: https://github.com/stackb/rules_proto/releases/tag/v3.1.0
-# Size: 1995581 (2.0 MB)
