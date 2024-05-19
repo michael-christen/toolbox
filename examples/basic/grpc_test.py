@@ -8,12 +8,12 @@ from examples.basic import server
 
 class TestHello(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self):
-        self.s = server.get_server()
-        await self.s.start()
+        self.server = server.get_server()
+        await self.server.start()
 
     async def asyncTearDown(self):
-        await self.s.stop(grace=None)
-        await self.s.wait_for_termination()
+        await self.server.stop(grace=None)
+        await self.server.wait_for_termination()
 
     async def test_basics(self):
         result = await client.get_response()
