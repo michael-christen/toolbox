@@ -1,3 +1,4 @@
+load("@build_stack_rules_proto//rules/py:grpc_py_library.bzl", "grpc_py_library")
 load("@build_stack_rules_proto//rules/py:proto_py_library.bzl", "proto_py_library")
 load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_library")
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
@@ -20,8 +21,13 @@ proto_compile(
     outputs = [
         "hello.pb.cc",
         "hello.pb.h",
+        "hello.grpc.pb.cc",
+        "hello.grpc.pb.h",
     ],
-    plugins = ["@build_stack_rules_proto//plugin/builtin:cpp"],
+    plugins = [
+        "@build_stack_rules_proto//plugin/builtin:cpp",
+        "@build_stack_rules_proto//plugin/grpc/grpc:protoc-gen-grpc-cpp",
+    ],
     proto = "hello_proto",
     visibility = ["//visibility:public"],
 )
@@ -31,10 +37,12 @@ proto_compile(
     outputs = [
         "hello_pb2.py",
         "hello_pb2.pyi",
+        "hello_pb2_grpc.py",
     ],
     plugins = [
         "@build_stack_rules_proto//plugin/builtin:pyi",
         "@build_stack_rules_proto//plugin/builtin:python",
+        "@build_stack_rules_proto//plugin/grpc/grpc:protoc-gen-grpc-python",
     ],
     proto = "hello_proto",
     visibility = ["//visibility:public"],
@@ -86,4 +94,43 @@ py_binary(
     name = "main",
     srcs = ["main.py"],
     visibility = ["//:__subpackages__"],
+)
+
+py_binary(
+    name = "server",
+    srcs = ["server.py"],
+    visibility = ["//:__subpackages__"],
+    deps = [
+        "//examples/basic:hello_grpc_py_library",
+        "//examples/basic:hello_py_library",
+        "@pip//grpcio",
+    ],
+)
+
+py_binary(
+    name = "client",
+    srcs = ["client.py"],
+    visibility = ["//:__subpackages__"],
+    deps = [
+        "//examples/basic:hello_grpc_py_library",
+        "//examples/basic:hello_py_library",
+        "@pip//grpcio",
+    ],
+)
+
+grpc_py_library(
+    name = "hello_grpc_py_library",
+    srcs = ["hello_pb2_grpc.py"],
+    visibility = ["//visibility:public"],
+    deps = [":hello_py_library"],
+)
+
+py_test(
+    name = "grpc_test",
+    srcs = ["grpc_test.py"],
+    deps = [
+        ":client",
+        ":server",
+        "//examples/basic:hello_py_library",
+    ],
 )
