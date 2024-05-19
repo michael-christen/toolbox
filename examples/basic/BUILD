@@ -1,4 +1,3 @@
-load("@build_stack_rules_proto//rules/cc:grpc_cc_library.bzl", "grpc_cc_library")
 load("@build_stack_rules_proto//rules/py:grpc_py_library.bzl", "grpc_py_library")
 load("@build_stack_rules_proto//rules/py:proto_py_library.bzl", "proto_py_library")
 load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_library")
@@ -95,6 +94,28 @@ py_binary(
     name = "main",
     srcs = ["main.py"],
     visibility = ["//:__subpackages__"],
+)
+
+py_binary(
+    name = "server",
+    srcs = ["server.py"],
+    visibility = ["//:__subpackages__"],
+    deps = [
+        "//examples/basic:hello_grpc_py_library",
+        "//examples/basic:hello_py_library",
+        "@pip//grpcio",
+    ],
+)
+
+py_binary(
+    name = "client",
+    srcs = ["client.py"],
+    visibility = ["//:__subpackages__"],
+    deps = [
+        "//examples/basic:hello_grpc_py_library",
+        "//examples/basic:hello_py_library",
+        "@pip//grpcio",
+    ],
 )
 
 # grpc_cc_library(
