@@ -14,8 +14,7 @@ build --test_env=PYTHONNOUSERSITE=1
 build --copt -Wall
 # -Wextra, with a few exceptions
 build --copt -Wmemset-transposed-args
-# XXX: boringssl
-# build --copt -Wcast-function-type
+build --copt -Wcast-function-type
 build --copt -Wclobbered
 build --copt -Wempty-body
 build --copt -Wenum-conversion
@@ -25,11 +24,9 @@ build --copt -Wignored-qualifiers
 # build --copt -Wimplicit-fallthrough=3
 build --copt -Wmaybe-uninitialized
 build --copt -Wshift-negative-value
-# XXX: upb
-# build --copt -Wsign-compare
+build --copt -Wsign-compare
 build --copt -Wstring-compare
-# XXX: grpc
-# build --copt -Wtype-limits
+build --copt -Wtype-limits
 build --copt -Wuninitialized
 build --copt -Wunused-but-set-parameter
 build --conlyopt -Wabsolute-value
@@ -38,9 +35,6 @@ build --conlyopt -Wold-style-declaration
 build --conlyopt -Woverride-init
 build --cxxopt -Wsized-deallocation
 build --cxxopt -Wdeprecated-copy
-# XXX: grpc
-build --copt -Wno-comment
-
 # Unrecognized
 # build --copt -Walloc-size
 # com_google_protobuf does these:
@@ -55,8 +49,7 @@ build --copt -Werror
 build --copt -fdiagnostics-color=always
 
 # Let's use the latest and greatest we can
-# XXX: rules_proto upb has c++20 lambda deprecation issue
-build --cxxopt='-std=c++17' --host_cxxopt='-std=c++17'
+build --cxxopt='-std=c++20' --host_cxxopt='-std=c++20'
 # NOTE: Can also specify --linkopt
 
 # Only build tests when testing
