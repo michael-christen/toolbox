@@ -1,4 +1,3 @@
 # bazel run //:requirements.update && bazel run //:gazelle_python_manifest.update
 beautifulsoup4
 grpcio
-# XXX: Maybe grpcio-tools?
