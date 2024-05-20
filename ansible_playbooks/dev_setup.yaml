@@ -96,7 +96,7 @@
         #   with_file:
         #     - ssh_keys/mchristen_work
         #     - ssh_keys/mchristen_phone
-# XXX: This doesn't seem to properly be setting us up
+# TODO: This doesn't seem to properly be setting us up
 # Instead, we are simply linked to input/event..
 - name: Configure udev rules
   hosts: all
