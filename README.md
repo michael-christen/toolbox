@@ -31,10 +31,12 @@ chmod +x ~/tools/bazel
 ### Getting Started
 
 ## TODO
+- [ ] Convert XXX to issues
 - [ ] decide on rough rules for directory structure, likely don't separate by
   language
 - [ ] handle security issues & re-enable dependabot:
   https://github.com/michael-christen/toolbox/security/dependabot
+- [ ] Look into new tools: fd, fzf, zoxide
 
 ## Issues
 

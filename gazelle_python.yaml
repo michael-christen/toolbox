@@ -12,6 +12,7 @@ manifest:
     bs4.diagnose: beautifulsoup4
     bs4.element: beautifulsoup4
     bs4.formatter: beautifulsoup4
+    exceptiongroup: exceptiongroup
     grpc: grpcio
     grpc.aio: grpcio
     grpc.beta: grpcio
@@ -40,12 +41,26 @@ manifest:
     grpc.framework.interfaces.face: grpcio
     grpc.framework.interfaces.face.face: grpcio
     grpc.framework.interfaces.face.utilities: grpcio
+    iniconfig: iniconfig
+    iniconfig.exceptions: iniconfig
+    packaging: packaging
+    packaging.markers: packaging
+    packaging.metadata: packaging
+    packaging.requirements: packaging
+    packaging.specifiers: packaging
+    packaging.tags: packaging
+    packaging.utils: packaging
+    packaging.version: packaging
+    pluggy: pluggy
+    py: pytest
+    pytest: pytest
     soupsieve: soupsieve
     soupsieve.css_match: soupsieve
     soupsieve.css_parser: soupsieve
     soupsieve.css_types: soupsieve
     soupsieve.pretty: soupsieve
     soupsieve.util: soupsieve
+    tomli: tomli
   pip_repository:
     name: pip
-integrity: 1655a0cea16caa4fad04c8b35f9f729241ff2f2176cc978371422265b8000158
+integrity: 96dcd2d07aaa59aabe626f11e11fa219726f13f4d64293792c1ee0eb1b45a0a5

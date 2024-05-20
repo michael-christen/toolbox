@@ -1,8 +1,6 @@
-load("@build_stack_rules_proto//rules/py:grpc_py_library.bzl", "grpc_py_library")
-load("@build_stack_rules_proto//rules/py:proto_py_library.bzl", "proto_py_library")
+load("//bzl:py.bzl", "grpc_py_library", "proto_py_library", "py_binary", "py_test")
 load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_library")
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
-load("@aspect_rules_py//py:defs.bzl", "py_binary", "py_test")
 load("@rules_proto//proto:defs.bzl", "proto_library")
 load("@rules_cc//cc:defs.bzl", "cc_library")
 load("@crate_index//:defs.bzl", "aliases", "all_crate_deps")
@@ -56,13 +54,6 @@ proto_cc_library(
     deps = ["@com_google_protobuf//:protobuf"],
 )
 
-proto_py_library(
-    name = "hello_py_library",
-    srcs = ["hello_pb2.py"],
-    visibility = ["//visibility:public"],
-    deps = ["@com_google_protobuf//:protobuf_python"],
-)
-
 rust_binary(
     name = "hello_world",
     srcs = ["src/main.rs"],
@@ -85,9 +76,7 @@ rust_doc(
 py_test(
     name = "hello_test",
     srcs = ["hello_test.py"],
-    deps = [
-        "//examples/basic:hello_py_library",
-    ],
+    deps = ["//examples/basic:hello_py_library"],
 )
 
 py_binary(
@@ -118,13 +107,6 @@ py_binary(
     ],
 )
 
-grpc_py_library(
-    name = "hello_grpc_py_library",
-    srcs = ["hello_pb2_grpc.py"],
-    visibility = ["//visibility:public"],
-    deps = [":hello_py_library"],
-)
-
 py_test(
     name = "grpc_test",
     srcs = ["grpc_test.py"],
@@ -133,4 +115,18 @@ py_test(
         ":server",
         "//examples/basic:hello_py_library",
     ],
+)
+
+grpc_py_library(
+    name = "hello_grpc_py_library",
+    srcs = ["hello_pb2_grpc.py"],
+    visibility = ["//visibility:public"],
+    deps = [":hello_py_library"],
+)
+
+proto_py_library(
+    name = "hello_py_library",
+    srcs = ["hello_pb2.py"],
+    visibility = ["//visibility:public"],
+    deps = ["@com_google_protobuf//:protobuf_python"],
 )

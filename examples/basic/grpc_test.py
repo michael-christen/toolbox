@@ -20,8 +20,3 @@ class TestHello(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(
             hello_pb2.HelloReply(message='Hello, you!'),
             result)
-
-
-if __name__ == '__main__':
-    # XXX: Automate this
-    unittest.main()
