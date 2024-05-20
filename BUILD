@@ -9,6 +9,10 @@ load("@rules_python//python:pip.bzl", "compile_pip_requirements")
 load("@rules_python_gazelle_plugin//manifest:defs.bzl", "gazelle_python_manifest")
 load("@rules_python_gazelle_plugin//modules_mapping:def.bzl", "modules_mapping")
 
+exports_files([
+    "pytest.ini",
+])
+
 compile_pip_requirements(
     name = "requirements",
     requirements_in = "requirements.in",
@@ -100,8 +104,16 @@ gazelle(
 # Tell gazelle where to find imports
 # gazelle:resolve py google.protobuf.message @com_google_protobuf//:protobuf_python
 
+# Use our own rules
+# gazelle:map_kind py_binary py_binary //bzl:py.bzl
+# gazelle:map_kind py_library py_library //bzl:py.bzl
+# gazelle:map_kind py_test py_test //bzl:py.bzl
+# gazelle:map_kind grpc_py_library grpc_py_library //bzl:py.bzl
+# gazelle:map_kind proto_py_library proto_py_library //bzl:py.bzl
+
 # TODO: Figure out a way to not need these
 # gazelle:resolve py examples.basic.hello_pb2 //examples/basic:hello_py_library
+# gazelle:resolve py examples.basic.hello_pb2_grpc //examples/basic:hello_grpc_py_library
 
 package(default_visibility = ["//visibility:private"])
 

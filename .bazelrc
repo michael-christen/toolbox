@@ -20,7 +20,8 @@ build --copt -Wempty-body
 build --copt -Wenum-conversion
 build --copt -Wexpansion-to-defined
 build --copt -Wignored-qualifiers
-# XXX: zlib
+# TODO(https://github.com/michael-christen/toolbox/issues/42): Re-enable
+# NOTE: zlib was the cause of requiring this
 # build --copt -Wimplicit-fallthrough=3
 build --copt -Wmaybe-uninitialized
 build --copt -Wshift-negative-value

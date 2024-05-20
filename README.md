@@ -35,24 +35,8 @@ chmod +x ~/tools/bazel
   language
 - [ ] handle security issues & re-enable dependabot:
   https://github.com/michael-christen/toolbox/security/dependabot
-
-## Issues
-
-```
-INFO: From Compiling src/google/protobuf/generated_message_tctable_lite.cc [for tool]:
-In file included from bazel-out/k8-opt-exec-2B5CBBC6/bin/external/com_google_protobuf/src/google/protobuf/_virtual_includes/protobuf_lite/google/protobuf/generated_message_tctable_decl.h:45:0,
-from external/com_google_protobuf/src/google/protobuf/generated_message_tctable_lite.cc:42:
-bazel-out/k8-opt-exec-2B5CBBC6/bin/external/com_google_protobuf/src/google/protobuf/_virtual_includes/protobuf_lite/google/protobuf/parse_context.h:1147:1: warning: always_inline function might not be inlinable [
--Wattributes]
-ParseContext::ParseLengthDelimitedInlined(const char* ptr, const Func& func) {
-^~~~~~~~~~~~
-external/com_google_protobuf/src/google/protobuf/generated_message_tctable_lite.cc:867:36: warning: always_inline function might not be inlinable [-Wattributes]
-PROTOBUF_ALWAYS_INLINE const char* TcParser::FastVarintS1(
-^~~~~~~~
-external/com_google_protobuf/src/google/protobuf/generated_message_tctable_lite.cc:867:36: warning: always_inline function might not be inlinable [-Wattributes]
-```
-- externla/com_google_protobuf warning directory does not exist
-
+- [ ] Add linter
+- [ ] Look into new tools: fd, fzf, zoxide
 
 ## References
 

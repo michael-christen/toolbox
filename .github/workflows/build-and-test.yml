@@ -18,6 +18,9 @@ jobs:
           # dependencies too
           # Or should we just setup remote caching more fully?
           key: ${{ hashFiles('WORKSPACE') }}
+      - name: Gazelle
+        run: |
+          bazel run //:gazelle -- -mode diff
       - name: Build
         run: |
           bazel build //...
