@@ -1,3 +1,4 @@
+load("//bzl:py.bzl", "grpc_py_library", "proto_py_library", "py_binary", "py_test")
 load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_library")
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
 load("@rules_proto//proto:defs.bzl", "proto_library")
