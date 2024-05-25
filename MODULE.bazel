@@ -11,3 +11,28 @@ python.toolchain(
     configure_coverage_tool = True,
     python_version = "3.11",
 )
+
+use_repo(python, "python_3_11", "python_versions")
+
+
+pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip")
+
+pip.parse(
+    # XXX: Needed?
+    # You can use one of the values below to specify the target platform
+    # to generate the dependency graph for.
+    experimental_target_platforms = [
+        # Using host python version
+        "linux_*",
+        "osx_*",
+        "windows_*",
+        # Or specifying an exact platform
+        "linux_x86_64",
+        # Or the following to get the `host` platform only
+        "host",
+    ],
+    hub_name = "pip",
+    python_version = "3.11",
+    requirements_lock = "//:requirements_lock.txt",
+)
+use_repo(pip, "pip")
