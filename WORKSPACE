@@ -66,12 +66,6 @@ load("@build_bazel_rules_apple//apple:repositories.bzl", "apple_rules_dependenci
 apple_rules_dependencies(ignore_version_differences = False)
 
 
-# Fetches the rules_py dependencies.
-# (must come before aspect's gcc toolchain dependencies)
-load("@aspect_rules_py//py:repositories.bzl", "rules_py_dependencies")
-
-rules_py_dependencies()
-
 http_archive(
     name = "aspect_gcc_toolchain",
     sha256 = "3341394b1376fb96a87ac3ca01c582f7f18e7dc5e16e8cf40880a31dd7ac0e1e",

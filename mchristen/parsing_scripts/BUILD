@@ -1,4 +1,4 @@
-load("@aspect_rules_py//py:defs.bzl", "py_binary")
+load("//bzl:py.bzl", "py_binary")
 
 package(default_visibility = ["//visibility:private"])
 

@@ -75,6 +75,3 @@ try-import %workspace%/user.bazelrc
 # # Have rules_rust use the right hermetic toolchain sysroot, symlink folders
 # # into execution directory
 # build --@rules_rust//cargo/settings:experimental_symlink_execroot=True
-
-# Why does requirements_lock.txt say 3.11?
-common --@aspect_rules_py//py:interpreter_version=3.9.18
