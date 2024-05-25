@@ -19,7 +19,7 @@ def py_test(srcs, deps = [], args = [], data = [], **kwargs):
     unique_deps = {d: None for d in deps}
 
     _py_test(
-        # main = "//bzl:pytest_main.py",
+        main = "//bzl:pytest_main.py",
         srcs = srcs + ["//bzl:pytest_main.py"],
         deps = unique_deps,
         args = args + [
