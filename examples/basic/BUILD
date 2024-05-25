@@ -1,5 +1,5 @@
 load("@build_stack_rules_proto//rules:proto_compiled_sources.bzl", "proto_compiled_sources")
-load("//bzl:py.bzl", "grpc_py_library", "proto_py_library", "py_binary", "py_library", "py_test")
+load("//bzl:py.bzl", "py_binary", "py_library", "py_test")
 load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_library")
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
 load("@rules_proto//proto:defs.bzl", "proto_library")
@@ -116,20 +116,6 @@ py_test(
         ":hello_pb2",
         ":server",
     ],
-)
-
-grpc_py_library(
-    name = "hello_grpc_py_library",
-    srcs = ["hello_pb2_grpc.py"],
-    visibility = ["//visibility:public"],
-    deps = [":hello_py_library"],
-)
-
-proto_py_library(
-    name = "hello_py_library",
-    srcs = ["hello_pb2.py"],
-    visibility = ["//visibility:public"],
-    deps = ["@com_google_protobuf//:protobuf_python"],
 )
 
 py_library(

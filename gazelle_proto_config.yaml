@@ -32,16 +32,6 @@ rules:
     deps:
       - "@com_github_grpc_grpc//:grpc++"
       - "@com_github_grpc_grpc//:grpc++_reflection"
-  - name: proto_python_library
-    implementation: stackb:rules_proto:proto_py_library
-    visibility:
-      -  //visibility:public
-    deps:
-      - "@com_google_protobuf//:protobuf_python"
-  - name: grpc_py_library
-    implementation: stackb:rules_proto:grpc_py_library
-    visibility:
-      -  //visibility:public
 languages:
   - name: "cpp"
     plugins:
@@ -59,5 +49,3 @@ languages:
       - protoc-gen-grpc-python
     rules:
       - proto_compiled_sources
-      - proto_python_library
-      - grpc_py_library

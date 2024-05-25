@@ -106,8 +106,6 @@ proto_gazelle(
 # gazelle:map_kind py_binary py_binary //bzl:py.bzl
 # gazelle:map_kind py_library py_library //bzl:py.bzl
 # gazelle:map_kind py_test py_test //bzl:py.bzl
-# gazelle:map_kind grpc_py_library grpc_py_library //bzl:py.bzl
-# gazelle:map_kind proto_py_library proto_py_library //bzl:py.bzl
 
 package(default_visibility = ["//visibility:private"])
 
