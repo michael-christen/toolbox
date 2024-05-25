@@ -65,20 +65,6 @@ load("@build_bazel_rules_apple//apple:repositories.bzl", "apple_rules_dependenci
 
 apple_rules_dependencies(ignore_version_differences = False)
 
-#  XXX: Remove?
-http_archive(
-    name = "rules_python",
-    sha256 = "d71d2c67e0bce986e1c5a7731b4693226867c45bfe0b7c5e0067228a536fc580",
-    strip_prefix = "rules_python-0.29.0",
-    url = "https://github.com/bazelbuild/rules_python/releases/download/0.29.0/rules_python-0.29.0.tar.gz",
-)
-
-http_archive(
-    name = "aspect_rules_py",
-    sha256 = "50b4b43491cdfc13238c29cb159b7ccacf0a1e54bd27b65ff2d5fac69af4d46f",
-    strip_prefix = "rules_py-0.4.0",
-    url = "https://github.com/aspect-build/rules_py/releases/download/v0.4.0/rules_py-v0.4.0.tar.gz",
-)
 
 # Fetches the rules_py dependencies.
 # (must come before aspect's gcc toolchain dependencies)
