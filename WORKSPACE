@@ -65,6 +65,7 @@ load("@build_bazel_rules_apple//apple:repositories.bzl", "apple_rules_dependenci
 
 apple_rules_dependencies(ignore_version_differences = False)
 
+#  XXX: Remove?
 http_archive(
     name = "rules_python",
     sha256 = "d71d2c67e0bce986e1c5a7731b4693226867c45bfe0b7c5e0067228a536fc580",

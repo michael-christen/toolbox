@@ -63,4 +63,4 @@ manifest:
     tomli: tomli
   pip_repository:
     name: pip
-integrity: 96dcd2d07aaa59aabe626f11e11fa219726f13f4d64293792c1ee0eb1b45a0a5
+integrity: b29a43b09f41cbf29987b243d607c62bf795cfa792a6c069174c4034a2506cd8

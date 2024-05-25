@@ -2,3 +2,6 @@
 beautifulsoup4
 grpcio
 pytest
+# Needed to define now?
+exceptiongroup
+tomli

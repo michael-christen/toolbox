@@ -1,5 +1,5 @@
-# Don't use bzlmod yet
-common --noenable_bzlmod
+# Use bzlmod
+common --enable_bzlmod
 
 # https://github.com/aspect-build/gcc-toolchain/issues/161
 build --noincompatible_sandbox_hermetic_tmp
@@ -75,3 +75,6 @@ try-import %workspace%/user.bazelrc
 # # Have rules_rust use the right hermetic toolchain sysroot, symlink folders
 # # into execution directory
 # build --@rules_rust//cargo/settings:experimental_symlink_execroot=True
+
+# Why does requirements_lock.txt say 3.11?
+common --@aspect_rules_py//py:interpreter_version=3.9.18
