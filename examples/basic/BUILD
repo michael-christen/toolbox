@@ -1,4 +1,5 @@
-load("//bzl:py.bzl", "grpc_py_library", "proto_py_library", "py_binary", "py_test")
+load("@build_stack_rules_proto//rules:proto_compiled_sources.bzl", "proto_compiled_sources")
+load("//bzl:py.bzl", "grpc_py_library", "proto_py_library", "py_binary", "py_library", "py_test")
 load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_library")
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
 load("@rules_proto//proto:defs.bzl", "proto_library")
@@ -30,9 +31,9 @@ proto_compile(
     visibility = ["//visibility:public"],
 )
 
-proto_compile(
-    name = "hello_python_compile",
-    outputs = [
+proto_compiled_sources(
+    name = "hello_python_compiled_sources",
+    srcs = [
         "hello_pb2.py",
         "hello_pb2.pyi",
         "hello_pb2_grpc.py",
@@ -76,7 +77,7 @@ rust_doc(
 py_test(
     name = "hello_test",
     srcs = ["hello_test.py"],
-    deps = ["//examples/basic:hello_py_library"],
+    deps = [":hello_pb2"],
 )
 
 py_binary(
@@ -90,8 +91,8 @@ py_binary(
     srcs = ["server.py"],
     visibility = ["//:__subpackages__"],
     deps = [
-        "//examples/basic:hello_grpc_py_library",
-        "//examples/basic:hello_py_library",
+        ":hello_pb2",
+        ":hello_pb2_grpc",
         "@pip//grpcio",
     ],
 )
@@ -101,8 +102,8 @@ py_binary(
     srcs = ["client.py"],
     visibility = ["//:__subpackages__"],
     deps = [
-        "//examples/basic:hello_grpc_py_library",
-        "//examples/basic:hello_py_library",
+        ":hello_pb2",
+        ":hello_pb2_grpc",
         "@pip//grpcio",
     ],
 )
@@ -112,8 +113,8 @@ py_test(
     srcs = ["grpc_test.py"],
     deps = [
         ":client",
+        ":hello_pb2",
         ":server",
-        "//examples/basic:hello_py_library",
     ],
 )
 
@@ -129,4 +130,21 @@ proto_py_library(
     srcs = ["hello_pb2.py"],
     visibility = ["//visibility:public"],
     deps = ["@com_google_protobuf//:protobuf_python"],
+)
+
+py_library(
+    name = "hello_pb2",
+    srcs = ["hello_pb2.py"],
+    visibility = ["//:__subpackages__"],
+    deps = ["@pip//protobuf"],
+)
+
+py_library(
+    name = "hello_pb2_grpc",
+    srcs = ["hello_pb2_grpc.py"],
+    visibility = ["//:__subpackages__"],
+    deps = [
+        ":hello_pb2",
+        "@pip//grpcio",
+    ],
 )

@@ -14,6 +14,10 @@ rules:
     implementation: stackb:rules_proto:proto_compile
     visibility:
       -  //visibility:public
+  - name: proto_compiled_sources
+    implementation: stackb:rules_proto:proto_compiled_sources
+    visibility:
+      -  //visibility:public
   - name: proto_cc_library
     implementation: stackb:rules_proto:proto_cc_library
     visibility:
@@ -54,6 +58,6 @@ languages:
       - pyi
       - protoc-gen-grpc-python
     rules:
-      - proto_compile
+      - proto_compiled_sources
       - proto_python_library
       - grpc_py_library

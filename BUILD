@@ -2,12 +2,13 @@
 # various rulesets and dependencies.
 # The `load` statement imports the symbol for the rule, in the defined
 # ruleset. When the symbol is loaded you can use the rule.
-load("@bazel_gazelle//:def.bzl", "gazelle", "gazelle_binary")
+load("@bazel_gazelle//:def.bzl", "gazelle_binary")
 load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
 load("@pip//:requirements.bzl", "all_whl_requirements")
 load("@rules_python//python:pip.bzl", "compile_pip_requirements")
 load("@rules_python_gazelle_plugin//manifest:defs.bzl", "gazelle_python_manifest")
 load("@rules_python_gazelle_plugin//modules_mapping:def.bzl", "modules_mapping")
+load("@build_stack_rules_proto//rules:proto_gazelle.bzl", "proto_gazelle")
 
 exports_files([
     "pytest.ini",
@@ -62,16 +63,13 @@ gazelle_binary(
     ],
 )
 
-# Our gazelle target points to the python gazelle binary.
-# This is the simple case where we only need one language supported.
-# If you also had proto, go, or other gazelle-supported languages,
-# you would also need a gazelle_binary rule.
 # See https://github.com/bazelbuild/bazel-gazelle/blob/master/extend.rst#example
-gazelle(
+proto_gazelle(
     name = "gazelle",
     args = [
         "-proto_configs=gazelle_proto_config.yaml",
     ],
+    command = "update",
     gazelle = ":gazelle_bin",
 )
 
@@ -110,10 +108,6 @@ gazelle(
 # gazelle:map_kind py_test py_test //bzl:py.bzl
 # gazelle:map_kind grpc_py_library grpc_py_library //bzl:py.bzl
 # gazelle:map_kind proto_py_library proto_py_library //bzl:py.bzl
-
-# TODO: Figure out a way to not need these
-# gazelle:resolve py examples.basic.hello_pb2 //examples/basic:hello_py_library
-# gazelle:resolve py examples.basic.hello_pb2_grpc //examples/basic:hello_grpc_py_library
 
 package(default_visibility = ["//visibility:private"])
 
