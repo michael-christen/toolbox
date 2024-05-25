@@ -2,3 +2,5 @@
 **/*_pb2.py linguist-generated=true
 **/*_pb2.pyi linguist-generated=true
 **/*_pb2_grpc.py linguist-generated=true
+gazelle_python.yaml
+requirements_lock.txt
