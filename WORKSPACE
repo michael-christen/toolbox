@@ -6,6 +6,7 @@ workspace(name = "mchristen")
 # The `load` statement imports the symbol for http_archive from the http.bzl
 # file.  When the symbol is loaded you can use the rule.
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
 http_archive(
     name = "build_stack_rules_proto",
@@ -218,3 +219,20 @@ http_archive(
         "https://github.com/bazelbuild/buildtools/archive/refs/tags/4.2.2.tar.gz",
     ],
 )
+
+http_archive(
+    name = "rules_cc",
+    urls = ["https://github.com/bazelbuild/rules_cc/releases/download/0.0.10-rc1/rules_cc-0.0.10-rc1.tar.gz"],
+    sha256 = "d75a040c32954da0d308d3f2ea2ba735490f49b3a7aa3e4b40259ca4b814f825",
+    strip_prefix = "rules_cc-0.0.10-rc1",
+)
+
+git_repository(
+    name = "arm_none_eabi",
+    commit = "88d8e25b06be484188b04905f11f2788d302aa72",
+    remote = "https://github.com/hexdae/bazel-arm-none-eabi",
+)
+
+load("@arm_none_eabi//:deps.bzl", "arm_none_eabi_deps")
+arm_none_eabi_deps()
+register_toolchains("@arm_none_eabi//toolchain:all")
