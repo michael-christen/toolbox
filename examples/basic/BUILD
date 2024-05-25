@@ -68,10 +68,10 @@ rust_binary(
     # ),
 )
 
-rust_doc(
-    name = "hello_world_doc",
-    crate = ":hello_world",
-)
+# rust_doc(
+#     name = "hello_world_doc",
+#     crate = ":hello_world",
+# )
 
 py_test(
     name = "hello_test",

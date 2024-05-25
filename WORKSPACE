@@ -85,25 +85,25 @@ load("@aspect_rules_py//py:repositories.bzl", "rules_py_dependencies")
 
 rules_py_dependencies()
 
-http_archive(
-    name = "aspect_gcc_toolchain",
-    sha256 = "3341394b1376fb96a87ac3ca01c582f7f18e7dc5e16e8cf40880a31dd7ac0e1e",
-    strip_prefix = "gcc-toolchain-0.4.2",
-    urls = [
-        "https://github.com/aspect-build/gcc-toolchain/archive/refs/tags/0.4.2.tar.gz",
-    ],
-)
-
-load("@aspect_gcc_toolchain//toolchain:repositories.bzl", "gcc_toolchain_dependencies")
-
-gcc_toolchain_dependencies()
-
-load("@aspect_gcc_toolchain//toolchain:defs.bzl", "ARCHS", "gcc_register_toolchain")
-
-gcc_register_toolchain(
-    name = "gcc_toolchain_x86_64",
-    target_arch = ARCHS.x86_64,
-)
+# http_archive(
+#     name = "aspect_gcc_toolchain",
+#     sha256 = "3341394b1376fb96a87ac3ca01c582f7f18e7dc5e16e8cf40880a31dd7ac0e1e",
+#     strip_prefix = "gcc-toolchain-0.4.2",
+#     urls = [
+#         "https://github.com/aspect-build/gcc-toolchain/archive/refs/tags/0.4.2.tar.gz",
+#     ],
+# )
+# 
+# load("@aspect_gcc_toolchain//toolchain:repositories.bzl", "gcc_toolchain_dependencies")
+# 
+# gcc_toolchain_dependencies()
+# 
+# load("@aspect_gcc_toolchain//toolchain:defs.bzl", "ARCHS", "gcc_register_toolchain")
+# 
+# gcc_register_toolchain(
+#     name = "gcc_toolchain_x86_64",
+#     target_arch = ARCHS.x86_64,
+# )
 
 http_archive(
     name = "rules_rust",
@@ -218,3 +218,34 @@ http_archive(
         "https://github.com/bazelbuild/buildtools/archive/refs/tags/4.2.2.tar.gz",
     ],
 )
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+
+git_repository(
+    name = "bazel_embedded",
+    commit = "d3cbe4eff9a63d3dee63067d61096d681daca33b",
+    remote = "https://github.com/bazelembedded/bazel-embedded.git",
+    shallow_since = "1585022166 +0800",
+)
+
+load("@bazel_embedded//:bazel_embedded_deps.bzl", "bazel_embedded_deps")
+
+bazel_embedded_deps()
+
+load("@bazel_embedded//platforms:execution_platforms.bzl", "register_platforms")
+
+register_platforms()
+
+load(
+    "@bazel_embedded//toolchains/compilers/gcc_arm_none_eabi:gcc_arm_none_repository.bzl",
+    "gcc_arm_none_compiler",
+)
+
+gcc_arm_none_compiler()
+
+load("@bazel_embedded//toolchains/gcc_arm_none_eabi:gcc_arm_none_toolchain.bzl", "register_gcc_arm_none_toolchain")
+
+register_gcc_arm_none_toolchain()
+
+load("@bazel_embedded//tools/openocd:openocd_repository.bzl", "openocd_deps")
+
+openocd_deps()
