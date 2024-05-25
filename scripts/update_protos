@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Exit immediately if a command exits with a non-zero status.
+set -e
+
+# Find all proto_compile_gencopy_run and update generated proto files
+bazel query 'kind(proto_compile_gencopy_run, //...)' | xargs bazel run
+
+# TODO: Could rerun gazelle in changed directories
