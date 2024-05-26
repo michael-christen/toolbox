@@ -1,6 +1,6 @@
 {
   "lockFileVersion": 3,
-  "moduleFileHash": "5ccb020e3cd7bef8eb3f941a023cc1243193e95c53ed12747fd6ed86a8f86368",
+  "moduleFileHash": "78a933871f87bf0fc6820da3b75c41170dbf1ac71de50668d578fb23d6fb73d6",
   "flags": {
     "cmdRegistries": [
       "https://bcr.bazel.build/"
@@ -270,6 +270,7 @@
         "rules_oci": "rules_oci@1.7.4",
         "buildifier_prebuilt": "buildifier_prebuilt@6.4.0",
         "aspect_rules_js": "aspect_rules_js@1.38.0",
+        "rules_multirun": "rules_multirun@0.9.0",
         "bazel_tools": "bazel_tools@_",
         "local_config_platform": "local_config_platform@_"
       }
@@ -1087,6 +1088,37 @@
           "strip_prefix": "rules_js-1.38.0",
           "remote_patches": {
             "https://bcr.bazel.build/modules/aspect_rules_js/1.38.0/patches/module_dot_bazel_version.patch": "sha256-tAqZRfOXAplJDTwXVfUiYwinz9Iqug7CeU2aJH0+IqU="
+          },
+          "remote_patch_strip": 1
+        }
+      }
+    },
+    "rules_multirun@0.9.0": {
+      "name": "rules_multirun",
+      "version": "0.9.0",
+      "key": "rules_multirun@0.9.0",
+      "repoName": "rules_multirun",
+      "executionPlatformsToRegister": [],
+      "toolchainsToRegister": [],
+      "extensionUsages": [],
+      "deps": {
+        "bazel_skylib": "bazel_skylib@1.5.0",
+        "rules_python": "rules_python@0.29.0",
+        "bazel_tools": "bazel_tools@_",
+        "local_config_platform": "local_config_platform@_"
+      },
+      "repoSpec": {
+        "bzlFile": "@bazel_tools//tools/build_defs/repo:http.bzl",
+        "ruleClassName": "http_archive",
+        "attributes": {
+          "name": "rules_multirun~0.9.0",
+          "urls": [
+            "https://github.com/keith/rules_multirun/releases/download/0.9.0/rules_multirun.0.9.0.tar.gz"
+          ],
+          "integrity": "sha256-DhJFZ/qFKHh07/M6eRw7vcxTQzKaVvqoKO9iQ4DUYHw=",
+          "strip_prefix": "",
+          "remote_patches": {
+            "https://bcr.bazel.build/modules/rules_multirun/0.9.0/patches/module_dot_bazel_version.patch": "sha256-TXZTom3++VxDkbxlgEc85OI7tV6p0Lcr246yGlzsrPQ="
           },
           "remote_patch_strip": 1
         }
