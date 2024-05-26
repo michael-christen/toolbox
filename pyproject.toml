@@ -16,6 +16,8 @@ force_single_line = true
 [tool.black]
 line-length = 79
 target-version = ['py38']
+# XXX: Remove to switch ' to "
+skip-string-normalization = true
 exclude = '''
 (
   /(
