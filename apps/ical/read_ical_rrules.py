@@ -1,6 +1,7 @@
 #!/usr/bin/env python
-import icalendar
 import sys
+
+import icalendar
 
 
 def main():

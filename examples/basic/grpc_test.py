@@ -1,8 +1,8 @@
 import asyncio
 import unittest
 
-from examples.basic import hello_pb2
 from examples.basic import client
+from examples.basic import hello_pb2
 from examples.basic import server
 
 

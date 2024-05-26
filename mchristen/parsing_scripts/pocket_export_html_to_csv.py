@@ -5,7 +5,8 @@ import argparse
 import csv
 import datetime
 import sys
-from typing import List, NamedTuple
+from typing import List
+from typing import NamedTuple
 
 from bs4 import BeautifulSoup as BS
 
