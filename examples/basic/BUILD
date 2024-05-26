@@ -4,7 +4,7 @@ load("@rules_proto//proto:defs.bzl", "proto_library")
 
 # load("@crate_index//:defs.bzl", "aliases", "all_crate_deps")
 load("@rules_rust//rust:defs.bzl", "rust_binary", "rust_doc")
-load("//bzl:py.bzl", "grpc_py_library", "proto_py_library", "py_binary", "py_test")
+load("//bzl:py.bzl", "grpc_py_library", "proto_py_library", "py_binary", "py_test", "py_image")
 
 package(default_visibility = ["//visibility:private"])
 
@@ -96,6 +96,15 @@ py_binary(
     ],
 )
 
+# Build and run this image with
+#     bazel run //examples/basic:sever_img_load_docker
+#     docker run --rm server:latest
+py_image(
+    name = "server_img",
+    binary = ":server",
+    image_tags = ["server:latest"],
+)
+
 py_binary(
     name = "client",
     srcs = ["client.py"],
@@ -105,6 +114,15 @@ py_binary(
         "//examples/basic:hello_py_library",
         "@pip//grpcio",
     ],
+)
+
+# Build and run this image with
+#     bazel run //examples/basic:client_img_load_docker
+#     docker run --rm client:latest
+py_image(
+    name = "client_img",
+    binary = ":client",
+    image_tags = ["client:latest"],
 )
 
 py_test(
