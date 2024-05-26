@@ -7,10 +7,8 @@ workspace(name = "mchristen")
 # | https://github.com/stackb/rules_proto              | NO             |
 # | https://github.com/aspect-build/gcc-toolchain      | NO             |
 # | https://github.com/bazelbuild/rules_python gazelle | YES, see #55   |
-# | https://github.com/bazelbuild/buildtools           | NO             |
 #
 # Alternative to gcc-toolchain: https://github.com/uber/hermetic_cc_toolchain
-# Alternative to buildtools: https://github.com/fmeum/buildozer
 
 # Load the http_archive rule so that we can have bazel download
 # various rulesets and dependencies.
@@ -116,13 +114,3 @@ load("@rules_python_gazelle_plugin//:deps.bzl", _py_gazelle_deps = "gazelle_deps
 # This rule loads and compiles various go dependencies that running gazelle
 # for python requirements.
 _py_gazelle_deps()
-
-# buildozer and buildifier
-http_archive(
-    name = "com_github_bazelbuild_buildtools",
-    sha256 = "ae34c344514e08c23e90da0e2d6cb700fcd28e80c02e23e4d5715dddcb42f7b3",
-    strip_prefix = "buildtools-4.2.2",
-    urls = [
-        "https://github.com/bazelbuild/buildtools/archive/refs/tags/4.2.2.tar.gz",
-    ],
-)

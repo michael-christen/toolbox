@@ -91,3 +91,10 @@ CARGO_BAZEL_REPIN=1 bazel sync --only=crate_index
 3. `bazel run //:gazelle_python_manifest.update` to modify `gazelle_python.yaml`
 
 NOTE: Once `requirements.in` is modified, tests will ensure the above commands have been run (or CI will fail)
+
+### Miscellaneous
+
+```
+bazel run //tools/buildozer -- <args>
+bazel run //tools/buildifier -- <args>
+```

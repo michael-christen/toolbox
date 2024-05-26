@@ -1,3 +1,4 @@
+# XXX: Move to tools/rules/python defs.bzl
 load("@aspect_rules_py//py:defs.bzl", _py_binary = "py_binary", _py_library = "py_library")
 # TODO(#52): Add aspect_rules_py back for py_test
 load("@rules_python//python:defs.bzl", _py_test = "py_test")

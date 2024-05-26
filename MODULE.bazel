@@ -106,7 +106,6 @@ bazel_dep(
     version = "6.4.0",
     dev_dependency = True,
 )
-# XXX: Add buildozer too
 
 
 ########################################

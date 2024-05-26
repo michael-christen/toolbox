@@ -111,11 +111,3 @@ gazelle(
 # gazelle:resolve py examples.basic.hello_pb2_grpc //examples/basic:hello_grpc_py_library
 
 package(default_visibility = ["//visibility:private"])
-
-# Run as:
-# bazel run //:buildifier -- <args>
-buildifier(
-    name = "buildifier",
-)
-# Run buildozer as:
-# bazel run --run_under="cd $PWD && " @com_github_bazelbuild_buildtools//buildozer --  <args>
