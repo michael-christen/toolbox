@@ -79,3 +79,7 @@ try-import %workspace%/user.bazelrc
 # Must match PYTHON_VERSION in MODULE.bazel
 # LINK(7e463bc3_e4d9_4464_ba39_3217c4a86004)
 common --@aspect_rules_py//py:interpreter_version=3.11.9
+
+build --@mypy_integration//:mypy=@pip//mypy
+# build --aspects @mypy_integration//:mypy.bzl%mypy_aspect
+# build --output_groups=+mypy

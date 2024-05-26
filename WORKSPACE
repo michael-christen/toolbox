@@ -121,3 +121,39 @@ load("@rules_python_gazelle_plugin//:deps.bzl", _py_gazelle_deps = "gazelle_deps
 # This rule loads and compiles various go dependencies that running gazelle
 # for python requirements.
 _py_gazelle_deps()
+
+
+http_archive(
+    name = "mypy_integration",
+    sha256 = "cf94c102fbaccb587eea8de5cf1cb7f55c5c74396a2468932c3a2a4df989aa1d",
+    strip_prefix = "bazel-mypy-integration-0.4.0",
+    url = "https://github.com/thundergolfer/bazel-mypy-integration/archive/refs/tags/0.4.0.tar.gz",
+)
+
+load(
+    "@mypy_integration//repositories:repositories.bzl",
+    mypy_integration_repositories = "repositories",
+)
+mypy_integration_repositories()
+
+load("@mypy_integration//:config.bzl", "mypy_configuration")
+# XXX: Optionally pass a MyPy config file, otherwise pass no argument.
+mypy_configuration()
+
+# XXX: Issue
+# ± bazel build --@mypy_integration//:mypy=@pip//mypy:mypy //...                                                                                                                                                                                                                                                                                                                                                                      27s
+# ERROR: Traceback (most recent call last):
+#         File "/home/mchristen/.cache/bazel/_bazel_mchristen/eabc9c58e7a2790b61df5bad4df6e1e8/external/mypy_integration/repositories/py_repositories.bzl", line 6, column 40, in <toplevel>
+#                 load("@rules_python//python:pip.bzl", "pip_install")
+# Error: file '@rules_python//python:pip.bzl' does not contain symbol 'pip_install'
+# ERROR: Error computing the main repository mapping: at /home/mchristen/.cache/bazel/_bazel_mchristen/eabc9c58e7a2790b61df5bad4df6e1e8/external/mypy_integration/repositories/deps.bzl:7:6: initialization of module 'repositories/py_repositories.bzl' failed
+# 
+# load("@mypy_integration//repositories:deps.bzl", mypy_integration_deps = "deps")
+
+# mypy_integration_deps(
+#     mypy_requirements_file="//:requirements_lock.txt",
+#     # XXX: Needed?
+#     # python_interpreter = "python3.9"  # /home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:/home/runner/.local/bin:/opt/pipx_bin:/home/runner/.cargo/bin:/home/runner/.config/composer/vendor/bin:/usr/local/.ghcup/bin:/home/runner/.dotnet/tools:/snap/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin is searched for exe.
+#     # OR
+#     # python_interpreter_target = "@python3_interpreter//:bin/python3",
+# )

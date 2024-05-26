@@ -10,11 +10,17 @@ load("@rules_oci//oci:defs.bzl", "oci_image", "oci_tarball")
 # TODO(#52): Add aspect_rules_py back for py_test
 load("@rules_python//python:defs.bzl", _py_test = "py_test")
 
+load("@mypy_integration//:mypy.bzl", "mypy_test")
+
 def py_binary(**kwargs):
     _py_binary(**kwargs)
 
-def py_library(**kwargs):
-    _py_library(**kwargs)
+def py_library(name, **kwargs):
+    _py_library(name=name, **kwargs)
+    mypy_test(
+        name="{}_mypy_test".format(name),
+        deps=[":{}".format(name)],
+    )
 
 def py_test(srcs, deps = [], args = [], data = [], **kwargs):
     deps = deps + [
