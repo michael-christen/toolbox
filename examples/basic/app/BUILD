@@ -1,5 +1,7 @@
 load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
 
+package(default_visibility = ["//visibility:private"])
+
 cc_library(
     name = "hello-greet",
     srcs = ["hello-greet.cc"],
@@ -15,5 +17,3 @@ cc_binary(
         "//examples/basic/lib:hello-time",
     ],
 )
-
-package(default_visibility = ["//visibility:private"])

@@ -22,11 +22,12 @@ http_archive(
     strip_prefix = "rules_proto-3.1.0",
     urls = ["https://github.com/stackb/rules_proto/archive/v3.1.0.tar.gz"],
 )
-register_toolchains("@build_stack_rules_proto//toolchain:standard")
 
+register_toolchains("@build_stack_rules_proto//toolchain:standard")
 
 # Bring in @io_bazel_rules_go, @bazel_gazelle, @rules_proto if not already present
 load("@build_stack_rules_proto//deps:core_deps.bzl", "core_deps")
+
 core_deps()
 
 load(
@@ -34,16 +35,21 @@ load(
     "go_register_toolchains",
     "go_rules_dependencies",
 )
+
 go_rules_dependencies()
+
 go_register_toolchains(version = "1.18.2")
 
-load( "@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+load("@bazel_gazelle//:deps.bzl", "gazelle_dependencies")
+
 gazelle_dependencies()
 
 load("@build_stack_rules_proto//:go_deps.bzl", "gazelle_protobuf_extension_go_deps")
+
 gazelle_protobuf_extension_go_deps()
 
 load("@build_stack_rules_proto//deps:protobuf_core_deps.bzl", "protobuf_core_deps")
+
 protobuf_core_deps()
 
 load("@rules_python//python:repositories.bzl", "py_repositories")
@@ -52,6 +58,7 @@ py_repositories()
 
 # I added
 load("@build_stack_rules_proto//deps:grpc_core_deps.bzl", "grpc_core_deps")
+
 grpc_core_deps()
 
 load(
@@ -62,6 +69,7 @@ load(
 grpc_deps()
 
 load("@com_google_googleapis//:repository_rules.bzl", "switched_rules_by_language")
+
 # Initialize Google APIs with only C++ and Python targets
 switched_rules_by_language(
     name = "com_google_googleapis_imports",
@@ -73,7 +81,6 @@ switched_rules_by_language(
 load("@build_bazel_rules_apple//apple:repositories.bzl", "apple_rules_dependencies")
 
 apple_rules_dependencies(ignore_version_differences = False)
-
 
 http_archive(
     name = "aspect_gcc_toolchain",

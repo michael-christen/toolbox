@@ -5,8 +5,10 @@
 # bazel mod deps --lockfile_mode=error
 #
 # See https://bazel.build/external/lockfile for more info
-module(name="mchristen", version="")
-
+module(
+    name = "mchristen",
+    version = "",
+)
 
 ########################################
 # Generic deps
@@ -21,12 +23,14 @@ bazel_dep(name = "aspect_rules_py", version = "0.7.3")
 
 # Minimum version needs:
 # feat: add interpreter_version_info to py_runtime by @mattem in #1671
-bazel_dep(name = "rules_python", dev_dependency = True, version = "0.29.0")
+bazel_dep(name = "rules_python", version = "0.29.0", dev_dependency = True)
 
 python = use_extension("@rules_python//python/extensions:python.bzl", "python")
+
 # Must match interpreter_version in .bazelrc
 # LINK(7e463bc3_e4d9_4464_ba39_3217c4a86004)
 PYTHON_VERSION = "3.11"
+
 python.toolchain(
     configure_coverage_tool = True,
     python_version = PYTHON_VERSION,
@@ -41,12 +45,12 @@ pip.parse(
 use_repo(pip, "pip")
 
 bazel_dep(name = "protobuf", version = "26.0")
-
 bazel_dep(name = "rules_rust", version = "0.38.0")
 
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
 rust.toolchain(edition = "2021")
 use_repo(rust, "rust_toolchains")
+
 register_toolchains("@rust_toolchains//:all")
 
 crate = use_extension(
@@ -106,7 +110,6 @@ bazel_dep(
     version = "6.4.0",
     dev_dependency = True,
 )
-
 
 ########################################
 # Set up rules_js
