@@ -3,7 +3,7 @@
 # The `load` statement imports the symbol for the rule, in the defined
 # ruleset. When the symbol is loaded you can use the rule.
 load("@bazel_gazelle//:def.bzl", "gazelle", "gazelle_binary")
-load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
+load("@npm//:defs.bzl", "npm_link_all_packages")
 load("@pip//:requirements.bzl", "all_whl_requirements")
 load("@rules_python//python:pip.bzl", "compile_pip_requirements")
 load("@rules_python_gazelle_plugin//manifest:defs.bzl", "gazelle_python_manifest")
@@ -114,3 +114,5 @@ gazelle(
 # gazelle:resolve py examples.basic.hello_pb2_grpc //examples/basic:hello_grpc_py_library
 
 package(default_visibility = ["//visibility:private"])
+
+npm_link_all_packages(name = "node_modules")
