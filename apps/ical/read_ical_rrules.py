@@ -13,8 +13,9 @@ def main():
         cal = icalendar.Calendar.from_ical(f.read())
     subcomponents = [s for s in cal.subcomponents if 'RRULE' in s]
     for s in subcomponents:
-        rrule_str = ', '.join('{} -> {}'.format(k, v)
-                             for k, v in sorted(s['RRULE'].items()))
+        rrule_str = ', '.join(
+            '{} -> {}'.format(k, v) for k, v in sorted(s['RRULE'].items())
+        )
         print('{}: {}'.format(s['SUMMARY'], rrule_str))
 
 

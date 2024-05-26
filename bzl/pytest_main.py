@@ -7,13 +7,16 @@ import pytest
 def main():
     pytest_args = [
         "--ignore=external",
-        "-p", "no:cacheprovider",
+        "-p",
+        "no:cacheprovider",
     ]
 
     # https://bazel.build/reference/test-encyclopedia
     test_tempdir = os.environ.get("TEST_TMPDIR", None)
     if test_tempdir:
-        test_tempdir = os.path.join(os.path.abspath(test_tempdir), "pytest_temp")
+        test_tempdir = os.path.join(
+            os.path.abspath(test_tempdir), "pytest_temp"
+        )
         pytest_args.append(f"--basetemp={test_tempdir}")
 
     # https://bazel.build/docs/user-manual#flag--test_filter

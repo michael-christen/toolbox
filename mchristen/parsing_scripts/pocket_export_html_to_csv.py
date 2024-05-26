@@ -21,10 +21,11 @@ class Entry(NamedTuple):
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Read exported pocket html from stdin, output csv')
-    parser.add_argument('--select', type=str,
-                        choices=['all', 'read', 'unread'],
-                        default='all')
+        description='Read exported pocket html from stdin, output csv'
+    )
+    parser.add_argument(
+        '--select', type=str, choices=['all', 'read', 'unread'], default='all'
+    )
     args = parser.parse_args()
     if args.select == 'unread':
         selector = lambda x: not x.is_read
@@ -42,24 +43,32 @@ def main():
     for is_read, l in zip([False, True], lists):
         for link in l.find_all('a'):
             attrs = link.attrs
-            entries.append(Entry(
-                href=link.attrs['href'],
-                title=link.text,
-                timestamp=int(link.attrs['time_added']),
-                tags=link.attrs['tags'].split(',') if link.attrs['tags'] else [],
-                is_read=is_read,
-            ))
+            entries.append(
+                Entry(
+                    href=link.attrs['href'],
+                    title=link.text,
+                    timestamp=int(link.attrs['time_added']),
+                    tags=(
+                        link.attrs['tags'].split(',')
+                        if link.attrs['tags']
+                        else []
+                    ),
+                    is_read=is_read,
+                )
+            )
     fields = ['Name', 'URL', 'Tags', 'Timestamp', 'Done']
     writer = csv.DictWriter(sys.stdout, fields)
     writer.writeheader()
     for entry in filter(selector, entries):
-        writer.writerow({
-            'Name': entry.title,
-            'URL': entry.href,
-            'Tags': ','.join(entry.tags),
-            'Timestamp': entry.timestamp,
-            'Done': entry.is_read,
-        })
+        writer.writerow(
+            {
+                'Name': entry.title,
+                'URL': entry.href,
+                'Tags': ','.join(entry.tags),
+                'Timestamp': entry.timestamp,
+                'Done': entry.is_read,
+            }
+        )
 
 
 if __name__ == '__main__':
