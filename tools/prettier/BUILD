@@ -6,3 +6,5 @@ prettier.prettier_binary(
     # Allow the binary to be run outside bazel
     env = {"BAZEL_BINDIR": "."},
 )
+
+package(default_visibility = ["//visibility:private"])
