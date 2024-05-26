@@ -18,6 +18,9 @@ jobs:
           # dependencies too
           # Or should we just setup remote caching more fully?
           key: ${{ hashFiles('WORKSPACE') }}
+      - name: bzlmod lockfile
+        run: |
+          bazel mod deps --lockfile_mode=error
       - name: Gazelle
         run: |
           bazel run //:gazelle -- -mode diff
