@@ -56,3 +56,5 @@ echo $MARKDOWN_FILES | xargs ${PRETTIER_INVOCATION}
 
 
 printf "\n✨ Linting completed successfully! ✨\n"
+
+# Add git grep XXX?
