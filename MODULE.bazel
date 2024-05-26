@@ -1,3 +1,10 @@
+# Update via
+# bazel mod deps --lockfile_mode=update
+# --lockfile_mode=refresh refreshes mutable fields
+# Test via
+# bazel mod deps --lockfile_mode=error
+#
+# See https://bazel.build/external/lockfile for more info
 module(name="mchristen", version="")
 
 bazel_dep(name = "aspect_rules_py", version = "0.7.3")
