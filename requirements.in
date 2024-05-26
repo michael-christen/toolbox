@@ -4,4 +4,10 @@
 # bazel test //:gazelle_python_manifest.test //:requirements_test
 beautifulsoup4
 grpcio
+# largely for development
 pytest
+black
+flake8
+isort
+ipdb
+notebook
