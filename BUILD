@@ -19,15 +19,11 @@ compile_pip_requirements(
     requirements_txt = "requirements_lock.txt",
 )
 
-# This repository rule fetches the metadata for python packages we
-# depend on. That data is required for the gazelle_python_manifest
-# rule to update our manifest file.
-# To see what this rule does, try `bazel run @modules_map//:print`
+# To see more, try `bazel run @modules_map//:print`
 modules_mapping(
     name = "modules_map",
     exclude_patterns = [
         "^_|(\\._)+",  # This is the default.
-        "(\\.tests)+",  # Add a custom one to get rid of the psutil tests.
     ],
     wheels = all_whl_requirements,
 )
