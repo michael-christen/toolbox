@@ -99,40 +99,6 @@ gcc_register_toolchain(
 )
 
 http_archive(
-    name = "rules_rust",
-    integrity = "sha256-ZQGWDD5NoySV0eEAfe0HaaU0yxlcMN6jaqVPnYo/A2E=",
-    urls = ["https://github.com/bazelbuild/rules_rust/releases/download/0.38.0/rules_rust-v0.38.0.tar.gz"],
-)
-
-load("@rules_rust//rust:repositories.bzl", "rules_rust_dependencies", "rust_register_toolchains")
-
-rules_rust_dependencies()
-
-rust_register_toolchains(
-    edition = "2021",
-)
-
-load("@rules_rust//crate_universe:repositories.bzl", "crate_universe_dependencies")
-
-crate_universe_dependencies()
-
-load("@rules_rust//crate_universe:defs.bzl", "crates_repository")
-
-crates_repository(
-    name = "crate_index",
-    cargo_lockfile = "//:Cargo.lock",
-    lockfile = "//:cargo-bazel-lock.json",
-    manifests = [
-        # "//:Cargo.toml",
-        "//:examples/basic/Cargo.toml",
-    ],
-)
-
-load("@crate_index//:defs.bzl", "crate_repositories")
-
-crate_repositories()
-
-http_archive(
     name = "com_google_protobuf",
     sha256 = "616bb3536ac1fff3fb1a141450fa28b875e985712170ea7f1bfe5e5fc41e2cd8",
     strip_prefix = "protobuf-24.4",
