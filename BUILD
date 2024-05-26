@@ -51,7 +51,7 @@ gazelle_binary(
         "@bazel_gazelle//language/go",  # Built-in rule from gazelle for Golang
         "@bazel_gazelle//language/proto",  # Built-in rule from gazelle for Protos
         # Any languages that depend on the proto plugin must come after it
-        # "@rules_python_gazelle_plugin//python:python",  # Use gazelle from rules_python
+        "@rules_python_gazelle_plugin//python:python",  # Use gazelle from rules_python
         "@build_stack_rules_proto//language/protobuf",  # Protobuf language generation
         # TODO: Add buf suppport
         # "@rules_buf//gazelle/buf:buf",  # Generates buf lint and buf breaking detection rules
@@ -68,8 +68,7 @@ gazelle(
     args = [
         "-proto_configs=gazelle_proto_config.yaml",
     ],
-    gazelle = "@rules_python_gazelle_plugin//python:gazelle_binary",
-    # XXX: gazelle = ":gazelle_bin",
+    gazelle = ":gazelle_bin",
 )
 
 # https://github.com/bazelbuild/bazel-gazelle#directives
