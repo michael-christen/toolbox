@@ -13,26 +13,25 @@ sections = ['FUTURE','STDLIB','THIRDPARTY', 'MCHRISTEN', 'FIRSTPARTY','LOCALFOLD
 force_single_line = true
 # known_third_party
 
-# XXX
-# [tool.black]
-# line-length = 79
-# target-version = ['py38']
-# exclude = '''
-# (
-#   /(
-#     | \.git
-#     | \.mypy_cache
-#     | \.tox
-#     | \.venv
-#     | \bazel-*
-#     | \bazel-bin
-#     | \bazel-genfiles
-#     | \bazel-out
-#     | \bazel-testlogs
-#   )/
-# )
-# '''
-# 
+[tool.black]
+line-length = 79
+target-version = ['py38']
+exclude = '''
+(
+  /(
+    | \.git
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | \bazel-*
+    | \bazel-bin
+    | \bazel-genfiles
+    | \bazel-out
+    | \bazel-testlogs
+  )/
+)
+'''
+
 # [tool.pyright]
 # exclude = [
 #     "bazel-*/",
