@@ -25,3 +25,10 @@ py_library(
     srcs = ["utils.py"],
     visibility = ["//:__subpackages__"],
 )
+
+py_library(
+    name = "bazel_utils",
+    srcs = ["bazel_utils.py"],
+    visibility = ["//:__subpackages__"],
+    deps = ["//third_party/bazel/src/main/protobuf:build_py_library"],
+)
