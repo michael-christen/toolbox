@@ -1,3 +1,4 @@
+# TODO(#52): Add aspect_rules_py back
 # load("@aspect_rules_py//py:defs.bzl", _py_binary = "py_binary", _py_library = "py_library", _py_test = "py_test")
 load("@rules_python//python:defs.bzl", _py_binary = "py_binary", _py_library = "py_library", _py_test = "py_test")
 load("@build_stack_rules_proto//rules/py:grpc_py_library.bzl", _grpc_py_library = "grpc_py_library")

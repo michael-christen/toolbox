@@ -1,5 +1,6 @@
 module(name="mchristen", version="")
 
+# TODO(#52): Add aspect_rules_py back
 # bazel_dep(name = "aspect_rules_py", version = "0.7.3")
 
 # Minimum version needs:
@@ -7,19 +8,16 @@ module(name="mchristen", version="")
 bazel_dep(name = "rules_python", dev_dependency = True, version = "0.29.0")
 
 python = use_extension("@rules_python//python/extensions:python.bzl", "python")
+PYTHON_VERSION = "3.11"
 python.toolchain(
     configure_coverage_tool = True,
-    python_version = "3.11",
+    python_version = PYTHON_VERSION,
 )
 
-use_repo(python, "python_3_11", "python_versions")
-
-
 pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip")
-
 pip.parse(
     hub_name = "pip",
-    python_version = "3.11",
+    python_version = PYTHON_VERSION,
     requirements_lock = "//:requirements_lock.txt",
 )
 use_repo(pip, "pip")
