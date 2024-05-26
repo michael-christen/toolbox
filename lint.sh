@@ -47,14 +47,6 @@ bazel run -- //tools/black ${REPO_ROOT}
 bazel run -- //tools/flake8 ${REPO_ROOT}
 
 #################
-# Go linting
-#################
-GO_FILES=$(find ${REPO_ROOT} -type f -name "*.go" -print)
-GOFMT_ARGS=("")
-GOFMT_INVOCATION="bazel run -- @rules_go//go fmt ${GOFMT_ARGS[@]}"
-echo $GO_FILES | xargs ${GOFMT_INVOCATION}
-
-#################
 # Markdown Linting
 #################
 MARKDOWN_FILES=$(find ${REPO_ROOT} -type f -name "*.md" -print)

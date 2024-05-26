@@ -10,6 +10,7 @@ load("@rules_python_gazelle_plugin//manifest:defs.bzl", "gazelle_python_manifest
 load("@rules_python_gazelle_plugin//modules_mapping:def.bzl", "modules_mapping")
 
 exports_files([
+    ".flake8",
     "pytest.ini",
     "pyproject.toml",
 ])
