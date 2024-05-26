@@ -1,6 +1,7 @@
 # Useful Commands
 
-This is just a place for me to put small commands that I find myself looking up frequently.
+This is just a place for me to put small commands that I find myself looking up
+frequently.
 
 ### Reload udev rules:
 
@@ -14,6 +15,7 @@ sudo udevadm trigger
 #### Argument shortcuts
 
 https://stackoverflow.com/questions/4009412/how-to-use-arguments-from-previous-command
+
 ```
 !^      first argument
 !$      last argument
