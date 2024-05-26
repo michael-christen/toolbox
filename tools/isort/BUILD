@@ -7,5 +7,8 @@ py_binary(
     srcs = ["isort.py"],
     data = ["//:pyproject.toml"],
     visibility = ["//:__subpackages__"],
-    deps = ["@pip//isort"],
+    deps = [
+        "//tools:utils",
+        "@pip//isort",
+    ],
 )
