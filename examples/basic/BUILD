@@ -4,7 +4,7 @@ load("@rules_proto//proto:defs.bzl", "proto_library")
 
 # load("@crate_index//:defs.bzl", "aliases", "all_crate_deps")
 load("@rules_rust//rust:defs.bzl", "rust_binary", "rust_doc")
-load("//bzl:py.bzl", "grpc_py_library", "proto_py_library", "py_binary", "py_test", "py_image")
+load("//bzl:py.bzl", "grpc_py_library", "proto_py_library", "py_binary", "py_image", "py_test")
 
 package(default_visibility = ["//visibility:private"])
 
