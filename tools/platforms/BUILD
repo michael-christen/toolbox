@@ -1,3 +1,5 @@
+package(default_visibility = ["//visibility:private"])
+
 platform(
     name = "container_aarch64_linux",
     constraint_values = [
@@ -15,5 +17,3 @@ platform(
     ],
     visibility = ["//visibility:public"],
 )
-
-package(default_visibility = ["//visibility:private"])
