@@ -3,6 +3,7 @@ load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_librar
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
 load("@rules_proto//proto:defs.bzl", "proto_library")
 load("@rules_cc//cc:defs.bzl", "cc_library")
+
 # load("@crate_index//:defs.bzl", "aliases", "all_crate_deps")
 load("@rules_rust//rust:defs.bzl", "rust_binary", "rust_doc")
 
