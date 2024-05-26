@@ -1,14 +1,13 @@
 # Set the name of the bazel workspace.
 workspace(name = "mchristen")
 
+# Repo description / layout
 # | Repo                                               | bzlmod enabled |
 # | ---                                                | ---            |
 # | https://github.com/stackb/rules_proto              | NO             |
-# | https://github.com/bazelbuild/rules_rust           | YES            |
-# | https://github.com/protocolbuffers/protobuf        | YES            |
 # | https://github.com/aspect-build/gcc-toolchain      | NO             |
-# | https://github.com/bazelbuild/rules_python gazelle | ?  |
-# | https://github.com/bazelbuild/buildtools           | NO |
+# | https://github.com/bazelbuild/rules_python gazelle | YES, see #55   |
+# | https://github.com/bazelbuild/buildtools           | NO             |
 #
 # Alternative to gcc-toolchain: https://github.com/uber/hermetic_cc_toolchain
 # Alternative to buildtools: https://github.com/fmeum/buildozer
