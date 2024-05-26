@@ -105,3 +105,7 @@ bazel run //tools/buildozer -- <args>
 bazel run //tools/buildifier -- <args>
 bazel run -- @pnpm//:pnpm --dir $PWD install --lockfile-only
 ```
+
+#### Inspiration
+
+- https://github.com/jessecureton/python_bazel_template
