@@ -76,3 +76,16 @@ py_library(
     srcs = ["utils.py"],
     visibility = ["//:__subpackages__"],
 )
+
+load("@aspect_rules_lint//format:defs.bzl", "format_multirun")
+
+format_multirun(
+    name = "format2",
+    python = ":ruff",
+)
+load("@aspect_rules_lint//lint:ruff.bzl", "ruff_aspect")
+
+ruff = ruff_aspect(
+    binary = "@@//:ruff",
+    configs = "@@//:.ruff.toml",
+)
