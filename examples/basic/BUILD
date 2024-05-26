@@ -3,7 +3,7 @@ load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_librar
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
 load("@rules_proto//proto:defs.bzl", "proto_library")
 load("@rules_cc//cc:defs.bzl", "cc_library")
-load("@crate_index//:defs.bzl", "aliases", "all_crate_deps")
+# load("@crate_index//:defs.bzl", "aliases", "all_crate_deps")
 load("@rules_rust//rust:defs.bzl", "rust_binary", "rust_doc")
 
 package(default_visibility = ["//visibility:private"])
@@ -57,11 +57,11 @@ proto_cc_library(
 rust_binary(
     name = "hello_world",
     srcs = ["src/main.rs"],
-    aliases = aliases(),
     deps = [
         "@crate_index//:ferris-says",
     ],
     # TODO: Get rust dependencies working
+    # aliases = aliases(),
     # deps = all_crate_deps(),
     # proc_macro_deps = all_crate_deps(
     #     proc_macro = True,
