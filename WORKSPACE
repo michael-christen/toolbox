@@ -1,6 +1,18 @@
 # Set the name of the bazel workspace.
 workspace(name = "mchristen")
 
+# | Repo                                               | bzlmod enabled |
+# | ---                                                | ---            |
+# | https://github.com/stackb/rules_proto              | NO             |
+# | https://github.com/bazelbuild/rules_rust           | YES            |
+# | https://github.com/protocolbuffers/protobuf        | YES            |
+# | https://github.com/aspect-build/gcc-toolchain      | NO             |
+# | https://github.com/bazelbuild/rules_python gazelle | ?  |
+# | https://github.com/bazelbuild/buildtools           | NO |
+#
+# Alternative to gcc-toolchain: https://github.com/uber/hermetic_cc_toolchain
+# Alternative to buildtools: https://github.com/fmeum/buildozer
+
 # Load the http_archive rule so that we can have bazel download
 # various rulesets and dependencies.
 # The `load` statement imports the symbol for http_archive from the http.bzl
