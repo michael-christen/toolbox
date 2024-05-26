@@ -1,8 +1,7 @@
-import asyncio
 import unittest
 
-from examples.basic import hello_pb2
 from examples.basic import client
+from examples.basic import hello_pb2
 from examples.basic import server
 
 
@@ -17,6 +16,4 @@ class TestHello(unittest.IsolatedAsyncioTestCase):
 
     async def test_basics(self):
         result = await client.get_response()
-        self.assertEqual(
-            hello_pb2.HelloReply(message='Hello, you!'),
-            result)
+        self.assertEqual(hello_pb2.HelloReply(message="Hello, you!"), result)

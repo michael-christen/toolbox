@@ -3,8 +3,8 @@
 My personal monorepo.
 
 This will include everything from one-off scripts and experiments to libraries
-and applications. I'll likely mostly use Python, C++, and Rust (fingers
-crossed) and tie it all into 1 build tool to bring them all together.
+and applications. I'll likely mostly use Python, C++, and Rust (fingers crossed)
+and tie it all into 1 build tool to bring them all together.
 
 This should act as a repository of projects I'm working on and an example of my
 latest insights into best practices, design principles, dev-ops usage, etc.
@@ -31,10 +31,11 @@ chmod +x ~/tools/bazel
 ### Getting Started
 
 ## TODO
+
 - [ ] decide on rough rules for directory structure, likely don't separate by
-  language
+      language
 - [ ] handle security issues & re-enable dependabot:
-  https://github.com/michael-christen/toolbox/security/dependabot
+      https://github.com/michael-christen/toolbox/security/dependabot
 - [ ] Add linter
 - [ ] Look into new tools: fd, fzf, zoxide
 
@@ -54,15 +55,18 @@ bazel clean --expunge
 # https://www.tweag.io/blog/2023-07-27-building-rust-workspace-with-bazel/
 CARGO_BAZEL_REPIN=1 bazel sync --only=crate_index
 ```
+
 NOTE: this doesn't seem to be working ...
 
 #### Notes
-- bzlmod is where things will be moving to better share dependency information and use a central regirstry: https://bazel.build/external/migration
 
+- bzlmod is where things will be moving to better share dependency information
+  and use a central regirstry: https://bazel.build/external/migration
 
 ## Language FAQs
 
 Generally, each language needs a way to answer these questions:
+
 - How to check & enforce style and typing? (linter & formatter)
 - How to bulid?
 - How to test?
@@ -76,6 +80,7 @@ Generally, each language needs a way to answer these questions:
 #### Command Quick Reference
 
 Copied from "Bazel"
+
 ```
 # Update cargo dependencies
 # https://www.tweag.io/blog/2023-07-27-building-rust-workspace-with-bazel/
@@ -90,7 +95,8 @@ CARGO_BAZEL_REPIN=1 bazel sync --only=crate_index
 2. `bazel run //:requirements.update` to modify `requirements_lock.txt`
 3. `bazel run //:gazelle_python_manifest.update` to modify `gazelle_python.yaml`
 
-NOTE: Once `requirements.in` is modified, tests will ensure the above commands have been run (or CI will fail)
+NOTE: Once `requirements.in` is modified, tests will ensure the above commands
+have been run (or CI will fail)
 
 ### Miscellaneous
 

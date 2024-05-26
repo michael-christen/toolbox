@@ -5,6 +5,7 @@ For example, assume you have | A   | B   | C   |
 
 how do you return A 10% of the time, B 30%, etc?
 """
+
 import random
 
 

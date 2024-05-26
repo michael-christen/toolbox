@@ -28,7 +28,6 @@ class EntryNotFound(BaseError):
     pass
 
 
-
 def read_csv(f=None):
     f = f or sys.stdin
     reader = csv.reader(f)
@@ -50,16 +49,20 @@ def get_entry_for_cell(entries, cell, row_offset=0, col_offset=0):
 
 def update_sheet(entries, sheet_name):
     scope = [
-        'https://spreadsheets.google.com/feeds',
-        'https://www.googleapis.com/auth/drive',
+        "https://spreadsheets.google.com/feeds",
+        "https://www.googleapis.com/auth/drive",
     ]
     credentials = ServiceAccountCredentials.from_json_keyfile_name(
-        'credentials.json', scope)
+        "credentials.json", scope
+    )
     gc = gspread.authorize(credentials)
     # TODO: Select custom sheet
     wks = gc.open(sheet_name).sheet1
     cell_list = wks.range(
-        1, 1, wks.row_count, wks.col_count,
+        1,
+        1,
+        wks.row_count,
+        wks.col_count,
     )
     for cell in cell_list:
         try:
@@ -69,9 +72,9 @@ def update_sheet(entries, sheet_name):
     wks.update_cells(cell_list)
 
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Upload csv to spreadsheets.')
-    parser.add_argument('sheet_name', help='The spreadsheet name')
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Upload csv to spreadsheets.")
+    parser.add_argument("sheet_name", help="The spreadsheet name")
     args = parser.parse_args()
     entries = list(read_csv())
     update_sheet(entries, args.sheet_name)

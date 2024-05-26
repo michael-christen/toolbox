@@ -17,8 +17,6 @@ force_single_line = true
 # https://black.readthedocs.io/en/stable/usage_and_configuration/the_basics.html
 line-length = 79
 target-version = ['py38']
-# XXX: Remove to switch ' to "
-skip-string-normalization = true
 exclude = '''
 (
   /(
