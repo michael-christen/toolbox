@@ -32,3 +32,6 @@ jobs:
         run: |
           bazel test //...
       - run: echo "Status is ${{ job.status }}."
+
+# XXX: Lint
+#

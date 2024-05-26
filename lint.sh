@@ -39,6 +39,7 @@ echo $BAZEL_FILES | xargs ${BUILDIFIER_INVOCATION}
 # Python linting
 #################
 # Sort imports
+# XXX: --check-only
 bazel run -- //tools/isort ${REPO_ROOT} --dont-follow-links
 # Autoformat
 bazel run -- //tools/black ${REPO_ROOT}
