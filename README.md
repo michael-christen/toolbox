@@ -97,4 +97,5 @@ NOTE: Once `requirements.in` is modified, tests will ensure the above commands h
 ```
 bazel run //tools/buildozer -- <args>
 bazel run //tools/buildifier -- <args>
+bazel run -- @pnpm//:pnpm --dir $PWD install --lockfile-only
 ```

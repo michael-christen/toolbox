@@ -11,6 +11,7 @@ load("@rules_python_gazelle_plugin//modules_mapping:def.bzl", "modules_mapping")
 
 exports_files([
     ".flake8",
+    ".prettierrc",
     "pytest.ini",
     "pyproject.toml",
 ])
