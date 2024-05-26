@@ -3,9 +3,21 @@
 set -euo pipefail
 
 # Function to print usage
-print_usage() {
+function print_usage {
   echo "Usage: $0 --mode [check|format]"
   exit 1
+}
+
+function grep_xxx {
+  # Don't show up in the search
+  X="X"
+  BAD_STRING="$X$X$X"
+  # Raise and re-report if found
+  if git grep --quiet ${BAD_STRING}; then
+    echo "${BAD_STRING} found in source"
+    git grep ${BAD_STRING}
+    exit 1
+  fi
 }
 
 # Parse arguments using getopt
@@ -70,10 +82,12 @@ elif [ "$mode" = "check" ]; then
   BUILDIFIER_ARGS=("-lint=off" "-mode=check" "-v=false")
   PRETTIER_ARGS=("--check" "--config ${REPO_ROOT}/.prettierrc")
   BAZEL_TOOL="//tools:check"
+  GAZELLE_ARGS=("-mode" "diff")
 elif [ "$mode" = "format" ]; then
   BUILDIFIER_ARGS=("-lint=fix" "-mode=fix" "-v=false")
   PRETTIER_ARGS=("--write" "--config ${REPO_ROOT}/.prettierrc")
   BAZEL_TOOL="//tools:format"
+  GAZELLE_ARGS=("-mode" "fix")
 fi
 PRETTIER_INVOCATION=""
 
@@ -91,9 +105,16 @@ CONFIG="--config quiet"
 echo $BAZEL_FILES | xargs bazel run ${CONFIG} -- //tools/buildifier ${BUILDIFIER_ARGS[@]}
 bazel run ${CONFIG} -- ${BAZEL_TOOL}
 echo $MARKDOWN_FILES | xargs bazel run ${CONFIG} -- //tools/prettier ${PRETTIER_ARGS[@]}
+bazel run ${CONFIG} -- //:gazelle ${GAZELLE_ARGS[@]}
+
+# Add back in when fixed
+# grep_xxx
+
+
+# TODO(#57): Re-enable this check when we fix the false errors
+# - name: bzlmod lockfile
+#   run: |
+#     bazel mod deps --lockfile_mode=error
 
 
 printf "\n✨ Linting completed successfully! ✨\n"
-
-# Add git grep XXX?
-# And --check option
