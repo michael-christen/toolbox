@@ -4,9 +4,10 @@
 bazel query //... --output proto > query_result.pb
 # Load then operate on it
 # For example
-bazel query //... --output=proto | tee result.pb | bazel run //apps:bazel_parser
+bazel query //... --output=proto |tee result.pb |bazel run //apps:bazel_parser
 ```
 """
+
 from third_party.bazel.src.main.protobuf import build_pb2
 
 
