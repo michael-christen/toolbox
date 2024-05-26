@@ -1,2 +1,4 @@
 # Have bazel ignore this directory
 nobazel
+# Don't want node_modules
+node_modules

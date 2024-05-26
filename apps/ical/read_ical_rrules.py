@@ -14,7 +14,7 @@ def main():
     for s in subcomponents:
         rrule_str = ', '.join('{} -> {}'.format(k, v)
                              for k, v in sorted(s['RRULE'].items()))
-        print '{}: {}'.format(s['SUMMARY'], rrule_str)
+        print('{}: {}'.format(s['SUMMARY'], rrule_str))
 
 
 if __name__ == '__main__':

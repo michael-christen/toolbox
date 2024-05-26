@@ -3,14 +3,17 @@
 # The `load` statement imports the symbol for the rule, in the defined
 # ruleset. When the symbol is loaded you can use the rule.
 load("@bazel_gazelle//:def.bzl", "gazelle", "gazelle_binary")
-load("@com_github_bazelbuild_buildtools//buildifier:def.bzl", "buildifier")
+load("@npm//:defs.bzl", "npm_link_all_packages")
 load("@pip//:requirements.bzl", "all_whl_requirements")
 load("@rules_python//python:pip.bzl", "compile_pip_requirements")
 load("@rules_python_gazelle_plugin//manifest:defs.bzl", "gazelle_python_manifest")
 load("@rules_python_gazelle_plugin//modules_mapping:def.bzl", "modules_mapping")
 
 exports_files([
+    ".flake8",
+    ".prettierrc",
     "pytest.ini",
+    "pyproject.toml",
 ])
 
 compile_pip_requirements(
@@ -112,10 +115,4 @@ gazelle(
 
 package(default_visibility = ["//visibility:private"])
 
-# Run as:
-# bazel run //:buildifier -- <args>
-buildifier(
-    name = "buildifier",
-)
-# Run buildozer as:
-# bazel run --run_under="cd $PWD && " @com_github_bazelbuild_buildtools//buildozer --  <args>
+npm_link_all_packages(name = "node_modules")

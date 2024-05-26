@@ -1,11 +1,10 @@
-load("//bzl:py.bzl", "grpc_py_library", "proto_py_library", "py_binary", "py_test")
-load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_library")
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
+load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_library")
 load("@rules_proto//proto:defs.bzl", "proto_library")
-load("@rules_cc//cc:defs.bzl", "cc_library")
 
 # load("@crate_index//:defs.bzl", "aliases", "all_crate_deps")
 load("@rules_rust//rust:defs.bzl", "rust_binary", "rust_doc")
+load("//bzl:py.bzl", "grpc_py_library", "proto_py_library", "py_binary", "py_image", "py_test")
 
 package(default_visibility = ["//visibility:private"])
 
@@ -97,6 +96,15 @@ py_binary(
     ],
 )
 
+# Build and run this image with
+#     bazel run //examples/basic:sever_img_load_docker
+#     docker run --rm server:latest
+py_image(
+    name = "server_img",
+    binary = ":server",
+    image_tags = ["server:latest"],
+)
+
 py_binary(
     name = "client",
     srcs = ["client.py"],
@@ -108,6 +116,15 @@ py_binary(
     ],
 )
 
+# Build and run this image with
+#     bazel run //examples/basic:client_img_load_docker
+#     docker run --rm client:latest
+py_image(
+    name = "client_img",
+    binary = ":client",
+    image_tags = ["client:latest"],
+)
+
 py_test(
     name = "grpc_test",
     srcs = ["grpc_test.py"],
@@ -116,6 +133,7 @@ py_test(
         ":server",
         "//examples/basic:hello_py_library",
     ],
+    # XXX: How to expect_failure
 )
 
 grpc_py_library(

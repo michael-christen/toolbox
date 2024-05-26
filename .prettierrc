@@ -1,0 +1,6 @@
+# https://prettier.io/docs/en/options.html#print-width
+proseWrap: "always"
+overrides:
+  - files: "*.md"
+    options:
+      printWidth: 80
