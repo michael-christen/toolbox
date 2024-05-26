@@ -54,6 +54,7 @@ bazel clean --expunge
 # https://www.tweag.io/blog/2023-07-27-building-rust-workspace-with-bazel/
 CARGO_BAZEL_REPIN=1 bazel sync --only=crate_index
 ```
+NOTE: this doesn't seem to be working ...
 
 #### Notes
 - bzlmod is where things will be moving to better share dependency information and use a central regirstry: https://bazel.build/external/migration
