@@ -29,3 +29,5 @@ pip.parse(
     requirements_lock = "//:requirements_lock.txt",
 )
 use_repo(pip, "pip")
+
+bazel_dep(name = "protobuf", version = "26.0")
