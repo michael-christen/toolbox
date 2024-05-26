@@ -7,5 +7,8 @@ py_binary(
     srcs = ["black.py"],
     data = ["//:pyproject.toml"],
     visibility = ["//:__subpackages__"],
-    deps = ["@pip//black"],
+    deps = [
+        "//tools:utils",
+        "@pip//black",
+    ],
 )
