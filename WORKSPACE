@@ -98,16 +98,6 @@ gcc_register_toolchain(
     target_arch = ARCHS.x86_64,
 )
 
-http_archive(
-    name = "com_google_protobuf",
-    sha256 = "616bb3536ac1fff3fb1a141450fa28b875e985712170ea7f1bfe5e5fc41e2cd8",
-    strip_prefix = "protobuf-24.4",
-    urls = ["https://github.com/protocolbuffers/protobuf/archive/v24.4.tar.gz"],
-)
-
-load("@com_google_protobuf//:protobuf_deps.bzl", "protobuf_deps")
-
-protobuf_deps()
 # TODO: Should add buf too
 
 # Remaining setup is for rules_python.

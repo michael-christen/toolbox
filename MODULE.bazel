@@ -30,6 +30,8 @@ pip.parse(
 )
 use_repo(pip, "pip")
 
+bazel_dep(name = "protobuf", version = "26.0")
+
 bazel_dep(name = "rules_rust", version = "0.45.1")
 
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
