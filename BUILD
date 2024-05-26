@@ -11,6 +11,7 @@ load("@rules_python_gazelle_plugin//modules_mapping:def.bzl", "modules_mapping")
 
 exports_files([
     "pytest.ini",
+    "pyproject.toml",
 ])
 
 compile_pip_requirements(
