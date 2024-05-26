@@ -19,15 +19,11 @@ compile_pip_requirements(
     requirements_txt = "requirements_lock.txt",
 )
 
-# This repository rule fetches the metadata for python packages we
-# depend on. That data is required for the gazelle_python_manifest
-# rule to update our manifest file.
-# To see what this rule does, try `bazel run @modules_map//:print`
+# To see more, try `bazel run @modules_map//:print`
 modules_mapping(
     name = "modules_map",
     exclude_patterns = [
         "^_|(\\._)+",  # This is the default.
-        "(\\.tests)+",  # Add a custom one to get rid of the psutil tests.
     ],
     wheels = all_whl_requirements,
 )
@@ -55,7 +51,7 @@ gazelle_binary(
         "@bazel_gazelle//language/go",  # Built-in rule from gazelle for Golang
         "@bazel_gazelle//language/proto",  # Built-in rule from gazelle for Protos
         # Any languages that depend on the proto plugin must come after it
-        "@rules_python_gazelle_plugin//python:python",  # Use gazelle from rules_python
+        # "@rules_python_gazelle_plugin//python:python",  # Use gazelle from rules_python
         "@build_stack_rules_proto//language/protobuf",  # Protobuf language generation
         # TODO: Add buf suppport
         # "@rules_buf//gazelle/buf:buf",  # Generates buf lint and buf breaking detection rules
@@ -72,7 +68,8 @@ gazelle(
     args = [
         "-proto_configs=gazelle_proto_config.yaml",
     ],
-    gazelle = ":gazelle_bin",
+    gazelle = "@rules_python_gazelle_plugin//python:gazelle_binary",
+    # XXX: gazelle = ":gazelle_bin",
 )
 
 # https://github.com/bazelbuild/bazel-gazelle#directives
