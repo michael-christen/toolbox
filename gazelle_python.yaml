@@ -12,7 +12,6 @@ manifest:
     bs4.diagnose: beautifulsoup4
     bs4.element: beautifulsoup4
     bs4.formatter: beautifulsoup4
-    exceptiongroup: exceptiongroup
     grpc: grpcio
     grpc.aio: grpcio
     grpc.beta: grpcio
@@ -60,7 +59,6 @@ manifest:
     soupsieve.css_types: soupsieve
     soupsieve.pretty: soupsieve
     soupsieve.util: soupsieve
-    tomli: tomli
   pip_repository:
     name: pip
-integrity: 96dcd2d07aaa59aabe626f11e11fa219726f13f4d64293792c1ee0eb1b45a0a5
+integrity: 0c6e388ea9fb9ddcd2b8c8ad19921748a11bc1800bdf4e068269333d8b59a2c0

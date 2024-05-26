@@ -1,0 +1,24 @@
+module(name="mchristen", version="")
+
+bazel_dep(name = "aspect_rules_py", version = "0.7.3")
+
+# Minimum version needs:
+# feat: add interpreter_version_info to py_runtime by @mattem in #1671
+bazel_dep(name = "rules_python", dev_dependency = True, version = "0.29.0")
+
+python = use_extension("@rules_python//python/extensions:python.bzl", "python")
+# Must match interpreter_version in .bazelrc
+# LINK(7e463bc3_e4d9_4464_ba39_3217c4a86004)
+PYTHON_VERSION = "3.11"
+python.toolchain(
+    configure_coverage_tool = True,
+    python_version = PYTHON_VERSION,
+)
+
+pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip")
+pip.parse(
+    hub_name = "pip",
+    python_version = PYTHON_VERSION,
+    requirements_lock = "//:requirements_lock.txt",
+)
+use_repo(pip, "pip")

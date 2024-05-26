@@ -65,25 +65,6 @@ load("@build_bazel_rules_apple//apple:repositories.bzl", "apple_rules_dependenci
 
 apple_rules_dependencies(ignore_version_differences = False)
 
-http_archive(
-    name = "rules_python",
-    sha256 = "d71d2c67e0bce986e1c5a7731b4693226867c45bfe0b7c5e0067228a536fc580",
-    strip_prefix = "rules_python-0.29.0",
-    url = "https://github.com/bazelbuild/rules_python/releases/download/0.29.0/rules_python-0.29.0.tar.gz",
-)
-
-http_archive(
-    name = "aspect_rules_py",
-    sha256 = "50b4b43491cdfc13238c29cb159b7ccacf0a1e54bd27b65ff2d5fac69af4d46f",
-    strip_prefix = "rules_py-0.4.0",
-    url = "https://github.com/aspect-build/rules_py/releases/download/v0.4.0/rules_py-v0.4.0.tar.gz",
-)
-
-# Fetches the rules_py dependencies.
-# (must come before aspect's gcc toolchain dependencies)
-load("@aspect_rules_py//py:repositories.bzl", "rules_py_dependencies")
-
-rules_py_dependencies()
 
 http_archive(
     name = "aspect_gcc_toolchain",
@@ -159,46 +140,6 @@ http_archive(
     strip_prefix = "rules_python-0.29.0/gazelle",
     url = "https://github.com/bazelbuild/rules_python/releases/download/0.29.0/rules_python-0.29.0.tar.gz",
 )
-
-# Next we load the setup and toolchain from rules_python.
-load("@rules_python//python:repositories.bzl", "py_repositories", "python_register_toolchains")
-
-# Perform general setup
-py_repositories()
-
-# We now register a hermetic Python interpreter rather than relying on a system-installed interpreter.
-# This toolchain will allow bazel to download a specific python version, and use that version
-# for compilation.
-python_register_toolchains(
-    name = "python39",
-    python_version = "3.9",
-)
-
-load("@python39//:defs.bzl", "interpreter")
-load("@rules_python//python:pip.bzl", "pip_parse")
-
-# This macro wraps the `pip_repository` rule that invokes `pip`, with `incremental` set.
-# Accepts a locked/compiled requirements file and installs the dependencies listed within.
-# Those dependencies become available in a generated `requirements.bzl` file.
-# You can instead check this `requirements.bzl` file into your repo.
-pip_parse(
-    name = "pip",
-    # (Optional) You can provide a python_interpreter (path) or a python_interpreter_target (a Bazel target, that
-    # acts as an executable). The latter can be anything that could be used as Python interpreter. E.g.:
-    # 1. Python interpreter that you compile in the build file.
-    # 2. Pre-compiled python interpreter included with http_archive.
-    # 3. Wrapper script, like in the autodetecting python toolchain.
-    # Here, we use the interpreter constant that resolves to the host interpreter from the default Python toolchain.
-    python_interpreter_target = interpreter,
-    # Set the location of the lock file.
-    requirements_lock = "//:requirements_lock.txt",
-)
-
-# Load the install_deps macro.
-load("@pip//:requirements.bzl", "install_deps")
-
-# Initialize repositories for all packages in requirements_lock.txt.
-install_deps()
 
 # The rules_python gazelle extension has some third-party go dependencies
 # which we need to fetch in order to compile it.

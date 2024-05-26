@@ -96,11 +96,6 @@ gazelle(
 # Set default BUILD rule visibility
 # gazelle:default_visibility //visibility:private
 
-# Configure aspect_rules_py to be used for py_test, py_binary, py_library
-# gazelle:map_kind py_binary py_binary @aspect_rules_py//py:defs.bzl
-# gazelle:map_kind py_library py_library @aspect_rules_py//py:defs.bzl
-# gazelle:map_kind py_test py_test @aspect_rules_py//py:defs.bzl
-
 # Tell gazelle where to find imports
 # gazelle:resolve py google.protobuf.message @com_google_protobuf//:protobuf_python
 
