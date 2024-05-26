@@ -119,3 +119,8 @@ gazelle(
 # gazelle:resolve py examples.basic.hello_pb2_grpc //examples/basic:hello_grpc_py_library
 
 npm_link_all_packages(name = "node_modules")
+
+alias(
+    name = "format",
+    actual = "//tools:format2",
+)
