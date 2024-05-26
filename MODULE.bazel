@@ -46,10 +46,7 @@ crate = use_extension(
 crate.from_cargo(
     name = "crate_index",
     cargo_lockfile = "//:Cargo.lock",
-    # XXX: What about this one?
-    # lockfile = "//:cargo-bazel-lock.json",
     manifests = [
-        # "//:Cargo.toml",
         "//:examples/basic/Cargo.toml",
     ],
 )
