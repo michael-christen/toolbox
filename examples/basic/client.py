@@ -15,7 +15,7 @@ async def get_response() -> hello_pb2.HelloReply:
 
 async def run() -> None:
     resp = await get_response()
-    print("Greeter client received: " + response.message)
+    print("Greeter client received: " + resp.message)
 
 
 if __name__ == "__main__":

@@ -3,7 +3,6 @@
 """
 import argparse
 import csv
-import datetime
 import sys
 from typing import List
 from typing import NamedTuple
@@ -28,11 +27,19 @@ def main():
     )
     args = parser.parse_args()
     if args.select == 'unread':
-        selector = lambda x: not x.is_read
+
+        def selector(x) -> bool:
+            return not x.is_read
+
     elif args.select == 'read':
-        selector = lambda x: x.is_read
+
+        def selector(x) -> bool:
+            return x.is_read
+
     else:
-        selector = lambda x: True
+
+        def selector(x) -> bool:
+            return True
 
     html = sys.stdin.read()
     parsed = BS(html, 'html.parser')
@@ -42,7 +49,6 @@ def main():
     entries = []
     for is_read, l in zip([False, True], lists):
         for link in l.find_all('a'):
-            attrs = link.attrs
             entries.append(
                 Entry(
                     href=link.attrs['href'],

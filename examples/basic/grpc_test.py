@@ -1,4 +1,3 @@
-import asyncio
 import unittest
 
 from examples.basic import client
