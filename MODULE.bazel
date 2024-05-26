@@ -7,6 +7,16 @@
 # See https://bazel.build/external/lockfile for more info
 module(name="mchristen", version="")
 
+
+########################################
+# Generic deps
+########################################
+bazel_dep(name = "aspect_bazel_lib", version = "2.5.1")
+bazel_dep(name = "platforms", version = "0.0.8")
+
+########################################
+# Set up rules_python and pip
+########################################
 bazel_dep(name = "aspect_rules_py", version = "0.7.3")
 
 # Minimum version needs:
@@ -51,3 +61,79 @@ crate.from_cargo(
     ],
 )
 use_repo(crate, "crate_index")
+
+########################################
+# Set up rules_oci
+########################################
+bazel_dep(name = "rules_oci", version = "1.7.4")
+
+oci = use_extension("@rules_oci//oci:extensions.bzl", "oci")
+oci.pull(
+    name = "distroless_base",
+    # 'latest' is not reproducible, but it's convenient.
+    # During the build we print a WARNING message that includes recommended 'digest' and 'platforms'
+    # values which you can use here in place of 'tag' to pin for reproducibility.
+    # tag = "latest",
+    digest = "sha256:9d4e5680d67c984ac9c957f66405de25634012e2d5d6dc396c4bdd2ba6ae569f",
+    image = "gcr.io/distroless/base",
+    platforms = [
+        "linux/amd64",
+        "linux/arm64/v8",
+    ],
+)
+oci.pull(
+    name = "ubuntu_base",
+    # tag = "24.04",
+    digest = "sha256:723ad8033f109978f8c7e6421ee684efb624eb5b9251b70c6788fdb2405d050b",
+    image = "ubuntu",
+    platforms = [
+        "linux/amd64",
+        "linux/arm64/v8",
+    ],
+)
+
+# For each oci.pull call, repeat the "name" here to expose them as dependencies.
+use_repo(oci, "distroless_base", "ubuntu_base")
+
+########################################
+# Set up hermetic Buildifier tools
+########################################
+# This is helpful because the old version used an http_archive to fetch the buildtools
+# WORKSPACE, but it is incompatible with bzlmod Go toolchains. Instead let's just use
+# a prebuilt version.
+bazel_dep(
+    name = "buildifier_prebuilt",
+    version = "6.4.0",
+    dev_dependency = True,
+)
+# XXX: Add buildozer too
+
+
+########################################
+# Set up rules_js
+########################################
+# NOTE: We don't really use/support JS in this repo, and if you need to you'll
+# have some more config to do, but we register rules_js here so we can use it to
+# pull a few javascript packages used for repo tooling, like prettier for linting.
+bazel_dep(name = "aspect_rules_js", version = "1.38.0")
+
+####### OPTIONAL: Customize Node.js version #########
+# By default you get the node version from DEFAULT_NODE_VERSION in @rules_nodejs//nodejs:repositories.bzl
+# Optionally you can pin a different node version:
+# bazel_dep(name = "rules_nodejs", version = "5.8.2")
+# node = use_extension("@rules_nodejs//nodejs:extensions.bzl", "node")
+# node.toolchain(node_version = "16.14.2")
+#################################
+
+npm = use_extension("@aspect_rules_js//npm:extensions.bzl", "npm", dev_dependency = True)
+
+pnpm = use_extension("@aspect_rules_js//npm:extensions.bzl", "pnpm", dev_dependency = True)
+
+npm.npm_translate_lock(
+    name = "npm",
+    pnpm_lock = "//:pnpm-lock.yaml",
+    verify_node_modules_ignored = "//:.bazelignore",
+)
+use_repo(npm, "npm")
+
+use_repo(pnpm, "pnpm")

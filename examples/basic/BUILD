@@ -116,6 +116,7 @@ py_test(
         ":server",
         "//examples/basic:hello_py_library",
     ],
+    # XXX: How to expect_failure
 )
 
 grpc_py_library(
