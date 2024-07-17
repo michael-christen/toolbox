@@ -120,3 +120,5 @@ bazel run -- @pnpm//:pnpm --dir $PWD install --lockfile-only
 #### Inspiration
 
 - https://github.com/jessecureton/python_bazel_template
+
+` XXX: trigger CI`
