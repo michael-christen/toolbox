@@ -17,7 +17,10 @@ jobs:
           # Add .bazelrc, .bazelversion, MODULE.bazel, possibly other
           # dependencies too
           # Or should we just setup remote caching more fully?
-          key: ${{ hashFiles('WORKSPACE') }}
+          key: bazel-${{ hashFiles('WORKSPACE') }}
+          # An ordered list of prefix-matched keys to use for restoring stale cache if no cache hit occurred for key.
+          restore-keys: |
+            bazel-
       - name: Lint
         run: |
           ./lint.sh --mode check

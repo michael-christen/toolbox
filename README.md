@@ -39,6 +39,17 @@ chmod +x ~/tools/bazel
 - [ ] Add linter
 - [ ] Look into new tools: fd, fzf, zoxide
 
+### CI
+
+- github actions, see [.github/workflows/](.github/workflows/)
+- bazel
+  - disk caching uses github's cache action
+  - remote caching handled externally with
+    [nativelink](https://www.nativelink.com/)
+    - see
+      [dashboard](https://app.nativelink.com/c690e34c-beac-420a-b672-6320b8f5b419/dashboard)
+      for more detailed metrics.
+
 ## References
 
 ### Bazel
