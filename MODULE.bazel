@@ -141,3 +141,8 @@ use_repo(npm, "npm")
 use_repo(pnpm, "pnpm")
 
 bazel_dep(name = "rules_multirun", version = "0.9.0")
+
+########################################
+# Set up rules_platform
+########################################
+bazel_dep(name = "rules_platform", version = "0.1.0")
