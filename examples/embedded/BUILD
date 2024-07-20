@@ -7,6 +7,8 @@ cc_binary(
 
 platform_data(
     name = "main_embedded",
-    target = ":main",
     platform = "@bazel_embedded//platforms:cortex_m0",
+    target = ":main",
 )
+
+package(default_visibility = ["//visibility:private"])

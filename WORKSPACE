@@ -128,7 +128,6 @@ git_repository(
     name = "bazel_embedded",
     commit = "d3cbe4eff9a63d3dee63067d61096d681daca33b",
     remote = "https://github.com/bazelembedded/bazel-embedded.git",
-    shallow_since = "1585022166 +0800",
 )
 
 load("@bazel_embedded//:bazel_embedded_deps.bzl", "bazel_embedded_deps")
