@@ -24,7 +24,7 @@ build --copt -Wmemset-transposed-args
 build --copt -Wcast-function-type
 build --copt -Wclobbered
 build --copt -Wempty-body
-build --copt -Wenum-conversion
+build --conlyopt -Wenum-conversion
 build --copt -Wexpansion-to-defined
 build --copt -Wignored-qualifiers
 # TODO(https://github.com/michael-christen/toolbox/issues/42): Re-enable
@@ -86,3 +86,38 @@ try-import %workspace%/user.bazelrc
 # Must match PYTHON_VERSION in MODULE.bazel
 # LINK(7e463bc3_e4d9_4464_ba39_3217c4a86004)
 common --@aspect_rules_py//py:interpreter_version=3.11.9
+
+# Standard Bazel configuration flags required for all Pigweed projects.
+
+# Don't automatically create __init__.py files.
+#
+# This prevents spurious package name collisions at import time, and should be
+# the default (https://github.com/bazelbuild/bazel/issues/7386). It's
+# particularly helpful for Pigweed, because we have many potential package name
+# collisions due to a profusion of stuttering paths like
+# pw_transfer/py/pw_transfer.
+common --incompatible_default_to_explicit_init_py
+
+# Required for new toolchain resolution API.
+build --incompatible_enable_cc_toolchain_resolution
+
+# Do not attempt to configure an autodetected (local) toolchain. We vendor all
+# our toolchains, and CI VMs may not have any local toolchain to detect.
+common --repo_env=BAZEL_DO_NOT_DETECT_CPP_TOOLCHAIN=1
+
+# Don't propagate flags or defines to the exec config. This will become the
+# default one day (https://github.com/bazelbuild/bazel/issues/22457) and will
+# improve cache hit rates between builds targeting different platforms.
+# XXX: common --experimental_exclude_defines_from_exec_config
+# XXX: common --experimental_exclude_starlark_flags_from_exec_config
+
+# Enforces consistent action environment variables. This is important to
+# address Protobuf's rebuild sensitivity on changes to the environment
+# variables. It also improves cache hit rates. Should be true by default one
+# day (https://github.com/bazelbuild/bazel/issues/7026).
+build --incompatible_strict_action_env
+
+# Expose exec toolchains for Python. We use these toolchains in some rule
+# implementations (git grep for
+# "@rules_python//python:exec_tools_toolchain_type").
+build --@rules_python//python/config_settings:exec_tools_toolchain=enabled
