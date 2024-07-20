@@ -3,6 +3,9 @@ run-name: ${{ github.actor }} is building and testing ${{ github.repository }}
 on:
   pull_request:
   workflow_dispatch:
+  push:
+    branches:
+      - master
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
