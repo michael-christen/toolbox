@@ -10,12 +10,13 @@ workspace(name = "mchristen")
 #
 # Alternative to gcc-toolchain: https://github.com/uber/hermetic_cc_toolchain
 
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+
 # Load the http_archive rule so that we can have bazel download
 # various rulesets and dependencies.
 # The `load` statement imports the symbol for http_archive from the http.bzl
 # file.  When the symbol is loaded you can use the rule.
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
 http_archive(
     name = "build_stack_rules_proto",
@@ -124,7 +125,7 @@ load("@rules_python_gazelle_plugin//:deps.bzl", _py_gazelle_deps = "gazelle_deps
 _py_gazelle_deps()
 
 git_repository(
-  name = "pigweed",
-  commit = "c00e9e430addee0c8add16c32eb6d8ab94189b9e",
-  remote = "https://pigweed.googlesource.com/pigweed/pigweed.git",
+    name = "pigweed",
+    commit = "c00e9e430addee0c8add16c32eb6d8ab94189b9e",
+    remote = "https://pigweed.googlesource.com/pigweed/pigweed.git",
 )
