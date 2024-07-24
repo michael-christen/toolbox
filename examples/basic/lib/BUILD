@@ -7,7 +7,4 @@ cc_library(
     srcs = ["hello-time.cc"],
     hdrs = ["hello-time.h"],
     visibility = ["//examples/basic/app:__pkg__"],
-    deps = [
-        "@pigweed//pw_containers:vector",
-    ],
 )
