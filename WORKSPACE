@@ -126,6 +126,6 @@ _py_gazelle_deps()
 
 git_repository(
     name = "pigweed",
-    commit = "c00e9e430addee0c8add16c32eb6d8ab94189b9e",
+    commit = "362fe9d9a87cd8428c86c0058a252d007a874485",
     remote = "https://pigweed.googlesource.com/pigweed/pigweed.git",
 )
