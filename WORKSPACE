@@ -124,8 +124,144 @@ load("@rules_python_gazelle_plugin//:deps.bzl", _py_gazelle_deps = "gazelle_deps
 # for python requirements.
 _py_gazelle_deps()
 
+_PIGWEED_COMMIT = "7dc26abc274fa80d6c9f9de9e3a12e679795743d"
+# XXX: module.bazel broke this recently: Label.repo_name reliance
+# "362fe9d9a87cd8428c86c0058a252d007a874485"
 git_repository(
     name = "pigweed",
-    commit = "362fe9d9a87cd8428c86c0058a252d007a874485",
+    commit = _PIGWEED_COMMIT,
     remote = "https://pigweed.googlesource.com/pigweed/pigweed.git",
 )
+
+git_repository(
+    name = "pw_toolchain",
+    commit = _PIGWEED_COMMIT,
+    remote = "https://pigweed.googlesource.com/pigweed/pigweed.git",
+    strip_prefix = "pw_toolchain_bazel",
+)
+
+load("@bazel_tools//tools/build_defs/repo:utils.bzl", "maybe")
+
+# XXX: pigweed example below
+# Load Pigweed's own dependencies that we'll need.
+#
+# TODO: b/274148833 - Don't require users to spell these out.
+http_archive(
+    name = "platforms",
+    sha256 = "5308fc1d8865406a49427ba24a9ab53087f17f5266a7aabbfc28823f3916e1ca",
+    urls = [
+        "https://mirror.bazel.build/github.com/bazelbuild/platforms/releases/download/0.0.6/platforms-0.0.6.tar.gz",
+        "https://github.com/bazelbuild/platforms/releases/download/0.0.6/platforms-0.0.6.tar.gz",
+    ],
+)
+
+http_archive(
+    name = "bazel_skylib",
+    sha256 = "aede1b60709ac12b3461ee0bb3fa097b58a86fbfdb88ef7e9f90424a69043167",
+    strip_prefix = "bazel-skylib-1.6.1",  # 2024-04-24
+    urls = ["https://github.com/bazelbuild/bazel-skylib/archive/refs/tags/1.6.1.tar.gz"],
+)
+
+http_archive(
+    name = "rules_fuzzing",
+    sha256 = "d9002dd3cd6437017f08593124fdd1b13b3473c7b929ceb0e60d317cb9346118",
+    strip_prefix = "rules_fuzzing-0.3.2",
+    urls = ["https://github.com/bazelbuild/rules_fuzzing/archive/v0.3.2.zip"],
+)
+
+load("@rules_fuzzing//fuzzing:repositories.bzl", "rules_fuzzing_dependencies")
+
+rules_fuzzing_dependencies()
+
+# Add Pigweed itself, as a submodule.
+#
+# XXX: Remove this from the docs
+# TODO: b/300695111 - Support depending on Pigweed as a git_repository, even if
+# you use pw_toolchain.
+
+# Get ready to grab CIPD dependencies. For this minimal example, the only
+# dependencies will be the toolchains and OpenOCD (used for flashing).
+load(
+    "@pigweed//pw_env_setup/bazel/cipd_setup:cipd_rules.bzl",
+    "cipd_client_repository",
+    "cipd_repository",
+)
+
+cipd_client_repository()
+
+load("@pigweed//pw_toolchain:register_toolchains.bzl", "register_pigweed_cxx_toolchains")
+
+register_pigweed_cxx_toolchains()
+
+# Get the OpenOCD binary (we'll use it for flashing).
+cipd_repository(
+    name = "openocd",
+    path = "infra/3pp/tools/openocd/${os}-${arch}",
+    tag = "version:2@0.11.0-3",
+)
+
+# Set up the Python interpreter we'll need.
+
+# XXX: Can I do this
+# Narrator: He couldn't
+# load("@python3//:defs.bzl", "interpreter")
+
+# Setup Nanopb protoc plugin.
+# Required by: Pigweed.
+# Used in modules: pw_protobuf.
+http_archive(
+    name = "com_github_nanopb_nanopb",
+    sha256 = "3f78bf63722a810edb6da5ab5f0e76c7db13a961c2aad4ab49296e3095d0d830",
+    strip_prefix = "nanopb-0.4.8",
+    url = "https://github.com/nanopb/nanopb/archive/refs/tags/0.4.8.tar.gz",
+)
+
+load("@com_github_nanopb_nanopb//extra/bazel:nanopb_deps.bzl", "nanopb_deps")
+
+nanopb_deps()
+
+load("@com_github_nanopb_nanopb//extra/bazel:python_deps.bzl", "nanopb_python_deps")
+
+# XXX
+# nanopb_python_deps(interpreter)
+
+# load("@com_github_nanopb_nanopb//extra/bazel:nanopb_workspace.bzl", "nanopb_workspace")
+
+# XXX
+# nanopb_workspace()
+
+http_archive(
+    name = "freertos",
+    build_file = "@pigweed//third_party/freertos:freertos.BUILD.bazel",
+    sha256 = "89af32b7568c504624f712c21fe97f7311c55fccb7ae6163cda7adde1cde7f62",
+    strip_prefix = "FreeRTOS-Kernel-10.5.1",
+    urls = ["https://github.com/FreeRTOS/FreeRTOS-Kernel/archive/refs/tags/V10.5.1.tar.gz"],
+)
+
+http_archive(
+    name = "hal_driver",
+    build_file = "@pigweed//third_party/stm32cube:stm32_hal_driver.BUILD.bazel",
+    sha256 = "c8741e184555abcd153f7bdddc65e4b0103b51470d39ee0056ce2f8296b4e835",
+    strip_prefix = "stm32f4xx_hal_driver-1.8.0",
+    urls = ["https://github.com/STMicroelectronics/stm32f4xx_hal_driver/archive/refs/tags/v1.8.0.tar.gz"],
+)
+
+http_archive(
+    name = "cmsis_device",
+    build_file = "@pigweed//third_party/stm32cube:cmsis_device.BUILD.bazel",
+    sha256 = "6390baf3ea44aff09d0327a3c112c6ca44418806bfdfe1c5c2803941c391fdce",
+    strip_prefix = "cmsis_device_f4-2.6.8",
+    urls = ["https://github.com/STMicroelectronics/cmsis_device_f4/archive/refs/tags/v2.6.8.tar.gz"],
+)
+
+http_archive(
+    name = "cmsis_core",
+    build_file = "@pigweed//third_party/stm32cube:cmsis_core.BUILD.bazel",
+    sha256 = "f711074a546bce04426c35e681446d69bc177435cd8f2f1395a52db64f52d100",
+    strip_prefix = "cmsis_core-5.4.0_cm4",
+    urls = ["https://github.com/STMicroelectronics/cmsis_core/archive/refs/tags/v5.4.0_cm4.tar.gz"],
+)
+
+load("@pigweed//targets/rp2040:deps.bzl", "pigweed_rp2_deps")
+
+pigweed_rp2_deps()
