@@ -18,9 +18,9 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
     name = "build_stack_rules_proto",
-    sha256 = "ee7a11d66e7bbc5b0f7a35ca3e960cb9a5f8a314b22252e19912dfbc6e22782d",
-    strip_prefix = "rules_proto-3.1.0",
-    urls = ["https://github.com/stackb/rules_proto/archive/v3.1.0.tar.gz"],
+    sha256 = "b7cbaf457d91e1d3c295df53b80f24e1d6da71c94ee61c42277ab938db6d1c68",
+    strip_prefix = "rules_proto-3.2.0",
+    urls = ["https://github.com/stackb/rules_proto/archive/v3.2.0.tar.gz"],
 )
 
 register_toolchains("@build_stack_rules_proto//toolchain:standard")
@@ -82,25 +82,25 @@ load("@build_bazel_rules_apple//apple:repositories.bzl", "apple_rules_dependenci
 
 apple_rules_dependencies(ignore_version_differences = False)
 
-http_archive(
-    name = "aspect_gcc_toolchain",
-    sha256 = "3341394b1376fb96a87ac3ca01c582f7f18e7dc5e16e8cf40880a31dd7ac0e1e",
-    strip_prefix = "gcc-toolchain-0.4.2",
-    urls = [
-        "https://github.com/aspect-build/gcc-toolchain/archive/refs/tags/0.4.2.tar.gz",
-    ],
-)
-
-load("@aspect_gcc_toolchain//toolchain:repositories.bzl", "gcc_toolchain_dependencies")
-
-gcc_toolchain_dependencies()
-
-load("@aspect_gcc_toolchain//toolchain:defs.bzl", "ARCHS", "gcc_register_toolchain")
-
-gcc_register_toolchain(
-    name = "gcc_toolchain_x86_64",
-    target_arch = ARCHS.x86_64,
-)
+# http_archive(
+#     name = "aspect_gcc_toolchain",
+#     integrity = "sha256-iqcSkkfwbhKrNWeX957qE/I4fzKuj3GEB06OZAJ5Apk=",
+#     strip_prefix = "gcc-toolchain-0.6.0",
+#     urls = [
+#         "https://github.com/f0rmiga/gcc-toolchain/archive/refs/tags/0.6.0.tar.gz",
+#     ],
+# )
+# 
+# load("@aspect_gcc_toolchain//toolchain:repositories.bzl", "gcc_toolchain_dependencies")
+# 
+# gcc_toolchain_dependencies()
+# 
+# load("@aspect_gcc_toolchain//toolchain:defs.bzl", "ARCHS", "gcc_register_toolchain")
+# 
+# gcc_register_toolchain(
+#     name = "gcc_toolchain_x86_64",
+#     target_arch = ARCHS.x86_64,
+# )
 
 # TODO: Should add buf too
 
