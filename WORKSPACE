@@ -91,13 +91,13 @@ apple_rules_dependencies(ignore_version_differences = False)
 #         "https://github.com/f0rmiga/gcc-toolchain/archive/refs/tags/0.6.0.tar.gz",
 #     ],
 # )
-# 
+#
 # load("@aspect_gcc_toolchain//toolchain:repositories.bzl", "gcc_toolchain_dependencies")
-# 
+#
 # gcc_toolchain_dependencies()
-# 
+#
 # load("@aspect_gcc_toolchain//toolchain:defs.bzl", "ARCHS", "gcc_register_toolchain")
-# 
+#
 # gcc_register_toolchain(
 #     name = "gcc_toolchain_x86_64",
 #     target_arch = ARCHS.x86_64,
