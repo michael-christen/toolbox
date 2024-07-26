@@ -82,6 +82,7 @@ load("@build_bazel_rules_apple//apple:repositories.bzl", "apple_rules_dependenci
 
 apple_rules_dependencies(ignore_version_differences = False)
 
+# TODO(#78): Consider re-enabling
 # http_archive(
 #     name = "aspect_gcc_toolchain",
 #     integrity = "sha256-iqcSkkfwbhKrNWeX957qE/I4fzKuj3GEB06OZAJ5Apk=",
