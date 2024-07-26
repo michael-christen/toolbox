@@ -20,6 +20,7 @@ cc_binary(
 )
 
 # These also weren't working
+# ok
 # stm32_binary(
 #     name = "stm32_blinky.elf",
 #     binary = ":blinky",
