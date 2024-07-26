@@ -35,6 +35,9 @@ python.toolchain(
     configure_coverage_tool = True,
     python_version = PYTHON_VERSION,
 )
+# XXX: How to expose python3?
+# use_repo(python, "python_toolchains")
+# register_toolchains("@python_toolchains//:all")
 
 pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip")
 pip.parse(
@@ -44,7 +47,7 @@ pip.parse(
 )
 use_repo(pip, "pip")
 
-bazel_dep(name = "protobuf", version = "26.0")
+bazel_dep(name = "protobuf", version = "27.2")
 bazel_dep(name = "rules_rust", version = "0.48.0")
 
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
@@ -144,3 +147,32 @@ bazel_dep(name = "rules_multirun", version = "0.9.0")
 
 # XXX: Specify to support stackb_rules_proto
 bazel_dep(name = "rules_apple", version = "3.7.0", repo_name = "build_bazel_rules_apple")
+
+
+# Support llvm_toolchain for pigweed
+bazel_dep(name = "toolchains_llvm", version = "1.0.0")
+
+# To directly use a commit from GitHub, replace commit with the commit you want.
+# Otherwise, omit this block.
+git_override(
+  module_name = "toolchains_llvm",
+  commit = "329910897f3114f3f5d24407d9abf49b244056d2",
+  remote = "https://github.com/bazel-contrib/toolchains_llvm",
+)
+
+# Configure and register the toolchain.
+llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
+llvm.toolchain(
+   llvm_version = "16.0.0",
+)
+
+use_repo(llvm, "llvm_toolchain")
+# use_repo(llvm, "llvm_toolchain_llvm") # if you depend on specific tools in scripts
+
+# XXX: llvm built protoc is segfaulting
+# - not sure it's the same issue: https://stackoverflow.com/questions/70634033/protobuf-causes-segfault-on-init-when-compiled-with-clang
+# - not sure it's the same issue: https://github.com/protocolbuffers/protobuf/issues/12373
+register_toolchains("@llvm_toolchain//:all")
+# XXX: Required sudo apt-get install libtinfo5
+
+# Use clang-format from ^, etc.

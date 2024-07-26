@@ -202,9 +202,17 @@ cipd_repository(
 
 # Set up the Python interpreter we'll need.
 
+load("@rules_python//python:repositories.bzl", "py_repositories", "python_register_toolchains")
+# XXX?
+# I probably shouldn't have multiples of these
+python_register_toolchains(
+    name = "python3",
+    python_version = "3.11",
+)
+
 # XXX: Can I do this
 # Narrator: He couldn't
-# load("@python3//:defs.bzl", "interpreter")
+load("@python3//:defs.bzl", "interpreter")
 
 # Setup Nanopb protoc plugin.
 # Required by: Pigweed.
@@ -222,13 +230,11 @@ nanopb_deps()
 
 load("@com_github_nanopb_nanopb//extra/bazel:python_deps.bzl", "nanopb_python_deps")
 
-# XXX
-# nanopb_python_deps(interpreter)
+nanopb_python_deps(interpreter)
 
-# load("@com_github_nanopb_nanopb//extra/bazel:nanopb_workspace.bzl", "nanopb_workspace")
+load("@com_github_nanopb_nanopb//extra/bazel:nanopb_workspace.bzl", "nanopb_workspace")
 
-# XXX
-# nanopb_workspace()
+nanopb_workspace()
 
 http_archive(
     name = "freertos",

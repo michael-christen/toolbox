@@ -23,7 +23,7 @@ build --copt -Wall
 # -Wextra, with a few exceptions
 build --copt -Wmemset-transposed-args
 build --copt -Wcast-function-type
-build --copt -Wclobbered
+# build --copt -Wclobbered
 build --copt -Wempty-body
 build --conlyopt -Wenum-conversion
 build --copt -Wexpansion-to-defined
@@ -31,7 +31,7 @@ build --copt -Wignored-qualifiers
 # TODO(https://github.com/michael-christen/toolbox/issues/42): Re-enable
 # NOTE: zlib was the cause of requiring this
 # build --copt -Wimplicit-fallthrough=3
-build --copt -Wmaybe-uninitialized
+# build --copt -Wmaybe-uninitialized
 build --copt -Wshift-negative-value
 build --copt -Wsign-compare
 build --copt -Wstring-compare
@@ -42,7 +42,7 @@ build --conlyopt -Wabsolute-value
 build --conlyopt -Wmissing-parameter-type
 build --conlyopt -Wold-style-declaration
 build --conlyopt -Woverride-init
-build --cxxopt -Wsized-deallocation
+# build --cxxopt -Wsized-deallocation
 build --cxxopt -Wdeprecated-copy
 # Unrecognized
 # build --copt -Walloc-size
@@ -52,7 +52,9 @@ build --cxxopt -Wdeprecated-copy
 # build --copt -Wunused-parameter
 
 # Warnings are errors
-build --copt -Werror
+# XXX: Offset in protobuf -Wunused-function
+# external/com_google_protobuf/src/google/protobuf/generated_message_tctable_lite.cc
+# build --copt -Werror
 
 # Colored output
 build --copt -fdiagnostics-color=always
