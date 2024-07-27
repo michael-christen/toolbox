@@ -14,7 +14,7 @@ module(
 # Generic deps
 ########################################
 bazel_dep(name = "aspect_bazel_lib", version = "2.5.1")
-bazel_dep(name = "platforms", version = "0.0.8")
+bazel_dep(name = "platforms", version = "0.0.9")
 
 ########################################
 # Set up rules_python and pip
@@ -45,7 +45,7 @@ pip.parse(
 use_repo(pip, "pip")
 
 bazel_dep(name = "protobuf", version = "26.0")
-bazel_dep(name = "rules_rust", version = "0.38.0")
+bazel_dep(name = "rules_rust", version = "0.48.0")
 
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
 rust.toolchain(edition = "2021")
@@ -117,7 +117,7 @@ bazel_dep(
 # NOTE: We don't really use/support JS in this repo, and if you need to you'll
 # have some more config to do, but we register rules_js here so we can use it to
 # pull a few javascript packages used for repo tooling, like prettier for linting.
-bazel_dep(name = "aspect_rules_js", version = "1.38.0")
+bazel_dep(name = "aspect_rules_js", version = "1.39.0")
 
 ####### OPTIONAL: Customize Node.js version #########
 # By default you get the node version from DEFAULT_NODE_VERSION in @rules_nodejs//nodejs:repositories.bzl
@@ -141,3 +141,6 @@ use_repo(npm, "npm")
 use_repo(pnpm, "pnpm")
 
 bazel_dep(name = "rules_multirun", version = "0.9.0")
+
+# Specify to support stackb_rules_proto in bazel 7
+bazel_dep(name = "rules_apple", version = "3.7.0", repo_name = "build_bazel_rules_apple")
