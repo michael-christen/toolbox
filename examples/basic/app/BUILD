@@ -15,5 +15,6 @@ cc_binary(
         ":hello-greet",
         "//examples/basic:hello_cc_library",
         "//examples/basic/lib:hello-time",
+        "@pigweed//pw_build:default_link_extra_lib",
     ],
 )
