@@ -157,5 +157,4 @@ bazel_dep(name = "rules_platform", version = "0.1.0")
 register_toolchains(
     "//examples/bazel:foo_rude_toolchain",
     "//examples/bazel:foo_nice_toolchain",
-    "//examples/bazel:foo_default_toolchain",
 )

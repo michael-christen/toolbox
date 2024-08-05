@@ -31,8 +31,6 @@ foo_binary = rule(
     toolchains = [
         config_common.toolchain_type(":toolchain_type", mandatory = True),
     ],
-    # XXX: Making executable so we can do platform transitions
-    # executable = True,
 )
 
 def _foo_toolchain_impl(ctx):
@@ -49,5 +47,3 @@ foo_toolchain = rule(
         "prefix": attr.string(),
     },
 )
-
-# XXX: Add constraint values
