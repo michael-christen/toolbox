@@ -10,7 +10,10 @@ my_rules_test_suite(name = "my_rules_test")
 
 # XXX: Use select with my platform's constraints
 # Select a default, otherwise we'll need a default toolchain
-constraint_setting(name = "foo_version", default_constraint_value=":foo_pure")
+constraint_setting(
+    name = "foo_version",
+    default_constraint_value = ":foo_pure",
+)
 
 constraint_value(
     name = "foo_pure",
@@ -77,7 +80,6 @@ toolchain(
     toolchain_type = ":toolchain_type",
 )
 
-
 # Define our products
 
 foo_binary(
@@ -116,13 +118,19 @@ platform_data(
 sh_test(
     name = "cat_bin1_pure_test",
     srcs = ["check_equality.sh"],
-    args = ["$(location :cat_bin1_pure)", "'Hello from nice_guy to Alice!'"],
+    args = [
+        "$(location :cat_bin1_pure)",
+        "'Hello from nice_guy to Alice!'",
+    ],
     data = [":cat_bin1_pure"],
 )
 
 sh_test(
     name = "cat_bin1_evil_test",
     srcs = ["check_equality.sh"],
-    args = ["$(location :cat_bin1_evil)", "'Hello from rude_guy to Alice!'"],
+    args = [
+        "$(location :cat_bin1_evil)",
+        "'Hello from rude_guy to Alice!'",
+    ],
     data = [":cat_bin1_evil"],
 )
