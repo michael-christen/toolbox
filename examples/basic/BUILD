@@ -4,6 +4,7 @@ load("@rules_proto//proto:defs.bzl", "proto_library")
 
 # load("@crate_index//:defs.bzl", "aliases", "all_crate_deps")
 load("@rules_rust//rust:defs.bzl", "rust_binary", "rust_doc")
+# load("@rules_python//python:defs.bzl", old_py_binary = "py_binary")
 load("//bzl:py.bzl", "grpc_py_library", "proto_py_library", "py_binary", "py_image", "py_test")
 
 package(default_visibility = ["//visibility:private"])
@@ -95,6 +96,13 @@ py_binary(
         "@pip//grpcio",
     ],
 )
+
+# Package a old_py_binary like a pex for distribution
+# filegroup(
+#     name = "server_zip",
+#     srcs = [":server"],
+#     output_group = "python_zip_file",
+# )
 
 # Build and run this image with
 #     bazel run //examples/basic:sever_img_load_docker
