@@ -1,11 +1,20 @@
+FooInfo = provider(
+    doc = "Information to foo_binary, to add to output.",
+    # XXX: More type-hinting or docs?
+    fields = ["prefix"],
+)
+
 # XXX: What can ctx be?
 def _foo_binary_impl(ctx):
     # XXX: How to get toolchain specifics into the rule
     out = ctx.actions.declare_file(ctx.label.name)
+    info = ctx.toolchains[":toolchain_type"].fooinfo
     ctx.actions.write(
         output = out,
         # XXX: Different toolchain should have different prefix :shrug:
-        content = "Hello {}!\n".format(ctx.attr.username),
+        content = "Hello from {} to {}!\n".format(
+            info.prefix,
+            ctx.attr.username),
     )
     # XXX: What is in global namespace
     return [DefaultInfo(files = depset([out]))]
@@ -17,4 +26,26 @@ foo_binary = rule(
     attrs = {
         "username": attr.string(),
     },
+    toolchains = [
+        config_common.toolchain_type(":toolchain_type", mandatory = True),
+    ],
 )
+
+
+def _foo_toolchain_impl(ctx):
+    toolchain_info = platform_common.ToolchainInfo(
+        fooinfo = FooInfo(
+            prefix = ctx.attr.prefix,
+        ),
+    )
+    return [toolchain_info]
+
+
+foo_toolchain = rule(
+    implementation = _foo_toolchain_impl,
+    attrs = {
+        "prefix": attr.string(),
+    },
+)
+
+# XXX: Add constraint values

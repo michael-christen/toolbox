@@ -148,3 +148,10 @@ bazel_dep(name = "rules_apple", version = "3.7.0", repo_name = "build_bazel_rule
 # Bazel rule helpers, including testing
 bazel_dep(name = "bazel_skylib", version = "1.7.1")
 bazel_dep(name = "bazel_skylib_gazelle_plugin", version = "1.7.1", dev_dependency = True)
+
+
+# Register our own toolchains
+register_toolchains(
+    "//examples/bazel:foo_rude_toolchain",
+    "//examples/bazel:foo_nice_toolchain",
+)
