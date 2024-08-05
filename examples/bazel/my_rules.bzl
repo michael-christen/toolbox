@@ -14,8 +14,10 @@ def _foo_binary_impl(ctx):
         # XXX: Different toolchain should have different prefix :shrug:
         content = "Hello from {} to {}!\n".format(
             info.prefix,
-            ctx.attr.username),
+            ctx.attr.username,
+        ),
     )
+
     # XXX: What is in global namespace
     return [DefaultInfo(files = depset([out]))]
 
@@ -33,7 +35,6 @@ foo_binary = rule(
     # executable = True,
 )
 
-
 def _foo_toolchain_impl(ctx):
     toolchain_info = platform_common.ToolchainInfo(
         fooinfo = FooInfo(
@@ -41,7 +42,6 @@ def _foo_toolchain_impl(ctx):
         ),
     )
     return [toolchain_info]
-
 
 foo_toolchain = rule(
     implementation = _foo_toolchain_impl,

@@ -5,6 +5,7 @@ ideas, and hopefully leave a few good examples of how to do certain bazel
 things.
 
 Most of this is coming from bazel's documentation and copious examples:
+
 - [Tutorials](https://bazel.build/rules/rules-tutorial)
 - [Examples](https://github.com/bazelbuild/examples/tree/master/rules)
 - [Reference](https://bazel.build/reference/be/general#config_setting)
@@ -20,11 +21,12 @@ Most of this is coming from bazel's documentation and copious examples:
   - instantiate the rule and test
 
 ## More to Do
+
 - [ ] Aspect usage
 - [ ] genrule
 
-
 ## Questions
+
 - what is the difference between config_setting/value and
   constraint_setting/value
   - there isn't config_value? just config_setting, which describes kinda

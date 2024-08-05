@@ -2,8 +2,10 @@ load("@rules_platform//platform_data:defs.bzl", "platform_data")
 load(":my_rules.bzl", "foo_binary", "foo_toolchain")
 load(":my_rules_test.bzl", "my_rules_test_suite")
 
-
-foo_binary(name = "bin1", username = "Alice")
+foo_binary(
+    name = "bin1",
+    username = "Alice",
+)
 
 sh_binary(
     name = "cat",
@@ -13,20 +15,20 @@ sh_binary(
 
 platform_data(
     name = "cat_bin1_pure",
-    platform = ":foo_pure_platform",
-    target = ":cat",
     # XXX: should use location, but can't add as attribute of platform_data,
     # and args is overriden by platform_data
     args = ["examples/bazel/bin1"],
+    platform = ":foo_pure_platform",
+    target = ":cat",
 )
 
 platform_data(
     name = "cat_bin1_evil",
-    platform = ":foo_evil_platform",
-    target = ":cat",
     # XXX: should use location, but can't add as attribute of platform_data,
     # and args is overriden by platform_data
     args = ["examples/bazel/bin1"],
+    platform = ":foo_evil_platform",
+    target = ":cat",
 )
 
 my_rules_test_suite(name = "my_rules_test")
@@ -34,7 +36,6 @@ my_rules_test_suite(name = "my_rules_test")
 # Convention has these mostly named toolchain_type and distinguised by path,
 # maybe we break that convention in this scenario if we have more?
 toolchain_type(name = "toolchain_type")
-
 
 foo_toolchain(
     name = "foo_rude",
@@ -50,7 +51,6 @@ foo_toolchain(
     name = "foo_defaulted",
     prefix = "default_guy",
 )
-
 
 # XXX: How to pick a default platform?
 # XXX: Use select with my platform's constraints
@@ -116,3 +116,5 @@ platform(
         ":foo_evil",
     ],
 )
+
+package(default_visibility = ["//visibility:private"])
