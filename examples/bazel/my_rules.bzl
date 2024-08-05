@@ -29,6 +29,8 @@ foo_binary = rule(
     toolchains = [
         config_common.toolchain_type(":toolchain_type", mandatory = True),
     ],
+    # XXX: Making executable so we can do platform transitions
+    # executable = True,
 )
 
 

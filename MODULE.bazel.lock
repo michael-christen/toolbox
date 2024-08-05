@@ -110,6 +110,8 @@
     "https://bcr.bazel.build/modules/rules_oci/1.7.4/source.json": "21efb943a104bb5ec1be4fb1866a085cd1782fa785d9dad30ffa00be89b580f3",
     "https://bcr.bazel.build/modules/rules_pkg/0.7.0/MODULE.bazel": "df99f03fc7934a4737122518bb87e667e62d780b610910f0447665a7e2be62dc",
     "https://bcr.bazel.build/modules/rules_pkg/0.7.0/source.json": "c2557066e0c0342223ba592510ad3d812d4963b9024831f7f66fd0584dd8c66c",
+    "https://bcr.bazel.build/modules/rules_platform/0.1.0/MODULE.bazel": "1fe546d3ced195ad1632ed3621446d3c0bb4757e5becc44b12303a4ac23d6058",
+    "https://bcr.bazel.build/modules/rules_platform/0.1.0/source.json": "98becf9569572719b65f639133510633eb3527fb37d347d7ef08447f3ebcf1c9",
     "https://bcr.bazel.build/modules/rules_proto/4.0.0/MODULE.bazel": "a7a7b6ce9bee418c1a760b3d84f83a299ad6952f9903c67f19e4edd964894e06",
     "https://bcr.bazel.build/modules/rules_proto/5.3.0-21.7/MODULE.bazel": "e8dff86b0971688790ae75528fe1813f71809b5afd57facb44dad9e8eca631b7",
     "https://bcr.bazel.build/modules/rules_proto/6.0.2/MODULE.bazel": "ce916b775a62b90b61888052a416ccdda405212b6aaeb39522f7dc53431a5e73",

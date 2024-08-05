@@ -8,6 +8,7 @@ Most of this is coming from bazel's documentation and copious examples:
 - [Tutorials](https://bazel.build/rules/rules-tutorial)
 - [Examples](https://github.com/bazelbuild/examples/tree/master/rules)
 - [Reference](https://bazel.build/reference/be/general#config_setting)
+- https://bazel.build/docs/configurable-attributes
 
 ## Description
 
@@ -20,6 +21,8 @@ Most of this is coming from bazel's documentation and copious examples:
 
 ## More to Do
 - [ ] Aspect usage
+- [ ] genrule
+
 
 ## Questions
 - what is the difference between config_setting/value and
