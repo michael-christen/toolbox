@@ -1,24 +1,27 @@
+# https://bazel.build/extending/rules#providers
+# https://bazel.build/rules/lib/globals/bzl#provider
 FooInfo = provider(
     doc = "Information to foo_binary, to add to output.",
-    # XXX: More type-hinting or docs?
-    fields = ["prefix"],
+    # NOTE: Can also just define as a list
+    fields = {
+        "prefix": "Prefix used in assembling foo output",
+    },
 )
 
-# XXX: What can ctx be?
+# ctx fields: https://bazel.build/rules/lib/builtins/ctx
 def _foo_binary_impl(ctx):
-    # XXX: How to get toolchain specifics into the rule
-    out = ctx.actions.declare_file(ctx.label.name)
+    # Get toolchain specifics into the rule
     info = ctx.toolchains[":toolchain_type"].fooinfo
+    out = ctx.actions.declare_file(ctx.label.name)
     ctx.actions.write(
         output = out,
-        # XXX: Different toolchain should have different prefix :shrug:
+        # Different toolchain uses different prefix
         content = "Hello from {} to {}!\n".format(
             info.prefix,
             ctx.attr.username,
         ),
     )
 
-    # XXX: What is in global namespace
     return [DefaultInfo(files = depset([out]))]
 
 # A rule definition consists of an implementation and attrs (arguments)

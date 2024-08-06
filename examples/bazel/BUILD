@@ -8,7 +8,6 @@ my_rules_test_suite(name = "my_rules_test")
 
 # Define constraints to select our toolchain
 
-# XXX: Use select with my platform's constraints
 # Select a default, otherwise we'll need a default toolchain
 constraint_setting(
     name = "foo_version",
@@ -84,7 +83,11 @@ toolchain(
 
 foo_binary(
     name = "bin1",
-    username = "Alice",
+    # Here's an example of using select with my platform's constraints
+    username = select({
+        ":foo_pure": "Alice",
+        ":foo_evil": "Bob",
+    }),
 )
 
 sh_binary(
@@ -130,7 +133,7 @@ sh_test(
     srcs = ["check_equality.sh"],
     args = [
         "$(location :cat_bin1_evil)",
-        "'Hello from rude_guy to Alice!'",
+        "'Hello from rude_guy to Bob!'",
     ],
     data = [":cat_bin1_evil"],
 )
