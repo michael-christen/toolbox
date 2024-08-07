@@ -153,6 +153,13 @@ bazel_dep(name = "bazel_skylib_gazelle_plugin", version = "1.7.1", dev_dependenc
 # Allow platform transitions
 bazel_dep(name = "rules_platform", version = "0.1.0")
 
+# C++ Test framework
+# https://github.com/catchorg/Catch2
+# Consider adding listeners via https://github.com/catchorg/Catch2/blob/devel/docs/event-listeners.md
+bazel_dep(name = "catch2", version = "3.6.0")
+# Consider the googletest alternative: https://google.github.io/googletest/
+# bazel_dep(name = "googletest", version = "1.15.2")
+
 # Register our own toolchains
 register_toolchains(
     "//examples/bazel:foo_rude_toolchain",

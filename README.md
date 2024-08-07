@@ -109,6 +109,10 @@ CARGO_BAZEL_REPIN=1 bazel sync --only=crate_index
 NOTE: Once `requirements.in` is modified, tests will ensure the above commands
 have been run (or CI will fail)
 
+### C++
+
+Testing utilizes [catch2](https://github.com/catchorg/Catch2)
+
 ### Miscellaneous
 
 ```

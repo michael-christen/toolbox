@@ -17,7 +17,7 @@
 #
 # If you want to use custom COPTS, then just use @rules_cc//cc:defs.bzl
 # directly and include all of the pieces you want
-load("@rules_cc//cc:defs.bzl", _cc_binary = "cc_binary", _cc_library = "cc_library")
+load("@rules_cc//cc:defs.bzl", _cc_binary = "cc_binary", _cc_library = "cc_library", _cc_test = "cc_test")
 
 # C Compiler Options: https://gcc.gnu.org/onlinedocs/gcc/Option-Summary.html
 
@@ -74,6 +74,9 @@ def cc_binary(**kwargs):
 
 def cc_library(**kwargs):
     _cc_library(copts = COPTS + CXX_OPTS, **kwargs)
+
+def cc_test(**kwargs):
+    _cc_test(copts = COPTS + CXX_OPTS, **kwargs)
 
 def c_binary(**kwargs):
     _cc_binary(copts = COPTS + CONLY_OPTS, **kwargs)

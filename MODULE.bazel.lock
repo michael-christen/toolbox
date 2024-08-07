@@ -50,6 +50,8 @@
     "https://bcr.bazel.build/modules/buildifier_prebuilt/6.4.0/source.json": "83eb01b197ed0b392f797860c9da5ed1bf95f4d0ded994d694a3d44731275916",
     "https://bcr.bazel.build/modules/buildozer/7.1.2/MODULE.bazel": "2e8dd40ede9c454042645fd8d8d0cd1527966aa5c919de86661e62953cd73d84",
     "https://bcr.bazel.build/modules/buildozer/7.1.2/source.json": "c9028a501d2db85793a6996205c8de120944f50a0d570438fcae0457a5f9d1f8",
+    "https://bcr.bazel.build/modules/catch2/3.6.0/MODULE.bazel": "6a1536f01f4c7ede6f842099f53e7c27e17d43e0012ae195521d3572d1e00a0e",
+    "https://bcr.bazel.build/modules/catch2/3.6.0/source.json": "c774717702675ab43bc1d1b59a14814c89916fc1d8ec3357fb3dbc672655fb1c",
     "https://bcr.bazel.build/modules/gazelle/0.27.0/MODULE.bazel": "3446abd608295de6d90b4a8a118ed64a9ce11dcb3dda2dc3290a22056bd20996",
     "https://bcr.bazel.build/modules/gazelle/0.29.0/MODULE.bazel": "a8c809839caeb52995de3f46bbc60cfd327fadfdbfa9f19ee297c8bc8500be45",
     "https://bcr.bazel.build/modules/gazelle/0.30.0/MODULE.bazel": "f888a1effe338491f35f0e0e85003b47bb9d8295ccba73c37e07702d8d31c65b",
