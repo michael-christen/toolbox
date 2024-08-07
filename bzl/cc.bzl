@@ -19,65 +19,64 @@
 # directly and include all of the pieces you want
 load("@rules_cc//cc:defs.bzl", _cc_binary = "cc_binary", _cc_library = "cc_library")
 
-
 # C Compiler Options: https://gcc.gnu.org/onlinedocs/gcc/Option-Summary.html
 
 COPTS = [
-  # All Warnings and then some, mark em as errors too
-  '-Wall',
-  # Warnings are errors
-  '-Werror',
-  # -Wextra, with a few exceptions
-  '-Wmemset-transposed-args',
-  '-Wcast-function-type',
-  '-Wclobbered',
-  '-Wempty-body',
-  '-Wenum-conversion',
-  '-Wexpansion-to-defined',
-  '-Wignored-qualifiers',
-  '-Wimplicit-fallthrough=3',
-  '-Wmaybe-uninitialized',
-  '-Wshift-negative-value',
-  '-Wsign-compare',
-  '-Wstring-compare',
-  '-Wtype-limits',
-  '-Wuninitialized',
-  '-Wunused-but-set-parameter',
-  '-Wmissing-field-initializers',
-  '-Wredundant-move',
-  '-Wunused-parameter',
-  # Colored output
-  '-fdiagnostics-color=always',
-  # Unrecognized
-  # '-Walloc-size',
+    # All Warnings and then some, mark em as errors too
+    "-Wall",
+    # Warnings are errors
+    "-Werror",
+    # -Wextra, with a few exceptions
+    "-Wmemset-transposed-args",
+    "-Wcast-function-type",
+    "-Wclobbered",
+    "-Wempty-body",
+    "-Wenum-conversion",
+    "-Wexpansion-to-defined",
+    "-Wignored-qualifiers",
+    "-Wimplicit-fallthrough=3",
+    "-Wmaybe-uninitialized",
+    "-Wshift-negative-value",
+    "-Wsign-compare",
+    "-Wstring-compare",
+    "-Wtype-limits",
+    "-Wuninitialized",
+    "-Wunused-but-set-parameter",
+    "-Wmissing-field-initializers",
+    "-Wredundant-move",
+    "-Wunused-parameter",
+    # Colored output
+    "-fdiagnostics-color=always",
+    # Unrecognized
+    # '-Walloc-size',
 ]
 
 # Add to conly code
 CONLY_OPTS = [
-  '-Wabsolute-value',
-  '-Wmissing-parameter-type',
-  '-Wold-style-declaration',
-  '-Woverride-init',
+    "-Wabsolute-value",
+    "-Wmissing-parameter-type",
+    "-Wold-style-declaration",
+    "-Woverride-init",
 ]
 
 CXX_OPTS = [
-  '-Wsized-deallocation',
-  '-Wdeprecated-copy',
-  # If changing, likely want to update .bazelrc
-  # See https://en.cppreference.com/w/cpp/23
-  '-std=c++23',
+    "-Wsized-deallocation",
+    "-Wdeprecated-copy",
+    # If changing, likely want to update .bazelrc
+    # See https://en.cppreference.com/w/cpp/23
+    "-std=c++23",
 ]
 
 # NOTE: Maybe we should add linkopt too?
 
 def cc_binary(**kwargs):
-    _cc_binary(copts=COPTS + CXX_OPTS, **kwargs)
+    _cc_binary(copts = COPTS + CXX_OPTS, **kwargs)
 
 def cc_library(**kwargs):
-    _cc_library(copts=COPTS + CXX_OPTS, **kwargs)
+    _cc_library(copts = COPTS + CXX_OPTS, **kwargs)
 
 def c_binary(**kwargs):
-    _cc_binary(copts=COPTS + CONLY_OPTS, **kwargs)
+    _cc_binary(copts = COPTS + CONLY_OPTS, **kwargs)
 
 def c_library(**kwargs):
-    _cc_library(copts=COPTS + CONLY_OPTS, **kwargs)
+    _cc_library(copts = COPTS + CONLY_OPTS, **kwargs)

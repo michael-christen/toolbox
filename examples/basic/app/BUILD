@@ -1,4 +1,4 @@
-load("//bzl:cc.bzl", "cc_library", "cc_binary")
+load("//bzl:cc.bzl", "cc_binary", "cc_library")
 
 package(default_visibility = ["//visibility:private"])
 
