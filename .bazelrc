@@ -51,6 +51,8 @@ try-import %workspace%/user.bazelrc
 common --@aspect_rules_py//py:interpreter_version=3.11.9
 
 # Remote Cache: https://app.nativelink.com/c690e34c-beac-420a-b672-6320b8f5b419/quickstart
+#
+# NOTE: Causing link to take 8s ...
 build --remote_cache=grpcs://cas-michael-christen.build-faster.nativelink.net
 build --remote_header=x-nativelink-api-key=66f9052f8b6613865377d05b5202334eb9a5bb702e64270381c202f6e9ae4072
 build --bes_backend=grpcs://bes-michael-christen.build-faster.nativelink.net
