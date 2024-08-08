@@ -13,11 +13,11 @@ async def get_response() -> hello_pb2.HelloReply:
         return await stub.SayHello(hello_pb2.HelloRequest(name="you"))
 
 
-async def run() -> None:
+async def run() -> None:  # pragma: no cover
     resp = await get_response()
     print("Greeter client received: " + resp.message)
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma: no cover
     logging.basicConfig()
     asyncio.run(run())

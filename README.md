@@ -100,6 +100,10 @@ CARGO_BAZEL_REPIN=1 bazel sync --only=crate_index
 
 ### Python
 
+#### Excluding coverage
+
+`# pragma: no cover` https://coverage.readthedocs.io/en/latest/excluding.html
+
 #### Adding / Modifying External Dependencies
 
 1. Update `requirements.in`

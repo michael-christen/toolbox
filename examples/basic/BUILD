@@ -3,7 +3,7 @@ load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_librar
 load("@rules_proto//proto:defs.bzl", "proto_library")
 
 # load("@crate_index//:defs.bzl", "aliases", "all_crate_deps")
-load("@rules_rust//rust:defs.bzl", "rust_binary", "rust_doc")
+load("@rules_rust//rust:defs.bzl", "rust_binary", "rust_library", "rust_test", "rust_doc")
 load("//bzl:py.bzl", "grpc_py_library", "proto_py_library", "py_binary", "py_image", "py_test")
 
 package(default_visibility = ["//visibility:private"])
@@ -52,6 +52,16 @@ proto_cc_library(
     hdrs = ["hello.pb.h"],
     visibility = ["//visibility:public"],
     deps = ["@com_google_protobuf//:protobuf"],
+)
+
+rust_library(
+    name = "lib",
+    srcs = ["src/lib.rs"],
+)
+
+rust_test(
+    name = "lib_test",
+    crate = ":lib",
 )
 
 rust_binary(
