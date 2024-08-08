@@ -1,5 +1,7 @@
 load("//bzl:cc.bzl", "cc_library")
 
+package(default_visibility = ["//visibility:private"])
+
 # Alternatively, we could just use @catch2//:catch_main
 cc_library(
     name = "catch_main",
@@ -10,5 +12,3 @@ cc_library(
         "@catch2",
     ],
 )
-
-package(default_visibility = ["//visibility:private"])
