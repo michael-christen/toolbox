@@ -22,7 +22,7 @@ def main():
     # https://bazel.build/docs/user-manual#flag--test_filter
     # Take --test_filter options
     test_filter = os.environ.get("TESTBRIDGE_TEST_ONLY", None)
-    if test_filter:
+    if test_filter:  # pragma: no cover
         pytest_args.extend(["-k", test_filter])
 
     # Invoke

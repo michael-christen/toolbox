@@ -25,12 +25,12 @@ def get_server() -> grpc.aio.server:
     return server
 
 
-async def serve() -> None:
+async def serve() -> None:  # pragma no cover
     server = get_server()
     await server.start()
     await server.wait_for_termination()
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma no cover
     logging.basicConfig(level=logging.INFO)
     asyncio.run(serve())
