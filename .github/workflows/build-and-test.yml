@@ -35,11 +35,11 @@ jobs:
       - name: Test
         run: |
           bazel test //...
-          # XXX: Add all files via a find command and generation
-          # XXX: Should we test in addition / segregate some?
-          # XXX: Should we test in different modes?
-          # XXX: Should we add instrumentation_filter to .bazelrc?
-          #
+          # Food for thought:
+          # - Should we test in addition / segregate some?
+          # - Should we test in different modes (-c opt / -c dbg)?
+          # - Should we add instrumentation_filter to .bazelrc to reduce
+          # analysis cache thrashing?
       - name: Coverage
         run: |
           bazel coverage //... --combined_report=lcov --instrument_test_targets --instrumentation_filter="^//"
