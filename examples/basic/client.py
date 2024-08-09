@@ -12,6 +12,9 @@ async def get_response() -> hello_pb2.HelloReply:
         stub = hello_pb2_grpc.GreeterStub(channel)
         return await stub.SayHello(hello_pb2.HelloRequest(name="you"))
 
+def new_function() -> None:
+    print('hello')
+
 
 async def run() -> None:  # pragma: no cover
     resp = await get_response()
