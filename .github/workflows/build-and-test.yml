@@ -49,6 +49,9 @@ jobs:
         run: |
           # Remove external/ sources: https://manpages.debian.org/unstable/lcov/lcov.1.en.html
           lcov --remove "$(bazel info output_path)/_coverage/_coverage_report.dat" 'external*' -o coverage.dat
+          # Show Table
+          lcov --list coverage.dat
+          # Generate HTML
           genhtml --legend --highlight --branch-coverage --output genhtml coverage.dat
       # See https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/storing-workflow-data-as-artifacts
       - name: Archive coverage.dat
@@ -61,6 +64,12 @@ jobs:
         with:
           name: code-coverage-html
           path: genhtml
+      - name: Upload coverage report to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          verbose: true
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage.dat
       # Try out https://app.codecov.io/ or
       # https://github.com/marketplace/actions/report-lcov and ensure min
       # coverage is met
