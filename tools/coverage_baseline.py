@@ -60,7 +60,6 @@ def find_files(root_dir: pathlib.Path) -> list[pathlib.Path]:
 
 
 if __name__ == "__main__":
-    # XXX: Pass it in
     parser = argparse.ArgumentParser()
     parser.add_argument("--root_dir", type=pathlib.Path)
     args = parser.parse_args()
