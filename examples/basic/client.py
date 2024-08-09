@@ -15,6 +15,7 @@ async def get_response() -> hello_pb2.HelloReply:
 
 def new_function() -> None:
     print("hello")
+    print("oh boy")
 
 
 async def run() -> None:  # pragma: no cover
