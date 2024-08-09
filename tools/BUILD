@@ -1,5 +1,5 @@
 load("@rules_multirun//:defs.bzl", "command", "multirun")
-load("//bzl:py.bzl", "py_library")
+load("//bzl:py.bzl", "py_binary", "py_library")
 
 package(default_visibility = ["//visibility:private"])
 
@@ -82,4 +82,10 @@ py_library(
     srcs = ["bazel_utils.py"],
     visibility = ["//:__subpackages__"],
     deps = ["//third_party/bazel/src/main/protobuf:build_py_library"],
+)
+
+py_binary(
+    name = "coverage_baseline",
+    srcs = ["coverage_baseline.py"],
+    visibility = ["//:__subpackages__"],
 )

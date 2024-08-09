@@ -47,8 +47,12 @@ jobs:
         uses: hrishikesh-kadam/setup-lcov@v1
       - name: Coverage Report Generation
         run: |
+          # Generate baseline
+          bazel run tools:coverage_baseline -- --root_dir `pwd` > baseline_coverage.dat
           # Remove external/ sources: https://manpages.debian.org/unstable/lcov/lcov.1.en.html
-          lcov --remove "$(bazel info output_path)/_coverage/_coverage_report.dat" 'external*' -o coverage.dat
+          lcov --remove "$(bazel info output_path)/_coverage/_coverage_report.dat" 'external*' -o most_coverage.dat
+          # Combine with baseline
+          lcov -a baseline_coverage.dat -a most_coverage.dat -o coverage.dat
           # Show Table
           lcov --list coverage.dat
           # Generate HTML
