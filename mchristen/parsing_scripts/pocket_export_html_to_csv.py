@@ -18,6 +18,10 @@ class Entry(NamedTuple):
     is_read: bool
 
 
+def do_it():
+    print("does it catch that this isn't covered")
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Read exported pocket html from stdin, output csv"
