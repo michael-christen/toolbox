@@ -9,6 +9,13 @@ and tie it all into 1 build tool to bring them all together.
 This should act as a repository of projects I'm working on and an example of my
 latest insights into best practices, design principles, dev-ops usage, etc.
 
+## Badges
+
+[![codecov](https://codecov.io/gh/michael-christen/toolbox/graph/badge.svg?token=GGS6QHC5YP)](https://codecov.io/gh/michael-christen/toolbox)
+
+NOTE: Our coverage setup doesn't find completely uncovered files. We'll need to
+fix that at some point, for now be aware of it.
+
 ## Layout
 
 - docs: various writings and documentation of the repo and tools used
