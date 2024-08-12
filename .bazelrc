@@ -38,13 +38,13 @@ try-import %workspace%/user.bazelrc
 
 # TODO(https://github.com/michael-christen/toolbox/issues/28): stop interference with rules_rust
 # # https://github.com/aspect-build/gcc-toolchain/issues/85
-# build --incompatible_enable_cc_toolchain_resolution
-# build --action_env=BAZEL_DO_NOT_DETECT_CPP_TOOLCHAIN=1
+build --incompatible_enable_cc_toolchain_resolution
+build --action_env=BAZEL_DO_NOT_DETECT_CPP_TOOLCHAIN=1
 # # Performance per #85
-# build --experimental_reuse_sandbox_directories
+build --experimental_reuse_sandbox_directories
 # # Have rules_rust use the right hermetic toolchain sysroot, symlink folders
 # # into execution directory
-# build --@rules_rust//cargo/settings:experimental_symlink_execroot=True
+build --@rules_rust//cargo/settings:experimental_symlink_execroot=True
 
 # Must match PYTHON_VERSION in MODULE.bazel
 # LINK(7e463bc3_e4d9_4464_ba39_3217c4a86004)
