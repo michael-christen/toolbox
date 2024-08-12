@@ -12,20 +12,15 @@ jobs:
     steps:
       - run: echo "The job was triggered by a ${{ github.event_name }} event, running on ${{ runner.os }}, ${{ github.ref }} @ ${{ github.repository }}."
       - uses: actions/checkout@v4
-      - name: Cache Bazel
-        uses: actions/cache@v4.0.2
+      - name: Get Bazel
+        uses: bazel-contrib/setup-bazel@0.8.1
         with:
-          path: |
-            ~/.cache/bazelisk
-            ~/.cache/bazel
-          # key: ${{ runner.os }}-bazel
-          # Add .bazelrc, .bazelversion, MODULE.bazel, possibly other
-          # dependencies too
-          # Or should we just setup remote caching more fully?
-          key: bazel-${{ hashFiles('WORKSPACE') }}
-          # An ordered list of prefix-matched keys to use for restoring stale cache if no cache hit occurred for key.
-          restore-keys: |
-            bazel-
+          # Avoid downloading Bazel every time.
+          bazelisk-cache: true
+          # Store build cache per workflow.
+          disk-cache: ${{ github.workflow }}
+          # Share repository cache between workflows.
+          repository-cache: true
       - name: Lint
         run: |
           ./lint.sh --mode check
