@@ -8,6 +8,9 @@ load("@pip//:requirements.bzl", "all_whl_requirements")
 load("@rules_python//python:pip.bzl", "compile_pip_requirements")
 load("@rules_python_gazelle_plugin//manifest:defs.bzl", "gazelle_python_manifest")
 load("@rules_python_gazelle_plugin//modules_mapping:def.bzl", "modules_mapping")
+load("@bazel_skylib//rules:copy_file.bzl", "copy_file")
+load("@hedron_compile_commands//:refresh_compile_commands.bzl", "refresh_compile_commands")
+load("@pigweed//pw_build:compatibility.bzl", "incompatible_with_mcu")
 
 package(default_visibility = ["//visibility:private"])
 
@@ -120,3 +123,38 @@ gazelle(
 # gazelle:resolve py third_party.bazel.src.main.protobuf.build_pb2 //third_party/bazel/src/main/protobuf:build_py_library
 
 npm_link_all_packages(name = "node_modules")
+
+
+copy_file(
+    name = "copy_clangd",
+    src = "@pigweed//pw_toolchain/host_clang:clangd",
+    out = "clangd",
+    allow_symlink = True,
+)
+
+refresh_compile_commands(
+    name = "refresh_compile_commands",
+    out_dir = ".compile_commands",
+    target_compatible_with = incompatible_with_mcu(),
+    target_groups = {
+        "host_simulator": [
+            "//apps/blinky:simulator_blinky",
+            "//modules/blinky:blinky_test",
+        ],
+        "rp2040": [
+            "//apps/blinky:rp2040_blinky.elf",
+            [
+                "//modules/blinky:blinky_test",
+                "--config=rp2040",
+            ],
+        ],
+    },
+)
+
+filegroup(
+    name = "pw_console_config",
+    srcs = [
+        ".pw_console.yaml",
+    ],
+    visibility = ["//visibility:public"],
+)

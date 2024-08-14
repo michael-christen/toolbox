@@ -13,32 +13,22 @@
 // the License.
 #define PW_LOG_MODULE_NAME "MAIN"
 
-// #include "modules/blinky/service.h"
-// #include "modules/board/service.h"
+#include "modules/blinky/service.h"
 #include "pw_log/log.h"
 #include "pw_system/system.h"
-// #include "system/system.h"
-// #include "system/worker.h"
+#include "system/system.h"
 
 int main() {
-  // sense::system::Init();
-  // auto& rpc_server = pw::System().rpc_server();
-  // auto& worker = sense::system::GetWorker();
-  // auto& monochrome_led = sense::system::MonochromeLed();
-  // auto& polychrome_led = sense::system::PolychromeLed();
+  demo::system::Init();
+  auto& rpc_server = pw::System().rpc_server();
+  auto& monochrome_led = demo::system::MonochromeLed();
 
-  // static sense::BoardService board_service;
-  // board_service.Init(worker, sense::system::Board());
-  // rpc_server.RegisterService(board_service);
-
-  // static sense::BlinkyService blinky_service;
-  // blinky_service.Init(pw::System().dispatcher(),
-  //                     pw::System().allocator(),
-  //                     monochrome_led,
-  //                     polychrome_led);
-  // rpc_server.RegisterService(blinky_service);
+  static demo::BlinkyService blinky_service;
+  blinky_service.Init(
+      pw::System().dispatcher(), pw::System().allocator(), monochrome_led);
+  rpc_server.RegisterService(blinky_service);
 
   PW_LOG_INFO("Started blinky app; waiting for RPCs...");
-  // sense::system::Start();
+  demo::system::Start();
   PW_UNREACHABLE;
 }
