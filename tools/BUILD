@@ -1,5 +1,6 @@
 load("@rules_multirun//:defs.bzl", "command", "multirun")
 load("//bzl:py.bzl", "py_binary", "py_library")
+load("@rules_python//python:defs.bzl", og_py_binary = "py_binary")
 
 package(default_visibility = ["//visibility:private"])
 
@@ -90,7 +91,7 @@ py_binary(
     visibility = ["//:__subpackages__"],
 )
 
-py_binary(
+og_py_binary(
     name = "console",
     srcs = ["console.py"],
     deps = [
