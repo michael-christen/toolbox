@@ -1,0 +1,51 @@
+// Copyright 2024 The Pigweed Authors
+//
+// Licensed under the Apache License, Version 2.0 (the "License"); you may not
+// use this file except in compliance with the License. You may obtain a copy of
+// the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+// WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+// License for the specific language governing permissions and limitations under
+// the License.
+syntax = "proto3";
+
+package blinky;
+
+import "pw_protobuf_protos/common.proto";
+
+service Blinky {
+  // Toggles the LED on or off.
+  // If a previous `Blink` request is still running, stops it before toggling.
+  rpc ToggleLed(pw.protobuf.Empty) returns (pw.protobuf.Empty);
+
+  // Sets the LED on or off.
+  rpc SetLed(SetLedRequest) returns (pw.protobuf.Empty);
+
+  // Continuously blinks the board LED a specified number of times.
+  rpc Blink(BlinkRequest) returns (pw.protobuf.Empty);
+
+  // Returns true or false if LED blinking is idle.
+  rpc IsIdle(pw.protobuf.Empty) returns (BlinkIdleResponse);
+}
+
+message SetLedRequest {
+  bool on = 1;
+}
+
+message BlinkIdleResponse {
+  bool is_idle = 1;
+}
+
+message BlinkRequest {
+  // The interval at which to blink or pulse the LED, in milliseconds.
+  uint32 interval_ms = 1;
+
+  // The number of times to blink the LED.
+  // If unset, blinks forever.
+  // If 0, stops blinking.
+  optional uint32 blink_count = 2;
+}
