@@ -15,6 +15,7 @@ workspace(name = "mchristen")
 # The `load` statement imports the symbol for http_archive from the http.bzl
 # file.  When the symbol is loaded you can use the rule.
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
 http_archive(
     name = "build_stack_rules_proto",
@@ -122,3 +123,31 @@ load("@rules_python_gazelle_plugin//:deps.bzl", _py_gazelle_deps = "gazelle_deps
 # This rule loads and compiles various go dependencies that running gazelle
 # for python requirements.
 _py_gazelle_deps()
+
+
+load(
+    "@pigweed//pw_toolchain/rust:defs.bzl",
+    "pw_rust_register_toolchain_and_target_repos",
+    "pw_rust_register_toolchains",
+)
+
+pw_rust_register_toolchain_and_target_repos(
+    cipd_tag = "rust_revision:bf9c7a64ad222b85397573668b39e6d1ab9f4a72",
+)
+
+# Allows creation of a `rust-project.json` file to allow rust analyzer to work.
+load("@rules_rust//tools/rust_analyzer:deps.bzl", "rust_analyzer_dependencies")
+
+rust_analyzer_dependencies()
+
+pw_rust_register_toolchains()
+
+# Vendored third party rust crates.
+git_repository(
+    name = "rust_crates",
+    commit = "de54de1a2683212d8edb4e15ec7393eb013c849c",
+    remote = "https://pigweed.googlesource.com/third_party/rust_crates",
+)
+
+# Registers platforms for use with toolchain resolution
+register_execution_platforms("@local_config_platform//:host", "//platforms:all")

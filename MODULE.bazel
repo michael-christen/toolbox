@@ -55,26 +55,27 @@ use_repo(pip, "pip")
 # 
 # Version 26.0 caused a failure when compiling nanopb
 bazel_dep(name = "protobuf", version = "24.4")
-bazel_dep(name = "rules_rust", version = "0.48.0")
+# Version 0.48.0 was causing issues
+bazel_dep(name = "rules_rust", version = "0.45.1")
 
-rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
-rust.toolchain(edition = "2021")
-use_repo(rust, "rust_toolchains")
+# rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
+# rust.toolchain(edition = "2021")
+# use_repo(rust, "rust_toolchains")
+# 
+# register_toolchains("@rust_toolchains//:all")
 
-register_toolchains("@rust_toolchains//:all")
-
-crate = use_extension(
-    "@rules_rust//crate_universe:extension.bzl",
-    "crate",
-)
-crate.from_cargo(
-    name = "crate_index",
-    cargo_lockfile = "//:Cargo.lock",
-    manifests = [
-        "//:examples/basic/Cargo.toml",
-    ],
-)
-use_repo(crate, "crate_index")
+# crate = use_extension(
+#     "@rules_rust//crate_universe:extension.bzl",
+#     "crate",
+# )
+# crate.from_cargo(
+#     name = "crate_index",
+#     cargo_lockfile = "//:Cargo.lock",
+#     manifests = [
+#         "//:examples/basic/Cargo.toml",
+#     ],
+# )
+# use_repo(crate, "crate_index")
 
 ########################################
 # Set up rules_oci
@@ -198,6 +199,27 @@ archive_override(
     module_name = "hedron_compile_commands",
     strip_prefix = "bazel-compile-commands-extractor-163521345aa6366fd1ed801b989b668b5c806f69",
     urls = ["https://github.com/chadnorvell/bazel-compile-commands-extractor/archive/163521345aa6366fd1ed801b989b668b5c806f69.tar.gz"],
+)
+
+
+archive_override(
+    module_name = "rules_rust",
+    integrity = "sha256-+bWb47wg0VchIADaHt6L5Dma2Gn+Q589nz/MKcTi+lo=",
+    # patch_strip = 1,
+    # patches = [
+    #     # Fix rustdoc test w/ proc macros
+    #     # https://github.com/bazelbuild/rules_rust/pull/1952
+    #     "@pigweed//pw_rust/bazel_patches:0001-rustdoc_test-Apply-prefix-stripping-to-proc_macro-de.patch",
+    #     # Adds prototype functionality for documenting multiple crates in one
+    #     # HTML output directory.  While the approach in this patch may have
+    #     # issues scaling to giant mono-repos, it is appropriate for embedded
+    #     # projects and minimally invasive and should be easy to maintain.  Once
+    #     # the `rules_rust` community decides on a way to propperly support this,
+    #     # we will migrate to that solution.
+    #     # https://github.com/konkers/rules_rust/tree/wip/rustdoc
+    #     "@pigweed//pw_rust/bazel_patches:0002-PROTOTYPE-Add-ability-to-document-multiple-crates-at.patch",
+    # ],
+    urls = ["https://github.com/bazelbuild/rules_rust/releases/download/0.45.1/rules_rust-v0.45.1.tar.gz"],
 )
 
 # TODO: https://pwbug.dev/354274498 - nanopb is not yet in the BCR.
