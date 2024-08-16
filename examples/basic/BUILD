@@ -54,34 +54,35 @@ proto_cc_library(
     deps = ["@com_google_protobuf//:protobuf"],
 )
 
-rust_library(
-    name = "lib",
-    srcs = ["src/lib.rs"],
-)
-
-rust_test(
-    name = "lib_test",
-    crate = ":lib",
-)
-
-rust_binary(
-    name = "hello_world",
-    srcs = ["src/main.rs"],
-    deps = [
-        "@crate_index//:ferris-says",
-    ],
-    # TODO: Get rust dependencies working
-    # aliases = aliases(),
-    # deps = all_crate_deps(),
-    # proc_macro_deps = all_crate_deps(
-    #     proc_macro = True,
-    # ),
-)
-
-rust_doc(
-    name = "hello_world_doc",
-    crate = ":hello_world",
-)
+# XXX: clang toolchain from pigweed is breaking rust
+# rust_library(
+#     name = "lib",
+#     srcs = ["src/lib.rs"],
+# )
+# 
+# rust_test(
+#     name = "lib_test",
+#     crate = ":lib",
+# )
+# 
+# rust_binary(
+#     name = "hello_world",
+#     srcs = ["src/main.rs"],
+#     deps = [
+#         "@crate_index//:ferris-says",
+#     ],
+#     # TODO: Get rust dependencies working
+#     # aliases = aliases(),
+#     # deps = all_crate_deps(),
+#     # proc_macro_deps = all_crate_deps(
+#     #     proc_macro = True,
+#     # ),
+# )
+# 
+# rust_doc(
+#     name = "hello_world_doc",
+#     crate = ":hello_world",
+# )
 
 py_test(
     name = "hello_test",

@@ -29,13 +29,13 @@ COPTS = [
     # -Wextra, with a few exceptions
     "-Wmemset-transposed-args",
     "-Wcast-function-type",
-    "-Wclobbered",
+    # "-Wclobbered",
     "-Wempty-body",
     "-Wenum-conversion",
     "-Wexpansion-to-defined",
     "-Wignored-qualifiers",
-    "-Wimplicit-fallthrough=3",
-    "-Wmaybe-uninitialized",
+    # "-Wimplicit-fallthrough=3",
+    # "-Wmaybe-uninitialized",
     "-Wshift-negative-value",
     "-Wsign-compare",
     "-Wstring-compare",
@@ -60,7 +60,7 @@ CONLY_OPTS = [
 ]
 
 CXX_OPTS = [
-    "-Wsized-deallocation",
+    # "-Wsized-deallocation",
     "-Wdeprecated-copy",
     # If changing, likely want to update .bazelrc
     # See https://en.cppreference.com/w/cpp/23
