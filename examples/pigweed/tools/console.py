@@ -14,20 +14,18 @@
 """Wraps pw_system's console to inject quickstart's RPC proto."""
 
 import argparse
+import logging
 import sys
 
-import logging
-
 import pw_cli
-from pw_system.device import Device as PwSystemDevice
-from pw_system.device_connection import (
-    add_device_args,
-    DeviceConnection,
-    create_device_serial_or_socket_connection,
-)
 import pw_system.console
 from blinky_pb import blinky_pb2
-
+from pw_system.device import Device as PwSystemDevice
+from pw_system.device_connection import DeviceConnection
+from pw_system.device_connection import add_device_args
+from pw_system.device_connection import (
+    create_device_serial_or_socket_connection,
+)
 
 _LOG = logging.getLogger(__file__)
 
@@ -62,7 +60,7 @@ def get_device_connection(
         pw_cli.log.install(level=log_level)
 
     parser = argparse.ArgumentParser(
-        prog='quickstart',
+        prog="quickstart",
         description=__doc__,
     )
     parser = add_device_args(parser)
@@ -96,5 +94,5 @@ def main() -> int:
     )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main())
