@@ -71,7 +71,7 @@ cc_library(
 )
 
 proto_library(
-    name = "proto",
+    name = "blinky_proto",
     srcs = ["blinky.proto"],
     import_prefix = "blinky_pb",
     strip_import_prefix = "/examples/pigweed/modules/blinky",
@@ -82,16 +82,16 @@ proto_library(
 
 nanopb_proto_library(
     name = "nanopb",
-    deps = [":proto"],
+    deps = [":blinky_proto"],
 )
 
 nanopb_rpc_proto_library(
     name = "nanopb_rpc",
     nanopb_proto_library_deps = [":nanopb"],
-    deps = [":proto"],
+    deps = [":blinky_proto"],
 )
 
 py_proto_library(
     name = "py_pb2",
-    deps = [":proto"],
+    deps = [":blinky_proto"],
 )
