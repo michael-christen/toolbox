@@ -12,6 +12,8 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
+# Don't autogenerate any protos here
+# gazelle:ignore
 load("@pigweed//pw_build:pigweed.bzl", "pw_cc_test")
 load(
     "@pigweed//pw_protobuf_compiler:pw_proto_library.bzl",
