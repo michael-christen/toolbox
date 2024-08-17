@@ -19,7 +19,7 @@ import sys
 
 import pw_cli
 import pw_system.console
-from blinky_pb import blinky_pb2
+from examples.pigweed.modules.blinky import blinky_pb2
 from pw_system.device import Device as PwSystemDevice
 from pw_system.device_connection import DeviceConnection
 from pw_system.device_connection import add_device_args

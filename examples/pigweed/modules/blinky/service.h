@@ -14,7 +14,7 @@
 #pragma once
 
 #include "examples/pigweed/modules/blinky/blinky.h"
-#include "examples/pigweed/modules/blinky/blinky_pb/blinky.rpc.pb.h"
+#include "examples/pigweed/modules/blinky/blinky.rpc.pb.h"
 #include "pw_allocator/allocator.h"
 #include "pw_async2/dispatcher.h"
 
