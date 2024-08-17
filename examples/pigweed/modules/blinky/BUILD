@@ -90,6 +90,6 @@ nanopb_rpc_proto_library(
 )
 
 py_proto_library(
-    name = "py_pb2",
+    name = "blinky_pb2",
     deps = [":blinky_proto"],
 )
