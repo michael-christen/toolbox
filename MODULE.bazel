@@ -47,14 +47,15 @@ use_repo(pip, "pip")
 # XXX: This was causing the descriptor_pb2.py segfault with
 # //modules/blinky:service
 # external/protobuf~/.: warning: directory does not exist.
-# ERROR: /home/mchristen/.local/tmp/bazel/_bazel_mchristen/eabc9c58e7a2790b61df5bad4df6e1e8/external/nanopb~/BUILD.bazel:88:17: ProtoCompile external/nanopb~/generator/proto/google/protobuf/descriptor_pb2.py [for tool] failed: (Segmentation fault): protoc failed: error executing ProtoCompile command (from target @@nanopb~//:descriptor_py_proto_genproto) 
+# ERROR: /home/mchristen/.local/tmp/bazel/_bazel_mchristen/eabc9c58e7a2790b61df5bad4df6e1e8/external/nanopb~/BUILD.bazel:88:17: ProtoCompile external/nanopb~/generator/proto/google/protobuf/descriptor_pb2.py [for tool] failed: (Segmentation fault): protoc failed: error executing ProtoCompile command (from target @@nanopb~//:descriptor_py_proto_genproto)
 #   (cd /home/mchristen/.local/tmp/bazel/_bazel_mchristen/eabc9c58e7a2790b61df5bad4df6e1e8/sandbox/linux-sandbox/3486/execroot/_main && \
 #   exec env - \
 #     PATH=/bin:/usr/bin:/usr/local/bin \
 #   bazel-out/k8-opt-exec-ST-d57f47055a04/bin/external/protobuf~/protoc '--python_out=bazel-out/k8-opt-exec-ST-d0eb3b6eed71/bin/external/nanopb~/generator/proto' -Iexternal/nanopb~/generator/proto external/nanopb~/generator/proto/google/protobuf/descriptor.proto)
-# 
+#
 # Version 26.0 caused a failure when compiling nanopb
 bazel_dep(name = "protobuf", version = "24.4")
+
 # Version 0.48.0 was causing issues
 bazel_dep(name = "rules_rust", version = "0.45.1")
 
@@ -156,7 +157,6 @@ bazel_dep(name = "rules_multirun", version = "0.9.0")
 # Specify to support stackb_rules_proto in bazel 7
 bazel_dep(name = "rules_apple", version = "3.7.0", repo_name = "build_bazel_rules_apple")
 
-
 # Allow platform transitions
 bazel_dep(name = "rules_platform", version = "0.1.0")
 
@@ -178,6 +178,7 @@ register_toolchains(
 
 # Bazel rule helpers, including testing
 bazel_dep(name = "bazel_skylib", version = "1.7.1")
+
 bazel_dep(name = "bazel_skylib_gazelle_plugin", version = "1.7.1", dev_dependency = True)  # mchristen add
 
 bazel_dep(name = "freertos", version = "10.5.1.bcr.2")
@@ -200,7 +201,6 @@ archive_override(
     strip_prefix = "bazel-compile-commands-extractor-163521345aa6366fd1ed801b989b668b5c806f69",
     urls = ["https://github.com/chadnorvell/bazel-compile-commands-extractor/archive/163521345aa6366fd1ed801b989b668b5c806f69.tar.gz"],
 )
-
 
 archive_override(
     module_name = "rules_rust",
