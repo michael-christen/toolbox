@@ -19,13 +19,14 @@ import sys
 
 import pw_cli
 import pw_system.console
-from examples.pigweed.modules.blinky import blinky_pb2
 from pw_system.device import Device as PwSystemDevice
 from pw_system.device_connection import DeviceConnection
 from pw_system.device_connection import add_device_args
 from pw_system.device_connection import (
     create_device_serial_or_socket_connection,
 )
+
+from examples.pigweed.modules.blinky import blinky_pb2
 
 _LOG = logging.getLogger(__file__)
 

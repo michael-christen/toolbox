@@ -1,5 +1,5 @@
 load("@pigweed//targets/host_device_simulator:transition.bzl", "host_device_simulator_binary")
-load("//examples/pigweed/tools:tools.bzl", "device_console", "host_console")
+load("//examples/pigweed/tools:tools.bzl", "host_console")
 
 package(default_visibility = ["//visibility:public"])
 
