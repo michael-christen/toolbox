@@ -1,5 +1,6 @@
 load("@pigweed//pw_build:compatibility.bzl", "host_backend_alias")
 
+# gazelle:default_visibility //visibility:public
 package(default_visibility = ["//visibility:public"])
 
 cc_library(
@@ -12,6 +13,7 @@ cc_library(
         "PW_FUNCTION_INLINE_CALLABLE_SIZE=16UL",
         "PW_ASSERT_BASIC_ACTION=PW_ASSERT_BASIC_ACTION_EXIT",
     ],
+    visibility = ["//visibility:public"],
 )
 
 label_flag(
@@ -29,6 +31,7 @@ cc_library(
     hdrs = [
         "system.h",
     ],
+    visibility = ["//visibility:public"],
     deps = [
         "@pigweed//pw_digital_io",
     ],

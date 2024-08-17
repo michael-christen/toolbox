@@ -20,7 +20,6 @@ cc_binary(
     ],
 )
 
-
 # Create a host binary using the Pigweed upstream pw_system host_device_simulator.
 host_device_simulator_binary(
     name = "simulator_blinky",
