@@ -8,16 +8,9 @@
 # Do not attempt to configure an autodetected (local) toolchain. We vendor all
 # our toolchains, and CI VMs may not have any local toolchain to detect.
 common --repo_env=BAZEL_DO_NOT_DETECT_CPP_TOOLCHAIN=1
-# build --action_env=BAZEL_DO_NOT_DETECT_CPP_TOOLCHAIN=1
 
 # Required for new toolchain resolution API.
-# TODO(https://github.com/michael-christen/toolbox/issues/28): stop interference with rules_rust
-# https://github.com/aspect-build/gcc-toolchain/issues/85
 build --incompatible_enable_cc_toolchain_resolution
-
-# Expose exec toolchains for Python.
-# XXX: Needed twice?
-build --@rules_python//python/config_settings:exec_tools_toolchain=enabled
 
 # Don't propagate flags or defines to the exec config. This will become the
 # default one day (https://github.com/bazelbuild/bazel/issues/22457) and will
@@ -49,7 +42,6 @@ build --@rules_python//python/config_settings:exec_tools_toolchain=enabled
 # ===========================
 
 # Ignore all warnings in third-party code.
-# XXX: Very cool
 common --per_file_copt=external/.*@-w
 common --host_per_file_copt=external/.*@-w
 
@@ -70,18 +62,8 @@ common --verbose_failures
 # View failed test output
 test --test_output=errors
 
-# Suppress the DEBUG: log messages from bazel. We get spammy DEBUG:
-# messages from rules_python.
-#
-# TODO: https://github.com/bazelbuild/rules_python/issues/1818 - Re-enable DEBUG
-# messages once rules_python stops spamming us.
-# XXX: Don't need this
-# common --ui_event_filters=-debug
-#
 # Platform configuration
 # ======================
-# XXX: Need custom_malloc definition
-# common --custom_malloc=//targets:malloc
 build --@pigweed//pw_build:default_module_config=//system:module_config
 
 # Host platform default backends.
@@ -90,8 +72,6 @@ common --@pigweed//pw_log:backend_impl=@pigweed//pw_log_string:impl
 common --@pigweed//pw_log_string:handler_backend=@pigweed//pw_system:log_backend
 common --@pigweed//pw_sys_io:backend=@pigweed//pw_sys_io_stdio
 common --@pigweed//pw_system:io_backend=@pigweed//pw_system:socket_target_io
-
-# XXX: RP2040 & RP2350 platform?
 
 # My rules
 # ========
@@ -126,10 +106,10 @@ test --build_tests_only
 build:quiet --ui_event_filters=-info,-stdout,-stderr
 build:quiet --noshow_progress
 
-# # Performance per #85
+# Performance per #85
 build --experimental_reuse_sandbox_directories
-# # Have rules_rust use the right hermetic toolchain sysroot, symlink folders
-# # into execution directory
+# Have rules_rust use the right hermetic toolchain sysroot, symlink folders
+# into execution directory
 build --@rules_rust//cargo/settings:experimental_symlink_execroot=True
 
 # Must match PYTHON_VERSION in MODULE.bazel

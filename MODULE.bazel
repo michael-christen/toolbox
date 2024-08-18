@@ -22,8 +22,7 @@ bazel_dep(name = "aspect_rules_py", version = "0.7.3")
 
 # Minimum version needs:
 # feat: add interpreter_version_info to py_runtime by @mattem in #1671
-# XXX: Duplicate
-# bazel_dep(name = "rules_python", version = "0.34.0", dev_dependency = True)
+bazel_dep(name = "rules_python", version = "0.34.0", dev_dependency = True)
 
 python = use_extension("@rules_python//python/extensions:python.bzl", "python")
 
@@ -44,20 +43,10 @@ pip.parse(
 )
 use_repo(pip, "pip")
 
-# XXX: This was causing the descriptor_pb2.py segfault with
-# //modules/blinky:service
-# external/protobuf~/.: warning: directory does not exist.
-# ERROR: /home/mchristen/.local/tmp/bazel/_bazel_mchristen/eabc9c58e7a2790b61df5bad4df6e1e8/external/nanopb~/BUILD.bazel:88:17: ProtoCompile external/nanopb~/generator/proto/google/protobuf/descriptor_pb2.py [for tool] failed: (Segmentation fault): protoc failed: error executing ProtoCompile command (from target @@nanopb~//:descriptor_py_proto_genproto)
-#   (cd /home/mchristen/.local/tmp/bazel/_bazel_mchristen/eabc9c58e7a2790b61df5bad4df6e1e8/sandbox/linux-sandbox/3486/execroot/_main && \
-#   exec env - \
-#     PATH=/bin:/usr/bin:/usr/local/bin \
-#   bazel-out/k8-opt-exec-ST-d57f47055a04/bin/external/protobuf~/protoc '--python_out=bazel-out/k8-opt-exec-ST-d0eb3b6eed71/bin/external/nanopb~/generator/proto' -Iexternal/nanopb~/generator/proto external/nanopb~/generator/proto/google/protobuf/descriptor.proto)
-#
-# Version 26.0 caused a failure when compiling nanopb
+# TODO(#91): Allow bumping this up to 26 or greater while avoiding segfault
 bazel_dep(name = "protobuf", version = "24.4")
 
-# Version 0.48.0 was causing issues
-bazel_dep(name = "rules_rust", version = "0.45.1")
+bazel_dep(name = "rules_rust", version = "0.48.0")
 
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
 rust.toolchain(edition = "2021")
@@ -157,6 +146,11 @@ bazel_dep(name = "rules_multirun", version = "0.9.0")
 # Specify to support stackb_rules_proto in bazel 7
 bazel_dep(name = "rules_apple", version = "3.7.0", repo_name = "build_bazel_rules_apple")
 
+# Bazel rule helpers, including testing
+bazel_dep(name = "bazel_skylib", version = "1.7.1")
+
+bazel_dep(name = "bazel_skylib_gazelle_plugin", version = "1.7.1", dev_dependency = True)  # mchristen add
+
 # Allow platform transitions
 bazel_dep(name = "rules_platform", version = "0.1.0")
 
@@ -176,11 +170,6 @@ register_toolchains(
 # Pigweed
 ######################################
 
-# Bazel rule helpers, including testing
-bazel_dep(name = "bazel_skylib", version = "1.7.1")
-
-bazel_dep(name = "bazel_skylib_gazelle_plugin", version = "1.7.1", dev_dependency = True)  # mchristen add
-
 bazel_dep(name = "freertos", version = "10.5.1.bcr.2")
 bazel_dep(name = "nanopb", repo_name = "com_github_nanopb_nanopb")
 bazel_dep(name = "pico-sdk", version = "2.0.0")
@@ -188,7 +177,6 @@ bazel_dep(name = "pigweed")
 bazel_dep(name = "platforms", version = "0.0.10")
 bazel_dep(name = "pw_toolchain")
 bazel_dep(name = "rules_cc")
-bazel_dep(name = "rules_python", version = "0.34.0")
 
 bazel_dep(name = "hedron_compile_commands", dev_dependency = True)
 
@@ -205,6 +193,7 @@ archive_override(
 archive_override(
     module_name = "rules_rust",
     integrity = "sha256-+bWb47wg0VchIADaHt6L5Dma2Gn+Q589nz/MKcTi+lo=",
+    # Can only apply patches from local workspace
     # patch_strip = 1,
     # patches = [
     #     # Fix rustdoc test w/ proc macros
@@ -258,9 +247,4 @@ archive_override(
     urls = [
         "https://github.com/bazelbuild/rules_cc/archive/1acf5213b6170f1f0133e273cb85ede0e732048f.zip",
     ],
-)
-
-http_archive = use_repo_rule(
-    "@bazel_tools//tools/build_defs/repo:http.bzl",
-    "http_archive",
 )
