@@ -45,7 +45,6 @@ use_repo(pip, "pip")
 
 # TODO(#91): Allow bumping this up to 26 or greater while avoiding segfault
 bazel_dep(name = "protobuf", version = "24.4")
-
 bazel_dep(name = "rules_rust", version = "0.48.0")
 
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
