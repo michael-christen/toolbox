@@ -56,44 +56,7 @@ snippets:
       Send a string to the device and receive a response with the same
       message back.
 
+      ```pycon
       >>> device.rpcs.pw.rpc.EchoService.Echo(msg='hello world')
       (Status.OK, pw.rpc.EchoMessage(msg='hello world'))
-
-  Reboot to bootloader:
-    code: |
-      device.rpcs.board.Board.Reboot(reboot_type=1)
-    description: |
-      Sent a reboot request to the device. The console must be
-      relaunched to reconnect.
-
-  Get onboard temp sensor value:
-    code: |
-      device.rpcs.board.Board.OnboardTemp()
-    description: |
-      Get the current value of the onboard temperature sensor.
-
-      ```pycon
-      >>> device.rpcs.board.Board.OnboardTemp()
-      (Status.OK, board.OnboardTempResponse(temp=24.797744750976562))
-      ```
-
-  Log onboard temp sensor values every 1000ms:
-    code: |
-      call = device.rpcs.board.Board.OnboardTempStream.invoke(
-          request_args=dict(sample_interval_ms=1000),
-          on_next=lambda _, message: LOG.info(message)
-      )
-    description: |
-      Start logging with:
-
-      ```pycon
-      >>> call = device.rpcs.board.Board.OnboardTempStream.invoke(request_args=dict(sample_interval_ms=1000), on_next=lambda _, message: LOG.info(message))
-      ```
-
-      Log messages will appear in the 'Host Logs' window.
-      To stop the streaming RPC run `call.cancel()`:
-
-      ```pycon
-      >>> call.cancel()
-      True
       ```

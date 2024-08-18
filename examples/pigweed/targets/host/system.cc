@@ -46,25 +46,6 @@ void InstallCtrlCSignalHandler() {
   signal(SIGINT, CtrlCSignalHandler);
 }
 
-namespace {
-class VirtualInput : public DigitalIn {
- public:
-  VirtualInput(State state) : state_(state) {}
-
- private:
-  pw::Status DoEnable(bool) override { return pw::OkStatus(); }
-  pw::Result<State> DoGetState() override { return state_; }
-
-  State state_;
-};
-
-VirtualInput io_sw_a(State::kInactive);
-VirtualInput io_sw_b(State::kInactive);
-VirtualInput io_sw_x(State::kInactive);
-VirtualInput io_sw_y(State::kInactive);
-
-}  // namespace
-
 namespace demo::system {
 
 void Init() {}

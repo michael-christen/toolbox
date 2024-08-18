@@ -64,6 +64,7 @@ test --test_output=errors
 
 # Platform configuration
 # ======================
+common --custom_malloc=//targets:malloc
 build --@pigweed//pw_build:default_module_config=//system:module_config
 
 # Host platform default backends.
