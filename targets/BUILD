@@ -12,7 +12,7 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-package(default_visibility = ["//visibility:public"])
+package(default_visibility = ["//visibility:private"])
 
 # TODO: https://github.com/bazelbuild/bazel/issues/22457 - Move this into the
 # platform once it no longer propagates to the exec configuration.
