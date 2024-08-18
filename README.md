@@ -125,6 +125,14 @@ bazel run //tools/buildifier -- <args>
 bazel run -- @pnpm//:pnpm --dir $PWD install --lockfile-only
 ```
 
+#### Get tsan to work on Ubuntu 24.04
+
+https://stackoverflow.com/a/77856955
+
+```
+sudo sysctl vm.mmap_rnd_bits=30
+```
+
 #### Inspiration
 
 - https://github.com/jessecureton/python_bazel_template
