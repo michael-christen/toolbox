@@ -118,5 +118,11 @@ gazelle(
 # gazelle:resolve py examples.basic.hello_pb2 //examples/basic:hello_py_library
 # gazelle:resolve py examples.basic.hello_pb2_grpc //examples/basic:hello_grpc_py_library
 # gazelle:resolve py third_party.bazel.src.main.protobuf.build_pb2 //third_party/bazel/src/main/protobuf:build_py_library
+# gazelle:resolve proto pw_protobuf_protos/common.proto @pigweed//pw_protobuf:common_proto
+# gazelle:resolve py examples.pigweed.modules.blinky.blinky_pb2 //examples/pigweed/modules/blinky:blinky_pb2
+# gazelle:resolve py pw_cli @pigweed//pw_system/py:pw_system_lib
+# gazelle:resolve py pw_system.console @pigweed//pw_system/py:pw_system_lib
+# gazelle:resolve py pw_system.device @pigweed//pw_system/py:pw_system_lib
+# gazelle:resolve py pw_system.device_connection @pigweed//pw_system/py:pw_system_lib
 
 npm_link_all_packages(name = "node_modules")
