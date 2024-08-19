@@ -17,6 +17,7 @@ exports_files(
         ".prettierrc",
         "pytest.ini",
         "pyproject.toml",
+        "oh_hey.rst",
     ],
     visibility = ["//visibility:public"],
 )
@@ -126,3 +127,15 @@ gazelle(
 # gazelle:resolve py pw_system.device_connection @pigweed//pw_system/py:pw_system_lib
 
 npm_link_all_packages(name = "node_modules")
+
+load("//tools/sphinx:sphinx.bzl", "sphinx_html")
+
+sphinx_html(
+    name = "docs",
+    config = "conf.py",
+    index = "index.rst",  # Test non-canonical naming.
+    srcs = [
+        "//docs:hello.rst",
+        "//:oh_hey.rst",
+    ],
+)

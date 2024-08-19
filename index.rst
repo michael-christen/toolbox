@@ -19,5 +19,5 @@ documentation for details.
    :maxdepth: 4
    :caption: Contents:
 
-   hello
+   docs/hello
 
