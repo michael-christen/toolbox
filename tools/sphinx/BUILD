@@ -5,6 +5,9 @@ py_binary(
     deps = [
         "@pip//sphinx",
         "@pip//sphinx_rtd_theme",
+        "@pip//myst_parser",
+        "@pip//linkify_it_py",
+        "@pip//sphinxcontrib_mermaid",
     ],
     visibility = ["//visibility:public"],
 )

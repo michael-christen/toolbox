@@ -14,3 +14,8 @@ notebook
 # Documentation
 sphinx
 sphinx-rtd-theme
+myst-parser
+# - generates links with raw urls, eg) www.example.com
+linkify-it-py
+# - diagram generation
+sphinxcontrib-mermaid

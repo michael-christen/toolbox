@@ -1050,11 +1050,111 @@ manifest:
     jupyterlab_server.translations_handler: jupyterlab_server
     jupyterlab_server.workspaces_app: jupyterlab_server
     jupyterlab_server.workspaces_handler: jupyterlab_server
+    linkify_it: linkify_it_py
+    linkify_it.main: linkify_it_py
+    linkify_it.tlds: linkify_it_py
+    linkify_it.ucre: linkify_it_py
+    markdown_it: markdown_it_py
+    markdown_it.cli: markdown_it_py
+    markdown_it.cli.parse: markdown_it_py
+    markdown_it.common: markdown_it_py
+    markdown_it.common.entities: markdown_it_py
+    markdown_it.common.html_blocks: markdown_it_py
+    markdown_it.common.html_re: markdown_it_py
+    markdown_it.common.normalize_url: markdown_it_py
+    markdown_it.common.utils: markdown_it_py
+    markdown_it.helpers: markdown_it_py
+    markdown_it.helpers.parse_link_destination: markdown_it_py
+    markdown_it.helpers.parse_link_label: markdown_it_py
+    markdown_it.helpers.parse_link_title: markdown_it_py
+    markdown_it.main: markdown_it_py
+    markdown_it.parser_block: markdown_it_py
+    markdown_it.parser_core: markdown_it_py
+    markdown_it.parser_inline: markdown_it_py
+    markdown_it.presets: markdown_it_py
+    markdown_it.presets.commonmark: markdown_it_py
+    markdown_it.presets.default: markdown_it_py
+    markdown_it.presets.zero: markdown_it_py
+    markdown_it.renderer: markdown_it_py
+    markdown_it.ruler: markdown_it_py
+    markdown_it.rules_block: markdown_it_py
+    markdown_it.rules_block.blockquote: markdown_it_py
+    markdown_it.rules_block.code: markdown_it_py
+    markdown_it.rules_block.fence: markdown_it_py
+    markdown_it.rules_block.heading: markdown_it_py
+    markdown_it.rules_block.hr: markdown_it_py
+    markdown_it.rules_block.html_block: markdown_it_py
+    markdown_it.rules_block.lheading: markdown_it_py
+    markdown_it.rules_block.list: markdown_it_py
+    markdown_it.rules_block.paragraph: markdown_it_py
+    markdown_it.rules_block.reference: markdown_it_py
+    markdown_it.rules_block.state_block: markdown_it_py
+    markdown_it.rules_block.table: markdown_it_py
+    markdown_it.rules_core: markdown_it_py
+    markdown_it.rules_core.block: markdown_it_py
+    markdown_it.rules_core.inline: markdown_it_py
+    markdown_it.rules_core.linkify: markdown_it_py
+    markdown_it.rules_core.normalize: markdown_it_py
+    markdown_it.rules_core.replacements: markdown_it_py
+    markdown_it.rules_core.smartquotes: markdown_it_py
+    markdown_it.rules_core.state_core: markdown_it_py
+    markdown_it.rules_core.text_join: markdown_it_py
+    markdown_it.rules_inline: markdown_it_py
+    markdown_it.rules_inline.autolink: markdown_it_py
+    markdown_it.rules_inline.backticks: markdown_it_py
+    markdown_it.rules_inline.balance_pairs: markdown_it_py
+    markdown_it.rules_inline.emphasis: markdown_it_py
+    markdown_it.rules_inline.entity: markdown_it_py
+    markdown_it.rules_inline.escape: markdown_it_py
+    markdown_it.rules_inline.fragments_join: markdown_it_py
+    markdown_it.rules_inline.html_inline: markdown_it_py
+    markdown_it.rules_inline.image: markdown_it_py
+    markdown_it.rules_inline.link: markdown_it_py
+    markdown_it.rules_inline.linkify: markdown_it_py
+    markdown_it.rules_inline.newline: markdown_it_py
+    markdown_it.rules_inline.state_inline: markdown_it_py
+    markdown_it.rules_inline.strikethrough: markdown_it_py
+    markdown_it.rules_inline.text: markdown_it_py
+    markdown_it.token: markdown_it_py
+    markdown_it.tree: markdown_it_py
+    markdown_it.utils: markdown_it_py
     markupsafe: MarkupSafe
     matplotlib_inline: matplotlib_inline
     matplotlib_inline.backend_inline: matplotlib_inline
     matplotlib_inline.config: matplotlib_inline
     mccabe: mccabe
+    mdit_py_plugins: mdit_py_plugins
+    mdit_py_plugins.admon: mdit_py_plugins
+    mdit_py_plugins.admon.index: mdit_py_plugins
+    mdit_py_plugins.amsmath: mdit_py_plugins
+    mdit_py_plugins.anchors: mdit_py_plugins
+    mdit_py_plugins.anchors.index: mdit_py_plugins
+    mdit_py_plugins.attrs: mdit_py_plugins
+    mdit_py_plugins.attrs.index: mdit_py_plugins
+    mdit_py_plugins.attrs.parse: mdit_py_plugins
+    mdit_py_plugins.colon_fence: mdit_py_plugins
+    mdit_py_plugins.container: mdit_py_plugins
+    mdit_py_plugins.container.index: mdit_py_plugins
+    mdit_py_plugins.deflist: mdit_py_plugins
+    mdit_py_plugins.deflist.index: mdit_py_plugins
+    mdit_py_plugins.dollarmath: mdit_py_plugins
+    mdit_py_plugins.dollarmath.index: mdit_py_plugins
+    mdit_py_plugins.field_list: mdit_py_plugins
+    mdit_py_plugins.footnote: mdit_py_plugins
+    mdit_py_plugins.footnote.index: mdit_py_plugins
+    mdit_py_plugins.front_matter: mdit_py_plugins
+    mdit_py_plugins.front_matter.index: mdit_py_plugins
+    mdit_py_plugins.myst_blocks: mdit_py_plugins
+    mdit_py_plugins.myst_blocks.index: mdit_py_plugins
+    mdit_py_plugins.myst_role: mdit_py_plugins
+    mdit_py_plugins.myst_role.index: mdit_py_plugins
+    mdit_py_plugins.substitution: mdit_py_plugins
+    mdit_py_plugins.tasklists: mdit_py_plugins
+    mdit_py_plugins.texmath: mdit_py_plugins
+    mdit_py_plugins.texmath.index: mdit_py_plugins
+    mdit_py_plugins.utils: mdit_py_plugins
+    mdit_py_plugins.wordcount: mdit_py_plugins
+    mdurl: mdurl
     mistune: mistune
     mistune.block_parser: mistune
     mistune.core: mistune
@@ -1086,6 +1186,33 @@ manifest:
     mistune.toc: mistune
     mistune.util: mistune
     mypy_extensions: mypy_extensions
+    myst_parser: myst_parser
+    myst_parser.cli: myst_parser
+    myst_parser.config: myst_parser
+    myst_parser.config.dc_validators: myst_parser
+    myst_parser.config.main: myst_parser
+    myst_parser.docutils_: myst_parser
+    myst_parser.inventory: myst_parser
+    myst_parser.mdit_to_docutils: myst_parser
+    myst_parser.mdit_to_docutils.base: myst_parser
+    myst_parser.mdit_to_docutils.html_to_nodes: myst_parser
+    myst_parser.mdit_to_docutils.sphinx_: myst_parser
+    myst_parser.mdit_to_docutils.transforms: myst_parser
+    myst_parser.mocking: myst_parser
+    myst_parser.parsers: myst_parser
+    myst_parser.parsers.directives: myst_parser
+    myst_parser.parsers.docutils_: myst_parser
+    myst_parser.parsers.mdit: myst_parser
+    myst_parser.parsers.options: myst_parser
+    myst_parser.parsers.parse_html: myst_parser
+    myst_parser.parsers.sphinx_: myst_parser
+    myst_parser.sphinx_: myst_parser
+    myst_parser.sphinx_ext: myst_parser
+    myst_parser.sphinx_ext.directives: myst_parser
+    myst_parser.sphinx_ext.main: myst_parser
+    myst_parser.sphinx_ext.mathjax: myst_parser
+    myst_parser.sphinx_ext.myst_refs: myst_parser
+    myst_parser.warnings_: myst_parser
     nbclient: nbclient
     nbclient.cli: nbclient
     nbclient.client: nbclient
@@ -2032,11 +2159,14 @@ manifest:
     sphinx.writers.xml: sphinx
     sphinx_rtd_theme: sphinx_rtd_theme
     sphinxcontrib.applehelp: sphinxcontrib_applehelp
+    sphinxcontrib.autoclassdiag: sphinxcontrib_mermaid
     sphinxcontrib.devhelp: sphinxcontrib_devhelp
+    sphinxcontrib.exceptions: sphinxcontrib_mermaid
     sphinxcontrib.htmlhelp: sphinxcontrib_htmlhelp
     sphinxcontrib.jquery: sphinxcontrib_jquery
     sphinxcontrib.jsmath: sphinxcontrib_jsmath
     sphinxcontrib.jsmath.version: sphinxcontrib_jsmath
+    sphinxcontrib.mermaid: sphinxcontrib_mermaid
     sphinxcontrib.qthelp: sphinxcontrib_qthelp
     sphinxcontrib.serializinghtml: sphinxcontrib_serializinghtml
     sphinxcontrib.serializinghtml.jsonimpl: sphinxcontrib_serializinghtml
@@ -2151,6 +2281,19 @@ manifest:
     traitlets.utils.text: traitlets
     traitlets.utils.warnings: traitlets
     typing_extensions: typing_extensions
+    uc_micro: uc_micro_py
+    uc_micro.categories: uc_micro_py
+    uc_micro.categories.Cc: uc_micro_py
+    uc_micro.categories.Cc.regex: uc_micro_py
+    uc_micro.categories.Cf: uc_micro_py
+    uc_micro.categories.Cf.regex: uc_micro_py
+    uc_micro.categories.P: uc_micro_py
+    uc_micro.categories.P.regex: uc_micro_py
+    uc_micro.categories.Z: uc_micro_py
+    uc_micro.categories.Z.regex: uc_micro_py
+    uc_micro.properties: uc_micro_py
+    uc_micro.properties.Any: uc_micro_py
+    uc_micro.properties.Any.regex: uc_micro_py
     uri_template: uri_template
     uri_template.charset: uri_template
     uri_template.expansions: uri_template
@@ -2282,4 +2425,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: cafa0eab28728c4f9f673e13c6938a92229eb9d18b372289881eefdcfa715dc3
+integrity: 491528f4bfd1a348ef93edb15a6bf9c50e18a25da70d639965d928eea87732e1

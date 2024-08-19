@@ -20,4 +20,8 @@ documentation for details.
    :caption: Contents:
 
    hello
+   myst
+   examples
 
+..
+   myst_extensions

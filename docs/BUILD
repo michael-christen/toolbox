@@ -6,5 +6,10 @@ sphinx_html(
     index = "index.rst",  # Test non-canonical naming.
     srcs = [
         "hello.rst",
+        "myst.md",
+        # has warnings
+        # "myst_extensions.md",
+        "examples.md",
     ],
+
 )

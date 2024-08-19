@@ -1,3 +1,4 @@
+# Originally pulled from https://github.com/agoessling/rules_sphinx/tree/3280f704d048dd85400334f7513d0ce11bcdc5f3
 load("@bazel_skylib//lib:paths.bzl", "paths")
 
 
