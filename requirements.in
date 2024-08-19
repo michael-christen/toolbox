@@ -11,3 +11,6 @@ flake8
 isort
 ipdb
 notebook
+# Documentation
+sphinx
+sphinx-rtd-theme
