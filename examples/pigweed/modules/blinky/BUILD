@@ -34,7 +34,7 @@ cc_library(
     ],
     deps = [
         "//examples/pigweed/modules/timer_future",
-        "//system",
+        "//examples/pigweed/system",
         "@pigweed//pw_async2:coro",
         "@pigweed//pw_async2:coro_or_else_task",
         "@pigweed//pw_async2:dispatcher",

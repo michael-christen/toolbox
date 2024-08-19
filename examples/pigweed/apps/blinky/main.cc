@@ -16,7 +16,7 @@
 #include "examples/pigweed/modules/blinky/service.h"
 #include "pw_log/log.h"
 #include "pw_system/system.h"
-#include "system/system.h"
+#include "examples/pigweed/system/system.h"
 
 int main() {
   demo::system::Init();

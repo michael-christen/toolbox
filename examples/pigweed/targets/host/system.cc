@@ -12,7 +12,7 @@
 // License for the specific language governing permissions and limitations under
 // the License.
 
-#include "system/system.h"
+#include "examples/pigweed/system/system.h"
 
 #include <signal.h>
 #include <stdio.h>

@@ -8,7 +8,7 @@ cc_binary(
     srcs = ["main.cc"],
     deps = [
         "//examples/pigweed/modules/blinky:service",
-        "//system",
+        "//examples/pigweed/system",
         "@pigweed//pw_log",
         "@pigweed//pw_system:async",
 
