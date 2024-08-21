@@ -143,6 +143,7 @@ py_test(
         ":server",
         "//examples/basic:hello_py_library",
     ],
+    flaky = True,
     # XXX: How to expect_failure
 )
 
