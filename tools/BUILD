@@ -81,7 +81,10 @@ py_library(
     name = "bazel_utils",
     srcs = ["bazel_utils.py"],
     visibility = ["//:__subpackages__"],
-    deps = ["//third_party/bazel/src/main/protobuf:build_py_library"],
+    deps = [
+        "//third_party/bazel/src/main/java/com/google/devtools/build/lib/buildeventstream/proto:build_event_stream_py_library",
+        "//third_party/bazel/src/main/protobuf:build_py_library",
+    ],
 )
 
 py_binary(
