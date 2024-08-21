@@ -27,19 +27,18 @@ jobs:
           restore-keys: |
             bazel-
       # XXX: Trying to debug why I get no cache hit
-      # - name: Specify user.bazelrc for CI only settings
-      #   env:
-      #     BUILDBUDDY_API_KEY: ${{ secrets.BUILDBUDDY_API_KEY }}
-      #   run: |
-      #     cat <<EOF > user.bazelrc
-      #     build --bes_results_url=https://app.buildbuddy.io/invocation/
-      #     build --bes_backend=grpcs://remote.buildbuddy.io
-      #     # XXX: Remote cache is too slow
-      #     # build --remote_cache=grpcs://remote.buildbuddy.io
-      #     # build --noremote_upload_local_results # Uploads logs & artifacts without writing to cache
-      #     build --remote_timeout=3600
-      #     build --remote_header=x-buildbuddy-api-key="$BUILDBUDDY_API_KEY"
-      #     EOF
+      - name: Specify user.bazelrc for CI only settings
+        env:
+          BUILDBUDDY_API_KEY: ${{ secrets.BUILDBUDDY_API_KEY }}
+        run: |
+          cat <<EOF > user.bazelrc
+          build --bes_results_url=https://app.buildbuddy.io/invocation/
+          build --bes_backend=grpcs://remote.buildbuddy.io
+          build --remote_cache=grpcs://remote.buildbuddy.io
+          build --remote_download_toplevel # Helps remove network bottleneck if caching is enabled
+          build --remote_timeout=3600
+          build --remote_header=x-buildbuddy-api-key="$BUILDBUDDY_API_KEY"
+          EOF
       - name: Lint
         run: |
           ./lint.sh --mode check
