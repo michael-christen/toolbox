@@ -1,5 +1,5 @@
-import unittest
 import time
+import unittest
 
 from examples.basic import client
 from examples.basic import hello_pb2
