@@ -21,5 +21,5 @@ class TestHello(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(hello_pb2.HelloReply(message="Hello, you!"), result)
         # Intentionally Flaky
         now = time.time()
-        if int(now) % 2 == 0:
+        if int(now * 1000) % 2 == 0:
             self.assertTrue(False)

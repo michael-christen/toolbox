@@ -127,11 +127,11 @@ common --experimental_profile_include_primary_output
 
 # Build Event Server
 # ==================
-build --bes_results_url=https://app.buildbuddy.io/invocation/
-build --bes_backend=grpcs://remote.buildbuddy.io
+# build --bes_results_url=https://app.buildbuddy.io/invocation/
+# build --bes_backend=grpcs://remote.buildbuddy.io
 # build --remote_cache=grpcs://remote.buildbuddy.io
-build --noremote_upload_local_results # Uploads logs & artifacts without writing to cache
-build --remote_timeout=3600
+# build --noremote_upload_local_results # Uploads logs & artifacts without writing to cache
+# build --remote_timeout=3600
 
 # Remote Cache
 # ============
