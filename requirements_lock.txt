@@ -45,6 +45,10 @@ arrow==1.3.0 \
     --hash=sha256:c728b120ebc00eb84e01882a6f5e7927a53960aa990ce7dd2b10f39005a67f80 \
     --hash=sha256:d4540617648cb5f895730f1ad8c82a65f2dad0166f57b75f3ca54759c4d67a85
     # via isoduration
+astroid==3.3.2 \
+    --hash=sha256:99e9b5b602cbb005434084309213d6af32bf7a9b743c836749168b8e2b330cbd \
+    --hash=sha256:9f8136ce9770e0f912401b25a0f15d5c2ec20b50e99b1b413ac0778fe53ff6f1
+    # via sphinx-autoapi
 asttokens==2.4.1 \
     --hash=sha256:051ed49c3dcae8913ea7cd08e46a606dba30b79993209636c4875bc1d637bc24 \
     --hash=sha256:b03869718ba9a6eb027e134bfdf69f38a236d681c83c160d510768af11254ba0
@@ -429,6 +433,7 @@ jinja2==3.1.4 \
     #   myst-parser
     #   nbconvert
     #   sphinx
+    #   sphinx-autoapi
 json5==0.9.25 \
     --hash=sha256:34ed7d834b1341a86987ed52f3f76cd8ee184394906b6e22a1e0deb9ab294e8f \
     --hash=sha256:548e41b9be043f9426776f05df8635a00fe06104ea51ed24b67f908856e151ae
@@ -800,6 +805,7 @@ pyyaml==6.0.1 \
     # via
     #   jupyter-events
     #   myst-parser
+    #   sphinx-autoapi
 pyzmq==26.0.3 \
     --hash=sha256:01fbfbeb8249a68d257f601deb50c70c929dc2dfe683b754659569e502fbd3aa \
     --hash=sha256:0270b49b6847f0d106d64b5086e9ad5dc8a902413b5dbbb15d12b60f9c1747a4 \
@@ -1053,8 +1059,13 @@ sphinx==7.4.7 \
     # via
     #   -r requirements.in
     #   myst-parser
+    #   sphinx-autoapi
     #   sphinx-rtd-theme
     #   sphinxcontrib-jquery
+sphinx-autoapi==3.2.1 \
+    --hash=sha256:1f9d56b3a98d5653d1fad5644abeed2c042cec304a126ef72c236dae4af16b90 \
+    --hash=sha256:72fe556abc579528a46494f4fcbeaeaaf3e0b031f6514f7b496f6c36754c5430
+    # via -r requirements.in
 sphinx-rtd-theme==2.0.0 \
     --hash=sha256:bd5d7b80622406762073a04ef8fadc5f9151261563d47027de09910ce03afe6b \
     --hash=sha256:ec93d0856dc280cf3aee9a4c9807c60e027c7f7b461b77aeffed682e68f0e586

@@ -19,7 +19,21 @@ extensions = [
     "sphinx_rtd_theme",
     "myst_parser",
     "sphinxcontrib.mermaid",
+    "autoapi.extension",
 ]
+autoapi_dirs = [
+    # "./",
+    "../",
+    "../examples",
+    # "../examples/basic",
+    # "../examples/bazel",
+]
+autoapi_type = "python"
+# Maybe set to True (need to show directory structure though)
+# XXX:
+# https://sphinx-autoapi.readthedocs.io/en/latest/reference/config.html#confval-autoapi_python_use_implicit_namespaces
+# - configure toctree to find these properly now
+autoapi_python_use_implicit_namespaces = True
 
 myst_enable_extensions = [
     "amsmath",

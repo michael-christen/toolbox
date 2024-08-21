@@ -19,3 +19,5 @@ myst-parser
 linkify-it-py
 # - diagram generation
 sphinxcontrib-mermaid
+# - python code (parse, not executing)
+sphinx-autoapi

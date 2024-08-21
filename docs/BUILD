@@ -10,6 +10,8 @@ sphinx_html(
         # has warnings
         # "myst_extensions.md",
         "examples.md",
+        "example.py",
+        "//:python_source",
     ],
 
 )

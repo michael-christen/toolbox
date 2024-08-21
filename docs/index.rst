@@ -22,6 +22,8 @@ documentation for details.
    hello
    myst
    examples
+   autoapi/index
+   autoapi/examples/basic/client/index
 
 ..
    myst_extensions
