@@ -22,4 +22,4 @@ class TestHello(unittest.IsolatedAsyncioTestCase):
         # Intentionally Flaky
         now = time.time()
         if int(now * 1000) % 2 == 0:
-            self.assertTrue(False)
+            self.assertTrue(False)  # pragma: no cover
