@@ -87,6 +87,11 @@ jobs:
           verbose: true
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage.dat
+      - name: Test Flakiness
+        run: |
+          # Run several times to identify flakiness, but avoid large tests
+          # XXX: Move to a separate / nightly workflow
+          bazel test --runs_per_test_detects_flakes --runs_per_test=5  -- //... -//:requirements_test
       # Try out https://app.codecov.io/ or
       # https://github.com/marketplace/actions/report-lcov and ensure min
       # coverage is met
