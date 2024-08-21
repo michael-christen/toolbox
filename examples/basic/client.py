@@ -8,6 +8,7 @@ from examples.basic import hello_pb2_grpc
 
 
 async def get_response() -> hello_pb2.HelloReply:
+    """Establish a connection, send hello and return the reply."""
     async with grpc.aio.insecure_channel("localhost:50051") as channel:
         stub = hello_pb2_grpc.GreeterStub(channel)
         return await stub.SayHello(hello_pb2.HelloRequest(name="you"))
