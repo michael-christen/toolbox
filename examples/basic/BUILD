@@ -138,12 +138,12 @@ py_image(
 py_test(
     name = "grpc_test",
     srcs = ["grpc_test.py"],
+    flaky = True,
     deps = [
         ":client",
         ":server",
         "//examples/basic:hello_py_library",
     ],
-    flaky = True,
     # XXX: How to expect_failure
 )
 
