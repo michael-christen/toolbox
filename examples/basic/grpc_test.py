@@ -1,4 +1,5 @@
 import unittest
+import time
 
 from examples.basic import client
 from examples.basic import hello_pb2
@@ -18,3 +19,7 @@ class TestHello(unittest.IsolatedAsyncioTestCase):
     async def test_basics(self):
         result = await client.get_response()
         self.assertEqual(hello_pb2.HelloReply(message="Hello, you!"), result)
+        # Intentionally Flaky
+        now = time.time()
+        if int(now) % 2 == 0:
+            self.assertTrue(False)
