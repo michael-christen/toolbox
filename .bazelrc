@@ -117,14 +117,13 @@ build --@rules_rust//cargo/settings:experimental_symlink_execroot=True
 # LINK(7e463bc3_e4d9_4464_ba39_3217c4a86004)
 common --@aspect_rules_py//py:interpreter_version=3.11.9
 
-# XXX: Trying to identify why github is not caching
-# # Reduce payload size of uploaded build event stream by eliminating duplicate
-# # file references
-# common --nolegacy_important_outputs
-# # For a more detailed timing profile
-# common --noslim_profile
-# common --experimental_profile_include_target_label
-# common --experimental_profile_include_primary_output
+# Reduce payload size of uploaded build event stream by eliminating duplicate
+# file references
+common --nolegacy_important_outputs
+# For a more detailed timing profile
+common --noslim_profile
+common --experimental_profile_include_target_label
+common --experimental_profile_include_primary_output
 
 # Build Event Server
 # ==================
