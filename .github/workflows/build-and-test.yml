@@ -12,33 +12,9 @@ jobs:
     steps:
       - run: echo "The job was triggered by a ${{ github.event_name }} event, running on ${{ runner.os }}, ${{ github.ref }} @ ${{ github.repository }}."
       - uses: actions/checkout@v4
-      - name: Cache Bazel
-        uses: actions/cache@v4.0.2
+      - uses: ./.github/actions/bazel-setup
         with:
-          path: |
-            ~/.cache/bazelisk
-            ~/.cache/bazel
-          # key: ${{ runner.os }}-bazel
-          # Add .bazelrc, .bazelversion, MODULE.bazel, possibly other
-          # dependencies too
-          # Or should we just setup remote caching more fully?
-          key: bazel-${{ hashFiles('WORKSPACE') }}
-          # An ordered list of prefix-matched keys to use for restoring stale cache if no cache hit occurred for key.
-          restore-keys: |
-            bazel-
-      # XXX: Trying to debug why I get no cache hit
-      - name: Specify user.bazelrc for CI only settings
-        env:
-          BUILDBUDDY_API_KEY: ${{ secrets.BUILDBUDDY_API_KEY }}
-        run: |
-          cat <<EOF > user.bazelrc
-          build --bes_results_url=https://app.buildbuddy.io/invocation/
-          build --bes_backend=grpcs://remote.buildbuddy.io
-          build --remote_cache=grpcs://remote.buildbuddy.io
-          build --remote_download_toplevel # Helps remove network bottleneck if caching is enabled
-          build --remote_timeout=3600
-          build --remote_header=x-buildbuddy-api-key="$BUILDBUDDY_API_KEY"
-          EOF
+          buildbuddy_api_key: ${{ secrets.BUILDBUDDY_API_KEY }}
       - name: Lint
         run: |
           ./lint.sh --mode check
@@ -87,12 +63,4 @@ jobs:
           verbose: true
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage.dat
-      - name: Test Flakiness
-        run: |
-          # Run several times to identify flakiness, but avoid large tests
-          # XXX: Move to a separate / nightly workflow
-          bazel test --runs_per_test_detects_flakes --runs_per_test=5  -- //... -//:requirements_test
-      # Try out https://app.codecov.io/ or
-      # https://github.com/marketplace/actions/report-lcov and ensure min
-      # coverage is met
       - run: echo "Status is ${{ job.status }}."

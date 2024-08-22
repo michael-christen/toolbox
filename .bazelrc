@@ -125,27 +125,17 @@ common --noslim_profile
 common --experimental_profile_include_target_label
 common --experimental_profile_include_primary_output
 
-# Build Event Server
+# Build Event Server & Remote Caching
 # ==================
-# build --bes_results_url=https://app.buildbuddy.io/invocation/
-# build --bes_backend=grpcs://remote.buildbuddy.io
-# build --remote_cache=grpcs://remote.buildbuddy.io
-# build --noremote_upload_local_results # Uploads logs & artifacts without writing to cache
-# build --remote_timeout=3600
-
-# Remote Cache
-# ============
-#
-# Link: : https://app.nativelink.com/c690e34c-beac-420a-b672-6320b8f5b419/quickstart
-#
-# XXX: Prior issue was due to not using remote caching apparently ... is disk
-# caching not doing the trick?
-# NOTE: Causing link to take 8s ...
-# build --remote_cache=grpcs://cas-michael-christen.build-faster.nativelink.net
-# build --remote_header=x-nativelink-api-key=66f9052f8b6613865377d05b5202334eb9a5bb702e64270381c202f6e9ae4072
-# build --bes_backend=grpcs://bes-michael-christen.build-faster.nativelink.net
-# build --bes_header=x-nativelink-api-key=66f9052f8b6613865377d05b5202334eb9a5bb702e64270381c202f6e9ae4072
-# build --remote_timeout=600
+# TODO(#95): Reconsider nativelink remote caching
+# TODO(#96): Consider only enabling BES for github jobs
+build --bes_results_url=https://app.buildbuddy.io/invocation/
+build --bes_backend=grpcs://remote.buildbuddy.io
+build --remote_cache=grpcs://remote.buildbuddy.io
+build --remote_download_toplevel # Helps remove network bottleneck if caching is enabled
+build --remote_timeout=3600
+# Specify this in your user.bazelrc
+# build --remote_header=x-buildbuddy-api-key="$BUILDBUDDY_API_KEY"
 
 
 # Allow user to extend .bazelrc

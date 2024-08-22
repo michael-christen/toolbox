@@ -1,0 +1,21 @@
+name: Flaky Finder
+run-name: ${{ github.actor }} is finding flakes ${{ github.repository }}
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "The job was triggered by a ${{ github.event_name }} event, running on ${{ runner.os }}, ${{ github.ref }} @ ${{ github.repository }}."
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/bazel-setup
+        with:
+          buildbuddy_api_key: ${{ secrets.BUILDBUDDY_API_KEY }}
+      - name: Test Flakiness
+        run: |
+          # Run several times to identify flakiness, but avoid large tests
+          bazel test --runs_per_test_detects_flakes --runs_per_test=5  -- //... -//:requirements_test
+      - run: echo "Status is ${{ job.status }}."
