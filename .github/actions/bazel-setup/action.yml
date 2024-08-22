@@ -23,6 +23,7 @@ runs:
     - name: Specify user.bazelrc for CI only settings
       env:
         BUILDBUDDY_API_KEY: ${{ inputs.buildbuddy_api_key }}
+      shell: bash
       run: |
         cat <<EOF > user.bazelrc
         build --remote_header=x-buildbuddy-api-key="$BUILDBUDDY_API_KEY"
