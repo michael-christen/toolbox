@@ -1,0 +1,13 @@
+actions:
+  - name: "Build and Test all targets"
+    triggers:
+      push:
+        branches:
+          - "master" # <-- replace "main" with your main branch name
+      pull_request:
+        branches:
+          - "*"
+    bazel_commands:
+      - 'build //...'
+      - 'test //...'
+      - 'coverage //... --combined_report=lcov --instrument_test_targets --instrumentation_filter="^//"'

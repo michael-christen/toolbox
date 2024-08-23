@@ -6,7 +6,7 @@ on:
     branches:
       - master
 jobs:
-  build_and_test:
+  flaky_finder:
     runs-on: ubuntu-latest
     steps:
       - run: echo "The job was triggered by a ${{ github.event_name }} event, running on ${{ runner.os }}, ${{ github.ref }} @ ${{ github.repository }}."
