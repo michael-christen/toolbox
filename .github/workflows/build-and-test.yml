@@ -32,8 +32,7 @@ jobs:
           # Could leave the above to buildbuddy ...
       - name: Coverage
         run: |
-          # Avoid enormous tests
-          # Can find them with: `bazel query 'attr(size, enormous, //...)'`
+          # Avoid enormous tests; can find them with: `bazel query 'attr(size, enormous, //...)'`
           bazel coverage //... --combined_report=lcov --instrument_test_targets --instrumentation_filter="^//" --test_size_filters=-enormous
       - name: Setup LCOV
         uses: hrishikesh-kadam/setup-lcov@v1
