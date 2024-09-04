@@ -11,4 +11,4 @@ actions:
     bazel_commands:
       - 'build //...'
       - 'test //...'
-      - 'coverage //... --combined_report=lcov --instrument_test_targets --instrumentation_filter="^//"'
+      - 'coverage //... --combined_report=lcov --instrument_test_targets --instrumentation_filter="^//" --test_size_filters=-enormous'
