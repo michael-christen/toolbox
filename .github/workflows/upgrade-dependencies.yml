@@ -17,11 +17,15 @@ jobs:
           buildbuddy_api_key: ${{ secrets.BUILDBUDDY_API_KEY }}
       - name: Remove old requirements and regenerate
         run: |
-          echo "" > requirements_lock.txt
-          bazel run //:requirements.update && bazel run //:gazelle_python_manifest.update
+          bazel run //:requirements_upgrade.update && bazel run //:gazelle_python_manifest.update
       # https://github.com/marketplace/actions/create-pull-request
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
-          commit-message: "AUTO Upgrade Dependencies"
+          commit-message: "Automatically Upgrade Dependencies"
           sign-commits: true
+          body: Automatically Upgrade Dependencies - by upgrade-dependencies.yml
+          title: Automatically Upgrade Dependencies
+          add-paths:
+            - requirements_lock.txt
+            - gazelle_python.yaml

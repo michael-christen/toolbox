@@ -27,6 +27,17 @@ compile_pip_requirements(
     requirements_txt = "requirements_lock.txt",
 )
 
+# Call this to upgrade requirements
+compile_pip_requirements(
+    name = "requirements_upgrade",
+    requirements_in = "requirements.in",
+    requirements_txt = "requirements_lock.txt",
+    extra_args = ["--upgrade"],
+    # We don't want to test this because it should be different when we need an
+    # upgrade.
+    tags = ["manual"],
+)
+
 # This repository rule fetches the metadata for python packages we
 # depend on. That data is required for the gazelle_python_manifest
 # rule to update our manifest file.
