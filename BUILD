@@ -23,10 +23,10 @@ exports_files(
 
 compile_pip_requirements(
     name = "requirements",
-    requirements_in = "requirements.in",
-    requirements_txt = "requirements_lock.txt",
     # https://bazel.build/reference/be/common-definitions
     size = "enormous",
+    requirements_in = "requirements.in",
+    requirements_txt = "requirements_lock.txt",
 )
 
 # This repository rule fetches the metadata for python packages we
