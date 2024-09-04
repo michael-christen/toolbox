@@ -2,8 +2,8 @@
 # bazel run //:requirements.update && bazel run //:gazelle_python_manifest.update
 # Test via
 # bazel test //:gazelle_python_manifest.test //:requirements_test
-# Upgrade via
-# bazel run //:requirements_upgrade.update && bazel run //:gazelle_python_manifest.update
+# Upgrade by
+# bazel run //:requirements.update -- --upgrade && bazel run //:gazelle_python_manifest.update
 beautifulsoup4
 grpcio
 # largely for development
