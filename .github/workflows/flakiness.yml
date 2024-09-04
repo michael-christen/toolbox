@@ -5,6 +5,10 @@ on:
   push:
     branches:
       - master
+  schedule:
+    # https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#schedule
+    # Run everyday at 15:00 UTC
+    - cron: "0 15 * * *"
 jobs:
   flaky_finder:
     runs-on: ubuntu-latest
