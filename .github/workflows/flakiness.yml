@@ -5,8 +5,12 @@ on:
   push:
     branches:
       - master
+  schedule:
+    # https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#schedule
+    # Run everyday at 15:00 UTC
+    - cron: "0 15 * * *"
 jobs:
-  build_and_test:
+  flaky_finder:
     runs-on: ubuntu-latest
     steps:
       - run: echo "The job was triggered by a ${{ github.event_name }} event, running on ${{ runner.os }}, ${{ github.ref }} @ ${{ github.repository }}."
