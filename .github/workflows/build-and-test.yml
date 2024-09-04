@@ -29,6 +29,7 @@ jobs:
           # - Should we test in different modes (-c opt / -c dbg)?
           # - Should we add instrumentation_filter to .bazelrc to reduce
           # analysis cache thrashing?
+          # Could leave the above to buildbuddy ...
       - name: Coverage
         run: |
           bazel coverage //... --combined_report=lcov --instrument_test_targets --instrumentation_filter="^//"
