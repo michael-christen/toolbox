@@ -1135,6 +1135,7 @@ manifest:
     pexpect.socket_pexpect: pexpect
     pexpect.spawnbase: pexpect
     pexpect.utils: pexpect
+    pkg_resources: setuptools
     platformdirs: platformdirs
     platformdirs.android: platformdirs
     platformdirs.api: platformdirs
@@ -1695,6 +1696,64 @@ manifest:
     send2trash.win.IFileOperationProgressSink: Send2Trash
     send2trash.win.legacy: Send2Trash
     send2trash.win.modern: Send2Trash
+    setuptools: setuptools
+    setuptools.archive_util: setuptools
+    setuptools.build_meta: setuptools
+    setuptools.command: setuptools
+    setuptools.command.alias: setuptools
+    setuptools.command.bdist_egg: setuptools
+    setuptools.command.bdist_rpm: setuptools
+    setuptools.command.bdist_wheel: setuptools
+    setuptools.command.build: setuptools
+    setuptools.command.build_clib: setuptools
+    setuptools.command.build_ext: setuptools
+    setuptools.command.build_py: setuptools
+    setuptools.command.develop: setuptools
+    setuptools.command.dist_info: setuptools
+    setuptools.command.easy_install: setuptools
+    setuptools.command.editable_wheel: setuptools
+    setuptools.command.egg_info: setuptools
+    setuptools.command.install: setuptools
+    setuptools.command.install_egg_info: setuptools
+    setuptools.command.install_lib: setuptools
+    setuptools.command.install_scripts: setuptools
+    setuptools.command.register: setuptools
+    setuptools.command.rotate: setuptools
+    setuptools.command.saveopts: setuptools
+    setuptools.command.sdist: setuptools
+    setuptools.command.setopt: setuptools
+    setuptools.command.test: setuptools
+    setuptools.command.upload: setuptools
+    setuptools.command.upload_docs: setuptools
+    setuptools.compat: setuptools
+    setuptools.compat.py310: setuptools
+    setuptools.compat.py311: setuptools
+    setuptools.compat.py312: setuptools
+    setuptools.compat.py39: setuptools
+    setuptools.config: setuptools
+    setuptools.config.expand: setuptools
+    setuptools.config.pyprojecttoml: setuptools
+    setuptools.config.setupcfg: setuptools
+    setuptools.depends: setuptools
+    setuptools.discovery: setuptools
+    setuptools.dist: setuptools
+    setuptools.errors: setuptools
+    setuptools.extension: setuptools
+    setuptools.glob: setuptools
+    setuptools.installer: setuptools
+    setuptools.launch: setuptools
+    setuptools.logging: setuptools
+    setuptools.modified: setuptools
+    setuptools.monkey: setuptools
+    setuptools.msvc: setuptools
+    setuptools.namespaces: setuptools
+    setuptools.package_index: setuptools
+    setuptools.sandbox: setuptools
+    setuptools.unicode_utils: setuptools
+    setuptools.version: setuptools
+    setuptools.warnings: setuptools
+    setuptools.wheel: setuptools
+    setuptools.windows_support: setuptools
     six: six
     sniffio: sniffio
     soupsieve: soupsieve
@@ -1945,4 +2004,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: a83ae87e9e28997852f922f00eb8a6ac5012f3928bd7226717f2e3442645040d
+integrity: e01c4c8b1bee9fe2f10db1145964716dc6bb1d68098528a41f27e9faaa0cd015
