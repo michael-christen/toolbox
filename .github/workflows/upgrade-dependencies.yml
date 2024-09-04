@@ -1,0 +1,27 @@
+name: Upgrade Dependencies
+run-name: ${{ github.actor }} is upgrading dependencies
+on:
+  workflow_dispatch:
+  schedule:
+    # https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#schedule
+    # Run every monday at 15:00 UTC
+    - cron: "0 15 * * MON"
+jobs:
+  updgrade_dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "The job was triggered by a ${{ github.event_name }} event, running on ${{ runner.os }}, ${{ github.ref }} @ ${{ github.repository }}."
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/bazel-setup
+        with:
+          buildbuddy_api_key: ${{ secrets.BUILDBUDDY_API_KEY }}
+      - name: Remove old requirements and regenerate
+        run: |
+          echo "" > requirements_lock.txt
+          bazel run //:requirements.update && bazel run //:gazelle_python_manifest.update
+      # https://github.com/marketplace/actions/create-pull-request
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "AUTO Upgrade Dependencies"
+          sign-commits: true
