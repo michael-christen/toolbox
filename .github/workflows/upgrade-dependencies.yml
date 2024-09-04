@@ -17,7 +17,7 @@ jobs:
           buildbuddy_api_key: ${{ secrets.BUILDBUDDY_API_KEY }}
       - name: Remove old requirements and regenerate
         run: |
-          bazel run //:requirements.update --upgrade && bazel run //:gazelle_python_manifest.update
+          bazel run //:requirements.update -- --upgrade && bazel run //:gazelle_python_manifest.update
       # https://github.com/marketplace/actions/create-pull-request
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
