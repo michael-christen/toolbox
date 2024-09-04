@@ -26,6 +26,6 @@ jobs:
           sign-commits: true
           body: Automatically Upgrade Dependencies - by upgrade-dependencies.yml
           title: Automatically Upgrade Dependencies
-          add-paths:
-            - requirements_lock.txt
-            - gazelle_python.yaml
+          add-paths: |
+            requirements_lock.txt
+            gazelle_python.yaml
