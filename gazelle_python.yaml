@@ -225,28 +225,28 @@ manifest:
     attrs.filters: attrs
     attrs.setters: attrs
     attrs.validators: attrs
-    babel: Babel
-    babel.core: Babel
-    babel.dates: Babel
-    babel.languages: Babel
-    babel.lists: Babel
-    babel.localedata: Babel
-    babel.localtime: Babel
-    babel.messages: Babel
-    babel.messages.catalog: Babel
-    babel.messages.checkers: Babel
-    babel.messages.extract: Babel
-    babel.messages.frontend: Babel
-    babel.messages.jslexer: Babel
-    babel.messages.mofile: Babel
-    babel.messages.plurals: Babel
-    babel.messages.pofile: Babel
-    babel.messages.setuptools_frontend: Babel
-    babel.numbers: Babel
-    babel.plural: Babel
-    babel.support: Babel
-    babel.units: Babel
-    babel.util: Babel
+    babel: babel
+    babel.core: babel
+    babel.dates: babel
+    babel.languages: babel
+    babel.lists: babel
+    babel.localedata: babel
+    babel.localtime: babel
+    babel.messages: babel
+    babel.messages.catalog: babel
+    babel.messages.checkers: babel
+    babel.messages.extract: babel
+    babel.messages.frontend: babel
+    babel.messages.jslexer: babel
+    babel.messages.mofile: babel
+    babel.messages.plurals: babel
+    babel.messages.pofile: babel
+    babel.messages.setuptools_frontend: babel
+    babel.numbers: babel
+    babel.plural: babel
+    babel.support: babel
+    babel.units: babel
+    babel.util: babel
     black: black
     black.brackets: black
     black.cache: black
@@ -1915,11 +1915,6 @@ manifest:
     wcwidth.unicode_versions: wcwidth
     wcwidth.wcwidth: wcwidth
     webcolors: webcolors
-    webcolors.constants: webcolors
-    webcolors.conversion: webcolors
-    webcolors.html5: webcolors
-    webcolors.normalization: webcolors
-    webcolors.types: webcolors
     webencodings: webencodings
     webencodings.labels: webencodings
     webencodings.mklabels: webencodings
@@ -2004,4 +1999,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: e01c4c8b1bee9fe2f10db1145964716dc6bb1d68098528a41f27e9faaa0cd015
+integrity: aa0cf3416eb069e21eb6a9bc09007d2aeed1f23687e7e6265c47e4c4fe133ccd
