@@ -56,6 +56,7 @@ chmod +x ~/tools/bazel
     - see
       [dashboard](https://app.nativelink.com/c690e34c-beac-420a-b672-6320b8f5b419/dashboard)
       for more detailed metrics.
+  - [buildbuddy](https://app.buildbuddy.io/)
 
 ## References
 
@@ -130,6 +131,14 @@ Testing utilizes [catch2](https://github.com/catchorg/Catch2)
 bazel run //tools/buildozer -- <args>
 bazel run //tools/buildifier -- <args>
 bazel run -- @pnpm//:pnpm --dir $PWD install --lockfile-only
+```
+
+#### Get tsan to work on Ubuntu 24.04
+
+https://stackoverflow.com/a/77856955
+
+```
+sudo sysctl vm.mmap_rnd_bits=30
 ```
 
 #### Inspiration

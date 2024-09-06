@@ -2,3 +2,7 @@
 nobazel
 # Don't want node_modules
 node_modules
+# Bazel directories
+bazel-bin
+bazel-out
+bazel-testlogs

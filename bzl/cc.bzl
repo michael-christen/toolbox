@@ -29,13 +29,10 @@ COPTS = [
     # -Wextra, with a few exceptions
     "-Wmemset-transposed-args",
     "-Wcast-function-type",
-    "-Wclobbered",
     "-Wempty-body",
     "-Wenum-conversion",
     "-Wexpansion-to-defined",
     "-Wignored-qualifiers",
-    "-Wimplicit-fallthrough=3",
-    "-Wmaybe-uninitialized",
     "-Wshift-negative-value",
     "-Wsign-compare",
     "-Wstring-compare",
@@ -49,6 +46,9 @@ COPTS = [
     "-fdiagnostics-color=always",
     # Unrecognized
     # '-Walloc-size',
+    # "-Wclobbered",
+    # "-Wimplicit-fallthrough=3",
+    # "-Wmaybe-uninitialized",
 ]
 
 # Add to conly code
@@ -60,11 +60,12 @@ CONLY_OPTS = [
 ]
 
 CXX_OPTS = [
-    "-Wsized-deallocation",
     "-Wdeprecated-copy",
     # If changing, likely want to update .bazelrc
     # See https://en.cppreference.com/w/cpp/23
     "-std=c++23",
+    # Unrecognized
+    # "-Wsized-deallocation",
 ]
 
 # NOTE: Maybe we should add linkopt too?

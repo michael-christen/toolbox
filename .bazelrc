@@ -1,5 +1,82 @@
 # See https://bazel.build/docs/user-manual for option definitions
 #
+# Standard Pigweed flags
+# ======================
+# All Pigweed projects are expected to set these flags. They mostly pre-adopt
+# future Bazel settings.
+#
+# Do not attempt to configure an autodetected (local) toolchain. We vendor all
+# our toolchains, and CI VMs may not have any local toolchain to detect.
+common --repo_env=BAZEL_DO_NOT_DETECT_CPP_TOOLCHAIN=1
+
+# Required for new toolchain resolution API.
+build --incompatible_enable_cc_toolchain_resolution
+
+# Don't propagate flags or defines to the exec config. This will become the
+# default one day (https://github.com/bazelbuild/bazel/issues/22457) and will
+# improve cache hit rates between builds targeting different platforms. This is
+# especially impactful for large host tools like protoc, which will have its
+# cache invalidated when your host C++ config changes.
+common --experimental_exclude_defines_from_exec_config
+common --experimental_exclude_starlark_flags_from_exec_config
+
+# Don't automatically create __init__.py files.
+#
+# This prevents spurious package name collisions at import time, and should be
+# the default (https://github.com/bazelbuild/bazel/issues/7386). It's
+# particularly helpful for Pigweed, because we have many potential package name
+# collisions due to a profusion of stuttering paths like
+# pw_transfer/py/pw_transfer.
+common --incompatible_default_to_explicit_init_py
+
+# Don't inherit system PATH. Improves hermeticity and cache hit rates. Should
+# be true by default one day (https://github.com/bazelbuild/bazel/issues/7026).
+common --incompatible_strict_action_env
+
+# Expose exec toolchains for Python. We use these toolchains in some rule
+# implementations (git grep for
+# "@rules_python//python:exec_tools_toolchain_type").
+build --@rules_python//python/config_settings:exec_tools_toolchain=enabled
+
+# C++ toolchain configuration
+# ===========================
+
+# Ignore all warnings in third-party code.
+common --per_file_copt=external/.*@-w
+common --host_per_file_copt=external/.*@-w
+
+# Picotool needs to build with exceptions and RTTI enabled.
+common --per_file_copt=external.*picotool.*@-fexceptions,-frtti
+common --host_per_file_copt=external.*picotool.*@-fexceptions,-frtti
+
+# Keep debugging symbols, but don't send them when flashing.
+build --strip=never
+
+build --@pico-sdk//bazel/config:PICO_STDIO_USB=True
+build --@pico-sdk//bazel/config:PICO_STDIO_UART=True
+
+# UX settings
+# ===========
+# Error output settings.
+common --verbose_failures
+# View failed test output
+test --test_output=errors
+
+# Platform configuration
+# ======================
+common --custom_malloc=//targets:malloc
+build --@pigweed//pw_build:default_module_config=//system:module_config
+
+# Host platform default backends.
+common --@pigweed//pw_log:backend=@pigweed//pw_log_string
+common --@pigweed//pw_log:backend_impl=@pigweed//pw_log_string:impl
+common --@pigweed//pw_log_string:handler_backend=@pigweed//pw_system:log_backend
+common --@pigweed//pw_sys_io:backend=@pigweed//pw_sys_io_stdio
+common --@pigweed//pw_system:io_backend=@pigweed//pw_system:socket_target_io
+
+# My rules
+# ========
+#
 # Avoid incompatible_sandbox_hermetic_tmp causing relative paths to change.
 # https://github.com/aspect-build/gcc-toolchain/issues/161
 build --noincompatible_sandbox_hermetic_tmp
@@ -26,35 +103,45 @@ build --host_cxxopt='-std=c++23'
 # Only build tests when testing
 test --build_tests_only
 
-# View failed test output
-test --test_output=errors
-
 # Allow silent builds with --config=quiet
 build:quiet --ui_event_filters=-info,-stdout,-stderr
 build:quiet --noshow_progress
 
-# Allow user to extend .bazelrc
-try-import %workspace%/user.bazelrc
-
-# TODO(https://github.com/michael-christen/toolbox/issues/28): stop interference with rules_rust
-# # https://github.com/aspect-build/gcc-toolchain/issues/85
-# build --incompatible_enable_cc_toolchain_resolution
-# build --action_env=BAZEL_DO_NOT_DETECT_CPP_TOOLCHAIN=1
-# # Performance per #85
-# build --experimental_reuse_sandbox_directories
-# # Have rules_rust use the right hermetic toolchain sysroot, symlink folders
-# # into execution directory
-# build --@rules_rust//cargo/settings:experimental_symlink_execroot=True
+# Performance per #85
+build --experimental_reuse_sandbox_directories
+# Have rules_rust use the right hermetic toolchain sysroot, symlink folders
+# into execution directory
+build --@rules_rust//cargo/settings:experimental_symlink_execroot=True
 
 # Must match PYTHON_VERSION in MODULE.bazel
 # LINK(7e463bc3_e4d9_4464_ba39_3217c4a86004)
 common --@aspect_rules_py//py:interpreter_version=3.11.9
 
-# Remote Cache: https://app.nativelink.com/c690e34c-beac-420a-b672-6320b8f5b419/quickstart
+# Reduce payload size of uploaded build event stream by eliminating duplicate
+# file references
+common --nolegacy_important_outputs
+# For a more detailed timing profile
+common --noslim_profile
+common --experimental_profile_include_target_label
+common --experimental_profile_include_primary_output
+
+# Build Event Server & Remote Caching
+# ==================
+# TODO(#95): Reconsider nativelink remote caching
+# TODO(#96): Consider only enabling BES for github jobs
+build --bes_results_url=https://app.buildbuddy.io/invocation/
+build --bes_backend=grpcs://remote.buildbuddy.io
+build --remote_cache=grpcs://remote.buildbuddy.io
+build --remote_download_toplevel # Helps remove network bottleneck if caching is enabled
+build --remote_timeout=3600
+# Specify this in your user.bazelrc
+# build --remote_header=x-buildbuddy-api-key="$BUILDBUDDY_API_KEY"
+
+
+# Allow user to extend .bazelrc
+# https://bazel.build/configure/best-practices#bazelrc-file
 #
-# NOTE: Causing link to take 8s ...
-build --remote_cache=grpcs://cas-michael-christen.build-faster.nativelink.net
-build --remote_header=x-nativelink-api-key=66f9052f8b6613865377d05b5202334eb9a5bb702e64270381c202f6e9ae4072
-build --bes_backend=grpcs://bes-michael-christen.build-faster.nativelink.net
-build --bes_header=x-nativelink-api-key=66f9052f8b6613865377d05b5202334eb9a5bb702e64270381c202f6e9ae4072
-build --remote_timeout=600
+# note: this should be at the bottom of the file, so that user-specified
+# options override anything in this file
+# (https://bazel.build/run/bazelrc#imports)
+try-import %workspace%/user.bazelrc
