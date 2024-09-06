@@ -178,8 +178,6 @@ manifest:
     IPython.utils.ulinecache: ipython
     IPython.utils.version: ipython
     IPython.utils.wildcard: ipython
-    alabaster: alabaster
-    alabaster.support: alabaster
     anyio: anyio
     anyio.abc: anyio
     anyio.from_thread: anyio
@@ -227,28 +225,28 @@ manifest:
     attrs.filters: attrs
     attrs.setters: attrs
     attrs.validators: attrs
-    babel: Babel
-    babel.core: Babel
-    babel.dates: Babel
-    babel.languages: Babel
-    babel.lists: Babel
-    babel.localedata: Babel
-    babel.localtime: Babel
-    babel.messages: Babel
-    babel.messages.catalog: Babel
-    babel.messages.checkers: Babel
-    babel.messages.extract: Babel
-    babel.messages.frontend: Babel
-    babel.messages.jslexer: Babel
-    babel.messages.mofile: Babel
-    babel.messages.plurals: Babel
-    babel.messages.pofile: Babel
-    babel.messages.setuptools_frontend: Babel
-    babel.numbers: Babel
-    babel.plural: Babel
-    babel.support: Babel
-    babel.units: Babel
-    babel.util: Babel
+    babel: babel
+    babel.core: babel
+    babel.dates: babel
+    babel.languages: babel
+    babel.lists: babel
+    babel.localedata: babel
+    babel.localtime: babel
+    babel.messages: babel
+    babel.messages.catalog: babel
+    babel.messages.checkers: babel
+    babel.messages.extract: babel
+    babel.messages.frontend: babel
+    babel.messages.jslexer: babel
+    babel.messages.mofile: babel
+    babel.messages.plurals: babel
+    babel.messages.pofile: babel
+    babel.messages.setuptools_frontend: babel
+    babel.numbers: babel
+    babel.plural: babel
+    babel.support: babel
+    babel.units: babel
+    babel.util: babel
     black: black
     black.brackets: black
     black.cache: black
@@ -394,128 +392,6 @@ manifest:
     defusedxml.pulldom: defusedxml
     defusedxml.sax: defusedxml
     defusedxml.xmlrpc: defusedxml
-    docutils: docutils
-    docutils.core: docutils
-    docutils.examples: docutils
-    docutils.frontend: docutils
-    docutils.io: docutils
-    docutils.languages: docutils
-    docutils.languages.af: docutils
-    docutils.languages.ar: docutils
-    docutils.languages.ca: docutils
-    docutils.languages.cs: docutils
-    docutils.languages.da: docutils
-    docutils.languages.de: docutils
-    docutils.languages.en: docutils
-    docutils.languages.eo: docutils
-    docutils.languages.es: docutils
-    docutils.languages.fa: docutils
-    docutils.languages.fi: docutils
-    docutils.languages.fr: docutils
-    docutils.languages.gl: docutils
-    docutils.languages.he: docutils
-    docutils.languages.it: docutils
-    docutils.languages.ja: docutils
-    docutils.languages.ko: docutils
-    docutils.languages.lt: docutils
-    docutils.languages.lv: docutils
-    docutils.languages.nl: docutils
-    docutils.languages.pl: docutils
-    docutils.languages.pt_br: docutils
-    docutils.languages.ru: docutils
-    docutils.languages.sk: docutils
-    docutils.languages.sv: docutils
-    docutils.languages.uk: docutils
-    docutils.languages.zh_cn: docutils
-    docutils.languages.zh_tw: docutils
-    docutils.nodes: docutils
-    docutils.parsers: docutils
-    docutils.parsers.commonmark_wrapper: docutils
-    docutils.parsers.null: docutils
-    docutils.parsers.recommonmark_wrapper: docutils
-    docutils.parsers.rst: docutils
-    docutils.parsers.rst.directives: docutils
-    docutils.parsers.rst.directives.admonitions: docutils
-    docutils.parsers.rst.directives.body: docutils
-    docutils.parsers.rst.directives.html: docutils
-    docutils.parsers.rst.directives.images: docutils
-    docutils.parsers.rst.directives.misc: docutils
-    docutils.parsers.rst.directives.parts: docutils
-    docutils.parsers.rst.directives.references: docutils
-    docutils.parsers.rst.directives.tables: docutils
-    docutils.parsers.rst.languages: docutils
-    docutils.parsers.rst.languages.af: docutils
-    docutils.parsers.rst.languages.ar: docutils
-    docutils.parsers.rst.languages.ca: docutils
-    docutils.parsers.rst.languages.cs: docutils
-    docutils.parsers.rst.languages.da: docutils
-    docutils.parsers.rst.languages.de: docutils
-    docutils.parsers.rst.languages.en: docutils
-    docutils.parsers.rst.languages.eo: docutils
-    docutils.parsers.rst.languages.es: docutils
-    docutils.parsers.rst.languages.fa: docutils
-    docutils.parsers.rst.languages.fi: docutils
-    docutils.parsers.rst.languages.fr: docutils
-    docutils.parsers.rst.languages.gl: docutils
-    docutils.parsers.rst.languages.he: docutils
-    docutils.parsers.rst.languages.it: docutils
-    docutils.parsers.rst.languages.ja: docutils
-    docutils.parsers.rst.languages.ko: docutils
-    docutils.parsers.rst.languages.lt: docutils
-    docutils.parsers.rst.languages.lv: docutils
-    docutils.parsers.rst.languages.nl: docutils
-    docutils.parsers.rst.languages.pl: docutils
-    docutils.parsers.rst.languages.pt_br: docutils
-    docutils.parsers.rst.languages.ru: docutils
-    docutils.parsers.rst.languages.sk: docutils
-    docutils.parsers.rst.languages.sv: docutils
-    docutils.parsers.rst.languages.uk: docutils
-    docutils.parsers.rst.languages.zh_cn: docutils
-    docutils.parsers.rst.languages.zh_tw: docutils
-    docutils.parsers.rst.roles: docutils
-    docutils.parsers.rst.states: docutils
-    docutils.parsers.rst.tableparser: docutils
-    docutils.readers: docutils
-    docutils.readers.doctree: docutils
-    docutils.readers.pep: docutils
-    docutils.readers.standalone: docutils
-    docutils.statemachine: docutils
-    docutils.transforms: docutils
-    docutils.transforms.components: docutils
-    docutils.transforms.frontmatter: docutils
-    docutils.transforms.misc: docutils
-    docutils.transforms.parts: docutils
-    docutils.transforms.peps: docutils
-    docutils.transforms.references: docutils
-    docutils.transforms.universal: docutils
-    docutils.transforms.writer_aux: docutils
-    docutils.utils: docutils
-    docutils.utils.code_analyzer: docutils
-    docutils.utils.error_reporting: docutils
-    docutils.utils.math: docutils
-    docutils.utils.math.latex2mathml: docutils
-    docutils.utils.math.math2html: docutils
-    docutils.utils.math.tex2mathml_extern: docutils
-    docutils.utils.math.tex2unichar: docutils
-    docutils.utils.math.unichar2tex: docutils
-    docutils.utils.punctuation_chars: docutils
-    docutils.utils.roman: docutils
-    docutils.utils.smartquotes: docutils
-    docutils.utils.urischemes: docutils
-    docutils.writers: docutils
-    docutils.writers.docutils_xml: docutils
-    docutils.writers.html4css1: docutils
-    docutils.writers.html5_polyglot: docutils
-    docutils.writers.latex2e: docutils
-    docutils.writers.manpage: docutils
-    docutils.writers.null: docutils
-    docutils.writers.odf_odt: docutils
-    docutils.writers.odf_odt.prepstyles: docutils
-    docutils.writers.odf_odt.pygmentsformatter: docutils
-    docutils.writers.pep_html: docutils
-    docutils.writers.pseudoxml: docutils
-    docutils.writers.s5_html: docutils
-    docutils.writers.xetex: docutils
     executing: executing
     executing.executing: executing
     executing.version: executing
@@ -598,8 +474,6 @@ manifest:
     idna.intranges: idna
     idna.package_data: idna
     idna.uts46data: idna
-    imagesize: imagesize
-    imagesize.imagesize: imagesize
     iniconfig: iniconfig
     iniconfig.exceptions: iniconfig
     ipdb: ipdb
@@ -1261,6 +1135,7 @@ manifest:
     pexpect.socket_pexpect: pexpect
     pexpect.spawnbase: pexpect
     pexpect.utils: pexpect
+    pkg_resources: setuptools
     platformdirs: platformdirs
     platformdirs.android: platformdirs
     platformdirs.api: platformdirs
@@ -1821,225 +1696,72 @@ manifest:
     send2trash.win.IFileOperationProgressSink: Send2Trash
     send2trash.win.legacy: Send2Trash
     send2trash.win.modern: Send2Trash
+    setuptools: setuptools
+    setuptools.archive_util: setuptools
+    setuptools.build_meta: setuptools
+    setuptools.command: setuptools
+    setuptools.command.alias: setuptools
+    setuptools.command.bdist_egg: setuptools
+    setuptools.command.bdist_rpm: setuptools
+    setuptools.command.bdist_wheel: setuptools
+    setuptools.command.build: setuptools
+    setuptools.command.build_clib: setuptools
+    setuptools.command.build_ext: setuptools
+    setuptools.command.build_py: setuptools
+    setuptools.command.develop: setuptools
+    setuptools.command.dist_info: setuptools
+    setuptools.command.easy_install: setuptools
+    setuptools.command.editable_wheel: setuptools
+    setuptools.command.egg_info: setuptools
+    setuptools.command.install: setuptools
+    setuptools.command.install_egg_info: setuptools
+    setuptools.command.install_lib: setuptools
+    setuptools.command.install_scripts: setuptools
+    setuptools.command.register: setuptools
+    setuptools.command.rotate: setuptools
+    setuptools.command.saveopts: setuptools
+    setuptools.command.sdist: setuptools
+    setuptools.command.setopt: setuptools
+    setuptools.command.test: setuptools
+    setuptools.command.upload: setuptools
+    setuptools.command.upload_docs: setuptools
+    setuptools.compat: setuptools
+    setuptools.compat.py310: setuptools
+    setuptools.compat.py311: setuptools
+    setuptools.compat.py312: setuptools
+    setuptools.compat.py39: setuptools
+    setuptools.config: setuptools
+    setuptools.config.expand: setuptools
+    setuptools.config.pyprojecttoml: setuptools
+    setuptools.config.setupcfg: setuptools
+    setuptools.depends: setuptools
+    setuptools.discovery: setuptools
+    setuptools.dist: setuptools
+    setuptools.errors: setuptools
+    setuptools.extension: setuptools
+    setuptools.glob: setuptools
+    setuptools.installer: setuptools
+    setuptools.launch: setuptools
+    setuptools.logging: setuptools
+    setuptools.modified: setuptools
+    setuptools.monkey: setuptools
+    setuptools.msvc: setuptools
+    setuptools.namespaces: setuptools
+    setuptools.package_index: setuptools
+    setuptools.sandbox: setuptools
+    setuptools.unicode_utils: setuptools
+    setuptools.version: setuptools
+    setuptools.warnings: setuptools
+    setuptools.wheel: setuptools
+    setuptools.windows_support: setuptools
     six: six
     sniffio: sniffio
-    snowballstemmer: snowballstemmer
-    snowballstemmer.among: snowballstemmer
-    snowballstemmer.arabic_stemmer: snowballstemmer
-    snowballstemmer.armenian_stemmer: snowballstemmer
-    snowballstemmer.basestemmer: snowballstemmer
-    snowballstemmer.basque_stemmer: snowballstemmer
-    snowballstemmer.catalan_stemmer: snowballstemmer
-    snowballstemmer.danish_stemmer: snowballstemmer
-    snowballstemmer.dutch_stemmer: snowballstemmer
-    snowballstemmer.english_stemmer: snowballstemmer
-    snowballstemmer.finnish_stemmer: snowballstemmer
-    snowballstemmer.french_stemmer: snowballstemmer
-    snowballstemmer.german_stemmer: snowballstemmer
-    snowballstemmer.greek_stemmer: snowballstemmer
-    snowballstemmer.hindi_stemmer: snowballstemmer
-    snowballstemmer.hungarian_stemmer: snowballstemmer
-    snowballstemmer.indonesian_stemmer: snowballstemmer
-    snowballstemmer.irish_stemmer: snowballstemmer
-    snowballstemmer.italian_stemmer: snowballstemmer
-    snowballstemmer.lithuanian_stemmer: snowballstemmer
-    snowballstemmer.nepali_stemmer: snowballstemmer
-    snowballstemmer.norwegian_stemmer: snowballstemmer
-    snowballstemmer.porter_stemmer: snowballstemmer
-    snowballstemmer.portuguese_stemmer: snowballstemmer
-    snowballstemmer.romanian_stemmer: snowballstemmer
-    snowballstemmer.russian_stemmer: snowballstemmer
-    snowballstemmer.serbian_stemmer: snowballstemmer
-    snowballstemmer.spanish_stemmer: snowballstemmer
-    snowballstemmer.swedish_stemmer: snowballstemmer
-    snowballstemmer.tamil_stemmer: snowballstemmer
-    snowballstemmer.turkish_stemmer: snowballstemmer
-    snowballstemmer.yiddish_stemmer: snowballstemmer
     soupsieve: soupsieve
     soupsieve.css_match: soupsieve
     soupsieve.css_parser: soupsieve
     soupsieve.css_types: soupsieve
     soupsieve.pretty: soupsieve
     soupsieve.util: soupsieve
-    sphinx: sphinx
-    sphinx.addnodes: sphinx
-    sphinx.application: sphinx
-    sphinx.builders: sphinx
-    sphinx.builders.changes: sphinx
-    sphinx.builders.dirhtml: sphinx
-    sphinx.builders.dummy: sphinx
-    sphinx.builders.epub3: sphinx
-    sphinx.builders.gettext: sphinx
-    sphinx.builders.html: sphinx
-    sphinx.builders.html.transforms: sphinx
-    sphinx.builders.latex: sphinx
-    sphinx.builders.latex.constants: sphinx
-    sphinx.builders.latex.nodes: sphinx
-    sphinx.builders.latex.theming: sphinx
-    sphinx.builders.latex.transforms: sphinx
-    sphinx.builders.latex.util: sphinx
-    sphinx.builders.linkcheck: sphinx
-    sphinx.builders.manpage: sphinx
-    sphinx.builders.singlehtml: sphinx
-    sphinx.builders.texinfo: sphinx
-    sphinx.builders.text: sphinx
-    sphinx.builders.xml: sphinx
-    sphinx.cmd: sphinx
-    sphinx.cmd.build: sphinx
-    sphinx.cmd.make_mode: sphinx
-    sphinx.cmd.quickstart: sphinx
-    sphinx.config: sphinx
-    sphinx.deprecation: sphinx
-    sphinx.directives: sphinx
-    sphinx.directives.code: sphinx
-    sphinx.directives.other: sphinx
-    sphinx.directives.patches: sphinx
-    sphinx.domains: sphinx
-    sphinx.domains.c: sphinx
-    sphinx.domains.changeset: sphinx
-    sphinx.domains.citation: sphinx
-    sphinx.domains.cpp: sphinx
-    sphinx.domains.index: sphinx
-    sphinx.domains.javascript: sphinx
-    sphinx.domains.math: sphinx
-    sphinx.domains.python: sphinx
-    sphinx.domains.rst: sphinx
-    sphinx.domains.std: sphinx
-    sphinx.environment: sphinx
-    sphinx.environment.adapters: sphinx
-    sphinx.environment.adapters.asset: sphinx
-    sphinx.environment.adapters.indexentries: sphinx
-    sphinx.environment.adapters.toctree: sphinx
-    sphinx.environment.collectors: sphinx
-    sphinx.environment.collectors.asset: sphinx
-    sphinx.environment.collectors.dependencies: sphinx
-    sphinx.environment.collectors.metadata: sphinx
-    sphinx.environment.collectors.title: sphinx
-    sphinx.environment.collectors.toctree: sphinx
-    sphinx.errors: sphinx
-    sphinx.events: sphinx
-    sphinx.ext: sphinx
-    sphinx.ext.apidoc: sphinx
-    sphinx.ext.autodoc: sphinx
-    sphinx.ext.autodoc.directive: sphinx
-    sphinx.ext.autodoc.importer: sphinx
-    sphinx.ext.autodoc.mock: sphinx
-    sphinx.ext.autodoc.preserve_defaults: sphinx
-    sphinx.ext.autodoc.type_comment: sphinx
-    sphinx.ext.autodoc.typehints: sphinx
-    sphinx.ext.autosectionlabel: sphinx
-    sphinx.ext.autosummary: sphinx
-    sphinx.ext.autosummary.generate: sphinx
-    sphinx.ext.coverage: sphinx
-    sphinx.ext.doctest: sphinx
-    sphinx.ext.duration: sphinx
-    sphinx.ext.extlinks: sphinx
-    sphinx.ext.githubpages: sphinx
-    sphinx.ext.graphviz: sphinx
-    sphinx.ext.ifconfig: sphinx
-    sphinx.ext.imgconverter: sphinx
-    sphinx.ext.imgmath: sphinx
-    sphinx.ext.inheritance_diagram: sphinx
-    sphinx.ext.intersphinx: sphinx
-    sphinx.ext.linkcode: sphinx
-    sphinx.ext.mathjax: sphinx
-    sphinx.ext.napoleon: sphinx
-    sphinx.ext.napoleon.docstring: sphinx
-    sphinx.ext.todo: sphinx
-    sphinx.ext.viewcode: sphinx
-    sphinx.extension: sphinx
-    sphinx.highlighting: sphinx
-    sphinx.io: sphinx
-    sphinx.jinja2glue: sphinx
-    sphinx.locale: sphinx
-    sphinx.parsers: sphinx
-    sphinx.project: sphinx
-    sphinx.pycode: sphinx
-    sphinx.pycode.ast: sphinx
-    sphinx.pycode.parser: sphinx
-    sphinx.pygments_styles: sphinx
-    sphinx.registry: sphinx
-    sphinx.roles: sphinx
-    sphinx.search: sphinx
-    sphinx.search.da: sphinx
-    sphinx.search.de: sphinx
-    sphinx.search.en: sphinx
-    sphinx.search.es: sphinx
-    sphinx.search.fi: sphinx
-    sphinx.search.fr: sphinx
-    sphinx.search.hu: sphinx
-    sphinx.search.it: sphinx
-    sphinx.search.ja: sphinx
-    sphinx.search.nl: sphinx
-    sphinx.search.no: sphinx
-    sphinx.search.pt: sphinx
-    sphinx.search.ro: sphinx
-    sphinx.search.ru: sphinx
-    sphinx.search.sv: sphinx
-    sphinx.search.tr: sphinx
-    sphinx.search.zh: sphinx
-    sphinx.testing: sphinx
-    sphinx.testing.fixtures: sphinx
-    sphinx.testing.path: sphinx
-    sphinx.testing.restructuredtext: sphinx
-    sphinx.testing.util: sphinx
-    sphinx.theming: sphinx
-    sphinx.transforms: sphinx
-    sphinx.transforms.compact_bullet_list: sphinx
-    sphinx.transforms.i18n: sphinx
-    sphinx.transforms.post_transforms: sphinx
-    sphinx.transforms.post_transforms.code: sphinx
-    sphinx.transforms.post_transforms.images: sphinx
-    sphinx.transforms.references: sphinx
-    sphinx.util: sphinx
-    sphinx.util.build_phase: sphinx
-    sphinx.util.cfamily: sphinx
-    sphinx.util.console: sphinx
-    sphinx.util.display: sphinx
-    sphinx.util.docfields: sphinx
-    sphinx.util.docstrings: sphinx
-    sphinx.util.docutils: sphinx
-    sphinx.util.exceptions: sphinx
-    sphinx.util.fileutil: sphinx
-    sphinx.util.http_date: sphinx
-    sphinx.util.i18n: sphinx
-    sphinx.util.images: sphinx
-    sphinx.util.index_entries: sphinx
-    sphinx.util.inspect: sphinx
-    sphinx.util.inventory: sphinx
-    sphinx.util.logging: sphinx
-    sphinx.util.matching: sphinx
-    sphinx.util.math: sphinx
-    sphinx.util.nodes: sphinx
-    sphinx.util.osutil: sphinx
-    sphinx.util.parallel: sphinx
-    sphinx.util.parsing: sphinx
-    sphinx.util.png: sphinx
-    sphinx.util.requests: sphinx
-    sphinx.util.rst: sphinx
-    sphinx.util.tags: sphinx
-    sphinx.util.template: sphinx
-    sphinx.util.texescape: sphinx
-    sphinx.util.typing: sphinx
-    sphinx.versioning: sphinx
-    sphinx.writers: sphinx
-    sphinx.writers.html: sphinx
-    sphinx.writers.html5: sphinx
-    sphinx.writers.latex: sphinx
-    sphinx.writers.manpage: sphinx
-    sphinx.writers.texinfo: sphinx
-    sphinx.writers.text: sphinx
-    sphinx.writers.xml: sphinx
-    sphinx_rtd_theme: sphinx_rtd_theme
-    sphinxcontrib.applehelp: sphinxcontrib_applehelp
-    sphinxcontrib.devhelp: sphinxcontrib_devhelp
-    sphinxcontrib.htmlhelp: sphinxcontrib_htmlhelp
-    sphinxcontrib.jquery: sphinxcontrib_jquery
-    sphinxcontrib.jsmath: sphinxcontrib_jsmath
-    sphinxcontrib.jsmath.version: sphinxcontrib_jsmath
-    sphinxcontrib.qthelp: sphinxcontrib_qthelp
-    sphinxcontrib.serializinghtml: sphinxcontrib_serializinghtml
-    sphinxcontrib.serializinghtml.jsonimpl: sphinxcontrib_serializinghtml
     stack_data: stack_data
     stack_data.core: stack_data
     stack_data.formatting: stack_data
@@ -2193,11 +1915,6 @@ manifest:
     wcwidth.unicode_versions: wcwidth
     wcwidth.wcwidth: wcwidth
     webcolors: webcolors
-    webcolors.constants: webcolors
-    webcolors.conversion: webcolors
-    webcolors.html5: webcolors
-    webcolors.normalization: webcolors
-    webcolors.types: webcolors
     webencodings: webencodings
     webencodings.labels: webencodings
     webencodings.mklabels: webencodings
@@ -2282,4 +1999,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: cafa0eab28728c4f9f673e13c6938a92229eb9d18b372289881eefdcfa715dc3
+integrity: aa0cf3416eb069e21eb6a9bc09007d2aeed1f23687e7e6265c47e4c4fe133ccd

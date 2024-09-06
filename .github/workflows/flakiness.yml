@@ -1,0 +1,26 @@
+name: Flaky Finder
+run-name: ${{ github.actor }} is finding flakes ${{ github.repository }}
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+  schedule:
+    # https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#schedule
+    # Run everyday at 15:00 UTC
+    - cron: "0 15 * * *"
+jobs:
+  flaky_finder:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "The job was triggered by a ${{ github.event_name }} event, running on ${{ runner.os }}, ${{ github.ref }} @ ${{ github.repository }}."
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/bazel-setup
+        with:
+          buildbuddy_api_key: ${{ secrets.BUILDBUDDY_API_KEY }}
+      - name: Test Flakiness
+        run: |
+          # Run several times to identify flakiness, but avoid enormous tests
+          # Can find them with: `bazel query 'attr(size, enormous, //...)'`
+          bazel test --runs_per_test_detects_flakes --runs_per_test=5 --test_size_filters=-enormous -- //...
+      - run: echo "Status is ${{ job.status }}."
