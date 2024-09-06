@@ -110,6 +110,12 @@
             mode: 0644
           notify: Reload udev
           # TODO: Do this, iterating over all the files
+        - name: "Set pico rules"
+          ansible.builtin.copy:
+            src: udev/49-pico.rules
+            dest: /etc/udev/rules.d/49-pico.rules
+            mode: 0644
+          notify: Reload udev
   handlers:
     - name: Reload udev
       include_tasks: tasks/reload_udev.yaml
