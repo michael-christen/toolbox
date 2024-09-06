@@ -23,6 +23,8 @@ exports_files(
 
 compile_pip_requirements(
     name = "requirements",
+    # https://bazel.build/reference/be/common-definitions
+    size = "enormous",
     requirements_in = "requirements.in",
     requirements_txt = "requirements_lock.txt",
 )
