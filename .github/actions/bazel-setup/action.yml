@@ -1,0 +1,30 @@
+name: Shared Setup
+description: Shared setup steps
+inputs:
+  buildbuddy_api_key:
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Cache Bazel
+      uses: actions/cache@v4.0.2
+      with:
+        path: |
+          ~/.cache/bazelisk
+          ~/.cache/bazel
+        # key: ${{ runner.os }}-bazel
+        # Add .bazelrc, .bazelversion, MODULE.bazel, possibly other
+        # dependencies too
+        # Or should we just setup remote caching more fully?
+        key: bazel-${{ hashFiles('WORKSPACE') }}
+        # An ordered list of prefix-matched keys to use for restoring stale cache if no cache hit occurred for key.
+        restore-keys: |
+          bazel-
+    - name: Specify user.bazelrc for CI only settings
+      env:
+        BUILDBUDDY_API_KEY: ${{ inputs.buildbuddy_api_key }}
+      shell: bash
+      run: |
+        cat <<EOF > user.bazelrc
+        build --remote_header=x-buildbuddy-api-key="$BUILDBUDDY_API_KEY"
+        EOF

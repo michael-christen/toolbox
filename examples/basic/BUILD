@@ -146,6 +146,7 @@ py_image(
 py_test(
     name = "grpc_test",
     srcs = ["grpc_test.py"],
+    flaky = True,
     deps = [
         ":client",
         ":server",

@@ -12,20 +12,9 @@ jobs:
     steps:
       - run: echo "The job was triggered by a ${{ github.event_name }} event, running on ${{ runner.os }}, ${{ github.ref }} @ ${{ github.repository }}."
       - uses: actions/checkout@v4
-      - name: Cache Bazel
-        uses: actions/cache@v4.0.2
+      - uses: ./.github/actions/bazel-setup
         with:
-          path: |
-            ~/.cache/bazelisk
-            ~/.cache/bazel
-          # key: ${{ runner.os }}-bazel
-          # Add .bazelrc, .bazelversion, MODULE.bazel, possibly other
-          # dependencies too
-          # Or should we just setup remote caching more fully?
-          key: bazel-${{ hashFiles('WORKSPACE') }}
-          # An ordered list of prefix-matched keys to use for restoring stale cache if no cache hit occurred for key.
-          restore-keys: |
-            bazel-
+          buildbuddy_api_key: ${{ secrets.BUILDBUDDY_API_KEY }}
       - name: Lint
         run: |
           ./lint.sh --mode check
@@ -40,9 +29,11 @@ jobs:
           # - Should we test in different modes (-c opt / -c dbg)?
           # - Should we add instrumentation_filter to .bazelrc to reduce
           # analysis cache thrashing?
+          # Could leave the above to buildbuddy ...
       - name: Coverage
         run: |
-          bazel coverage //... --combined_report=lcov --instrument_test_targets --instrumentation_filter="^//"
+          # Avoid enormous tests; can find them with: `bazel query 'attr(size, enormous, //...)'`
+          bazel coverage //... --combined_report=lcov --instrument_test_targets --instrumentation_filter="^//" --test_size_filters=-enormous
       - name: Setup LCOV
         uses: hrishikesh-kadam/setup-lcov@v1
       - name: Coverage Report Generation
@@ -74,7 +65,4 @@ jobs:
           verbose: true
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage.dat
-      # Try out https://app.codecov.io/ or
-      # https://github.com/marketplace/actions/report-lcov and ensure min
-      # coverage is met
       - run: echo "Status is ${{ job.status }}."

@@ -117,18 +117,25 @@ build --@rules_rust//cargo/settings:experimental_symlink_execroot=True
 # LINK(7e463bc3_e4d9_4464_ba39_3217c4a86004)
 common --@aspect_rules_py//py:interpreter_version=3.11.9
 
-# Remote Cache
-# ============
-#
-# Link: : https://app.nativelink.com/c690e34c-beac-420a-b672-6320b8f5b419/quickstart
-#
-# NOTE: Causing link to take 8s ...
-# XXX: SLOW
-# build --remote_cache=grpcs://cas-michael-christen.build-faster.nativelink.net
-# build --remote_header=x-nativelink-api-key=66f9052f8b6613865377d05b5202334eb9a5bb702e64270381c202f6e9ae4072
-# build --bes_backend=grpcs://bes-michael-christen.build-faster.nativelink.net
-# build --bes_header=x-nativelink-api-key=66f9052f8b6613865377d05b5202334eb9a5bb702e64270381c202f6e9ae4072
-# build --remote_timeout=600
+# Reduce payload size of uploaded build event stream by eliminating duplicate
+# file references
+common --nolegacy_important_outputs
+# For a more detailed timing profile
+common --noslim_profile
+common --experimental_profile_include_target_label
+common --experimental_profile_include_primary_output
+
+# Build Event Server & Remote Caching
+# ==================
+# TODO(#95): Reconsider nativelink remote caching
+# TODO(#96): Consider only enabling BES for github jobs
+build --bes_results_url=https://app.buildbuddy.io/invocation/
+build --bes_backend=grpcs://remote.buildbuddy.io
+build --remote_cache=grpcs://remote.buildbuddy.io
+build --remote_download_toplevel # Helps remove network bottleneck if caching is enabled
+build --remote_timeout=3600
+# Specify this in your user.bazelrc
+# build --remote_header=x-buildbuddy-api-key="$BUILDBUDDY_API_KEY"
 
 
 # Allow user to extend .bazelrc
