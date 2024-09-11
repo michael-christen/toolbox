@@ -28,6 +28,7 @@ compile_pip_requirements(
     size = "enormous",
     requirements_in = "requirements.in",
     requirements_txt = "requirements_lock.txt",
+    tags = ["no-mypy"],
 )
 
 # This repository rule fetches the metadata for python packages we

@@ -152,6 +152,7 @@ grpc_py_library(
     srcs = ["hello_pb2_grpc.py"],
     visibility = ["//visibility:public"],
     deps = [":hello_py_library"],
+    tags = ["no-mypy"],
 )
 
 proto_py_library(
@@ -159,4 +160,6 @@ proto_py_library(
     srcs = ["hello_pb2.py"],
     visibility = ["//visibility:public"],
     deps = ["@com_google_protobuf//:protobuf_python"],
+    data = ["hello_pb2.pyi"],
+    tags = ["no-mypy"],
 )
