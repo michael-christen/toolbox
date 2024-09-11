@@ -15,6 +15,7 @@ exports_files(
     [
         ".flake8",
         ".prettierrc",
+        "mypy.ini",
         "pytest.ini",
         "pyproject.toml",
     ],

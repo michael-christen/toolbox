@@ -49,4 +49,6 @@ proto_py_library(
     srcs = ["build_pb2.py"],
     visibility = ["//visibility:public"],
     deps = ["@com_google_protobuf//:protobuf_python"],
+    # XXX: Need to incorporate .pyi somehow
+    tags = ["no-mypy"],
 )

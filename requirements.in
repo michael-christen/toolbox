@@ -6,6 +6,9 @@
 # bazel run //:requirements.update -- --upgrade && bazel run //:gazelle_python_manifest.update
 beautifulsoup4
 grpcio
+mypy
+protobuf
+types-protobuf
 # largely for development
 pytest
 black
