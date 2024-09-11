@@ -1,4 +1,3 @@
-import time
 import unittest
 
 from examples.basic import client
