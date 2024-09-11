@@ -1,4 +1,4 @@
-load("@pip//:requirements.bzl", "requirement") # '@pip' must match configured pip hub_name
+load("@pip//:requirements.bzl", "requirement")  # '@pip' must match configured pip hub_name
 load("@rules_multirun//:defs.bzl", "command", "multirun")
 load("@rules_mypy//mypy:mypy.bzl", "mypy_cli")
 load("//bzl:py.bzl", "py_binary", "py_library")
