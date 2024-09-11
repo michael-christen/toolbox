@@ -150,7 +150,6 @@ py_test(
 grpc_py_library(
     name = "hello_grpc_py_library",
     srcs = ["hello_pb2_grpc.py"],
-    tags = ["no-mypy"],
     visibility = ["//visibility:public"],
     deps = [":hello_py_library"],
 )
@@ -158,8 +157,6 @@ grpc_py_library(
 proto_py_library(
     name = "hello_py_library",
     srcs = ["hello_pb2.py"],
-    data = ["hello_pb2.pyi"],
-    tags = ["no-mypy"],
     visibility = ["//visibility:public"],
     deps = ["@com_google_protobuf//:protobuf_python"],
 )

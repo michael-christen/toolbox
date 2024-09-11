@@ -7,6 +7,7 @@ package(default_visibility = ["//visibility:public"])
 py_binary(
     name = "console",
     srcs = ["console.py"],
+    # TODO(#111): pigweed isn't setup for use with mypy yet
     tags = ["no-mypy"],
     visibility = ["//:__subpackages__"],
     deps = [

@@ -29,6 +29,7 @@ compile_pip_requirements(
     timeout = "eternal",  # 60m
     requirements_in = "requirements.in",
     requirements_txt = "requirements_lock.txt",
+    # Don't want to type-check requirements building
     tags = ["no-mypy"],
 )
 

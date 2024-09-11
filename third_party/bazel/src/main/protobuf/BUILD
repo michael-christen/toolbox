@@ -47,10 +47,6 @@ proto_compile(
 proto_py_library(
     name = "build_py_library",
     srcs = ["build_pb2.py"],
-    # Get .pyi
-    data = ["build_pb2.pyi"],
-    # Don't run mypy on this itself
-    tags = ["no-mypy"],
     visibility = ["//visibility:public"],
     deps = ["@com_google_protobuf//:protobuf_python"],
 )

@@ -34,11 +34,19 @@ def py_test(srcs, deps = [], args = [], data = [], **kwargs):
         **kwargs
     )
 
-def grpc_py_library(**kwargs):
-    _grpc_py_library(**kwargs)
+def grpc_py_library(tags = [], **kwargs):
+    # Don't evaluate mypy on this library
+    new_tags = ["no-mypy"]
+    _grpc_py_library(tags=tags + new_tags, **kwargs)
 
-def proto_py_library(**kwargs):
-    _proto_py_library(**kwargs)
+def proto_py_library(srcs = [], tags = [], data = [], **kwargs):
+    # Add .pyi as a data dependency
+    new_data = []
+    for src in srcs:
+        new_data.append("{}i".format(src))
+    # Don't evaluate mypy on this library
+    new_tags = ["no-mypy"]
+    _proto_py_library(srcs=srcs, tags=tags + new_tags, data=data + new_data, **kwargs)
 
 def _py_layers(name, binary):
     """
