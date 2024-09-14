@@ -179,6 +179,21 @@ bazel_dep(name = "rules_cc")
 
 bazel_dep(name = "hedron_compile_commands", dev_dependency = True)
 
+# Python Type Checking - mypy
+#############################
+bazel_dep(name = "rules_mypy", version = "0.6.0")
+
+types = use_extension("@rules_mypy//mypy:types.bzl", "types")
+types.requirements(
+    name = "pip_types",
+    # `@pip` in the next line corresponds to the `hub_name` when using
+    # rules_python's `pip.parse(...)`.
+    pip_requirements = "@pip//:requirements.bzl",
+    # also legal to pass a `requirements.in` here
+    requirements_txt = "//:requirements_lock.txt",
+)
+use_repo(types, "pip_types")
+
 # Module overrides
 # ================
 # TODO: https://pwbug.dev/349880767 - Point this back to the upstream repo once
