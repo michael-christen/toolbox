@@ -15,6 +15,7 @@ exports_files(
     [
         ".flake8",
         ".prettierrc",
+        "mypy.ini",
         "pytest.ini",
         "pyproject.toml",
     ],
@@ -25,9 +26,11 @@ compile_pip_requirements(
     name = "requirements",
     # https://bazel.build/reference/be/common-definitions
     size = "enormous",
+    timeout = "eternal",  # 60m
     requirements_in = "requirements.in",
     requirements_txt = "requirements_lock.txt",
-    timeout = "long",
+    # Don't want to type-check requirements building
+    tags = ["no-mypy"],
 )
 
 # This repository rule fetches the metadata for python packages we

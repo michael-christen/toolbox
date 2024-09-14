@@ -34,16 +34,16 @@ def find_files(root_dir: pathlib.Path) -> list[pathlib.Path]:
             "tools",
         ]
     ]
-    suffix_args = []
+    suffix_args: list[str] = []
     for i, suffix in enumerate(file_suffixes):
         suffix_args.extend(["-name", f"*{suffix}"])
         if i < len(file_suffixes) - 1:
             suffix_args.append("-o")
     # Using find rather than glob at the moment because it allows me to avoid
     # symlinks easily and I didn't want to bother with anything else
-    find_result = subprocess.check_output(
-        ["find", root_dir, "("] + suffix_args + [")"]
-    ).decode("utf-8")
+    args: list[str | pathlib.Path] = ["find", root_dir, "("]
+    args += suffix_args + [")"]
+    find_result = subprocess.check_output(args).decode("utf-8")
     paths = []
     for line in find_result.splitlines():
         found_path = pathlib.Path(line).relative_to(root_dir)
