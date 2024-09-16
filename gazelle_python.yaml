@@ -2055,14 +2055,11 @@ manifest:
     setuptools.command.install_egg_info: setuptools
     setuptools.command.install_lib: setuptools
     setuptools.command.install_scripts: setuptools
-    setuptools.command.register: setuptools
     setuptools.command.rotate: setuptools
     setuptools.command.saveopts: setuptools
     setuptools.command.sdist: setuptools
     setuptools.command.setopt: setuptools
     setuptools.command.test: setuptools
-    setuptools.command.upload: setuptools
-    setuptools.command.upload_docs: setuptools
     setuptools.compat: setuptools
     setuptools.compat.py310: setuptools
     setuptools.compat.py311: setuptools
@@ -2231,6 +2228,8 @@ manifest:
     urllib3.fields: urllib3
     urllib3.filepost: urllib3
     urllib3.http2: urllib3
+    urllib3.http2.connection: urllib3
+    urllib3.http2.probe: urllib3
     urllib3.poolmanager: urllib3
     urllib3.response: urllib3
     urllib3.util: urllib3
@@ -2337,4 +2336,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: 2d7d53a3a8e410aee54273f305e0d0b8df53373d7b0ecac17d5f76245c2fb096
+integrity: f7059360ebf00e9c1e7cbabaf3d53cb9443d4b1dafdf252321d5dc25415a1c92
