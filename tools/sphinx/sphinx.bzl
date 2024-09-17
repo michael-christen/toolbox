@@ -33,8 +33,8 @@ def _sphinx_html_impl(ctx):
     )
 
     args = ctx.actions.args()
-    args.add("-b", "html")
-    args.add("-q")
+    args.add("--builder", "html")
+    args.add("--quiet")
     args.add_all(ctx.attr.args)
     args.add(root_dir)
     args.add(output_dir.path)
