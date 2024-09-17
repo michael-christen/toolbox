@@ -18,9 +18,11 @@ myst:
 
 # Syntax Extensions
 
-
-The following syntaxes are optional (disabled by default) and can be enabled *via* the {{ confpy }} (see also [](sphinx/config-options)).
-Their goal is generally to add more *Markdown friendly* syntaxes; often enabling and rendering markdown-it-py plugins that extend the [CommonMark specification](https://commonmark.org/).
+The following syntaxes are optional (disabled by default) and can be enabled
+_via_ the {{ confpy }} (see also [](sphinx/config-options)). Their goal is
+generally to add more _Markdown friendly_ syntaxes; often enabling and rendering
+markdown-it-py plugins that extend the
+[CommonMark specification](https://commonmark.org/).
 
 To enable all the syntaxes explained below:
 
@@ -43,71 +45,76 @@ myst_enable_extensions = [
 ]
 ```
 
-:::{versionchanged} 0.13.0
-`myst_enable_extensions` replaces previous configuration options:
-`admonition_enable`, `figure_enable`, `dmath_enable`, `amsmath_enable`, `deflist_enable`, `html_img_enable`
-:::
+:::{versionchanged} 0.13.0 `myst_enable_extensions` replaces previous
+configuration options: `admonition_enable`, `figure_enable`, `dmath_enable`,
+`amsmath_enable`, `deflist_enable`, `html_img_enable` :::
 
-(syntax/typography)=
-(syntax/smartquotes)=
-(syntax/replacements)=
+(syntax/typography)= (syntax/smartquotes)= (syntax/replacements)=
 
 ## Typography
 
-Adding `"smartquotes"` to `myst_enable_extensions` (in the {{ confpy }}) will automatically convert standard quotations to their opening/closing variants:
+Adding `"smartquotes"` to `myst_enable_extensions` (in the {{ confpy }}) will
+automatically convert standard quotations to their opening/closing variants:
 
 - `'single quotes'`: 'single quotes'
 - `"double quotes"`: "double quotes"
 
-Adding `"replacements"` to `myst_enable_extensions` (in the {{ confpy }}) will automatically convert some common typographic texts:
+Adding `"replacements"` to `myst_enable_extensions` (in the {{ confpy }}) will
+automatically convert some common typographic texts:
 
-text  | converted
------ | ----------
-``(c)``, ``(C)`` | (c)
-``(tm)``, ``(TM)`` | (tm)
-``(r)``, ``(R)`` | (r)
-``(p)``, ``(P)`` | (p)
-``+-`` | +-
-``...`` | ...
-``?....`` | ?....
-``!....`` | !....
-``????????`` | ????????
-``!!!!!`` | !!!!!
-``,,,`` | ,,,
-``--`` | --
-``---`` | ---
+| text           | converted |
+| -------------- | --------- |
+| `(c)`, `(C)`   | (c)       |
+| `(tm)`, `(TM)` | (tm)      |
+| `(r)`, `(R)`   | (r)       |
+| `(p)`, `(P)`   | (p)       |
+| `+-`           | +-        |
+| `...`          | ...       |
+| `?....`        | ?....     |
+| `!....`        | !....     |
+| `????????`     | ????????  |
+| `!!!!!`        | !!!!!     |
+| `,,,`          | ,,,       |
+| `--`           | --        |
+| `---`          | ---       |
 
 (syntax/strikethrough)=
 
 ## Strikethrough
 
 ```{versionadded} 0.17.0
+
 ```
 
-The `strikethrough` extension allows text within `~~` delimiters to have a strikethrough (horizontal line) placed over it.
-For example, `~~strikethrough with *emphasis*~~` renders as: ~~strikethrough with *emphasis*~~.
+The `strikethrough` extension allows text within `~~` delimiters to have a
+strikethrough (horizontal line) placed over it. For example,
+`~~strikethrough with *emphasis*~~` renders as: ~~strikethrough with
+_emphasis_~~.
 
-:::{warning}
-This extension is currently only supported for HTML output,
-and you will need to suppress the `myst.strikethrough` warning
-(see [](myst-warnings))
+:::{warning} This extension is currently only supported for HTML output, and you
+will need to suppress the `myst.strikethrough` warning (see [](myst-warnings))
 :::
 
 (syntax/math)=
+
 ## Math shortcuts
 
-Math is parsed by adding to the `myst_enable_extensions` list option, in the {{ confpy }} one or both of:
+Math is parsed by adding to the `myst_enable_extensions` list option, in the
+{{ confpy }} one or both of:
 
 - `"dollarmath"` for parsing of dollar `$` and `$$` encapsulated math.
-- `"amsmath"` for direct parsing of [amsmath LaTeX environments](https://ctan.org/pkg/amsmath).
+- `"amsmath"` for direct parsing of
+  [amsmath LaTeX environments](https://ctan.org/pkg/amsmath).
 
-These options enable their respective Markdown parser plugins, as detailed in the markdown-it plugin guide.
+These options enable their respective Markdown parser plugins, as detailed in
+the markdown-it plugin guide.
 
-:::{versionchanged} 0.13.0
-`myst_dmath_enable=True` and `myst_amsmath_enable=True` are deprecated, and replaced by `myst_enable_extensions = ["dollarmath", "amsmath"]`
-:::
+:::{versionchanged} 0.13.0 `myst_dmath_enable=True` and
+`myst_amsmath_enable=True` are deprecated, and replaced by
+`myst_enable_extensions = ["dollarmath", "amsmath"]` :::
 
 (syntax/math/dollar)=
+
 ### Dollar delimited math
 
 Enabling `dollarmath` will parse the following syntax:
@@ -119,32 +126,31 @@ Additionally if `myst_dmath_allow_labels=True` is set (the default):
 
 - Display (block) math with equation label: `$$...$$ (1)`
 
-For example, `$x_{hey}=it+is^{math}$` renders as $x_{hey}=it+is^{math}$.
-This is equivalent to writing:
+For example, `$x_{hey}=it+is^{math}$` renders as $x_{hey}=it+is^{math}$. This is
+equivalent to writing:
 
 ```md
 {math}`x_{hey}=it+is^{math}`
 ```
 
-:::{admonition} Escaping Dollars
-:class: tip dropdown
+:::{admonition} Escaping Dollars :class: tip dropdown
 
-Math can be escaped (negated) by adding a `\` before the first symbol, e.g. `\$a$` renders as \$a\$.
-Escaping can also be used inside math, e.g. `$a=\$3$` renders as $a=\$3$.
+Math can be escaped (negated) by adding a `\` before the first symbol, e.g.
+`\$a$` renders as \$a\$. Escaping can also be used inside math, e.g. `$a=\$3$`
+renders as $a=\$3$.
 
-Conversely `\\` will negate the escaping, so `\\$a$` renders as \\$a$.
-:::
+Conversely `\\` will negate the escaping, so `\\$a$` renders as \\$a$. :::
 
-Block-level math can be specified with `$$` signs that wrap the math block you'd like to parse.
-For example:
+Block-level math can be specified with `$$` signs that wrap the math block you'd
+like to parse. For example:
 
-:::{note}
-:highlight: latex
+:::{note} :highlight: latex
 
 $$
     y    & = ax^2 + bx + c \\
     f(x) & = x^2 + 2xy + y^2
 $$
+
 :::
 
 This is equivalent to the following directive:
@@ -160,8 +166,7 @@ This is equivalent to the following directive:
 
 You can also add labels to block equations:
 
-:::{note}
-:highlight: latex
+:::{note} :highlight: latex
 
 $$
 e = mc^2
@@ -190,7 +195,9 @@ This allows for example:
 
 Hence, for $\alpha \in (0, 1)$,
 $$
-  \mathbb P (\alpha \bar{X} \ge \mu) \le \alpha;
+
+\mathbb P (\alpha \bar{X} \ge \mu) \le \alpha;
+
 $$
 i.e., $[\alpha \bar{X}, \infty)$ is a lower 1-sided $1-\alpha$ confidence bound for $\mu$.
 :::
@@ -942,3 +949,4 @@ You can also nest HTML admonitions:
   </div>
 </div>
 :::
+$$

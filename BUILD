@@ -134,11 +134,11 @@ gazelle(
 npm_link_all_packages(name = "node_modules")
 
 filegroup(
-  name = "python_source",
-  srcs = glob(["*.py"]) + [
-    "//examples/basic:python_source",
-    "//examples/bazel:python_source",
-    "//apps:python_source",
-  ],
-  visibility = ["//visibility:public"],
+    name = "python_source",
+    srcs = glob(["*.py"]) + [
+        "//apps:python_source",
+        "//examples/basic:python_source",
+        "//examples/bazel:python_source",
+    ],
+    visibility = ["//visibility:public"],
 )

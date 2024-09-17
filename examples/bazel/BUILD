@@ -5,10 +5,10 @@ load(":my_rules_test.bzl", "my_rules_test_suite")
 package(default_visibility = ["//visibility:private"])
 
 filegroup(
-  name = "python_source",
-  srcs = glob(["*.py"]) + [
-  ],
-  visibility = ["//visibility:public"],
+    name = "python_source",
+    srcs = glob(["*.py"]) + [
+    ],
+    visibility = ["//visibility:public"],
 )
 
 my_rules_test_suite(name = "my_rules_test")

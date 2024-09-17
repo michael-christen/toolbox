@@ -1,12 +1,10 @@
 # Originally pulled from https://github.com/agoessling/rules_sphinx/tree/3280f704d048dd85400334f7513d0ce11bcdc5f3
 load("@bazel_skylib//lib:paths.bzl", "paths")
 
-
 SphinxInfo = provider(
     doc = "Info pertaining to Sphinx build.",
     fields = ["open_uri"],
 )
-
 
 def _sphinx_html_impl(ctx):
     sandbox = ctx.actions.declare_directory(ctx.label.name + "_sandbox")
@@ -55,7 +53,6 @@ def _sphinx_html_impl(ctx):
         SphinxInfo(open_uri = paths.join(output_dir.short_path, "index.html")),
     ]
 
-
 sphinx_html_gen = rule(
     implementation = _sphinx_html_impl,
     doc = "Sphinx HTML documentation.",
@@ -88,7 +85,6 @@ sphinx_html_gen = rule(
     },
 )
 
-
 def _sphinx_view_impl(ctx):
     shell_cmd = ctx.attr.open_cmd.format(ctx.attr.generator[SphinxInfo].open_uri)
     print(ctx.attr.generator[SphinxInfo].open_uri)
@@ -99,7 +95,6 @@ def _sphinx_view_impl(ctx):
     runfiles = ctx.runfiles(files = ctx.files.generator)
 
     return [DefaultInfo(executable = script, runfiles = runfiles)]
-
 
 sphinx_view = rule(
     implementation = _sphinx_view_impl,
@@ -118,11 +113,10 @@ sphinx_view = rule(
     executable = True,
 )
 
-
 def sphinx_html(name, **kwargs):
     view_args = {"generator": ":" + name}
     if "open_cmd" in kwargs:
-      view_args["open_cmd"] = kwargs.pop("open_cmd")
+        view_args["open_cmd"] = kwargs.pop("open_cmd")
 
     sphinx_html_gen(name = name, **kwargs)
     sphinx_view(name = name + ".view", **view_args)

@@ -1,5 +1,3 @@
-import sphinx_rtd_theme
-
 # Configuration file for the Sphinx documentation builder.
 #
 # For the full list of built-in configuration values, see the documentation:
@@ -8,9 +6,9 @@ import sphinx_rtd_theme
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'toolbox'
-copyright = '2024, Michael Christen'
-author = 'Michael Christen'
+project = "toolbox"
+copyright = "2024, Michael Christen"
+author = "Michael Christen"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -83,11 +81,11 @@ exclude_patterns = []
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'sphinx_rtd_theme'
+html_theme = "sphinx_rtd_theme"
 # html_theme = 'furo'
 
-html_static_path = ['_static']
-templates_path = ['_templates']
+html_static_path = ["_static"]
+templates_path = ["_templates"]
 
 # html_sidebars = {
 #     "**": [
