@@ -24,6 +24,8 @@ documentation for details.
    examples
    autoapi/index
    autoapi/examples/basic/client/index
+   autoapi/toolbox/apps/bazel_parser/index
+   autoapi/toolbox/algorithms/weighted_probability/index
 
 ..
    myst_extensions

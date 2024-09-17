@@ -8,6 +8,7 @@ py_binary(
         "@pip//myst_parser",
         "@pip//linkify_it_py",
         "@pip//sphinxcontrib_mermaid",
+        "@pip//sphinx_autoapi",
     ],
     visibility = ["//visibility:public"],
 )
