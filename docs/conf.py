@@ -6,6 +6,8 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
+import sphinx_rtd_theme
+
 project = "toolbox"
 copyright = "2024, Michael Christen"
 author = "Michael Christen"
@@ -65,7 +67,7 @@ myst_enable_extensions = [
     "fieldlist",
     "html_admonition",
     "html_image",
-    "linkify",
+    # "linkify",
     "replacements",
     "smartquotes",
     "strikethrough",
@@ -85,10 +87,15 @@ html_theme = "sphinx_rtd_theme"
 # html_theme = 'furo'
 
 html_static_path = ["_static"]
-templates_path = ["_templates"]
-
+# html_logo = "_static/wrench.png"
+html_favicon = "_static/wrench.png"
+# html_theme_options = {
+#     "logo_only": True,
+#     "display_version": False,
+# }
 # html_sidebars = {
 #     "**": [
 #         "navigation.html",
 #     ],
 # }
+templates_path = ["_templates"]
