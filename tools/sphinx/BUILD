@@ -7,11 +7,11 @@ py_binary(
     srcs = ["sphinx_build_wrapper.py"],
     visibility = ["//visibility:public"],
     deps = [
+        "@pip//linkify_it_py",  # keep
+        "@pip//myst_parser",  # keep
         "@pip//sphinx",  # keep
         "@pip//sphinx_autoapi",  # keep
         "@pip//sphinx_rtd_theme",  # keep
         "@pip//sphinxcontrib_mermaid",  # keep
-        "@pip//linkify_it_py",  # keep
-        "@pip//myst_parser",  # keep
     ],
 )
