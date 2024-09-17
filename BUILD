@@ -138,6 +138,7 @@ filegroup(
   srcs = glob(["*.py"]) + [
     "//examples/basic:python_source",
     "//examples/bazel:python_source",
+    "//apps:python_source",
   ],
   visibility = ["//visibility:public"],
 )

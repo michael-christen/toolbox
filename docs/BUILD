@@ -1,5 +1,10 @@
 load("//tools/sphinx:sphinx.bzl", "sphinx_html")
 
+filegroup(
+    name = "templates",
+    srcs = glob(["_templates/**/*.rst"]),
+)
+
 sphinx_html(
     name = "docs",
     config = "conf.py",
@@ -12,6 +17,6 @@ sphinx_html(
         "examples.md",
         "example.py",
         "//:python_source",
+        ":templates",
     ],
-
 )

@@ -22,10 +22,12 @@ documentation for details.
    hello
    myst
    examples
+
+.. toctree::
+   :maxdepth: 1
+   :caption: API Reference:
+
    autoapi/index
-   autoapi/examples/basic/client/index
-   autoapi/toolbox/apps/bazel_parser/index
-   autoapi/toolbox/algorithms/weighted_probability/index
 
 ..
    myst_extensions
