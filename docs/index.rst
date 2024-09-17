@@ -22,6 +22,7 @@ documentation for details.
    hello
    myst
    examples
+   myst_extensions
 
 .. toctree::
    :maxdepth: 1
@@ -30,4 +31,3 @@ documentation for details.
    autoapi/index
 
 ..
-   myst_extensions
