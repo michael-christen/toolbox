@@ -50,3 +50,186 @@ proto_py_library(
     visibility = ["//visibility:public"],
     deps = ["@com_google_protobuf//:protobuf_python"],
 )
+
+proto_library(
+    name = "action_cache_proto",
+    srcs = ["action_cache.proto"],
+)
+
+proto_library(
+    name = "command_line_proto",
+    srcs = ["command_line.proto"],
+    deps = ["//src/main/protobuf:protobuf_proto"],
+)
+
+proto_library(
+    name = "failure_details_proto",
+    srcs = ["failure_details.proto"],
+    deps = ["@com_google_protobuf//:descriptor_proto"],
+)
+
+proto_library(
+    name = "invocation_policy_proto",
+    srcs = ["invocation_policy.proto"],
+    deps = ["//src/main/protobuf:protobuf_proto"],
+)
+
+proto_cc_library(
+    name = "action_cache_cc_library",
+    srcs = ["action_cache.pb.cc"],
+    hdrs = ["action_cache.pb.h"],
+    visibility = ["//visibility:public"],
+    deps = ["@com_google_protobuf//:protobuf"],
+)
+
+proto_compile(
+    name = "action_cache_cpp_compile",
+    outputs = [
+        "action_cache.pb.cc",
+        "action_cache.pb.h",
+    ],
+    plugins = ["@build_stack_rules_proto//plugin/builtin:cpp"],
+    proto = "action_cache_proto",
+    visibility = ["//visibility:public"],
+)
+
+proto_cc_library(
+    name = "command_line_cc_library",
+    srcs = ["command_line.pb.cc"],
+    hdrs = ["command_line.pb.h"],
+    visibility = ["//visibility:public"],
+    deps = ["@com_google_protobuf//:protobuf"],
+)
+
+proto_compile(
+    name = "command_line_cpp_compile",
+    outputs = [
+        "command_line.pb.cc",
+        "command_line.pb.h",
+    ],
+    plugins = ["@build_stack_rules_proto//plugin/builtin:cpp"],
+    proto = "command_line_proto",
+    visibility = ["//visibility:public"],
+)
+
+proto_cc_library(
+    name = "failure_details_cc_library",
+    srcs = ["failure_details.pb.cc"],
+    hdrs = ["failure_details.pb.h"],
+    visibility = ["//visibility:public"],
+    deps = ["@com_google_protobuf//:protobuf"],
+)
+
+proto_compile(
+    name = "failure_details_cpp_compile",
+    outputs = [
+        "failure_details.pb.cc",
+        "failure_details.pb.h",
+    ],
+    plugins = ["@build_stack_rules_proto//plugin/builtin:cpp"],
+    proto = "failure_details_proto",
+    visibility = ["//visibility:public"],
+)
+
+proto_cc_library(
+    name = "invocation_policy_cc_library",
+    srcs = ["invocation_policy.pb.cc"],
+    hdrs = ["invocation_policy.pb.h"],
+    visibility = ["//visibility:public"],
+    deps = ["@com_google_protobuf//:protobuf"],
+)
+
+proto_compile(
+    name = "invocation_policy_cpp_compile",
+    outputs = [
+        "invocation_policy.pb.cc",
+        "invocation_policy.pb.h",
+    ],
+    plugins = ["@build_stack_rules_proto//plugin/builtin:cpp"],
+    proto = "invocation_policy_proto",
+    visibility = ["//visibility:public"],
+)
+
+proto_compile(
+    name = "action_cache_python_compile",
+    outputs = [
+        "action_cache_pb2.py",
+        "action_cache_pb2.pyi",
+    ],
+    plugins = [
+        "@build_stack_rules_proto//plugin/builtin:pyi",
+        "@build_stack_rules_proto//plugin/builtin:python",
+    ],
+    proto = "action_cache_proto",
+    visibility = ["//visibility:public"],
+)
+
+proto_py_library(
+    name = "action_cache_py_library",
+    srcs = ["action_cache_pb2.py"],
+    visibility = ["//visibility:public"],
+    deps = ["@com_google_protobuf//:protobuf_python"],
+)
+
+proto_compile(
+    name = "command_line_python_compile",
+    outputs = [
+        "command_line_pb2.py",
+        "command_line_pb2.pyi",
+    ],
+    plugins = [
+        "@build_stack_rules_proto//plugin/builtin:pyi",
+        "@build_stack_rules_proto//plugin/builtin:python",
+    ],
+    proto = "command_line_proto",
+    visibility = ["//visibility:public"],
+)
+
+proto_py_library(
+    name = "command_line_py_library",
+    srcs = ["command_line_pb2.py"],
+    visibility = ["//visibility:public"],
+    deps = ["@com_google_protobuf//:protobuf_python"],
+)
+
+proto_compile(
+    name = "failure_details_python_compile",
+    outputs = [
+        "failure_details_pb2.py",
+        "failure_details_pb2.pyi",
+    ],
+    plugins = [
+        "@build_stack_rules_proto//plugin/builtin:pyi",
+        "@build_stack_rules_proto//plugin/builtin:python",
+    ],
+    proto = "failure_details_proto",
+    visibility = ["//visibility:public"],
+)
+
+proto_py_library(
+    name = "failure_details_py_library",
+    srcs = ["failure_details_pb2.py"],
+    visibility = ["//visibility:public"],
+    deps = ["@com_google_protobuf//:protobuf_python"],
+)
+
+proto_compile(
+    name = "invocation_policy_python_compile",
+    outputs = [
+        "invocation_policy_pb2.py",
+        "invocation_policy_pb2.pyi",
+    ],
+    plugins = [
+        "@build_stack_rules_proto//plugin/builtin:pyi",
+        "@build_stack_rules_proto//plugin/builtin:python",
+    ],
+    proto = "invocation_policy_proto",
+    visibility = ["//visibility:public"],
+)
+
+proto_py_library(
+    name = "invocation_policy_py_library",
+    srcs = ["invocation_policy_pb2.py"],
+    visibility = ["//visibility:public"],
+    deps = ["@com_google_protobuf//:protobuf_python"],
+)
