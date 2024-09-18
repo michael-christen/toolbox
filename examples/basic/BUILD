@@ -122,6 +122,7 @@ py_binary(
     deps = [
         "//examples/basic:hello_grpc_py_library",
         "//examples/basic:hello_py_library",
+        "//third_party/bazel/googleapis/google/devtools/build/v1:publish_build_event_py_library",
         "@pip//grpcio",
     ],
 )

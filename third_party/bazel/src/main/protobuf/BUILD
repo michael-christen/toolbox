@@ -54,24 +54,28 @@ proto_py_library(
 proto_library(
     name = "action_cache_proto",
     srcs = ["action_cache.proto"],
+    visibility = ["//visibility:public"],
 )
 
 proto_library(
     name = "command_line_proto",
     srcs = ["command_line.proto"],
-    deps = ["//src/main/protobuf:protobuf_proto"],
+    deps = [":option_filters_proto"],
+    visibility = ["//visibility:public"],
 )
 
 proto_library(
     name = "failure_details_proto",
     srcs = ["failure_details.proto"],
     deps = ["@com_google_protobuf//:descriptor_proto"],
+    visibility = ["//visibility:public"],
 )
 
 proto_library(
     name = "invocation_policy_proto",
     srcs = ["invocation_policy.proto"],
-    deps = ["//src/main/protobuf:protobuf_proto"],
+    deps = [":strategy_policy_proto"],
+    visibility = ["//visibility:public"],
 )
 
 proto_cc_library(
@@ -98,7 +102,10 @@ proto_cc_library(
     srcs = ["command_line.pb.cc"],
     hdrs = ["command_line.pb.h"],
     visibility = ["//visibility:public"],
-    deps = ["@com_google_protobuf//:protobuf"],
+    deps = [
+        ":option_filters_cc_library",
+        "@com_google_protobuf//:protobuf",
+    ],
 )
 
 proto_compile(
@@ -136,7 +143,10 @@ proto_cc_library(
     srcs = ["invocation_policy.pb.cc"],
     hdrs = ["invocation_policy.pb.h"],
     visibility = ["//visibility:public"],
-    deps = ["@com_google_protobuf//:protobuf"],
+    deps = [
+        ":strategy_policy_cc_library",
+        "@com_google_protobuf//:protobuf",
+    ],
 )
 
 proto_compile(
@@ -189,7 +199,10 @@ proto_py_library(
     name = "command_line_py_library",
     srcs = ["command_line_pb2.py"],
     visibility = ["//visibility:public"],
-    deps = ["@com_google_protobuf//:protobuf_python"],
+    deps = [
+        ":option_filters_py_library",
+        "@com_google_protobuf//:protobuf_python",
+    ],
 )
 
 proto_compile(
@@ -230,6 +243,99 @@ proto_compile(
 proto_py_library(
     name = "invocation_policy_py_library",
     srcs = ["invocation_policy_pb2.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":strategy_policy_py_library",
+        "@com_google_protobuf//:protobuf_python",
+    ],
+)
+
+proto_library(
+    name = "strategy_policy_proto",
+    srcs = ["strategy_policy.proto"],
+)
+
+proto_cc_library(
+    name = "strategy_policy_cc_library",
+    srcs = ["strategy_policy.pb.cc"],
+    hdrs = ["strategy_policy.pb.h"],
+    visibility = ["//visibility:public"],
+    deps = ["@com_google_protobuf//:protobuf"],
+)
+
+proto_compile(
+    name = "strategy_policy_cpp_compile",
+    outputs = [
+        "strategy_policy.pb.cc",
+        "strategy_policy.pb.h",
+    ],
+    plugins = ["@build_stack_rules_proto//plugin/builtin:cpp"],
+    proto = "strategy_policy_proto",
+    visibility = ["//visibility:public"],
+)
+
+proto_compile(
+    name = "strategy_policy_python_compile",
+    outputs = [
+        "strategy_policy_pb2.py",
+        "strategy_policy_pb2.pyi",
+    ],
+    plugins = [
+        "@build_stack_rules_proto//plugin/builtin:pyi",
+        "@build_stack_rules_proto//plugin/builtin:python",
+    ],
+    proto = "strategy_policy_proto",
+    visibility = ["//visibility:public"],
+)
+
+proto_py_library(
+    name = "strategy_policy_py_library",
+    srcs = ["strategy_policy_pb2.py"],
+    visibility = ["//visibility:public"],
+    deps = ["@com_google_protobuf//:protobuf_python"],
+)
+
+proto_library(
+    name = "option_filters_proto",
+    srcs = ["option_filters.proto"],
+)
+
+proto_cc_library(
+    name = "option_filters_cc_library",
+    srcs = ["option_filters.pb.cc"],
+    hdrs = ["option_filters.pb.h"],
+    visibility = ["//visibility:public"],
+    deps = ["@com_google_protobuf//:protobuf"],
+)
+
+proto_compile(
+    name = "option_filters_cpp_compile",
+    outputs = [
+        "option_filters.pb.cc",
+        "option_filters.pb.h",
+    ],
+    plugins = ["@build_stack_rules_proto//plugin/builtin:cpp"],
+    proto = "option_filters_proto",
+    visibility = ["//visibility:public"],
+)
+
+proto_compile(
+    name = "option_filters_python_compile",
+    outputs = [
+        "option_filters_pb2.py",
+        "option_filters_pb2.pyi",
+    ],
+    plugins = [
+        "@build_stack_rules_proto//plugin/builtin:pyi",
+        "@build_stack_rules_proto//plugin/builtin:python",
+    ],
+    proto = "option_filters_proto",
+    visibility = ["//visibility:public"],
+)
+
+proto_py_library(
+    name = "option_filters_py_library",
+    srcs = ["option_filters_pb2.py"],
     visibility = ["//visibility:public"],
     deps = ["@com_google_protobuf//:protobuf_python"],
 )
