@@ -6,6 +6,8 @@ from examples.basic import server
 
 
 class TestHello(unittest.IsolatedAsyncioTestCase):
+    """Test asyncio client and server with gRPC."""
+
     async def asyncSetUp(self):
         self.server = server.get_server()
         await self.server.start()

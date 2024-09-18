@@ -74,6 +74,7 @@ myst_enable_extensions = [
     "substitution",
     "tasklist",
 ]
+myst_heading_anchors = 3
 
 exclude_patterns = []
 
@@ -99,3 +100,8 @@ html_favicon = "_static/wrench.png"
 #     ],
 # }
 templates_path = ["_templates"]
+
+suppress_warnings = [
+    # Only supported in html
+    "myst.strikethrough",
+]

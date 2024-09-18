@@ -19,7 +19,7 @@ myst:
 # Syntax Extensions
 
 The following syntaxes are optional (disabled by default) and can be enabled
-_via_ the {{ confpy }} (see also [](sphinx/config-options)). Their goal is
+_via_ the {{ confpy }} (see also [Configuration](https://myst-parser.readthedocs.io/en/latest/configuration.html#sphinx-config-options)). Their goal is
 generally to add more _Markdown friendly_ syntaxes; often enabling and rendering
 markdown-it-py plugins that extend the
 [CommonMark specification](https://commonmark.org/).
@@ -92,7 +92,7 @@ strikethrough (horizontal line) placed over it. For example,
 _emphasis_~~.
 
 :::{warning} This extension is currently only supported for HTML output, and you
-will need to suppress the `myst.strikethrough` warning (see [](myst-warnings))
+will need to suppress the `myst.strikethrough` warning (see [Build Warnings](https://myst-parser.readthedocs.io/en/latest/configuration.html#myst-warnings))
 :::
 
 (syntax/math)=
@@ -194,6 +194,7 @@ This allows for example:
 :highlight: latex
 
 Hence, for $\alpha \in (0, 1)$,
+
 $$
 
 \mathbb P (\alpha \bar{X} \ge \mu) \le \alpha;
@@ -313,7 +314,7 @@ myst_substitutions = {
 }
 ```
 
-or at the top of the file, in the front-matter section (see [this section](syntax/frontmatter)):
+or at the top of the file, in the front-matter section
 
 ````yaml
 ---
@@ -415,7 +416,7 @@ By adding `"colon_fence"` to `myst_enable_extensions` (in the {{ confpy }}),
 you can also use `:::` delimiters to denote directives, instead of ```` ``` ````.
 
 Using colons instead of back-ticks has the benefit of allowing the content to be rendered correctly, when you are working in any standard Markdown editor.
-It is ideal for admonition type directives (as documented in [Directives](syntax/directives)) or tables with titles, for example:
+It is ideal for admonition type directives (as documented in Directives) or tables with titles, for example:
 
 :::::{note}
 
@@ -491,9 +492,10 @@ You can then insert markdown links directly to anchors that are generated from y
 
 The paths to other files should be relative to the current file:
 
-:::{note}
+For example
+```
 [**link text**](./typography.md#headings)
-:::
+```
 
 ### Anchor slug structure
 
@@ -644,7 +646,7 @@ Send a message to a recipient
 :::
 
 :::{note}
-Currently `sphinx.ext.autodoc` does not support MyST, see [](howto/autodoc).
+Currently `sphinx.ext.autodoc` does not support MyST, see howto/autodoc
 :::
 
 (syntax/attributes)=
@@ -824,7 +826,7 @@ The first is the standard Markdown syntax:
 This will correctly copy the image to the build folder and will render it in all output formats (HTML, TeX, etc).
 However, it is limited in the configuration that can be applied, for example setting a width.
 
-As discussed [above](syntax/directives), MyST allow for directives to be used such as `image` and `figure` (see {ref}`the sphinx documentation <sphinx:rst-primer>`):
+As discussed in syntax/directives, MyST allow for directives to be used such as `image` and `figure` (see {ref}`the sphinx documentation sphinx:rst-primer`):
 
 :::{note}
 ```{image} img/fun-fish.png

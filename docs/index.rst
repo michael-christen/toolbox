@@ -23,11 +23,20 @@ documentation for details.
    myst
    examples
    myst_extensions
+   bringup
+   useful_commands
 
 .. toctree::
    :maxdepth: 1
    :caption: API Reference:
 
    autoapi/index
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Orphaned API References:
+
+   autoapi/apps/bazel_parser/index.rst
+   autoapi/examples/pigweed/tools/console/index.rst
 
 ..

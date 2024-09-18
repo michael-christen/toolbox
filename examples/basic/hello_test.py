@@ -4,6 +4,8 @@ from examples.basic import hello_pb2
 
 
 class TestHello(unittest.TestCase):
+    """Test proto loading."""
+
     def test_basics(self):
         """Wassup"""
 
