@@ -4,6 +4,13 @@ load("@rules_python//python:defs.bzl", "py_binary")
 
 package(default_visibility = ["//visibility:public"])
 
+filegroup(
+    name = "python_source",
+    srcs = glob(["*.py"]) + [
+    ],
+    visibility = ["//visibility:public"],
+)
+
 py_binary(
     name = "console",
     srcs = ["console.py"],

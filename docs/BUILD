@@ -9,6 +9,11 @@ filegroup(
 )
 
 filegroup(
+    name = "img",
+    srcs = glob(["img/**"]),
+)
+
+filegroup(
     name = "static",
     srcs = glob(["_static/**/*.png"]),
 )
@@ -21,12 +26,16 @@ sphinx_html(
         # has warnings
         "myst_extensions.md",
         "examples.md",
+        "bringup.md",
+        "useful_commands.md",
         "//:python_source",
         ":templates",
+        ":img",
         ":static",
     ],
     config = "conf.py",
     index = "index.rst",  # Test non-canonical naming.
+    # args = ["--keep-going", "--fail-on-warning"],
 )
 
 py_library(
