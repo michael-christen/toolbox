@@ -10,8 +10,8 @@ package(default_visibility = ["//visibility:private"])
 filegroup(
     name = "python_source",
     srcs = glob(["*.py"]) + [
-      "hello_pb2.py",
-      "hello_pb2_grpc.py",
+        "hello_pb2.py",
+        "hello_pb2_grpc.py",
     ],
     visibility = ["//visibility:public"],
 )

@@ -149,5 +149,4 @@ intersphinx_mapping = {
     "markdown_it": ("https://markdown-it-py.readthedocs.io/en/latest", None),
 }
 
-rediraffe_redirects = {
-}
+rediraffe_redirects = {}

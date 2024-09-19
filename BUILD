@@ -139,8 +139,8 @@ filegroup(
         "//apps:python_source",
         "//examples/basic:python_source",
         "//examples/bazel:python_source",
-        "//examples/pigweed/tools:python_source",
         "//examples/pigweed/modules/blinky:python_source",
+        "//examples/pigweed/tools:python_source",
     ],
     visibility = ["//visibility:public"],
 )

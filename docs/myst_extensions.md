@@ -19,9 +19,10 @@ myst:
 # Syntax Extensions
 
 The following syntaxes are optional (disabled by default) and can be enabled
-_via_ the {{ confpy }} (see also [Configuration](https://myst-parser.readthedocs.io/en/latest/configuration.html#sphinx-config-options)). Their goal is
-generally to add more _Markdown friendly_ syntaxes; often enabling and rendering
-markdown-it-py plugins that extend the
+_via_ the {{ confpy }} (see also
+[Configuration](https://myst-parser.readthedocs.io/en/latest/configuration.html#sphinx-config-options)).
+Their goal is generally to add more _Markdown friendly_ syntaxes; often enabling
+and rendering markdown-it-py plugins that extend the
 [CommonMark specification](https://commonmark.org/).
 
 To enable all the syntaxes explained below:
@@ -47,8 +48,7 @@ myst_enable_extensions = [
 
 :::{versionchanged} 0.13.0 `myst_enable_extensions` replaces previous
 configuration options: `admonition_enable`, `figure_enable`, `dmath_enable`,
-`amsmath_enable`, `deflist_enable`, `html_img_enable`
-:::
+`amsmath_enable`, `deflist_enable`, `html_img_enable` :::
 
 (syntax/typography)= (syntax/smartquotes)= (syntax/replacements)=
 
@@ -93,7 +93,8 @@ strikethrough (horizontal line) placed over it. For example,
 _emphasis_~~.
 
 :::{warning} This extension is currently only supported for HTML output, and you
-will need to suppress the `myst.strikethrough` warning (see [Build Warnings](https://myst-parser.readthedocs.io/en/latest/configuration.html#myst-warnings))
+will need to suppress the `myst.strikethrough` warning (see
+[Build Warnings](https://myst-parser.readthedocs.io/en/latest/configuration.html#myst-warnings))
 :::
 
 (syntax/math)=
@@ -194,6 +195,7 @@ This allows for example:
 :::{note}
 
 Hence, for $\alpha \in (0, 1)$,
+
 
 $$
 
