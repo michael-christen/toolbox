@@ -19,7 +19,17 @@ extensions = [
     "sphinx_rtd_theme",
     "myst_parser",
     "sphinxcontrib.mermaid",
+    "sphinx.ext.intersphinx",
+    "sphinx.ext.viewcode",
     "autoapi.extension",
+    # "sphinx_autoapi",
+    "sphinx_design",
+    "sphinx_copybutton",
+    "sphinxext.rediraffe",
+    "sphinxext.opengraph",
+    "sphinx_pyscript",
+    "sphinx_tippy",
+    "sphinx_togglebutton",
 ]
 autoapi_dirs = [
     # XXX: Would be nice to not have to add
@@ -54,13 +64,39 @@ def skip_member(app, what, name, obj, skip, options):
     return skip
 
 
-def setup(sphinx):
-    sphinx.connect("autoapi-skip-member", skip_member)
+def setup(app):
+    """Add functions to the Sphinx setup."""
+    # from myst_parser._docs import (
+    #     DirectiveDoc,
+    #     DocutilsCliHelpDirective,
+    #     MystAdmonitionDirective,
+    #     MystConfigDirective,
+    #     MystExampleDirective,
+    #     MystLexer,
+    #     MystToHTMLDirective,
+    #     MystWarningsDirective,
+    #     NumberSections,
+    #     StripUnsupportedLatex,
+    # )
+
+    # app.add_directive("myst-config", MystConfigDirective)
+    # app.add_directive("docutils-cli-help", DocutilsCliHelpDirective)
+    # app.add_directive("doc-directive", DirectiveDoc)
+    # app.add_directive("myst-warnings", MystWarningsDirective)
+    # app.add_directive("myst-example", MystExampleDirective)
+    # app.add_directive("myst-admonitions", MystAdmonitionDirective)
+    # app.add_directive("myst-to-html", MystToHTMLDirective)
+    # app.add_post_transform(StripUnsupportedLatex)
+    # app.add_post_transform(NumberSections)
+    # app.add_lexer("myst", MystLexer)
+
+    app.connect("autoapi-skip-member", skip_member)
 
 
 myst_enable_extensions = [
     "amsmath",
     "attrs_inline",
+    "attrs_block",
     "colon_fence",
     "deflist",
     "dollarmath",
@@ -85,6 +121,7 @@ exclude_patterns = []
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_theme = "sphinx_rtd_theme"
+# html_theme = "sphinx_book_theme"
 # html_theme = 'furo'
 
 html_static_path = ["_static"]
@@ -105,3 +142,12 @@ suppress_warnings = [
     # Only supported in html
     "myst.strikethrough",
 ]
+
+intersphinx_mapping = {
+    "python": ("https://docs.python.org/3.10", None),
+    "sphinx": ("https://www.sphinx-doc.org/en/master", None),
+    "markdown_it": ("https://markdown-it-py.readthedocs.io/en/latest", None),
+}
+
+rediraffe_redirects = {
+}

@@ -13,5 +13,14 @@ py_binary(
         "@pip//sphinx_autoapi",  # keep
         "@pip//sphinx_rtd_theme",  # keep
         "@pip//sphinxcontrib_mermaid",  # keep
+        "@pip//sphinx_design",  # keep
+        "@pip//sphinx_copybutton",  # keep
+        "@pip//sphinxext_rediraffe",  # keep
+        "@pip//sphinxext_opengraph",  # keep
+        "@pip//sphinx_pyscript",  # keep
+        "@pip//sphinx_tippy",  # keep
+        "@pip//sphinx_togglebutton",  # keep
+        "@pip//sphinx_book_theme",  # keep
     ],
+    tags = ["no-mypy"],
 )

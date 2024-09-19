@@ -47,7 +47,8 @@ myst_enable_extensions = [
 
 :::{versionchanged} 0.13.0 `myst_enable_extensions` replaces previous
 configuration options: `admonition_enable`, `figure_enable`, `dmath_enable`,
-`amsmath_enable`, `deflist_enable`, `html_img_enable` :::
+`amsmath_enable`, `deflist_enable`, `html_img_enable`
+:::
 
 (syntax/typography)= (syntax/smartquotes)= (syntax/replacements)=
 
@@ -144,7 +145,7 @@ Conversely `\\` will negate the escaping, so `\\$a$` renders as \\$a$. :::
 Block-level math can be specified with `$$` signs that wrap the math block you'd
 like to parse. For example:
 
-:::{note} :highlight: latex
+:::{note}
 
 $$
     y    & = ax^2 + bx + c \\
@@ -166,7 +167,7 @@ This is equivalent to the following directive:
 
 You can also add labels to block equations:
 
-:::{note} :highlight: latex
+:::{note}
 
 $$
 e = mc^2
@@ -191,7 +192,6 @@ To allow display math (i.e. `$$`) within an inline context, set `myst_dmath_doub
 This allows for example:
 
 :::{note}
-:highlight: latex
 
 Hence, for $\alpha \in (0, 1)$,
 
@@ -229,7 +229,6 @@ These top-level math environments will then be directly parsed:
 As expected, environments ending in `*` will not be numbered, for example:
 
 :::{note}
-:highlight: latex
 
 \begin{gather*}
 a_1=b_1+c_1\\
@@ -712,6 +711,7 @@ you can enable parsing of block attributes before certain block syntaxes.
 For example, the following Markdown:
 
 :::{note}
+
 {#mypara .bg-warning}
 Here is a paragraph with attributes.
 
@@ -826,7 +826,7 @@ The first is the standard Markdown syntax:
 This will correctly copy the image to the build folder and will render it in all output formats (HTML, TeX, etc).
 However, it is limited in the configuration that can be applied, for example setting a width.
 
-As discussed in syntax/directives, MyST allow for directives to be used such as `image` and `figure` (see {ref}`the sphinx documentation sphinx:rst-primer`):
+As discussed in syntax/directives, MyST allow for directives to be used such as `image` and `figure` (see the sphinx documentation sphinx:rst-primer):
 
 :::{note}
 ```{image} img/fun-fish.png
@@ -848,7 +848,6 @@ By adding `"html_image"` to `myst_enable_extensions` (in the {{ confpy }}),
 MySt-Parser will attempt to convert any isolated `img` tags (i.e. not wrapped in any other HTML) to the internal representation used in sphinx.
 
 :::{note}
-:highlight: html
 
 <img src="img/fun-fish.png" alt="fishy" width="200px">
 <img src="img/fun-fish.png" alt="fishy" width="200px" class="bg-primary">
@@ -914,7 +913,6 @@ If the first element within the `div` is `<div class="title">` or `<p class="tit
 All internal text (and the title) will be parsed as MyST-Markdown and all classes and an optional name will be passed to the admonition:
 
 :::{note}
-:highlight: html
 
 <div class="admonition note" name="html-admonition" style="background: lightgreen; padding: 10px">
 <p class="title">This is the **title**</p>
@@ -929,7 +927,6 @@ There can be no empty lines in the block, otherwise they will be read as two sep
 If you want to use multiple paragraphs then they can be enclosed in `<p>`:
 
 :::{note}
-:highlight: html
 <div class="admonition note">
 <p>Paragraph 1</p>
 <p>Paragraph 2</p>
@@ -941,7 +938,6 @@ If you want to use multiple paragraphs then they can be enclosed in `<p>`:
 You can also nest HTML admonitions:
 
 :::{note}
-:highlight: html
 <div class="admonition">
 <p>Some **content**</p>
   <div class="admonition tip">

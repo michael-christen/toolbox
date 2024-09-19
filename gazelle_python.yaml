@@ -179,6 +179,42 @@ manifest:
     IPython.utils.ulinecache: ipython
     IPython.utils.version: ipython
     IPython.utils.wildcard: ipython
+    a11y_pygments: accessible_pygments
+    a11y_pygments.a11y_dark: accessible_pygments
+    a11y_pygments.a11y_dark.style: accessible_pygments
+    a11y_pygments.a11y_high_contrast_dark: accessible_pygments
+    a11y_pygments.a11y_high_contrast_dark.style: accessible_pygments
+    a11y_pygments.a11y_high_contrast_light: accessible_pygments
+    a11y_pygments.a11y_high_contrast_light.style: accessible_pygments
+    a11y_pygments.a11y_light: accessible_pygments
+    a11y_pygments.a11y_light.style: accessible_pygments
+    a11y_pygments.blinds_dark: accessible_pygments
+    a11y_pygments.blinds_dark.style: accessible_pygments
+    a11y_pygments.blinds_light: accessible_pygments
+    a11y_pygments.blinds_light.style: accessible_pygments
+    a11y_pygments.github_dark: accessible_pygments
+    a11y_pygments.github_dark.style: accessible_pygments
+    a11y_pygments.github_dark_colorblind: accessible_pygments
+    a11y_pygments.github_dark_colorblind.style: accessible_pygments
+    a11y_pygments.github_dark_high_contrast: accessible_pygments
+    a11y_pygments.github_dark_high_contrast.style: accessible_pygments
+    a11y_pygments.github_light: accessible_pygments
+    a11y_pygments.github_light.style: accessible_pygments
+    a11y_pygments.github_light_colorblind: accessible_pygments
+    a11y_pygments.github_light_colorblind.style: accessible_pygments
+    a11y_pygments.github_light_high_contrast: accessible_pygments
+    a11y_pygments.github_light_high_contrast.style: accessible_pygments
+    a11y_pygments.gotthard_dark: accessible_pygments
+    a11y_pygments.gotthard_dark.style: accessible_pygments
+    a11y_pygments.gotthard_light: accessible_pygments
+    a11y_pygments.gotthard_light.style: accessible_pygments
+    a11y_pygments.greative: accessible_pygments
+    a11y_pygments.greative.style: accessible_pygments
+    a11y_pygments.pitaya_smoothie: accessible_pygments
+    a11y_pygments.pitaya_smoothie.style: accessible_pygments
+    a11y_pygments.utils: accessible_pygments
+    a11y_pygments.utils.utils: accessible_pygments
+    a11y_pygments.utils.wcag_contrast: accessible_pygments
     alabaster: alabaster
     alabaster.support: alabaster
     anyio: anyio
@@ -2024,6 +2060,14 @@ manifest:
     pycparser.ply.ygen: pycparser
     pycparser.plyparser: pycparser
     pycparser.yacctab: pycparser
+    pydata_sphinx_theme: pydata_sphinx_theme
+    pydata_sphinx_theme.edit_this_page: pydata_sphinx_theme
+    pydata_sphinx_theme.logo: pydata_sphinx_theme
+    pydata_sphinx_theme.pygments: pydata_sphinx_theme
+    pydata_sphinx_theme.short_link: pydata_sphinx_theme
+    pydata_sphinx_theme.toctree: pydata_sphinx_theme
+    pydata_sphinx_theme.translator: pydata_sphinx_theme
+    pydata_sphinx_theme.utils: pydata_sphinx_theme
     pyflakes: pyflakes
     pyflakes.api: pyflakes
     pyflakes.checker: pyflakes
@@ -2646,7 +2690,28 @@ manifest:
     sphinx.writers.texinfo: sphinx
     sphinx.writers.text: sphinx
     sphinx.writers.xml: sphinx
+    sphinx_book_theme: sphinx_book_theme
+    sphinx_book_theme.directives: sphinx_book_theme
+    sphinx_book_theme.header_buttons: sphinx_book_theme
+    sphinx_book_theme.header_buttons.launch: sphinx_book_theme
+    sphinx_book_theme.header_buttons.source: sphinx_book_theme
+    sphinx_book_theme.nodes: sphinx_book_theme
+    sphinx_copybutton: sphinx_copybutton
+    sphinx_design: sphinx_design
+    sphinx_design.article_info: sphinx_design
+    sphinx_design.badges_buttons: sphinx_design
+    sphinx_design.cards: sphinx_design
+    sphinx_design.compiled: sphinx_design
+    sphinx_design.dropdown: sphinx_design
+    sphinx_design.extension: sphinx_design
+    sphinx_design.grids: sphinx_design
+    sphinx_design.icons: sphinx_design
+    sphinx_design.shared: sphinx_design
+    sphinx_design.tabs: sphinx_design
+    sphinx_pyscript: sphinx_pyscript
     sphinx_rtd_theme: sphinx_rtd_theme
+    sphinx_tippy: sphinx_tippy
+    sphinx_togglebutton: sphinx_togglebutton
     sphinxcontrib.applehelp: sphinxcontrib_applehelp
     sphinxcontrib.autoclassdiag: sphinxcontrib_mermaid
     sphinxcontrib.devhelp: sphinxcontrib_devhelp
@@ -2659,6 +2724,12 @@ manifest:
     sphinxcontrib.qthelp: sphinxcontrib_qthelp
     sphinxcontrib.serializinghtml: sphinxcontrib_serializinghtml
     sphinxcontrib.serializinghtml.jsonimpl: sphinxcontrib_serializinghtml
+    sphinxext.opengraph: sphinxext_opengraph
+    sphinxext.opengraph.descriptionparser: sphinxext_opengraph
+    sphinxext.opengraph.metaparser: sphinxext_opengraph
+    sphinxext.opengraph.socialcards: sphinxext_opengraph
+    sphinxext.opengraph.titleparser: sphinxext_opengraph
+    sphinxext.rediraffe: sphinxext_rediraffe
     stack_data: stack_data
     stack_data.core: stack_data
     stack_data.formatting: stack_data
@@ -2677,6 +2748,7 @@ manifest:
     tinycss2.parser: tinycss2
     tinycss2.serializer: tinycss2
     tinycss2.tokenizer: tinycss2
+    tokenize_rt: tokenize_rt
     tornado: tornado
     tornado.auth: tornado
     tornado.autoreload: tornado
@@ -2832,6 +2904,25 @@ manifest:
     webencodings.mklabels: webencodings
     webencodings.x_user_defined: webencodings
     websocket: websocket_client
+    wheel: wheel
+    wheel.bdist_wheel: wheel
+    wheel.cli: wheel
+    wheel.cli.convert: wheel
+    wheel.cli.pack: wheel
+    wheel.cli.tags: wheel
+    wheel.cli.unpack: wheel
+    wheel.macosx_libfile: wheel
+    wheel.metadata: wheel
+    wheel.util: wheel
+    wheel.vendored: wheel
+    wheel.vendored.packaging: wheel
+    wheel.vendored.packaging.markers: wheel
+    wheel.vendored.packaging.requirements: wheel
+    wheel.vendored.packaging.specifiers: wheel
+    wheel.vendored.packaging.tags: wheel
+    wheel.vendored.packaging.utils: wheel
+    wheel.vendored.packaging.version: wheel
+    wheel.wheelfile: wheel
     yaml: PyYAML
     yaml.composer: PyYAML
     yaml.constructor: PyYAML
@@ -2911,4 +3002,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: b23a5869e4feb5c883a23126c445e8d733e4bf83ade35448d53df15aa88a1e10
+integrity: 90336ef4c5e17ba36eaaf2df659719d7da381ca41de9926829c99b4a8f2ed0cb

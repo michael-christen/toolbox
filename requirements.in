@@ -26,3 +26,11 @@ linkify-it-py
 sphinxcontrib-mermaid
 # - python code (parse, not executing)
 sphinx-autoapi
+sphinx-design
+sphinx-copybutton
+sphinxext-rediraffe
+sphinxext-opengraph
+sphinx-pyscript
+sphinx-tippy
+sphinx-togglebutton
+sphinx-book-theme
