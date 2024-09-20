@@ -1,0 +1,42 @@
+examples.basic.server
+=====================
+
+.. py:module:: examples.basic.server
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   examples.basic.server.Greeter
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   examples.basic.server.get_server
+   examples.basic.server.serve
+
+
+Module Contents
+---------------
+
+.. py:class:: Greeter
+
+   Bases: :py:obj:`examples.basic.hello_pb2_grpc.GreeterServicer`
+
+
+   .. py:method:: SayHello(request: examples.basic.hello_pb2.HelloRequest, context: grpc.aio.ServicerContext) -> examples.basic.hello_pb2.HelloReply
+      :async:
+
+
+
+.. py:function:: get_server() -> grpc.aio.Server
+
+.. py:function:: serve() -> None
+   :async:
+
+

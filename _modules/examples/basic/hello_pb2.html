@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>examples.basic.hello_pb2 &mdash; toolbox  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+    <link rel="shortcut icon" href="../../../_static/wrench.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=f281be69"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../_static/togglebutton.js?v=4a39c7ea"></script>
+        <script src="../../../_static/design-tabs.js?v=f930bc37"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            toolbox
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../hello.html">hello</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../myst.html">MyST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples.html">My nifty title</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../myst_extensions.html">Syntax Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../bringup.html">Log for How I am Bringing up This Repo and My New Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../useful_commands.html">Useful Commands</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/index.html">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Orphaned API References:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/apps/bazel_parser/index.html">apps.bazel_parser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../autoapi/examples/pigweed/tools/console/index.html">examples.pigweed.tools.console</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">toolbox</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">examples.basic.hello_pb2</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for examples.basic.hello_pb2</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1"># Generated by the protocol buffer compiler.  DO NOT EDIT!</span>
+<span class="c1"># source: examples/basic/hello.proto</span>
+<span class="sd">&quot;&quot;&quot;Generated protocol buffer code.&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">google.protobuf.internal</span> <span class="kn">import</span> <span class="n">builder</span> <span class="k">as</span> <span class="n">_builder</span>
+<span class="kn">from</span> <span class="nn">google.protobuf</span> <span class="kn">import</span> <span class="n">descriptor</span> <span class="k">as</span> <span class="n">_descriptor</span>
+<span class="kn">from</span> <span class="nn">google.protobuf</span> <span class="kn">import</span> <span class="n">descriptor_pool</span> <span class="k">as</span> <span class="n">_descriptor_pool</span>
+<span class="kn">from</span> <span class="nn">google.protobuf</span> <span class="kn">import</span> <span class="n">symbol_database</span> <span class="k">as</span> <span class="n">_symbol_database</span>
+<span class="c1"># @@protoc_insertion_point(imports)</span>
+
+<span class="n">_sym_db</span> <span class="o">=</span> <span class="n">_symbol_database</span><span class="o">.</span><span class="n">Default</span><span class="p">()</span>
+
+
+
+
+<div class="viewcode-block" id="DESCRIPTOR">
+<a class="viewcode-back" href="../../../autoapi/examples/basic/hello_pb2/index.html#examples.basic.hello_pb2.DESCRIPTOR">[docs]</a>
+<span class="n">DESCRIPTOR</span> <span class="o">=</span> <span class="n">_descriptor_pool</span><span class="o">.</span><span class="n">Default</span><span class="p">()</span><span class="o">.</span><span class="n">AddSerializedFile</span><span class="p">(</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\n\x1a\x65</span><span class="s1">xamples/basic/hello.proto</span><span class="se">\x12\x0e\x65</span><span class="s1">xamples.basic</span><span class="se">\&quot;\x17\n\x05</span><span class="s1">Hello</span><span class="se">\x12\x0e\n\x02</span><span class="s1">id</span><span class="se">\x18\x01</span><span class="s1"> </span><span class="se">\x01</span><span class="s1">(</span><span class="se">\r</span><span class="s1">R</span><span class="se">\x02</span><span class="s1">id</span><span class="se">\&quot;\&quot;\n\x0c</span><span class="s1">HelloRequest</span><span class="se">\x12\x12\n\x04</span><span class="s1">name</span><span class="se">\x18\x01</span><span class="s1"> </span><span class="se">\x01</span><span class="s1">(</span><span class="se">\t</span><span class="s1">R</span><span class="se">\x04</span><span class="s1">name</span><span class="se">\&quot;</span><span class="s1">&amp;</span><span class="se">\n\n</span><span class="s1">HelloReply</span><span class="se">\x12\x18\n\x07</span><span class="s1">message</span><span class="se">\x18\x01</span><span class="s1"> </span><span class="se">\x01</span><span class="s1">(</span><span class="se">\t</span><span class="s1">R</span><span class="se">\x07</span><span class="s1">message2</span><span class="se">\xfc\x01\n\x07</span><span class="s1">Greeter</span><span class="se">\x12\x46\n\x08</span><span class="s1">SayHello</span><span class="se">\x12\x1c</span><span class="s1">.examples.basic.HelloRequest</span><span class="se">\x1a\x1a</span><span class="s1">.examples.basic.HelloReply</span><span class="se">\&quot;\x00\x12</span><span class="s1">S</span><span class="se">\n\x13</span><span class="s1">SayHelloStreamReply</span><span class="se">\x12\x1c</span><span class="s1">.examples.basic.HelloRequest</span><span class="se">\x1a\x1a</span><span class="s1">.examples.basic.HelloReply</span><span class="se">\&quot;\x00\x30\x01\x12</span><span class="s1">T</span><span class="se">\n\x12</span><span class="s1">SayHelloBidiStream</span><span class="se">\x12\x1c</span><span class="s1">.examples.basic.HelloRequest</span><span class="se">\x1a\x1a</span><span class="s1">.examples.basic.HelloReply</span><span class="se">\&quot;\x00</span><span class="s1">(</span><span class="se">\x01\x30\x01</span><span class="s1">&#39;</span><span class="p">)</span></div>
+
+
+<span class="n">_builder</span><span class="o">.</span><span class="n">BuildMessageAndEnumDescriptors</span><span class="p">(</span><span class="n">DESCRIPTOR</span><span class="p">,</span> <span class="nb">globals</span><span class="p">())</span>
+<span class="n">_builder</span><span class="o">.</span><span class="n">BuildTopDescriptorsAndMessages</span><span class="p">(</span><span class="n">DESCRIPTOR</span><span class="p">,</span> <span class="s1">&#39;examples.basic.hello_pb2&#39;</span><span class="p">,</span> <span class="nb">globals</span><span class="p">())</span>
+<span class="k">if</span> <span class="n">_descriptor</span><span class="o">.</span><span class="n">_USE_C_DESCRIPTORS</span> <span class="o">==</span> <span class="kc">False</span><span class="p">:</span>
+
+  <span class="n">DESCRIPTOR</span><span class="o">.</span><span class="n">_options</span> <span class="o">=</span> <span class="kc">None</span>
+  <span class="n">_HELLO</span><span class="o">.</span><span class="n">_serialized_start</span><span class="o">=</span><span class="mi">46</span>
+  <span class="n">_HELLO</span><span class="o">.</span><span class="n">_serialized_end</span><span class="o">=</span><span class="mi">69</span>
+  <span class="n">_HELLOREQUEST</span><span class="o">.</span><span class="n">_serialized_start</span><span class="o">=</span><span class="mi">71</span>
+  <span class="n">_HELLOREQUEST</span><span class="o">.</span><span class="n">_serialized_end</span><span class="o">=</span><span class="mi">105</span>
+  <span class="n">_HELLOREPLY</span><span class="o">.</span><span class="n">_serialized_start</span><span class="o">=</span><span class="mi">107</span>
+  <span class="n">_HELLOREPLY</span><span class="o">.</span><span class="n">_serialized_end</span><span class="o">=</span><span class="mi">145</span>
+  <span class="n">_GREETER</span><span class="o">.</span><span class="n">_serialized_start</span><span class="o">=</span><span class="mi">148</span>
+  <span class="n">_GREETER</span><span class="o">.</span><span class="n">_serialized_end</span><span class="o">=</span><span class="mi">400</span>
+<span class="c1"># @@protoc_insertion_point(module_scope)</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Michael Christen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

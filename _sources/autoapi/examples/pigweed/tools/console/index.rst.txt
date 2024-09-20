@@ -1,0 +1,58 @@
+examples.pigweed.tools.console
+==============================
+
+.. py:module:: examples.pigweed.tools.console
+
+.. autoapi-nested-parse::
+
+   Wraps pw_system's console to inject quickstart's RPC proto.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   examples.pigweed.tools.console.Device
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   examples.pigweed.tools.console.get_device_connection
+   examples.pigweed.tools.console.main
+
+
+Module Contents
+---------------
+
+.. py:class:: Device(*args, **kwargs)
+
+   Bases: :py:obj:`pw_system.device.Device`
+
+
+   .. py:method:: toggle_led()
+
+      Toggles the onboard (non-RGB) LED.
+
+
+
+   .. py:method:: set_led(on: bool)
+
+      Sets the onboard (non-RGB) LED.
+
+
+
+   .. py:method:: blink(interval_ms=1000, blink_count=None)
+
+      Sets the onboard (non-RGB) LED to blink on and off.
+
+
+
+.. py:function:: get_device_connection(setup_logging: bool = True, log_level: int = logging.DEBUG) -> pw_system.device_connection.DeviceConnection
+
+.. py:function:: main() -> int
+

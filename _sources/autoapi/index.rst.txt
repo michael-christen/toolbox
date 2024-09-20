@@ -1,0 +1,19 @@
+API Reference
+=============
+
+This page contains auto-generated API reference documentation [#f1]_.
+
+.. toctree::
+   :titlesonly:
+
+
+
+   /autoapi/examples/basic/client/index
+   /autoapi/examples/basic/grpc_test/index
+   /autoapi/examples/basic/hello_pb2/index
+   /autoapi/examples/basic/hello_pb2_grpc/index
+   /autoapi/examples/basic/hello_test/index
+   /autoapi/examples/basic/main/index
+   /autoapi/examples/basic/server/index
+
+.. [#f1] Created with `sphinx-autoapi <https://github.com/readthedocs/sphinx-autoapi>`_

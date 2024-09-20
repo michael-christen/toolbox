@@ -1,0 +1,31 @@
+examples.basic.client
+=====================
+
+.. py:module:: examples.basic.client
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   examples.basic.client.get_response
+   examples.basic.client.run
+
+
+Module Contents
+---------------
+
+.. py:function:: get_response() -> examples.basic.hello_pb2.HelloReply
+   :async:
+
+
+   Establish a connection, send hello and return the reply.
+
+   Asyncyhronous.
+
+
+.. py:function:: run() -> None
+   :async:
+
+

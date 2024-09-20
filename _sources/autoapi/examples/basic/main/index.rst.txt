@@ -1,0 +1,22 @@
+examples.basic.main
+===================
+
+.. py:module:: examples.basic.main
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   examples.basic.main.main
+
+
+Module Contents
+---------------
+
+.. py:function:: main()
+
+   Hello
+
+

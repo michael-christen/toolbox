@@ -1,0 +1,31 @@
+examples.basic.hello_test
+=========================
+
+.. py:module:: examples.basic.hello_test
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   examples.basic.hello_test.TestHello
+
+
+Module Contents
+---------------
+
+.. py:class:: TestHello(methodName='runTest')
+
+   Bases: :py:obj:`unittest.TestCase`
+
+
+   Test proto loading.
+
+
+   .. py:method:: test_basics()
+
+      Wassup
+
+
+

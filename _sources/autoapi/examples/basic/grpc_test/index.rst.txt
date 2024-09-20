@@ -1,0 +1,40 @@
+examples.basic.grpc_test
+========================
+
+.. py:module:: examples.basic.grpc_test
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   examples.basic.grpc_test.TestHello
+
+
+Module Contents
+---------------
+
+.. py:class:: TestHello(methodName='runTest')
+
+   Bases: :py:obj:`unittest.IsolatedAsyncioTestCase`
+
+
+   Test asyncio client and server with gRPC.
+
+
+   .. py:method:: asyncSetUp()
+      :async:
+
+
+
+   .. py:method:: asyncTearDown()
+      :async:
+
+
+
+   .. py:method:: test_basics()
+      :async:
+
+
+

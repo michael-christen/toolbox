@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>examples.pigweed.tools.console &mdash; toolbox  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+    <link rel="shortcut icon" href="../../../../_static/wrench.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
+        <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+        <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            toolbox
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../hello.html">hello</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../myst.html">MyST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples.html">My nifty title</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../myst_extensions.html">Syntax Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../bringup.html">Log for How I am Bringing up This Repo and My New Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../useful_commands.html">Useful Commands</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../autoapi/index.html">API Reference</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Orphaned API References:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../autoapi/apps/bazel_parser/index.html">apps.bazel_parser</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../autoapi/examples/pigweed/tools/console/index.html">examples.pigweed.tools.console</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">toolbox</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">examples.pigweed.tools.console</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for examples.pigweed.tools.console</h1><div class="highlight"><pre>
+<span></span><span class="c1"># Copyright 2024 The Pigweed Authors</span>
+<span class="c1">#</span>
+<span class="c1"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;); you may not</span>
+<span class="c1"># use this file except in compliance with the License. You may obtain a copy of</span>
+<span class="c1"># the License at</span>
+<span class="c1">#</span>
+<span class="c1">#     https://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="c1">#</span>
+<span class="c1"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="c1"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT</span>
+<span class="c1"># WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the</span>
+<span class="c1"># License for the specific language governing permissions and limitations under</span>
+<span class="c1"># the License.</span>
+<span class="sd">&quot;&quot;&quot;Wraps pw_system&#39;s console to inject quickstart&#39;s RPC proto.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">argparse</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+
+<span class="kn">import</span> <span class="nn">pw_cli</span>
+<span class="kn">import</span> <span class="nn">pw_system.console</span>
+<span class="kn">from</span> <span class="nn">pw_system.device</span> <span class="kn">import</span> <span class="n">Device</span> <span class="k">as</span> <span class="n">PwSystemDevice</span>
+<span class="kn">from</span> <span class="nn">pw_system.device_connection</span> <span class="kn">import</span> <span class="n">DeviceConnection</span>
+<span class="kn">from</span> <span class="nn">pw_system.device_connection</span> <span class="kn">import</span> <span class="n">add_device_args</span>
+<span class="kn">from</span> <span class="nn">pw_system.device_connection</span> <span class="kn">import</span> <span class="p">(</span>
+    <span class="n">create_device_serial_or_socket_connection</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">examples.pigweed.modules.blinky</span> <span class="kn">import</span> <span class="n">blinky_pb2</span>
+
+<span class="n">_LOG</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span>
+
+
+<span class="c1"># Quickstart-specific device classes, new functions can be added here.</span>
+<span class="c1"># similar to ones on the parent pw_system.device.Device class:</span>
+<span class="c1"># https://cs.opensource.google/pigweed/pigweed/+/main:pw_system/py/pw_system/device.py?q=%22def%20run_tests(%22</span>
+<div class="viewcode-block" id="Device">
+<a class="viewcode-back" href="../../../../autoapi/examples/pigweed/tools/console/index.html#examples.pigweed.tools.console.Device">[docs]</a>
+<span class="k">class</span> <span class="nc">Device</span><span class="p">(</span><span class="n">PwSystemDevice</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<div class="viewcode-block" id="Device.toggle_led">
+<a class="viewcode-back" href="../../../../autoapi/examples/pigweed/tools/console/index.html#examples.pigweed.tools.console.Device.toggle_led">[docs]</a>
+    <span class="k">def</span> <span class="nf">toggle_led</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Toggles the onboard (non-RGB) LED.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rpcs</span><span class="o">.</span><span class="n">blinky</span><span class="o">.</span><span class="n">Blinky</span><span class="o">.</span><span class="n">ToggleLed</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="Device.set_led">
+<a class="viewcode-back" href="../../../../autoapi/examples/pigweed/tools/console/index.html#examples.pigweed.tools.console.Device.set_led">[docs]</a>
+    <span class="k">def</span> <span class="nf">set_led</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">on</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the onboard (non-RGB) LED.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rpcs</span><span class="o">.</span><span class="n">blinky</span><span class="o">.</span><span class="n">Blinky</span><span class="o">.</span><span class="n">SetLed</span><span class="p">(</span><span class="n">on</span><span class="o">=</span><span class="n">on</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Device.blink">
+<a class="viewcode-back" href="../../../../autoapi/examples/pigweed/tools/console/index.html#examples.pigweed.tools.console.Device.blink">[docs]</a>
+    <span class="k">def</span> <span class="nf">blink</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">interval_ms</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">blink_count</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets the onboard (non-RGB) LED to blink on and off.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rpcs</span><span class="o">.</span><span class="n">blinky</span><span class="o">.</span><span class="n">Blinky</span><span class="o">.</span><span class="n">Blink</span><span class="p">(</span>
+            <span class="n">interval_ms</span><span class="o">=</span><span class="n">interval_ms</span><span class="p">,</span> <span class="n">blink_count</span><span class="o">=</span><span class="n">blink_count</span>
+        <span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="get_device_connection">
+<a class="viewcode-back" href="../../../../autoapi/examples/pigweed/tools/console/index.html#examples.pigweed.tools.console.get_device_connection">[docs]</a>
+<span class="k">def</span> <span class="nf">get_device_connection</span><span class="p">(</span>
+    <span class="n">setup_logging</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">log_level</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DeviceConnection</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">setup_logging</span><span class="p">:</span>
+        <span class="n">pw_cli</span><span class="o">.</span><span class="n">log</span><span class="o">.</span><span class="n">install</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">log_level</span><span class="p">)</span>
+
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
+        <span class="n">prog</span><span class="o">=</span><span class="s2">&quot;quickstart&quot;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="vm">__doc__</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">add_device_args</span><span class="p">(</span><span class="n">parser</span><span class="p">)</span>
+    <span class="n">args</span><span class="p">,</span> <span class="n">_remaning_args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_known_args</span><span class="p">()</span>
+
+    <span class="n">compiled_protos</span> <span class="o">=</span> <span class="p">[</span><span class="n">blinky_pb2</span><span class="p">]</span>
+
+    <span class="n">device_context</span> <span class="o">=</span> <span class="n">create_device_serial_or_socket_connection</span><span class="p">(</span>
+        <span class="n">device</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">device</span><span class="p">,</span>
+        <span class="n">baudrate</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">baudrate</span><span class="p">,</span>
+        <span class="n">token_databases</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">token_databases</span><span class="p">,</span>
+        <span class="n">compiled_protos</span><span class="o">=</span><span class="n">compiled_protos</span><span class="p">,</span>
+        <span class="n">socket_addr</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">socket_addr</span><span class="p">,</span>
+        <span class="n">ticks_per_second</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">ticks_per_second</span><span class="p">,</span>
+        <span class="n">serial_debug</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">serial_debug</span><span class="p">,</span>
+        <span class="n">rpc_logging</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">rpc_logging</span><span class="p">,</span>
+        <span class="n">hdlc_encoding</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">hdlc_encoding</span><span class="p">,</span>
+        <span class="n">channel_id</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">channel_id</span><span class="p">,</span>
+        <span class="c1"># Device tracing is not hooked up yet for Pigweed Sense.</span>
+        <span class="n">device_tracing</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">device_class</span><span class="o">=</span><span class="n">Device</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">device_context</span></div>
+
+
+
+<div class="viewcode-block" id="main">
+<a class="viewcode-back" href="../../../../autoapi/examples/pigweed/tools/console/index.html#examples.pigweed.tools.console.main">[docs]</a>
+<span class="k">def</span> <span class="nf">main</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">pw_system</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">main</span><span class="p">(</span>
+        <span class="n">compiled_protos</span><span class="o">=</span><span class="p">[</span><span class="n">blinky_pb2</span><span class="p">],</span>
+        <span class="n">device_connection</span><span class="o">=</span><span class="n">get_device_connection</span><span class="p">(),</span>
+    <span class="p">)</span></div>
+
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Michael Christen.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
