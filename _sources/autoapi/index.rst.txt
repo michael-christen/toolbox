@@ -7,7 +7,6 @@ This page contains auto-generated API reference documentation [#f1]_.
    :titlesonly:
 
 
-
    /autoapi/examples/basic/client/index
    /autoapi/examples/basic/grpc_test/index
    /autoapi/examples/basic/hello_pb2/index

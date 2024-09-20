@@ -25,7 +25,4 @@ Module Contents
 
    .. py:method:: test_basics()
 
-      Wassup
-
-
 

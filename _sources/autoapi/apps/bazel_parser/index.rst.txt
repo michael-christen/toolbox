@@ -17,8 +17,3 @@ Module Contents
 
 .. py:function:: main()
 
-   Oh to be, or not to be.
-
-   That is the question.
-
-
