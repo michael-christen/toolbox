@@ -21,7 +21,6 @@ filegroup(
 sphinx_html(
     name = "docs",
     srcs = [
-        "hello.rst",
         "myst.md",
         # has warnings
         "myst_extensions.md",
