@@ -10,4 +10,4 @@ communication.
 :::{important} Our Values We believe in a community-driven approach of
 open-source tools that are composable and extensible. :::
 
-[Syntax guide](https://myst-parser.readthedocs.io/en/v0.13.3/using/syntax.html)
+This is the [Syntax guide](https://myst-parser.readthedocs.io/en/v0.13.3/using/syntax.html)
