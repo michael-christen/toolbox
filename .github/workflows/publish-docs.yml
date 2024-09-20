@@ -1,0 +1,22 @@
+name: Build & Publish Docs
+run-name: Build & Publish Docs
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build_and_publish_docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/bazel-setup
+        with:
+          buildbuddy_api_key: ${{ secrets.BUILDBUDDY_API_KEY }}
+      - name: Build Docs
+        run: |
+          bazel build //docs:docs
+      - name: Upload Docs
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: bazel-bin/docs/docs_html

@@ -65,9 +65,4 @@ jobs:
           verbose: true
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage.dat
-      - name: Upload Docs Example
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: bazel-bin/docs/docs_html
       - run: echo "Status is ${{ job.status }}."
