@@ -179,6 +179,8 @@ manifest:
     IPython.utils.ulinecache: ipython
     IPython.utils.version: ipython
     IPython.utils.wildcard: ipython
+    alabaster: alabaster
+    alabaster.support: alabaster
     anyio: anyio
     anyio.abc: anyio
     anyio.from_thread: anyio
@@ -206,6 +208,95 @@ manifest:
     arrow.locales: arrow
     arrow.parser: arrow
     arrow.util: arrow
+    astroid: astroid
+    astroid.arguments: astroid
+    astroid.astroid_manager: astroid
+    astroid.bases: astroid
+    astroid.brain: astroid
+    astroid.brain.brain_argparse: astroid
+    astroid.brain.brain_attrs: astroid
+    astroid.brain.brain_boto3: astroid
+    astroid.brain.brain_builtin_inference: astroid
+    astroid.brain.brain_collections: astroid
+    astroid.brain.brain_crypt: astroid
+    astroid.brain.brain_ctypes: astroid
+    astroid.brain.brain_curses: astroid
+    astroid.brain.brain_dataclasses: astroid
+    astroid.brain.brain_datetime: astroid
+    astroid.brain.brain_dateutil: astroid
+    astroid.brain.brain_functools: astroid
+    astroid.brain.brain_gi: astroid
+    astroid.brain.brain_hashlib: astroid
+    astroid.brain.brain_http: astroid
+    astroid.brain.brain_hypothesis: astroid
+    astroid.brain.brain_io: astroid
+    astroid.brain.brain_mechanize: astroid
+    astroid.brain.brain_multiprocessing: astroid
+    astroid.brain.brain_namedtuple_enum: astroid
+    astroid.brain.brain_nose: astroid
+    astroid.brain.brain_numpy_core_einsumfunc: astroid
+    astroid.brain.brain_numpy_core_fromnumeric: astroid
+    astroid.brain.brain_numpy_core_function_base: astroid
+    astroid.brain.brain_numpy_core_multiarray: astroid
+    astroid.brain.brain_numpy_core_numeric: astroid
+    astroid.brain.brain_numpy_core_numerictypes: astroid
+    astroid.brain.brain_numpy_core_umath: astroid
+    astroid.brain.brain_numpy_ma: astroid
+    astroid.brain.brain_numpy_ndarray: astroid
+    astroid.brain.brain_numpy_random_mtrand: astroid
+    astroid.brain.brain_numpy_utils: astroid
+    astroid.brain.brain_pathlib: astroid
+    astroid.brain.brain_pkg_resources: astroid
+    astroid.brain.brain_pytest: astroid
+    astroid.brain.brain_qt: astroid
+    astroid.brain.brain_random: astroid
+    astroid.brain.brain_re: astroid
+    astroid.brain.brain_regex: astroid
+    astroid.brain.brain_responses: astroid
+    astroid.brain.brain_scipy_signal: astroid
+    astroid.brain.brain_signal: astroid
+    astroid.brain.brain_six: astroid
+    astroid.brain.brain_sqlalchemy: astroid
+    astroid.brain.brain_ssl: astroid
+    astroid.brain.brain_subprocess: astroid
+    astroid.brain.brain_threading: astroid
+    astroid.brain.brain_type: astroid
+    astroid.brain.brain_typing: astroid
+    astroid.brain.brain_unittest: astroid
+    astroid.brain.brain_uuid: astroid
+    astroid.brain.helpers: astroid
+    astroid.builder: astroid
+    astroid.const: astroid
+    astroid.constraint: astroid
+    astroid.context: astroid
+    astroid.decorators: astroid
+    astroid.exceptions: astroid
+    astroid.filter_statements: astroid
+    astroid.helpers: astroid
+    astroid.inference_tip: astroid
+    astroid.interpreter: astroid
+    astroid.interpreter.dunder_lookup: astroid
+    astroid.interpreter.objectmodel: astroid
+    astroid.manager: astroid
+    astroid.modutils: astroid
+    astroid.nodes: astroid
+    astroid.nodes.as_string: astroid
+    astroid.nodes.const: astroid
+    astroid.nodes.node_classes: astroid
+    astroid.nodes.node_ng: astroid
+    astroid.nodes.scoped_nodes: astroid
+    astroid.nodes.scoped_nodes.mixin: astroid
+    astroid.nodes.scoped_nodes.scoped_nodes: astroid
+    astroid.nodes.scoped_nodes.utils: astroid
+    astroid.nodes.utils: astroid
+    astroid.objects: astroid
+    astroid.protocols: astroid
+    astroid.raw_building: astroid
+    astroid.rebuilder: astroid
+    astroid.test_utils: astroid
+    astroid.transforms: astroid
+    astroid.typing: astroid
+    astroid.util: astroid
     asttokens: asttokens
     asttokens.astroid_compat: asttokens
     asttokens.asttokens: asttokens
@@ -226,6 +317,12 @@ manifest:
     attrs.filters: attrs
     attrs.setters: attrs
     attrs.validators: attrs
+    autoapi: sphinx_autoapi
+    autoapi.directives: sphinx_autoapi
+    autoapi.documenters: sphinx_autoapi
+    autoapi.extension: sphinx_autoapi
+    autoapi.inheritance_diagrams: sphinx_autoapi
+    autoapi.settings: sphinx_autoapi
     babel: babel
     babel.core: babel
     babel.dates: babel
@@ -393,6 +490,128 @@ manifest:
     defusedxml.pulldom: defusedxml
     defusedxml.sax: defusedxml
     defusedxml.xmlrpc: defusedxml
+    docutils: docutils
+    docutils.core: docutils
+    docutils.examples: docutils
+    docutils.frontend: docutils
+    docutils.io: docutils
+    docutils.languages: docutils
+    docutils.languages.af: docutils
+    docutils.languages.ar: docutils
+    docutils.languages.ca: docutils
+    docutils.languages.cs: docutils
+    docutils.languages.da: docutils
+    docutils.languages.de: docutils
+    docutils.languages.en: docutils
+    docutils.languages.eo: docutils
+    docutils.languages.es: docutils
+    docutils.languages.fa: docutils
+    docutils.languages.fi: docutils
+    docutils.languages.fr: docutils
+    docutils.languages.gl: docutils
+    docutils.languages.he: docutils
+    docutils.languages.it: docutils
+    docutils.languages.ja: docutils
+    docutils.languages.ko: docutils
+    docutils.languages.lt: docutils
+    docutils.languages.lv: docutils
+    docutils.languages.nl: docutils
+    docutils.languages.pl: docutils
+    docutils.languages.pt_br: docutils
+    docutils.languages.ru: docutils
+    docutils.languages.sk: docutils
+    docutils.languages.sv: docutils
+    docutils.languages.uk: docutils
+    docutils.languages.zh_cn: docutils
+    docutils.languages.zh_tw: docutils
+    docutils.nodes: docutils
+    docutils.parsers: docutils
+    docutils.parsers.commonmark_wrapper: docutils
+    docutils.parsers.null: docutils
+    docutils.parsers.recommonmark_wrapper: docutils
+    docutils.parsers.rst: docutils
+    docutils.parsers.rst.directives: docutils
+    docutils.parsers.rst.directives.admonitions: docutils
+    docutils.parsers.rst.directives.body: docutils
+    docutils.parsers.rst.directives.html: docutils
+    docutils.parsers.rst.directives.images: docutils
+    docutils.parsers.rst.directives.misc: docutils
+    docutils.parsers.rst.directives.parts: docutils
+    docutils.parsers.rst.directives.references: docutils
+    docutils.parsers.rst.directives.tables: docutils
+    docutils.parsers.rst.languages: docutils
+    docutils.parsers.rst.languages.af: docutils
+    docutils.parsers.rst.languages.ar: docutils
+    docutils.parsers.rst.languages.ca: docutils
+    docutils.parsers.rst.languages.cs: docutils
+    docutils.parsers.rst.languages.da: docutils
+    docutils.parsers.rst.languages.de: docutils
+    docutils.parsers.rst.languages.en: docutils
+    docutils.parsers.rst.languages.eo: docutils
+    docutils.parsers.rst.languages.es: docutils
+    docutils.parsers.rst.languages.fa: docutils
+    docutils.parsers.rst.languages.fi: docutils
+    docutils.parsers.rst.languages.fr: docutils
+    docutils.parsers.rst.languages.gl: docutils
+    docutils.parsers.rst.languages.he: docutils
+    docutils.parsers.rst.languages.it: docutils
+    docutils.parsers.rst.languages.ja: docutils
+    docutils.parsers.rst.languages.ko: docutils
+    docutils.parsers.rst.languages.lt: docutils
+    docutils.parsers.rst.languages.lv: docutils
+    docutils.parsers.rst.languages.nl: docutils
+    docutils.parsers.rst.languages.pl: docutils
+    docutils.parsers.rst.languages.pt_br: docutils
+    docutils.parsers.rst.languages.ru: docutils
+    docutils.parsers.rst.languages.sk: docutils
+    docutils.parsers.rst.languages.sv: docutils
+    docutils.parsers.rst.languages.uk: docutils
+    docutils.parsers.rst.languages.zh_cn: docutils
+    docutils.parsers.rst.languages.zh_tw: docutils
+    docutils.parsers.rst.roles: docutils
+    docutils.parsers.rst.states: docutils
+    docutils.parsers.rst.tableparser: docutils
+    docutils.readers: docutils
+    docutils.readers.doctree: docutils
+    docutils.readers.pep: docutils
+    docutils.readers.standalone: docutils
+    docutils.statemachine: docutils
+    docutils.transforms: docutils
+    docutils.transforms.components: docutils
+    docutils.transforms.frontmatter: docutils
+    docutils.transforms.misc: docutils
+    docutils.transforms.parts: docutils
+    docutils.transforms.peps: docutils
+    docutils.transforms.references: docutils
+    docutils.transforms.universal: docutils
+    docutils.transforms.writer_aux: docutils
+    docutils.utils: docutils
+    docutils.utils.code_analyzer: docutils
+    docutils.utils.error_reporting: docutils
+    docutils.utils.math: docutils
+    docutils.utils.math.latex2mathml: docutils
+    docutils.utils.math.math2html: docutils
+    docutils.utils.math.tex2mathml_extern: docutils
+    docutils.utils.math.tex2unichar: docutils
+    docutils.utils.math.unichar2tex: docutils
+    docutils.utils.punctuation_chars: docutils
+    docutils.utils.roman: docutils
+    docutils.utils.smartquotes: docutils
+    docutils.utils.urischemes: docutils
+    docutils.writers: docutils
+    docutils.writers.docutils_xml: docutils
+    docutils.writers.html4css1: docutils
+    docutils.writers.html5_polyglot: docutils
+    docutils.writers.latex2e: docutils
+    docutils.writers.manpage: docutils
+    docutils.writers.null: docutils
+    docutils.writers.odf_odt: docutils
+    docutils.writers.odf_odt.prepstyles: docutils
+    docutils.writers.odf_odt.pygmentsformatter: docutils
+    docutils.writers.pep_html: docutils
+    docutils.writers.pseudoxml: docutils
+    docutils.writers.s5_html: docutils
+    docutils.writers.xetex: docutils
     executing: executing
     executing.executing: executing
     executing.version: executing
@@ -526,6 +745,8 @@ manifest:
     idna.intranges: idna
     idna.package_data: idna
     idna.uts46data: idna
+    imagesize: imagesize
+    imagesize.imagesize: imagesize
     iniconfig: iniconfig
     iniconfig.exceptions: iniconfig
     ipdb: ipdb
@@ -976,11 +1197,111 @@ manifest:
     jupyterlab_server.translations_handler: jupyterlab_server
     jupyterlab_server.workspaces_app: jupyterlab_server
     jupyterlab_server.workspaces_handler: jupyterlab_server
+    linkify_it: linkify_it_py
+    linkify_it.main: linkify_it_py
+    linkify_it.tlds: linkify_it_py
+    linkify_it.ucre: linkify_it_py
+    markdown_it: markdown_it_py
+    markdown_it.cli: markdown_it_py
+    markdown_it.cli.parse: markdown_it_py
+    markdown_it.common: markdown_it_py
+    markdown_it.common.entities: markdown_it_py
+    markdown_it.common.html_blocks: markdown_it_py
+    markdown_it.common.html_re: markdown_it_py
+    markdown_it.common.normalize_url: markdown_it_py
+    markdown_it.common.utils: markdown_it_py
+    markdown_it.helpers: markdown_it_py
+    markdown_it.helpers.parse_link_destination: markdown_it_py
+    markdown_it.helpers.parse_link_label: markdown_it_py
+    markdown_it.helpers.parse_link_title: markdown_it_py
+    markdown_it.main: markdown_it_py
+    markdown_it.parser_block: markdown_it_py
+    markdown_it.parser_core: markdown_it_py
+    markdown_it.parser_inline: markdown_it_py
+    markdown_it.presets: markdown_it_py
+    markdown_it.presets.commonmark: markdown_it_py
+    markdown_it.presets.default: markdown_it_py
+    markdown_it.presets.zero: markdown_it_py
+    markdown_it.renderer: markdown_it_py
+    markdown_it.ruler: markdown_it_py
+    markdown_it.rules_block: markdown_it_py
+    markdown_it.rules_block.blockquote: markdown_it_py
+    markdown_it.rules_block.code: markdown_it_py
+    markdown_it.rules_block.fence: markdown_it_py
+    markdown_it.rules_block.heading: markdown_it_py
+    markdown_it.rules_block.hr: markdown_it_py
+    markdown_it.rules_block.html_block: markdown_it_py
+    markdown_it.rules_block.lheading: markdown_it_py
+    markdown_it.rules_block.list: markdown_it_py
+    markdown_it.rules_block.paragraph: markdown_it_py
+    markdown_it.rules_block.reference: markdown_it_py
+    markdown_it.rules_block.state_block: markdown_it_py
+    markdown_it.rules_block.table: markdown_it_py
+    markdown_it.rules_core: markdown_it_py
+    markdown_it.rules_core.block: markdown_it_py
+    markdown_it.rules_core.inline: markdown_it_py
+    markdown_it.rules_core.linkify: markdown_it_py
+    markdown_it.rules_core.normalize: markdown_it_py
+    markdown_it.rules_core.replacements: markdown_it_py
+    markdown_it.rules_core.smartquotes: markdown_it_py
+    markdown_it.rules_core.state_core: markdown_it_py
+    markdown_it.rules_core.text_join: markdown_it_py
+    markdown_it.rules_inline: markdown_it_py
+    markdown_it.rules_inline.autolink: markdown_it_py
+    markdown_it.rules_inline.backticks: markdown_it_py
+    markdown_it.rules_inline.balance_pairs: markdown_it_py
+    markdown_it.rules_inline.emphasis: markdown_it_py
+    markdown_it.rules_inline.entity: markdown_it_py
+    markdown_it.rules_inline.escape: markdown_it_py
+    markdown_it.rules_inline.fragments_join: markdown_it_py
+    markdown_it.rules_inline.html_inline: markdown_it_py
+    markdown_it.rules_inline.image: markdown_it_py
+    markdown_it.rules_inline.link: markdown_it_py
+    markdown_it.rules_inline.linkify: markdown_it_py
+    markdown_it.rules_inline.newline: markdown_it_py
+    markdown_it.rules_inline.state_inline: markdown_it_py
+    markdown_it.rules_inline.strikethrough: markdown_it_py
+    markdown_it.rules_inline.text: markdown_it_py
+    markdown_it.token: markdown_it_py
+    markdown_it.tree: markdown_it_py
+    markdown_it.utils: markdown_it_py
     markupsafe: MarkupSafe
     matplotlib_inline: matplotlib_inline
     matplotlib_inline.backend_inline: matplotlib_inline
     matplotlib_inline.config: matplotlib_inline
     mccabe: mccabe
+    mdit_py_plugins: mdit_py_plugins
+    mdit_py_plugins.admon: mdit_py_plugins
+    mdit_py_plugins.admon.index: mdit_py_plugins
+    mdit_py_plugins.amsmath: mdit_py_plugins
+    mdit_py_plugins.anchors: mdit_py_plugins
+    mdit_py_plugins.anchors.index: mdit_py_plugins
+    mdit_py_plugins.attrs: mdit_py_plugins
+    mdit_py_plugins.attrs.index: mdit_py_plugins
+    mdit_py_plugins.attrs.parse: mdit_py_plugins
+    mdit_py_plugins.colon_fence: mdit_py_plugins
+    mdit_py_plugins.container: mdit_py_plugins
+    mdit_py_plugins.container.index: mdit_py_plugins
+    mdit_py_plugins.deflist: mdit_py_plugins
+    mdit_py_plugins.deflist.index: mdit_py_plugins
+    mdit_py_plugins.dollarmath: mdit_py_plugins
+    mdit_py_plugins.dollarmath.index: mdit_py_plugins
+    mdit_py_plugins.field_list: mdit_py_plugins
+    mdit_py_plugins.footnote: mdit_py_plugins
+    mdit_py_plugins.footnote.index: mdit_py_plugins
+    mdit_py_plugins.front_matter: mdit_py_plugins
+    mdit_py_plugins.front_matter.index: mdit_py_plugins
+    mdit_py_plugins.myst_blocks: mdit_py_plugins
+    mdit_py_plugins.myst_blocks.index: mdit_py_plugins
+    mdit_py_plugins.myst_role: mdit_py_plugins
+    mdit_py_plugins.myst_role.index: mdit_py_plugins
+    mdit_py_plugins.substitution: mdit_py_plugins
+    mdit_py_plugins.tasklists: mdit_py_plugins
+    mdit_py_plugins.texmath: mdit_py_plugins
+    mdit_py_plugins.texmath.index: mdit_py_plugins
+    mdit_py_plugins.utils: mdit_py_plugins
+    mdit_py_plugins.wordcount: mdit_py_plugins
+    mdurl: mdurl
     mistune: mistune
     mistune.block_parser: mistune
     mistune.core: mistune
@@ -1298,6 +1619,33 @@ manifest:
     mypyc.transform.lower: mypy
     mypyc.transform.refcount: mypy
     mypyc.transform.uninit: mypy
+    myst_parser: myst_parser
+    myst_parser.cli: myst_parser
+    myst_parser.config: myst_parser
+    myst_parser.config.dc_validators: myst_parser
+    myst_parser.config.main: myst_parser
+    myst_parser.docutils_: myst_parser
+    myst_parser.inventory: myst_parser
+    myst_parser.mdit_to_docutils: myst_parser
+    myst_parser.mdit_to_docutils.base: myst_parser
+    myst_parser.mdit_to_docutils.html_to_nodes: myst_parser
+    myst_parser.mdit_to_docutils.sphinx_: myst_parser
+    myst_parser.mdit_to_docutils.transforms: myst_parser
+    myst_parser.mocking: myst_parser
+    myst_parser.parsers: myst_parser
+    myst_parser.parsers.directives: myst_parser
+    myst_parser.parsers.docutils_: myst_parser
+    myst_parser.parsers.mdit: myst_parser
+    myst_parser.parsers.options: myst_parser
+    myst_parser.parsers.parse_html: myst_parser
+    myst_parser.parsers.sphinx_: myst_parser
+    myst_parser.sphinx_: myst_parser
+    myst_parser.sphinx_ext: myst_parser
+    myst_parser.sphinx_ext.directives: myst_parser
+    myst_parser.sphinx_ext.main: myst_parser
+    myst_parser.sphinx_ext.mathjax: myst_parser
+    myst_parser.sphinx_ext.myst_refs: myst_parser
+    myst_parser.warnings_: myst_parser
     nbclient: nbclient
     nbclient.cli: nbclient
     nbclient.client: nbclient
@@ -2091,12 +2439,247 @@ manifest:
     setuptools.windows_support: setuptools
     six: six
     sniffio: sniffio
+    snowballstemmer: snowballstemmer
+    snowballstemmer.among: snowballstemmer
+    snowballstemmer.arabic_stemmer: snowballstemmer
+    snowballstemmer.armenian_stemmer: snowballstemmer
+    snowballstemmer.basestemmer: snowballstemmer
+    snowballstemmer.basque_stemmer: snowballstemmer
+    snowballstemmer.catalan_stemmer: snowballstemmer
+    snowballstemmer.danish_stemmer: snowballstemmer
+    snowballstemmer.dutch_stemmer: snowballstemmer
+    snowballstemmer.english_stemmer: snowballstemmer
+    snowballstemmer.finnish_stemmer: snowballstemmer
+    snowballstemmer.french_stemmer: snowballstemmer
+    snowballstemmer.german_stemmer: snowballstemmer
+    snowballstemmer.greek_stemmer: snowballstemmer
+    snowballstemmer.hindi_stemmer: snowballstemmer
+    snowballstemmer.hungarian_stemmer: snowballstemmer
+    snowballstemmer.indonesian_stemmer: snowballstemmer
+    snowballstemmer.irish_stemmer: snowballstemmer
+    snowballstemmer.italian_stemmer: snowballstemmer
+    snowballstemmer.lithuanian_stemmer: snowballstemmer
+    snowballstemmer.nepali_stemmer: snowballstemmer
+    snowballstemmer.norwegian_stemmer: snowballstemmer
+    snowballstemmer.porter_stemmer: snowballstemmer
+    snowballstemmer.portuguese_stemmer: snowballstemmer
+    snowballstemmer.romanian_stemmer: snowballstemmer
+    snowballstemmer.russian_stemmer: snowballstemmer
+    snowballstemmer.serbian_stemmer: snowballstemmer
+    snowballstemmer.spanish_stemmer: snowballstemmer
+    snowballstemmer.swedish_stemmer: snowballstemmer
+    snowballstemmer.tamil_stemmer: snowballstemmer
+    snowballstemmer.turkish_stemmer: snowballstemmer
+    snowballstemmer.yiddish_stemmer: snowballstemmer
     soupsieve: soupsieve
     soupsieve.css_match: soupsieve
     soupsieve.css_parser: soupsieve
     soupsieve.css_types: soupsieve
     soupsieve.pretty: soupsieve
     soupsieve.util: soupsieve
+    sphinx: sphinx
+    sphinx.addnodes: sphinx
+    sphinx.application: sphinx
+    sphinx.builders: sphinx
+    sphinx.builders.changes: sphinx
+    sphinx.builders.dirhtml: sphinx
+    sphinx.builders.dummy: sphinx
+    sphinx.builders.epub3: sphinx
+    sphinx.builders.gettext: sphinx
+    sphinx.builders.html: sphinx
+    sphinx.builders.html.transforms: sphinx
+    sphinx.builders.latex: sphinx
+    sphinx.builders.latex.constants: sphinx
+    sphinx.builders.latex.nodes: sphinx
+    sphinx.builders.latex.theming: sphinx
+    sphinx.builders.latex.transforms: sphinx
+    sphinx.builders.latex.util: sphinx
+    sphinx.builders.linkcheck: sphinx
+    sphinx.builders.manpage: sphinx
+    sphinx.builders.singlehtml: sphinx
+    sphinx.builders.texinfo: sphinx
+    sphinx.builders.text: sphinx
+    sphinx.builders.xml: sphinx
+    sphinx.cmd: sphinx
+    sphinx.cmd.build: sphinx
+    sphinx.cmd.make_mode: sphinx
+    sphinx.cmd.quickstart: sphinx
+    sphinx.config: sphinx
+    sphinx.deprecation: sphinx
+    sphinx.directives: sphinx
+    sphinx.directives.code: sphinx
+    sphinx.directives.other: sphinx
+    sphinx.directives.patches: sphinx
+    sphinx.domains: sphinx
+    sphinx.domains.c: sphinx
+    sphinx.domains.changeset: sphinx
+    sphinx.domains.citation: sphinx
+    sphinx.domains.cpp: sphinx
+    sphinx.domains.index: sphinx
+    sphinx.domains.javascript: sphinx
+    sphinx.domains.math: sphinx
+    sphinx.domains.python: sphinx
+    sphinx.domains.rst: sphinx
+    sphinx.domains.std: sphinx
+    sphinx.environment: sphinx
+    sphinx.environment.adapters: sphinx
+    sphinx.environment.adapters.asset: sphinx
+    sphinx.environment.adapters.indexentries: sphinx
+    sphinx.environment.adapters.toctree: sphinx
+    sphinx.environment.collectors: sphinx
+    sphinx.environment.collectors.asset: sphinx
+    sphinx.environment.collectors.dependencies: sphinx
+    sphinx.environment.collectors.metadata: sphinx
+    sphinx.environment.collectors.title: sphinx
+    sphinx.environment.collectors.toctree: sphinx
+    sphinx.errors: sphinx
+    sphinx.events: sphinx
+    sphinx.ext: sphinx
+    sphinx.ext.apidoc: sphinx
+    sphinx.ext.autodoc: sphinx
+    sphinx.ext.autodoc.directive: sphinx
+    sphinx.ext.autodoc.importer: sphinx
+    sphinx.ext.autodoc.mock: sphinx
+    sphinx.ext.autodoc.preserve_defaults: sphinx
+    sphinx.ext.autodoc.type_comment: sphinx
+    sphinx.ext.autodoc.typehints: sphinx
+    sphinx.ext.autosectionlabel: sphinx
+    sphinx.ext.autosummary: sphinx
+    sphinx.ext.autosummary.generate: sphinx
+    sphinx.ext.coverage: sphinx
+    sphinx.ext.doctest: sphinx
+    sphinx.ext.duration: sphinx
+    sphinx.ext.extlinks: sphinx
+    sphinx.ext.githubpages: sphinx
+    sphinx.ext.graphviz: sphinx
+    sphinx.ext.ifconfig: sphinx
+    sphinx.ext.imgconverter: sphinx
+    sphinx.ext.imgmath: sphinx
+    sphinx.ext.inheritance_diagram: sphinx
+    sphinx.ext.intersphinx: sphinx
+    sphinx.ext.linkcode: sphinx
+    sphinx.ext.mathjax: sphinx
+    sphinx.ext.napoleon: sphinx
+    sphinx.ext.napoleon.docstring: sphinx
+    sphinx.ext.todo: sphinx
+    sphinx.ext.viewcode: sphinx
+    sphinx.extension: sphinx
+    sphinx.highlighting: sphinx
+    sphinx.io: sphinx
+    sphinx.jinja2glue: sphinx
+    sphinx.locale: sphinx
+    sphinx.parsers: sphinx
+    sphinx.project: sphinx
+    sphinx.pycode: sphinx
+    sphinx.pycode.ast: sphinx
+    sphinx.pycode.parser: sphinx
+    sphinx.pygments_styles: sphinx
+    sphinx.registry: sphinx
+    sphinx.roles: sphinx
+    sphinx.search: sphinx
+    sphinx.search.da: sphinx
+    sphinx.search.de: sphinx
+    sphinx.search.en: sphinx
+    sphinx.search.es: sphinx
+    sphinx.search.fi: sphinx
+    sphinx.search.fr: sphinx
+    sphinx.search.hu: sphinx
+    sphinx.search.it: sphinx
+    sphinx.search.ja: sphinx
+    sphinx.search.nl: sphinx
+    sphinx.search.no: sphinx
+    sphinx.search.pt: sphinx
+    sphinx.search.ro: sphinx
+    sphinx.search.ru: sphinx
+    sphinx.search.sv: sphinx
+    sphinx.search.tr: sphinx
+    sphinx.search.zh: sphinx
+    sphinx.testing: sphinx
+    sphinx.testing.fixtures: sphinx
+    sphinx.testing.path: sphinx
+    sphinx.testing.restructuredtext: sphinx
+    sphinx.testing.util: sphinx
+    sphinx.theming: sphinx
+    sphinx.transforms: sphinx
+    sphinx.transforms.compact_bullet_list: sphinx
+    sphinx.transforms.i18n: sphinx
+    sphinx.transforms.post_transforms: sphinx
+    sphinx.transforms.post_transforms.code: sphinx
+    sphinx.transforms.post_transforms.images: sphinx
+    sphinx.transforms.references: sphinx
+    sphinx.util: sphinx
+    sphinx.util.build_phase: sphinx
+    sphinx.util.cfamily: sphinx
+    sphinx.util.console: sphinx
+    sphinx.util.display: sphinx
+    sphinx.util.docfields: sphinx
+    sphinx.util.docstrings: sphinx
+    sphinx.util.docutils: sphinx
+    sphinx.util.exceptions: sphinx
+    sphinx.util.fileutil: sphinx
+    sphinx.util.http_date: sphinx
+    sphinx.util.i18n: sphinx
+    sphinx.util.images: sphinx
+    sphinx.util.index_entries: sphinx
+    sphinx.util.inspect: sphinx
+    sphinx.util.inventory: sphinx
+    sphinx.util.logging: sphinx
+    sphinx.util.matching: sphinx
+    sphinx.util.math: sphinx
+    sphinx.util.nodes: sphinx
+    sphinx.util.osutil: sphinx
+    sphinx.util.parallel: sphinx
+    sphinx.util.parsing: sphinx
+    sphinx.util.png: sphinx
+    sphinx.util.requests: sphinx
+    sphinx.util.rst: sphinx
+    sphinx.util.tags: sphinx
+    sphinx.util.template: sphinx
+    sphinx.util.texescape: sphinx
+    sphinx.util.typing: sphinx
+    sphinx.versioning: sphinx
+    sphinx.writers: sphinx
+    sphinx.writers.html: sphinx
+    sphinx.writers.html5: sphinx
+    sphinx.writers.latex: sphinx
+    sphinx.writers.manpage: sphinx
+    sphinx.writers.texinfo: sphinx
+    sphinx.writers.text: sphinx
+    sphinx.writers.xml: sphinx
+    sphinx_copybutton: sphinx_copybutton
+    sphinx_design: sphinx_design
+    sphinx_design.article_info: sphinx_design
+    sphinx_design.badges_buttons: sphinx_design
+    sphinx_design.cards: sphinx_design
+    sphinx_design.compiled: sphinx_design
+    sphinx_design.dropdown: sphinx_design
+    sphinx_design.extension: sphinx_design
+    sphinx_design.grids: sphinx_design
+    sphinx_design.icons: sphinx_design
+    sphinx_design.shared: sphinx_design
+    sphinx_design.tabs: sphinx_design
+    sphinx_pyscript: sphinx_pyscript
+    sphinx_rtd_theme: sphinx_rtd_theme
+    sphinx_tippy: sphinx_tippy
+    sphinx_togglebutton: sphinx_togglebutton
+    sphinxcontrib.applehelp: sphinxcontrib_applehelp
+    sphinxcontrib.autoclassdiag: sphinxcontrib_mermaid
+    sphinxcontrib.devhelp: sphinxcontrib_devhelp
+    sphinxcontrib.exceptions: sphinxcontrib_mermaid
+    sphinxcontrib.htmlhelp: sphinxcontrib_htmlhelp
+    sphinxcontrib.jquery: sphinxcontrib_jquery
+    sphinxcontrib.jsmath: sphinxcontrib_jsmath
+    sphinxcontrib.jsmath.version: sphinxcontrib_jsmath
+    sphinxcontrib.mermaid: sphinxcontrib_mermaid
+    sphinxcontrib.qthelp: sphinxcontrib_qthelp
+    sphinxcontrib.serializinghtml: sphinxcontrib_serializinghtml
+    sphinxcontrib.serializinghtml.jsonimpl: sphinxcontrib_serializinghtml
+    sphinxext.opengraph: sphinxext_opengraph
+    sphinxext.opengraph.descriptionparser: sphinxext_opengraph
+    sphinxext.opengraph.metaparser: sphinxext_opengraph
+    sphinxext.opengraph.socialcards: sphinxext_opengraph
+    sphinxext.opengraph.titleparser: sphinxext_opengraph
+    sphinxext.rediraffe: sphinxext_rediraffe
     stack_data: stack_data
     stack_data.core: stack_data
     stack_data.formatting: stack_data
@@ -2115,6 +2698,7 @@ manifest:
     tinycss2.parser: tinycss2
     tinycss2.serializer: tinycss2
     tinycss2.tokenizer: tinycss2
+    tokenize_rt: tokenize_rt
     tornado: tornado
     tornado.auth: tornado
     tornado.autoreload: tornado
@@ -2208,6 +2792,19 @@ manifest:
     traitlets.utils.text: traitlets
     traitlets.utils.warnings: traitlets
     typing_extensions: typing_extensions
+    uc_micro: uc_micro_py
+    uc_micro.categories: uc_micro_py
+    uc_micro.categories.Cc: uc_micro_py
+    uc_micro.categories.Cc.regex: uc_micro_py
+    uc_micro.categories.Cf: uc_micro_py
+    uc_micro.categories.Cf.regex: uc_micro_py
+    uc_micro.categories.P: uc_micro_py
+    uc_micro.categories.P.regex: uc_micro_py
+    uc_micro.categories.Z: uc_micro_py
+    uc_micro.categories.Z.regex: uc_micro_py
+    uc_micro.properties: uc_micro_py
+    uc_micro.properties.Any: uc_micro_py
+    uc_micro.properties.Any.regex: uc_micro_py
     uri_template: uri_template
     uri_template.charset: uri_template
     uri_template.expansions: uri_template
@@ -2257,6 +2854,25 @@ manifest:
     webencodings.mklabels: webencodings
     webencodings.x_user_defined: webencodings
     websocket: websocket_client
+    wheel: wheel
+    wheel.bdist_wheel: wheel
+    wheel.cli: wheel
+    wheel.cli.convert: wheel
+    wheel.cli.pack: wheel
+    wheel.cli.tags: wheel
+    wheel.cli.unpack: wheel
+    wheel.macosx_libfile: wheel
+    wheel.metadata: wheel
+    wheel.util: wheel
+    wheel.vendored: wheel
+    wheel.vendored.packaging: wheel
+    wheel.vendored.packaging.markers: wheel
+    wheel.vendored.packaging.requirements: wheel
+    wheel.vendored.packaging.specifiers: wheel
+    wheel.vendored.packaging.tags: wheel
+    wheel.vendored.packaging.utils: wheel
+    wheel.vendored.packaging.version: wheel
+    wheel.wheelfile: wheel
     yaml: PyYAML
     yaml.composer: PyYAML
     yaml.constructor: PyYAML
@@ -2336,4 +2952,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: f7059360ebf00e9c1e7cbabaf3d53cb9443d4b1dafdf252321d5dc25415a1c92
+integrity: c424208a4a3829f96c09986f2efecb7e578cb7c3ed9d96902457467222834c5b

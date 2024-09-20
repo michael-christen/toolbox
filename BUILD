@@ -132,3 +132,15 @@ gazelle(
 # gazelle:resolve py pw_system.device_connection @pigweed//pw_system/py:pw_system_lib
 
 npm_link_all_packages(name = "node_modules")
+
+filegroup(
+    name = "python_source",
+    srcs = glob(["*.py"]) + [
+        "//apps:python_source",
+        "//examples/basic:python_source",
+        "//examples/bazel:python_source",
+        "//examples/pigweed/modules/blinky:python_source",
+        "//examples/pigweed/tools:python_source",
+    ],
+    visibility = ["//visibility:public"],
+)

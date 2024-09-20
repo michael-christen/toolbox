@@ -24,6 +24,13 @@ load("@rules_python//python:proto.bzl", "py_proto_library")
 
 package(default_visibility = ["//visibility:public"])
 
+filegroup(
+    name = "python_source",
+    srcs = glob(["*.py"]) + [
+    ],
+    visibility = ["//visibility:public"],
+)
+
 cc_library(
     name = "blinky",
     srcs = ["blinky.cc"],

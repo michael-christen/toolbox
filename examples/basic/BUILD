@@ -7,6 +7,15 @@ load("//bzl:py.bzl", "grpc_py_library", "proto_py_library", "py_binary", "py_ima
 
 package(default_visibility = ["//visibility:private"])
 
+filegroup(
+    name = "python_source",
+    srcs = glob(["*.py"]) + [
+        "hello_pb2.py",
+        "hello_pb2_grpc.py",
+    ],
+    visibility = ["//visibility:public"],
+)
+
 proto_library(
     name = "hello_proto",
     srcs = ["hello.proto"],

@@ -11,8 +11,26 @@ protobuf
 types-protobuf
 # largely for development
 pytest
-black
+black[jupyter]
 flake8
 isort
 ipdb
 notebook
+# Documentation
+sphinx
+sphinx-rtd-theme
+myst-parser
+# - generates links with raw urls, eg) www.example.com
+linkify-it-py
+# - diagram generation
+sphinxcontrib-mermaid
+# - python code (parse, not executing)
+sphinx-autoapi
+# - lots of miscellaneous plugins for sphinx
+sphinx-design
+sphinx-copybutton
+sphinxext-rediraffe
+sphinxext-opengraph
+sphinx-pyscript
+sphinx-tippy
+sphinx-togglebutton
