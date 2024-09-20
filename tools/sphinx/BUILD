@@ -12,7 +12,6 @@ py_binary(
         "@pip//myst_parser",  # keep
         "@pip//sphinx",  # keep
         "@pip//sphinx_autoapi",  # keep
-        "@pip//sphinx_book_theme",  # keep
         "@pip//sphinx_copybutton",  # keep
         "@pip//sphinx_design",  # keep
         "@pip//sphinx_pyscript",  # keep
