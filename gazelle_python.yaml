@@ -179,42 +179,6 @@ manifest:
     IPython.utils.ulinecache: ipython
     IPython.utils.version: ipython
     IPython.utils.wildcard: ipython
-    a11y_pygments: accessible_pygments
-    a11y_pygments.a11y_dark: accessible_pygments
-    a11y_pygments.a11y_dark.style: accessible_pygments
-    a11y_pygments.a11y_high_contrast_dark: accessible_pygments
-    a11y_pygments.a11y_high_contrast_dark.style: accessible_pygments
-    a11y_pygments.a11y_high_contrast_light: accessible_pygments
-    a11y_pygments.a11y_high_contrast_light.style: accessible_pygments
-    a11y_pygments.a11y_light: accessible_pygments
-    a11y_pygments.a11y_light.style: accessible_pygments
-    a11y_pygments.blinds_dark: accessible_pygments
-    a11y_pygments.blinds_dark.style: accessible_pygments
-    a11y_pygments.blinds_light: accessible_pygments
-    a11y_pygments.blinds_light.style: accessible_pygments
-    a11y_pygments.github_dark: accessible_pygments
-    a11y_pygments.github_dark.style: accessible_pygments
-    a11y_pygments.github_dark_colorblind: accessible_pygments
-    a11y_pygments.github_dark_colorblind.style: accessible_pygments
-    a11y_pygments.github_dark_high_contrast: accessible_pygments
-    a11y_pygments.github_dark_high_contrast.style: accessible_pygments
-    a11y_pygments.github_light: accessible_pygments
-    a11y_pygments.github_light.style: accessible_pygments
-    a11y_pygments.github_light_colorblind: accessible_pygments
-    a11y_pygments.github_light_colorblind.style: accessible_pygments
-    a11y_pygments.github_light_high_contrast: accessible_pygments
-    a11y_pygments.github_light_high_contrast.style: accessible_pygments
-    a11y_pygments.gotthard_dark: accessible_pygments
-    a11y_pygments.gotthard_dark.style: accessible_pygments
-    a11y_pygments.gotthard_light: accessible_pygments
-    a11y_pygments.gotthard_light.style: accessible_pygments
-    a11y_pygments.greative: accessible_pygments
-    a11y_pygments.greative.style: accessible_pygments
-    a11y_pygments.pitaya_smoothie: accessible_pygments
-    a11y_pygments.pitaya_smoothie.style: accessible_pygments
-    a11y_pygments.utils: accessible_pygments
-    a11y_pygments.utils.utils: accessible_pygments
-    a11y_pygments.utils.wcag_contrast: accessible_pygments
     alabaster: alabaster
     alabaster.support: alabaster
     anyio: anyio
@@ -2060,14 +2024,6 @@ manifest:
     pycparser.ply.ygen: pycparser
     pycparser.plyparser: pycparser
     pycparser.yacctab: pycparser
-    pydata_sphinx_theme: pydata_sphinx_theme
-    pydata_sphinx_theme.edit_this_page: pydata_sphinx_theme
-    pydata_sphinx_theme.logo: pydata_sphinx_theme
-    pydata_sphinx_theme.pygments: pydata_sphinx_theme
-    pydata_sphinx_theme.short_link: pydata_sphinx_theme
-    pydata_sphinx_theme.toctree: pydata_sphinx_theme
-    pydata_sphinx_theme.translator: pydata_sphinx_theme
-    pydata_sphinx_theme.utils: pydata_sphinx_theme
     pyflakes: pyflakes
     pyflakes.api: pyflakes
     pyflakes.checker: pyflakes
@@ -2690,12 +2646,6 @@ manifest:
     sphinx.writers.texinfo: sphinx
     sphinx.writers.text: sphinx
     sphinx.writers.xml: sphinx
-    sphinx_book_theme: sphinx_book_theme
-    sphinx_book_theme.directives: sphinx_book_theme
-    sphinx_book_theme.header_buttons: sphinx_book_theme
-    sphinx_book_theme.header_buttons.launch: sphinx_book_theme
-    sphinx_book_theme.header_buttons.source: sphinx_book_theme
-    sphinx_book_theme.nodes: sphinx_book_theme
     sphinx_copybutton: sphinx_copybutton
     sphinx_design: sphinx_design
     sphinx_design.article_info: sphinx_design
@@ -3002,4 +2952,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: 90336ef4c5e17ba36eaaf2df659719d7da381ca41de9926829c99b4a8f2ed0cb
+integrity: c424208a4a3829f96c09986f2efecb7e578cb7c3ed9d96902457467222834c5b

@@ -2130,7 +2130,7 @@
         "recordedFileInputs": {
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_windows_lock.txt": "4367c7d4cc4a1c2d6a136edace02581066f1c9ead10937685dde568d1061189f",
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_linux_lock.txt": "ce8b16e007309a610c37eec908b75451733ae5efb9c14ec7e6f04557b81d621e",
-          "@@//requirements_lock.txt": "18f073f2ab381f43010ac29da14893591cae98f898761b0c9e8b6b0a41cf973f",
+          "@@//requirements_lock.txt": "ce065fba01890e43361089d1fe811e576a35ecff1e104c1f3796d6b6c849aee0",
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_darwin_lock.txt": "91de3b2cdbe8f8fc7136ce309824355684c2a6ae2395c1e12f4aa59d02d52f3b",
           "@@rules_fuzzing~//fuzzing/requirements.txt": "ab04664be026b632a0d2a2446c4f65982b7654f5b6851d2f9d399a19b7242a5b",
           "@@nanopb~//extra/requirements_lock.txt": "8a44f53e5c48123742970b4e9d6f8730eaa143134c08db0706ccd6d2c78c03ca",
@@ -2663,16 +2663,6 @@
               "requirement": "jsonschema==4.21.1     --hash=sha256:7996507afae316306f9e2290407761157c6f78002dcf7419acb99822143d1c6f     --hash=sha256:85727c00279f5fa6bedbe6238d2aa6403bedd8b4864ab11207d07df3cc1b2ee5"
             }
           },
-          "pip_311_accessible_pygments": {
-            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
-            "ruleClassName": "whl_library",
-            "attributes": {
-              "dep_template": "@pip//{name}:{target}",
-              "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
-              "repo": "pip_311",
-              "requirement": "accessible-pygments==0.0.5     --hash=sha256:40918d3e6a2b619ad424cb91e556bd3bd8865443d9f22f1dcdf79e33c8046872     --hash=sha256:88ae3211e68a1d0b011504b2ffc1691feafce124b845bd072ab6f9f66f34d4b7"
-            }
-          },
           "rules_mypy_pip_312_mypy_extensions_sdist_75dbf895": {
             "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
             "ruleClassName": "whl_library",
@@ -3184,16 +3174,6 @@
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
               "requirement": "types-protobuf==5.27.0.20240907     --hash=sha256:5443270534cc8072909ef7ad9e1421ccff924ca658749a6396c0c43d64c32676     --hash=sha256:bb6f90f66b18d4d1c75667b6586334b0573a6fcee5eb0142a7348a765a7cbadc"
-            }
-          },
-          "pip_311_sphinx_book_theme": {
-            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
-            "ruleClassName": "whl_library",
-            "attributes": {
-              "dep_template": "@pip//{name}:{target}",
-              "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
-              "repo": "pip_311",
-              "requirement": "sphinx-book-theme==1.1.3     --hash=sha256:1f25483b1846cb3d353a6bc61b3b45b031f4acf845665d7da90e01ae0aef5b4d     --hash=sha256:a554a9a7ac3881979a87a2b10f633aa2a5706e72218a10f71be38b3c9e831ae9"
             }
           },
           "python_packages_311_kconfiglib": {
@@ -4202,16 +4182,6 @@
               "requirement": "wcwidth==0.2.13     --hash=sha256:3da69048e4540d84af32131829ff948f1e022c1c6bdb8d6102117aac784f6859     --hash=sha256:72ea0c06399eb286d978fdedb6923a9eb47e1c486ce63e9b4e64fc18303972b5"
             }
           },
-          "pip_311_pydata_sphinx_theme": {
-            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
-            "ruleClassName": "whl_library",
-            "attributes": {
-              "dep_template": "@pip//{name}:{target}",
-              "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
-              "repo": "pip_311",
-              "requirement": "pydata-sphinx-theme==0.15.4     --hash=sha256:2136ad0e9500d0949f96167e63f3e298620040aea8f9c74621959eda5d4cf8e6     --hash=sha256:7762ec0ac59df3acecf49fd2f889e1b4565dbce8b88b2e29ee06fdd90645a06d"
-            }
-          },
           "python_packages_311_coverage": {
             "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
             "ruleClassName": "whl_library",
@@ -5090,14 +5060,11 @@
                 "prometheus_client": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_prometheus_client\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "rfc3339_validator": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_rfc3339_validator\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "rfc3986_validator": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_rfc3986_validator\",\"target_platforms\":null,\"version\":\"3.11\"}]",
-                "sphinx_book_theme": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_sphinx_book_theme\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "sphinx_copybutton": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_sphinx_copybutton\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "typing_extensions": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_typing_extensions\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "charset_normalizer": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_charset_normalizer\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "python_json_logger": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_python_json_logger\",\"target_platforms\":null,\"version\":\"3.11\"}]",
-                "accessible_pygments": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_accessible_pygments\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "jupyterlab_pygments": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_jupyterlab_pygments\",\"target_platforms\":null,\"version\":\"3.11\"}]",
-                "pydata_sphinx_theme": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_pydata_sphinx_theme\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "sphinx_togglebutton": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_sphinx_togglebutton\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "sphinxext_opengraph": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_sphinxext_opengraph\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "sphinxext_rediraffe": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_sphinxext_rediraffe\",\"target_platforms\":null,\"version\":\"3.11\"}]",

@@ -4,10 +4,6 @@
 #
 #    bazel run //:requirements.update
 #
-accessible-pygments==0.0.5 \
-    --hash=sha256:40918d3e6a2b619ad424cb91e556bd3bd8865443d9f22f1dcdf79e33c8046872 \
-    --hash=sha256:88ae3211e68a1d0b011504b2ffc1691feafce124b845bd072ab6f9f66f34d4b7
-    # via pydata-sphinx-theme
 alabaster==0.7.16 \
     --hash=sha256:75a8b99c28a5dad50dd7f8ccdd447a121ddb3892da9e53d1ca5cca3106d58d65 \
     --hash=sha256:b46733c07dce03ae4e150330b975c75737fa60f0a7c591b6c8bf4928a28e2c92
@@ -72,7 +68,6 @@ babel==2.16.0 \
     --hash=sha256:d1f3554ca26605fe173f3de0c65f750f5a42f924499bf134de6423582298e316
     # via
     #   jupyterlab-server
-    #   pydata-sphinx-theme
     #   sphinx
 beautifulsoup4==4.12.3 \
     --hash=sha256:74e3d1928edc070d21748185c46e3fb33490f22f52a3addee9aee0f4f7781051 \
@@ -80,7 +75,6 @@ beautifulsoup4==4.12.3 \
     # via
     #   -r requirements.in
     #   nbconvert
-    #   pydata-sphinx-theme
     #   sphinx-tippy
 black[jupyter]==24.8.0 \
     --hash=sha256:09cdeb74d494ec023ded657f7092ba518e8cf78fa8386155e4a03fdcc44679e6 \
@@ -325,7 +319,6 @@ docutils==0.20.1 \
     --hash=sha256:f08a4e276c3a1583a86dce3e34aba3fe04d02bba2dd51ed16106244e8a923e3b
     # via
     #   myst-parser
-    #   pydata-sphinx-theme
     #   sphinx
     #   sphinx-rtd-theme
     #   sphinx-togglebutton
@@ -710,7 +703,6 @@ packaging==24.1 \
     #   jupyterlab
     #   jupyterlab-server
     #   nbconvert
-    #   pydata-sphinx-theme
     #   pytest
     #   sphinx
 pandocfilters==1.5.1 \
@@ -797,10 +789,6 @@ pycparser==2.22 \
     --hash=sha256:491c8be9c040f5390f5bf44a5b07752bd07f56edf992381b05c701439eec10f6 \
     --hash=sha256:c3702b6d3dd8c7abc1afa565d7e63d53a1d0bd86cdc24edd75470f4de499cfcc
     # via cffi
-pydata-sphinx-theme==0.15.4 \
-    --hash=sha256:2136ad0e9500d0949f96167e63f3e298620040aea8f9c74621959eda5d4cf8e6 \
-    --hash=sha256:7762ec0ac59df3acecf49fd2f889e1b4565dbce8b88b2e29ee06fdd90645a06d
-    # via sphinx-book-theme
 pyflakes==3.2.0 \
     --hash=sha256:1c61603ff154621fb2a9172037d84dca3500def8c8b630657d1701f026f8af3f \
     --hash=sha256:84b5be138a2dfbb40689ca07e2152deb896a65c3a3e24c251c5c62489568074a
@@ -809,10 +797,8 @@ pygments==2.18.0 \
     --hash=sha256:786ff802f32e91311bff3889f6e9a86e81505fe99f2735bb6d60ae0c5004f199 \
     --hash=sha256:b8e6aca0523f3ab76fee51799c488e38782ac06eafcf95e7ba832985c8e7b13a
     # via
-    #   accessible-pygments
     #   ipython
     #   nbconvert
-    #   pydata-sphinx-theme
     #   sphinx
 pytest==8.3.3 \
     --hash=sha256:70b98107bd648308a7952b06e6ca9a50bc660be218d53c257cc1fc94fda10181 \
@@ -1166,9 +1152,7 @@ sphinx==7.4.7 \
     # via
     #   -r requirements.in
     #   myst-parser
-    #   pydata-sphinx-theme
     #   sphinx-autoapi
-    #   sphinx-book-theme
     #   sphinx-copybutton
     #   sphinx-design
     #   sphinx-pyscript
@@ -1181,10 +1165,6 @@ sphinx==7.4.7 \
 sphinx-autoapi==3.3.1 \
     --hash=sha256:c31a5f41eabc9705d277b75f98e983d653e9af24e294dd576b2afa1719f72c1f \
     --hash=sha256:e44a225827d0ef7178748225a66f30c95454dfd00ee3c22afbdfb8056f7dffb5
-    # via -r requirements.in
-sphinx-book-theme==1.1.3 \
-    --hash=sha256:1f25483b1846cb3d353a6bc61b3b45b031f4acf845665d7da90e01ae0aef5b4d \
-    --hash=sha256:a554a9a7ac3881979a87a2b10f633aa2a5706e72218a10f71be38b3c9e831ae9
     # via -r requirements.in
 sphinx-copybutton==0.5.2 \
     --hash=sha256:4cf17c82fb9646d1bc9ca92ac280813a3b605d8c421225fd9913154103ee1fbd \
@@ -1317,7 +1297,6 @@ typing-extensions==4.12.2 \
     # via
     #   ipython
     #   mypy
-    #   pydata-sphinx-theme
 uc-micro-py==1.0.3 \
     --hash=sha256:d321b92cff673ec58027c04015fcaa8bb1e005478643ff4a500882eaab88c48a \
     --hash=sha256:db1dffff340817673d7b466ec86114a9dc0e9d4d9b5ba229d9d60e5c12600cd5
