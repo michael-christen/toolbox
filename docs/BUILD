@@ -41,7 +41,7 @@ sphinx_html(
 py_library(
     name = "conf",
     srcs = ["conf.py"],
+    tags = ["no-mypy"],
     visibility = ["//:__subpackages__"],
     deps = ["@pip//sphinx_rtd_theme"],
-    tags = ["no-mypy"],
 )
