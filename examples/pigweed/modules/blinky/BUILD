@@ -27,7 +27,6 @@ package(default_visibility = ["//visibility:public"])
 filegroup(
     name = "python_source",
     srcs = glob(["*.py"]) + [
-        # "blinky_pb2.py",
     ],
     visibility = ["//visibility:public"],
 )

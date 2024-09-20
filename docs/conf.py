@@ -22,7 +22,6 @@ extensions = [
     "sphinx.ext.intersphinx",
     "sphinx.ext.viewcode",
     "autoapi.extension",
-    # "sphinx_autoapi",
     "sphinx_design",
     "sphinx_copybutton",
     "sphinxext.rediraffe",
@@ -32,17 +31,12 @@ extensions = [
     "sphinx_togglebutton",
 ]
 autoapi_dirs = [
-    # XXX: Would be nice to not have to add
     "../examples",
-    # XXX: Not showing apps
     "../apps",
 ]
 autoapi_type = "python"
 autoapi_template_dir = "_templates/autoapi"
-# Maybe set to True (need to show directory structure though)
-# XXX:
 # https://sphinx-autoapi.readthedocs.io/en/latest/reference/config.html#confval-autoapi_python_use_implicit_namespaces
-# - configure toctree to find these properly now
 autoapi_python_use_implicit_namespaces = True
 # https://sphinx-autoapi.readthedocs.io/en/latest/reference/config.html#confval-autoapi_options
 autoapi_options = [
@@ -55,41 +49,17 @@ autoapi_options = [
 # Keep outputs around for debugging
 autoapi_keep_files = True
 # signature, description, both, none: are the options
-# XXX: Maybe just signature
+# MAYBE: just signature
 autodoc_typehints = "both"
 
 
 def skip_member(app, what, name, obj, skip, options):
-    # XXX: conditional breakpoint here
+    # NOTE, if curious can add conditional breakpoint here
     return skip
 
 
 def setup(app):
     """Add functions to the Sphinx setup."""
-    # from myst_parser._docs import (
-    #     DirectiveDoc,
-    #     DocutilsCliHelpDirective,
-    #     MystAdmonitionDirective,
-    #     MystConfigDirective,
-    #     MystExampleDirective,
-    #     MystLexer,
-    #     MystToHTMLDirective,
-    #     MystWarningsDirective,
-    #     NumberSections,
-    #     StripUnsupportedLatex,
-    # )
-
-    # app.add_directive("myst-config", MystConfigDirective)
-    # app.add_directive("docutils-cli-help", DocutilsCliHelpDirective)
-    # app.add_directive("doc-directive", DirectiveDoc)
-    # app.add_directive("myst-warnings", MystWarningsDirective)
-    # app.add_directive("myst-example", MystExampleDirective)
-    # app.add_directive("myst-admonitions", MystAdmonitionDirective)
-    # app.add_directive("myst-to-html", MystToHTMLDirective)
-    # app.add_post_transform(StripUnsupportedLatex)
-    # app.add_post_transform(NumberSections)
-    # app.add_lexer("myst", MystLexer)
-
     app.connect("autoapi-skip-member", skip_member)
 
 
@@ -115,7 +85,6 @@ myst_heading_anchors = 3
 exclude_patterns = []
 
 # `root_doc`: Provided at Bazel level
-
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
