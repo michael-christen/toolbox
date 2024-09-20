@@ -4,6 +4,7 @@ build:
   tools:
     nodejs: "20"
   commands:
-    - bazel build //docs:docs
+    - go install github.com/bazelbuild/bazelisk@latest
+    - `go env GOPATH`/bin/bazelisk build //docs:docs
     - mkdir --parents $READTHEDOCS_OUTPUT/html/
     - cp --recursive bazel-bin/docs/docs_html/* $READTHEDOCS_OUTPUT/html/
