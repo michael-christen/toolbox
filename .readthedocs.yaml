@@ -1,0 +1,9 @@
+version: 2
+build:
+  os: "ubuntu-22.04"
+  tools:
+    nodejs: "20"
+  commands:
+    - bazel build //docs:docs
+    - mkdir --parents $READTHEDOCS_OUTPUT/html/
+    - cp --recursive bazel-bin/docs/docs_html/* $READTHEDOCS_OUTPUT/html/

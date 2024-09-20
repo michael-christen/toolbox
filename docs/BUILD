@@ -43,4 +43,5 @@ py_library(
     srcs = ["conf.py"],
     visibility = ["//:__subpackages__"],
     deps = ["@pip//sphinx_rtd_theme"],
+    tags = ["no-mypy"],
 )
