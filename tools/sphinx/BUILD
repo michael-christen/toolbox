@@ -8,6 +8,7 @@ py_binary(
     tags = ["no-mypy"],
     visibility = ["//visibility:public"],
     deps = [
+        "@pip//furo",  # keep
         "@pip//linkify_it_py",  # keep
         "@pip//myst_parser",  # keep
         "@pip//sphinx",  # keep
@@ -21,6 +22,5 @@ py_binary(
         "@pip//sphinxcontrib_mermaid",  # keep
         "@pip//sphinxext_opengraph",  # keep
         "@pip//sphinxext_rediraffe",  # keep
-        "@pip//furo",  # keep
     ],
 )
