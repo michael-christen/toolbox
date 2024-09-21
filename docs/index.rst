@@ -19,6 +19,7 @@ documentation for details.
    :maxdepth: 4
    :caption: Contents:
 
+   README
    myst
    examples
    myst_extensions
