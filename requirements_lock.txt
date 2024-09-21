@@ -74,6 +74,7 @@ beautifulsoup4==4.12.3 \
     --hash=sha256:b80878c9f40111313e55da8ba20bdba06d8fa3969fc68304167741bbf9e082ed
     # via
     #   -r requirements.in
+    #   furo
     #   nbconvert
     #   sphinx-tippy
 black[jupyter]==24.8.0 \
@@ -338,6 +339,10 @@ fqdn==1.5.1 \
     --hash=sha256:105ed3677e767fb5ca086a0c1f4bb66ebc3c100be518f0e0d755d9eae164d89f \
     --hash=sha256:3a179af3761e4df6eb2e026ff9e1a3033d3587bf980a0b1b2e1e5d08d7358014
     # via jsonschema
+furo==2024.8.6 \
+    --hash=sha256:6cd97c58b47813d3619e63e9081169880fbe331f0ca883c871ff1f3f11814f5c \
+    --hash=sha256:b63e4cee8abfc3136d3bc03a3d45a76a850bada4d6374d24c1716b0e01394a01
+    # via -r requirements.in
 grpcio==1.66.1 \
     --hash=sha256:0e6c9b42ded5d02b6b1fea3a25f036a2236eeb75d0579bfd43c0018c88bf0a3e \
     --hash=sha256:161d5c535c2bdf61b95080e7f0f017a1dfcb812bf54093e71e5562b16225b4ce \
@@ -797,6 +802,7 @@ pygments==2.18.0 \
     --hash=sha256:786ff802f32e91311bff3889f6e9a86e81505fe99f2735bb6d60ae0c5004f199 \
     --hash=sha256:b8e6aca0523f3ab76fee51799c488e38782ac06eafcf95e7ba832985c8e7b13a
     # via
+    #   furo
     #   ipython
     #   nbconvert
     #   sphinx
@@ -1151,8 +1157,10 @@ sphinx==7.4.7 \
     --hash=sha256:c2419e2135d11f1951cd994d6eb18a1835bd8fdd8429f9ca375dc1f3281bd239
     # via
     #   -r requirements.in
+    #   furo
     #   myst-parser
     #   sphinx-autoapi
+    #   sphinx-basic-ng
     #   sphinx-copybutton
     #   sphinx-design
     #   sphinx-pyscript
@@ -1166,6 +1174,10 @@ sphinx-autoapi==3.3.1 \
     --hash=sha256:c31a5f41eabc9705d277b75f98e983d653e9af24e294dd576b2afa1719f72c1f \
     --hash=sha256:e44a225827d0ef7178748225a66f30c95454dfd00ee3c22afbdfb8056f7dffb5
     # via -r requirements.in
+sphinx-basic-ng==1.0.0b2 \
+    --hash=sha256:9ec55a47c90c8c002b5960c57492ec3021f5193cb26cebc2dc4ea226848651c9 \
+    --hash=sha256:eb09aedbabfb650607e9b4b68c9d240b90b1e1be221d6ad71d61c52e29f7932b
+    # via furo
 sphinx-copybutton==0.5.2 \
     --hash=sha256:4cf17c82fb9646d1bc9ca92ac280813a3b605d8c421225fd9913154103ee1fbd \
     --hash=sha256:fb543fd386d917746c9a2c50360c7905b605726b9355cd26e9974857afeae06e

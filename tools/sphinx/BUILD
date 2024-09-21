@@ -21,5 +21,6 @@ py_binary(
         "@pip//sphinxcontrib_mermaid",  # keep
         "@pip//sphinxext_opengraph",  # keep
         "@pip//sphinxext_rediraffe",  # keep
+        "@pip//furo",  # keep
     ],
 )

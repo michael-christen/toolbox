@@ -655,6 +655,9 @@ manifest:
     flake8.utils: flake8
     flake8.violation: flake8
     fqdn: fqdn
+    furo: furo
+    furo.navigation: furo
+    furo.sphinxext: furo
     google.protobuf: protobuf
     google.protobuf.any_pb2: protobuf
     google.protobuf.api_pb2: protobuf
@@ -2646,6 +2649,7 @@ manifest:
     sphinx.writers.texinfo: sphinx
     sphinx.writers.text: sphinx
     sphinx.writers.xml: sphinx
+    sphinx_basic_ng: sphinx_basic_ng
     sphinx_copybutton: sphinx_copybutton
     sphinx_design: sphinx_design
     sphinx_design.article_info: sphinx_design
@@ -2952,4 +2956,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: c424208a4a3829f96c09986f2efecb7e578cb7c3ed9d96902457467222834c5b
+integrity: d11a127cb9d35eca4847da45112408066f5bea0b35f1a9d73a759b42387f4a4d
