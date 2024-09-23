@@ -24,6 +24,7 @@ documentation for details.
    myst_extensions
    bringup
    useful_commands
+   common_references
 
 .. toctree::
    :maxdepth: 1

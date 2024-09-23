@@ -21,13 +21,14 @@ filegroup(
 sphinx_html(
     name = "docs",
     srcs = [
-        "myst.md",
-        # has warnings
-        "myst_extensions.md",
-        "examples.md",
         "bringup.md",
+        "common_references.md",
+        "examples.md",
+        "myst.md",
+        "myst_extensions.md",
         "useful_commands.md",
         "//:python_source",
+        "//docs/common:docs",
         ":templates",
         ":img",
         ":static",
