@@ -21,6 +21,7 @@ filegroup(
 sphinx_html(
     name = "docs",
     srcs = [
+        "README.md",
         "bringup.md",
         "common_references.md",
         "examples.md",
