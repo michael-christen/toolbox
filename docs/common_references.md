@@ -3,5 +3,5 @@
 Common references that are often used.
 
 ```{toctree}
-common/python_refences.md
+common/python_references.md
 ```
