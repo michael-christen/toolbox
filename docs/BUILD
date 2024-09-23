@@ -22,16 +22,17 @@ sphinx_html(
     name = "docs",
     srcs = [
         "README.md",
-        "myst.md",
-        # has warnings
-        "myst_extensions.md",
-        "examples.md",
         "bringup.md",
+        "common_references.md",
+        "examples.md",
+        "myst.md",
+        "myst_extensions.md",
         "useful_commands.md",
-        "//:python_source",
-        ":templates",
         ":img",
         ":static",
+        ":templates",
+        "//:python_source",
+        "//docs/common:docs",
     ],
     config = "conf.py",
     index = "index.rst",  # Test non-canonical naming.
