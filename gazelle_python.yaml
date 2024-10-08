@@ -512,6 +512,7 @@ manifest:
     docutils.languages.he: docutils
     docutils.languages.it: docutils
     docutils.languages.ja: docutils
+    docutils.languages.ka: docutils
     docutils.languages.ko: docutils
     docutils.languages.lt: docutils
     docutils.languages.lv: docutils
@@ -556,6 +557,7 @@ manifest:
     docutils.parsers.rst.languages.he: docutils
     docutils.parsers.rst.languages.it: docutils
     docutils.parsers.rst.languages.ja: docutils
+    docutils.parsers.rst.languages.ka: docutils
     docutils.parsers.rst.languages.ko: docutils
     docutils.parsers.rst.languages.lt: docutils
     docutils.parsers.rst.languages.lv: docutils
@@ -591,6 +593,8 @@ manifest:
     docutils.utils.math: docutils
     docutils.utils.math.latex2mathml: docutils
     docutils.utils.math.math2html: docutils
+    docutils.utils.math.mathalphabet2unichar: docutils
+    docutils.utils.math.mathml_elements: docutils
     docutils.utils.math.tex2mathml_extern: docutils
     docutils.utils.math.tex2unichar: docutils
     docutils.utils.math.unichar2tex: docutils
@@ -2956,4 +2960,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: ba1de35e50f4a1ae242ab5325018f29661da0a5684ff5f9194807f9cd9970a0b
+integrity: d9003b4cc925d75d3cc363c2cb15246ccaf2ecca77dbab7ebd3eacd8a471cc31
