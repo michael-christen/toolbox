@@ -11,7 +11,7 @@
 <meta name="description" content="The following syntaxes are optional (disabled by default) and can be enabled via the sphinx conf.py(see also Configuration). Their goal is generally to add more Markdown friendly syntaxes; often en..." />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Log for How I am Bringing up This Repo and My New Server" href="bringup.html" /><link rel="prev" title="My nifty title" href="examples.html" />
 
-    <link rel="shortcut icon" href="_static/wrench.png"/><!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
+    <link rel="shortcut icon" href="_static/wrench.png"/><!-- Generated with Sphinx 8.0.2 and Furo 2024.08.06 -->
         <title>Syntax Extensions - toolbox documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
@@ -508,9 +508,9 @@ a_1=b_1+c_1\\
 a_2=b_2+c_2-d_2+e_2
 \end{gather*}\]</div>
 </div>
-<div class="math-wrapper amsmath docutils container" id="equation-d0288ff0-040c-4bf6-84b1-f34c5c97b248">
-<div class="amsmath math notranslate nohighlight" id="equation-d0288ff0-040c-4bf6-84b1-f34c5c97b248">
-<span class="eqno">(2)<a class="headerlink" href="#equation-d0288ff0-040c-4bf6-84b1-f34c5c97b248" title="Permalink to this equation"></a></span>\[\begin{align}
+<div class="math-wrapper amsmath docutils container" id="equation-ebb1ebb6-9c36-453c-8181-2985f73bb276">
+<div class="amsmath math notranslate nohighlight" id="equation-ebb1ebb6-9c36-453c-8181-2985f73bb276">
+<span class="eqno">(2)<a class="headerlink" href="#equation-ebb1ebb6-9c36-453c-8181-2985f73bb276" title="Permalink to this equation"></a></span>\[\begin{align}
 a_{11}&amp; =b_{11}&amp;
   a_{12}&amp; =b_{12}\\
 a_{21}&amp; =b_{21}&amp;
@@ -853,7 +853,8 @@ A definition begins with a colon or tilde, which may be indented one or two spac
 </div></blockquote>
 </dd>
 <dd><p>A final definition, that can even include images:</p>
-<a class="reference internal image-reference" href="_images/fun-fish.png"><img alt="fishy" src="_images/fun-fish.png" style="width: 200px;" /></a>
+<a class="reference internal image-reference" href="_images/fun-fish.png"><img alt="fishy" src="_images/fun-fish.png" style="width: 200px;" />
+</a>
 </dd>
 </dl>
 </div>
@@ -1094,7 +1095,8 @@ However, it is limited in the configuration that can be applied, for example set
 <p>As discussed in syntax/directives, MyST allow for directives to be used such as <code class="docutils literal notranslate"><span class="pre">image</span></code> and <code class="docutils literal notranslate"><span class="pre">figure</span></code> (see the sphinx documentation sphinx:rst-primer):</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<a class="bg-primary reference internal image-reference" href="_images/fun-fish.png"><img alt="fishy" class="bg-primary align-center" src="_images/fun-fish.png" style="width: 200px;" /></a>
+<a class="bg-primary reference internal image-reference" href="_images/fun-fish.png"><img alt="fishy" class="bg-primary align-center" src="_images/fun-fish.png" style="width: 200px;" />
+</a>
 </div>
 <p>Additional options can now be set, however, in contrast to the Markdown syntax, this syntax will not show the image in common Markdown viewers (for example when the files are viewed on GitHub).</p>
 <p>The final option is directly using HTML, which is also parsed by MyST.
@@ -1104,8 +1106,10 @@ This is usually a bad option, because the HTML is treated as raw text during the
 MySt-Parser will attempt to convert any isolated <code class="docutils literal notranslate"><span class="pre">img</span></code> tags (i.e. not wrapped in any other HTML) to the internal representation used in sphinx.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<a class="reference internal image-reference" href="_images/fun-fish.png"><img alt="fishy" src="_images/fun-fish.png" style="width: 200px;" /></a>
-<a class="bg-primary reference internal image-reference" href="_images/fun-fish.png"><img alt="fishy" class="bg-primary" src="_images/fun-fish.png" style="width: 200px;" /></a>
+<a class="reference internal image-reference" href="_images/fun-fish.png"><img alt="fishy" src="_images/fun-fish.png" style="width: 200px;" />
+</a>
+<a class="bg-primary reference internal image-reference" href="_images/fun-fish.png"><img alt="fishy" class="bg-primary" src="_images/fun-fish.png" style="width: 200px;" />
+</a>
 </div>
 <p>Allowed attributes are equivalent to the <code class="docutils literal notranslate"><span class="pre">image</span></code> directive: <code class="docutils literal notranslate"><span class="pre">src</span></code>, <code class="docutils literal notranslate"><span class="pre">alt</span></code>, <code class="docutils literal notranslate"><span class="pre">class</span></code>, <code class="docutils literal notranslate"><span class="pre">width</span></code>, <code class="docutils literal notranslate"><span class="pre">height</span></code> and <code class="docutils literal notranslate"><span class="pre">name</span></code>.
 Any other attributes will be dropped.</p>
@@ -1125,13 +1129,15 @@ to create a fully Markdown compliant version of the <code class="docutils litera
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <figure class="align-default" id="id3">
-<a class="bg-primary mb-1 reference internal image-reference" href="_images/fun-fish.png"><img alt="fishy" class="bg-primary mb-1" src="_images/fun-fish.png" style="width: 200px;" /></a>
+<a class="bg-primary mb-1 reference internal image-reference" href="_images/fun-fish.png"><img alt="fishy" class="bg-primary mb-1" src="_images/fun-fish.png" style="width: 200px;" />
+</a>
 <figcaption>
 <p><span class="caption-text">This is a caption in <strong>Markdown</strong></span><a class="headerlink" href="#id3" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <figure class="myclass align-default" id="fig-target">
-<a class="bg-primary mb-1 reference internal image-reference" href="_images/fun-fish.png"><img alt="fishy" class="bg-primary mb-1" src="_images/fun-fish.png" style="width: 200px;" /></a>
+<a class="bg-primary mb-1 reference internal image-reference" href="_images/fun-fish.png"><img alt="fishy" class="bg-primary mb-1" src="_images/fun-fish.png" style="width: 200px;" />
+</a>
 <figcaption>
 <p><span class="caption-text">This is a caption in <strong>Markdown</strong></span><a class="headerlink" href="#fig-target" title="Link to this image"></a></p>
 </figcaption>
@@ -1305,7 +1311,7 @@ If you want to use multiple paragraphs then they can be enclosed in <code class=
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
     <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
-    <script defer="defer" src="_static/tippy/myst_extensions.99d423ec-abd5-4e78-b699-516447c5a7d6.js"></script>
+    <script defer="defer" src="_static/tippy/myst_extensions.d84a1b3b-df3f-4421-b8de-3e3c4f1338eb.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
