@@ -11,11 +11,11 @@
 <meta name="description" content="Some text! Here’s another section: And some more content. a reference to this section. I can also reference the section Here’s another section without specifying my title." />
 <link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Syntax Extensions" href="myst_extensions.html" /><link rel="prev" title="MyST" href="myst.html" />
 
-    <link rel="shortcut icon" href="_static/wrench.png"/><!-- Generated with Sphinx 8.0.2 and Furo 2024.08.06 -->
+    <link rel="shortcut icon" href="_static/wrench.png"/><!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
         <title>My nifty title - toolbox documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
-    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
@@ -294,8 +294,8 @@ section <a class="reference internal" href="#section-two"><span class="std std-r
 <p class="admonition-title">Note</p>
 <p>And here’s a note with a colon fence! :::</p>
 <p>And finally, here’s a cool mermaid diagram!</p>
-<div class="mermaid">
-            sequenceDiagram
+<pre  class="mermaid">
+        sequenceDiagram
   participant Alice
   participant Bob
   Alice-&gt;John: Hello John, how are you?
@@ -306,7 +306,7 @@ section <a class="reference internal" href="#section-two"><span class="std std-r
   John--&gt;Alice: Great!
   John-&gt;Bob: How about you?
   Bob--&gt;John: Jolly good!
-        </div></div>
+    </pre></div>
 </section>
 </section>
 
@@ -381,7 +381,7 @@ section <a class="reference internal" href="#section-two"><span class="std std-r
 </div><script src="_static/jquery.js?v=5d32c60e"></script>
     <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script src="_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=5fa4622c"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
@@ -395,8 +395,14 @@ section <a class="reference internal" href="#section-two"><span class="std std-r
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
     <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
-    <script defer="defer" src="_static/tippy/examples.9507aede-dc0e-4dff-95e3-b80f0d268f3f.js"></script>
-    <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
-    <script>mermaid.initialize({startOnLoad:true});</script>
+    <script defer="defer" src="_static/tippy/examples.e151fe40-afcc-4a4a-9f76-30202424fe7b.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs"></script>
+    <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";import elkLayouts from "https://cdn.jsdelivr.net/npm/@mermaid-js/layout-elk@0.1.4/dist/mermaid-layout-elk.esm.min.mjs";mermaid.registerLayoutLoaders(elkLayouts);mermaid.initialize({startOnLoad:false});</script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+    <script type="module">
+import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.2.0/dist/mermaid.esm.min.mjs";
+window.addEventListener("load", () => mermaid.run());
+</script>
     </body>
 </html>
