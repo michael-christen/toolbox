@@ -2671,14 +2671,14 @@ manifest:
     sphinx_tippy: sphinx_tippy
     sphinx_togglebutton: sphinx_togglebutton
     sphinxcontrib.applehelp: sphinxcontrib_applehelp
-    sphinxcontrib.autoclassdiag: sphinxcontrib_mermaid
     sphinxcontrib.devhelp: sphinxcontrib_devhelp
-    sphinxcontrib.exceptions: sphinxcontrib_mermaid
     sphinxcontrib.htmlhelp: sphinxcontrib_htmlhelp
     sphinxcontrib.jquery: sphinxcontrib_jquery
     sphinxcontrib.jsmath: sphinxcontrib_jsmath
     sphinxcontrib.jsmath.version: sphinxcontrib_jsmath
     sphinxcontrib.mermaid: sphinxcontrib_mermaid
+    sphinxcontrib.mermaid.autoclassdiag: sphinxcontrib_mermaid
+    sphinxcontrib.mermaid.exceptions: sphinxcontrib_mermaid
     sphinxcontrib.qthelp: sphinxcontrib_qthelp
     sphinxcontrib.serializinghtml: sphinxcontrib_serializinghtml
     sphinxcontrib.serializinghtml.jsonimpl: sphinxcontrib_serializinghtml
@@ -2960,4 +2960,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: d9003b4cc925d75d3cc363c2cb15246ccaf2ecca77dbab7ebd3eacd8a471cc31
+integrity: 3922f3b2e597de83bc1e3d6e60ada6c89275e832e8010466250e143bd6a86ca1
