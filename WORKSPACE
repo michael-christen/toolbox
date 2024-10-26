@@ -15,6 +15,7 @@ workspace(name = "mchristen")
 # The `load` statement imports the symbol for http_archive from the http.bzl
 # file.  When the symbol is loaded you can use the rule.
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
 http_archive(
     name = "build_stack_rules_proto",
@@ -122,3 +123,12 @@ load("@rules_python_gazelle_plugin//:deps.bzl", _py_gazelle_deps = "gazelle_deps
 # This rule loads and compiles various go dependencies that running gazelle
 # for python requirements.
 _py_gazelle_deps()
+
+# TODO: https://pwbug.dev/354747966 - Update the BCR version of Emboss.
+git_repository(
+    name = "com_google_emboss",
+    # LINT.IfChange(emboss)
+    remote = "https://pigweed.googlesource.com/third_party/github/google/emboss",
+    tag = "v2024.0809.170004",
+    # LINT.ThenChange(/pw_package/py/pw_package/packages/emboss.py:emboss)
+)
