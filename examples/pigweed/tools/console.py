@@ -19,12 +19,8 @@ import sys
 
 import pw_cli
 import pw_system.console
-from pw_system.device import Device as PwSystemDevice
-from pw_system.device_connection import DeviceConnection
-from pw_system.device_connection import add_device_args
-from pw_system.device_connection import (
-    create_device_serial_or_socket_connection,
-)
+from pw_system import device
+from pw_system import device_connection
 
 from examples.pigweed.modules.blinky import blinky_pb2
 
@@ -34,7 +30,7 @@ _LOG = logging.getLogger(__file__)
 # Quickstart-specific device classes, new functions can be added here.
 # similar to ones on the parent pw_system.device.Device class:
 # https://cs.opensource.google/pigweed/pigweed/+/main:pw_system/py/pw_system/device.py?q=%22def%20run_tests(%22
-class Device(PwSystemDevice):
+class Device(device.Device):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -56,7 +52,7 @@ class Device(PwSystemDevice):
 def get_device_connection(
     setup_logging: bool = True,
     log_level: int = logging.DEBUG,
-) -> DeviceConnection:
+) -> device_connection.DeviceConnection:
     if setup_logging:
         pw_cli.log.install(level=log_level)
 
@@ -64,26 +60,28 @@ def get_device_connection(
         prog="quickstart",
         description=__doc__,
     )
-    parser = add_device_args(parser)
+    parser = device_connection.add_device_args(parser)
     args, _remaning_args = parser.parse_known_args()
 
     compiled_protos = [blinky_pb2]
 
-    device_context = create_device_serial_or_socket_connection(
-        device=args.device,
-        baudrate=args.baudrate,
-        token_databases=args.token_databases,
-        compiled_protos=compiled_protos,
-        socket_addr=args.socket_addr,
-        ticks_per_second=args.ticks_per_second,
-        serial_debug=args.serial_debug,
-        rpc_logging=args.rpc_logging,
-        hdlc_encoding=args.hdlc_encoding,
-        channel_id=args.channel_id,
-        # Device tracing is not hooked up yet for Pigweed Sense.
-        device_tracing=False,
-        device_class=Device,
-    )
+    device_context = (device_connection
+                      .create_device_serial_or_socket_connection(
+                          device=args.device,
+                          baudrate=args.baudrate,
+                          token_databases=args.token_databases,
+                          compiled_protos=compiled_protos,
+                          socket_addr=args.socket_addr,
+                          ticks_per_second=args.ticks_per_second,
+                          serial_debug=args.serial_debug,
+                          rpc_logging=args.rpc_logging,
+                          hdlc_encoding=args.hdlc_encoding,
+                          channel_id=args.channel_id,
+                          # Device tracing is not hooked up yet for Pigweed
+                          # Sense.
+                          device_tracing=False,
+                          device_class=Device,
+                          ))
 
     return device_context
 

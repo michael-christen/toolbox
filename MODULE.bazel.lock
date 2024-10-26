@@ -2130,7 +2130,7 @@
         "recordedFileInputs": {
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_windows_lock.txt": "4367c7d4cc4a1c2d6a136edace02581066f1c9ead10937685dde568d1061189f",
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_linux_lock.txt": "ce8b16e007309a610c37eec908b75451733ae5efb9c14ec7e6f04557b81d621e",
-          "@@//requirements_lock.txt": "7a4da850ba737d79dc1646c13207ec8b1a4d15b8f42850137a1ac497fde7e2d7",
+          "@@//requirements_lock.txt": "5098483f27c9e3b14e78941a0343dff8d6d240caff97304bcecb8c78db38bf9a",
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_darwin_lock.txt": "91de3b2cdbe8f8fc7136ce309824355684c2a6ae2395c1e12f4aa59d02d52f3b",
           "@@rules_fuzzing~//fuzzing/requirements.txt": "ab04664be026b632a0d2a2446c4f65982b7654f5b6851d2f9d399a19b7242a5b",
           "@@nanopb~//extra/requirements_lock.txt": "8a44f53e5c48123742970b4e9d6f8730eaa143134c08db0706ccd6d2c78c03ca",
@@ -2742,7 +2742,7 @@
               "dep_template": "@pip//{name}:{target}",
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
-              "requirement": "prometheus-client==0.20.0     --hash=sha256:287629d00b147a32dcb2be0b9df905da599b2d82f80377083ec8463309a4bb89     --hash=sha256:cde524a85bce83ca359cc837f28b8c0db5cac7aa653a588fd7e84ba061c329e7"
+              "requirement": "prometheus-client==0.21.0     --hash=sha256:4fa6b4dd0ac16d58bb587c04b1caae65b8c5043e85f778f42f5f632f6af2e166     --hash=sha256:96c83c606b71ff2b0a433c98889d275f51ffec6c5e267de37c7a2b5c9aa9233e"
             }
           },
           "python_packages_311_pykwalify": {
@@ -2772,7 +2772,7 @@
               "dep_template": "@pip//{name}:{target}",
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
-              "requirement": "anyio==4.4.0     --hash=sha256:5aadc6a1bbb7cdb0bede386cac5e2940f5e2ff3aa20277e991cf028e0585ce94     --hash=sha256:c1b2d8f46a8a812513012e1107cb0e68c17159a7a594208005a57dc776e1bdc7"
+              "requirement": "anyio==4.6.0     --hash=sha256:137b4559cbb034c477165047febb6ff83f390fc3b20bf181c1fc0a728cb8beeb     --hash=sha256:c7d2e9d63e31599eeb636c8c5c03a7e108d73b345f064f1c19fdc87b79036a9a"
             }
           },
           "pip_311_ptyprocess": {
@@ -3193,7 +3193,7 @@
               "dep_template": "@pip//{name}:{target}",
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
-              "requirement": "types-protobuf==5.27.0.20240907     --hash=sha256:5443270534cc8072909ef7ad9e1421ccff924ca658749a6396c0c43d64c32676     --hash=sha256:bb6f90f66b18d4d1c75667b6586334b0573a6fcee5eb0142a7348a765a7cbadc"
+              "requirement": "types-protobuf==5.27.0.20240920     --hash=sha256:992d695315d11eb2d25e806122c9e1fd9fec282e96104f0a0cb9226cd5d90293     --hash=sha256:c04140bd3c761a55f4e661372b24a6f508169e0815f2b73da33f34b447ed7a8d"
             }
           },
           "python_packages_311_kconfiglib": {
@@ -3762,7 +3762,7 @@
               "dep_template": "@pip//{name}:{target}",
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
-              "requirement": "jupyter-client==8.6.2     --hash=sha256:2bda14d55ee5ba58552a8c53ae43d215ad9868853489213f37da060ced54d8df     --hash=sha256:50cbc5c66fd1b8f65ecb66bc490ab73217993632809b6e505687de18e9dea39f"
+              "requirement": "jupyter-client==8.6.3     --hash=sha256:35b3a0947c4a6e9d589eb97d7d4cd5e90f910ee73101611f01283732bd6d9419     --hash=sha256:e8a19cc986cc45905ac3362915f410f3af85424b4c0905e94fa5f2cb08e8f23f"
             }
           },
           "rules_mypy_pip_312_mypy_cp312_cp312_musllinux_1_1_x86_64_3a66169b": {
@@ -4497,7 +4497,7 @@
               "dep_template": "@pip//{name}:{target}",
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
-              "requirement": "protobuf==5.28.1     --hash=sha256:0dfd86d2b5edf03d91ec2a7c15b4e950258150f14f9af5f51c17fa224ee1931f     --hash=sha256:1b04bde117a10ff9d906841a89ec326686c48ececeb65690f15b8cabe7149495     --hash=sha256:42597e938f83bb7f3e4b35f03aa45208d49ae8d5bcb4bc10b9fc825e0ab5e423     --hash=sha256:4304e4fceb823d91699e924a1fdf95cde0e066f3b1c28edb665bda762ecde10f     --hash=sha256:4b4b9a0562a35773ff47a3df823177ab71a1f5eb1ff56d8f842b7432ecfd7fd2     --hash=sha256:4c7f5cb38c640919791c9f74ea80c5b82314c69a8409ea36f2599617d03989af     --hash=sha256:51f09caab818707ab91cf09cc5c156026599cf05a4520779ccbf53c1b352fb25     --hash=sha256:c529535e5c0effcf417682563719e5d8ac8d2b93de07a56108b4c2d436d7a29a     --hash=sha256:cabfe43044ee319ad6832b2fda332646f9ef1636b0130186a3ae0a52fc264bb4     --hash=sha256:f24e5d70e6af8ee9672ff605d5503491635f63d5db2fffb6472be78ba62efd8f     --hash=sha256:fc063acaf7a3d9ca13146fefb5b42ac94ab943ec6e978f543cd5637da2d57957"
+              "requirement": "protobuf==5.28.2     --hash=sha256:2c69461a7fcc8e24be697624c09a839976d82ae75062b11a0972e41fd2cd9132     --hash=sha256:35cfcb15f213449af7ff6198d6eb5f739c37d7e4f1c09b5d0641babf2cc0c68f     --hash=sha256:52235802093bd8a2811abbe8bf0ab9c5f54cca0a751fdd3f6ac2a21438bffece     --hash=sha256:59379674ff119717404f7454647913787034f03fe7049cbef1d74a97bb4593f0     --hash=sha256:5e8a95246d581eef20471b5d5ba010d55f66740942b95ba9b872d918c459452f     --hash=sha256:87317e9bcda04a32f2ee82089a204d3a2f0d3c8aeed16568c7daf4756e4f1fe0     --hash=sha256:8ddc60bf374785fb7cb12510b267f59067fa10087325b8e1855b898a0d81d276     --hash=sha256:a8b9403fc70764b08d2f593ce44f1d2920c5077bf7d311fefec999f8c40f78b7     --hash=sha256:c0ea0123dac3399a2eeb1a1443d82b7afc9ff40241433296769f7da42d142ec3     --hash=sha256:ca53faf29896c526863366a52a8f4d88e69cd04ec9571ed6082fa117fac3ab36     --hash=sha256:eeea10f3dc0ac7e6b4933d32db20662902b4ab81bf28df12218aa389e9c2102d"
             }
           },
           "python_packages_311_google_api_core": {
@@ -5326,7 +5326,7 @@
               "dep_template": "@pip//{name}:{target}",
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
-              "requirement": "platformdirs==4.3.3     --hash=sha256:50a5450e2e84f44539718293cbb1da0a0885c9d14adf21b77bae4e66fc99d9b5     --hash=sha256:d4e0b7d8ec176b341fb03cb11ca12d0276faa8c485f9cd218f613840463fc2c0"
+              "requirement": "platformdirs==4.3.6     --hash=sha256:357fb2acbc885b0419afd3ce3ed34564c13c9b95c89360cd9563f73aa5e2b907     --hash=sha256:73e575e1408ab8103900836b97580d5307456908a03e92031bab39e4554cc3fb"
             }
           },
           "python_packages_311_sphinx_basic_ng": {
@@ -5449,7 +5449,7 @@
               "dep_template": "@pip//{name}:{target}",
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
-              "requirement": "astroid==3.3.2     --hash=sha256:99e9b5b602cbb005434084309213d6af32bf7a9b743c836749168b8e2b330cbd     --hash=sha256:9f8136ce9770e0f912401b25a0f15d5c2ec20b50e99b1b413ac0778fe53ff6f1"
+              "requirement": "astroid==3.3.3     --hash=sha256:2d79acfd3c594b6a2d4141fea98a1d62ab4a52e54332b1f1ddcf07b652cc5c0f     --hash=sha256:63f8c5370d9bad8294163c87b2d440a7fdf546be6c72bbeac0549c93244dbd72"
             }
           },
           "python_packages_311_toml": {
