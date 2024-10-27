@@ -6,6 +6,15 @@ emboss_cc_library(
     srcs = ["lis3mdl.emb"],
 )
 
+cc_library(
+    name = "lis3mdl",
+    srcs = ["lis3mdl.cc"],
+    hdrs = ["lis3mdl.h"],
+    deps = [
+        ":lis3mdl_emb",
+    ],
+)
+
 
 cc_test(
     name = "lis3mdl_test",
