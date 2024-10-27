@@ -17,12 +17,12 @@ package hw_drivers.lis3mdl;
 
 
 // XXX: Should I define _INVALID at 0 and not tie to bit-mapping?
-enum OperatingMode {
-  OPERATING_MODE_LOW_POWER = 0;
-  OPERATING_MODE_MEDIUM_PERFORMANCE = 1;
-  OPERATING_MODE_HIGH_PERFORMANCE = 2;
-  OPERATING_MODE_ULTRA_HIGH_PERFORMANCE = 3;
-};
+// enum OperatingMode {
+//   OPERATING_MODE_LOW_POWER = 0;
+//   OPERATING_MODE_MEDIUM_PERFORMANCE = 1;
+//   OPERATING_MODE_HIGH_PERFORMANCE = 2;
+//   OPERATING_MODE_ULTRA_HIGH_PERFORMANCE = 3;
+// };
 
 // How do we want to configure this magnetometer.
 // 
@@ -92,7 +92,7 @@ message LIS3MDLReading {
   // - experiment with unit libraries
 
   // The magnetic strength in micro-Gauss
-  repeated sint32 magnetic_strength_ug = 1 [(nanopb).max_count = 3, (nanopb).fixed_count = true];
+  repeated sint32 magnetic_strength_ug = 1;  // XXX: [(nanopb).max_count = 3, (nanopb).fixed_count = true];
 
   // Temperature in tenths of a degree celcius (we get 1/8 C resolution).
   optional sint32 temperature_dc = 2;

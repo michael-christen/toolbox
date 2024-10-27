@@ -27,6 +27,13 @@ enum ConversionMode:
   CONVERSION_MODE_POWER_DOWN_A = 2
   CONVERSION_MODE_POWER_DOWN_B = 3
 
+
+enum FullScaleSelection:
+  FULL_SCALE_SELECTION_4 = 0
+  FULL_SCALE_SELECTION_8 = 1
+  FULL_SCALE_SELECTION_12 = 2
+  FULL_SCALE_SELECTION_16 = 3
+
 struct Offset:
   -- OUT = OUT_measured - OFFSET
 
@@ -68,7 +75,7 @@ struct Control:
     # CTRL_REG2
     # the not-set must be 0
 
-    5 [+2] UInt full_scale
+    5 [+2] FullScaleSelection full_scale
       -- Refer to Table 25; Default: 0
 
     3 [+1] Flag reboot
