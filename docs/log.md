@@ -201,3 +201,8 @@ So, let's write-up a proto interface for these.
 - [ ] emboss doesn't enforce fields don't overlap ...
 - [ ] seeing very long link times when making / editing tests
   - if I disable remote caching, the speed is fine ...
+
+### 2024-10-27, Sunday:
+
+- https://protobuf.dev/reference/cpp/api-docs/google.protobuf.repeated_field/#RepeatedField
+- https://github.com/catchorg/Catch2/blob/devel/docs/assertions.md
