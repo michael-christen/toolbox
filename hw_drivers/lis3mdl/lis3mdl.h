@@ -69,6 +69,10 @@ std::expected<LIS3MDLConfiguration, ConfigurationError> SolveConfiguration(const
 LIS3MDLReading InterpretReading(uint32_t lsb_per_gauss,
     const LIS3MDLData& data);
 
+// XXX: return status, pass in i2c objects
+void ApplyControlToDevice(const LIS3MDLControl& control);
+void ReadFromDevice(LIS3MDLData *data);
+
 
 
 class LIS3MDL {

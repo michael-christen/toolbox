@@ -1,6 +1,7 @@
 load("@rules_proto//proto:defs.bzl", "proto_library")
 load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_library")
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
+load("@pigweed//pw_build:pigweed.bzl", "pw_cc_test")
 load("//bzl:py.bzl", "proto_py_library")
 load("@com_google_emboss//:build_defs.bzl", "emboss_cc_library")
 load("//bzl:cc.bzl", "cc_library", "cc_test")
@@ -20,6 +21,21 @@ cc_library(
     ],
 )
 
+pw_cc_test(
+    name = "lis3mdl_pw_test",
+    srcs = ["lis3mdl_pw_test.cc"],
+    deps = [
+        ":lis3mdl_emb",
+        ":lis3mdl",
+        ":lis3mdl_cc_library",
+        "@pigweed//pw_bytes:pw_bytes",
+        "@pigweed//pw_i2c:address",
+        "@pigweed//pw_i2c:initiator_mock",
+        "@pigweed//pw_result:pw_result",
+        "@pigweed//pw_unit_test:pw_unit_test",
+    ],
+)
+
 cc_test(
     name = "lis3mdl_test",
     srcs = ["lis3mdl_test.cc"],
@@ -28,6 +44,10 @@ cc_test(
         ":lis3mdl",
         ":lis3mdl_cc_library",
         "//testing:catch_main",
+        "@pigweed//pw_bytes:pw_bytes",
+        "@pigweed//pw_i2c:address",
+        "@pigweed//pw_i2c:initiator_mock",
+        "@pigweed//pw_result:pw_result",
     ],
 )
 

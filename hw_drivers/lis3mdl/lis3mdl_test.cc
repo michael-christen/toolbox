@@ -1,15 +1,18 @@
 #include "hw_drivers/lis3mdl/lis3mdl.h"
 
-#include <catch2/catch_test_macros.hpp>
-
 #include <cstdint>
 #include <vector>
+
+#include <catch2/catch_test_macros.hpp>
 
 #include "hw_drivers/lis3mdl/lis3mdl.emb.h"
 #include "hw_drivers/lis3mdl/lis3mdl.pb.h"
 
+
 namespace hw_drivers {
 namespace lis3mdl {
+
+namespace {
 
 TEST_CASE("offset") {
   uint8_t buf[Offset::MaxSizeInBytes()];
@@ -105,6 +108,8 @@ TEST_CASE("Read Data") {
   CHECK(reading.magnetic_strength_ug().at(0) == -58'445);
   CHECK(reading.magnetic_strength_ug().at(1) == 0);
   CHECK(reading.magnetic_strength_ug().at(2) == 116'890);
+}
+
 }
 
 }
