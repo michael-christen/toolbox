@@ -1,5 +1,5 @@
-load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_library")
 load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_library")
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
 load(
     "@pigweed//pw_protobuf_compiler:pw_proto_library.bzl",
@@ -46,34 +46,6 @@ nanopb_rpc_proto_library(
     deps = [":sbr_proto"],
 )
 
-# XXX
-# proto_cc_library(
-#     name = "sbr_cc_library",
-#     srcs = ["sbr.pb.cc"],
-#     hdrs = ["sbr.pb.h"],
-#     visibility = ["//visibility:public"],
-#     deps = [
-#         "//hw_drivers/lis3mdl:lis3mdl_cc_library",
-#         "@com_google_protobuf//:protobuf",
-#     ],
-# )
-#
-# proto_compile(
-#     name = "sbr_cpp_compile",
-#     outputs = [
-#         "sbr.grpc.pb.cc",
-#         "sbr.grpc.pb.h",
-#         "sbr.pb.cc",
-#         "sbr.pb.h",
-#     ],
-#     plugins = [
-#         "@build_stack_rules_proto//plugin/builtin:cpp",
-#         "@build_stack_rules_proto//plugin/grpc/grpc:protoc-gen-grpc-cpp",
-#     ],
-#     proto = "sbr_proto",
-#     visibility = ["//visibility:public"],
-# )
-#
 grpc_py_library(
     name = "sbr_grpc_py_library",
     srcs = ["sbr_pb2_grpc.py"],
@@ -101,8 +73,33 @@ proto_py_library(
     name = "sbr_py_library",
     srcs = ["sbr_pb2.py"],
     visibility = ["//visibility:public"],
-    deps = [
-        "//hw_drivers/lis3mdl:lis3mdl_py_library",
-        "@com_google_protobuf//:protobuf_python",
-    ],
+    deps = ["@com_google_protobuf//:protobuf_python"],
 )
+
+# XXX
+# proto_cc_library(
+#     name = "sbr_cc_library",
+#     srcs = ["sbr.pb.cc"],
+#     hdrs = ["sbr.pb.h"],
+#     visibility = ["//visibility:public"],
+#     deps = [
+#         "//hw_drivers/lis3mdl:lis3mdl_cc_library",
+#         "@com_google_protobuf//:protobuf",
+#     ],
+# )
+#
+# proto_compile(
+#     name = "sbr_cpp_compile",
+#     outputs = [
+#         "sbr.grpc.pb.cc",
+#         "sbr.grpc.pb.h",
+#         "sbr.pb.cc",
+#         "sbr.pb.h",
+#     ],
+#     plugins = [
+#         "@build_stack_rules_proto//plugin/builtin:cpp",
+#         "@build_stack_rules_proto//plugin/grpc/grpc:protoc-gen-grpc-cpp",
+#     ],
+#     proto = "sbr_proto",
+#     visibility = ["//visibility:public"],
+# )
