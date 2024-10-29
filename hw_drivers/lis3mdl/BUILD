@@ -81,23 +81,24 @@ proto_compile(
     visibility = ["//visibility:public"],
 )
 
-proto_compile(
-    name = "lis3mdl_python_compile",
-    outputs = [
-        "lis3mdl_pb2.py",
-        "lis3mdl_pb2.pyi",
-    ],
-    plugins = [
-        "@build_stack_rules_proto//plugin/builtin:pyi",
-        "@build_stack_rules_proto//plugin/builtin:python",
-    ],
-    proto = "lis3mdl_proto",
-    visibility = ["//visibility:public"],
-)
-
-proto_py_library(
-    name = "lis3mdl_py_library",
-    srcs = ["lis3mdl_pb2.py"],
-    visibility = ["//visibility:public"],
-    deps = ["@com_google_protobuf//:protobuf_python"],
-)
+# XXX: Causing issues in sbr ...
+# proto_compile(
+#     name = "lis3mdl_python_compile",
+#     outputs = [
+#         "lis3mdl_pb2.py",
+#         "lis3mdl_pb2.pyi",
+#     ],
+#     plugins = [
+#         "@build_stack_rules_proto//plugin/builtin:pyi",
+#         "@build_stack_rules_proto//plugin/builtin:python",
+#     ],
+#     proto = "lis3mdl_proto",
+#     visibility = ["//visibility:public"],
+# )
+# 
+# proto_py_library(
+#     name = "lis3mdl_py_library",
+#     srcs = ["lis3mdl_pb2.py"],
+#     visibility = ["//visibility:public"],
+#     deps = ["@com_google_protobuf//:protobuf_python"],
+# )

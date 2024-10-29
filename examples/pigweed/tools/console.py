@@ -27,6 +27,7 @@ from pw_system.device_connection import (
 )
 
 from examples.pigweed.modules.blinky import blinky_pb2
+from hw_service.sbr import sbr_pb2
 
 _LOG = logging.getLogger(__file__)
 
@@ -52,6 +53,10 @@ class Device(PwSystemDevice):
             interval_ms=interval_ms, blink_count=blink_count
         )
 
+COMPILED_PROTOS = [
+    blinky_pb2,
+    sbr_pb2,
+]
 
 def get_device_connection(
     setup_logging: bool = True,
@@ -67,13 +72,11 @@ def get_device_connection(
     parser = add_device_args(parser)
     args, _remaning_args = parser.parse_known_args()
 
-    compiled_protos = [blinky_pb2]
-
     device_context = create_device_serial_or_socket_connection(
         device=args.device,
         baudrate=args.baudrate,
         token_databases=args.token_databases,
-        compiled_protos=compiled_protos,
+        compiled_protos=COMPILED_PROTOS,
         socket_addr=args.socket_addr,
         ticks_per_second=args.ticks_per_second,
         serial_debug=args.serial_debug,
@@ -90,7 +93,7 @@ def get_device_connection(
 
 def main() -> int:
     return pw_system.console.main(
-        compiled_protos=[blinky_pb2],
+        compiled_protos=COMPILED_PROTOS,
         device_connection=get_device_connection(),
     )
 

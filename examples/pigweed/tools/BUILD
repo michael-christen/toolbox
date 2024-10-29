@@ -19,6 +19,7 @@ py_binary(
     visibility = ["//:__subpackages__"],
     deps = [
         "//examples/pigweed/modules/blinky:blinky_pb2",
+        "//hw_service/sbr:sbr_pb2",
         "@pigweed//pw_system/py:pw_system_lib",
     ],
 )
