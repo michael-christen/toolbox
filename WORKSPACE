@@ -10,12 +10,13 @@ workspace(name = "mchristen")
 #
 # Alternative to gcc-toolchain: https://github.com/uber/hermetic_cc_toolchain
 
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+
 # Load the http_archive rule so that we can have bazel download
 # various rulesets and dependencies.
 # The `load` statement imports the symbol for http_archive from the http.bzl
 # file.  When the symbol is loaded you can use the rule.
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
-load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
 http_archive(
     name = "build_stack_rules_proto",

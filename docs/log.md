@@ -11,16 +11,16 @@ internal use.
       layout?
     - I think we could probably leave it as Init/Start and leave it at that
     - May be able to completely avoid to start (though probably want for host)
-- 22:34 - spending a lot of time trying to find the pigweed module to describe
-  a register map
-  - 22:53 - found it in 3rd party libraries: https://github.com/google/emboss/blob/master/doc/guide.md
+- 22:34 - spending a lot of time trying to find the pigweed module to describe a
+  register map
+  - 22:53 - found it in 3rd party libraries:
+    https://github.com/google/emboss/blob/master/doc/guide.md
 
 ### 2024-10-26, Saturday:
 
 - having trouble getting data out of pdf, tried using chat gpt, but it only
   really got a few rows
-  - pdftotext worked fairly well, but still a fair amount of manual
-    intervention
+  - pdftotext worked fairly well, but still a fair amount of manual intervention
 - this is taking a while, worth reconsidering my approach; let's look at
   existing libraries at least for inspiration, if not for data ingestion
 - separately, I notice when I dive into this stuff, I leave a wake of way too
@@ -36,9 +36,10 @@ internal use.
   - https://blog.domski.pl/quadrature-encoders-with-raspberry-pi-pico-pio/
   - other articles about reading encoders:
     - https://makeatronics.blogspot.com/2013/02/efficiently-reading-quadrature-with.html
-- I don't think I'll be able to easily do non-blocking i2c out of the box, I
-  may need to adjust things a bit
+- I don't think I'll be able to easily do non-blocking i2c out of the box, I may
+  need to adjust things a bit
 - other self-balancing robots:
+
   - https://blog.pictor.us/self-balancing-robot/
   - https://blog.pictor.us/lqr-control-of-a-self-balancing-robot/
 
@@ -46,14 +47,16 @@ internal use.
   - union bitfields
   - enums / constants
   - don't even separate bit-fields
-  - C++ templated bitfields: https://codereview.stackexchange.com/questions/54342/template-for-endianness-free-code-data-always-packed-as-big-endian
+  - C++ templated bitfields:
+    https://codereview.stackexchange.com/questions/54342/template-for-endianness-free-code-data-always-packed-as-big-endian
   - structuring this information in a machine-readable way that can easily
-    generate code doesn't seem to be solved / there are probably some other
-    good repos out there
+    generate code doesn't seem to be solved / there are probably some other good
+    repos out there
     - https://docs.python.org/3/library/struct.html is python's approach to it
 
 Alright, before spending a bunch of time merely transcribing these fields into
 code, let's get working knowledge for how these work, taking a look at:
+
 - application note
 - datasheet
 - exisiting code (should help me narrow down on what I need to care about)
@@ -62,6 +65,7 @@ Alright, let's start with this AHRS (Attitude and Heading Reference System)
 application:
 
 https://github.com/pololu/minimu-9-ahrs-arduino.
+
 - could be handy for a sanity check on hardware setup
 
 - setup
@@ -74,6 +78,7 @@ https://github.com/pololu/minimu-9-ahrs-arduino.
     - read_gyro
     - read_accel
 - loop (50 Hz)
+
   - read others + compass and get compass_heading
   - mathematics to update matrix, normalize, drift correction and compute euler
     angles
@@ -83,14 +88,16 @@ https://github.com/pololu/minimu-9-ahrs-arduino.
   - gyro_acc.init(), .enableDefault()
   - `gyro_acc.writeReg(LSM6::CTRL1_XL, 0x3C); // 52 Hz, 8 g full scale`
 - accel init
+
   - check address and read `WHO_AM_I (0x0F)` register
-  - there are a few different behaviors based on whether we're a specific
-    device type, the library auto-detects by checking `WHO_AM_I`
+  - there are a few different behaviors based on whether we're a specific device
+    type, the library auto-detects by checking `WHO_AM_I`
 
 - accel/gyro `enable_default`
   - pick resolution and rate
   - auto-increment register address for multiple byte access
     - they use this for readAcc, etc.
+
 ```
 /*
 Enables the LSM6's accelerometer and gyro. Also:
@@ -124,12 +131,15 @@ the registers it writes to.
 ```
 
 - readACC
-  - write `OUTX_L_XL` to specify register, then read 6 bytes (2 for each of x,y,z); combine bytes
+  - write `OUTX_L_XL` to specify register, then read 6 bytes (2 for each of
+    x,y,z); combine bytes
   - they aren't waiting for data to be ready?
 - readGyro
+
   - same process for gyro
 
 - thoughts?
+
   - I may be able to structure my data type to read and format it for myself,
     without needing to shift afterwards
 
@@ -168,6 +178,7 @@ the registers it writes to.
 ```
 
 - writes MSB to get subaddress updating? Is that auto-incrementing?
+
 ```
   // assert MSB to enable subaddress updating
   Wire.write(OUT_X_L | 0x80);
@@ -175,27 +186,31 @@ the registers it writes to.
 
   Wire.requestFrom(address, (uint8_t)6);
 ```
+
 - there is temperature data
 - the compass is fairly straightforward
 - In order to read multiple bytes, it is necessary to assert the most
   significant bit of the subaddress field. In other words, SUB(7) must be equal
   to 1, while SUB(6-0) represents the address of first register to be read.
+
   - See 5.1.1 I2C operation of LIS3MDL data sheet
 
 - there are self-test features on these chips
 
 So, let's write-up a proto interface for these.
 
-- [ ] Where to put common references: https://jpa.kapsi.fi/nanopb/docs/concepts.html
+- [ ] Where to put common references:
+      https://jpa.kapsi.fi/nanopb/docs/concepts.html
   - the hardest part of documentation is making it useful in the future
 - [ ] we should have 2 different endianness processors to ensure we're properly
-  handling endianness and not relying on processor specifics
+      handling endianness and not relying on processor specifics
 - [ ] Is there a good/uniform way to encode state machines?
-- [ ] I wonder what happens if BDU and FAST_READ are set at the same time,
-  would it not update?
+- [ ] I wonder what happens if BDU and FAST_READ are set at the same time, would
+      it not update?
 
-- what is emboss gonna be like / how parseable is it, eg) if I wanted to make
-  my own frontend, could that work? Is it inefficient?
+- what is emboss gonna be like / how parseable is it, eg) if I wanted to make my
+  own frontend, could that work? Is it inefficient?
+
   - enums are uint64 when uint8 would suffice
 
 - [ ] emboss doesn't enforce fields don't overlap ...

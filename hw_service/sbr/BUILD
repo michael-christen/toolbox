@@ -1,22 +1,28 @@
+load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_library")
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
 load(
     "@pigweed//pw_protobuf_compiler:pw_proto_library.bzl",
     "nanopb_proto_library",
     "nanopb_rpc_proto_library",
 )
-load("@rules_python//python:proto.bzl", "py_proto_library")
+load("//bzl:py.bzl", "grpc_py_library", "proto_py_library")
 
-package(default_visibility = ["//visibility:public"])
+package(default_visibility = ["//visibility:private"])
 
 cc_library(
     name = "service",
     srcs = ["service.cc"],
     hdrs = ["service.h"],
+    visibility = [
+        "//apps/sbr:__pkg__",
+    ],
     deps = [
         ":sbr_nanopb_rpc",
-        "@pigweed//pw_log",
         "@pigweed//pw_allocator:allocator",
         "@pigweed//pw_assert:check",
         "@pigweed//pw_async2:dispatcher",
+        "@pigweed//pw_log",
     ],
 )
 
@@ -40,7 +46,63 @@ nanopb_rpc_proto_library(
     deps = [":sbr_proto"],
 )
 
-py_proto_library(
-    name = "sbr_pb2",
-    deps = [":sbr_proto"],
+# XXX
+# proto_cc_library(
+#     name = "sbr_cc_library",
+#     srcs = ["sbr.pb.cc"],
+#     hdrs = ["sbr.pb.h"],
+#     visibility = ["//visibility:public"],
+#     deps = [
+#         "//hw_drivers/lis3mdl:lis3mdl_cc_library",
+#         "@com_google_protobuf//:protobuf",
+#     ],
+# )
+#
+# proto_compile(
+#     name = "sbr_cpp_compile",
+#     outputs = [
+#         "sbr.grpc.pb.cc",
+#         "sbr.grpc.pb.h",
+#         "sbr.pb.cc",
+#         "sbr.pb.h",
+#     ],
+#     plugins = [
+#         "@build_stack_rules_proto//plugin/builtin:cpp",
+#         "@build_stack_rules_proto//plugin/grpc/grpc:protoc-gen-grpc-cpp",
+#     ],
+#     proto = "sbr_proto",
+#     visibility = ["//visibility:public"],
+# )
+#
+grpc_py_library(
+    name = "sbr_grpc_py_library",
+    srcs = ["sbr_pb2_grpc.py"],
+    visibility = ["//visibility:public"],
+    deps = [":sbr_py_library"],
+)
+
+proto_compile(
+    name = "sbr_python_compile",
+    outputs = [
+        "sbr_pb2.py",
+        "sbr_pb2.pyi",
+        "sbr_pb2_grpc.py",
+    ],
+    plugins = [
+        "@build_stack_rules_proto//plugin/builtin:pyi",
+        "@build_stack_rules_proto//plugin/builtin:python",
+        "@build_stack_rules_proto//plugin/grpc/grpc:protoc-gen-grpc-python",
+    ],
+    proto = "sbr_proto",
+    visibility = ["//visibility:public"],
+)
+
+proto_py_library(
+    name = "sbr_py_library",
+    srcs = ["sbr_pb2.py"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//hw_drivers/lis3mdl:lis3mdl_py_library",
+        "@com_google_protobuf//:protobuf_python",
+    ],
 )

@@ -1,10 +1,12 @@
-load("@rules_proto//proto:defs.bzl", "proto_library")
-load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_library")
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
-load("@pigweed//pw_build:pigweed.bzl", "pw_cc_test")
-load("//bzl:py.bzl", "proto_py_library")
+load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_library")
 load("@com_google_emboss//:build_defs.bzl", "emboss_cc_library")
+load("@pigweed//pw_build:pigweed.bzl", "pw_cc_test")
+load("@rules_proto//proto:defs.bzl", "proto_library")
 load("//bzl:cc.bzl", "cc_library", "cc_test")
+load("//bzl:py.bzl", "proto_py_library")
+
+package(default_visibility = ["//visibility:private"])
 
 emboss_cc_library(
     name = "lis3mdl_emb",
@@ -16,8 +18,8 @@ cc_library(
     srcs = ["lis3mdl.cc"],
     hdrs = ["lis3mdl.h"],
     deps = [
-        ":lis3mdl_emb",
         ":lis3mdl_cc_library",
+        ":lis3mdl_emb",
         "@pigweed//pw_i2c:register_device",
     ],
 )
@@ -26,16 +28,16 @@ pw_cc_test(
     name = "lis3mdl_pw_test",
     srcs = ["lis3mdl_pw_test.cc"],
     deps = [
-        ":lis3mdl_emb",
         ":lis3mdl",
         ":lis3mdl_cc_library",
-        "@pigweed//pw_bytes:pw_bytes",
+        ":lis3mdl_emb",
+        "@pigweed//pw_bytes",
         "@pigweed//pw_i2c:address",
         "@pigweed//pw_i2c:device",
-        "@pigweed//pw_i2c:register_device",
         "@pigweed//pw_i2c:initiator_mock",
-        "@pigweed//pw_result:pw_result",
-        "@pigweed//pw_unit_test:pw_unit_test",
+        "@pigweed//pw_i2c:register_device",
+        "@pigweed//pw_result",
+        "@pigweed//pw_unit_test",
     ],
 )
 
@@ -43,18 +45,16 @@ cc_test(
     name = "lis3mdl_test",
     srcs = ["lis3mdl_test.cc"],
     deps = [
-        ":lis3mdl_emb",
         ":lis3mdl",
         ":lis3mdl_cc_library",
+        ":lis3mdl_emb",
         "//testing:catch_main",
-        "@pigweed//pw_bytes:pw_bytes",
+        "@pigweed//pw_bytes",
         "@pigweed//pw_i2c:address",
         "@pigweed//pw_i2c:initiator_mock",
-        "@pigweed//pw_result:pw_result",
+        "@pigweed//pw_result",
     ],
 )
-
-package(default_visibility = ["//visibility:private"])
 
 proto_library(
     name = "lis3mdl_proto",
@@ -81,24 +81,23 @@ proto_compile(
     visibility = ["//visibility:public"],
 )
 
-# XXX: Causing issues in sbr ...
-# proto_compile(
-#     name = "lis3mdl_python_compile",
-#     outputs = [
-#         "lis3mdl_pb2.py",
-#         "lis3mdl_pb2.pyi",
-#     ],
-#     plugins = [
-#         "@build_stack_rules_proto//plugin/builtin:pyi",
-#         "@build_stack_rules_proto//plugin/builtin:python",
-#     ],
-#     proto = "lis3mdl_proto",
-#     visibility = ["//visibility:public"],
-# )
-# 
-# proto_py_library(
-#     name = "lis3mdl_py_library",
-#     srcs = ["lis3mdl_pb2.py"],
-#     visibility = ["//visibility:public"],
-#     deps = ["@com_google_protobuf//:protobuf_python"],
-# )
+proto_compile(
+    name = "lis3mdl_python_compile",
+    outputs = [
+        "lis3mdl_pb2.py",
+        "lis3mdl_pb2.pyi",
+    ],
+    plugins = [
+        "@build_stack_rules_proto//plugin/builtin:pyi",
+        "@build_stack_rules_proto//plugin/builtin:python",
+    ],
+    proto = "lis3mdl_proto",
+    visibility = ["//visibility:public"],
+)
+
+proto_py_library(
+    name = "lis3mdl_py_library",
+    srcs = ["lis3mdl_pb2.py"],
+    visibility = ["//visibility:public"],
+    deps = ["@com_google_protobuf//:protobuf_python"],
+)
