@@ -112,6 +112,7 @@ struct Control:
       -- (0: data LSb at lower address; 1: data MSb at lower address)
 
   4 [+1] bits:
+    # CTRL_REG5
 
     7 [+1] Flag fast_read
       -- FAST READ allows reading the high part of DATA OUT only in order to

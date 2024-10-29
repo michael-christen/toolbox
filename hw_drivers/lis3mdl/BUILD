@@ -18,6 +18,7 @@ cc_library(
     deps = [
         ":lis3mdl_emb",
         ":lis3mdl_cc_library",
+        "@pigweed//pw_i2c:register_device",
     ],
 )
 
@@ -30,6 +31,8 @@ pw_cc_test(
         ":lis3mdl_cc_library",
         "@pigweed//pw_bytes:pw_bytes",
         "@pigweed//pw_i2c:address",
+        "@pigweed//pw_i2c:device",
+        "@pigweed//pw_i2c:register_device",
         "@pigweed//pw_i2c:initiator_mock",
         "@pigweed//pw_result:pw_result",
         "@pigweed//pw_unit_test:pw_unit_test",

@@ -17,7 +17,7 @@ namespace {
 TEST_CASE("offset") {
   uint8_t buf[Offset::MaxSizeInBytes()];
 
-  auto offset_view = MakeOffsetView(buf, sizeof(buf));
+  auto offset_view = MakeOffsetView(buf, std::size(buf));
   offset_view.out_x().Write(0x1234);
 
   CHECK(offset_view.out_x().Read() == 0x1234);
@@ -28,7 +28,7 @@ TEST_CASE("offset") {
 TEST_CASE("emboss and calculations are correct") {
   uint8_t buf[Control::MaxSizeInBytes()];
 
-  auto control_view = MakeControlView(buf, sizeof(buf));
+  auto control_view = MakeControlView(buf, std::size(buf));
   control_view.temperature_enable().Write(true);
 
   CHECK(control_view.temperature_enable().Read());
@@ -41,7 +41,7 @@ TEST_CASE("SolveConfiguration") {
   // XXX: Better naming schema to denote differences
   // XXX: Analysis on size and run-time cost
   LIS3MDLControl control;
-  auto control_view = MakeControlView(control.bytes, sizeof(control.bytes));
+  auto control_view = MakeControlView(control.bytes.data(), std::size(control.bytes));
   auto result = SolveConfiguration(configuration, &control);
   REQUIRE(!result.has_value());
   CHECK(result.error() == ConfigurationError::kInvalidConfig);
@@ -70,7 +70,12 @@ TEST_CASE("Read Data") {
   static_assert(Data::IntrinsicSizeInBytes() == 9);
 
   LIS3MDLData d;
-  auto view = MakeDataView(d.bytes, sizeof(d.bytes));
+  auto view = MakeDataView(d.bytes.data(), std::size(d.bytes));
+  // XXX: Why aren't these equal / why is sizeof d.bytes.data() 8?
+  CHECK(d.bytes.size() == 9);
+  CHECK(std::size(d.bytes) == 9);
+  // CHECK(sizeof(d.bytes.data()) == d.bytes.size());
+  // CHECK(sizeof(d.bytes.data()) == 9);
 
   // Check simple available / overrun behavior
   view.zyxd_available().Write(1);

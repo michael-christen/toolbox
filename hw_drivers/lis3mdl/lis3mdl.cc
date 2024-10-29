@@ -2,20 +2,27 @@
 
 #include <expected>
 
+// XXX: Do I need these in my namespaces?
+using namespace std::chrono_literals;
+
 namespace hw_drivers {
 namespace lis3mdl {
+
+  namespace {
+    constexpr auto kI2cTimeout = 1ms;
+  }
 
 
 // XXX: No idea why this is failing / why there's an issue with this
 // declaration, but in test code, things are fine ...
 DataView LIS3MDLData::GetView() {
-  return MakeDataView(bytes, sizeof(bytes));
+  return MakeDataView(bytes.data(), std::size(bytes));
 }
 
 
 std::expected<LIS3MDLConfiguration, ConfigurationError> SolveConfiguration(const LIS3MDLConfiguration& desired_configuration,
     LIS3MDLControl* control) {
-  auto view = MakeControlView(control->bytes, sizeof(control->bytes));
+  auto view = MakeControlView(control->bytes.data(), std::size(control->bytes));
   // Constraints of our system:
   // - 
   LIS3MDLConfiguration result_configuration;
@@ -119,6 +126,7 @@ std::expected<LIS3MDLConfiguration, ConfigurationError> SolveConfiguration(const
   view.z_axis_operating_mode().Write(operating_mode);
   view.output_data_rate().Write(exponent);
   view.fast_output_data_rate().Write(fast_output_data_rate);
+  // XXX: Set block update
 
   return result_configuration;
 }
@@ -128,7 +136,7 @@ std::expected<LIS3MDLConfiguration, ConfigurationError> SolveConfiguration(const
 LIS3MDLReading InterpretReading(uint32_t lsb_per_gauss,
                                 const LIS3MDLData& data) {
   LIS3MDLReading reading;
-  auto view = MakeDataView(data.bytes, sizeof(data.bytes));
+  auto view = MakeDataView(data.bytes.data(), std::size(data.bytes));
 
   reading.set_data_fresh(view.zyxd_available().Read());
   reading.set_data_overrun(view.zyx_overrun().Read());
@@ -158,6 +166,29 @@ LIS3MDLReading InterpretReading(uint32_t lsb_per_gauss,
         / lsb_per_gauss);
   }
   return reading;
+}
+
+pw::Status ApplyControlToDevice(const LIS3MDLControl& control, pw::i2c::RegisterDevice* register_device) {
+  
+  // XXX: Why won't std::size work?
+  std::array<std::byte, Control::MaxSizeInBytes() + 1> raw_buf = {std::byte{0}};
+  // XXX: Could I do something differently and avoid the extra buffer?
+  // - I could make a LIS3MDLControl that is "wrong" and the first value is the
+  // address?
+  auto buf = pw::as_writable_bytes(pw::span(raw_buf));
+  return register_device->WriteRegisters(
+      static_cast<uint8_t>(RegisterAddress::CONTROL),
+      pw::span(control.bytes),
+      buf,
+      kI2cTimeout
+  );
+}
+
+pw::Status ReadFromDevice(LIS3MDLData *data, pw::i2c::RegisterDevice* register_device) {
+  return register_device->ReadRegisters(
+      static_cast<uint8_t>(RegisterAddress::DATA),
+      pw::span(data->bytes),
+      kI2cTimeout);
 }
 
 }

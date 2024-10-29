@@ -5,6 +5,8 @@
 #include <cstdint>
 #include <expected>
 
+#include "pw_i2c/register_device.h"
+
 #include "hw_drivers/lis3mdl/lis3mdl.emb.h"
 #include "hw_drivers/lis3mdl/lis3mdl.pb.h"
 
@@ -33,13 +35,18 @@ struct LIS3MDLData {
   public:
     DataView GetView();
 
-    uint8_t bytes[Data::MaxSizeInBytes()];
+    std::array<std::byte, Data::MaxSizeInBytes()> bytes {std::byte{0}};
 };
 
 struct LIS3MDLControl {
   public:
-    uint8_t bytes[Control::MaxSizeInBytes()];
+    std::array<std::byte, Control::MaxSizeInBytes()> bytes {std::byte{0}};
 };
+
+// XXX: Move to util
+// template<size_t N, typename T>
+//
+// constant_integer<N> array_size( const std::array<T, N>& );
 
 
 // XXX:
@@ -70,8 +77,8 @@ LIS3MDLReading InterpretReading(uint32_t lsb_per_gauss,
     const LIS3MDLData& data);
 
 // XXX: return status, pass in i2c objects
-void ApplyControlToDevice(const LIS3MDLControl& control);
-void ReadFromDevice(LIS3MDLData *data);
+pw::Status ApplyControlToDevice(const LIS3MDLControl& control, pw::i2c::RegisterDevice* register_device);
+pw::Status ReadFromDevice(LIS3MDLData *data, pw::i2c::RegisterDevice* register_device);
 
 
 
