@@ -38,11 +38,18 @@ TEST(I2CTestSuite, I2CTransactions) {
     0x0C,
     0x00
   >();
+  constexpr auto kDataRead = pw::bytes::Array<
+    0, 0, 0,
+    0, 0, 0,
+    0, 0, 0
+  >();
+  constexpr auto kDataReg = pw::bytes::Array<static_cast<uint8_t>(RegisterAddress::DATA)>();
   auto expected_transactions = pw::i2c::MakeExpectedTransactionArray(
     {
       pw::i2c::WriteTransaction(pw::OkStatus(), kAddress, kExpectedWrite, 1ms),
       pw::i2c::Transaction(pw::OkStatus(), kAddress, kJustReg, kMockRead, 1ms),
       pw::i2c::WriteTransaction(pw::OkStatus(), kAddress, kControlWrite, 1ms),
+      pw::i2c::Transaction(pw::OkStatus(), kAddress, kDataReg, kDataRead, 1ms),
     }
   );
   pw::i2c::MockInitiator initiator(expected_transactions);
@@ -90,6 +97,10 @@ TEST(I2CTestSuite, I2CTransactions) {
   PW_LOG_INFO("Control bytes: %s", sb.c_str());
 
   status = ApplyControlToDevice(control, &reg_device);
+  EXPECT_EQ(status, pw::OkStatus());
+
+  LIS3MDLData data;
+  status = ReadFromDevice(&data, &reg_device);
   EXPECT_EQ(status, pw::OkStatus());
 
   // XXX: This is a fairly annoying check, it doesn't say what's wrong
