@@ -2702,6 +2702,7 @@ manifest:
     tinycss2.ast: tinycss2
     tinycss2.bytes: tinycss2
     tinycss2.color3: tinycss2
+    tinycss2.color4: tinycss2
     tinycss2.nth: tinycss2
     tinycss2.parser: tinycss2
     tinycss2.serializer: tinycss2
@@ -2960,4 +2961,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: 3922f3b2e597de83bc1e3d6e60ada6c89275e832e8010466250e143bd6a86ca1
+integrity: 62e605625faab25ed61d84431350ff44120a493274f60520b9d3dd9b50c6bdc5
