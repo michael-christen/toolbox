@@ -508,9 +508,9 @@ a_1=b_1+c_1\\
 a_2=b_2+c_2-d_2+e_2
 \end{gather*}\]</div>
 </div>
-<div class="math-wrapper amsmath docutils container" id="equation-439a8c49-a396-489d-a367-42dabac3e644">
-<div class="amsmath math notranslate nohighlight" id="equation-439a8c49-a396-489d-a367-42dabac3e644">
-<span class="eqno">(2)<a class="headerlink" href="#equation-439a8c49-a396-489d-a367-42dabac3e644" title="Permalink to this equation"></a></span>\[\begin{align}
+<div class="math-wrapper amsmath docutils container" id="equation-e40768ce-2f1c-4789-a5d2-9cabcca19ec4">
+<div class="amsmath math notranslate nohighlight" id="equation-e40768ce-2f1c-4789-a5d2-9cabcca19ec4">
+<span class="eqno">(2)<a class="headerlink" href="#equation-e40768ce-2f1c-4789-a5d2-9cabcca19ec4" title="Permalink to this equation"></a></span>\[\begin{align}
 a_{11}&amp; =b_{11}&amp;
   a_{12}&amp; =b_{12}\\
 a_{21}&amp; =b_{21}&amp;
@@ -549,7 +549,7 @@ a_1=b_1+c_1\\a_2=b_2+c_2-d_2+e_2
 </section>
 <section id="mathjax-and-math-parsing">
 <span id="syntax-mathjax"></span><h3>Mathjax and math parsing<a class="headerlink" href="#mathjax-and-math-parsing" title="Link to this heading"></a></h3>
-<p>When building HTML using the <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/extensions/math.html#module-sphinx.ext.mathjax" title="Sphinx 8.1.3"><code class="docutils literal notranslate"><span class="pre">sphinx.ext.mathjax</span></code></a> extension (enabled by default),
+<p>When building HTML using the <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/extensions/math.html#module-sphinx.ext.mathjax" title="Sphinx 8.2.0"><code class="docutils literal notranslate"><span class="pre">sphinx.ext.mathjax</span></code></a> extension (enabled by default),
 If <code class="docutils literal notranslate"><span class="pre">dollarmath</span></code> is enabled, Myst-Parser injects the <code class="docutils literal notranslate"><span class="pre">tex2jax_ignore</span></code> (MathJax v2) and  <code class="docutils literal notranslate"><span class="pre">mathjax_ignore</span></code> (MathJax v3) classes in to the top-level section of each MyST document, and adds the following default MathJax configuration:</p>
 <p>MathJax version 2 (see <a class="reference external" href="https://docs.mathjax.org/en/v2.7-latest/options/preprocessors/tex2jax.html#configure-tex2jax">the tex2jax preprocessor</a>:</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">MathJax</span><span class="p">.</span><span class="nx">Hub</span><span class="p">.</span><span class="nx">Config</span><span class="p">({</span><span class="s2">&quot;tex2jax&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;processClass&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;tex2jax_process|mathjax_process|math|output_area&quot;</span><span class="p">}})</span>
@@ -649,7 +649,7 @@ Either directly; <code class="docutils literal notranslate"><span class="pre">pi
 <p>One should also be wary of using unsuitable directives for inline substitutions.
 This may lead to unexpected outcomes.</p>
 <div class="docutils">
-<p>Substitution references are assessed as <a class="reference external" href="http://jinja.palletsprojects.com">Jinja2 expressions</a> which can use <a class="reference external" href="https://jinja.palletsprojects.com/en/2.11.x/templates/#list-of-builtin-filters">filters</a>, and also contains the <a class="reference external" href="https://www.sphinx-doc.org/en/master/extdev/envapi.html" title="Sphinx 8.1.3">Sphinx Environment</a> in the context (as <code class="docutils literal notranslate"><span class="pre">env</span></code>).
+<p>Substitution references are assessed as <a class="reference external" href="http://jinja.palletsprojects.com">Jinja2 expressions</a> which can use <a class="reference external" href="https://jinja.palletsprojects.com/en/2.11.x/templates/#list-of-builtin-filters">filters</a>, and also contains the <a class="reference external" href="https://www.sphinx-doc.org/en/master/extdev/envapi.html" title="Sphinx 8.2.0">Sphinx Environment</a> in the context (as <code class="docutils literal notranslate"><span class="pre">env</span></code>).
 Therefore you can do things like:</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -911,7 +911,7 @@ with the first line.</p>
 </dd>
 </dl>
 </div>
-<p>A prominent use case of field lists is for use in API docstrings, as used in <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/domains/python.html" title="Sphinx 8.1.3">Sphinx’s docstring renderers</a>:</p>
+<p>A prominent use case of field lists is for use in API docstrings, as used in <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/domains/python.html" title="Sphinx 8.2.0">Sphinx’s docstring renderers</a>:</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <dl class="py function">
@@ -1037,7 +1037,7 @@ but only certain key-value attributes are supported for each syntax.</p>
 <p class="attribution">—Chris Sewell, <a class="reference external" href="https://example.com">link</a></p>
 </div></blockquote>
 </div>
-<p>For <em>definition lists</em>, the adding a glossary key turns the definition list into a glossary (similar to using the <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html#directive-glossary" title="Sphinx 8.1.3"><code class="docutils literal notranslate"><span class="pre">glossary</span></code> directive</a> in Sphinx):</p>
+<p>For <em>definition lists</em>, the adding a glossary key turns the definition list into a glossary (similar to using the <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html#directive-glossary" title="Sphinx 8.2.0"><code class="docutils literal notranslate"><span class="pre">glossary</span></code> directive</a> in Sphinx):</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <dl class="simple myst glossary">
@@ -1311,7 +1311,7 @@ If you want to use multiple paragraphs then they can be enclosed in <code class=
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
     <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
-    <script defer="defer" src="_static/tippy/myst_extensions.97fd34c5-59b7-4d39-bb03-2e31ee6d76df.js"></script>
+    <script defer="defer" src="_static/tippy/myst_extensions.4f3d8dbe-b8c4-4bfc-ac35-cf81457d7055.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
