@@ -77,6 +77,15 @@ proto_py_library(
 )
 
 # XXX
+#
+# gazelle:ignore
+#
+# Ignore the whole file (it keeps trying to make this and I can't get the
+# necessary sub-dependency)
+# > In file included from .../hw_service/sbr/sbr.pb.cc:4:
+# > .../hw_service/sbr/sbr.pb.h:31:10: fatal error:
+# >  'pw_protobuf_protos/common.pb.h' file not found
+# >   #include "pw_protobuf_protos/common.pb.h"
 # proto_cc_library(
 #     name = "sbr_cc_library",
 #     srcs = ["sbr.pb.cc"],
