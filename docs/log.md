@@ -221,3 +221,15 @@ So, let's write-up a proto interface for these.
 
 - https://protobuf.dev/reference/cpp/api-docs/google.protobuf.repeated_field/#RepeatedField
 - https://github.com/catchorg/Catch2/blob/devel/docs/assertions.md
+
+### 2024-10-30, Wednesday:
+
+- pigweed pw::Status https://pigweed.dev/pw_status/reference.html#c.OK
+  - OK, CANCELLED, UNKNOWN, INVALID_ARGUMENT, DEADLINE_EXCEEDED, NOT_FOUND,
+    ALREADY_EXISTS, PERMISSION_DENIED, RESOURCE_EXHAUSTED, FAILED_PRECONDITION,
+    ABORTED, OUT_OF_RANGE, UNIMPLEMENTED, INTERNAL, UNAVAILABLE, DATA_LOSS,
+    UNAUTHENTICATED,
+- would be good to read more about `pw_rpc`
+- got the server running (had odd issues when both the C++ and nanopb libraries
+  were included)
+- InterpretReading is crashing on uninitialized values

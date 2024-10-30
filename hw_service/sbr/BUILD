@@ -23,6 +23,10 @@ cc_library(
         "@pigweed//pw_async2:dispatcher",
         "@pigweed//pw_log",
     ],
+    implementation_deps = [
+        "//hw_drivers/lis3mdl:lis3mdl",
+        "//hw_drivers/lis3mdl:lis3mdl_emb",
+    ],
 )
 
 proto_library(
@@ -72,7 +76,10 @@ proto_py_library(
     name = "sbr_py_library",
     srcs = ["sbr_pb2.py"],
     visibility = ["//visibility:public"],
-    deps = ["@com_google_protobuf//:protobuf_python"],
+    deps = [
+      "@com_google_protobuf//:protobuf_python",
+      "//hw_drivers/lis3mdl:lis3mdl_py_library",
+    ],
 )
 
 # XXX

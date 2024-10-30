@@ -2,6 +2,7 @@
 
 #include <chrono>
 #include <cstdint>
+#include <iostream>
 #include <vector>
 
 #include "pw_bytes/bit.h"

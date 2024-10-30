@@ -84,10 +84,13 @@ TEST_CASE("Read Data") {
   // CHECK(sizeof(d.bytes.data()) == d.bytes.size());
   // CHECK(sizeof(d.bytes.data()) == 9);
 
+  // Check that reading uninitialized doesn't crash
+  auto reading = InterpretReading(kFullScale4LSBPerGauss, d);
+
   // Check simple available / overrun behavior
   view.zyxd_available().Write(1);
   view.zyx_overrun().Write(1);
-  auto reading = InterpretReading(kFullScale4LSBPerGauss, d);
+  reading = InterpretReading(kFullScale4LSBPerGauss, d);
   CHECK(reading.data_fresh);
   CHECK(reading.data_overrun);
 

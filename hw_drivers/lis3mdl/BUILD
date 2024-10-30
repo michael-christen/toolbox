@@ -16,6 +16,9 @@ package(default_visibility = ["//visibility:private"])
 emboss_cc_library(
     name = "lis3mdl_emb",
     srcs = ["lis3mdl.emb"],
+    visibility = [
+        "//hw_service/sbr:__subpackages__",
+    ],
 )
 
 cc_library(
@@ -23,11 +26,12 @@ cc_library(
     srcs = ["lis3mdl.cc"],
     hdrs = ["lis3mdl.h"],
     deps = [
-        ":lis3mdl_cc_library",
         ":lis3mdl_nanopb",
         ":lis3mdl_emb",
-        # "//hw_service/sbr:sbr_nanopb_rpc",
         "@pigweed//pw_i2c:register_device",
+    ],
+    visibility = [
+        "//hw_service/sbr:__subpackages__",
     ],
 )
 
@@ -36,7 +40,6 @@ pw_cc_test(
     srcs = ["lis3mdl_pw_test.cc"],
     deps = [
         ":lis3mdl",
-        ":lis3mdl_cc_library",
         ":lis3mdl_nanopb",
         ":lis3mdl_emb",
         "@pigweed//pw_bytes",
@@ -54,7 +57,6 @@ cc_test(
     srcs = ["lis3mdl_test.cc"],
     deps = [
         ":lis3mdl",
-        ":lis3mdl_cc_library",
         ":lis3mdl_nanopb",
         ":lis3mdl_emb",
         "//testing:catch_main",
@@ -77,6 +79,7 @@ proto_library(
 
 # XXX: Unclear how to use these vs. the C++ generated code?
 nanopb_proto_library(
+    # XXX: Should change to use different suffixes
     name = "lis3mdl_nanopb",
     deps = [":lis3mdl_proto"],
 )

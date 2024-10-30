@@ -5,15 +5,17 @@
 #include <cstdint>
 #include <expected>
 
+#include "pw_i2c/address.h"
 #include "pw_i2c/register_device.h"
 
 #include "hw_drivers/lis3mdl/lis3mdl.emb.h"
 #include "hw_drivers/lis3mdl/lis3mdl.pb.h"
-// XXX: Fix reference?
-#include "hw_drivers/lis3mdl/hw_drivers/lis3mdl/lis3mdl.pb.h"
 
 namespace hw_drivers {
 namespace lis3mdl {
+
+constexpr pw::i2c::Address kHighAddress = pw::i2c::Address::SevenBit<0b000'1110>();
+constexpr pw::i2c::Address kLowAddress =  pw::i2c::Address::SevenBit<0b000'1100>();
 
 // XXX: static or not?
 constexpr uint32_t kFullScale4LSBPerGauss = 6842;
