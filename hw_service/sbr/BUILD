@@ -1,10 +1,10 @@
-load("@rules_proto//proto:defs.bzl", "proto_library")
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
 load(
     "@pigweed//pw_protobuf_compiler:pw_proto_library.bzl",
     "nanopb_proto_library",
     "nanopb_rpc_proto_library",
 )
+load("@rules_proto//proto:defs.bzl", "proto_library")
 load("//bzl:py.bzl", "grpc_py_library", "proto_py_library")
 
 package(default_visibility = ["//visibility:private"])
@@ -13,6 +13,10 @@ cc_library(
     name = "service",
     srcs = ["service.cc"],
     hdrs = ["service.h"],
+    implementation_deps = [
+        "//hw_drivers/lis3mdl",
+        "//hw_drivers/lis3mdl:lis3mdl_emb",
+    ],
     visibility = [
         "//apps/sbr:__pkg__",
     ],
@@ -22,10 +26,6 @@ cc_library(
         "@pigweed//pw_assert:check",
         "@pigweed//pw_async2:dispatcher",
         "@pigweed//pw_log",
-    ],
-    implementation_deps = [
-        "//hw_drivers/lis3mdl:lis3mdl",
-        "//hw_drivers/lis3mdl:lis3mdl_emb",
     ],
 )
 
@@ -77,8 +77,8 @@ proto_py_library(
     srcs = ["sbr_pb2.py"],
     visibility = ["//visibility:public"],
     deps = [
-      "@com_google_protobuf//:protobuf_python",
-      "//hw_drivers/lis3mdl:lis3mdl_py_library",
+        "//hw_drivers/lis3mdl:lis3mdl_py_library",
+        "@com_google_protobuf//:protobuf_python",
     ],
 )
 

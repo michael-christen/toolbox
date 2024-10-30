@@ -2,14 +2,14 @@ load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
 load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_library")
 load("@com_google_emboss//:build_defs.bzl", "emboss_cc_library")
 load("@pigweed//pw_build:pigweed.bzl", "pw_cc_test")
-load("@rules_proto//proto:defs.bzl", "proto_library")
-load("//bzl:cc.bzl", "cc_library", "cc_test")
-load("//bzl:py.bzl", "proto_py_library")
 load(
     "@pigweed//pw_protobuf_compiler:pw_proto_library.bzl",
     "nanopb_proto_library",
     "nanopb_rpc_proto_library",
 )
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("//bzl:cc.bzl", "cc_library", "cc_test")
+load("//bzl:py.bzl", "proto_py_library")
 
 package(default_visibility = ["//visibility:private"])
 
@@ -25,13 +25,13 @@ cc_library(
     name = "lis3mdl",
     srcs = ["lis3mdl.cc"],
     hdrs = ["lis3mdl.h"],
-    deps = [
-        ":lis3mdl_nanopb",
-        ":lis3mdl_emb",
-        "@pigweed//pw_i2c:register_device",
-    ],
     visibility = [
         "//hw_service/sbr:__subpackages__",
+    ],
+    deps = [
+        ":lis3mdl_emb",
+        ":lis3mdl_nanopb",
+        "@pigweed//pw_i2c:register_device",
     ],
 )
 
@@ -40,8 +40,8 @@ pw_cc_test(
     srcs = ["lis3mdl_pw_test.cc"],
     deps = [
         ":lis3mdl",
-        ":lis3mdl_nanopb",
         ":lis3mdl_emb",
+        ":lis3mdl_nanopb",
         "@pigweed//pw_bytes",
         "@pigweed//pw_i2c:address",
         "@pigweed//pw_i2c:device",
@@ -57,8 +57,8 @@ cc_test(
     srcs = ["lis3mdl_test.cc"],
     deps = [
         ":lis3mdl",
-        ":lis3mdl_nanopb",
         ":lis3mdl_emb",
+        ":lis3mdl_nanopb",
         "//testing:catch_main",
         "@pigweed//pw_bytes",
         "@pigweed//pw_i2c:address",
@@ -70,12 +70,8 @@ cc_test(
 proto_library(
     name = "lis3mdl_proto",
     srcs = ["lis3mdl.proto"],
-    deps = [
-        # "@com_github_nanopb_nanopb//:nanopb_proto",
-    ],
     visibility = ["//visibility:public"],
 )
-
 
 # XXX: Unclear how to use these vs. the C++ generated code?
 nanopb_proto_library(
