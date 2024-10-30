@@ -9,6 +9,8 @@
 
 #include "hw_drivers/lis3mdl/lis3mdl.emb.h"
 #include "hw_drivers/lis3mdl/lis3mdl.pb.h"
+// XXX: Fix reference?
+#include "hw_drivers/lis3mdl/hw_drivers/lis3mdl/lis3mdl.pb.h"
 
 namespace hw_drivers {
 namespace lis3mdl {
@@ -70,10 +72,11 @@ struct LIS3MDLControl {
 //
 // XXX: Support strict mode where desired must match actual (in a top-level
 // function)
-std::expected<LIS3MDLConfiguration, ConfigurationError> SolveConfiguration(const LIS3MDLConfiguration& desired_configuration,
+//
+std::expected<::hw_drivers_lis3mdl_LIS3MDLConfiguration, ConfigurationError> SolveConfiguration(const ::hw_drivers_lis3mdl_LIS3MDLConfiguration& desired_configuration,
     LIS3MDLControl* control); 
 
-LIS3MDLReading InterpretReading(uint32_t lsb_per_gauss,
+::hw_drivers_lis3mdl_LIS3MDLReading InterpretReading(uint32_t lsb_per_gauss,
     const LIS3MDLData& data);
 
 // XXX: return status, pass in i2c objects

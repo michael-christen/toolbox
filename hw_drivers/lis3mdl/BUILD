@@ -5,6 +5,11 @@ load("@pigweed//pw_build:pigweed.bzl", "pw_cc_test")
 load("@rules_proto//proto:defs.bzl", "proto_library")
 load("//bzl:cc.bzl", "cc_library", "cc_test")
 load("//bzl:py.bzl", "proto_py_library")
+load(
+    "@pigweed//pw_protobuf_compiler:pw_proto_library.bzl",
+    "nanopb_proto_library",
+    "nanopb_rpc_proto_library",
+)
 
 package(default_visibility = ["//visibility:private"])
 
@@ -19,7 +24,9 @@ cc_library(
     hdrs = ["lis3mdl.h"],
     deps = [
         ":lis3mdl_cc_library",
+        ":lis3mdl_nanopb",
         ":lis3mdl_emb",
+        # "//hw_service/sbr:sbr_nanopb_rpc",
         "@pigweed//pw_i2c:register_device",
     ],
 )
@@ -30,6 +37,7 @@ pw_cc_test(
     deps = [
         ":lis3mdl",
         ":lis3mdl_cc_library",
+        ":lis3mdl_nanopb",
         ":lis3mdl_emb",
         "@pigweed//pw_bytes",
         "@pigweed//pw_i2c:address",
@@ -47,6 +55,7 @@ cc_test(
     deps = [
         ":lis3mdl",
         ":lis3mdl_cc_library",
+        ":lis3mdl_nanopb",
         ":lis3mdl_emb",
         "//testing:catch_main",
         "@pigweed//pw_bytes",
@@ -59,7 +68,23 @@ cc_test(
 proto_library(
     name = "lis3mdl_proto",
     srcs = ["lis3mdl.proto"],
+    deps = [
+        # "@com_github_nanopb_nanopb//:nanopb_proto",
+    ],
     visibility = ["//visibility:public"],
+)
+
+
+# XXX: Unclear how to use these vs. the C++ generated code?
+nanopb_proto_library(
+    name = "lis3mdl_nanopb",
+    deps = [":lis3mdl_proto"],
+)
+
+nanopb_rpc_proto_library(
+    name = "lis3mdl_nanopb_rpc",
+    nanopb_proto_library_deps = [":lis3mdl_nanopb"],
+    deps = [":lis3mdl_proto"],
 )
 
 proto_cc_library(

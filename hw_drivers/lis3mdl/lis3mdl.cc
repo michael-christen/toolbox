@@ -20,23 +20,20 @@ DataView LIS3MDLData::GetView() {
 }
 
 
-std::expected<LIS3MDLConfiguration, ConfigurationError> SolveConfiguration(const LIS3MDLConfiguration& desired_configuration,
+std::expected<::hw_drivers_lis3mdl_LIS3MDLConfiguration, ConfigurationError> SolveConfiguration(const ::hw_drivers_lis3mdl_LIS3MDLConfiguration& desired_configuration,
     LIS3MDLControl* control) {
   auto view = MakeControlView(control->bytes.data(), std::size(control->bytes));
   // Constraints of our system:
   // - 
-  LIS3MDLConfiguration result_configuration;
-  if(!(desired_configuration.has_temperature_enabled() &&
-        desired_configuration.has_allowable_rms_noise_ug() &&
-        desired_configuration.has_data_rate_millihz() &&
-        desired_configuration.has_scale_gauss())) {
+  if(!(desired_configuration.has_temperature_enabled &&
+        desired_configuration.has_allowable_rms_noise_ug &&
+        desired_configuration.has_data_rate_millihz &&
+        desired_configuration.has_scale_gauss)) {
     return std::unexpected(ConfigurationError::kInvalidConfig);
   }
 
-  // Temperature
-  result_configuration.set_temperature_enabled(desired_configuration.temperature_enabled());
   // RMS Noise and OperatingMode
-  auto desired_rms_noise_ug = desired_configuration.allowable_rms_noise_ug();
+  auto desired_rms_noise_ug = desired_configuration.allowable_rms_noise_ug;
   uint32_t actual_rms_noise_ug;
   OperatingMode operating_mode;
   if (desired_rms_noise_ug < 3'500) {
@@ -54,10 +51,9 @@ std::expected<LIS3MDLConfiguration, ConfigurationError> SolveConfiguration(const
     actual_rms_noise_ug = 5'300;
     operating_mode = OperatingMode::OPERATING_MODE_LOW_POWER;
   }
-  result_configuration.set_allowable_rms_noise_ug(actual_rms_noise_ug);
 
   // Date Rate Configuration
-  auto desired_data_rate_millihz = desired_configuration.data_rate_millihz();
+  auto desired_data_rate_millihz = desired_configuration.data_rate_millihz;
   constexpr uint32_t kBaseRate = 625;
   // kBaseRate * 2 ^ exponent = frequency
   // exponent = log2(frequency / kBaseRate)
@@ -93,12 +89,11 @@ std::expected<LIS3MDLConfiguration, ConfigurationError> SolveConfiguration(const
         break;
     }
   }
-  result_configuration.set_data_rate_millihz(actual_data_rate_millihz);
 
 
   // Scale Gauss
   // XXX: Note that this selection is kinda the opposite of the rms noise
-  auto desired_scale_gauss = desired_configuration.scale_gauss();
+  auto desired_scale_gauss = desired_configuration.scale_gauss;
   uint32_t actual_scale_gauss;
   FullScaleSelection full_scale_choice;
   if (desired_scale_gauss <= 4) {
@@ -114,13 +109,23 @@ std::expected<LIS3MDLConfiguration, ConfigurationError> SolveConfiguration(const
     actual_scale_gauss = 16;
     full_scale_choice = FullScaleSelection::FULL_SCALE_SELECTION_16;
   }
-  result_configuration.set_scale_gauss(actual_scale_gauss);
+  ::hw_drivers_lis3mdl_LIS3MDLConfiguration result_configuration{
+    .has_temperature_enabled = true,
+    // Temperature
+    .temperature_enabled = desired_configuration.temperature_enabled,
+    .has_allowable_rms_noise_ug = true,
+    .allowable_rms_noise_ug = actual_rms_noise_ug,
+    .has_data_rate_millihz = true,
+    .data_rate_millihz = actual_data_rate_millihz,
+    .has_scale_gauss = true,
+    .scale_gauss = actual_scale_gauss,
+  };
 
   // XXX: I could just do this elsewhere and send the information to write the
   // output separately?
   //
   // Ensure full result before applying to control
-  view.temperature_enable().Write(result_configuration.temperature_enabled());
+  view.temperature_enable().Write(result_configuration.temperature_enabled);
   view.full_scale().Write(full_scale_choice);
   view.xy_axis_operating_mode().Write(operating_mode);
   view.z_axis_operating_mode().Write(operating_mode);
@@ -133,13 +138,15 @@ std::expected<LIS3MDLConfiguration, ConfigurationError> SolveConfiguration(const
 
 // XXX: using lsb_per_gauss, since the scale isn't quite working out how I'd
 // expect / the LSBs are not mathing properly
-LIS3MDLReading InterpretReading(uint32_t lsb_per_gauss,
+::hw_drivers_lis3mdl_LIS3MDLReading InterpretReading(uint32_t lsb_per_gauss,
                                 const LIS3MDLData& data) {
-  LIS3MDLReading reading;
+  ::hw_drivers_lis3mdl_LIS3MDLReading reading;
   auto view = MakeDataView(data.bytes.data(), std::size(data.bytes));
 
-  reading.set_data_fresh(view.zyxd_available().Read());
-  reading.set_data_overrun(view.zyx_overrun().Read());
+  reading.has_data_fresh = true;
+  reading.data_fresh = view.zyxd_available().Read();
+  reading.has_data_overrun = true;
+  reading.data_overrun = view.zyx_overrun().Read();
 
   // 0 = 25C
   // LSB = 1/8 C = 1.25 dC = 125 mC
@@ -147,24 +154,34 @@ LIS3MDLReading InterpretReading(uint32_t lsb_per_gauss,
   constexpr int32_t kOffsetTemperatureMC = 25'000;
   constexpr int32_t kTemperatureMCPerLSB = 125;
   constexpr int32_t kMilliPerDeci = 100;
-  reading.set_temperature_dc(
+  reading.has_temperature_dc = true;
+  reading.temperature_dc = (
       ((view.temperature_out().Read() * kTemperatureMCPerLSB) + kOffsetTemperatureMC)
        / kMilliPerDeci);
 
-  constexpr size_t kNumAxes = 3;
+  (void) lsb_per_gauss;
+  reading.has_magnetic_strength_x_ug = true;
+  reading.has_magnetic_strength_y_ug = true;
+  reading.has_magnetic_strength_z_ug = true;
+  reading.magnetic_strength_x_ug = ((static_cast<int64_t>(view.out_x().Read()) * 1'000'000) / lsb_per_gauss);
+  reading.magnetic_strength_y_ug = ((static_cast<int64_t>(view.out_y().Read()) * 1'000'000) / lsb_per_gauss);
+  reading.magnetic_strength_z_ug = ((static_cast<int64_t>(view.out_z().Read()) * 1'000'000) / lsb_per_gauss);
+  // constexpr size_t kNumAxes = 3;
   // XXX: Check fixed_size of array
   // static_assert(kNumAxes == );
-  int32_t magnetometer_readings[kNumAxes] = {
-    view.out_x().Read(),
-    view.out_y().Read(),
-    view.out_z().Read(),
-  };
+  // int32_t magnetometer_readings[kNumAxes] = {
+  //   view.out_x().Read(),
+  //   view.out_y().Read(),
+  //   view.out_z().Read(),
+  // };
   // XXX: Any fun new C++ iterable behavior?
-  for (size_t i = 0; i < kNumAxes; ++i) {
-    reading.mutable_magnetic_strength_ug()->Add(
-        (static_cast<int64_t>(magnetometer_readings[i]) * 1'000'000)
-        / lsb_per_gauss);
-  }
+  // XXX need to get nanopb setup
+  // for (size_t i = 0; i < kNumAxes; ++i) {
+  //   reading.magnetic_strength_ug[i] = (
+  //       (static_cast<int64_t>(magnetometer_readings[i]) * 1'000'000)
+  //       / lsb_per_gauss);
+  // }
+  // reading.magnetic_strength_ug_count = kNumAxes;
   return reading;
 }
 

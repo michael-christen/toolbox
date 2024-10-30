@@ -37,7 +37,7 @@ TEST_CASE("emboss and calculations are correct") {
 
 // XXX: probably have to use nanopb syntax?
 TEST_CASE("SolveConfiguration") {
-  LIS3MDLConfiguration configuration;
+  ::hw_drivers_lis3mdl_LIS3MDLConfiguration configuration;
   // XXX: Better naming schema to denote differences
   // XXX: Analysis on size and run-time cost
   LIS3MDLControl control;
@@ -46,17 +46,24 @@ TEST_CASE("SolveConfiguration") {
   REQUIRE(!result.has_value());
   CHECK(result.error() == ConfigurationError::kInvalidConfig);
 
-  configuration.set_temperature_enabled(false);
-  configuration.set_allowable_rms_noise_ug(3'500);
-  configuration.set_data_rate_millihz(80'000);
-  configuration.set_scale_gauss(4);
+  configuration = ::hw_drivers_lis3mdl_LIS3MDLConfiguration{
+    .has_temperature_enabled = true,
+    // Temperature
+    .temperature_enabled = false,
+    .has_allowable_rms_noise_ug = true,
+    .allowable_rms_noise_ug = 3'500,
+    .has_data_rate_millihz = true,
+    .data_rate_millihz = 80'000,
+    .has_scale_gauss = true,
+    .scale_gauss = 4,
+  };
 
   result = SolveConfiguration(configuration, &control);
   REQUIRE(result.has_value());
   auto actual_config = result.value();
   // XXX: Better protobuf comparison
-  REQUIRE(actual_config.has_temperature_enabled());
-  CHECK(!actual_config.temperature_enabled());
+  REQUIRE(actual_config.has_temperature_enabled);
+  CHECK(!actual_config.temperature_enabled);
   CHECK(!control_view.temperature_enable().Read());
 
   // Test Plan:
@@ -81,38 +88,38 @@ TEST_CASE("Read Data") {
   view.zyxd_available().Write(1);
   view.zyx_overrun().Write(1);
   auto reading = InterpretReading(kFullScale4LSBPerGauss, d);
-  CHECK(reading.data_fresh());
-  CHECK(reading.data_overrun());
+  CHECK(reading.data_fresh);
+  CHECK(reading.data_overrun);
 
   view.zyx_overrun().Write(0);
   reading = InterpretReading(kFullScale4LSBPerGauss, d);
-  CHECK(reading.data_fresh());
-  CHECK(!reading.data_overrun());
+  CHECK(reading.data_fresh);
+  CHECK(!reading.data_overrun);
 
   view.zyxd_available().Write(0);
   reading = InterpretReading(kFullScale4LSBPerGauss, d);
-  CHECK(!reading.data_fresh());
-  CHECK(!reading.data_overrun());
+  CHECK(!reading.data_fresh);
+  CHECK(!reading.data_overrun);
 
   // Check Temperature
   view.temperature_out().Write(0);
   reading = InterpretReading(kFullScale4LSBPerGauss, d);
-  CHECK(reading.temperature_dc() == 250);
+  CHECK(reading.temperature_dc == 250);
   // XXX: Check more
   
   view.out_x().Write(-100);
   view.out_y().Write(0);
   view.out_z().Write(200);
   reading = InterpretReading(kFullScale4LSBPerGauss, d);
-  CHECK(reading.magnetic_strength_ug().at(0) == -14'615);
-  CHECK(reading.magnetic_strength_ug().at(1) == 0);
-  CHECK(reading.magnetic_strength_ug().at(2) == 29'231);
+  CHECK(reading.magnetic_strength_x_ug == -14'615);
+  CHECK(reading.magnetic_strength_y_ug == 0);
+  CHECK(reading.magnetic_strength_z_ug == 29'231);
 
   // Changing scale changes the behavior (eye-balled around 4x)
   reading = InterpretReading(kFullScale16LSBPerGauss, d);
-  CHECK(reading.magnetic_strength_ug().at(0) == -58'445);
-  CHECK(reading.magnetic_strength_ug().at(1) == 0);
-  CHECK(reading.magnetic_strength_ug().at(2) == 116'890);
+  CHECK(reading.magnetic_strength_x_ug == -58'445);
+  CHECK(reading.magnetic_strength_y_ug == 0);
+  CHECK(reading.magnetic_strength_z_ug == 116'890);
 }
 
 }

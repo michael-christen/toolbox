@@ -73,18 +73,24 @@ TEST(I2CTestSuite, I2CTransactions) {
 
   // XXX: new section?
   LIS3MDLControl control;
-  LIS3MDLConfiguration configuration;
-  configuration.set_temperature_enabled(true);
-  configuration.set_allowable_rms_noise_ug(3'500);
-  configuration.set_data_rate_millihz(80'000);
-  configuration.set_scale_gauss(4);
+  ::hw_drivers_lis3mdl_LIS3MDLConfiguration configuration{
+    .has_temperature_enabled = true,
+    // Temperature
+    .temperature_enabled = true,
+    .has_allowable_rms_noise_ug = true,
+    .allowable_rms_noise_ug = 3'500,
+    .has_data_rate_millihz = true,
+    .data_rate_millihz = 80'000,
+    .has_scale_gauss = true,
+    .scale_gauss = 4,
+  };
+  // XXX: Make Constant
 
   auto result = SolveConfiguration(configuration, &control);
   EXPECT_TRUE(result.has_value());
-  auto actual_config = result.value();
-
   // Ensuring we are configuring exactly as desired
-  // XXX: EXPECT_EQ(result.value(), configuration);
+  // auto actual_config = result.value();
+  // XXX: EXPECT_EQ(actual_config, configuration);
   // XXX: Do I need + 1?
   pw::StringBuffer<sizeof(control.bytes.data()) * 2 + 2> sb;
   sb << "0x";
