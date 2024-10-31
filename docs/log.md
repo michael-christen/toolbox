@@ -237,9 +237,9 @@ So, let's write-up a proto interface for these.
 - [ ] It'd be a good idea to make a host/simulation initiator for i2c, then I
       could run simulator_binary and actually have it fill with useful
       information.
-
   - should do a little write-up on pigweed's approach in sense (fake definitions
     for most things at the application level)
 
 - next step, let's run it on some hardware!
   - revisit full sim afterwards
+  - need to setup device
