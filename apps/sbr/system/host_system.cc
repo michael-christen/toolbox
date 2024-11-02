@@ -44,7 +44,7 @@ void Start() {
   printf("Simulator is now running. To connect with a console,\n");
   printf("either run one in a new terminal:\n");
   printf("\n");
-  printf("   $ bazelisk run //blinky:simulator_console\n");
+  printf("   $ bazel run //apps/sbr:simulator_console\n");
   printf("\n");
   printf("one from VSCode under the 'Bazel Build Targets' explorer tab.\n");
   printf("\n");
