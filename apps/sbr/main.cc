@@ -3,10 +3,10 @@
 #include "hw_service/sbr/service.h"
 #include "pw_log/log.h"
 #include "pw_system/system.h"
-#include "examples/pigweed/system/system.h"
+#include "apps/sbr/system/system.h"
 
 int main() {
-  demo::system::Init();
+  apps::sbr::system::Init();
   auto& rpc_server = pw::System().rpc_server();
 
   // XXX: Replace blilnky service
@@ -16,6 +16,6 @@ int main() {
   rpc_server.RegisterService(sbr_service);
 
   PW_LOG_INFO("Started SBR app; waiting for RPCs...");
-  demo::system::Start();
+  apps::sbr::system::Start();
   PW_UNREACHABLE;
 }

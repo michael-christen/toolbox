@@ -243,3 +243,43 @@ So, let's write-up a proto interface for these.
 - next step, let's run it on some hardware!
   - revisit full sim afterwards
   - need to setup device
+
+### 2024-10-31, Thursday:
+
+describe pigweed's sense firmware layout
+- apps
+  - build for end application + main.cc
+    - register services and start system
+    - int main or InitializeApp (unclear which to choose)
+      - just call from main
+  - (can have multiple apps built for a single system), different than work's
+    position
+  -
+- device
+  - most of the hardware specific things, eg) the sensors + pico
+- modules
+  - lots of different ones, neat constructs for async, timing, etc.
+  - individual modules can have services, etc.
+  - board refers to the pico board, not the pcb it's on
+  - lots of fakes
+  - morse code :) constexpr pw::containers::FlatMap seems neat
+  - a neat little pubsub + button management
+  - sampling thread for sensor
+  - example of .options file
+  - worker + timer
+  - [ ] (really, just most of the goodies, got to figure out how they're wired up)
+- system
+  - high-level definition of system (what components), + pubsub + worker
+- targets -> malloc alias, host + rp2 descriptions
+  - define target-dependent system (reference the "fake" modules)
+  - host: pick fake modules, setup ctrl-c handler, print instructions, call
+    SystemStart, setup memory allocation and stream channel
+  - rp2: FreeRTOS config, override platform flags
+    - define rp2040_binary and rp2350_binary
+    - define platform, tests, + system
+      - [ ] separating the common platform from the system definition could be
+        handy
+        - where is unit_test_rpc_main used?
+- tools -> console setup, Device examples + connection, factory
+- `web_app` -> ignore
+

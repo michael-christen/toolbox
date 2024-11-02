@@ -11,7 +11,8 @@ cc_binary(
     srcs = ["main.cc"],
     deps = [
         # XXX: Replace
-        "//examples/pigweed/system",
+        # "//examples/pigweed/system",
+        "//apps/sbr/system",
         "//hw_service/sbr:service",
         "@pigweed//pw_log",
         "@pigweed//pw_system:async",
