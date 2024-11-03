@@ -14,8 +14,8 @@
 namespace hw_drivers {
 namespace lis3mdl {
 
-constexpr pw::i2c::Address kHighAddress = pw::i2c::Address::SevenBit<0b000'1110>();
-constexpr pw::i2c::Address kLowAddress =  pw::i2c::Address::SevenBit<0b000'1100>();
+constexpr pw::i2c::Address kHighAddress = pw::i2c::Address::SevenBit<0b001'1110>();
+constexpr pw::i2c::Address kLowAddress =  pw::i2c::Address::SevenBit<0b001'1100>();
 
 // XXX: static or not?
 constexpr uint32_t kFullScale4LSBPerGauss = 6842;

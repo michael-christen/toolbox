@@ -283,3 +283,7 @@ describe pigweed's sense firmware layout
 - tools -> console setup, Device examples + connection, factory
 - `web_app` -> ignore
 
+### 2024-11-03, Sunday:
+
+- I got cross-compilation working and gyro at first wasn't acknowledging, but
+  now it's working after debugging with waveforms

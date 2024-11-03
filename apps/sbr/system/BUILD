@@ -54,7 +54,6 @@ cc_library(
     implementation_deps = [
         "@pigweed//pw_i2c:address",
         "@pigweed//pw_i2c:register_device",
-        "//platforms/host:initiator_host",
         "@pigweed//pw_channel",
         "@pigweed//pw_digital_io",
         "@pigweed//pw_digital_io:digital_io_mock",

@@ -4,6 +4,7 @@
 #include "pw_cpu_exception/entry.h"
 #include "pw_multibuf/simple_allocator.h"
 #include "pw_system/system.h"
+#include "pw_i2c_rp2040/initiator.h"
 
 #include "hardware/adc.h"
 #include "hardware/exception.h"
@@ -16,7 +17,30 @@
 #include "system_RP2350.h"
 #endif  // defined(PICO_RP2350) && PICO_RP2350
 
-#include "platforms/host/initiator_host.h"
+namespace {
+
+pw::i2c::Initiator& I2cInitiator() {
+
+  constexpr unsigned int kPinSda = 4;
+  constexpr unsigned int kPinScl = 5;
+
+  static constexpr pw::i2c::Rp2040Initiator::Config kI2c0Config{
+    // XXX: Try out different frequencies
+      .clock_frequency = 400'000,
+      .sda_pin = kPinSda,
+      .scl_pin = kPinScl,
+  };
+
+  static pw::i2c::Initiator& i2c0_bus = []() -> pw::i2c::Initiator& {
+    static pw::i2c::Rp2040Initiator bus(kI2c0Config, i2c0);
+    bus.Enable();
+    return bus;
+  }();
+
+  return i2c0_bus;
+}
+
+}
 
 // XXX: Decide on namespace style
 namespace apps::sbr::system {
@@ -43,10 +67,12 @@ void Start() {
 
 // XXX: Better
 pw::i2c::RegisterDevice& LIS3MDLRegisterDevice() {
-  constexpr pw::i2c::Address kAddress = pw::i2c::Address::SevenBit<0x01>();
+  // XXX: Share with lis3mdl
+  constexpr pw::i2c::Address kAddress = pw::i2c::Address::SevenBit<0b001'1110>();
+  // constexpr pw::i2c::Address kHighAddress = pw::i2c::Address::SevenBit<0b000'1110>();
+  // constexpr pw::i2c::Address kLowAddress =  pw::i2c::Address::SevenBit<0b000'1100>();
 
-  static platforms::host::HostInitiator initiator;
-  static pw::i2c::RegisterDevice reg_device(initiator, kAddress, cpp20::endian::little,
+  static pw::i2c::RegisterDevice reg_device(I2cInitiator(), kAddress, cpp20::endian::little,
       pw::i2c::RegisterAddressSize::k1Byte);
   return reg_device;
 }

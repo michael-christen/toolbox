@@ -9,7 +9,7 @@ namespace hw_drivers {
 namespace lis3mdl {
 
   namespace {
-    constexpr auto kI2cTimeout = 1ms;
+    constexpr auto kI2cTimeout = 100ms;
   }
 
 
