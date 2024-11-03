@@ -19,6 +19,8 @@ emboss_cc_library(
     visibility = [
         "//hw_service/sbr:__subpackages__",
     ],
+    # XXX: Required for cross-compilation, investigate more
+    enable_enum_traits = False,
 )
 
 cc_library(

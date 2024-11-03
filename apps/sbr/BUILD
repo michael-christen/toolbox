@@ -45,15 +45,15 @@ host_console(
 
 # Create an rp2040 flashable ELF
 # XXX: .emb isn't compiling ok for rp2040
-# rp2040_binary(
-#     name = "rp2040_sbr.elf",
-#     binary = ":sbr",
-# )
-# 
-# flash_rp2040(
-#     name = "flash_rp2040",
-#     rp2040_binary = "rp2040_sbr.elf",
-# )
+rp2040_binary(
+    name = "rp2040_sbr.elf",
+    binary = ":sbr",
+)
+
+flash_rp2040(
+    name = "flash_rp2040",
+    rp2040_binary = "rp2040_sbr.elf",
+)
 
 
 # XXX

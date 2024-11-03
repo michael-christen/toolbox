@@ -18,6 +18,9 @@
 
 #include "platforms/host/initiator_host.h"
 
+// XXX: Decide on namespace style
+namespace apps::sbr::system {
+
 void Init() {
   // PICO_SDK inits.
   SystemInit();
@@ -46,4 +49,6 @@ pw::i2c::RegisterDevice& LIS3MDLRegisterDevice() {
   static pw::i2c::RegisterDevice reg_device(initiator, kAddress, cpp20::endian::little,
       pw::i2c::RegisterAddressSize::k1Byte);
   return reg_device;
+}
+
 }
