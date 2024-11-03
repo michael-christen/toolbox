@@ -3,7 +3,7 @@ load("@pigweed//targets/rp2040:flash.bzl", "flash_rp2040")
 
 # XXX: Gotta support rp2040 more fully / separate out system, etc.
 load("//platforms/rp2:binary.bzl", "rp2040_binary")  # , "rp2350_binary")
-load("//examples/pigweed/tools:tools.bzl", "host_console")
+load("//examples/pigweed/tools:tools.bzl", "host_console", "device_console")
 
 package(default_visibility = ["//visibility:private"])
 
@@ -53,6 +53,11 @@ rp2040_binary(
 flash_rp2040(
     name = "flash_rp2040",
     rp2040_binary = "rp2040_sbr.elf",
+)
+
+device_console(
+    name = "rp2040_console",
+    binary = ":rp2040_sbr.elf",
 )
 
 
