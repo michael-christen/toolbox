@@ -9,10 +9,11 @@ int main() {
   apps::sbr::system::Init();
   auto& rpc_server = pw::System().rpc_server();
 
-  // XXX: Replace blilnky service
   static hw_service::sbr::SbrService sbr_service;
+  // XXX: add lis3mdl here
+  auto& reg_device = apps::sbr::system::LIS3MDLRegisterDevice();
   sbr_service.Init(
-      pw::System().dispatcher(), pw::System().allocator());
+      pw::System().dispatcher(), pw::System().allocator(), &reg_device);
   rpc_server.RegisterService(sbr_service);
 
   PW_LOG_INFO("Started SBR app; waiting for RPCs...");

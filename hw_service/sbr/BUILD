@@ -16,6 +16,7 @@ cc_library(
     implementation_deps = [
         "//hw_drivers/lis3mdl",
         "//hw_drivers/lis3mdl:lis3mdl_emb",
+        "@pigweed//pw_assert:check",
     ],
     visibility = [
         "//apps/sbr:__pkg__",
@@ -26,6 +27,7 @@ cc_library(
         "@pigweed//pw_assert:check",
         "@pigweed//pw_async2:dispatcher",
         "@pigweed//pw_log",
+        "@pigweed//pw_i2c:register_device",
     ],
 )
 

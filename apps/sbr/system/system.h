@@ -1,5 +1,6 @@
 #pragma once
 
+#include "pw_i2c/register_device.h"
 // The functions in this file return specific implementations of singleton types
 // provided by the system.
 
@@ -14,6 +15,7 @@ void Init();
 [[noreturn]] void Start();
 
 // XXX: Define getters
+pw::i2c::RegisterDevice& LIS3MDLRegisterDevice();
 
 }
 }

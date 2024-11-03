@@ -6,10 +6,13 @@
 #include "pw_assert/check.h"
 #include "pw_channel/stream_channel.h"
 #include "pw_digital_io/digital_io.h"
+#include "pw_i2c/address.h"
 #include "pw_multibuf/simple_allocator.h"
 #include "pw_system/io.h"
 #include "pw_system/system.h"
 #include "pw_thread_stl/options.h"
+
+#include "platforms/host/initiator_host.h"
 
 using ::pw::channel::StreamChannel;
 
@@ -61,6 +64,15 @@ void Start() {
 
   pw::SystemStart(*channel);
   PW_UNREACHABLE;
+}
+
+pw::i2c::RegisterDevice& LIS3MDLRegisterDevice() {
+  constexpr pw::i2c::Address kAddress = pw::i2c::Address::SevenBit<0x01>();
+
+  static platforms::host::HostInitiator initiator;
+  static pw::i2c::RegisterDevice reg_device(initiator, kAddress, cpp20::endian::little,
+      pw::i2c::RegisterAddressSize::k1Byte);
+  return reg_device;
 }
 
 }  // namespace demo::system

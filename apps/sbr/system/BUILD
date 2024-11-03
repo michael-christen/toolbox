@@ -10,7 +10,6 @@ label_flag(
 
 host_backend_alias(
     name = "unspecified_backend",
-    # XXX: Change
     backend = ":host_system",
 )
 
@@ -21,6 +20,7 @@ cc_library(
     ],
     visibility = ["//visibility:public"],
     deps = [
+        "@pigweed//pw_i2c:register_device",
     ],
 )
 
@@ -30,6 +30,10 @@ cc_library(
         "host_system.cc",
     ],
     implementation_deps = [
+        "@pigweed//pw_i2c:address",
+        "@pigweed//pw_i2c:register_device",
+        # XXX: Build out different kinds of fakes
+        "//platforms/host:initiator_host",
         "@pigweed//pw_channel",
         "@pigweed//pw_channel:stream_channel",
         "@pigweed//pw_digital_io",
