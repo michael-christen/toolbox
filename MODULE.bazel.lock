@@ -1568,6 +1568,36 @@
         ]
       }
     },
+    "@@rules_libusb~//:extensions.bzl%libusb": {
+      "general": {
+        "bzlTransitiveDigest": "8MMkZioPMI0L/IUQYREZgmo4F6RZep1CGB3oM/f96fs=",
+        "usagesDigest": "Sey8lUETM6yNnK8KRIGfK1oiabvErRrom0G4rZowMIk=",
+        "recordedFileInputs": {},
+        "recordedDirentsInputs": {},
+        "envVariables": {},
+        "generatedRepoSpecs": {
+          "libusb": {
+            "bzlFile": "@@bazel_tools//tools/build_defs/repo:http.bzl",
+            "ruleClassName": "http_archive",
+            "attributes": {
+              "urls": [
+                "https://github.com/libusb/libusb/releases/download/v1.0.27/libusb-1.0.27.tar.bz2"
+              ],
+              "build_file": "@@rules_libusb~//:libusb.BUILD",
+              "strip_prefix": "libusb-1.0.27",
+              "sha256": "ffaa41d741a8a3bee244ac8e54a72ea05bf2879663c098c82fc5757853441575"
+            }
+          }
+        },
+        "recordedRepoMappingEntries": [
+          [
+            "rules_libusb~",
+            "bazel_tools",
+            "bazel_tools"
+          ]
+        ]
+      }
+    },
     "@@rules_multitool~//multitool:extension.bzl%multitool": {
       "general": {
         "bzlTransitiveDigest": "AtvPzG/SAawYMKVVHcMoJq4EXkVPTIhS3AeNwENXp9E=",

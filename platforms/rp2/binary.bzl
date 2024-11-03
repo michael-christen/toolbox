@@ -11,9 +11,13 @@ load("@pigweed//targets/rp2040:transition.bzl", "RP2_SYSTEM_FLAGS")
 _COMMON_FLAGS = merge_flags_for_transition_impl(
     base = RP2_SYSTEM_FLAGS,
     override = {
-        "//apps/production:threads": "//platforms/rp2:production_app_threads",
-        "//system:system": "//targets/rp2:system",  # XXX: system definition is specific
-        "@freertos//:freertos_config": "//targets/rp2:freertos_config",
+        # XXX: Remove app-specific things
+        # XXX: How do these threads get involved?
+        # "//apps/production:threads": "//platforms/rp2:production_app_threads",
+        # XXX: This is incorrectly changing to //app somehow? (bazel clean
+        # fixed)
+        "//apps/sbr/system:system": "//apps/sbr/system:rp2_system",  # XXX: system definition is specific
+        "@freertos//:freertos_config": "//platforms/rp2:freertos_config",
         "@pico-sdk//bazel/config:PICO_CLIB": "llvm_libc",
         "@pico-sdk//bazel/config:PICO_TOOLCHAIN": "clang",
         "@pigweed//pw_build:default_module_config": "//system:module_config",
@@ -55,6 +59,7 @@ def _rp2_binary_impl(ctx):
     ctx.actions.symlink(output = out, is_executable = True, target_file = ctx.executable.binary)
     return [DefaultInfo(files = depset([out]), executable = out)]
 
+
 rp2040_binary = rule(
     _rp2_binary_impl,
     attrs = {
@@ -73,20 +78,20 @@ rp2040_binary = rule(
     executable = False,
 )
 
-rp2350_binary = rule(
-    _rp2_binary_impl,
-    attrs = {
-        "binary": attr.label(
-            doc = "cc_binary to build for the rp2350",
-            cfg = _rp2_transition(_RP2350_FLAGS),
-            executable = True,
-            mandatory = True,
-        ),
-        "_allowlist_function_transition": attr.label(
-            default = "@bazel_tools//tools/allowlists/function_transition_allowlist",
-        ),
-    },
-    doc = "Builds the specified binary for the rp2350 platform",
-    # This target is for rp2350 and can't be run on host.
-    executable = False,
-)
+# rp2350_binary = rule(
+#     _rp2_binary_impl,
+#     attrs = {
+#         "binary": attr.label(
+#             doc = "cc_binary to build for the rp2350",
+#             cfg = _rp2_transition(_RP2350_FLAGS),
+#             executable = True,
+#             mandatory = True,
+#         ),
+#         "_allowlist_function_transition": attr.label(
+#             default = "@bazel_tools//tools/allowlists/function_transition_allowlist",
+#         ),
+#     },
+#     doc = "Builds the specified binary for the rp2350 platform",
+#     # This target is for rp2350 and can't be run on host.
+#     executable = False,
+# )

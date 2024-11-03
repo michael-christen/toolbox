@@ -70,3 +70,9 @@ cc_library(
     ],
 )
 
+# cc_library(
+#     name = "production_app_threads",
+#     srcs = ["production_app_threads.cc"],
+#     implementation_deps = ["@pigweed//pw_thread_freertos:thread"],
+#     deps = ["//apps/production:threads_headers"],
+# )
