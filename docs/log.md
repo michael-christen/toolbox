@@ -287,3 +287,5 @@ describe pigweed's sense firmware layout
 
 - I got cross-compilation working and gyro at first wasn't acknowledging, but
   now it's working after debugging with waveforms
+- y seems to have different offsets than x and z, x and z are largely negative.
+  - would be good to corroborate with arduino application
