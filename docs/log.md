@@ -289,3 +289,8 @@ describe pigweed's sense firmware layout
   now it's working after debugging with waveforms
 - y seems to have different offsets than x and z, x and z are largely negative.
   - would be good to corroborate with arduino application
+
+### 2024-11-06, Wednesday:
+
+- ran arduino tools, saw similar behavior; seems like we need a calibration
+  process and offset
