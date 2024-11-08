@@ -317,9 +317,12 @@ TODO:
 - nanopb, change generated code suffix
 - how to specify fixed size on nanopb repeated with options?
 - gazelle cc_library for sbr
+- remove production_app_threads for now
+- clang-format
 
 Followup:
 - stream meaasurements
 - state machine
 - configuration
-
+- test where we spin up the firmware
+- compare select vs. label_flag

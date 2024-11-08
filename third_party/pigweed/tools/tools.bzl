@@ -24,17 +24,17 @@ def host_console(name, binary, extra_args = []):
     """
     native_binary(
         name = name,
-        src = "//examples/pigweed/tools:console",
+        src = "//third_party/pigweed/tools:console",
         args = [
             # This arg lets us skip manual port selection.
             "--socket",
             "default",
             "--config-file",
-            "$(rootpath //examples/pigweed:pw_console_config)",
+            "$(rootpath //third_party/pigweed:pw_console_config)",
         ] + extra_args,
         data = [
             binary,
-            "//examples/pigweed:pw_console_config",
+            "//third_party/pigweed:pw_console_config",
         ],
     )
 
@@ -51,17 +51,18 @@ def device_console(name, binary, extra_args = []):
     """
     native_binary(
         name = name,
-        src = "//examples/pigweed/tools:console",
+        src = "//third_party/pigweed/tools:console",
         args = [
             "-b",
             "115200",
             "--token-databases",
             "$(rootpath " + binary + ")",
             "--config-file",
-            "$(rootpath //examples/pigweed:pw_console_config)",
+            "$(rootpath //third_party/pigweed:pw_console_config)",
         ] + extra_args,
         data = [
             binary,
-            "//examples/pigweed:pw_console_config",
+            # XXX: May want to make this a bit more configurable
+            "//third_party/pigweed:pw_console_config",
         ],
     )

@@ -32,5 +32,5 @@ cc_library(
         "@pigweed//pw_system:io",
     ],
     target_compatible_with = incompatible_with_mcu(),
-    deps = ["//examples/pigweed/system:headers"],
+    deps = ["//examples/pigweed/apps/blinky/system:headers"],
 )

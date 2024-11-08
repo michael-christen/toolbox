@@ -13,7 +13,7 @@
 // the License.
 
 #include "pw_digital_io/digital_io_mock.h"
-#include "examples/pigweed/system/system.h"
+#include "examples/pigweed/apps/blinky/system/system.h"
 
 namespace demo::system {
 
