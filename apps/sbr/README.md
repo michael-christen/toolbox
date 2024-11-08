@@ -10,8 +10,7 @@ This directory contains the main application (main.cc).
 
 ## Usage
 
-- XXX: Testing
-- XXX: Flashing
+- TODO: Testing
 
 ### Run as Host Simulator
 
@@ -21,4 +20,14 @@ bazel run //apps/sbr:simulator_sbr
 # Separate window
 
 bazel run //apps/sbr:simulator_console
+```
+
+### Run on device
+
+```
+# Flash
+bazel run //apps/sbr:flash_rp2040
+
+# Console
+bazel run //apps/sbr:rp2040_console
 ```

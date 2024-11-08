@@ -13,8 +13,6 @@ namespace lis3mdl {
   }
 
 
-// XXX: No idea why this is failing / why there's an issue with this
-// declaration, but in test code, things are fine ...
 DataView LIS3MDLData::GetView() {
   return MakeDataView(bytes.data(), std::size(bytes));
 }

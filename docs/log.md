@@ -303,5 +303,23 @@ breakup the diff: https://github.com/michael-christen/toolbox/pull/136/files
   slow
 - add `hw_service/sbr/sbr.proto`
 - add `emboss`
+  - why do we need `enable_enum_traits = False`?
 - add apps/sbr
-- update platform
+- update platform to allow us to make new ones per system
+- good documentation on lis3mdl
+- host i2c initiator
+- platform definitions
+
+TODO:
+- maybe move more pigweed things to third party?
+- make hw_service plural
+- make common host_system library?
+- nanopb, change generated code suffix
+- how to specify fixed size on nanopb repeated with options?
+- gazelle cc_library for sbr
+
+Followup:
+- stream meaasurements
+- state machine
+- configuration
+

@@ -14,7 +14,6 @@ void Init();
 /// Starts the main system scheduler. This function never returns.
 [[noreturn]] void Start();
 
-// XXX: Define getters
 pw::i2c::RegisterDevice& LIS3MDLRegisterDevice();
 
 }
