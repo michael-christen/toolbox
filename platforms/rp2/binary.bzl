@@ -11,12 +11,8 @@ load("@pigweed//targets/rp2040:transition.bzl", "RP2_SYSTEM_FLAGS")
 _COMMON_FLAGS = merge_flags_for_transition_impl(
     base = RP2_SYSTEM_FLAGS,
     override = {
-        # XXX: Remove app-specific things
         # XXX: How do these threads get involved?
         # "//apps/production:threads": "//platforms/rp2:production_app_threads",
-        # XXX: This is incorrectly changing to //app somehow? (bazel clean
-        # fixed)
-        "//apps/sbr/system:system": "//apps/sbr/system:rp2_system",  # XXX: system definition is specific
         "@freertos//:freertos_config": "//platforms/rp2:freertos_config",
         "@pico-sdk//bazel/config:PICO_CLIB": "llvm_libc",
         "@pico-sdk//bazel/config:PICO_TOOLCHAIN": "clang",
@@ -36,13 +32,15 @@ _RP2350_FLAGS = {
     "//command_line_option:platforms": "//platforms/rp2:rp2350",
 }
 
-def _rp2_transition(device_specific_flags):
+def _rp2_transition(device_specific_flags, app_flags):
+    total_flags = dict(device_specific_flags, **app_flags)
+
     def _rp2_transition_impl(settings, attr):
         # buildifier: disable=unused-variable
         _ignore = settings, attr
         return merge_flags_for_transition_impl(
             base = _COMMON_FLAGS,
-            override = device_specific_flags,
+            override = total_flags,
         )
 
     return transition(
@@ -50,7 +48,7 @@ def _rp2_transition(device_specific_flags):
         inputs = [],
         outputs = merge_flags_for_transition_outputs(
             base = _COMMON_FLAGS,
-            override = device_specific_flags,
+            override = total_flags,
         ),
     )
 
@@ -60,38 +58,40 @@ def _rp2_binary_impl(ctx):
     return [DefaultInfo(files = depset([out]), executable = out)]
 
 
-rp2040_binary = rule(
-    _rp2_binary_impl,
-    attrs = {
-        "binary": attr.label(
-            doc = "cc_binary to build for the rp2040",
-            cfg = _rp2_transition(_RP2040_FLAGS),
-            executable = True,
-            mandatory = True,
-        ),
-        "_allowlist_function_transition": attr.label(
-            default = "@bazel_tools//tools/allowlists/function_transition_allowlist",
-        ),
-    },
-    doc = "Builds the specified binary for the rp2040 platform",
-    # This target is for rp2040 and can't be run on host.
-    executable = False,
-)
+def define_rp2040_binary_rule(app_flags):
+    return rule(
+        _rp2_binary_impl,
+        attrs = {
+            "binary": attr.label(
+                doc = "cc_binary to build for the rp2040",
+                cfg = _rp2_transition(_RP2040_FLAGS, app_flags),
+                executable = True,
+                mandatory = True,
+            ),
+            "_allowlist_function_transition": attr.label(
+                default = "@bazel_tools//tools/allowlists/function_transition_allowlist",
+            ),
+        },
+        doc = "Builds the specified binary for the rp2040 platform",
+        # This target is for rp2040 and can't be run on host.
+        executable = False,
+    )
 
-# rp2350_binary = rule(
-#     _rp2_binary_impl,
-#     attrs = {
-#         "binary": attr.label(
-#             doc = "cc_binary to build for the rp2350",
-#             cfg = _rp2_transition(_RP2350_FLAGS),
-#             executable = True,
-#             mandatory = True,
-#         ),
-#         "_allowlist_function_transition": attr.label(
-#             default = "@bazel_tools//tools/allowlists/function_transition_allowlist",
-#         ),
-#     },
-#     doc = "Builds the specified binary for the rp2350 platform",
-#     # This target is for rp2350 and can't be run on host.
-#     executable = False,
-# )
+def define_rp2350_binary_rule(app_flags):
+    return rule(
+        _rp2_binary_impl,
+        attrs = {
+            "binary": attr.label(
+                doc = "cc_binary to build for the rp2350",
+                cfg = _rp2_transition(_RP2350_FLAGS, app_flags),
+                executable = True,
+                mandatory = True,
+            ),
+            "_allowlist_function_transition": attr.label(
+                default = "@bazel_tools//tools/allowlists/function_transition_allowlist",
+            ),
+        },
+        doc = "Builds the specified binary for the rp2350 platform",
+        # This target is for rp2350 and can't be run on host.
+        executable = False,
+    )

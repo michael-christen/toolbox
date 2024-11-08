@@ -294,3 +294,14 @@ describe pigweed's sense firmware layout
 
 - ran arduino tools, saw similar behavior; seems like we need a calibration
   process and offset
+
+### 2024-11-07, Thursday:
+
+breakup the diff: https://github.com/michael-christen/toolbox/pull/136/files
+
+- add `--config local` approach for bypassing bes/remote cache when network is
+  slow
+- add `hw_service/sbr/sbr.proto`
+- add `emboss`
+- add apps/sbr
+- update platform

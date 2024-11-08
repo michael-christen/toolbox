@@ -1,8 +1,7 @@
 load("@pigweed//targets/host_device_simulator:transition.bzl", "host_device_simulator_binary")
 load("@pigweed//targets/rp2040:flash.bzl", "flash_rp2040")
 
-# XXX: Gotta support rp2040 more fully / separate out system, etc.
-load("//platforms/rp2:binary.bzl", "rp2040_binary")  # , "rp2350_binary")
+load(":binary.bzl", "rp2040_binary", "rp2350_binary")
 load("//examples/pigweed/tools:tools.bzl", "host_console", "device_console")
 
 package(default_visibility = ["//visibility:private"])
@@ -11,8 +10,6 @@ cc_binary(
     name = "sbr",
     srcs = ["main.cc"],
     deps = [
-        # XXX: Replace
-        # "//examples/pigweed/system",
         "//apps/sbr/system",
         "//hw_service/sbr:service",
         "@pigweed//pw_log",
@@ -44,7 +41,6 @@ host_console(
 )
 
 # Create an rp2040 flashable ELF
-# XXX: .emb isn't compiling ok for rp2040
 rp2040_binary(
     name = "rp2040_sbr.elf",
     binary = ":sbr",
@@ -61,15 +57,14 @@ device_console(
 )
 
 
-# XXX
-# # Create an rp2350 flashable ELF
-# rp2350_binary(
-#     name = "rp2350_sbr.elf",
-#     binary = ":sbr",
-# )
+# Create an rp2350 flashable ELF
+rp2350_binary(
+    name = "rp2350_sbr.elf",
+    binary = ":sbr",
+)
 
-# # Note: Despite the name, the rule works for the 2350.
-# flash_rp2040(
-#     name = "flash_rp2350",
-#     rp2040_binary = "rp2350_sbr.elf",
-# )
+# Note: Despite the name, the rule works for the 2350.
+flash_rp2040(
+    name = "flash_rp2350",
+    rp2040_binary = "rp2350_sbr.elf",
+)
