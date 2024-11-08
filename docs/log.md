@@ -311,14 +311,14 @@ breakup the diff: https://github.com/michael-christen/toolbox/pull/136/files
 - platform definitions
 
 TODO:
-- maybe move more pigweed things to third party?
-- make hw_service plural
-- make common host_system library?
-- nanopb, change generated code suffix
-- how to specify fixed size on nanopb repeated with options?
-- gazelle cc_library for sbr
-- remove production_app_threads for now
-- clang-format
+- [ ] maybe move more pigweed things to third party?
+- [ ] make hw_service plural
+- [ ] make common host_system library?
+- [ ] nanopb, change generated code suffix
+- [ ] how to specify fixed size on nanopb repeated with options?
+- [ ] gazelle cc_library for sbr
+- [x] remove production_app_threads for now
+- [ ] clang-format
 
 Followup:
 - stream meaasurements

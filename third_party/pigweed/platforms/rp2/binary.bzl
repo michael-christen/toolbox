@@ -11,25 +11,23 @@ load("@pigweed//targets/rp2040:transition.bzl", "RP2_SYSTEM_FLAGS")
 _COMMON_FLAGS = merge_flags_for_transition_impl(
     base = RP2_SYSTEM_FLAGS,
     override = {
-        # XXX: How do these threads get involved?
-        # "//apps/production:threads": "//platforms/rp2:production_app_threads",
-        "@freertos//:freertos_config": "//platforms/rp2:freertos_config",
+        "@freertos//:freertos_config": "//third_party/pigweed/platforms/rp2:freertos_config",
         "@pico-sdk//bazel/config:PICO_CLIB": "llvm_libc",
         "@pico-sdk//bazel/config:PICO_TOOLCHAIN": "clang",
         "@pigweed//pw_build:default_module_config": "//system:module_config",
-        "@pigweed//pw_system:extra_platform_libs": "//platforms/rp2:extra_platform_libs",
+        "@pigweed//pw_system:extra_platform_libs": "//third_party/pigweed/platforms/rp2:extra_platform_libs",
         "@pigweed//pw_system:io_backend": "@pigweed//pw_system:sys_io_target_io",
         "@pigweed//pw_toolchain:cortex-m_toolchain_kind": "clang",
-        "@pigweed//pw_unit_test:config_override": "//platforms/rp2:64k_unit_tests",
+        "@pigweed//pw_unit_test:config_override": "//third_party/pigweed/platforms/rp2:64k_unit_tests",
     },
 )
 
 _RP2040_FLAGS = {
-    "//command_line_option:platforms": "//platforms/rp2:rp2040",
+    "//command_line_option:platforms": "//third_party/pigweed/platforms/rp2:rp2040",
 }
 
 _RP2350_FLAGS = {
-    "//command_line_option:platforms": "//platforms/rp2:rp2350",
+    "//command_line_option:platforms": "//third_party/pigweed/platforms/rp2:rp2350",
 }
 
 def _rp2_transition(device_specific_flags, app_flags):
