@@ -1,4 +1,4 @@
-load("@pigweed//pw_build:compatibility.bzl", "host_backend_alias")
+load("@pigweed//pw_build:compatibility.bzl", "host_backend_alias", "incompatible_with_mcu")
 
 # gazelle:default_visibility //visibility:public
 package(default_visibility = ["//visibility:public"])
@@ -10,7 +10,7 @@ label_flag(
 
 host_backend_alias(
     name = "unspecified_backend",
-    backend = "//examples/pigweed/targets/host:system",
+    backend = ":host_system",
 )
 
 cc_library(
@@ -22,4 +22,23 @@ cc_library(
     deps = [
         "@pigweed//pw_digital_io",
     ],
+)
+
+cc_library(
+    name = "host_system",
+    srcs = [
+        "host_led.cc",
+        "host_system.cc",
+    ],
+    implementation_deps = [
+        "@pigweed//pw_channel",
+        "@pigweed//pw_channel:stream_channel",
+        "@pigweed//pw_digital_io",
+        "@pigweed//pw_digital_io:digital_io_mock",
+        "@pigweed//pw_multibuf:simple_allocator",
+        "@pigweed//pw_system:async",
+        "@pigweed//pw_system:io",
+    ],
+    target_compatible_with = incompatible_with_mcu(),
+    deps = ["//examples/pigweed/apps/blinky/system:headers"],
 )
