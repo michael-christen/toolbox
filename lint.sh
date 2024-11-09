@@ -114,6 +114,11 @@ bazel run $RULES_LINT_CMD
 # Add back in when fixed
 # grep_xxx
 
+# TODO(XXX)
+# Add this back in (conflicts with emboss at the moment)
+# See https://github.com/aspect-build/rules_lint/blob/main/example/lint.sh
+# --aspects=//tools/lint:linters.bzl%clang_tidy
+
 
 # TODO(#57): Re-enable this check when we fix the false errors
 # - name: bzlmod lockfile
