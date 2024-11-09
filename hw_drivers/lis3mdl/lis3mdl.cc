@@ -8,22 +8,22 @@ using namespace std::chrono_literals;
 namespace hw_drivers {
 namespace lis3mdl {
 
-  namespace {
-    constexpr auto kI2cTimeout = 100ms;
-  }
-
+namespace {
+constexpr auto kI2cTimeout = 100ms;
+}
 
 DataView LIS3MDLData::GetView() {
   return MakeDataView(bytes.data(), std::size(bytes));
 }
 
-
-std::expected<::hw_drivers_lis3mdl_LIS3MDLConfiguration, ConfigurationError> SolveConfiguration(const ::hw_drivers_lis3mdl_LIS3MDLConfiguration& desired_configuration,
+std::expected<::hw_drivers_lis3mdl_LIS3MDLConfiguration, ConfigurationError>
+SolveConfiguration(
+    const ::hw_drivers_lis3mdl_LIS3MDLConfiguration& desired_configuration,
     LIS3MDLControl* control) {
   auto view = MakeControlView(control->bytes.data(), std::size(control->bytes));
   // Constraints of our system:
-  // - 
-  if(!(desired_configuration.has_temperature_enabled &&
+  // -
+  if (!(desired_configuration.has_temperature_enabled &&
         desired_configuration.has_allowable_rms_noise_ug &&
         desired_configuration.has_data_rate_millihz &&
         desired_configuration.has_scale_gauss)) {
@@ -88,7 +88,6 @@ std::expected<::hw_drivers_lis3mdl_LIS3MDLConfiguration, ConfigurationError> Sol
     }
   }
 
-
   // Scale Gauss
   // XXX: Note that this selection is kinda the opposite of the rms noise
   auto desired_scale_gauss = desired_configuration.scale_gauss;
@@ -108,15 +107,15 @@ std::expected<::hw_drivers_lis3mdl_LIS3MDLConfiguration, ConfigurationError> Sol
     full_scale_choice = FullScaleSelection::FULL_SCALE_SELECTION_16;
   }
   ::hw_drivers_lis3mdl_LIS3MDLConfiguration result_configuration{
-    .has_temperature_enabled = true,
-    // Temperature
-    .temperature_enabled = desired_configuration.temperature_enabled,
-    .has_allowable_rms_noise_ug = true,
-    .allowable_rms_noise_ug = actual_rms_noise_ug,
-    .has_data_rate_millihz = true,
-    .data_rate_millihz = actual_data_rate_millihz,
-    .has_scale_gauss = true,
-    .scale_gauss = actual_scale_gauss,
+      .has_temperature_enabled = true,
+      // Temperature
+      .temperature_enabled = desired_configuration.temperature_enabled,
+      .has_allowable_rms_noise_ug = true,
+      .allowable_rms_noise_ug = actual_rms_noise_ug,
+      .has_data_rate_millihz = true,
+      .data_rate_millihz = actual_data_rate_millihz,
+      .has_scale_gauss = true,
+      .scale_gauss = actual_scale_gauss,
   };
 
   // XXX: I could just do this elsewhere and send the information to write the
@@ -137,7 +136,7 @@ std::expected<::hw_drivers_lis3mdl_LIS3MDLConfiguration, ConfigurationError> Sol
 // XXX: using lsb_per_gauss, since the scale isn't quite working out how I'd
 // expect / the LSBs are not mathing properly
 ::hw_drivers_lis3mdl_LIS3MDLReading InterpretReading(uint32_t lsb_per_gauss,
-                                const LIS3MDLData& data) {
+                                                     const LIS3MDLData& data) {
   ::hw_drivers_lis3mdl_LIS3MDLReading reading;
   auto view = MakeDataView(data.bytes.data(), std::size(data.bytes));
 
@@ -153,17 +152,21 @@ std::expected<::hw_drivers_lis3mdl_LIS3MDLConfiguration, ConfigurationError> Sol
   constexpr int32_t kTemperatureMCPerLSB = 125;
   constexpr int32_t kMilliPerDeci = 100;
   reading.has_temperature_dc = true;
-  reading.temperature_dc = (
-      ((view.temperature_out().Read() * kTemperatureMCPerLSB) + kOffsetTemperatureMC)
-       / kMilliPerDeci);
+  reading.temperature_dc =
+      (((view.temperature_out().Read() * kTemperatureMCPerLSB) +
+        kOffsetTemperatureMC) /
+       kMilliPerDeci);
 
-  (void) lsb_per_gauss;
+  (void)lsb_per_gauss;
   reading.has_magnetic_strength_x_ug = true;
   reading.has_magnetic_strength_y_ug = true;
   reading.has_magnetic_strength_z_ug = true;
-  reading.magnetic_strength_x_ug = ((static_cast<int64_t>(view.out_x().Read()) * 1'000'000) / lsb_per_gauss);
-  reading.magnetic_strength_y_ug = ((static_cast<int64_t>(view.out_y().Read()) * 1'000'000) / lsb_per_gauss);
-  reading.magnetic_strength_z_ug = ((static_cast<int64_t>(view.out_z().Read()) * 1'000'000) / lsb_per_gauss);
+  reading.magnetic_strength_x_ug =
+      ((static_cast<int64_t>(view.out_x().Read()) * 1'000'000) / lsb_per_gauss);
+  reading.magnetic_strength_y_ug =
+      ((static_cast<int64_t>(view.out_y().Read()) * 1'000'000) / lsb_per_gauss);
+  reading.magnetic_strength_z_ug =
+      ((static_cast<int64_t>(view.out_z().Read()) * 1'000'000) / lsb_per_gauss);
   // constexpr size_t kNumAxes = 3;
   // XXX: Check fixed_size of array
   // static_assert(kNumAxes == );
@@ -183,8 +186,8 @@ std::expected<::hw_drivers_lis3mdl_LIS3MDLConfiguration, ConfigurationError> Sol
   return reading;
 }
 
-pw::Status ApplyControlToDevice(const LIS3MDLControl& control, pw::i2c::RegisterDevice* register_device) {
-  
+pw::Status ApplyControlToDevice(const LIS3MDLControl& control,
+                                pw::i2c::RegisterDevice* register_device) {
   // XXX: Why won't std::size work?
   std::array<std::byte, Control::MaxSizeInBytes() + 1> raw_buf = {std::byte{0}};
   // XXX: Could I do something differently and avoid the extra buffer?
@@ -192,19 +195,16 @@ pw::Status ApplyControlToDevice(const LIS3MDLControl& control, pw::i2c::Register
   // address?
   auto buf = pw::as_writable_bytes(pw::span(raw_buf));
   return register_device->WriteRegisters(
-      static_cast<uint8_t>(RegisterAddress::CONTROL),
-      pw::span(control.bytes),
-      buf,
-      kI2cTimeout
-  );
+      static_cast<uint8_t>(RegisterAddress::CONTROL), pw::span(control.bytes),
+      buf, kI2cTimeout);
 }
 
-pw::Status ReadFromDevice(LIS3MDLData *data, pw::i2c::RegisterDevice* register_device) {
+pw::Status ReadFromDevice(LIS3MDLData* data,
+                          pw::i2c::RegisterDevice* register_device) {
   return register_device->ReadRegisters(
-      static_cast<uint8_t>(RegisterAddress::DATA),
-      pw::span(data->bytes),
+      static_cast<uint8_t>(RegisterAddress::DATA), pw::span(data->bytes),
       kI2cTimeout);
 }
 
-}
-}
+}  // namespace lis3mdl
+}  // namespace hw_drivers

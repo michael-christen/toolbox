@@ -1,22 +1,19 @@
-#include "hw_drivers/lis3mdl/lis3mdl.h"
-
 #include <chrono>
 #include <cstdint>
 #include <iostream>
 #include <vector>
 
-#include "pw_bytes/bit.h"
+#include "hw_drivers/lis3mdl/lis3mdl.emb.h"
+#include "hw_drivers/lis3mdl/lis3mdl.h"
+#include "hw_drivers/lis3mdl/lis3mdl.pb.h"
 #include "pw_bytes/array.h"
+#include "pw_bytes/bit.h"
 #include "pw_i2c/address.h"
 #include "pw_i2c/initiator_mock.h"
 #include "pw_i2c/register_device.h"
+#include "pw_log/log.h"
 #include "pw_result/result.h"
 #include "pw_unit_test/framework.h"
-#include "pw_log/log.h"
-
-#include "hw_drivers/lis3mdl/lis3mdl.emb.h"
-#include "hw_drivers/lis3mdl/lis3mdl.pb.h"
-
 
 using namespace std::chrono_literals;
 
@@ -30,29 +27,21 @@ TEST(I2CTestSuite, I2CTransactions) {
   constexpr pw::i2c::Address kAddress = pw::i2c::Address::SevenBit<0x01>();
   constexpr auto kExpectedWrite = pw::bytes::Array<1, 2, 3, 4, 5, 6>();
   constexpr auto kJustReg = pw::bytes::Array<1>();
-  constexpr auto kMockRead = pw::bytes::Array<1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12>();
-  constexpr auto kControlWrite = pw::bytes::Array<
-    static_cast<uint8_t>(RegisterAddress::CONTROL),  // 0x20
-    0xFC,  // 0b1111'1100,
-    0x00,
-    0x00,
-    0x0C,
-    0x00
-  >();
-  constexpr auto kDataRead = pw::bytes::Array<
-    0, 0, 0,
-    0, 0, 0,
-    0, 0, 0
-  >();
-  constexpr auto kDataReg = pw::bytes::Array<static_cast<uint8_t>(RegisterAddress::DATA)>();
-  auto expected_transactions = pw::i2c::MakeExpectedTransactionArray(
-    {
+  constexpr auto kMockRead =
+      pw::bytes::Array<1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12>();
+  constexpr auto kControlWrite =
+      pw::bytes::Array<static_cast<uint8_t>(RegisterAddress::CONTROL),  // 0x20
+                       0xFC,  // 0b1111'1100,
+                       0x00, 0x00, 0x0C, 0x00>();
+  constexpr auto kDataRead = pw::bytes::Array<0, 0, 0, 0, 0, 0, 0, 0, 0>();
+  constexpr auto kDataReg =
+      pw::bytes::Array<static_cast<uint8_t>(RegisterAddress::DATA)>();
+  auto expected_transactions = pw::i2c::MakeExpectedTransactionArray({
       pw::i2c::WriteTransaction(pw::OkStatus(), kAddress, kExpectedWrite, 1ms),
       pw::i2c::Transaction(pw::OkStatus(), kAddress, kJustReg, kMockRead, 1ms),
       pw::i2c::WriteTransaction(pw::OkStatus(), kAddress, kControlWrite, 1ms),
       pw::i2c::Transaction(pw::OkStatus(), kAddress, kDataReg, kDataRead, 1ms),
-    }
-  );
+  });
   pw::i2c::MockInitiator initiator(expected_transactions);
   pw::i2c::RegisterDevice reg_device(initiator, kAddress, cpp20::endian::little,
                                      pw::i2c::RegisterAddressSize::k1Byte);
@@ -64,26 +53,22 @@ TEST(I2CTestSuite, I2CTransactions) {
   // pw::ConstByteSpan kActualWrite = pw::bytes::Array<1, 2, 3>();
   // pw::Status status = initiator.WriteFor(kAddress, kActualWrite, 1ms);
   EXPECT_EQ(status, pw::OkStatus());
-  status = reg_device.ReadRegisters(
-      kAddress.GetSevenBit(),
-      buf,
-      1ms
-  );
+  status = reg_device.ReadRegisters(kAddress.GetSevenBit(), buf, 1ms);
   EXPECT_EQ(status, pw::OkStatus());
   EXPECT_EQ(raw_buf, kMockRead);
 
   // XXX: new section?
   LIS3MDLControl control;
   ::hw_drivers_lis3mdl_LIS3MDLConfiguration configuration{
-    .has_temperature_enabled = true,
-    // Temperature
-    .temperature_enabled = true,
-    .has_allowable_rms_noise_ug = true,
-    .allowable_rms_noise_ug = 3'500,
-    .has_data_rate_millihz = true,
-    .data_rate_millihz = 80'000,
-    .has_scale_gauss = true,
-    .scale_gauss = 4,
+      .has_temperature_enabled = true,
+      // Temperature
+      .temperature_enabled = true,
+      .has_allowable_rms_noise_ug = true,
+      .allowable_rms_noise_ug = 3'500,
+      .has_data_rate_millihz = true,
+      .data_rate_millihz = 80'000,
+      .has_scale_gauss = true,
+      .scale_gauss = 4,
   };
   // XXX: Make Constant
 
@@ -114,7 +99,7 @@ TEST(I2CTestSuite, I2CTransactions) {
   EXPECT_EQ(initiator.Finalize(), pw::OkStatus());
 }
 
-}
+}  // namespace
 
-}
-}
+}  // namespace lis3mdl
+}  // namespace hw_drivers

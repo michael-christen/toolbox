@@ -1,13 +1,11 @@
 #include "hw_drivers/lis3mdl/lis3mdl.h"
 
+#include <catch2/catch_test_macros.hpp>
 #include <cstdint>
 #include <vector>
 
-#include <catch2/catch_test_macros.hpp>
-
 #include "hw_drivers/lis3mdl/lis3mdl.emb.h"
 #include "hw_drivers/lis3mdl/lis3mdl.pb.h"
-
 
 namespace hw_drivers {
 namespace lis3mdl {
@@ -41,21 +39,22 @@ TEST_CASE("SolveConfiguration") {
   // XXX: Better naming schema to denote differences
   // XXX: Analysis on size and run-time cost
   LIS3MDLControl control;
-  auto control_view = MakeControlView(control.bytes.data(), std::size(control.bytes));
+  auto control_view =
+      MakeControlView(control.bytes.data(), std::size(control.bytes));
   auto result = SolveConfiguration(configuration, &control);
   REQUIRE(!result.has_value());
   CHECK(result.error() == ConfigurationError::kInvalidConfig);
 
   configuration = ::hw_drivers_lis3mdl_LIS3MDLConfiguration{
-    .has_temperature_enabled = true,
-    // Temperature
-    .temperature_enabled = false,
-    .has_allowable_rms_noise_ug = true,
-    .allowable_rms_noise_ug = 3'500,
-    .has_data_rate_millihz = true,
-    .data_rate_millihz = 80'000,
-    .has_scale_gauss = true,
-    .scale_gauss = 4,
+      .has_temperature_enabled = true,
+      // Temperature
+      .temperature_enabled = false,
+      .has_allowable_rms_noise_ug = true,
+      .allowable_rms_noise_ug = 3'500,
+      .has_data_rate_millihz = true,
+      .data_rate_millihz = 80'000,
+      .has_scale_gauss = true,
+      .scale_gauss = 4,
   };
 
   result = SolveConfiguration(configuration, &control);
@@ -109,7 +108,7 @@ TEST_CASE("Read Data") {
   reading = InterpretReading(kFullScale4LSBPerGauss, d);
   CHECK(reading.temperature_dc == 250);
   // XXX: Check more
-  
+
   view.out_x().Write(-100);
   view.out_y().Write(0);
   view.out_z().Write(200);
@@ -125,7 +124,7 @@ TEST_CASE("Read Data") {
   CHECK(reading.magnetic_strength_z_ug == 116'890);
 }
 
-}
+}  // namespace
 
-}
-}
+}  // namespace lis3mdl
+}  // namespace hw_drivers

@@ -12,8 +12,8 @@
 // License for the specific language governing permissions and limitations under
 // the License.
 
-#include "pw_digital_io/digital_io_mock.h"
 #include "examples/pigweed/apps/blinky/system/system.h"
+#include "pw_digital_io/digital_io_mock.h"
 
 namespace demo::system {
 

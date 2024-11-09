@@ -12,18 +12,20 @@ namespace sbr {
 class SbrService final
     : public ::hw_services::sbr::pw_rpc::nanopb::Sbr::Service<SbrService> {
  public:
-  void Init(pw::async2::Dispatcher& dispatcher,
-            pw::Allocator& allocator,
+  void Init(pw::async2::Dispatcher& dispatcher, pw::Allocator& allocator,
             pw::i2c::RegisterDevice* register_device);
 
-  pw::Status ConfigureMagnetometer(const hw_drivers_lis3mdl_LIS3MDLConfiguration& config, hw_drivers_lis3mdl_LIS3MDLConfiguration& actual_config);
+  pw::Status ConfigureMagnetometer(
+      const hw_drivers_lis3mdl_LIS3MDLConfiguration& config,
+      hw_drivers_lis3mdl_LIS3MDLConfiguration& actual_config);
 
-  pw::Status ReadMagnetometer(const pw_protobuf_Empty&, hw_drivers_lis3mdl_LIS3MDLReading& reading);
+  pw::Status ReadMagnetometer(const pw_protobuf_Empty&,
+                              hw_drivers_lis3mdl_LIS3MDLReading& reading);
 
  private:
   // XXX: Blinky blinky_;
   std::optional<pw::i2c::RegisterDevice*> register_device_;
 };
 
-}
-}
+}  // namespace sbr
+}  // namespace hw_services

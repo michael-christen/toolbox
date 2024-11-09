@@ -16,6 +16,6 @@ void Init();
 
 pw::i2c::RegisterDevice& LIS3MDLRegisterDevice();
 
-}
-}
-}
+}  // namespace system
+}  // namespace sbr
+}  // namespace apps

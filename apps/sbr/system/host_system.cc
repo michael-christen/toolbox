@@ -1,8 +1,8 @@
-#include "apps/sbr/system/system.h"
-
 #include <signal.h>
 #include <stdio.h>
 
+#include "apps/sbr/system/system.h"
+#include "platforms/host/initiator_host.h"
 #include "pw_assert/check.h"
 #include "pw_channel/stream_channel.h"
 #include "pw_digital_io/digital_io.h"
@@ -11,8 +11,6 @@
 #include "pw_system/io.h"
 #include "pw_system/system.h"
 #include "pw_thread_stl/options.h"
-
-#include "platforms/host/initiator_host.h"
 
 using ::pw::channel::StreamChannel;
 
@@ -56,11 +54,9 @@ void Start() {
   static std::byte channel_buffer[16384];
   static pw::multibuf::SimpleAllocator multibuf_alloc(channel_buffer,
                                                       pw::System().allocator());
-  static pw::NoDestructor<StreamChannel> channel(multibuf_alloc,
-                                                 pw::system::GetReader(),
-                                                 pw::thread::stl::Options(),
-                                                 pw::system::GetWriter(),
-                                                 pw::thread::stl::Options());
+  static pw::NoDestructor<StreamChannel> channel(
+      multibuf_alloc, pw::system::GetReader(), pw::thread::stl::Options(),
+      pw::system::GetWriter(), pw::thread::stl::Options());
 
   pw::SystemStart(*channel);
   PW_UNREACHABLE;
@@ -70,11 +66,12 @@ pw::i2c::RegisterDevice& LIS3MDLRegisterDevice() {
   constexpr pw::i2c::Address kAddress = pw::i2c::Address::SevenBit<0x01>();
 
   static platforms::host::HostInitiator initiator;
-  static pw::i2c::RegisterDevice reg_device(initiator, kAddress, cpp20::endian::little,
+  static pw::i2c::RegisterDevice reg_device(
+      initiator, kAddress, cpp20::endian::little,
       pw::i2c::RegisterAddressSize::k1Byte);
   return reg_device;
 }
 
-}  // namespace demo::system
-}
-}
+}  // namespace system
+}  // namespace sbr
+}  // namespace apps
