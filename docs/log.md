@@ -237,6 +237,7 @@ So, let's write-up a proto interface for these.
 - [ ] It'd be a good idea to make a host/simulation initiator for i2c, then I
       could run simulator_binary and actually have it fill with useful
       information.
+
   - should do a little write-up on pigweed's approach in sense (fake definitions
     for most things at the application level)
 
@@ -247,6 +248,7 @@ So, let's write-up a proto interface for these.
 ### 2024-10-31, Thursday:
 
 describe pigweed's sense firmware layout
+
 - apps
   - build for end application + main.cc
     - register services and start system
@@ -267,7 +269,8 @@ describe pigweed's sense firmware layout
   - sampling thread for sensor
   - example of .options file
   - worker + timer
-  - [ ] (really, just most of the goodies, got to figure out how they're wired up)
+  - [ ] (really, just most of the goodies, got to figure out how they're wired
+        up)
 - system
   - high-level definition of system (what components), + pubsub + worker
 - targets -> malloc alias, host + rp2 descriptions
@@ -278,7 +281,7 @@ describe pigweed's sense firmware layout
     - define rp2040_binary and rp2350_binary
     - define platform, tests, + system
       - [ ] separating the common platform from the system definition could be
-        handy
+            handy
         - where is unit_test_rpc_main used?
 - tools -> console setup, Device examples + connection, factory
 - `web_app` -> ignore
@@ -311,19 +314,23 @@ breakup the diff: https://github.com/michael-christen/toolbox/pull/136/files
 - platform definitions
 
 TODO:
+
 - [x] maybe move more pigweed things to third party?
 - [x] make hw_service plural
 - [>] make common host_system library?
 - [>] how to specify fixed size on nanopb repeated with options?
   - can't get it to work, got proto_library to work, didn't know how to include
     options
-  - could try with load("@com_github_nanopb_nanopb//extra/bazel:nanopb_cc_proto_library.bzl", "cc_nanopb_proto_library")
+  - could try with
+    load("@com_github_nanopb_nanopb//extra/bazel:nanopb_cc_proto_library.bzl",
+    "cc_nanopb_proto_library")
 - [>] gazelle cc_library for sbr
 - [>] nanopb, change generated code suffix
 - [ ] clang-format
 - [x] remove production_app_threads for now
 
 Followup:
+
 - stream meaasurements
 - state machine
 - configuration

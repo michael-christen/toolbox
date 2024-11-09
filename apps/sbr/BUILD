@@ -1,8 +1,7 @@
 load("@pigweed//targets/host_device_simulator:transition.bzl", "host_device_simulator_binary")
 load("@pigweed//targets/rp2040:flash.bzl", "flash_rp2040")
-
+load("//third_party/pigweed/tools:tools.bzl", "device_console", "host_console")
 load(":binary.bzl", "rp2040_binary", "rp2350_binary")
-load("//third_party/pigweed/tools:tools.bzl", "host_console", "device_console")
 
 package(default_visibility = ["//visibility:private"])
 
@@ -55,7 +54,6 @@ device_console(
     name = "rp2040_console",
     binary = ":rp2040_sbr.elf",
 )
-
 
 # Create an rp2350 flashable ELF
 rp2350_binary(

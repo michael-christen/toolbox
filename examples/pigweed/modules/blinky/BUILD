@@ -40,8 +40,8 @@ cc_library(
         "@pigweed//pw_preprocessor",
     ],
     deps = [
-        "//examples/pigweed/modules/timer_future",
         "//examples/pigweed/apps/blinky/system",
+        "//examples/pigweed/modules/timer_future",
         "@pigweed//pw_async2:coro",
         "@pigweed//pw_async2:coro_or_else_task",
         "@pigweed//pw_async2:dispatcher",

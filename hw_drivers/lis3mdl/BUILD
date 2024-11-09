@@ -16,11 +16,11 @@ package(default_visibility = ["//visibility:private"])
 emboss_cc_library(
     name = "lis3mdl_emb",
     srcs = ["lis3mdl.emb"],
+    # XXX: Required for cross-compilation, investigate more
+    enable_enum_traits = False,
     visibility = [
         "//hw_services/sbr:__subpackages__",
     ],
-    # XXX: Required for cross-compilation, investigate more
-    enable_enum_traits = False,
 )
 
 cc_library(

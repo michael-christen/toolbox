@@ -83,11 +83,13 @@ elif [ "$mode" = "check" ]; then
   PRETTIER_ARGS=("--check" "--config ${REPO_ROOT}/.prettierrc")
   BAZEL_TOOL="//tools:check"
   GAZELLE_ARGS=("-mode" "diff")
+  RULES_LINT_CMD="//tools/format:format"
 elif [ "$mode" = "format" ]; then
   BUILDIFIER_ARGS=("-lint=fix" "-mode=fix" "-v=false")
   PRETTIER_ARGS=("--write" "--config ${REPO_ROOT}/.prettierrc")
   BAZEL_TOOL="//tools:format"
   GAZELLE_ARGS=("-mode" "fix")
+  RULES_LINT_CMD="//tools/format:format.check"
 fi
 PRETTIER_INVOCATION=""
 
@@ -106,6 +108,8 @@ echo $BAZEL_FILES | xargs bazel run ${CONFIG} -- //tools/buildifier ${BUILDIFIER
 bazel run ${CONFIG} -- ${BAZEL_TOOL}
 echo $MARKDOWN_FILES | xargs bazel run ${CONFIG} -- //tools/prettier ${PRETTIER_ARGS[@]}
 bazel run ${CONFIG} -- //:gazelle ${GAZELLE_ARGS[@]}
+
+bazel run $RULES_LINT_CMD
 
 # Add back in when fixed
 # grep_xxx

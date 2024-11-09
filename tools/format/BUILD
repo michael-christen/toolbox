@@ -6,3 +6,5 @@ format_multirun(
     cc = "@llvm_toolchain_llvm//:bin/clang-format",
     visibility = ["//:__subpackages__"],
 )
+
+package(default_visibility = ["//visibility:private"])

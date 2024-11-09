@@ -119,7 +119,6 @@ bazel_dep(
 # pull a few javascript packages used for repo tooling, like prettier for linting.
 bazel_dep(name = "aspect_rules_js", version = "1.39.0")
 
-
 ##################
 # Setup rules_lint
 ##################
@@ -188,6 +187,7 @@ bazel_dep(name = "pw_toolchain")
 bazel_dep(name = "rules_cc")
 
 bazel_dep(name = "hedron_compile_commands", dev_dependency = True)
+
 bazel_dep(name = "toolchains_llvm", version = "0.10.3")
 
 # Python Type Checking - mypy

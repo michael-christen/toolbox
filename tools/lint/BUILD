@@ -5,3 +5,5 @@ native_binary(
     src = "@llvm_toolchain_llvm//:bin/clang-tidy",
     out = "clang_tidy",
 )
+
+package(default_visibility = ["//visibility:private"])

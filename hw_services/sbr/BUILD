@@ -1,5 +1,4 @@
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
-load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_library")
 load(
     "@pigweed//pw_protobuf_compiler:pw_proto_library.bzl",
     "nanopb_proto_library",
@@ -27,8 +26,8 @@ cc_library(
         "@pigweed//pw_allocator:allocator",
         "@pigweed//pw_assert:check",
         "@pigweed//pw_async2:dispatcher",
-        "@pigweed//pw_log",
         "@pigweed//pw_i2c:register_device",
+        "@pigweed//pw_log",
     ],
 )
 

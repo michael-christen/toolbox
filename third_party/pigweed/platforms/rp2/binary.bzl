@@ -55,7 +55,6 @@ def _rp2_binary_impl(ctx):
     ctx.actions.symlink(output = out, is_executable = True, target_file = ctx.executable.binary)
     return [DefaultInfo(files = depset([out]), executable = out)]
 
-
 def define_rp2040_binary_rule(app_flags):
     return rule(
         _rp2_binary_impl,
