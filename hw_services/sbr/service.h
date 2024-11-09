@@ -1,16 +1,16 @@
 #pragma once
 
 // #include "examples/pigweed/modules/blinky/blinky.h"
-#include "hw_service/sbr/sbr.rpc.pb.h"
+#include "hw_services/sbr/sbr.rpc.pb.h"
 #include "pw_allocator/allocator.h"
 #include "pw_async2/dispatcher.h"
 #include "pw_i2c/register_device.h"
 
-namespace hw_service {
+namespace hw_services {
 namespace sbr {
 
 class SbrService final
-    : public ::hw_service::sbr::pw_rpc::nanopb::Sbr::Service<SbrService> {
+    : public ::hw_services::sbr::pw_rpc::nanopb::Sbr::Service<SbrService> {
  public:
   void Init(pw::async2::Dispatcher& dispatcher,
             pw::Allocator& allocator,

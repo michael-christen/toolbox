@@ -17,7 +17,7 @@ emboss_cc_library(
     name = "lis3mdl_emb",
     srcs = ["lis3mdl.emb"],
     visibility = [
-        "//hw_service/sbr:__subpackages__",
+        "//hw_services/sbr:__subpackages__",
     ],
     # XXX: Required for cross-compilation, investigate more
     enable_enum_traits = False,
@@ -28,7 +28,7 @@ cc_library(
     srcs = ["lis3mdl.cc"],
     hdrs = ["lis3mdl.h"],
     visibility = [
-        "//hw_service/sbr:__subpackages__",
+        "//hw_services/sbr:__subpackages__",
     ],
     deps = [
         ":lis3mdl_emb",

@@ -121,7 +121,7 @@ gazelle(
 # gazelle:map_kind proto_py_library proto_py_library //bzl:py.bzl
 
 # TODO: Figure out a way to not need these
-# gazelle:resolve py hw_service.sbr.sbr_pb2 //hw_service/sbr:sbr_py_library
+# gazelle:resolve py hw_services.sbr.sbr_pb2 //hw_service/sbr:sbr_py_library
 # gazelle:resolve py examples.basic.hello_pb2 //examples/basic:hello_py_library
 # gazelle:resolve py examples.basic.hello_pb2_grpc //examples/basic:hello_grpc_py_library
 # gazelle:resolve py third_party.bazel.src.main.protobuf.build_pb2 //third_party/bazel/src/main/protobuf:build_py_library

@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package hw_service.sbr;
+package hw_services.sbr;
 
 import "pw_protobuf_protos/common.proto";
 import "hw_drivers/lis3mdl/lis3mdl.proto";

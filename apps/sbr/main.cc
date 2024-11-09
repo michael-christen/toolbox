@@ -1,6 +1,6 @@
 #define PW_LOG_MODULE_NAME "MAIN"
 
-#include "hw_service/sbr/service.h"
+#include "hw_services/sbr/service.h"
 #include "pw_log/log.h"
 #include "pw_system/system.h"
 #include "apps/sbr/system/system.h"
@@ -9,7 +9,7 @@ int main() {
   apps::sbr::system::Init();
   auto& rpc_server = pw::System().rpc_server();
 
-  static hw_service::sbr::SbrService sbr_service;
+  static hw_services::sbr::SbrService sbr_service;
 
   auto& reg_device = apps::sbr::system::LIS3MDLRegisterDevice();
   sbr_service.Init(

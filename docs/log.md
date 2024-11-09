@@ -301,7 +301,7 @@ breakup the diff: https://github.com/michael-christen/toolbox/pull/136/files
 
 - add `--config local` approach for bypassing bes/remote cache when network is
   slow
-- add `hw_service/sbr/sbr.proto`
+- add `hw_services/sbr/sbr.proto`
 - add `emboss`
   - why do we need `enable_enum_traits = False`?
 - add apps/sbr
@@ -311,14 +311,14 @@ breakup the diff: https://github.com/michael-christen/toolbox/pull/136/files
 - platform definitions
 
 TODO:
-- [ ] maybe move more pigweed things to third party?
-- [ ] make hw_service plural
-- [ ] make common host_system library?
-- [ ] nanopb, change generated code suffix
+- [x] maybe move more pigweed things to third party?
+- [x] make hw_service plural
+- [>] make common host_system library?
 - [ ] how to specify fixed size on nanopb repeated with options?
-- [ ] gazelle cc_library for sbr
-- [x] remove production_app_threads for now
+- [ ] nanopb, change generated code suffix
+  - [ ] gazelle cc_library for sbr
 - [ ] clang-format
+- [x] remove production_app_threads for now
 
 Followup:
 - stream meaasurements

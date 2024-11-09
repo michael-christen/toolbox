@@ -3,11 +3,11 @@
 
 #include "pw_assert/check.h"
 #include "pw_log/log.h"
-#include "hw_service/sbr/service.h"
+#include "hw_services/sbr/service.h"
 #include "hw_drivers/lis3mdl/lis3mdl.h"
 #include "hw_drivers/lis3mdl/lis3mdl.emb.h"
 
-namespace hw_service {
+namespace hw_services {
 namespace sbr {
 
 void SbrService::Init(pw::async2::Dispatcher& dispatcher,
