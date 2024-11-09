@@ -15,6 +15,8 @@ exports_files(
     [
         ".flake8",
         ".prettierrc",
+        ".clang-format",
+        ".clang-tidy",
         "mypy.ini",
         "pytest.ini",
         "pyproject.toml",
