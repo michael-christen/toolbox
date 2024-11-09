@@ -318,6 +318,11 @@ TODO:
 - [x] maybe move more pigweed things to third party?
 - [x] make hw_service plural
 - [>] make common host_system library?
+- [x] clang-format
+- [x] remove production_app_threads for now
+
+Followup:
+
 - [>] how to specify fixed size on nanopb repeated with options?
   - can't get it to work, got proto_library to work, didn't know how to include
     options
@@ -326,11 +331,6 @@ TODO:
     "cc_nanopb_proto_library")
 - [>] gazelle cc_library for sbr
 - [>] nanopb, change generated code suffix
-- [ ] clang-format
-- [x] remove production_app_threads for now
-
-Followup:
-
 - stream meaasurements
 - state machine
 - configuration
