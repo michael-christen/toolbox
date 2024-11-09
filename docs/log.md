@@ -314,9 +314,12 @@ TODO:
 - [x] maybe move more pigweed things to third party?
 - [x] make hw_service plural
 - [>] make common host_system library?
-- [ ] how to specify fixed size on nanopb repeated with options?
-- [ ] nanopb, change generated code suffix
-  - [ ] gazelle cc_library for sbr
+- [>] how to specify fixed size on nanopb repeated with options?
+  - can't get it to work, got proto_library to work, didn't know how to include
+    options
+  - could try with load("@com_github_nanopb_nanopb//extra/bazel:nanopb_cc_proto_library.bzl", "cc_nanopb_proto_library")
+- [>] gazelle cc_library for sbr
+- [>] nanopb, change generated code suffix
 - [ ] clang-format
 - [x] remove production_app_threads for now
 

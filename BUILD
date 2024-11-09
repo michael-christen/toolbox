@@ -145,3 +145,8 @@ filegroup(
     ],
     visibility = ["//visibility:public"],
 )
+
+alias(
+    name = "format",
+    actual = "//tools/format",
+)

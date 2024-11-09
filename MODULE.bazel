@@ -119,6 +119,16 @@ bazel_dep(
 # pull a few javascript packages used for repo tooling, like prettier for linting.
 bazel_dep(name = "aspect_rules_js", version = "1.39.0")
 
+
+##################
+# Setup rules_lint
+##################
+bazel_dep(name = "aspect_rules_lint", version = "1.0.3")
+
+# Next, follow the install instructions for
+# - linting: https://github.com/aspect-build/rules_lint/blob/v1.0.3/docs/linting.md
+# - formatting: https://github.com/aspect-build/rules_lint/blob/v1.0.3/docs/formatting.md
+
 ####### OPTIONAL: Customize Node.js version #########
 # By default you get the node version from DEFAULT_NODE_VERSION in @rules_nodejs//nodejs:repositories.bzl
 # Optionally you can pin a different node version:
