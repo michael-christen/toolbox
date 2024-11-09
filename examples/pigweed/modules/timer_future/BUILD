@@ -23,4 +23,5 @@ cc_library(
         "@pigweed//pw_chrono:system_clock",
         "@pigweed//pw_chrono:system_timer",
     ],
+    visibility = ["//visibility:public"],
 )
