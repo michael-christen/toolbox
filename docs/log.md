@@ -312,6 +312,7 @@ breakup the diff: https://github.com/michael-christen/toolbox/pull/136/files
 - good documentation on lis3mdl
 - host i2c initiator
 - platform definitions
+- clang-format
 
 TODO:
 
