@@ -29,4 +29,3 @@ void Init();
 pw::digital_io::DigitalInOut& MonochromeLed();
 
 }  // namespace demo::system
-

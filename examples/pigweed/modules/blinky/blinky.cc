@@ -51,8 +51,7 @@ void ToggleIo(DigitalInOut& io) {
 
 }  // namespace
 
-Coro<Status> Blinky::BlinkLoop(CoroContext&,
-                               uint32_t blink_count,
+Coro<Status> Blinky::BlinkLoop(CoroContext&, uint32_t blink_count,
                                pw::chrono::SystemClock::duration interval) {
   for (uint32_t blinked = 0; blinked < blink_count || blink_count == 0;
        ++blinked) {
@@ -82,8 +81,7 @@ Blinky::Blinky()
         PW_LOG_ERROR("Failed to allocate blink loop coroutine.");
       }) {}
 
-void Blinky::Init(Dispatcher& dispatcher,
-                  Allocator& allocator,
+void Blinky::Init(Dispatcher& dispatcher, Allocator& allocator,
                   pw::digital_io::DigitalInOut& monochrome_led) {
   dispatcher_ = &dispatcher;
   allocator_ = &allocator;
@@ -119,8 +117,8 @@ pw::Status Blinky::Blink(uint32_t blink_count, uint32_t interval_ms) {
   if (blink_count == 0) {
     PW_LOG_INFO("Blinking forever at a %ums interval", interval_ms);
   } else {
-    PW_LOG_INFO(
-        "Blinking %u times at a %ums interval", blink_count, interval_ms);
+    PW_LOG_INFO("Blinking %u times at a %ums interval", blink_count,
+                interval_ms);
   }
 
   pw::chrono::SystemClock::duration interval =
