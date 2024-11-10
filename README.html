@@ -428,6 +428,14 @@ bazel run //tools/buildifier -- &lt;args&gt;
 bazel run -- @pnpm//:pnpm --dir $PWD install --lockfile-only
 </pre></div>
 </div>
+<section id="bazel-options">
+<h4>Bazel Options<a class="headerlink" href="#bazel-options" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Avoid networked backends / remote caches, particularly helpful when home</span>
+<span class="n">network</span> <span class="ow">is</span> <span class="n">slow</span>
+<span class="o">--</span><span class="n">config</span> <span class="n">local</span>
+</pre></div>
+</div>
+</section>
 <section id="get-tsan-to-work-on-ubuntu-24-04">
 <h4>Get tsan to work on Ubuntu 24.04<a class="headerlink" href="#get-tsan-to-work-on-ubuntu-24-04" title="Link to this heading"></a></h4>
 <p><a class="reference external" href="https://stackoverflow.com/a/77856955">https://stackoverflow.com/a/77856955</a></p>
@@ -532,6 +540,7 @@ bazel run -- @pnpm//:pnpm --dir $PWD install --lockfile-only
 </li>
 <li><a class="reference internal" href="#c">C++</a></li>
 <li><a class="reference internal" href="#miscellaneous">Miscellaneous</a><ul>
+<li><a class="reference internal" href="#bazel-options">Bazel Options</a></li>
 <li><a class="reference internal" href="#get-tsan-to-work-on-ubuntu-24-04">Get tsan to work on Ubuntu 24.04</a></li>
 <li><a class="reference internal" href="#inspiration">Inspiration</a></li>
 </ul>
@@ -566,6 +575,6 @@ bazel run -- @pnpm//:pnpm --dir $PWD install --lockfile-only
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
     <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
-    <script defer="defer" src="_static/tippy/README.44fccea1-0432-44e5-9a8f-496ed8dc7ca9.js"></script>
+    <script defer="defer" src="_static/tippy/README.66846d20-2236-4ab5-b2e0-4f682c3db883.js"></script>
     </body>
 </html>
