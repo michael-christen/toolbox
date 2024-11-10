@@ -135,6 +135,14 @@ bazel run //tools/buildifier -- <args>
 bazel run -- @pnpm//:pnpm --dir $PWD install --lockfile-only
 ```
 
+#### Bazel Options
+
+```
+# Avoid networked backends / remote caches, particularly helpful when home
+network is slow
+--config local
+```
+
 #### Get tsan to work on Ubuntu 24.04
 
 https://stackoverflow.com/a/77856955
