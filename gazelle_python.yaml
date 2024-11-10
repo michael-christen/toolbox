@@ -377,6 +377,7 @@ manifest:
     bleach.linkifier: bleach
     bleach.parse_shim: bleach
     bleach.sanitizer: bleach
+    bleach.six_shim: bleach
     blib2to3: black
     blib2to3.pgen2: black
     blib2to3.pgen2.conv: black
@@ -2961,4 +2962,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: 62e605625faab25ed61d84431350ff44120a493274f60520b9d3dd9b50c6bdc5
+integrity: 8634b784b0655a9311851e3d23f82830834af182e1920d024cad0ef87b27384a
