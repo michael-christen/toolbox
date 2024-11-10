@@ -1,3 +1,5 @@
+package(default_visibility = ["//visibility:private"])
+
 cc_library(
     name = "initiator_host",
     srcs = ["initiator_host.cc"],
@@ -8,5 +10,3 @@ cc_library(
         "@pigweed//pw_i2c:initiator",
     ],
 )
-
-package(default_visibility = ["//visibility:private"])
