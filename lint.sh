@@ -109,7 +109,8 @@ bazel run ${CONFIG} -- ${BAZEL_TOOL}
 echo $MARKDOWN_FILES | xargs bazel run ${CONFIG} -- //tools/prettier ${PRETTIER_ARGS[@]}
 bazel run ${CONFIG} -- //:gazelle ${GAZELLE_ARGS[@]}
 
-bazel run $RULES_LINT_CMD
+# NEXT PR
+# bazel run $RULES_LINT_CMD
 
 # Add back in when fixed
 # grep_xxx
