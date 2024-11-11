@@ -109,13 +109,12 @@ bazel run ${CONFIG} -- ${BAZEL_TOOL}
 echo $MARKDOWN_FILES | xargs bazel run ${CONFIG} -- //tools/prettier ${PRETTIER_ARGS[@]}
 bazel run ${CONFIG} -- //:gazelle ${GAZELLE_ARGS[@]}
 
-# NEXT PR
-# bazel run $RULES_LINT_CMD
+bazel run $RULES_LINT_CMD
 
 # Add back in when fixed
 # grep_xxx
 
-# TODO(XXX)
+# TODO(#139)
 # Add this back in (conflicts with emboss at the moment)
 # See https://github.com/aspect-build/rules_lint/blob/main/example/lint.sh
 # --aspects=//tools/lint:linters.bzl%clang_tidy

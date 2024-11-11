@@ -67,11 +67,9 @@ void Start() {
   static std::byte channel_buffer[16384];
   static pw::multibuf::SimpleAllocator multibuf_alloc(channel_buffer,
                                                       pw::System().allocator());
-  static pw::NoDestructor<StreamChannel> channel(multibuf_alloc,
-                                                 pw::system::GetReader(),
-                                                 pw::thread::stl::Options(),
-                                                 pw::system::GetWriter(),
-                                                 pw::thread::stl::Options());
+  static pw::NoDestructor<StreamChannel> channel(
+      multibuf_alloc, pw::system::GetReader(), pw::thread::stl::Options(),
+      pw::system::GetWriter(), pw::thread::stl::Options());
 
   pw::SystemStart(*channel);
   PW_UNREACHABLE;
