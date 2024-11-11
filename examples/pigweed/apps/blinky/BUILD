@@ -1,7 +1,7 @@
 load("@pigweed//targets/host_device_simulator:transition.bzl", "host_device_simulator_binary")
 load("//third_party/pigweed/tools:tools.bzl", "host_console")
 
-package(default_visibility = ["//visibility:private"])
+package(default_visibility = ["//visibility:public"])
 
 cc_binary(
     name = "blinky",
