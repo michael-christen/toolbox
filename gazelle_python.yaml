@@ -1779,6 +1779,7 @@ manifest:
     overrides.signature: overrides
     overrides.typing_utils: overrides
     packaging: packaging
+    packaging.licenses: packaging
     packaging.markers: packaging
     packaging.metadata: packaging
     packaging.requirements: packaging
@@ -2962,4 +2963,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: 8634b784b0655a9311851e3d23f82830834af182e1920d024cad0ef87b27384a
+integrity: 816b9751d74abafe4a18c37778e003a0bd3c35ea8db5ca4a726d9a0791eba2d3
