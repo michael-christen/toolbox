@@ -27,11 +27,9 @@ from pw_system.device_connection import (
 )
 
 from examples.pigweed.modules.blinky import blinky_pb2
-from hw_services.sbr import sbr_pb2
 
 COMPILED_PROTOS = [
     blinky_pb2,
-    sbr_pb2,
 ]
 _LOG = logging.getLogger(__file__)
 
