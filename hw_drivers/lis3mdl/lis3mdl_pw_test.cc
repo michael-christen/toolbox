@@ -15,7 +15,6 @@
 #include "pw_result/result.h"
 #include "pw_unit_test/framework.h"
 
-
 namespace hw_drivers {
 namespace lis3mdl {
 
@@ -39,10 +38,14 @@ TEST(I2CTestSuite, I2CTransactions) {
   constexpr auto kDataReg =
       pw::bytes::Array<static_cast<uint8_t>(RegisterAddress::DATA)>();
   auto expected_transactions = pw::i2c::MakeExpectedTransactionArray({
-      pw::i2c::WriteTransaction(pw::OkStatus(), kAddress, kExpectedWrite, kI2cTimeout),
-      pw::i2c::Transaction(pw::OkStatus(), kAddress, kJustReg, kMockRead, kI2cTimeout),
-      pw::i2c::WriteTransaction(pw::OkStatus(), kAddress, kControlWrite, kI2cTimeout),
-      pw::i2c::Transaction(pw::OkStatus(), kAddress, kDataReg, kDataRead, kI2cTimeout),
+      pw::i2c::WriteTransaction(pw::OkStatus(), kAddress, kExpectedWrite,
+                                kI2cTimeout),
+      pw::i2c::Transaction(pw::OkStatus(), kAddress, kJustReg, kMockRead,
+                           kI2cTimeout),
+      pw::i2c::WriteTransaction(pw::OkStatus(), kAddress, kControlWrite,
+                                kI2cTimeout),
+      pw::i2c::Transaction(pw::OkStatus(), kAddress, kDataReg, kDataRead,
+                           kI2cTimeout),
   });
   pw::i2c::MockInitiator initiator(expected_transactions);
   pw::i2c::RegisterDevice reg_device(initiator, kAddress, cpp20::endian::little,
@@ -53,7 +56,8 @@ TEST(I2CTestSuite, I2CTransactions) {
   auto status = reg_device.WriteRegisters(
       kAddress.GetSevenBit() /*register_address*/, kRegWrite, buf, kI2cTimeout);
   // pw::ConstByteSpan kActualWrite = pw::bytes::Array<1, 2, 3>();
-  // pw::Status status = initiator.WriteFor(kAddress, kActualWrite, kI2cTimeout);
+  // pw::Status status = initiator.WriteFor(kAddress, kActualWrite,
+  // kI2cTimeout);
   EXPECT_EQ(status, pw::OkStatus());
   status = reg_device.ReadRegisters(kAddress.GetSevenBit(), buf, kI2cTimeout);
   EXPECT_EQ(status, pw::OkStatus());

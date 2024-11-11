@@ -67,7 +67,6 @@ TEST_CASE("SolveConfiguration") {
 }
 
 TEST_CASE("Read Data") {
-
   LIS3MDLData d;
   auto view = MakeDataView(d.bytes.data(), std::size(d.bytes));
   static_assert(Data::MaxSizeInBytes() == 9);

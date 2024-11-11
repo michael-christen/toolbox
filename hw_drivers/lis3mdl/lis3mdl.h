@@ -42,7 +42,6 @@ struct LIS3MDLControl {
   std::array<std::byte, Control::MaxSizeInBytes()> bytes{std::byte{0}};
 };
 
-
 // Functions to help handle the .proto and .emb objects as well as how to
 // interact with an actual i2c device.
 
