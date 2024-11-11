@@ -13,19 +13,15 @@
 namespace hw_drivers {
 namespace lis3mdl {
 
-constexpr pw::i2c::Address kHighAddress =
+static constexpr pw::i2c::Address kHighAddress =
     pw::i2c::Address::SevenBit<0b001'1110>();
-constexpr pw::i2c::Address kLowAddress =
+static constexpr pw::i2c::Address kLowAddress =
     pw::i2c::Address::SevenBit<0b001'1100>();
 
-// XXX: static or not?
-constexpr uint32_t kFullScale4LSBPerGauss = 6842;
-constexpr uint32_t kFullScale8LSBPerGauss = 3421;
-constexpr uint32_t kFullScale12LSBPerGauss = 2281;
-constexpr uint32_t kFullScale16LSBPerGauss = 1711;
-// XXX: Better way to define all of these various constants?
-// - this one is a bit annoying that the math doesn't quite work out.
-// - [ ] Test that magnitude remains same when changing full scale.
+static constexpr uint32_t kFullScale4LSBPerGauss = 6842;
+static constexpr uint32_t kFullScale8LSBPerGauss = 3421;
+static constexpr uint32_t kFullScale12LSBPerGauss = 2281;
+static constexpr uint32_t kFullScale16LSBPerGauss = 1711;
 
 enum class ConfigurationError {
   // Config is not valid, eg) missing expected parameters
@@ -34,62 +30,42 @@ enum class ConfigurationError {
   kUnsupportedConfig,
 };
 
+// Thin wrapper around lis3mdl.emb.h Data to own the data
 struct LIS3MDLData {
  public:
-  DataView GetView();
-
   std::array<std::byte, Data::MaxSizeInBytes()> bytes{std::byte{0}};
 };
 
+// Thin wrapper around lis3mdl.emb.h Control to own the data
 struct LIS3MDLControl {
  public:
   std::array<std::byte, Control::MaxSizeInBytes()> bytes{std::byte{0}};
 };
 
-// XXX: Move to util
-// template<size_t N, typename T>
-//
-// constant_integer<N> array_size( const std::array<T, N>& );
+// Functions to help handle the .proto and .emb objects as well as how to
+// interact with an actual i2c device.
 
-// XXX:
-//
-// - function to compute reading based on settings and DataView
-// - maybe start math functions to handle these
-//
-// - [ ] may be try to detect bounding issue if not "locked"
-//   - I no longer know what ^ means
-
-// XXX: Setup error result support ... -> std::expected!
-
-// XXX: This templating is annoying / requiring in .h
-// template <typename OtherStorage>
-// std::expected<LIS3MDLConfiguration, ConfigurationError>
-// SolveConfiguration(const LIS3MDLConfiguration& desired_configuration,
-//     GenericControlView<OtherStorage>* control);
-//  Switched to adding a wrapper class that owns the data to change it :shrug:
-
-// XXX: clang-format plz
-//
-// XXX: Support strict mode where desired must match actual (in a top-level
-// function)
-//
+// Given a desired_configuration, return the configuration available (or the
+// error for why finding a given configuration is not achievable). Also, if
+// successful, modify control to have the correct values that fit that
+// configuration.
 std::expected<::hw_drivers_lis3mdl_LIS3MDLConfiguration, ConfigurationError>
 SolveConfiguration(
     const ::hw_drivers_lis3mdl_LIS3MDLConfiguration& desired_configuration,
     LIS3MDLControl* control);
 
+// Create a LIS3MDLReading based on data from a device as well as an
+// understanding of the scale selected for the device.
 ::hw_drivers_lis3mdl_LIS3MDLReading InterpretReading(uint32_t lsb_per_gauss,
                                                      const LIS3MDLData& data);
 
-// XXX: return status, pass in i2c objects
+// Apply control to an i2c device
 pw::Status ApplyControlToDevice(const LIS3MDLControl& control,
                                 pw::i2c::RegisterDevice* register_device);
+
+// Read data from an i2c device
 pw::Status ReadFromDevice(LIS3MDLData* data,
                           pw::i2c::RegisterDevice* register_device);
-
-class LIS3MDL {
- public:
-};
 
 }  // namespace lis3mdl
 }  // namespace hw_drivers
