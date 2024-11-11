@@ -10,6 +10,8 @@ workspace(name = "mchristen")
 #
 # Alternative to gcc-toolchain: https://github.com/uber/hermetic_cc_toolchain
 
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
+
 # Load the http_archive rule so that we can have bazel download
 # various rulesets and dependencies.
 # The `load` statement imports the symbol for http_archive from the http.bzl
@@ -122,3 +124,12 @@ load("@rules_python_gazelle_plugin//:deps.bzl", _py_gazelle_deps = "gazelle_deps
 # This rule loads and compiles various go dependencies that running gazelle
 # for python requirements.
 _py_gazelle_deps()
+
+# TODO: https://pwbug.dev/354747966 - Update the BCR version of Emboss.
+git_repository(
+    name = "com_google_emboss",
+    # LINT.IfChange(emboss)
+    remote = "https://pigweed.googlesource.com/third_party/github/google/emboss",
+    tag = "v2024.0809.170004",
+    # LINT.ThenChange(/pw_package/py/pw_package/packages/emboss.py:emboss)
+)

@@ -1,0 +1,74 @@
+// Information specific to LIS3MDL Magnetometer
+//
+// WIP - I am scratchpadding here / I'd like to avoid binding too many hardware
+// specifics here. Likely we'll leave most of the specifics in the C++ and
+// expose more of the human-decipherable output at a higher "imu" abstraction.
+//
+// Reference:
+// - https://www.pololu.com/file/0J1089/LIS3MDL.pdf
+// - https://www.pololu.com/file/0J1090/LIS3MDL-AN4602.pdf
+// - //hw_drivers/lis3mdl:README.md
+
+syntax = "proto3";
+
+package hw_drivers.lis3mdl;
+
+// TODO(#145): add nanopb options back
+// import "nanopb.proto";
+
+
+// How do we want to configure this magnetometer.
+// 
+// Possible future changes / adjustments:
+// - We could also use power draw as a factor in selection.
+// - Start-up time also factors in here.
+message LIS3MDLConfiguration {
+
+  // Whether to enable temperature reading
+  // TODO(#148): Maybe just always enable it?
+  optional bool temperature_enabled = 1;
+  
+  // Define allowable_rms_noise in micro-Gauss
+  optional uint32 allowable_rms_noise_ug = 2;
+  
+  // Allowable Output Data Rate (milli-Hz) for the magnetometer, see this table
+  // for a rough set of possibilities.
+  // (625, 1,250, 2,500, 5,000, 10,000, 20,000, 40,000, 80,000)
+  // Really just base 0.625 and a factor of 2 * 
+  // - then we add fast_odr and
+  // - LP: 1,000,000
+  // - MP:   560,000
+  // - HP:   300,000
+  // - UHP:  155,000 become valid
+  // data rate in milli-hertz
+  optional uint32 data_rate_millihz = 3;
+  
+  // Scale and resolution are intrinsically tied
+  // Scales available are 4, 8, 12, 16 gauss range
+  optional uint32 scale_gauss = 4;
+};
+
+
+message LIS3MDLReading {
+  // The magnetic strength in micro-Gauss
+  // TODO(#145): allow nanopb options
+  // repeated sint32 magnetic_strength_ug = 1 [(nanopb).max_count = 3, (nanopb).fixed_count = true];
+  optional sint32 magnetic_strength_x_ug = 5;
+  optional sint32 magnetic_strength_y_ug = 6;
+  optional sint32 magnetic_strength_z_ug = 7;
+
+  // Temperature in tenths of a degree celcius (we get 1/8 C resolution).
+  optional sint32 temperature_dc = 2;
+
+  // Whether the data we're reading has been updated since our last reading
+  optional bool data_fresh = 3;
+
+  // Whether any data was overwritten since our last read
+  optional bool data_overrun = 4;
+};
+
+// For testing we may want to get a lot of readings
+// We could do a repeated LIS3MDLReading or a more efficient structure,
+// determine based on total number of reads ...
+//
+// [ ] Write tooling to describe how this thing'll work
