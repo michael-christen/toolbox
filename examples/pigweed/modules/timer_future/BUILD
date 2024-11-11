@@ -18,6 +18,7 @@ cc_library(
     name = "timer_future",
     srcs = ["timer_future.cc"],
     hdrs = ["timer_future.h"],
+    visibility = ["//visibility:public"],
     deps = [
         "@pigweed//pw_async2:dispatcher",
         "@pigweed//pw_chrono:system_clock",

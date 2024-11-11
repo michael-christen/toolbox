@@ -1,5 +1,5 @@
 load("@pigweed//targets/host_device_simulator:transition.bzl", "host_device_simulator_binary")
-load("//examples/pigweed/tools:tools.bzl", "host_console")
+load("//third_party/pigweed/tools:tools.bzl", "host_console")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -8,7 +8,7 @@ cc_binary(
     srcs = ["main.cc"],
     deps = [
         "//examples/pigweed/modules/blinky:service",
-        "//examples/pigweed/system",
+        "//examples/pigweed/apps/blinky/system",
         "@pigweed//pw_log",
         "@pigweed//pw_system:async",
 
