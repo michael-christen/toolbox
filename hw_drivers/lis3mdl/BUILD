@@ -16,7 +16,7 @@ package(default_visibility = ["//visibility:private"])
 emboss_cc_library(
     name = "lis3mdl_emb",
     srcs = ["lis3mdl.emb"],
-    # XXX: Required for cross-compilation, investigate more
+    # TODO(#144): Required for cross-compilation, investigate more
     enable_enum_traits = False,
     visibility = [
         "//hw_services/sbr:__subpackages__",
@@ -75,9 +75,8 @@ proto_library(
     visibility = ["//visibility:public"],
 )
 
-# XXX: Unclear how to use these vs. the C++ generated code?
 nanopb_proto_library(
-    # XXX: Should change to use different suffixes
+    # TODO(#145): Should change to use different suffixes
     name = "lis3mdl_nanopb",
     deps = [":lis3mdl_proto"],
 )
