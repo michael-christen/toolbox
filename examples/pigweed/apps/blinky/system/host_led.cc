@@ -11,24 +11,16 @@
 // WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 // License for the specific language governing permissions and limitations under
 // the License.
-#define PW_LOG_MODULE_NAME "MAIN"
 
 #include "examples/pigweed/apps/blinky/system/system.h"
-#include "examples/pigweed/modules/blinky/service.h"
-#include "pw_log/log.h"
-#include "pw_system/system.h"
+#include "pw_digital_io/digital_io_mock.h"
 
-int main() {
-  demo::system::Init();
-  auto& rpc_server = pw::System().rpc_server();
-  auto& monochrome_led = demo::system::MonochromeLed();
+namespace demo::system {
 
-  static demo::BlinkyService blinky_service;
-  blinky_service.Init(pw::System().dispatcher(), pw::System().allocator(),
-                      monochrome_led);
-  rpc_server.RegisterService(blinky_service);
-
-  PW_LOG_INFO("Started blinky app; waiting for RPCs...");
-  demo::system::Start();
-  PW_UNREACHABLE;
+pw::digital_io::DigitalInOut& MonochromeLed() {
+  static constexpr size_t kCapacity = 256;
+  static pw::digital_io::DigitalInOutMock<kCapacity> digital_io_mock;
+  return digital_io_mock;
 }
+
+}  // namespace demo::system
