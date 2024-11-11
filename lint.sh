@@ -83,13 +83,13 @@ elif [ "$mode" = "check" ]; then
   PRETTIER_ARGS=("--check" "--config ${REPO_ROOT}/.prettierrc")
   BAZEL_TOOL="//tools:check"
   GAZELLE_ARGS=("-mode" "diff")
-  RULES_LINT_CMD="//tools/format:format"
+  RULES_LINT_CMD="//tools/format:format.check"
 elif [ "$mode" = "format" ]; then
   BUILDIFIER_ARGS=("-lint=fix" "-mode=fix" "-v=false")
   PRETTIER_ARGS=("--write" "--config ${REPO_ROOT}/.prettierrc")
   BAZEL_TOOL="//tools:format"
   GAZELLE_ARGS=("-mode" "fix")
-  RULES_LINT_CMD="//tools/format:format.check"
+  RULES_LINT_CMD="//tools/format:format"
 fi
 PRETTIER_INVOCATION=""
 
@@ -114,7 +114,7 @@ bazel run $RULES_LINT_CMD
 # Add back in when fixed
 # grep_xxx
 
-# TODO(XXX)
+# TODO(#139)
 # Add this back in (conflicts with emboss at the moment)
 # See https://github.com/aspect-build/rules_lint/blob/main/example/lint.sh
 # --aspects=//tools/lint:linters.bzl%clang_tidy

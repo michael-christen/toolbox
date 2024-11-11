@@ -15,6 +15,7 @@
 
 #include "examples/pigweed/apps/blinky/system/system.h"
 #include "examples/pigweed/modules/blinky/service.h"
+#include "examples/pigweed/system/system.h"
 #include "pw_log/log.h"
 #include "pw_system/system.h"
 
