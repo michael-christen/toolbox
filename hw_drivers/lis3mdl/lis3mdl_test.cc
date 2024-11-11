@@ -33,11 +33,8 @@ TEST_CASE("emboss and calculations are correct") {
   CHECK(buf[0] & 0x80);
 }
 
-// XXX: probably have to use nanopb syntax?
 TEST_CASE("SolveConfiguration") {
   ::hw_drivers_lis3mdl_LIS3MDLConfiguration configuration;
-  // XXX: Better naming schema to denote differences
-  // XXX: Analysis on size and run-time cost
   LIS3MDLControl control;
   auto control_view =
       MakeControlView(control.bytes.data(), std::size(control.bytes));
@@ -60,7 +57,6 @@ TEST_CASE("SolveConfiguration") {
   result = SolveConfiguration(configuration, &control);
   REQUIRE(result.has_value());
   auto actual_config = result.value();
-  // XXX: Better protobuf comparison
   REQUIRE(actual_config.has_temperature_enabled);
   CHECK(!actual_config.temperature_enabled);
   CHECK(!control_view.temperature_enable().Read());
@@ -71,17 +67,16 @@ TEST_CASE("SolveConfiguration") {
 }
 
 TEST_CASE("Read Data") {
-  // XXX: Max or Intrinsic?
-  static_assert(Data::MaxSizeInBytes() == 9);
-  static_assert(Data::IntrinsicSizeInBytes() == 9);
 
   LIS3MDLData d;
   auto view = MakeDataView(d.bytes.data(), std::size(d.bytes));
-  // XXX: Why aren't these equal / why is sizeof d.bytes.data() 8?
+  static_assert(Data::MaxSizeInBytes() == 9);
+  static_assert(Data::IntrinsicSizeInBytes() == 9);
   CHECK(d.bytes.size() == 9);
   CHECK(std::size(d.bytes) == 9);
-  // CHECK(sizeof(d.bytes.data()) == d.bytes.size());
+  // TODO(#144): Why aren't these equal / why is sizeof d.bytes.data() 8?
   // CHECK(sizeof(d.bytes.data()) == 9);
+  // CHECK(sizeof(d.bytes.data()) == d.bytes.size());
 
   // Check that reading uninitialized doesn't crash
   auto reading = InterpretReading(kFullScale4LSBPerGauss, d);
@@ -107,7 +102,6 @@ TEST_CASE("Read Data") {
   view.temperature_out().Write(0);
   reading = InterpretReading(kFullScale4LSBPerGauss, d);
   CHECK(reading.temperature_dc == 250);
-  // XXX: Check more
 
   view.out_x().Write(-100);
   view.out_y().Write(0);

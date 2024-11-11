@@ -52,7 +52,7 @@ struct Control:
   -- Control
 
   0 [+1] bits:
-    # XXX: This can't be doc?
+    # TODO(#144): This can't be doc?
     # CTRL_REG1
 
     7 [+1] Flag temperature_enable
@@ -125,7 +125,7 @@ struct Control:
 
 
 struct Data:
-  # XXX: Is there a way to name these bits / the docs aren' too helpful?
+  # TODO(#144): Is there a way to name these bits / the docs aren' too helpful?
   0 [+1] bits:
     7 [+1] Flag zyx_overrun
       --  X-, Y- and Z-axis data overrun. Default value: 0

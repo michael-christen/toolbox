@@ -24,7 +24,7 @@ using namespace std::chrono_literals;
 
 constexpr auto kI2cTimeout = 100ms;
 
-// XXX: How to prevent bifurcation of pw_cc_test and cc_test?
+// TODO(#147): How to prevent bifurcation of pw_cc_test and cc_test?
 TEST(I2CTestSuite, I2CTransactions) {
   constexpr pw::i2c::Address kAddress = pw::i2c::Address::SevenBit<0x01>();
   constexpr auto kExpectedWrite = pw::bytes::Array<1, 2, 3, 4, 5, 6>();
@@ -34,7 +34,7 @@ TEST(I2CTestSuite, I2CTransactions) {
   constexpr auto kControlWrite =
       pw::bytes::Array<static_cast<uint8_t>(RegisterAddress::CONTROL),  // 0x20
                        0xFC,  // 0b1111'1100,
-                       0x00, 0x00, 0x0C, 0x00>();
+                       0x00, 0x00, 0x0C, 0x40>();
   constexpr auto kDataRead = pw::bytes::Array<0, 0, 0, 0, 0, 0, 0, 0, 0>();
   constexpr auto kDataReg =
       pw::bytes::Array<static_cast<uint8_t>(RegisterAddress::DATA)>();
@@ -59,9 +59,8 @@ TEST(I2CTestSuite, I2CTransactions) {
   EXPECT_EQ(status, pw::OkStatus());
   EXPECT_EQ(raw_buf, kMockRead);
 
-  // XXX: new section?
   LIS3MDLControl control;
-  ::hw_drivers_lis3mdl_LIS3MDLConfiguration configuration{
+  const ::hw_drivers_lis3mdl_LIS3MDLConfiguration configuration{
       .has_temperature_enabled = true,
       // Temperature
       .temperature_enabled = true,
@@ -72,22 +71,18 @@ TEST(I2CTestSuite, I2CTransactions) {
       .has_scale_gauss = true,
       .scale_gauss = 4,
   };
-  // XXX: Make Constant
 
   auto result = SolveConfiguration(configuration, &control);
   EXPECT_TRUE(result.has_value());
-  // Ensuring we are configuring exactly as desired
-  // auto actual_config = result.value();
-  // XXX: EXPECT_EQ(actual_config, configuration);
-  // XXX: Do I need + 1?
-  pw::StringBuffer<sizeof(control.bytes.data()) * 2 + 2> sb;
-  sb << "0x";
-  // XXX: Maybe should show as opposite?
+
+  // COULD: Make this a utility?
+  pw::StringBuffer<sizeof(control.bytes.data()) * 3 + 3> sb;
+  sb << "0x ";
   for (const auto c : control.bytes) {
-    sb << std::format("{:#x}", static_cast<uint8_t>(c));
+    sb << std::format("{:02X} ", static_cast<uint8_t>(c));
   }
   std::cout << "Control Bytes: " << sb.c_str() << std::endl;
-  // XXX: How to show LOG in test?
+  // TODO(#147): How to show LOG in test?
   PW_LOG_INFO("Control bytes: %s", sb.c_str());
 
   status = ApplyControlToDevice(control, &reg_device);
@@ -97,7 +92,7 @@ TEST(I2CTestSuite, I2CTransactions) {
   status = ReadFromDevice(&data, &reg_device);
   EXPECT_EQ(status, pw::OkStatus());
 
-  // XXX: This is a fairly annoying check, it doesn't say what's wrong
+  // NOTE: This is a fairly annoying check, it doesn't say what's wrong
   EXPECT_EQ(initiator.Finalize(), pw::OkStatus());
 }
 

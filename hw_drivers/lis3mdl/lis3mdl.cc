@@ -9,10 +9,6 @@ namespace {
 constexpr std::chrono::milliseconds kI2cTimeout{100};
 }
 
-DataView LIS3MDLData::GetView() {
-  return MakeDataView(bytes.data(), std::size(bytes));
-}
-
 std::expected<::hw_drivers_lis3mdl_LIS3MDLConfiguration, ConfigurationError>
 SolveConfiguration(
     const ::hw_drivers_lis3mdl_LIS3MDLConfiguration& desired_configuration,
@@ -114,9 +110,6 @@ SolveConfiguration(
       .scale_gauss = actual_scale_gauss,
   };
 
-  // XXX: I could just do this elsewhere and send the information to write the
-  // output separately?
-  //
   // Ensure full result before applying to control
   view.temperature_enable().Write(result_configuration.temperature_enabled);
   view.full_scale().Write(full_scale_choice);
@@ -124,13 +117,11 @@ SolveConfiguration(
   view.z_axis_operating_mode().Write(operating_mode);
   view.output_data_rate().Write(exponent);
   view.fast_output_data_rate().Write(fast_output_data_rate);
-  // XXX: Set block update
+  view.block_data_update().Write(true);
 
   return result_configuration;
 }
 
-// XXX: using lsb_per_gauss, since the scale isn't quite working out how I'd
-// expect / the LSBs are not mathing properly
 ::hw_drivers_lis3mdl_LIS3MDLReading InterpretReading(uint32_t lsb_per_gauss,
                                                      const LIS3MDLData& data) {
   ::hw_drivers_lis3mdl_LIS3MDLReading reading;
@@ -153,7 +144,6 @@ SolveConfiguration(
         kOffsetTemperatureMC) /
        kMilliPerDeci);
 
-  (void)lsb_per_gauss;
   reading.has_magnetic_strength_x_ug = true;
   reading.has_magnetic_strength_y_ug = true;
   reading.has_magnetic_strength_z_ug = true;
@@ -168,11 +158,10 @@ SolveConfiguration(
 
 pw::Status ApplyControlToDevice(const LIS3MDLControl& control,
                                 pw::i2c::RegisterDevice* register_device) {
-  // XXX: Why won't std::size work?
-  std::array<std::byte, Control::MaxSizeInBytes() + 1> raw_buf = {std::byte{0}};
-  // XXX: Could I do something differently and avoid the extra buffer?
+  // TODO(#144): Could I do something differently and avoid the extra buffer?
   // - I could make a LIS3MDLControl that is "wrong" and the first value is the
   // address?
+  std::array<std::byte, Control::MaxSizeInBytes() + 1> raw_buf = {std::byte{0}};
   auto buf = pw::as_writable_bytes(pw::span(raw_buf));
   return register_device->WriteRegisters(
       static_cast<uint8_t>(RegisterAddress::CONTROL), pw::span(control.bytes),
