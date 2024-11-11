@@ -2,14 +2,11 @@
 
 #include <expected>
 
-// XXX: Do I need these in my namespaces?
-using namespace std::chrono_literals;
-
 namespace hw_drivers {
 namespace lis3mdl {
 
 namespace {
-constexpr auto kI2cTimeout = 100ms;
+constexpr std::chrono::milliseconds kI2cTimeout{100};
 }
 
 DataView LIS3MDLData::GetView() {
@@ -70,7 +67,6 @@ SolveConfiguration(
     fast_output_data_rate = false;
   } else {
     fast_output_data_rate = true;
-    // XXX: What happens if we set exponent > 7 to our bitfield?
     exponent = 7;
     switch (operating_mode) {
       case OperatingMode::OPERATING_MODE_LOW_POWER:
@@ -89,7 +85,7 @@ SolveConfiguration(
   }
 
   // Scale Gauss
-  // XXX: Note that this selection is kinda the opposite of the rms noise
+  // Note that this selection is kinda the opposite of the rms noise
   auto desired_scale_gauss = desired_configuration.scale_gauss;
   uint32_t actual_scale_gauss;
   FullScaleSelection full_scale_choice;
@@ -167,22 +163,6 @@ SolveConfiguration(
       ((static_cast<int64_t>(view.out_y().Read()) * 1'000'000) / lsb_per_gauss);
   reading.magnetic_strength_z_ug =
       ((static_cast<int64_t>(view.out_z().Read()) * 1'000'000) / lsb_per_gauss);
-  // constexpr size_t kNumAxes = 3;
-  // XXX: Check fixed_size of array
-  // static_assert(kNumAxes == );
-  // int32_t magnetometer_readings[kNumAxes] = {
-  //   view.out_x().Read(),
-  //   view.out_y().Read(),
-  //   view.out_z().Read(),
-  // };
-  // XXX: Any fun new C++ iterable behavior?
-  // XXX need to get nanopb setup
-  // for (size_t i = 0; i < kNumAxes; ++i) {
-  //   reading.magnetic_strength_ug[i] = (
-  //       (static_cast<int64_t>(magnetometer_readings[i]) * 1'000'000)
-  //       / lsb_per_gauss);
-  // }
-  // reading.magnetic_strength_ug_count = kNumAxes;
   return reading;
 }
 

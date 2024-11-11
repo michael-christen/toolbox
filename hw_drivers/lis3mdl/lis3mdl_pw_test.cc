@@ -15,12 +15,14 @@
 #include "pw_result/result.h"
 #include "pw_unit_test/framework.h"
 
-using namespace std::chrono_literals;
 
 namespace hw_drivers {
 namespace lis3mdl {
 
 namespace {
+using namespace std::chrono_literals;
+
+constexpr auto kI2cTimeout = 100ms;
 
 // XXX: How to prevent bifurcation of pw_cc_test and cc_test?
 TEST(I2CTestSuite, I2CTransactions) {
@@ -37,10 +39,10 @@ TEST(I2CTestSuite, I2CTransactions) {
   constexpr auto kDataReg =
       pw::bytes::Array<static_cast<uint8_t>(RegisterAddress::DATA)>();
   auto expected_transactions = pw::i2c::MakeExpectedTransactionArray({
-      pw::i2c::WriteTransaction(pw::OkStatus(), kAddress, kExpectedWrite, 1ms),
-      pw::i2c::Transaction(pw::OkStatus(), kAddress, kJustReg, kMockRead, 1ms),
-      pw::i2c::WriteTransaction(pw::OkStatus(), kAddress, kControlWrite, 1ms),
-      pw::i2c::Transaction(pw::OkStatus(), kAddress, kDataReg, kDataRead, 1ms),
+      pw::i2c::WriteTransaction(pw::OkStatus(), kAddress, kExpectedWrite, kI2cTimeout),
+      pw::i2c::Transaction(pw::OkStatus(), kAddress, kJustReg, kMockRead, kI2cTimeout),
+      pw::i2c::WriteTransaction(pw::OkStatus(), kAddress, kControlWrite, kI2cTimeout),
+      pw::i2c::Transaction(pw::OkStatus(), kAddress, kDataReg, kDataRead, kI2cTimeout),
   });
   pw::i2c::MockInitiator initiator(expected_transactions);
   pw::i2c::RegisterDevice reg_device(initiator, kAddress, cpp20::endian::little,
@@ -49,11 +51,11 @@ TEST(I2CTestSuite, I2CTransactions) {
   std::array<std::byte, 12> raw_buf = {std::byte{0}};
   auto buf = pw::as_writable_bytes(pw::span(raw_buf));
   auto status = reg_device.WriteRegisters(
-      kAddress.GetSevenBit() /*register_address*/, kRegWrite, buf, 1ms);
+      kAddress.GetSevenBit() /*register_address*/, kRegWrite, buf, kI2cTimeout);
   // pw::ConstByteSpan kActualWrite = pw::bytes::Array<1, 2, 3>();
-  // pw::Status status = initiator.WriteFor(kAddress, kActualWrite, 1ms);
+  // pw::Status status = initiator.WriteFor(kAddress, kActualWrite, kI2cTimeout);
   EXPECT_EQ(status, pw::OkStatus());
-  status = reg_device.ReadRegisters(kAddress.GetSevenBit(), buf, 1ms);
+  status = reg_device.ReadRegisters(kAddress.GetSevenBit(), buf, kI2cTimeout);
   EXPECT_EQ(status, pw::OkStatus());
   EXPECT_EQ(raw_buf, kMockRead);
 

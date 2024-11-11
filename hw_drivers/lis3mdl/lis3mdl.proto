@@ -68,7 +68,6 @@ message LIS3MDLConfiguration {
   
   // Scale and resolution are intrinsically tied
   // Scales available are 4, 8, 12, 16 gauss range
-  // XXX: enum or not?
   optional uint32 scale_gauss = 4;
   
   // We could configure big/little endian, but we will allow the firmware to
