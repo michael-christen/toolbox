@@ -1,5 +1,7 @@
 load("@pigweed//pw_build:compatibility.bzl", "incompatible_with_mcu")
 
+package(default_visibility = ["//visibility:public"])
+
 cc_library(
     name = "common_host_system",
     srcs = [
@@ -49,5 +51,3 @@ cc_library(
         "@pigweed//pw_system:io",
     ],
 )
-
-package(default_visibility = ["//visibility:public"])
