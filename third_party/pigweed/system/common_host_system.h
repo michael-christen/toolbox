@@ -8,9 +8,6 @@
 #include "pw_system/system.h"
 #include "pw_thread_stl/options.h"
 
-// The functions in this file return specific implementations of singleton types
-// provided by the system.
-
 namespace third_party {
 namespace pigweed {
 namespace system {
