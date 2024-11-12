@@ -30,10 +30,10 @@ cc_library(
         "host_system.cc",
     ],
     implementation_deps = [
-        "@pigweed//pw_i2c:address",
-        "@pigweed//pw_i2c:register_device",
         "//platforms/host:initiator_host",
         "//third_party/pigweed/system:common_host_system",
+        "@pigweed//pw_i2c:address",
+        "@pigweed//pw_i2c:register_device",
         "@pigweed//pw_system:async",
     ],
     target_compatible_with = incompatible_with_mcu(),

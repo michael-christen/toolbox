@@ -1,5 +1,4 @@
 #include "apps/sbr/system/system.h"
-
 #include "pw_i2c_rp2040/initiator.h"
 
 namespace {
@@ -25,7 +24,6 @@ pw::i2c::Initiator& I2cInitiator() {
 
 }  // namespace
 
-
 #include "third_party/pigweed/system/common_rp2_system.h"
 
 namespace apps {
@@ -34,7 +32,7 @@ namespace system {
 
 void Init() { third_party::pigweed::system::CommonRp2Init(); }
 
-void Start() { PW_RP2_SYSTEM_START(2048) }
+void Start(){PW_RP2_SYSTEM_START(2048)}
 
 pw::i2c::RegisterDevice& LIS3MDLRegisterDevice() {
   static pw::i2c::RegisterDevice reg_device(
