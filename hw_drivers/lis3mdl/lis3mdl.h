@@ -67,5 +67,8 @@ pw::Status ApplyControlToDevice(const LIS3MDLControl& control,
 pw::Status ReadFromDevice(LIS3MDLData* data,
                           pw::i2c::RegisterDevice* register_device);
 
+std::expected<uint32_t, ConfigurationError> GetLsbPerGauss(
+    uint32_t scale_gauss);
+
 }  // namespace lis3mdl
 }  // namespace hw_drivers

@@ -175,5 +175,21 @@ pw::Status ReadFromDevice(LIS3MDLData* data,
       kI2cTimeout);
 }
 
+std::expected<uint32_t, ConfigurationError> GetLsbPerGauss(
+    uint32_t scale_gauss) {
+  switch (scale_gauss) {
+    case 4:
+      return kFullScale4LSBPerGauss;
+    case 8:
+      return kFullScale8LSBPerGauss;
+    case 12:
+      return kFullScale12LSBPerGauss;
+    case 16:
+      return kFullScale16LSBPerGauss;
+    default:
+      return std::unexpected(ConfigurationError::kInvalidConfig);
+  }
+}
+
 }  // namespace lis3mdl
 }  // namespace hw_drivers
