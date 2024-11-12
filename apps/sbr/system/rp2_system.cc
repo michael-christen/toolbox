@@ -36,14 +36,9 @@ void Init() { third_party::pigweed::system::CommonRp2Init(); }
 
 void Start() { PW_RP2_SYSTEM_START(2048) }
 
-// XXX: Better
 pw::i2c::RegisterDevice& LIS3MDLRegisterDevice() {
-  // XXX: Share with lis3mdl
-  constexpr pw::i2c::Address kAddress =
-      pw::i2c::Address::SevenBit<0b001'1110>();
-
   static pw::i2c::RegisterDevice reg_device(
-      I2cInitiator(), kAddress, cpp20::endian::little,
+      I2cInitiator(), hw_drivers::lis3mdl::kHighAddress, cpp20::endian::little,
       pw::i2c::RegisterAddressSize::k1Byte);
   return reg_device;
 }

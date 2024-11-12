@@ -32,7 +32,6 @@ cc_library(
     implementation_deps = [
         "@pigweed//pw_i2c:address",
         "@pigweed//pw_i2c:register_device",
-        # XXX: Build out different kinds of fakes
         "//platforms/host:initiator_host",
         "//third_party/pigweed/system:common_host_system",
         "@pigweed//pw_system:async",
