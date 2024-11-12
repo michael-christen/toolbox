@@ -20,7 +20,8 @@ void Init() {}
 
 void Start() {
   // third_party::pigweed::system::
-  PW_HOST_SYSTEM_START(16384, "//examples/pigweed/apps/blinky:simulator_console")
+  PW_HOST_SYSTEM_START(16384,
+                       "//examples/pigweed/apps/blinky:simulator_console")
 }
 
 }  // namespace demo::system

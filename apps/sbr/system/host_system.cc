@@ -1,5 +1,4 @@
 #include "apps/sbr/system/system.h"
-
 #include "third_party/pigweed/system/common_host_system.h"
 
 namespace apps {

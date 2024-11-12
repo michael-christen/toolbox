@@ -4,9 +4,9 @@ Contain code to manage a self-balancing robot.
 
 ## Layout
 
-This directory contains the main application (main.cc).
-It can instantiate `/hw_services/` and defines the `system/` that is utilized
-when constructing the application.
+This directory contains the main application (main.cc). It can instantiate
+`/hw_services/` and defines the `system/` that is utilized when constructing the
+application.
 
 ## Usage
 

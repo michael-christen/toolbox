@@ -8,17 +8,17 @@ cc_library(
     hdrs = [
         "common_host_system.h",
     ],
+    target_compatible_with = incompatible_with_mcu(),
+    visibility = ["//visibility:public"],
     deps = [
-        "@pigweed//pw_channel:stream_channel",
         "@pigweed//pw_channel",
+        "@pigweed//pw_channel:stream_channel",
         "@pigweed//pw_digital_io",
         "@pigweed//pw_digital_io:digital_io_mock",
         "@pigweed//pw_multibuf:simple_allocator",
         "@pigweed//pw_system:async",
         "@pigweed//pw_system:io",
     ],
-    target_compatible_with = incompatible_with_mcu(),
-    visibility = ["//visibility:public"],
 )
 
 cc_library(
@@ -41,11 +41,13 @@ cc_library(
         "@pigweed//pw_digital_io_rp2040",
         "@pigweed//third_party/freertos:support",
     ],
+    visibility = ["//visibility:public"],
     deps = [
         "@pigweed//pw_channel:rp2_stdio_channel",
         "@pigweed//pw_multibuf:simple_allocator",
         "@pigweed//pw_system:async",
         "@pigweed//pw_system:io",
     ],
-    visibility = ["//visibility:public"],
 )
+
+package(default_visibility = ["//visibility:public"])

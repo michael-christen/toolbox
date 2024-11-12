@@ -40,8 +40,8 @@ void CommonHostStartSetup(const char* bazel_console_path) {
   printf("Press Ctrl-C to exit\n");
 }
 
-}
+}  // namespace internal
 
 }  // namespace system
-}  // namespace sbr
-}  // namespace apps
+}  // namespace pigweed
+}  // namespace third_party

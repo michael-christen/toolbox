@@ -27,6 +27,6 @@ void CommonRp2Init() {
   exception_set_exclusive_handler(HARDFAULT_EXCEPTION, pw_cpu_exception_Entry);
 }
 
-}
-}
-}
+}  // namespace system
+}  // namespace pigweed
+}  // namespace third_party
