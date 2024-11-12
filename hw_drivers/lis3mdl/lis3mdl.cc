@@ -175,8 +175,9 @@ pw::Status ReadFromDevice(LIS3MDLData* data,
       kI2cTimeout);
 }
 
-std::expected<uint32_t, ConfigurationError> GetLsbPerGauss(uint32_t scale_gauss) {
-  switch(scale_gauss) {
+std::expected<uint32_t, ConfigurationError> GetLsbPerGauss(
+    uint32_t scale_gauss) {
+  switch (scale_gauss) {
     case 4:
       return kFullScale4LSBPerGauss;
     case 8:

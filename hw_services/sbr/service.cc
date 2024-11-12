@@ -28,8 +28,8 @@ pw::Status SbrService::ConfigureMagnetometer(
   auto result = hw_drivers::lis3mdl::SolveConfiguration(config, &control);
   if (result.has_value()) {
     actual_config = result.value();
-    auto application_result = hw_drivers::lis3mdl::ApplyControlToDevice(control,
-                                                     register_device_.value());
+    auto application_result = hw_drivers::lis3mdl::ApplyControlToDevice(
+        control, register_device_.value());
     if (application_result.ok()) {
       cached_config_ = config;
     }
@@ -50,7 +50,8 @@ pw::Status SbrService::ReadMagnetometer(
   if (!cached_config_.has_scale_gauss) {
     return pw::Status::FailedPrecondition();
   }
-  auto lsb_per_gauss = hw_drivers::lis3mdl::GetLsbPerGauss(cached_config_.scale_gauss);
+  auto lsb_per_gauss =
+      hw_drivers::lis3mdl::GetLsbPerGauss(cached_config_.scale_gauss);
   if (!lsb_per_gauss.has_value()) {
     return pw::Status::FailedPrecondition();
   }
@@ -61,8 +62,7 @@ pw::Status SbrService::ReadMagnetometer(
   if (!status.ok()) {
     return status;
   }
-  reading = hw_drivers::lis3mdl::InterpretReading(
-      lsb_per_gauss.value(), data);
+  reading = hw_drivers::lis3mdl::InterpretReading(lsb_per_gauss.value(), data);
   return pw::OkStatus();
 }
 
