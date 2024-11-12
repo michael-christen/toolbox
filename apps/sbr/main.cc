@@ -7,6 +7,7 @@
 
 int main() {
   apps::sbr::system::Init();
+
   auto& rpc_server = pw::System().rpc_server();
 
   static hw_services::sbr::SbrService sbr_service;
