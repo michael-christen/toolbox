@@ -2,7 +2,6 @@
 #include <stdio.h>
 
 #include "apps/sbr/system/system.h"
-#include "platforms/host/initiator_host.h"
 #include "pw_assert/check.h"
 #include "pw_channel/stream_channel.h"
 #include "pw_digital_io/digital_io.h"

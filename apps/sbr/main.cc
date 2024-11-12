@@ -6,7 +6,6 @@
 
 int main() {
   apps::sbr::system::Init();
-  auto& rpc_server = pw::System().rpc_server();
 
   PW_LOG_INFO("Started SBR app; waiting for RPCs...");
   apps::sbr::system::Start();
