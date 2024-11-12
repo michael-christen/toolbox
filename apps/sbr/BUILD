@@ -10,6 +10,7 @@ cc_binary(
     srcs = ["main.cc"],
     deps = [
         "//apps/sbr/system",
+        "//hw_services/sbr:service",
         "@pigweed//pw_log",
         "@pigweed//pw_system:async",
 

@@ -28,6 +28,7 @@ cc_library(
     srcs = ["lis3mdl.cc"],
     hdrs = ["lis3mdl.h"],
     visibility = [
+        "//apps/sbr:__subpackages__",
         "//hw_services/sbr:__subpackages__",
     ],
     deps = [

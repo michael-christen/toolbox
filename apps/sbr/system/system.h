@@ -1,5 +1,6 @@
 #pragma once
 
+#include "pw_i2c/register_device.h"
 // The functions in this file return specific implementations of singleton types
 // provided by the system.
 
@@ -12,6 +13,8 @@ void Init();
 
 /// Starts the main system scheduler. This function never returns.
 [[noreturn]] void Start();
+
+pw::i2c::RegisterDevice& LIS3MDLRegisterDevice();
 
 }  // namespace system
 }  // namespace sbr
