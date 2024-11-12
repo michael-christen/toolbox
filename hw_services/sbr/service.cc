@@ -24,7 +24,6 @@ pw::Status SbrService::ConfigureMagnetometer(
     hw_drivers_lis3mdl_LIS3MDLConfiguration& actual_config) {
   PW_CHECK(register_device_.has_value());
 
-  PW_LOG_INFO("CONFIGURE MAGNETOMETER");
   hw_drivers::lis3mdl::LIS3MDLControl control;
   auto result = hw_drivers::lis3mdl::SolveConfiguration(config, &control);
   if (result.has_value()) {
@@ -56,7 +55,6 @@ pw::Status SbrService::ReadMagnetometer(
     return pw::Status::FailedPrecondition();
   }
 
-  PW_LOG_INFO("READ MAGNETOMETER");
   hw_drivers::lis3mdl::LIS3MDLData data;
   auto status =
       hw_drivers::lis3mdl::ReadFromDevice(&data, register_device_.value());
