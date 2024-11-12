@@ -53,5 +53,6 @@ cc_library(
     deps = [
         "//apps/sbr/system:headers",
         "//third_party/pigweed/system:common_rp2_system",
+        "//hw_drivers/lis3mdl",
     ],
 )

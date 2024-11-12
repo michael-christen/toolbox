@@ -1,6 +1,8 @@
 #include "apps/sbr/system/system.h"
 #include "pw_i2c_rp2040/initiator.h"
 
+#include "hw_drivers/lis3mdl/lis3mdl.h"
+
 namespace {
 
 pw::i2c::Initiator& I2cInitiator() {
