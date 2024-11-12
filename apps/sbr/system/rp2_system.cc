@@ -1,40 +1,16 @@
 #include "apps/sbr/system/system.h"
-#include "hardware/adc.h"
-#include "hardware/exception.h"
-#include "pico/stdlib.h"
-#include "pw_channel/rp2_stdio_channel.h"
-#include "pw_cpu_exception/entry.h"
-#include "pw_multibuf/simple_allocator.h"
-#include "pw_system/system.h"
 
-#if defined(PICO_RP2040) && PICO_RP2040
-#include "system_RP2040.h"
-#endif  // defined(PICO_RP2040) && PICO_RP2040
-#if defined(PICO_RP2350) && PICO_RP2350
-#include "system_RP2350.h"
-#endif  // defined(PICO_RP2350) && PICO_RP2350
+#include "third_party/pigweed/system/common_rp2_system.h"
 
 // XXX: Decide on namespace style
 namespace apps::sbr::system {
 
 void Init() {
-  // PICO_SDK inits.
-  SystemInit();
-  stdio_init_all();
-  setup_default_uart();
-  stdio_usb_init();
-  adc_init();
-
-  // Install the CPU exception handler.
-  exception_set_exclusive_handler(HARDFAULT_EXCEPTION, pw_cpu_exception_Entry);
+  third_party::pigweed::system::CommonRp2Init();
 }
 
 void Start() {
-  static std::byte channel_buffer[2048];
-  static pw::multibuf::SimpleAllocator multibuf_alloc(channel_buffer,
-                                                      pw::System().allocator());
-  pw::SystemStart(pw::channel::Rp2StdioChannelInit(multibuf_alloc));
-  PW_UNREACHABLE;
+  PW_RP2_SYSTEM_START(2048)
 }
 
 }  // namespace apps::sbr::system
