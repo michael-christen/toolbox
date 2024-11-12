@@ -1,0 +1,26 @@
+// Information specific to lsm6dso
+//
+// WIP - I am scratchpadding here / I'd like to avoid binding too many hardware
+// specifics here. Likely we'll leave most of the specifics in the C++ and
+// expose more of the human-decipherable output at a higher "imu" abstraction.
+
+syntax = "proto3";
+
+// XXX: Do a quick example of differences between proto3/proto2 use of
+// optionals.
+
+package hw_drivers.lsm6dso;
+
+
+message LSM6DSOConfiguration {
+};
+
+message LSM6DSOTelemetry {
+
+  // XXX: fixed repeated or individual fields?
+  // XXX: re-evaluate unit
+  // - experiment with unit libraries
+  repeated sint32 acceleration_m_s2 = 1;
+
+  repeated sint32 angular_rate_rad_s = 2;
+};
