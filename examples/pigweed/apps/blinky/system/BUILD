@@ -30,15 +30,9 @@ cc_library(
         "host_led.cc",
         "host_system.cc",
     ],
-    implementation_deps = [
-        "@pigweed//pw_channel",
-        "@pigweed//pw_channel:stream_channel",
-        "@pigweed//pw_digital_io",
-        "@pigweed//pw_digital_io:digital_io_mock",
-        "@pigweed//pw_multibuf:simple_allocator",
-        "@pigweed//pw_system:async",
-        "@pigweed//pw_system:io",
-    ],
     target_compatible_with = incompatible_with_mcu(),
-    deps = ["//examples/pigweed/apps/blinky/system:headers"],
+    deps = [
+        "//examples/pigweed/apps/blinky/system:headers",
+        "//third_party/pigweed/system:common_host_system",
+    ],
 )
