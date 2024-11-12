@@ -22,7 +22,6 @@ void SbrService::Init(pw::async2::Dispatcher& dispatcher,
 pw::Status SbrService::ConfigureMagnetometer(
     const hw_drivers_lis3mdl_LIS3MDLConfiguration& config,
     hw_drivers_lis3mdl_LIS3MDLConfiguration& actual_config) {
-  // XXX: Maybe we shouldn't check, but just return precondition error?
   PW_CHECK(register_device_.has_value());
 
   PW_LOG_INFO("CONFIGURE MAGNETOMETER");
@@ -30,9 +29,12 @@ pw::Status SbrService::ConfigureMagnetometer(
   auto result = hw_drivers::lis3mdl::SolveConfiguration(config, &control);
   if (result.has_value()) {
     actual_config = result.value();
-    return hw_drivers::lis3mdl::ApplyControlToDevice(control,
+    auto application_result = hw_drivers::lis3mdl::ApplyControlToDevice(control,
                                                      register_device_.value());
-    return pw::OkStatus();
+    if (application_result.ok()) {
+      cached_config_ = config;
+    }
+    return application_result;
   } else {
     switch (result.error()) {
       case hw_drivers::lis3mdl::ConfigurationError::kInvalidConfig:
@@ -46,6 +48,13 @@ pw::Status SbrService::ConfigureMagnetometer(
 pw::Status SbrService::ReadMagnetometer(
     const pw_protobuf_Empty&, hw_drivers_lis3mdl_LIS3MDLReading& reading) {
   PW_CHECK(register_device_.has_value());
+  if (!cached_config_.has_scale_gauss) {
+    return pw::Status::FailedPrecondition();
+  }
+  auto lsb_per_gauss = hw_drivers::lis3mdl::GetLsbPerGauss(cached_config_.scale_gauss);
+  if (!lsb_per_gauss.has_value()) {
+    return pw::Status::FailedPrecondition();
+  }
 
   PW_LOG_INFO("READ MAGNETOMETER");
   hw_drivers::lis3mdl::LIS3MDLData data;
@@ -54,9 +63,8 @@ pw::Status SbrService::ReadMagnetometer(
   if (!status.ok()) {
     return status;
   }
-  // XXX: Don't use 4kFullScale4LSBPerGauss by default, use config?
   reading = hw_drivers::lis3mdl::InterpretReading(
-      hw_drivers::lis3mdl::kFullScale4LSBPerGauss, data);
+      lsb_per_gauss.value(), data);
   return pw::OkStatus();
 }
 

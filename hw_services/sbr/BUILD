@@ -84,7 +84,7 @@ proto_py_library(
     ],
 )
 
-# XXX
+# TODO(#145)
 #
 # gazelle:ignore
 #

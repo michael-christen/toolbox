@@ -5,13 +5,12 @@ package hw_services.sbr;
 import "pw_protobuf_protos/common.proto";
 import "hw_drivers/lis3mdl/lis3mdl.proto";
 
-// XXX: Or SBR?
 service Sbr {
   // ---------------------------------------
   // --- Debug / Bringup Functionalities ---
   // ---------------------------------------
 
-  // XXX: Should make magnetometer type less specific
+  // TODO(#148): Should make magnetometer type less specific
   // Attempt to configure and get the actual configuration back (only so much
   // granularity is supported by the hardware).
   rpc ConfigureMagnetometer(hw_drivers.lis3mdl.LIS3MDLConfiguration) returns (hw_drivers.lis3mdl.LIS3MDLConfiguration);

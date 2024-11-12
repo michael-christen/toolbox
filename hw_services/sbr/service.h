@@ -23,8 +23,8 @@ class SbrService final
                               hw_drivers_lis3mdl_LIS3MDLReading& reading);
 
  private:
-  // XXX: Blinky blinky_;
   std::optional<pw::i2c::RegisterDevice*> register_device_;
+  hw_drivers_lis3mdl_LIS3MDLConfiguration cached_config_;
 };
 
 }  // namespace sbr
