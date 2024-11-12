@@ -10,7 +10,7 @@ pw::Status HostInitiator::DoWriteReadFor(
   (void)tx_buffer;
   (void)rx_buffer;
   (void)timeout;
-  // XXX: Actually do something
+  // Just noop
   return pw::OkStatus();
 }
 
