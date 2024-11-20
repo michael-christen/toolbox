@@ -13,5 +13,8 @@ py_binary(
     name = "bazel_parser",
     srcs = ["bazel_parser.py"],
     visibility = ["//:__subpackages__"],
-    deps = ["//tools:bazel_utils"],
+    deps = [
+        "//tools:bazel_utils",
+        "@pip//networkx",
+    ],
 )
