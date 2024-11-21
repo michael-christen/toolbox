@@ -8,6 +8,7 @@ py_binary(
     srcs = ["ipython.py"],
     visibility = ["//:__subpackages__"],
     deps = [
-        "@pip//ipdb",
-    ] + all_requirements,
+        "@pip//ipython",
+        "//tools:git_utils",  # keep
+    ] + all_requirements,  # keep
 )

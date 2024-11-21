@@ -99,3 +99,9 @@ mypy_cli(
         "@pip//types_protobuf",
     ],
 )
+
+py_library(
+    name = "git_utils",
+    srcs = ["git_utils.py"],
+    visibility = ["//:__subpackages__"],
+)
