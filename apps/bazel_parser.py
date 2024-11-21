@@ -37,22 +37,21 @@ def dependency_analysis(query_result: build_pb2.QueryResult,
         rule = target.rule
 
         logger.debug(f'{rule.name}({rule.rule_class})')
-        rules[rule.name] = rule
-        for i in rule.rule_input:
-            if ignore_external and i.startswith('@'):
-                continue
-            graph.add_edge(i, rule.name)
-        for output in rule.rule_output:
-            graph.add_edge(rule.name, output)
-        # Still add this to the graph
-        if not graph.has_node(rule.name):
-            graph.add_node(rule.name)
         # Didn't see much use with these:
         # - rule.configured_rule_input
         # - rule.default_setting
+        rules[rule.name] = rule
 
-    # XXX: What should the order be (is depended by or depends on?
-    # graph = graph.reverse()
+        # Specify X depends on Y as X is a parent of Y
+        for i in rule.rule_input:
+            if ignore_external and i.startswith('@'):
+                continue
+            graph.add_edge(rule.name, i)
+        for output in rule.rule_output:
+            graph.add_edge(output, rule.name)
+        # Still add this to the graph, even if no edges
+        if not graph.has_node(rule.name):
+            graph.add_node(rule.name)
 
     for node in networkx.dfs_postorder_nodes(graph):
         logger.debug(node)

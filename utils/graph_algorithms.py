@@ -74,7 +74,6 @@ def compute_group_duration(
     # possibility
     graph = graph.reverse(copy=True)
     for node in networkx.dfs_postorder_nodes(graph):
-        print(node)
         # Get our own duration
         total = node_duration_s.get(node, 0.0)
         # Get sum of parents (referring to as succssors becasue we've reversed
