@@ -1,4 +1,5 @@
 import csv
+import logging
 import sys
 
 import networkx
@@ -8,7 +9,11 @@ from third_party.bazel.src.main.protobuf import build_pb2
 from tools import bazel_utils
 
 
-def dependency_analysis(query_result: build_pb2.QueryResult) -> None:
+logger = logging.getLogger(__name__)
+
+
+def dependency_analysis(query_result: build_pb2.QueryResult,
+                        ignore_external: bool) -> None:
     """Analyze the dependencies that we're getting to understant them.
 
     """
@@ -23,7 +28,7 @@ def dependency_analysis(query_result: build_pb2.QueryResult) -> None:
                              build_pb2.Target.Discriminator.GENERATED_FILE,
                              build_pb2.Target.Discriminator.PACKAGE_GROUP,
                              build_pb2.Target.Discriminator.ENVIRONMENT_GROUP}:
-            # print(i, type_name)
+            logger.debug(f'{i}, {type_name}')
             continue
         else:
             raise ValueError(
@@ -31,21 +36,30 @@ def dependency_analysis(query_result: build_pb2.QueryResult) -> None:
         # We are a rule type now
         rule = target.rule
 
-        # print(f'{rule.name}({rule.rule_class})')
+        logger.debug(f'{rule.name}({rule.rule_class})')
         rules[rule.name] = rule
         for i in rule.rule_input:
+            if ignore_external and i.startswith('@'):
+                continue
             graph.add_edge(i, rule.name)
         for output in rule.rule_output:
             graph.add_edge(rule.name, output)
+        # Still add this to the graph
+        if not graph.has_node(rule.name):
+            graph.add_node(rule.name)
         # Didn't see much use with these:
         # - rule.configured_rule_input
         # - rule.default_setting
 
     # XXX: What should the order be (is depended by or depends on?
-    graph = graph.reverse()
+    # graph = graph.reverse()
 
-    # print('nodes', len(graph.nodes))
-    # print('edges', len(graph.edges))
+    for node in networkx.dfs_postorder_nodes(graph):
+        logger.debug(node)
+
+    logger.debug(f'nodes: {len(graph.nodes)}')
+    logger.debug(f'edges: {len(graph.edges)}')
+    logger.debug(f'rules: {len(rules)}')
 
     pagerank = networkx.pagerank(graph)
     hubs, authorities = networkx.hits(graph)
@@ -83,23 +97,33 @@ def dependency_analysis(query_result: build_pb2.QueryResult) -> None:
             }
             writer.writerow(row)
 
-            # print(f'{rule_name}: {num_parents}/{num_ancestors}'
-            #       f' {num_children}/{num_descendants}'
-            #       f' {pagerank[rule_name]}'
-            #       f' {hubs[rule_name]},{authorities[rule_name]}')
-        except networkx.NetworkXError:
-            # print(f'Exception with {rule_name}')
-            ...
+        except networkx.NetworkXError as e:
+            raise AssertionError(f'Exception with {rule_name}') from e
+    # Temporary way to export
+    networkx.write_gml(graph, '/tmp/my.gml')
 
     # predecessors, successors is immediate
     # ancestors, descendants is all
-    # print(query_result)
+    # logger.debug(query_result)
+
+def draw():
+    import matplotlib.pyplot as plt
+    from networkx.drawing import nx_agraph
+    import networkx as nx
+
+    g = nx.read_gml('/tmp/my.gml')
+    pos = nx_agraph.graphviz_layout(g, prog='dot')
+    nx.draw(g, pos, with_labels=True, arrows=True)
+    plt.show()
 
 
 def main():
     query_result = bazel_utils.parse_build_output(sys.stdin.buffer.read())
-    dependency_analysis(query_result)
+    with open('/tmp/my.prototxt', 'w') as f:
+        f.write(str(query_result))
+    dependency_analysis(query_result, ignore_external=True)
 
 
 if __name__ == "__main__":
+    logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
     main()
