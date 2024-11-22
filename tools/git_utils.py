@@ -1,3 +1,5 @@
+from typing import Sequence
+
 import collections
 import dataclasses
 import datetime
@@ -5,9 +7,11 @@ import pathlib
 import subprocess
 
 
-def _get_git_output(args: list[pathlib.Path | str],
+def _get_git_output(args: Sequence[pathlib.Path | str],
                     git_directory: pathlib.Path | str) -> list[str]:
-    output = subprocess.check_output(['git', '-C', git_directory] + args)
+    # XXX: Why isn't type-hinting for these lists working?
+    output = subprocess.check_output(
+        ['git', '-C', git_directory] + args)  # type: ignore
     result = output.decode('utf-8').strip()
     if not result:
         return []
@@ -81,9 +85,9 @@ def get_file_commit_map_from_follow(
         git_directory: pathlib.Path | str,
         after: datetime.datetime | None = None,
 ) -> FileCommitMap:
-    commit_map = {}
+    commit_map:dict[str, set[pathlib.Path]] = {}
     # XXX: Maybe remove?
-    file_map = {}
+    file_map: dict[pathlib.Path, list[str]] = {}
     files = ls_files(git_directory)
     commits = get_commits(git_directory=git_directory, after=after)
     # Keep ordering

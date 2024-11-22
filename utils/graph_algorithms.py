@@ -12,10 +12,10 @@ from typing import Any
 import networkx
 
 
-def compute_group_probability(
+def compute_group_probability[T](
         graph: networkx.DiGraph,
-        node_probability: dict[Any, float],
-    ) -> dict[Any, float]:
+        node_probability: dict[T, float],
+    ) -> dict[T, float]:
     """Compute a group probability for a parent node.
 
     Group probability for a node can be defined for node
@@ -34,7 +34,7 @@ def compute_group_probability(
 
     Returns: The group probability for each node.
     """
-    node_group_probability = {}
+    node_group_probability: dict[T, float]  = {}
     for node in networkx.dfs_postorder_nodes(graph):
         # Get our own probability, assume 100% if not specified
         product = node_probability.get(node, 1.0)
@@ -46,10 +46,10 @@ def compute_group_probability(
     return node_group_probability
 
 
-def compute_group_duration(
+def compute_group_duration[T](
         graph: networkx.DiGraph,
-        node_duration_s: dict[Any, float],
-    ) -> dict[Any, float]:
+        node_duration_s: dict[T, float],
+    ) -> dict[T, float]:
     """Compute a group duration for a child node.
 
     Reversed from `compute_group_probability`, we want to know the accumulated
@@ -66,7 +66,7 @@ def compute_group_duration(
 
     Returns: Group duration for each node.
     """
-    node_group_durations = {}
+    node_group_durations: dict[T, float] = {}
     # Reverse the graph in order to do a "proper" traversal and don't end up
     # with unvisited parents. If we didn't reverse and did a preorder traversal
     # we could end up traversing from one parent down to a child without having

@@ -22,12 +22,12 @@ def dependency_analysis(query_result: build_pb2.QueryResult,
 
     for i, target in enumerate(query_result.target):
         type_name = build_pb2.Target.Discriminator.Name(target.type)
-        if target.type == build_pb2.Target.Discriminator.RULE:
+        if target.type == build_pb2.Target.RULE:
             pass
-        elif target.type in {build_pb2.Target.Discriminator.SOURCE_FILE,
-                             build_pb2.Target.Discriminator.GENERATED_FILE,
-                             build_pb2.Target.Discriminator.PACKAGE_GROUP,
-                             build_pb2.Target.Discriminator.ENVIRONMENT_GROUP}:
+        elif target.type in {build_pb2.Target.SOURCE_FILE,
+                             build_pb2.Target.GENERATED_FILE,
+                             build_pb2.Target.PACKAGE_GROUP,
+                             build_pb2.Target.ENVIRONMENT_GROUP}:
             logger.debug(f'{i}, {type_name}')
             continue
         else:
@@ -43,10 +43,10 @@ def dependency_analysis(query_result: build_pb2.QueryResult,
         rules[rule.name] = rule
 
         # Specify X depends on Y as X is a parent of Y
-        for i in rule.rule_input:
-            if ignore_external and i.startswith('@'):
+        for rule_input in rule.rule_input:
+            if ignore_external and rule_input.startswith('@'):
                 continue
-            graph.add_edge(rule.name, i)
+            graph.add_edge(rule.name, rule_input)
         for output in rule.rule_output:
             graph.add_edge(output, rule.name)
         # Still add this to the graph, even if no edges
@@ -105,15 +105,15 @@ def dependency_analysis(query_result: build_pb2.QueryResult,
     # ancestors, descendants is all
     # logger.debug(query_result)
 
-def draw():
-    import matplotlib.pyplot as plt
-    from networkx.drawing import nx_agraph
-    import networkx as nx
-
-    g = nx.read_gml('/tmp/my.gml')
-    pos = nx_agraph.graphviz_layout(g, prog='dot')
-    nx.draw(g, pos, with_labels=True, arrows=True)
-    plt.show()
+# def draw():
+#     import matplotlib.pyplot as plt
+#     from networkx.drawing import nx_agraph
+#     import networkx as nx
+#
+#     g = nx.read_gml('/tmp/my.gml')
+#     pos = nx_agraph.graphviz_layout(g, prog='dot')
+#     nx.draw(g, pos, with_labels=True, arrows=True)
+#     plt.show()
 
 
 def main():
