@@ -7,12 +7,15 @@ target is re-built given the likelihood that the children are changed as well
 as the duration of time spent from reverse dependencies if a given dependency
 changes.
 """
-from typing import Any
+from typing import Any, TypeVar
 
 import networkx
 
 
-def compute_group_probability[T](
+T = TypeVar('T')
+
+
+def compute_group_probability(
         graph: networkx.DiGraph,
         node_probability: dict[T, float],
     ) -> dict[T, float]:
@@ -46,7 +49,7 @@ def compute_group_probability[T](
     return node_group_probability
 
 
-def compute_group_duration[T](
+def compute_group_duration(
         graph: networkx.DiGraph,
         node_duration_s: dict[T, float],
     ) -> dict[T, float]:

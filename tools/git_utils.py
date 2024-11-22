@@ -43,7 +43,7 @@ def list_file_commits(
         ) -> list[str]:
     """List commits a file has touched."""
     args = [
-            'log', '--follow', '--pretty=%H'
+        'log', '--follow', '--pretty=%H'
     ] + _get_args_for_after(after) + [
         '--', file
     ]
@@ -52,9 +52,10 @@ def list_file_commits(
 
 def get_commits(
         git_directory: pathlib.Path | str,
+        target: str = 'HEAD',
         after: datetime.datetime | None = None,
         ) -> list[str]:
-    args = ['rev-list', 'HEAD'] + _get_args_for_after(after)
+    args = ['rev-list', target] + _get_args_for_after(after)
     return _get_git_output(args, git_directory)
 
 
@@ -76,8 +77,10 @@ def get_files_changed_at_commit(commit: str,
 class FileCommitMap:
     """Describe how the current files map to past commits."""
 
-    # XXX: Do I need a dataclass if I have a single type?
+    # Keyed by commit to set of files changed
     commit_map: dict[str, set[pathlib.Path]]
+    # Keyed by file, to set of commits involved in
+    file_map: dict[pathlib.Path, list[str]]
 
 
 # XXX: maybe we want to experiment with both mechanisms?
@@ -86,7 +89,6 @@ def get_file_commit_map_from_follow(
         after: datetime.datetime | None = None,
 ) -> FileCommitMap:
     commit_map:dict[str, set[pathlib.Path]] = {}
-    # XXX: Maybe remove?
     file_map: dict[pathlib.Path, list[str]] = {}
     files = ls_files(git_directory)
     commits = get_commits(git_directory=git_directory, after=after)
@@ -99,7 +101,7 @@ def get_file_commit_map_from_follow(
         file_map[f] = f_commits
         for c in f_commits:
             commit_map[c].add(f)
-    return FileCommitMap(commit_map=commit_map)
+    return FileCommitMap(commit_map=commit_map, file_map=file_map)
 
 
 def get_file_commit_map_from_list(
@@ -107,7 +109,6 @@ def get_file_commit_map_from_list(
         after: datetime.datetime | None = None,
 ) -> FileCommitMap:
     commit_map = {}
-    # XXX: Maybe remove?
     file_map = collections.defaultdict(list)
     commits = get_commits(git_directory=git_directory, after=after)
     for c in commits:
@@ -115,4 +116,4 @@ def get_file_commit_map_from_list(
         commit_map[c] = set(files)
         for f in files:
             file_map[f].append(c)
-    return FileCommitMap(commit_map=commit_map)
+    return FileCommitMap(commit_map=commit_map, file_map=file_map)
