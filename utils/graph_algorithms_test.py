@@ -44,14 +44,15 @@ class TestGroupProbability(unittest.TestCase):
             8: node_probability[3] * node_probability[8],
         }
         group_probability = graph_algorithms.compute_group_probability(
-            graph=g, node_probability=node_probability)
+            graph=g, node_probability=node_probability
+        )
         self.assertEqual(group_probability, expected_group_probability)
 
     def test_cycle(self):
         g = networkx.DiGraph()
         g.add_edge(1, 2)
         g.add_edge(2, 1)
-        with self.assertRaisesRegex(KeyError, '1'):
+        with self.assertRaisesRegex(KeyError, "1"):
             graph_algorithms.compute_group_probability(g, {})
 
 
@@ -94,12 +95,13 @@ class TestGroupDurations(unittest.TestCase):
             4: d4,
         }
         group_duration = graph_algorithms.compute_group_duration(
-            graph=g, node_duration_s=node_duration)
+            graph=g, node_duration_s=node_duration
+        )
         self.assertEqual(group_duration, expected_group_duration)
 
     def test_cycle(self):
         g = networkx.DiGraph()
         g.add_edge(1, 2)
         g.add_edge(2, 1)
-        with self.assertRaisesRegex(KeyError, '1'):
+        with self.assertRaisesRegex(KeyError, "1"):
             graph_algorithms.compute_group_duration(g, {})

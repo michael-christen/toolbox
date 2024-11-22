@@ -7,18 +7,18 @@ target is re-built given the likelihood that the children are changed as well
 as the duration of time spent from reverse dependencies if a given dependency
 changes.
 """
-from typing import Any, TypeVar
+
+from typing import TypeVar
 
 import networkx
 
-
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 def compute_group_probability(
-        graph: networkx.DiGraph,
-        node_probability: dict[T, float],
-    ) -> dict[T, float]:
+    graph: networkx.DiGraph,
+    node_probability: dict[T, float],
+) -> dict[T, float]:
     """Compute a group probability for a parent node.
 
     Group probability for a node can be defined for node
@@ -37,7 +37,7 @@ def compute_group_probability(
 
     Returns: The group probability for each node.
     """
-    node_group_probability: dict[T, float]  = {}
+    node_group_probability: dict[T, float] = {}
     for node in networkx.dfs_postorder_nodes(graph):
         # Get our own probability, assume 100% if not specified
         product = node_probability.get(node, 1.0)
@@ -50,9 +50,9 @@ def compute_group_probability(
 
 
 def compute_group_duration(
-        graph: networkx.DiGraph,
-        node_duration_s: dict[T, float],
-    ) -> dict[T, float]:
+    graph: networkx.DiGraph,
+    node_duration_s: dict[T, float],
+) -> dict[T, float]:
     """Compute a group duration for a child node.
 
     Reversed from `compute_group_probability`, we want to know the accumulated

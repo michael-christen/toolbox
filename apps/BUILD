@@ -14,6 +14,7 @@ py_binary(
     srcs = ["bazel_parser.py"],
     visibility = ["//:__subpackages__"],
     deps = [
+        "//third_party/bazel/src/main/protobuf:build_py_library",
         "//tools:bazel_utils",
         "@pip//networkx",
     ],
