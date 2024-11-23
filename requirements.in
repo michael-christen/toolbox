@@ -9,6 +9,10 @@ grpcio
 mypy
 protobuf
 types-protobuf
+# Analyze graphs easily
+# https://networkx.org/documentation/stable/index.html
+networkx[default]
+
 # largely for development
 pytest
 black[jupyter]
