@@ -1,0 +1,207 @@
+syntax = "proto3";
+
+package firecracker;
+
+import "proto/remote_execution.proto";
+
+// VM properties which cannot be changed across snapshot/resume cycles.
+//
+// Things like the container used to create the image, the numCPUs / RAM, etc.
+// Importantly, the files attached in the actionWorkingDir, which are attached
+// to the VM, can change. This string will be hashed into the snapshot ID, so
+// changing this structure will invalidate all existing cached snapshots. Be
+// careful!
+message VMConfiguration {
+  int64 num_cpus = 1;
+  int64 mem_size_mb = 2;
+  int64 scratch_disk_size_mb = 3;
+  bool enable_networking = 4;
+  bool init_dockerd = 5;
+  bool debug_mode = 6;
+  bool enable_dockerd_tcp = 7;
+  string kernel_version = 8;
+  string firecracker_version = 9;
+  string guest_api_version = 10;
+  bool enable_logging = 12;
+  bool cgroup_v2_only = 13;
+
+  // Guest kernel boot args.
+  string boot_args = 11;
+
+  // Host CPUID information. For now, if hosts differ in any of these CPUID
+  // fields, we do not share snapshots across the hosts.
+  CPUID host_cpuid = 14;
+
+  // TODO: add container_image here?
+}
+
+message CPUID {
+  // Representation of the CPU Vendor ID. This is a non-standard enum
+  // representation, and is defined here:
+  // https://github.com/klauspost/cpuid/blob/60035f3080f8a64825fc56d16a06103d44e36d4f/cpuid.go#L26-L65
+  int64 vendor_id = 1;
+
+  // CPU family number.
+  int64 family = 2;
+
+  // CPU model number.
+  int64 model = 3;
+}
+
+message SnapshotKeySet {
+  // Snapshot key to be read from when resuming the snapshot.
+  //
+  // For workflows, this is associated with the git branch checked out in the
+  // snapshotted git repo directory.
+  SnapshotKey branch_key = 1;
+
+  // Fallback keys to try reading if the main key is not found. These are
+  // read-only; only the main key will be updated when writing the snapshot back
+  // to cache.
+  repeated SnapshotKey fallback_keys = 2;
+
+  // The snapshot key that should be written to when the task is complete.
+  // By default, this is the branch key.
+  SnapshotKey write_key = 3;
+}
+
+message SnapshotKey {
+  // If set, this key corresponds to a specific snapshot instance, and should
+  // never be overwritten by other snapshot manifests.
+  //
+  // Because the snapshot ID uniquely identifies a snapshot, all other fields
+  // should be unset when using this field, except for instance_name.
+  // TODO: instance_name should not be part of the cache key.
+  //
+  // If not set, this key corresponds to the newest snapshot matching the other
+  // parameters.
+  string snapshot_id = 6;
+
+  // Remote instance name associated with the snapshot.
+  string instance_name = 1;
+
+  // SHA256 hash of the Platform proto (exec properties) associated with the VM
+  // snapshot.
+  string platform_hash = 2;
+
+  // SHA256 Hash of the VMConfiguration of the paused snapshot.
+  string configuration_hash = 3;
+
+  // The unique ID of the runner that is allowed to access this snapshot.
+  // TODO: Remove this once "forkable" snapshots are implemented.
+  string runner_id = 4;
+
+  // Git ref associated with the snapshot. For workflows, this represents the
+  // branch that was checked out when running the workflow.
+  string ref = 5;
+
+  // If set, corresponds to a specific version of the snapshot. Updating this
+  // can be used to invalidate earlier snapshots (Ex. you may want to do this
+  // if there's a breaking change to the vmexec API or firecracker version,
+  // or if an earlier snapshot has been corrupted)
+  string version_id = 7;
+}
+
+// Manifest represents a snapshot's VM configuration along with
+// file pointers to the snapshot artifacts.
+message SnapshotManifest {
+  // The VM configuration that should be used when restoring the snapshot.
+  VMConfiguration vm_configuration = 1;
+
+  // Cached files in the snapshot. The files follow a standard naming
+  // convention. For example, the vm state snapshot is expected to be named
+  // "vmstate.snap".
+  //
+  // NOTE: currently, the digests of these files are not proper content digests,
+  // and are just used as generic keys for the filecache.
+  repeated build.bazel.remote.execution.v2.FileNode files = 2;
+
+  // Cached chunked files in the snapshot. These follow the same convention
+  // mentioned in `files`.
+  repeated ChunkedFile chunked_files = 3;
+
+  // Metadata associated with the snapshot. The VM ID stored in the metadata
+  // stays constant across each resume/pause cycle of a particular snapshot, but
+  // the snapshot creator is expected to change each time the snapshot is
+  // updated.
+  VMMetadata vm_metadata = 4;
+}
+
+// Represents a chunked file for use with copy-on-write snapshotting.
+message ChunkedFile {
+  // Name of the file, which also identifies what it's for.
+  // Ex: "scratchfs.ext4"
+  string name = 1;
+
+  // Total length of the file in bytes.
+  int64 size = 2;
+
+  // Chunk size in bytes. Note that the last chunk is allowed to be smaller than
+  // this size.
+  int64 chunk_size = 3;
+
+  // The chunks in the file. If a particular chunk is missing at a given offset,
+  // it should be assumed that a hole is present at that offset (a chunk
+  // containing all zeroes).
+  repeated Chunk chunks = 4;
+}
+
+message Chunk {
+  // Byte offset of the chunk within the chunked file.
+  int64 offset = 1;
+
+  // Deprecated, use digest instead.
+  string digest_hash = 2 [deprecated = true];
+
+  // Digest of the chunk
+  build.bazel.remote.execution.v2.Digest digest = 3;
+}
+
+// Metadata associated with a firecracker VM.
+message VMMetadata {
+  // A UUID assigned to the VM upon creation which is preserved across
+  // snapshots.
+  string vm_id = 1;
+
+  // Represents a task executed on this VM.
+  message VMTask {
+    // The task's invocation ID. If multiple invocations are associated with the
+    // task (via action merging) then this will be the first invocation to have
+    // requested execution of this task.
+    string invocation_id = 1;
+
+    // The task's execution ID.
+    string execution_id = 2;
+
+    // The action digest associated with the task. The digest function used to
+    // compute the digest should match the one associated with the invocation.
+    build.bazel.remote.execution.v2.Digest action_digest = 3;
+
+    // The digest of the execution ID, used as the AC key for the stored
+    // ExecuteResponse. The digest function used to compute the digest should
+    // match the one associated with the invocation.
+    build.bazel.remote.execution.v2.Digest execute_response_digest = 4;
+
+    // A unique UUID assigned each time a snapshot is used.
+    // For example, even if the same execution is retried multiple times using
+    // the same snapshot key, each run will have a unqiue snapshot_id.
+    string snapshot_id = 5;
+  }
+
+  // The last task to execute on this VM. When resuming from snapshot, this
+  // represents the task which created the snapshot.
+  VMTask last_executed_task = 2;
+
+  // The snapshot ID of the task that is currently executing.
+  string snapshot_id = 3;
+
+  // The snapshot key the currently executing task saved to after execution.
+  SnapshotKey snapshot_key = 4;
+}
+
+// SnapshotVersionMetadata contains the version ID to be used for snapshots.
+// This can be updated to invalidate all earlier snapshots on a different
+// version.
+message SnapshotVersionMetadata {
+  string version_id = 1;
+}

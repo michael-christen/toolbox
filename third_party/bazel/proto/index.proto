@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+import "proto/context.proto";
+import "proto/git.proto";
+import "proto/resource.proto";
+
+package index;
+
+enum ReplacementStrategy {
+  UNKNOWN_REPLACEMENT_STRATEGY = 0;
+  REPLACE_REPO = 1;
+  // TODO(tylerw): support INCREMENTAL
+}
+
+message IndexRequest {
+  context.RequestContext request_context = 1;
+
+  git.GitRepo git_repo = 2;
+  git.RepoState repo_state = 3;
+
+  // Required. The search namespace to operate in. Namespaces are logically
+  // distinct domains. Documents indexed in one namespace are not visible from
+  // another. The search server does not itself apply restrictions on who can
+  // query -- so the application should enforce separation by putting users into
+  // different namespaces.
+  //
+  // Ex. "gr12345" or "anon", or "public" or "foobarbaz".
+  string namespace = 4;
+
+  // The strategy to use when indexing this repo.
+  // By default the server will assume REPLACE_REPO.
+  ReplacementStrategy replacement_strategy = 5;
+
+  // If true, the request will return immediately, even before indexing is
+  // complete. This is useful if you don't care about the results and can
+  // tolerate errors.
+  bool async = 6;
+}
+
+message IndexResponse {
+  context.ResponseContext response_context = 1;
+}
+
+message IngestAnnotationsRequest {
+  context.RequestContext request_context = 1;
+
+  // The resource name of the sstable to index.
+  resource.ResourceName sstable_name = 2;
+
+  // If true, the request will return immediately, even before indexing is
+  // complete. This is useful if you don't care about the results and can
+  // tolerate errors.
+  bool async = 3;
+}
+
+message IngestAnnotationsResponse {
+  context.ResponseContext response_context = 1;
+}

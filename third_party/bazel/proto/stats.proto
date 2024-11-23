@@ -1,0 +1,301 @@
+syntax = "proto3";
+
+import "proto/context.proto";
+import "proto/invocation_status.proto";
+import "proto/stat_filter.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+
+package stats;
+
+// Next tag: 9
+message ExecutionStat {
+  // When specified, this contains the (local) date that these stats are
+  // aggregated on in YYYY-MM-DD format.  This field will not be set when
+  // bucket_start_time_micros is present.
+  string name = 6;
+
+  // The start time that these stats are aggregated in--see StatsInterval
+  // for a specification of the bucket length. The time is expressed as a
+  // unix epoch time in microseconds. If specified, the name field will be
+  // empty.
+  int64 bucket_start_time_micros = 7;
+  // The duration between the execution task is queued and the worker starts.
+  double queue_duration_usec_p50 = 1;
+  double queue_duration_usec_p75 = 2;
+  double queue_duration_usec_p90 = 3;
+  double queue_duration_usec_p95 = 4;
+  double queue_duration_usec_p99 = 5;
+
+  // The total amount of "build time" spent (this is a number we use for
+  // billing purposes).  This sums up the total time spent on builds on all RBE
+  // workers, ignoring how many cores were used (i.e., a task using 2 cores for
+  // one minute counts the same as a task using 1 core for one minute).
+  int64 total_build_time_usec = 8;
+}
+
+message TrendQuery {
+  // The search parameters in this query will be ANDed when performing a
+  // query -- so if a client specifies both "user" and "host", all results
+  // returned must match both fields.
+
+  // The unix-user who performed the build.
+  string user = 1;
+
+  // The host this build was executed on.
+  string host = 2;
+
+  // The git repo the build was for.
+  string repo_url = 4;
+
+  // The commit sha used for the build.
+  string commit_sha = 5;
+
+  // The role played by the build. Ex: "CI". If multiple filters are specified,
+  // they are combined with "OR".
+  repeated string role = 6;
+
+  // The timestamp on or after which the build was last updated (inclusive).
+  google.protobuf.Timestamp updated_after = 7;
+
+  // The timestamp up to which the build was last updated (exclusive).
+  google.protobuf.Timestamp updated_before = 8;
+
+  // Status of the build. If multiple are specified, they are combined with
+  // "OR".
+  repeated invocation_status.OverallStatus status = 9;
+
+  // The git branch used for the build.
+  string branch_name = 10;
+
+  // The bazel command that was used. Ex: "build", "test", "run"
+  string command = 11;
+
+  // Stat filters (duration_usec, cas_cache_misses, etc.)
+  repeated stat_filter.StatFilter filter = 12;
+
+  // String-based dimensional filters (execution worker, branch, etc.)
+  repeated stat_filter.DimensionFilter dimension_filter = 17;
+
+  // The minimum invocation duration.
+  google.protobuf.Duration minimum_duration = 13;
+
+  // The maximum invocation duration.
+  google.protobuf.Duration maximum_duration = 14;
+
+  // The pattern for the targets built (exact match). Ex: "//..."
+  string pattern = 15;
+
+  // Plaintext tags for the targets built (exact match). Ex: "my-cool-tag"
+  repeated string tags = 16;
+
+  // New, robust filters that will eventually replace all other fields.
+  repeated stat_filter.GenericFilter generic_filters = 18;
+}
+
+// Next tag: 31
+message TrendStat {
+  // When specified, this contains the (local) date that these stats are
+  // aggregated on in YYYY-MM-DD format.  This field will not be set when
+  // bucket_start_time_micros is present.
+  string name = 1;
+
+  // The start time that these stats are aggregated in--see StatsInterval
+  // for a specification of the bucket length. The time is expressed as a
+  // unix epoch time in microseconds. If specified, the name field will be
+  // empty.
+  int64 bucket_start_time_micros = 27;
+  // The sum of all invocation durations for this entity.
+  int64 total_build_time_usec = 2;
+  double build_time_usec_p50 = 21;
+  double build_time_usec_p75 = 22;
+  double build_time_usec_p90 = 23;
+  double build_time_usec_p95 = 24;
+  double build_time_usec_p99 = 25;
+
+  // The total number of invocations completed by this entity.
+  int64 total_num_builds = 3;
+
+  // The number of invocations with a duration longer than 0 seconds.
+  int64 completed_invocation_count = 4;
+
+  // The number of unique users who stared a build.
+  int64 user_count = 5;
+
+  // The number of unique commits that caused a build.
+  int64 commit_count = 6;
+
+  // The number of unique hosts that ran a build.
+  int64 host_count = 7;
+
+  // The number of unique repos that were built.
+  int64 repo_count = 8;
+
+  // The duration (in microseconds) of the longest build.
+  int64 max_duration_usec = 9;
+
+  // Server-side Action-cache stats.
+  int64 action_cache_hits = 10;
+  int64 action_cache_misses = 11;
+  int64 action_cache_uploads = 12;
+
+  // Server-side CAS-cache stats.
+  int64 cas_cache_hits = 13;
+  int64 cas_cache_misses = 14;
+  int64 cas_cache_uploads = 15;
+
+  // Download / upload stats.
+  int64 total_download_size_bytes = 16;
+  int64 total_upload_size_bytes = 17;
+  int64 total_download_usec = 18;
+  int64 total_upload_usec = 19;
+
+  // The number of unique branches that were built.
+  int64 branch_count = 20;
+
+  // The sum of the cpu time saved.
+  int64 total_cpu_micros_saved = 26;
+
+  int64 successful_builds = 28;
+  int64 failed_builds = 29;
+  int64 other_builds = 30;
+}
+
+message Summary {
+  // The total number of builds from a specific period.
+  int64 num_builds = 1;
+
+  // The total number of builds.
+  int64 num_builds_with_remote_cache = 2;
+
+  // The total cpu time saved.
+  int64 cpu_micros_saved = 3;
+
+  // The total number of Action Cache hits.
+  int64 ac_cache_hits = 4;
+  // The total number of Action Cache misses.
+  int64 ac_cache_misses = 5;
+}
+
+message GetTrendRequest {
+  context.RequestContext request_context = 1;
+
+  TrendQuery query = 2;
+
+  reserved 3;
+}
+
+enum IntervalType {
+  INTERVAL_TYPE_UNKNOWN = 0;
+  INTERVAL_TYPE_MINUTE = 1;
+  INTERVAL_TYPE_HOUR = 2;
+  INTERVAL_TYPE_DAY = 3;
+}
+
+// The time bucket size into which stats were aggregated for a GetTrend call.
+// This is necessary because we don't always find stats for all intervals in
+// the request.  We could make this obsolete someday by instead filling all
+// possible buckets in a GetTrendResponse.
+message StatsInterval {
+  IntervalType type = 1;
+  // The number of the specified IntervalType that each bucket contains--for
+  // example, a value of 30 with INTERVAL_TYPE_MINUTE means each bucket will
+  // start at either :00 or :30 in the local time zone.
+  // Note that we currently *never* specify count > 1 for INTERVAL_TYPE_DAY.
+  int64 count = 2;
+}
+
+// Next tag: 8
+message GetTrendResponse {
+  context.ResponseContext response_context = 1;
+
+  StatsInterval interval = 7;
+
+  // The list of trend stats found.
+  repeated TrendStat trend_stat = 2;
+
+  // The list of execution stats found.
+  repeated ExecutionStat execution_stat = 3;
+
+  bool has_invocation_stat_percentiles = 4;
+
+  // A summary of metrics from the period specified in the query. It is unset
+  // if the data is partially available.
+  Summary current_summary = 5;
+  // A summary of metrics from the previous period equal in length of the one
+  // the user requested. It is unset if the data is partially available.
+  Summary previous_summary = 6;
+}
+
+// Fetches a heatmap for the requested metric--a heatmap is basically a set of
+// columns, where each column represents a histogram for that metric in a window
+// of time.
+message GetStatHeatmapRequest {
+  context.RequestContext request_context = 1;
+  TrendQuery query = 2;
+  stat_filter.Metric metric = 3;
+}
+
+message HeatmapColumn {
+  int64 timestamp_usec = 1;
+  repeated int64 value = 2;
+}
+
+message GetStatHeatmapResponse {
+  context.ResponseContext response_context = 1;
+  // This array is one entry longer than the number of timestamp buckets, with
+  // the actual buckets being defined by 2 sequential entries in the list.
+  repeated int64 timestamp_bracket = 2;
+  // This array is one entry longer than the number of buckets, with the actual
+  // buckets being defined by 2 sequential entries in the list.
+  repeated int64 bucket_bracket = 3;
+  // Each entry in the heatmap response is a histogram for a given time bucket.
+  repeated HeatmapColumn column = 4;
+}
+
+// A drilldown request fetches a set of charts.  Each chart shows a comparison
+// between two data sets, as defined by the 'filter' field.  The 'selection'
+// value contains all data that matches the filters, and the 'base' set contains
+// all data that *doesn't* match the filter.  The set of charts to be returned
+// is determined automatically based on the requested filters.
+message GetStatDrilldownRequest {
+  context.RequestContext request_context = 1;
+  TrendQuery query = 2;
+  repeated stat_filter.StatFilter filter = 3;
+  repeated stat_filter.DimensionFilter dimension_filter = 5;
+  stat_filter.Metric drilldown_metric = 4;
+}
+
+message DrilldownEntry {
+  string label = 1;
+  int64 base_value = 2;
+  int64 selection_value = 3;
+}
+
+enum DrilldownType {
+  UNKNOWN_DRILLDOWN_TYPE = 0;
+  USER_DRILLDOWN_TYPE = 1;
+  HOSTNAME_DRILLDOWN_TYPE = 2;
+  GROUP_ID_DRILLDOWN_TYPE = 3;
+  REPO_URL_DRILLDOWN_TYPE = 4;
+  COMMIT_SHA_DRILLDOWN_TYPE = 5;
+  DATE_DRILLDOWN_TYPE = 6;
+  BRANCH_DRILLDOWN_TYPE = 7;
+  PATTERN_DRILLDOWN_TYPE = 8;
+  WORKER_DRILLDOWN_TYPE = 9;
+  TAG_DRILLDOWN_TYPE = 10;
+}
+
+message DrilldownChart {
+  DrilldownType drilldown_type = 1;
+  repeated DrilldownEntry entry = 2;
+}
+
+message GetStatDrilldownResponse {
+  context.ResponseContext response_context = 1;
+  // Each chart shows a drilldown based on a different aggregation type.
+  repeated DrilldownChart chart = 2;
+  // Total fields that can be used to render percentages, if that's desirable.
+  int64 total_in_base = 3;
+  int64 total_in_selection = 4;
+}

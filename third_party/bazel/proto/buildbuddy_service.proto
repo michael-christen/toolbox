@@ -1,0 +1,311 @@
+syntax = "proto3";
+
+import "proto/api_key.proto";
+import "proto/auditlog.proto";
+import "proto/bazel_config.proto";
+import "proto/cache.proto";
+import "proto/search.proto";
+import "proto/eventlog.proto";
+import "proto/execution_stats.proto";
+import "proto/encryption.proto";
+import "proto/grp.proto";
+import "proto/invocation.proto";
+import "proto/iprules.proto";
+import "proto/runner.proto";
+import "proto/stats.proto";
+import "proto/target.proto";
+import "proto/user.proto";
+import "proto/workflow.proto";
+import "proto/workspace.proto";
+import "proto/scheduler.proto";
+import "proto/usage.proto";
+import "proto/gcp.proto";
+import "proto/github.proto";
+import "proto/quota.proto";
+import "proto/repo.proto";
+import "proto/secrets.proto";
+import "proto/suggestion.proto";
+import "proto/zip.proto";
+
+package buildbuddy.service;
+
+option go_package = "buildbuddy_service";
+
+service BuildBuddyService {
+  // Invocation API
+  rpc GetInvocation(invocation.GetInvocationRequest)
+      returns (invocation.GetInvocationResponse);
+  rpc SearchInvocation(invocation.SearchInvocationRequest)
+      returns (invocation.SearchInvocationResponse);
+  rpc GetInvocationStat(invocation.GetInvocationStatRequest)
+      returns (invocation.GetInvocationStatResponse);
+  rpc UpdateInvocation(invocation.UpdateInvocationRequest)
+      returns (invocation.UpdateInvocationResponse);
+  rpc DeleteInvocation(invocation.DeleteInvocationRequest)
+      returns (invocation.DeleteInvocationResponse);
+  rpc CancelExecutions(invocation.CancelExecutionsRequest)
+      returns (invocation.CancelExecutionsResponse);
+  rpc GetInvocationOwner(invocation.GetInvocationOwnerRequest)
+      returns (invocation.GetInvocationOwnerResponse);
+  rpc GetInvocationFilterSuggestions(
+      invocation.GetInvocationFilterSuggestionsRequest)
+      returns (invocation.GetInvocationFilterSuggestionsResponse);
+
+  // Fancy build stat breakdowns.
+  rpc GetTrend(stats.GetTrendRequest) returns (stats.GetTrendResponse);
+  rpc GetStatHeatmap(stats.GetStatHeatmapRequest)
+      returns (stats.GetStatHeatmapResponse);
+  rpc GetStatDrilldown(stats.GetStatDrilldownRequest)
+      returns (stats.GetStatDrilldownResponse);
+
+  // Zip manifest API
+  rpc GetZipManifest(zip.GetZipManifestRequest)
+      returns (zip.GetZipManifestResponse);
+
+  // Bazel Config API
+  rpc GetBazelConfig(bazel_config.GetBazelConfigRequest)
+      returns (bazel_config.GetBazelConfigResponse);
+
+  // User API
+  rpc CreateUser(user.CreateUserRequest) returns (user.CreateUserResponse);
+  rpc GetUser(user.GetUserRequest) returns (user.GetUserResponse);
+
+  // Groups API
+  rpc GetGroup(grp.GetGroupRequest) returns (grp.GetGroupResponse);
+  rpc GetGroupUsers(grp.GetGroupUsersRequest)
+      returns (grp.GetGroupUsersResponse);
+  rpc UpdateGroupUsers(grp.UpdateGroupUsersRequest)
+      returns (grp.UpdateGroupUsersResponse);
+  rpc JoinGroup(grp.JoinGroupRequest) returns (grp.JoinGroupResponse);
+  rpc CreateGroup(grp.CreateGroupRequest) returns (grp.CreateGroupResponse);
+  rpc UpdateGroup(grp.UpdateGroupRequest) returns (grp.UpdateGroupResponse);
+
+  // Org API Keys API
+  rpc GetApiKeys(api_key.GetApiKeysRequest)
+      returns (api_key.GetApiKeysResponse);
+  rpc GetApiKey(api_key.GetApiKeyRequest) returns (api_key.GetApiKeyResponse);
+  rpc CreateApiKey(api_key.CreateApiKeyRequest)
+      returns (api_key.CreateApiKeyResponse);
+  rpc UpdateApiKey(api_key.UpdateApiKeyRequest)
+      returns (api_key.UpdateApiKeyResponse);
+  rpc DeleteApiKey(api_key.DeleteApiKeyRequest)
+      returns (api_key.DeleteApiKeyResponse);
+  rpc CreateImpersonationApiKey(api_key.CreateImpersonationApiKeyRequest)
+      returns (api_key.CreateImpersonationApiKeyResponse);
+
+  // User API keys API
+  rpc GetUserApiKeys(api_key.GetApiKeysRequest)
+      returns (api_key.GetApiKeysResponse);
+  rpc GetUserApiKey(api_key.GetApiKeyRequest)
+      returns (api_key.GetApiKeyResponse);
+  rpc CreateUserApiKey(api_key.CreateApiKeyRequest)
+      returns (api_key.CreateApiKeyResponse);
+  rpc UpdateUserApiKey(api_key.UpdateApiKeyRequest)
+      returns (api_key.UpdateApiKeyResponse);
+  rpc DeleteUserApiKey(api_key.DeleteApiKeyRequest)
+      returns (api_key.DeleteApiKeyResponse);
+
+  // Execution API
+  rpc GetExecution(execution_stats.GetExecutionRequest)
+      returns (execution_stats.GetExecutionResponse);
+  rpc WaitExecution(execution_stats.WaitExecutionRequest)
+      returns (stream execution_stats.WaitExecutionResponse);
+  rpc GetExecutionNodes(scheduler.GetExecutionNodesRequest)
+      returns (scheduler.GetExecutionNodesResponse);
+  rpc SearchExecution(execution_stats.SearchExecutionRequest)
+      returns (execution_stats.SearchExecutionResponse);
+
+  // Cache API
+  rpc GetCacheScoreCard(cache.GetCacheScoreCardRequest)
+      returns (cache.GetCacheScoreCardResponse);
+  rpc GetCacheMetadata(cache.GetCacheMetadataRequest)
+      returns (cache.GetCacheMetadataResponse);
+  rpc GetTreeDirectorySizes(cache.GetTreeDirectorySizesRequest)
+      returns (cache.GetTreeDirectorySizesResponse);
+
+  // Targets API
+  rpc GetTarget(target.GetTargetRequest) returns (target.GetTargetResponse);
+  rpc GetTargetHistory(target.GetTargetHistoryRequest)
+      returns (target.GetTargetHistoryResponse);
+  rpc GetTargetStats(target.GetTargetStatsRequest)
+      returns (target.GetTargetStatsResponse);
+  rpc GetDailyTargetStats(target.GetDailyTargetStatsRequest)
+      returns (target.GetDailyTargetStatsResponse);
+  rpc GetTargetFlakeSamples(target.GetTargetFlakeSamplesRequest)
+      returns (target.GetTargetFlakeSamplesResponse);
+
+  // Workflow API
+  rpc CreateWorkflow(workflow.CreateWorkflowRequest)
+      returns (workflow.CreateWorkflowResponse);
+  rpc DeleteWorkflow(workflow.DeleteWorkflowRequest)
+      returns (workflow.DeleteWorkflowResponse);
+  rpc GetWorkflows(workflow.GetWorkflowsRequest)
+      returns (workflow.GetWorkflowsResponse);
+  rpc ExecuteWorkflow(workflow.ExecuteWorkflowRequest)
+      returns (workflow.ExecuteWorkflowResponse);
+  rpc GetRepos(workflow.GetReposRequest) returns (workflow.GetReposResponse);
+  rpc GetWorkflowHistory(workflow.GetWorkflowHistoryRequest)
+      returns (workflow.GetWorkflowHistoryResponse);
+  rpc InvalidateSnapshot(workflow.InvalidateSnapshotRequest)
+      returns (workflow.InvalidateSnapshotResponse);
+  rpc InvalidateAllSnapshotsForRepo(
+      workflow.InvalidateAllSnapshotsForRepoRequest)
+      returns (workflow.InvalidateAllSnapshotsForRepoResponse);
+
+  // Workspace API
+  rpc GetWorkspace(workspace.GetWorkspaceRequest)
+      returns (workspace.GetWorkspaceResponse);
+  rpc SaveWorkspace(workspace.SaveWorkspaceRequest)
+      returns (workspace.SaveWorkspaceResponse);
+  rpc GetWorkspaceDirectory(workspace.GetWorkspaceDirectoryRequest)
+      returns (workspace.GetWorkspaceDirectoryResponse);
+  rpc GetWorkspaceFile(workspace.GetWorkspaceFileRequest)
+      returns (workspace.GetWorkspaceFileResponse);
+
+  // GitHub account API
+  // Note: GitHub account linking is accomplished via HTTP redirect flow
+  rpc UnlinkGitHubAccount(github.UnlinkGitHubAccountRequest)
+      returns (github.UnlinkGitHubAccountResponse);
+
+  // GitHub app link API
+  rpc LinkGitHubAppInstallation(github.LinkAppInstallationRequest)
+      returns (github.LinkAppInstallationResponse);
+  rpc GetGitHubAppInstallations(github.GetAppInstallationsRequest)
+      returns (github.GetAppInstallationsResponse);
+  rpc UnlinkGitHubAppInstallation(github.UnlinkAppInstallationRequest)
+      returns (github.UnlinkAppInstallationResponse);
+
+  // Linked Git repositories API
+  rpc GetLinkedGitHubRepos(github.GetLinkedReposRequest)
+      returns (github.GetLinkedReposResponse);
+  rpc LinkGitHubRepo(github.LinkRepoRequest) returns (github.LinkRepoResponse);
+  rpc UnlinkGitHubRepo(github.UnlinkRepoRequest)
+      returns (github.UnlinkRepoResponse);
+
+  // Installation-repos API (authenticates w/ GitHub using
+  // installation access token)
+  rpc GetAccessibleGitHubRepos(github.GetAccessibleReposRequest)
+      returns (github.GetAccessibleReposResponse);
+
+  // Runner API
+  rpc Run(runner.RunRequest) returns (runner.RunResponse);
+
+  // Eventlog API
+  rpc GetEventLogChunk(eventlog.GetEventLogChunkRequest)
+      returns (eventlog.GetEventLogChunkResponse);
+  rpc GetEventLog(eventlog.GetEventLogChunkRequest)
+      returns (stream eventlog.GetEventLogChunkResponse);
+
+  // Usage API
+  rpc GetUsage(usage.GetUsageRequest) returns (usage.GetUsageResponse);
+
+  // Quota API
+  rpc GetNamespace(quota.GetNamespaceRequest)
+      returns (quota.GetNamespaceResponse);
+
+  rpc RemoveNamespace(quota.RemoveNamespaceRequest)
+      returns (quota.RemoveNamespaceResponse);
+
+  rpc ModifyNamespace(quota.ModifyNamespaceRequest)
+      returns (quota.ModifyNamespaceResponse);
+
+  rpc ApplyBucket(quota.ApplyBucketRequest) returns (quota.ApplyBucketResponse);
+
+  // Secrets API
+  rpc GetPublicKey(secrets.GetPublicKeyRequest)
+      returns (secrets.GetPublicKeyResponse);
+  rpc ListSecrets(secrets.ListSecretsRequest)
+      returns (secrets.ListSecretsResponse);
+  rpc UpdateSecret(secrets.UpdateSecretRequest)
+      returns (secrets.UpdateSecretResponse);
+  rpc DeleteSecret(secrets.DeleteSecretRequest)
+      returns (secrets.DeleteSecretResponse);
+
+  // Suggestion API
+  rpc GetSuggestion(suggestion.GetSuggestionRequest)
+      returns (suggestion.GetSuggestionResponse);
+
+  // Codesearch and Kythe API
+  rpc Search(search.SearchRequest) returns (search.SearchResponse);
+  rpc KytheProxy(search.KytheRequest) returns (search.KytheResponse);
+
+  // Encryption API
+  rpc SetEncryptionConfig(encryption.SetEncryptionConfigRequest)
+      returns (encryption.SetEncryptionConfigResponse);
+  rpc GetEncryptionConfig(encryption.GetEncryptionConfigRequest)
+      returns (encryption.GetEncryptionConfigResponse);
+
+  // Audit log API.
+  rpc GetAuditLogs(auditlog.GetAuditLogsRequest)
+      returns (auditlog.GetAuditLogsResponse);
+
+  // IP rule API.
+  rpc GetIPRules(iprules.GetRulesRequest) returns (iprules.GetRulesResponse);
+  rpc AddIPRule(iprules.AddRuleRequest) returns (iprules.AddRuleResponse);
+  rpc UpdateIPRule(iprules.UpdateRuleRequest)
+      returns (iprules.UpdateRuleResponse);
+  rpc DeleteIPRule(iprules.DeleteRuleRequest)
+      returns (iprules.DeleteRuleResponse);
+  rpc GetIPRulesConfig(iprules.GetRulesConfigRequest)
+      returns (iprules.GetRulesConfigResponse);
+  rpc SetIPRulesConfig(iprules.SetRulesConfigRequest)
+      returns (iprules.SetRulesConfigResponse);
+
+  // Repo API.
+  rpc CreateRepo(repo.CreateRepoRequest) returns (repo.CreateRepoResponse);
+
+  // GitHub passthrough API.
+  rpc GetGithubUserInstallations(github.GetGithubUserInstallationsRequest)
+      returns (github.GetGithubUserInstallationsResponse);
+  rpc GetGithubUser(github.GetGithubUserRequest)
+      returns (github.GetGithubUserResponse);
+  rpc GetGithubRepo(github.GetGithubRepoRequest)
+      returns (github.GetGithubRepoResponse);
+  rpc GetGithubContent(github.GetGithubContentRequest)
+      returns (github.GetGithubContentResponse);
+  rpc GetGithubTree(github.GetGithubTreeRequest)
+      returns (github.GetGithubTreeResponse);
+  rpc CreateGithubTree(github.CreateGithubTreeRequest)
+      returns (github.CreateGithubTreeResponse);
+  rpc GetGithubBlob(github.GetGithubBlobRequest)
+      returns (github.GetGithubBlobResponse);
+  rpc CreateGithubBlob(github.CreateGithubBlobRequest)
+      returns (github.CreateGithubBlobResponse);
+  rpc CreateGithubPull(github.CreateGithubPullRequest)
+      returns (github.CreateGithubPullResponse);
+  rpc MergeGithubPull(github.MergeGithubPullRequest)
+      returns (github.MergeGithubPullResponse);
+  rpc GetGithubCompare(github.GetGithubCompareRequest)
+      returns (github.GetGithubCompareResponse);
+  rpc GetGithubForks(github.GetGithubForksRequest)
+      returns (github.GetGithubForksResponse);
+  rpc CreateGithubFork(github.CreateGithubForkRequest)
+      returns (github.CreateGithubForkResponse);
+  rpc GetGithubCommits(github.GetGithubCommitsRequest)
+      returns (github.GetGithubCommitsResponse);
+  rpc CreateGithubCommit(github.CreateGithubCommitRequest)
+      returns (github.CreateGithubCommitResponse);
+  rpc UpdateGithubRef(github.UpdateGithubRefRequest)
+      returns (github.UpdateGithubRefResponse);
+  rpc CreateGithubRef(github.CreateGithubRefRequest)
+      returns (github.CreateGithubRefResponse);
+  rpc GetGithubPullRequest(github.GetGithubPullRequestRequest)
+      returns (github.GetGithubPullRequestResponse);
+  rpc GetGithubPullRequestDetails(github.GetGithubPullRequestDetailsRequest)
+      returns (github.GetGithubPullRequestDetailsResponse);
+  rpc CreateGithubPullRequestComment(
+      github.CreateGithubPullRequestCommentRequest)
+      returns (github.CreateGithubPullRequestCommentResponse);
+  rpc UpdateGithubPullRequestComment(
+      github.UpdateGithubPullRequestCommentRequest)
+      returns (github.UpdateGithubPullRequestCommentResponse);
+  rpc DeleteGithubPullRequestComment(
+      github.DeleteGithubPullRequestCommentRequest)
+      returns (github.DeleteGithubPullRequestCommentResponse);
+  rpc SendGithubPullRequestReview(github.SendGithubPullRequestReviewRequest)
+      returns (github.SendGithubPullRequestReviewResponse);
+
+  // GCP API
+  rpc GetGCPProject(gcp.GetGCPProjectRequest)
+      returns (gcp.GetGCPProjectResponse);
+}

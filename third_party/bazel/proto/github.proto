@@ -1,0 +1,701 @@
+syntax = "proto3";
+
+import "proto/context.proto";
+
+package github;
+
+// UnlinkGitHubAccountRequest is a request to unlink the GitHub account
+// associated with the group selected in the request context.
+message UnlinkGitHubAccountRequest {
+  context.RequestContext request_context = 1;
+
+  // Whether to unlink the user-level account.
+  bool unlink_user_account = 2;
+}
+
+message UnlinkGitHubAccountResponse {
+  context.ResponseContext response_context = 1;
+
+  // Warnings encountered while unlinking the account. For example, we may fail
+  // to delete webhooks if the linked GitHub token has already been revoked via
+  // the GitHub UI.
+  repeated string warning = 2;
+}
+
+// GitHub App installations API.
+//
+// Users can use GitHub to install and uninstall the BuildBuddy GitHub App,
+// without using the BuildBuddy UI as an entrypoint. After installing the app on
+// GitHub, the user is redirected by GitHub back to the app, which uses these
+// APIs to "link" the new installation to the currently selected organization.
+//
+// A linked installation allows any build within the org to get installation
+// access tokens. For example, when running an authenticated build with ROLE=CI,
+// the commit status reporter will attempt to authorize via an app installation
+// token associated with the repository, by parsing the repo URL owner (username
+// or org name) and looking for a BuildBuddy-linked installation matching that
+// owner.
+//
+// An app installation can only be linked to one BuildBuddy org. These APIs can
+// be used to re-assign the org that an installation is linked to, or to unlink
+// an installation from an org (note that unlinking is not the same as
+// uninstalling).
+
+// A request to link a GitHub App installation to the user's currently selected
+// BuildBuddy organization.
+//
+// The user must have a personal GitHub account linked to BuildBuddy, and that
+// account must have access to the installation ID.
+message LinkAppInstallationRequest {
+  context.RequestContext request_context = 1;
+
+  // The installation ID to link.
+  // Required.
+  int64 installation_id = 2;
+}
+
+message LinkAppInstallationResponse {
+  context.ResponseContext response_context = 1;
+}
+
+message AppInstallation {
+  // The GitHub App installation ID.
+  int64 installation_id = 1;
+
+  // The GitHub username or organization where the app is installed.
+  // This will be unique for each installation.
+  string owner = 2;
+
+  // The group ID to which the installation is linked.
+  string group_id = 3;
+}
+
+// A request to list GitHub App installations accessible to user as well as
+// installations linked to the org (which may or may not be directly accessible
+// to the user).
+//
+// Installations are returned for all groups that are accessible to the user, so
+// that the user can get a clear view of which installations are linked to which
+// orgs, without needing to switch orgs.
+message GetAppInstallationsRequest {
+  context.RequestContext request_context = 1;
+}
+
+message GetAppInstallationsResponse {
+  context.ResponseContext response_context = 1;
+
+  // The installations available to the user.
+  repeated AppInstallation installations = 2;
+}
+
+// A request to unlink a GitHub App installation from the authenticated org.
+//
+// The authenticated user must have access to the org that the installation is
+// linked to. If the authenticated user has access to the installation but not
+// the org, they can instead uninstall the app via GitHub.
+//
+// Unlinking an installation does not automatically unlink all repositories
+// associated with the installation. However, members of the organization will
+// no longer be able to get repository access tokens (unless the installation is
+// re-linked).
+message UnlinkAppInstallationRequest {
+  context.RequestContext request_context = 1;
+
+  // The installation ID to unlink.
+  int64 installation_id = 2;
+}
+
+message UnlinkAppInstallationResponse {
+  context.ResponseContext response_context = 1;
+}
+
+// Git repositories API.
+//
+// For now, Git repositories have to be explicitly configured in order to enable
+// BuildBuddy workflows.
+
+// A request to list repos accessible to the given installation ID.
+message GetAccessibleReposRequest {
+  context.RequestContext request_context = 1;
+
+  // The app installation ID. The authenticated user must have a linked GitHub
+  // account which has access to the installation, or an error is returned.
+  //
+  // Required.
+  int64 installation_id = 2;
+
+  // The plain text search query attempting to match all or part of the repo
+  // name.
+  //
+  // Optional.
+  string query = 3;
+}
+
+message GetAccessibleReposResponse {
+  context.ResponseContext response_context = 1;
+
+  repeated string repo_urls = 2;
+}
+
+// A request to list the repos linked to the BuildBuddy org.
+message GetLinkedReposRequest {
+  context.RequestContext request_context = 1;
+}
+
+message GetLinkedReposResponse {
+  context.ResponseContext response_context = 1;
+
+  repeated string repo_urls = 2;
+}
+
+// A request to link a repo to the authenticated org.
+//
+// Linking a repo effectively enables workflows for the repository. Once a repo
+// is linked, we start listening to webhook events which might trigger the
+// workflow (such as push and pull_request), and then fetch the buildbuddy.yaml
+// file using a linked installation access token.
+message LinkRepoRequest {
+  context.RequestContext request_context = 1;
+
+  // The repo URL to link. A GitHub App installation with access to the repo
+  // must be linked to the organization, otherwise an error is returned.
+  string repo_url = 2;
+}
+
+message LinkRepoResponse {
+  context.ResponseContext response_context = 1;
+}
+
+// A request to unlink a repo from the authenticated org.
+message UnlinkRepoRequest {
+  context.RequestContext request_context = 1;
+
+  // The URL of the repo to unlink.
+  string repo_url = 2;
+}
+
+message UnlinkRepoResponse {
+  context.ResponseContext response_context = 1;
+}
+
+// GET /user/installations
+message GetGithubUserInstallationsRequest {
+  context.RequestContext request_context = 1;
+}
+
+message UserInstallation {
+  int64 id = 1;
+  string login = 2;
+  string url = 3;
+  string target_type = 4;
+  UserInstallationPermissions permissions = 5;
+}
+
+message UserInstallationPermissions {
+  string administration = 1;
+  string repository_hooks = 2;
+  string pull_requests = 3;
+}
+
+message GetGithubUserInstallationsResponse {
+  context.ResponseContext response_context = 1;
+  repeated UserInstallation installations = 2;
+}
+
+// GET /user
+message GetGithubUserRequest {
+  context.RequestContext request_context = 1;
+}
+
+message GetGithubUserResponse {
+  context.ResponseContext response_context = 1;
+  string name = 2;
+  string login = 3;
+  string avatar_url = 4;
+}
+
+// GET /repos/{owner}/{repo}
+message GetGithubRepoRequest {
+  context.RequestContext request_context = 1;
+  string owner = 2;
+  string repo = 3;
+}
+
+message GetGithubRepoResponse {
+  context.ResponseContext response_context = 1;
+  string default_branch = 2;
+  RepoPermissions permissions = 4;
+}
+
+message RepoPermissions {
+  bool push = 1;
+}
+
+// GET /repos/{owner}/{repo}/contents/{path}
+message GetGithubContentRequest {
+  context.RequestContext request_context = 1;
+  string owner = 2;
+  string repo = 3;
+  string path = 4;
+  string ref = 5;
+
+  // If true, the request will only check for file existence and not return
+  // contents.
+  bool existence_only = 6;
+}
+
+message GetGithubContentResponse {
+  context.ResponseContext response_context = 1;
+  bytes content = 2;
+}
+
+// GET /repos/{owner}/{repo}/git/trees/{ref}
+message GetGithubTreeRequest {
+  context.RequestContext request_context = 1;
+  string owner = 2;
+  string repo = 3;
+  string ref = 4;
+}
+
+message GetGithubTreeResponse {
+  context.ResponseContext response_context = 1;
+  string sha = 2;
+  repeated TreeNode nodes = 3;
+}
+
+message TreeNode {
+  string path = 1;
+  string sha = 2;
+  string type = 3;
+  string mode = 4;
+  bytes content = 5;
+  int64 size = 6;
+}
+
+// POST /repos/{owner}/{repo}/git/trees
+message CreateGithubTreeRequest {
+  context.RequestContext request_context = 1;
+  string owner = 2;
+  string repo = 3;
+  string base_tree = 4;
+  repeated TreeNode nodes = 5;
+}
+
+message CreateGithubTreeResponse {
+  context.ResponseContext response_context = 1;
+  string sha = 2;
+}
+
+// GET /repos/{owner}/{repo}/git/blobs/{file_sha}
+message GetGithubBlobRequest {
+  context.RequestContext request_context = 1;
+  string owner = 2;
+  string repo = 3;
+  string sha = 4;
+}
+
+message GetGithubBlobResponse {
+  context.ResponseContext response_context = 1;
+  bytes content = 2;
+}
+
+// POST /repos/{owner}/{repo}/git/blobs
+message CreateGithubBlobRequest {
+  context.RequestContext request_context = 1;
+  string owner = 2;
+  string repo = 3;
+  bytes content = 4;
+}
+
+message CreateGithubBlobResponse {
+  context.ResponseContext response_context = 1;
+  string sha = 5;
+}
+
+// POST /repos/{owner}/{repo}/pulls
+message CreateGithubPullRequest {
+  context.RequestContext request_context = 1;
+  string owner = 2;
+  string repo = 3;
+  string head = 4;
+  string base = 5;
+  string title = 6;
+  string body = 7;
+  bool draft = 8;
+}
+
+message CreateGithubPullResponse {
+  context.ResponseContext response_context = 1;
+  string url = 2;
+  string ref = 4;
+  int64 pull_number = 3;
+}
+
+// PUT /repos/{owner}/{repo}/pulls/{pull_number}/merge
+message MergeGithubPullRequest {
+  context.RequestContext request_context = 1;
+  string owner = 2;
+  string repo = 3;
+  int64 pull_number = 4;
+}
+
+message MergeGithubPullResponse {
+  context.ResponseContext response_context = 1;
+}
+
+// GET /repos/{owner}/{repo}/compare/{basehead}
+message GetGithubCompareRequest {
+  context.RequestContext request_context = 1;
+  string owner = 2;
+  string repo = 3;
+  string base = 4;
+  string head = 5;
+}
+
+message GetGithubCompareResponse {
+  context.ResponseContext response_context = 1;
+  int64 ahead_by = 2;
+  repeated Commit commits = 3;
+  repeated FileSummary files = 5;
+
+  reserved 4;
+}
+
+message Commit {
+  string sha = 1;
+  string tree_sha = 2;
+  string message = 3;
+}
+
+// GET /repos/{owner}/{repo}/forks
+message GetGithubForksRequest {
+  context.RequestContext request_context = 1;
+  string owner = 2;
+  string repo = 3;
+}
+
+message GetGithubForksResponse {
+  context.ResponseContext response_context = 1;
+  repeated Fork forks = 2;
+}
+
+message Fork {
+  string owner = 1;
+}
+
+// POST /repos/{owner}/{repo}/forks
+message CreateGithubForkRequest {
+  context.RequestContext request_context = 1;
+  string owner = 2;
+  string repo = 3;
+}
+
+message CreateGithubForkResponse {
+  context.ResponseContext response_context = 1;
+}
+
+// GET /repos/{owner}/{repo}/commits
+message GetGithubCommitsRequest {
+  context.RequestContext request_context = 1;
+  string owner = 2;
+  string repo = 3;
+  string sha = 4;
+  int64 per_page = 5;
+}
+
+message GetGithubCommitsResponse {
+  context.ResponseContext response_context = 1;
+  repeated Commit commits = 2;
+}
+
+// POST /repos/{owner}/{repo}/git/commits
+message CreateGithubCommitRequest {
+  context.RequestContext request_context = 1;
+  string owner = 2;
+  string repo = 3;
+  string message = 4;
+  string tree = 5;
+  repeated string parents = 6;
+}
+
+message CreateGithubCommitResponse {
+  context.ResponseContext response_context = 1;
+  string sha = 2;
+}
+
+// PATCH /repos/{owner}/{repo}/git/refs/heads/{head}
+message UpdateGithubRefRequest {
+  context.RequestContext request_context = 1;
+  string owner = 2;
+  string repo = 3;
+  string sha = 4;
+  string head = 5;
+  bool force = 6;
+}
+
+message UpdateGithubRefResponse {
+  context.ResponseContext response_context = 1;
+}
+
+// POST /repos/{owner}/{repo}/git/refs
+message CreateGithubRefRequest {
+  context.RequestContext request_context = 1;
+  string owner = 2;
+  string repo = 3;
+  string sha = 4;
+  string ref = 5;
+}
+
+message CreateGithubRefResponse {
+  context.ResponseContext response_context = 1;
+}
+
+message PullRequest {
+  string owner = 11;
+  string repo = 12;
+  uint64 number = 1;
+  string title = 2;
+  string body = 3;
+  string author = 4;
+  map<string, Review> reviews = 6;
+  int64 updated_at_usec = 7;
+  int64 additions = 8;
+  int64 deletions = 9;
+  bool mergeable = 13;
+
+  reserved 5, 10;
+}
+
+message Review {
+  string status = 1;
+  int64 submitted_at_usec = 2;
+  bool requested = 3;
+  bool isCurrentUser = 4;
+}
+
+message GetGithubPullRequestRequest {
+  context.RequestContext request_context = 1;
+
+  // The Github user whose PR dashboard we're fetching.  If this isn't
+  // specified, the logged in user's dashboard will be returned.  An error will
+  // be returned if the user hasn't linked their Github account.
+  string user = 2;
+}
+
+message GetGithubPullRequestResponse {
+  context.ResponseContext response_context = 1;
+  repeated PullRequest outgoing = 3;
+  repeated PullRequest incoming = 4;
+  repeated PullRequest pending = 5;
+}
+
+message GetGithubPullRequestDetailsRequest {
+  context.RequestContext request_context = 1;
+  string owner = 2;
+  string repo = 3;
+  int64 pull = 4;
+}
+
+message Reviewer {
+  string login = 1;
+  bool attention = 2;
+  bool approved = 3;
+}
+
+enum ActionStatusState {
+  ACTION_STATUS_STATE_UNKNOWN = 0;
+  ACTION_STATUS_STATE_SUCCESS = 1;
+  ACTION_STATUS_STATE_FAILURE = 2;
+  ACTION_STATUS_STATE_PENDING = 3;
+  ACTION_STATUS_STATE_NEUTRAL = 4;
+}
+
+message ActionStatus {
+  string name = 1;
+  ActionStatusState status = 2;
+  string url = 3;
+}
+
+enum FileChangeType {
+  FILE_CHANGE_TYPE_UNKNOWN = 0;
+  FILE_CHANGE_TYPE_ADDED = 1;
+  FILE_CHANGE_TYPE_REMOVED = 2;
+  FILE_CHANGE_TYPE_MODIFIED = 3;
+  FILE_CHANGE_TYPE_RENAMED = 4;
+  FILE_CHANGE_TYPE_COPIED = 5;
+  FILE_CHANGE_TYPE_UNCHANGED = 6;
+}
+
+// A summary of the changes to a file contained in a PR.
+// All fields are computed between original and modified files as specified in
+// this message, which is not necessarily the base commit / head commit for the
+// pull request.
+message FileSummary {
+  string name = 1;
+  string modified_commit_sha = 6;
+
+  // The original name of the file, if the file moved--otherwise this will be
+  // the same as "name" above.
+  string original_name = 9;
+  string original_commit_sha = 7;
+
+  // The git-diff of modified_commit_sha and original_commit_sha for this file.
+  string patch = 5;
+  // Lines added between modified_commit_sha and original_commit_sha.
+  int64 additions = 2;
+  // Lines deleted between modified_commit_sha and original_commit_sha.
+  int64 deletions = 3;
+
+  FileChangeType change_type = 8;
+
+  string sha = 10;
+
+  reserved 4;  // formerly pr-level comment count.
+}
+
+message ReviewUser {
+  string login = 1;
+  bool bot = 2;
+}
+
+enum CommentSide {
+  RIGHT_SIDE = 0;
+  LEFT_SIDE = 1;
+}
+
+message CommentPosition {
+  int64 start_line = 1;
+  int64 end_line = 2;
+  CommentSide side = 3;
+}
+
+message Comment {
+  string id = 1;
+  string body = 2;
+  string path = 3;
+  string commit_sha = 4;
+  CommentPosition position = 5;
+
+  ReviewUser commenter = 6;
+  string review_id = 7;
+  int64 created_at_usec = 8;
+
+  string parent_comment_id = 9;
+  string thread_id = 10;
+
+  bool is_resolved = 11;
+}
+
+// Creates a draft comment on the specified PR at the specified location.  If
+// the review id isn't specified, a new draft review will be created.  It is
+// an error to not specify the review id if a review is already in progress,
+// since it is assumed the caller is out of sync with Github.
+message CreateGithubPullRequestCommentRequest {
+  context.RequestContext request_context = 1;
+
+  string owner = 2;
+  string repo = 3;
+  string pull_id = 4;
+
+  string path = 5;
+  string commit_sha = 6;
+  int64 line = 7;
+  CommentSide side = 8;
+
+  string body = 9;
+
+  // The review ID that the comment should be placed in--if it is not specified,
+  // a new draft review will be created containing this comment.
+  string review_id = 10;
+
+  // The comment thread that this comment is replying to, if any.
+  string thread_id = 11;
+}
+
+message CreateGithubPullRequestCommentResponse {
+  context.ResponseContext response_context = 1;
+  string review_id = 2;
+  string comment_id = 3;
+  Comment comment = 4;
+}
+
+message UpdateGithubPullRequestCommentRequest {
+  context.RequestContext request_context = 1;
+  string comment_id = 2;
+  string new_body = 3;
+}
+
+message UpdateGithubPullRequestCommentResponse {
+  context.ResponseContext response_context = 1;
+}
+
+message DeleteGithubPullRequestCommentRequest {
+  context.RequestContext request_context = 1;
+  string comment_id = 2;
+}
+
+message DeleteGithubPullRequestCommentResponse {
+  context.ResponseContext response_context = 1;
+}
+
+// Next ID: 24
+message GetGithubPullRequestDetailsResponse {
+  context.ResponseContext response_context = 1;
+
+  // The Github unique ID for this pull request.
+  string pull_id = 19;
+
+  string owner = 2;
+  string repo = 3;
+  int64 pull = 4;
+  string author = 5;
+  bool mergeable = 6;
+  bool submitted = 7;
+  repeated Reviewer reviewers = 8;
+  repeated ActionStatus action_statuses = 9;
+  repeated FileSummary files = 10;
+
+  string title = 11;
+  string body = 12;
+  string github_url = 13;
+
+  int64 created_at_usec = 14;
+  int64 updated_at_usec = 15;
+
+  string branch = 16;
+  string base_commit_sha = 21;
+  string head_commit_sha = 22;
+
+  // A sorted list of the commits in this PR (oldest comes first).
+  repeated Commit commits = 23;
+
+  repeated Comment comments = 17;
+
+  // The id of an ongoing review draft for the logged in user, if one is in
+  // progress.
+  string draft_review_id = 18;
+
+  // The Github login (username) of the user viewing this PR, based on the
+  // linked Github account.
+  string viewer_login = 20;
+}
+
+message SendGithubPullRequestReviewRequest {
+  context.RequestContext request_context = 1;
+  // The unique identifier of the review.  If this is not set, pull_request_id
+  // must be set AND this request must be a plain approval (approve == true)
+  string review_id = 2;
+
+  // The unique identifier of the pull request.
+  string pull_request_id = 4;
+
+  // If true, the review will approve the specified PR.
+  bool approve = 3;
+
+  // The main body of the reply--if not specified, we'll try to make one up.
+  string body = 5;
+}
+
+message SendGithubPullRequestReviewResponse {
+  context.ResponseContext response_context = 1;
+}

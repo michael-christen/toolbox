@@ -1,0 +1,118 @@
+syntax = "proto3";
+
+import "kythe/proto/filetree.proto";
+import "kythe/proto/graph.proto";
+import "kythe/proto/xref.proto";
+import "proto/context.proto";
+
+package search;
+
+message Query {
+  // Term contains a freeform text query.
+  string term = 1;
+}
+
+message Snippet {
+  string lines = 1;
+}
+
+// Next tag: 7
+message Result {
+  // The repository this result came from.
+  string owner = 6;
+
+  // The repository this result came from.
+  string repo = 1;
+
+  // The commit sha of the file.
+  string sha = 5;
+
+  // The name of the file the match was found in.
+  string filename = 2;
+
+  // Number of matches found in the file.
+  int32 match_count = 3;
+
+  // Snippets that can be displayed showing matching context.
+  repeated Snippet snippets = 4;
+}
+
+message SearchRequest {
+  context.RequestContext request_context = 1;
+
+  Query query = 2;
+
+  // Required. The search namespace to operate in. Namespaces are logically
+  // distinct domains. Documents indexed in one namespace are not visible from
+  // another. The search server does not itself apply restrictions on who can
+  // query -- so the application should enforce separation by putting users into
+  // different namespaces.
+  //
+  // Ex. "gr12345" or "anon", or "public" or "foobarbaz".
+  string namespace = 3;
+
+  // The maximum number of results to send back.
+  int32 num_results = 4;
+
+  // The offset to start sending results back from.
+  int32 offset = 5;
+}
+
+message ParsedQuery {
+  // raw query is the string entered by the user.
+  // Ex. "case:y lang:java System.out.println\(.*"
+  string raw_query = 1;
+
+  // parsed_query is the raw_query with all atoms extracted. For example, the
+  // parsed query, given the raw query above, would be:
+  // Ex. "System.out.println\(.*"
+  string parsed_query = 2;
+
+  // squery is the s-expression query evaluated against the index along with the
+  // parsed query.
+  // Ex. (:and (:eq * \"_ca\") (:eq * \"ach\") (:eq * \"bbl\"))
+  string squery = 3;
+}
+
+message Metric {
+  string name = 1;
+  int64 value = 2;
+}
+
+message PerformanceMetrics {
+  repeated Metric metrics = 1;
+}
+
+message SearchResponse {
+  context.ResponseContext response_context = 1;
+
+  repeated Result results = 2;
+
+  ParsedQuery parsed_query = 3;
+
+  PerformanceMetrics performance_metrics = 4;
+}
+
+message KytheRequest {
+  context.RequestContext request_context = 1;
+
+  oneof value {
+    kythe.proto.NodesRequest nodes_request = 2;
+    kythe.proto.DecorationsRequest decorations_request = 3;
+    kythe.proto.CrossReferencesRequest cross_references_request = 4;
+    kythe.proto.CorpusRootsRequest corpus_roots_request = 5;
+    kythe.proto.DirectoryRequest directory_request = 6;
+  }
+}
+
+message KytheResponse {
+  context.ResponseContext response_context = 1;
+
+  oneof value {
+    kythe.proto.NodesReply nodes_reply = 2;
+    kythe.proto.DecorationsReply decorations_reply = 3;
+    kythe.proto.CrossReferencesReply cross_references_reply = 4;
+    kythe.proto.CorpusRootsReply corpus_roots_reply = 5;
+    kythe.proto.DirectoryReply directory_reply = 6;
+  }
+}
