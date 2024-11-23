@@ -9,6 +9,9 @@ grpcio
 mypy
 protobuf
 types-protobuf
+# Make nice-looking table output
+tabulate
+
 # largely for development
 pytest
 black[jupyter]
