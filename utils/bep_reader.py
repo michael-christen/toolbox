@@ -2,18 +2,21 @@ import sys
 
 import tabulate
 
-from utils import proto
 from third_party.bazel.proto import build_event_stream_pb2
+from utils import proto
+
 
 def main() -> None:
     msgs = []
     label_to_runtime = {}
-    while msg := proto.read(sys.stdin.buffer, build_event_stream_pb2.BuildEvent):
+    while msg := proto.read(
+        sys.stdin.buffer, build_event_stream_pb2.BuildEvent
+    ):
         msgs.append(msg)
-        msg_id = msg.id.WhichOneof('id')
+        msg_id = msg.id.WhichOneof("id")
         # print(f'{msg_id=}')
         # XXX: Check for success
-        if msg_id == 'test_result':
+        if msg_id == "test_result":
             label = msg.id.test_result.label
             dt = msg.test_result.test_attempt_duration.ToTimedelta()
             # Accumulate multiple?
@@ -29,10 +32,10 @@ def main() -> None:
         #     # print(f'{msg=}')
         #     label_to_runtime[label] = dt
     table = sorted(label_to_runtime.items(), key=lambda kv: -kv[1])
-    print(tabulate.tabulate(table, headers=['Label', 'dt']))
+    print(tabulate.tabulate(table, headers=["Label", "dt"]))
 
     # print(f'Num Messages: {len(msgs)}')
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
