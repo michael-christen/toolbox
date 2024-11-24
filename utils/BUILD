@@ -1,4 +1,4 @@
-load("//bzl:py.bzl", "py_binary", "py_library")
+load("//bzl:py.bzl", "py_binary", "py_library", "py_test")
 
 package(default_visibility = ["//visibility:private"])
 
@@ -20,5 +20,14 @@ py_library(
     deps = [
         "@com_google_protobuf//:protobuf_python",
         "@pip//protobuf",
+    ],
+)
+
+py_test(
+    name = "proto_test",
+    srcs = ["proto_test.py"],
+    deps = [
+        ":proto",
+        "//examples/basic:hello_py_library",
     ],
 )
