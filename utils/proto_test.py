@@ -14,11 +14,20 @@ class TestProtoDelimited(unittest.TestCase):
         proto.write_delimited(buf, msg2)
 
         # Validate bytes themselves
-        expected_bytes = bytes([
-            # 3 bytes: field + varint
-            0x03, 0x08, 0xB9, 0x60,
-            # MSG 2
-            0x03, 0x08, 0x85, 0x35])
+        expected_bytes = bytes(
+            [
+                # 3 bytes: field + varint
+                0x03,
+                0x08,
+                0xB9,
+                0x60,
+                # MSG 2
+                0x03,
+                0x08,
+                0x85,
+                0x35,
+            ]
+        )
         self.assertEqual(expected_bytes, buf.getvalue())
 
         # Read from the same thing

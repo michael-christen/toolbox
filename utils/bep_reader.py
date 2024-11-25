@@ -11,7 +11,8 @@ from utils import proto
 def main() -> None:
     msgs = []
     label_to_runtime: dict[str, list[datetime.timedelta]] = (
-        collections.defaultdict(list))
+        collections.defaultdict(list)
+    )
     while msg := proto.read_delimited(
         sys.stdin.buffer, build_event_stream_pb2.BuildEvent
     ):

@@ -16,13 +16,17 @@ https://github.com/soulmachine/delimited-protobuf/blob/main/delimited_protobuf.p
   https://github.com/protocolbuffers/protobuf/blob/master/java/core/src/main/java/com/google/protobuf/MessageLite.java#L126
 """
 
-from typing import BinaryIO, Optional, Type, TypeVar
+from typing import BinaryIO
+from typing import Optional
+from typing import Type
+from typing import TypeVar
+
+from google.protobuf import message
 
 # NOTE: We use some internal mechanisms here for varint encoding, if we note
 # this as being an issue in the future, we can implement our own.
 from google.protobuf.internal import decoder
 from google.protobuf.internal import encoder
-from google.protobuf import message
 
 T = TypeVar("T", bound=message.Message)
 
