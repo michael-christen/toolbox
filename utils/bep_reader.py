@@ -1,3 +1,19 @@
+"""An example application that reads BEP binary files.
+
+This logs a nice table of targets' average test run time sorted by slowest
+first.
+
+Example:
+> bazel test //... --build_event_binary_file=test_all.pb
+> bazel run //utils:bep_reader < test_all.pb
+>
+
+ Label                                          dt
+ ---------------------------------------------  --------------
+ //:requirements_test                           0:01:20.341000
+ //examples/pigweed/modules/blinky:blinky_test  0:00:03.611000
+ //utils:graph_algorithms_test                  0:00:00.650000
+"""
 import collections
 import datetime
 import sys
