@@ -38,6 +38,7 @@ logger = logging.getLogger(__name__)
 def _get_rules(
     query_result: build_pb2.QueryResult
 ) -> dict[str, build_pb2.Rule]:
+    """Get rules by name"""
     rules = {}
 
     for i, target in enumerate(query_result.target):
@@ -64,6 +65,7 @@ def _get_rules(
         # - rule.configured_rule_input
         # - rule.default_setting
         rules[rule.name] = rule
+
     return rules
 
 
@@ -139,10 +141,6 @@ def dependency_analysis(
             raise AssertionError(f"Exception with {rule_name}") from e
     # Temporary way to export
     networkx.write_gml(graph, "/tmp/my.gml")
-
-    # predecessors, successors is immediate
-    # ancestors, descendants is all
-    # logger.debug(query_result)
 
 
 # def draw():
