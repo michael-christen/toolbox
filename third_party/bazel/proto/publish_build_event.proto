@@ -16,7 +16,7 @@ syntax = "proto3";
 
 package google.devtools.build.v1;
 
-import "proto/build_events.proto";
+import "third_party/bazel/proto/build_events.proto";
 import "google/api/annotations.proto";
 import "google/api/client.proto";
 import "google/api/field_behavior.proto";
