@@ -1,4 +1,4 @@
-load("//bzl:py.bzl", "py_binary", "py_library", "py_test")
+load("//bzl:py.bzl", "py_binary")
 
 package(default_visibility = ["//visibility:private"])
 
@@ -7,27 +7,8 @@ py_binary(
     srcs = ["bep_reader.py"],
     visibility = ["//:__subpackages__"],
     deps = [
-        ":proto",
         "//third_party/bazel/proto:build_event_stream_py_library",
+        "//third_party/delimited_protobuf",
         "@pip//tabulate",
-    ],
-)
-
-py_library(
-    name = "proto",
-    srcs = ["proto.py"],
-    visibility = ["//:__subpackages__"],
-    deps = [
-        "@com_google_protobuf//:protobuf_python",
-        "@pip//protobuf",
-    ],
-)
-
-py_test(
-    name = "proto_test",
-    srcs = ["proto_test.py"],
-    deps = [
-        ":proto",
-        "//examples/basic:hello_py_library",
     ],
 )

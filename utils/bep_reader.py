@@ -22,7 +22,7 @@ import sys
 import tabulate
 
 from third_party.bazel.proto import build_event_stream_pb2
-from utils import proto
+from third_party.delimited_protobuf import delimited_protobuf
 
 
 def main() -> None:
@@ -30,7 +30,7 @@ def main() -> None:
     label_to_runtime: dict[str, list[datetime.timedelta]] = (
         collections.defaultdict(list)
     )
-    while msg := proto.read_delimited(
+    while msg := delimited_protobuf.read_delimited(
         sys.stdin.buffer, build_event_stream_pb2.BuildEvent
     ):
         msgs.append(msg)
