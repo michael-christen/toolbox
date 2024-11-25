@@ -1,3 +1,28 @@
+"""Parse bazel query outputs
+
+A larger system description:
+- inputs:
+  - bazel query //... --ouput proto > query_result.pb
+    - the full dependency tree
+  - bazel test //... --build_event_binary_file=test_all.pb
+    - bazel run //utils:bep_reader < test_all.pb
+    - the execution time related to each test target
+  - git_utils.get_file_commit_map_from_follow
+    - how files have changed over time, can be used to generate
+      probabilities of files changing in the future
+- intermediates:
+  - representation for source files and bazel together
+- outputs:
+  - test targets:
+    - likelihood of executing
+      - expected value of runtime
+  - source files:
+    - cost in execution time of modification
+    - expected cost of file change (based on probability of change * cost)
+  - graph with the values above, we could take any set of file inputs and
+    describe cost
+  - graph that we could identify overly depended upon things
+"""
 import csv
 import logging
 import sys
@@ -10,11 +35,9 @@ from tools import bazel_utils
 logger = logging.getLogger(__name__)
 
 
-def dependency_analysis(
-    query_result: build_pb2.QueryResult, ignore_external: bool
-) -> None:
-    """Analyze the dependencies that we're getting to understant them."""
-    graph = networkx.DiGraph()
+def _get_rules(
+    query_result: build_pb2.QueryResult
+) -> dict[str, build_pb2.Rule]:
     rules = {}
 
     for i, target in enumerate(query_result.target):
@@ -41,7 +64,14 @@ def dependency_analysis(
         # - rule.configured_rule_input
         # - rule.default_setting
         rules[rule.name] = rule
+    return rules
 
+
+def get_dependency_digraph(
+    rules: dict[str, build_pb2.Rule], ignore_external: bool
+) -> networkx.DiGraph:
+    graph = networkx.DiGraph()
+    for rule in rules.values():
         # Specify X depends on Y as X is a parent of Y
         for rule_input in rule.rule_input:
             if ignore_external and rule_input.startswith("@"):
@@ -52,6 +82,15 @@ def dependency_analysis(
         # Still add this to the graph, even if no edges
         if not graph.has_node(rule.name):
             graph.add_node(rule.name)
+    return graph
+
+
+def dependency_analysis(
+    query_result: build_pb2.QueryResult, ignore_external: bool
+) -> None:
+    """Analyze the dependencies that we're getting to understand them."""
+    rules = _get_rules(query_result)
+    graph = get_dependency_digraph(rules, ignore_external=ignore_external)
 
     for node in networkx.dfs_postorder_nodes(graph):
         logger.debug(node)
