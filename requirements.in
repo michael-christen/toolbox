@@ -9,20 +9,10 @@ grpcio
 mypy
 protobuf
 types-protobuf
-
 # Analyze graphs easily
 # https://networkx.org/documentation/stable/index.html
 networkx[default]
-# Plots: https://matplotlib.org/stable/
-# Not the best, but so ubiquitous
-matplotlib
-# PyQt6
-# Error:   × Unable to run command:
-#   ├─▶ Conflicting symlinks found when attempting to create venv. More than one package provides the file at these paths
-#   ├─▶ rules_python~~pip~pip_311_pyqt6/site-packages/PyQt6/__init__.py
-#   ╰─▶ site-packages/PyQt6/__init__.py
-
-# InquirerPy
+# Make nice-looking table output
 tabulate
 
 # largely for development

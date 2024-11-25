@@ -23,18 +23,8 @@ py_binary(
     srcs = ["bep_reader.py"],
     visibility = ["//:__subpackages__"],
     deps = [
-        ":proto",
         "//third_party/bazel/proto:build_event_stream_py_library",
+        "//third_party/delimited_protobuf",
         "@pip//tabulate",
-    ],
-)
-
-py_library(
-    name = "proto",
-    srcs = ["proto.py"],
-    visibility = ["//:__subpackages__"],
-    deps = [
-        "@com_google_protobuf//:protobuf_python",
-        "@pip//protobuf",
     ],
 )
