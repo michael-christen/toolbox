@@ -37,3 +37,16 @@ class TestProtoDelimited(unittest.TestCase):
             expected_msg = expected_msgs.pop(0)
             self.assertEqual(r_msg, expected_msg)
         self.assertFalse(expected_msgs)
+
+    def test_read_varint(self) -> None:
+        buf = io.BytesIO()
+        buf.write(bytes([0x80, 0x01]))
+        buf.seek(0)
+        varint = delimited_protobuf._read_varint(buf)
+        self.assertEqual(0x80, varint)
+
+        buf = io.BytesIO()
+        buf.write(bytes([0x80]))
+        buf.seek(0)
+        with self.assertRaisesRegex(EOFError, "unexpected EOF"):
+            delimited_protobuf._read_varint(buf)
