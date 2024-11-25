@@ -1,11 +1,10 @@
-"""Describe a few graph algorithms I am running.
+"""A collecion of graph algorihms.
 
-The current (as of 2024-11-20) set of functions is intended for analyzing
-depency graphs. In particular for bazel dependency trees, I'd like to represent
-dependencies as children and I want to be able to answer the likelihood that a
-target is re-built given the likelihood that the children are changed as well
-as the duration of time spent from reverse dependencies if a given dependency
-changes.
+Some set of functions is intended for analyzing depency graphs. In particular
+for bazel dependency trees, I'd like to represent dependencies as children and
+I want to be able to answer the likelihood that a target is re-built given the
+likelihood that the children are changed as well as the duration of time spent
+from reverse dependencies if a given dependency changes.
 """
 
 from typing import TypeVar
@@ -60,7 +59,7 @@ def compute_group_duration(
 
     Group duration for a node N as a function GD:
 
-    GD(N) = D(N) * SUM{PARENTS(N)}
+    GD(N) = D(N) + SUM{PARENTS(N)}
 
     Arguments:
     - graph: A directed acyclic graph
