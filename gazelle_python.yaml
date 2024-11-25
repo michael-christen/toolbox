@@ -4035,6 +4035,8 @@ manifest:
     stack_data.serializing: stack_data
     stack_data.utils: stack_data
     stack_data.version: stack_data
+    tabulate: tabulate
+    tabulate.version: tabulate
     terminado: terminado
     terminado.management: terminado
     terminado.uimodule: terminado
@@ -4324,4 +4326,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: e90b3221ab3966a123e8693ea4183dec935e2dc69215d781ff33c3c3bde981bf
+integrity: cbec5633237b0f0aa03538b18ac82652f73610989dd6033ed60918051dd29059

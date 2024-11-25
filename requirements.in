@@ -12,6 +12,8 @@ types-protobuf
 # Analyze graphs easily
 # https://networkx.org/documentation/stable/index.html
 networkx[default]
+# Make nice-looking table output
+tabulate
 
 # largely for development
 pytest
