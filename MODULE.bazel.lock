@@ -53,7 +53,8 @@
     "https://bcr.bazel.build/modules/boringssl/0.0.0-20240530-2db0eb3/source.json": "0d413869349e82e5d679802abe9ce23e0326bbf56daa97ae9e7dbdcec72982fc",
     "https://bcr.bazel.build/modules/buildifier_prebuilt/6.1.2/MODULE.bazel": "2ef4962c8b0b6d8d21928a89190755619254459bc67f870dc0ccb9ba9952d444",
     "https://bcr.bazel.build/modules/buildifier_prebuilt/6.4.0/MODULE.bazel": "37389c6b5a40c59410b4226d3bb54b08637f393d66e2fa57925c6fcf68e64bf4",
-    "https://bcr.bazel.build/modules/buildifier_prebuilt/6.4.0/source.json": "83eb01b197ed0b392f797860c9da5ed1bf95f4d0ded994d694a3d44731275916",
+    "https://bcr.bazel.build/modules/buildifier_prebuilt/7.3.1/MODULE.bazel": "537faf0ad9f5892910074b8e43b4c91c96f1d5d86b6ed04bdbe40cf68aa48b68",
+    "https://bcr.bazel.build/modules/buildifier_prebuilt/7.3.1/source.json": "55153a5e6ca9c8a7e266c4b46b951e8a010d25ec6062bc35d5d4f89925796bad",
     "https://bcr.bazel.build/modules/buildozer/7.1.2/MODULE.bazel": "2e8dd40ede9c454042645fd8d8d0cd1527966aa5c919de86661e62953cd73d84",
     "https://bcr.bazel.build/modules/buildozer/7.1.2/source.json": "c9028a501d2db85793a6996205c8de120944f50a0d570438fcae0457a5f9d1f8",
     "https://bcr.bazel.build/modules/catch2/3.6.0/MODULE.bazel": "6a1536f01f4c7ede6f842099f53e7c27e17d43e0012ae195521d3572d1e00a0e",
@@ -143,8 +144,8 @@
     "https://bcr.bazel.build/modules/rules_multirun/0.9.0/source.json": "e882ba77962fa6c5fe68619e5c7d0374ec9a219fb8d03c42eadaf6d0243771bd",
     "https://bcr.bazel.build/modules/rules_multitool/0.4.0/MODULE.bazel": "15517987d5c00c9e7faab41fbe22ee67a350b6eabcc1e08baded5c6d9025897f",
     "https://bcr.bazel.build/modules/rules_multitool/0.4.0/source.json": "d73b450b7c6d9683e400d6cebc463fbc2b870cc5d8e2e75080d6278805aaab08",
-    "https://bcr.bazel.build/modules/rules_mypy/0.6.0/MODULE.bazel": "179e5a67e01e674e530cc07f03d6c4fca4bf256a49895e66f82b73ea98d4fd34",
-    "https://bcr.bazel.build/modules/rules_mypy/0.6.0/source.json": "88016682d771c5685903288f4d74aba0b7882990dcb86dfbc00d42d2f9c420f2",
+    "https://bcr.bazel.build/modules/rules_mypy/0.17.0/MODULE.bazel": "e7220bf58b050bedeb72fbc1e4fecc158cf908e9eb59c0ca38ebbb6fba244c2b",
+    "https://bcr.bazel.build/modules/rules_mypy/0.17.0/source.json": "ae334a730ce2ecb5dd7c4db55fddeb4b3a14a99818ad91a4fb45a7221b65176b",
     "https://bcr.bazel.build/modules/rules_nodejs/5.8.2/MODULE.bazel": "6bc03c8f37f69401b888023bf511cb6ee4781433b0cb56236b2e55a21e3a026a",
     "https://bcr.bazel.build/modules/rules_nodejs/5.8.2/source.json": "6e82cf5753d835ea18308200bc79b9c2e782efe2e2a4edc004a9162ca93382ca",
     "https://bcr.bazel.build/modules/rules_oci/1.7.4/MODULE.bazel": "2660ebc70c95c84c48f63391e01f7ea3d18c0844ffa2b9700c82c81c4b8f3879",
@@ -960,8 +961,8 @@
     },
     "@@buildifier_prebuilt~//:defs.bzl%buildifier_prebuilt_deps_extension": {
       "general": {
-        "bzlTransitiveDigest": "QuCD7ZHxC59z0Q/hZZp8bHaNJmvltDlo3OfiYVCZ9ew=",
-        "usagesDigest": "nThSTPRdiQbhDFl8FRM2nsKJftWMtPBQHrp/mdk716w=",
+        "bzlTransitiveDigest": "SioVUdstNY2CWYNM6iogSlEyxa5sbd3bnCRVDtXOX6E=",
+        "usagesDigest": "7y8d+NH/lOL6st0o3ouqoLk4c7QmdRM7lNm/chPWmFU=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
         "envVariables": {},
@@ -971,11 +972,11 @@
             "ruleClassName": "http_file",
             "attributes": {
               "urls": [
-                "https://github.com/bazelbuild/buildtools/releases/download/v6.4.0/buildozer-darwin-amd64"
+                "https://github.com/bazelbuild/buildtools/releases/download/v7.3.1/buildozer-darwin-amd64"
               ],
               "downloaded_file_path": "buildozer",
               "executable": true,
-              "sha256": "d29e347ecd6b5673d72cb1a8de05bf1b06178dd229ff5eb67fad5100c840cc8e"
+              "sha256": "854c9583efc166602276802658cef3f224d60898cfaa60630b33d328db3b0de2"
             }
           },
           "buildifier_linux_amd64": {
@@ -983,11 +984,11 @@
             "ruleClassName": "http_file",
             "attributes": {
               "urls": [
-                "https://github.com/bazelbuild/buildtools/releases/download/v6.4.0/buildifier-linux-amd64"
+                "https://github.com/bazelbuild/buildtools/releases/download/v7.3.1/buildifier-linux-amd64"
               ],
               "downloaded_file_path": "buildifier",
               "executable": true,
-              "sha256": "be63db12899f48600bad94051123b1fd7b5251e7661b9168582ce52396132e92"
+              "sha256": "5474cc5128a74e806783d54081f581662c4be8ae65022f557e9281ed5dc88009"
             }
           },
           "buildozer_darwin_arm64": {
@@ -995,11 +996,11 @@
             "ruleClassName": "http_file",
             "attributes": {
               "urls": [
-                "https://github.com/bazelbuild/buildtools/releases/download/v6.4.0/buildozer-darwin-arm64"
+                "https://github.com/bazelbuild/buildtools/releases/download/v7.3.1/buildozer-darwin-arm64"
               ],
               "downloaded_file_path": "buildozer",
               "executable": true,
-              "sha256": "9b9e71bdbec5e7223871e913b65d12f6d8fa026684daf991f00e52ed36a6978d"
+              "sha256": "31b1bfe20d7d5444be217af78f94c5c43799cdf847c6ce69794b7bf3319c5364"
             }
           },
           "buildozer_linux_amd64": {
@@ -1007,11 +1008,11 @@
             "ruleClassName": "http_file",
             "attributes": {
               "urls": [
-                "https://github.com/bazelbuild/buildtools/releases/download/v6.4.0/buildozer-linux-amd64"
+                "https://github.com/bazelbuild/buildtools/releases/download/v7.3.1/buildozer-linux-amd64"
               ],
               "downloaded_file_path": "buildozer",
               "executable": true,
-              "sha256": "8dfd6345da4e9042daa738d7fdf34f699c5dfce4632f7207956fceedd8494119"
+              "sha256": "3305e287b3fcc68b9a35fd8515ee617452cd4e018f9e6886b6c7cdbcba8710d4"
             }
           },
           "buildozer_windows_amd64": {
@@ -1019,11 +1020,11 @@
             "ruleClassName": "http_file",
             "attributes": {
               "urls": [
-                "https://github.com/bazelbuild/buildtools/releases/download/v6.4.0/buildozer-windows-amd64.exe"
+                "https://github.com/bazelbuild/buildtools/releases/download/v7.3.1/buildozer-windows-amd64.exe"
               ],
               "downloaded_file_path": "buildozer.exe",
               "executable": true,
-              "sha256": "e7f05bf847f7c3689dd28926460ce6e1097ae97380ac8e6ae7147b7b706ba19b"
+              "sha256": "58d41ce53257c5594c9bc86d769f580909269f68de114297f46284fbb9023dcf"
             }
           },
           "buildozer_linux_arm64": {
@@ -1031,11 +1032,11 @@
             "ruleClassName": "http_file",
             "attributes": {
               "urls": [
-                "https://github.com/bazelbuild/buildtools/releases/download/v6.4.0/buildozer-linux-arm64"
+                "https://github.com/bazelbuild/buildtools/releases/download/v7.3.1/buildozer-linux-arm64"
               ],
               "downloaded_file_path": "buildozer",
               "executable": true,
-              "sha256": "6559558fded658c8fa7432a9d011f7c4dcbac6b738feae73d2d5c352e5f605fa"
+              "sha256": "0b5a2a717ac4fc911e1fec8d92af71dbb4fe95b10e5213da0cc3d56cea64a328"
             }
           },
           "buildifier_windows_amd64": {
@@ -1043,18 +1044,18 @@
             "ruleClassName": "http_file",
             "attributes": {
               "urls": [
-                "https://github.com/bazelbuild/buildtools/releases/download/v6.4.0/buildifier-windows-amd64.exe"
+                "https://github.com/bazelbuild/buildtools/releases/download/v7.3.1/buildifier-windows-amd64.exe"
               ],
               "downloaded_file_path": "buildifier.exe",
               "executable": true,
-              "sha256": "da8372f35e34b65fb6d997844d041013bb841e55f58b54d596d35e49680fe13c"
+              "sha256": "370cd576075ad29930a82f5de132f1a1de4084c784a82514bd4da80c85acf4a8"
             }
           },
           "buildifier_prebuilt_toolchains": {
             "bzlFile": "@@buildifier_prebuilt~//:defs.bzl",
             "ruleClassName": "_buildifier_toolchain_setup",
             "attributes": {
-              "assets_json": "[{\"arch\":\"amd64\",\"name\":\"buildifier\",\"platform\":\"darwin\",\"sha256\":\"eeb47b2de27f60efe549348b183fac24eae80f1479e8b06cac0799c486df5bed\",\"version\":\"v6.4.0\"},{\"arch\":\"arm64\",\"name\":\"buildifier\",\"platform\":\"darwin\",\"sha256\":\"fa07ba0d20165917ca4cc7609f9b19a8a4392898148b7babdf6bb2a7dd963f05\",\"version\":\"v6.4.0\"},{\"arch\":\"amd64\",\"name\":\"buildifier\",\"platform\":\"linux\",\"sha256\":\"be63db12899f48600bad94051123b1fd7b5251e7661b9168582ce52396132e92\",\"version\":\"v6.4.0\"},{\"arch\":\"arm64\",\"name\":\"buildifier\",\"platform\":\"linux\",\"sha256\":\"18540fc10f86190f87485eb86963e603e41fa022f88a2d1b0cf52ff252b5e1dd\",\"version\":\"v6.4.0\"},{\"arch\":\"amd64\",\"name\":\"buildifier\",\"platform\":\"windows\",\"sha256\":\"da8372f35e34b65fb6d997844d041013bb841e55f58b54d596d35e49680fe13c\",\"version\":\"v6.4.0\"},{\"arch\":\"amd64\",\"name\":\"buildozer\",\"platform\":\"darwin\",\"sha256\":\"d29e347ecd6b5673d72cb1a8de05bf1b06178dd229ff5eb67fad5100c840cc8e\",\"version\":\"v6.4.0\"},{\"arch\":\"arm64\",\"name\":\"buildozer\",\"platform\":\"darwin\",\"sha256\":\"9b9e71bdbec5e7223871e913b65d12f6d8fa026684daf991f00e52ed36a6978d\",\"version\":\"v6.4.0\"},{\"arch\":\"amd64\",\"name\":\"buildozer\",\"platform\":\"linux\",\"sha256\":\"8dfd6345da4e9042daa738d7fdf34f699c5dfce4632f7207956fceedd8494119\",\"version\":\"v6.4.0\"},{\"arch\":\"arm64\",\"name\":\"buildozer\",\"platform\":\"linux\",\"sha256\":\"6559558fded658c8fa7432a9d011f7c4dcbac6b738feae73d2d5c352e5f605fa\",\"version\":\"v6.4.0\"},{\"arch\":\"amd64\",\"name\":\"buildozer\",\"platform\":\"windows\",\"sha256\":\"e7f05bf847f7c3689dd28926460ce6e1097ae97380ac8e6ae7147b7b706ba19b\",\"version\":\"v6.4.0\"}]"
+              "assets_json": "[{\"arch\":\"amd64\",\"name\":\"buildifier\",\"platform\":\"darwin\",\"sha256\":\"375f823103d01620aaec20a0c29c6cbca99f4fd0725ae30b93655c6704f44d71\",\"version\":\"v7.3.1\"},{\"arch\":\"arm64\",\"name\":\"buildifier\",\"platform\":\"darwin\",\"sha256\":\"5a6afc6ac7a09f5455ba0b89bd99d5ae23b4174dc5dc9d6c0ed5ce8caac3f813\",\"version\":\"v7.3.1\"},{\"arch\":\"amd64\",\"name\":\"buildifier\",\"platform\":\"linux\",\"sha256\":\"5474cc5128a74e806783d54081f581662c4be8ae65022f557e9281ed5dc88009\",\"version\":\"v7.3.1\"},{\"arch\":\"arm64\",\"name\":\"buildifier\",\"platform\":\"linux\",\"sha256\":\"0bf86c4bfffaf4f08eed77bde5b2082e4ae5039a11e2e8b03984c173c34a561c\",\"version\":\"v7.3.1\"},{\"arch\":\"amd64\",\"name\":\"buildifier\",\"platform\":\"windows\",\"sha256\":\"370cd576075ad29930a82f5de132f1a1de4084c784a82514bd4da80c85acf4a8\",\"version\":\"v7.3.1\"},{\"arch\":\"amd64\",\"name\":\"buildozer\",\"platform\":\"darwin\",\"sha256\":\"854c9583efc166602276802658cef3f224d60898cfaa60630b33d328db3b0de2\",\"version\":\"v7.3.1\"},{\"arch\":\"arm64\",\"name\":\"buildozer\",\"platform\":\"darwin\",\"sha256\":\"31b1bfe20d7d5444be217af78f94c5c43799cdf847c6ce69794b7bf3319c5364\",\"version\":\"v7.3.1\"},{\"arch\":\"amd64\",\"name\":\"buildozer\",\"platform\":\"linux\",\"sha256\":\"3305e287b3fcc68b9a35fd8515ee617452cd4e018f9e6886b6c7cdbcba8710d4\",\"version\":\"v7.3.1\"},{\"arch\":\"arm64\",\"name\":\"buildozer\",\"platform\":\"linux\",\"sha256\":\"0b5a2a717ac4fc911e1fec8d92af71dbb4fe95b10e5213da0cc3d56cea64a328\",\"version\":\"v7.3.1\"},{\"arch\":\"amd64\",\"name\":\"buildozer\",\"platform\":\"windows\",\"sha256\":\"58d41ce53257c5594c9bc86d769f580909269f68de114297f46284fbb9023dcf\",\"version\":\"v7.3.1\"}]"
             }
           },
           "buildifier_darwin_amd64": {
@@ -1062,11 +1063,11 @@
             "ruleClassName": "http_file",
             "attributes": {
               "urls": [
-                "https://github.com/bazelbuild/buildtools/releases/download/v6.4.0/buildifier-darwin-amd64"
+                "https://github.com/bazelbuild/buildtools/releases/download/v7.3.1/buildifier-darwin-amd64"
               ],
               "downloaded_file_path": "buildifier",
               "executable": true,
-              "sha256": "eeb47b2de27f60efe549348b183fac24eae80f1479e8b06cac0799c486df5bed"
+              "sha256": "375f823103d01620aaec20a0c29c6cbca99f4fd0725ae30b93655c6704f44d71"
             }
           },
           "buildifier_darwin_arm64": {
@@ -1074,11 +1075,11 @@
             "ruleClassName": "http_file",
             "attributes": {
               "urls": [
-                "https://github.com/bazelbuild/buildtools/releases/download/v6.4.0/buildifier-darwin-arm64"
+                "https://github.com/bazelbuild/buildtools/releases/download/v7.3.1/buildifier-darwin-arm64"
               ],
               "downloaded_file_path": "buildifier",
               "executable": true,
-              "sha256": "fa07ba0d20165917ca4cc7609f9b19a8a4392898148b7babdf6bb2a7dd963f05"
+              "sha256": "5a6afc6ac7a09f5455ba0b89bd99d5ae23b4174dc5dc9d6c0ed5ce8caac3f813"
             }
           },
           "buildifier_linux_arm64": {
@@ -1086,11 +1087,11 @@
             "ruleClassName": "http_file",
             "attributes": {
               "urls": [
-                "https://github.com/bazelbuild/buildtools/releases/download/v6.4.0/buildifier-linux-arm64"
+                "https://github.com/bazelbuild/buildtools/releases/download/v7.3.1/buildifier-linux-arm64"
               ],
               "downloaded_file_path": "buildifier",
               "executable": true,
-              "sha256": "18540fc10f86190f87485eb86963e603e41fa022f88a2d1b0cf52ff252b5e1dd"
+              "sha256": "0bf86c4bfffaf4f08eed77bde5b2082e4ae5039a11e2e8b03984c173c34a561c"
             }
           }
         },
@@ -1591,7 +1592,7 @@
     },
     "@@rules_mypy~//mypy:types.bzl%types": {
       "general": {
-        "bzlTransitiveDigest": "MjXtXAXuMi6agv2PEQDNMWhzu9XakaJGtsLD+pGne9k=",
+        "bzlTransitiveDigest": "bTsjWhC2MntN++D5GogAmgdWEGUqG5ZSXm2SoK8d/5U=",
         "usagesDigest": "cj2kLFb6kDDnhEVe5pn9w1z1vY/nsEn3uacJPrZ2EsE=",
         "recordedFileInputs": {},
         "recordedDirentsInputs": {},
@@ -2126,7 +2127,7 @@
     "@@rules_python~//python/extensions:pip.bzl%pip": {
       "general": {
         "bzlTransitiveDigest": "MnNArHHY8j8NDVbZuG3K3RqZcPVAM/4yMTGq0VScRm0=",
-        "usagesDigest": "/RtP1LTSwdLMpesOAFGtX4B6BaQrrwi+scAFPzEOSfk=",
+        "usagesDigest": "FqeVsBX27oblY/yfTzjfzcnqYRf1ChIAIAQE05/+lK0=",
         "recordedFileInputs": {
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_windows_lock.txt": "4367c7d4cc4a1c2d6a136edace02581066f1c9ead10937685dde568d1061189f",
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_linux_lock.txt": "ce8b16e007309a610c37eec908b75451733ae5efb9c14ec7e6f04557b81d621e",
@@ -2134,7 +2135,7 @@
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_darwin_lock.txt": "91de3b2cdbe8f8fc7136ce309824355684c2a6ae2395c1e12f4aa59d02d52f3b",
           "@@rules_fuzzing~//fuzzing/requirements.txt": "ab04664be026b632a0d2a2446c4f65982b7654f5b6851d2f9d399a19b7242a5b",
           "@@nanopb~//extra/requirements_lock.txt": "8a44f53e5c48123742970b4e9d6f8730eaa143134c08db0706ccd6d2c78c03ca",
-          "@@rules_mypy~//mypy/private/requirements.txt": "d8a955bb183013e87e565b63f189f10ee535df59592b50bfcf7db8031f37742f"
+          "@@rules_mypy~//mypy/private/requirements.txt": "f6c7c90744df0481ca13d433dd2790c62af0b6fef11cdd85ac5424bc87b39fac"
         },
         "recordedDirentsInputs": {},
         "envVariables": {},
@@ -2321,32 +2322,6 @@
               "requirement": "pyelftools==0.27     --hash=sha256:5609aa6da1123fccfae2e8431a67b4146aa7fad5b3889f808df12b110f230937     --hash=sha256:cde854e662774c5457d688ca41615f6594187ba7067af101232df889a6b7a66b"
             }
           },
-          "rules_mypy_pip_312_mypy_cp312_cp312_macosx_10_9_x86_64_e8960dbb": {
-            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
-            "ruleClassName": "whl_library",
-            "attributes": {
-              "dep_template": "@rules_mypy_pip//{name}:{target}",
-              "enable_implicit_namespace_pkgs": true,
-              "experimental_target_platforms": [
-                "linux_aarch64",
-                "linux_arm",
-                "linux_ppc",
-                "linux_s390x",
-                "linux_x86_64",
-                "osx_aarch64",
-                "osx_x86_64",
-                "windows_x86_64"
-              ],
-              "filename": "mypy-1.11.2-cp312-cp312-macosx_10_9_x86_64.whl",
-              "python_interpreter_target": "@@rules_python~~python~python_3_12_host//:python",
-              "repo": "rules_mypy_pip_312",
-              "requirement": "mypy==1.11.2",
-              "sha256": "e8960dbbbf36906c5c0b7f4fbf2f0c7ffb20f4898e6a879fcf56a41a08b0d318",
-              "urls": [
-                "https://files.pythonhosted.org/packages/35/3a/ed7b12ecc3f6db2f664ccf85cb2e004d3e90bec928e9d7be6aa2f16b7cdf/mypy-1.11.2-cp312-cp312-macosx_10_9_x86_64.whl"
-              ]
-            }
-          },
           "python_packages_311_snowballstemmer": {
             "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
             "ruleClassName": "whl_library",
@@ -2487,32 +2462,6 @@
               "requirement": "stack-data==0.6.3     --hash=sha256:836a778de4fec4dcd1dcd89ed8abff8a221f58308462e1c4aa2a3cf30148f0b9     --hash=sha256:d5558e0c25a4cb0853cddad3d77da9891a08cb85dd9f9f91b9f8cd66e511e695"
             }
           },
-          "rules_mypy_pip_312_mypy_cp312_cp312_win_amd64_969ea3ef": {
-            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
-            "ruleClassName": "whl_library",
-            "attributes": {
-              "dep_template": "@rules_mypy_pip//{name}:{target}",
-              "enable_implicit_namespace_pkgs": true,
-              "experimental_target_platforms": [
-                "linux_aarch64",
-                "linux_arm",
-                "linux_ppc",
-                "linux_s390x",
-                "linux_x86_64",
-                "osx_aarch64",
-                "osx_x86_64",
-                "windows_x86_64"
-              ],
-              "filename": "mypy-1.11.2-cp312-cp312-win_amd64.whl",
-              "python_interpreter_target": "@@rules_python~~python~python_3_12_host//:python",
-              "repo": "rules_mypy_pip_312",
-              "requirement": "mypy==1.11.2",
-              "sha256": "969ea3ef09617aff826885a22ece0ddef69d95852cdad2f60c8bb06bf1f71f70",
-              "urls": [
-                "https://files.pythonhosted.org/packages/27/c0/b19d709a42b24004d720db37446a42abadf844d5c46a2c442e2a074d70d9/mypy-1.11.2-cp312-cp312-win_amd64.whl"
-              ]
-            }
-          },
           "python_packages_311_websockets": {
             "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
             "ruleClassName": "whl_library",
@@ -2571,6 +2520,32 @@
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
               "requirement": "mistune==3.0.2     --hash=sha256:71481854c30fdbc938963d3605b72501f5c10a9320ecd412c121c163a1c7d205     --hash=sha256:fc7f93ded930c92394ef2cb6f04a8aabab4117a91449e72dcc8dfa646a508be8"
+            }
+          },
+          "rules_mypy_pip_312_mypy_cp312_cp312_manylinux_2_17_x86_64_164f28cb": {
+            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
+            "ruleClassName": "whl_library",
+            "attributes": {
+              "dep_template": "@rules_mypy_pip//{name}:{target}",
+              "enable_implicit_namespace_pkgs": true,
+              "experimental_target_platforms": [
+                "linux_aarch64",
+                "linux_arm",
+                "linux_ppc",
+                "linux_s390x",
+                "linux_x86_64",
+                "osx_aarch64",
+                "osx_x86_64",
+                "windows_x86_64"
+              ],
+              "filename": "mypy-1.13.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl",
+              "python_interpreter_target": "@@rules_python~~python~python_3_12_host//:python",
+              "repo": "rules_mypy_pip_312",
+              "requirement": "mypy==1.13.0",
+              "sha256": "164f28cb9d6367439031f4c81e84d3ccaa1e19232d9d05d37cb0bd880d3f93c2",
+              "urls": [
+                "https://files.pythonhosted.org/packages/ba/07/37d67048786ae84e6612575e173d713c9a05d0ae495dde1e68d972207d98/mypy-1.13.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl"
+              ]
             }
           },
           "pip_311_arrow": {
@@ -2647,32 +2622,6 @@
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "python_packages_311",
               "requirement": "sphinxcontrib-devhelp==1.0.2     --hash=sha256:8165223f9a335cc1af7ffe1ed31d2871f325254c0423bc0c4c7cd1c1e4734a2e     --hash=sha256:ff7f1afa7b9642e7060379360a67e9c41e8f3121f2ce9164266f61b9f4b338e4"
-            }
-          },
-          "rules_mypy_pip_312_mypy_sdist_7f9993ad": {
-            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
-            "ruleClassName": "whl_library",
-            "attributes": {
-              "dep_template": "@rules_mypy_pip//{name}:{target}",
-              "enable_implicit_namespace_pkgs": true,
-              "experimental_target_platforms": [
-                "linux_aarch64",
-                "linux_arm",
-                "linux_ppc",
-                "linux_s390x",
-                "linux_x86_64",
-                "osx_aarch64",
-                "osx_x86_64",
-                "windows_x86_64"
-              ],
-              "filename": "mypy-1.11.2.tar.gz",
-              "python_interpreter_target": "@@rules_python~~python~python_3_12_host//:python",
-              "repo": "rules_mypy_pip_312",
-              "requirement": "mypy==1.11.2",
-              "sha256": "7f9993ad3e0ffdc95c2a14b66dee63729f021968bff8ad911867579c65d13a79",
-              "urls": [
-                "https://files.pythonhosted.org/packages/5c/86/5d7cbc4974fd564550b80fbb8103c05501ea11aa7835edf3351d90095896/mypy-1.11.2.tar.gz"
-              ]
             }
           },
           "pip_311_prometheus_client": {
@@ -2855,6 +2804,32 @@
               "requirement": "referencing==0.35.1     --hash=sha256:25b42124a6c8b632a425174f24087783efb348a6f1e0008e63cd4466fedf703c     --hash=sha256:eda6d3234d62814d1c64e305c1331c9a3a6132da475ab6382eaa997b21ee75de"
             }
           },
+          "rules_mypy_pip_312_mypy_py3_none_any_9c250883": {
+            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
+            "ruleClassName": "whl_library",
+            "attributes": {
+              "dep_template": "@rules_mypy_pip//{name}:{target}",
+              "enable_implicit_namespace_pkgs": true,
+              "experimental_target_platforms": [
+                "linux_aarch64",
+                "linux_arm",
+                "linux_ppc",
+                "linux_s390x",
+                "linux_x86_64",
+                "osx_aarch64",
+                "osx_x86_64",
+                "windows_x86_64"
+              ],
+              "filename": "mypy-1.13.0-py3-none-any.whl",
+              "python_interpreter_target": "@@rules_python~~python~python_3_12_host//:python",
+              "repo": "rules_mypy_pip_312",
+              "requirement": "mypy==1.13.0",
+              "sha256": "9c250883f9fd81d212e0952c92dbfcc96fc237f4b7c92f56ac81fd48460b3e5a",
+              "urls": [
+                "https://files.pythonhosted.org/packages/3b/86/72ce7f57431d87a7ff17d442f521146a6585019eb8f4f31b7c02801f78ad/mypy-1.13.0-py3-none-any.whl"
+              ]
+            }
+          },
           "python_packages_311_aiosignal": {
             "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
             "ruleClassName": "whl_library",
@@ -2875,6 +2850,32 @@
               "requirement": "astroid==3.0.1     --hash=sha256:7d5895c9825e18079c5aeac0572bc2e4c83205c95d416e0b4fee8bc361d2d9ca     --hash=sha256:86b0bb7d7da0be1a7c4aedb7974e391b32d4ed89e33de6ed6902b4b15c97577e"
             }
           },
+          "rules_mypy_pip_312_mypy_cp312_cp312_macosx_10_13_x86_64_5c7051a3": {
+            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
+            "ruleClassName": "whl_library",
+            "attributes": {
+              "dep_template": "@rules_mypy_pip//{name}:{target}",
+              "enable_implicit_namespace_pkgs": true,
+              "experimental_target_platforms": [
+                "linux_aarch64",
+                "linux_arm",
+                "linux_ppc",
+                "linux_s390x",
+                "linux_x86_64",
+                "osx_aarch64",
+                "osx_x86_64",
+                "windows_x86_64"
+              ],
+              "filename": "mypy-1.13.0-cp312-cp312-macosx_10_13_x86_64.whl",
+              "python_interpreter_target": "@@rules_python~~python~python_3_12_host//:python",
+              "repo": "rules_mypy_pip_312",
+              "requirement": "mypy==1.13.0",
+              "sha256": "5c7051a3461ae84dfb5dd15eff5094640c61c5f22257c8b766794e6dd85e72d5",
+              "urls": [
+                "https://files.pythonhosted.org/packages/fb/31/c526a7bd2e5c710ae47717c7a5f53f616db6d9097caf48ad650581e81748/mypy-1.13.0-cp312-cp312-macosx_10_13_x86_64.whl"
+              ]
+            }
+          },
           "pip_311_isoduration": {
             "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
             "ruleClassName": "whl_library",
@@ -2893,32 +2894,6 @@
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
               "requirement": "typing-extensions==4.12.2     --hash=sha256:04e5ca0351e0f3f85c6853954072df659d0d13fac324d0072316b67d7794700d     --hash=sha256:1a7ead55c7e559dd4dee8856e3a88b41225abfe1ce8df57b7c13915fe121ffb8"
-            }
-          },
-          "rules_mypy_pip_312_mypy_cp312_cp312_macosx_11_0_arm64_06d26c27": {
-            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
-            "ruleClassName": "whl_library",
-            "attributes": {
-              "dep_template": "@rules_mypy_pip//{name}:{target}",
-              "enable_implicit_namespace_pkgs": true,
-              "experimental_target_platforms": [
-                "linux_aarch64",
-                "linux_arm",
-                "linux_ppc",
-                "linux_s390x",
-                "linux_x86_64",
-                "osx_aarch64",
-                "osx_x86_64",
-                "windows_x86_64"
-              ],
-              "filename": "mypy-1.11.2-cp312-cp312-macosx_11_0_arm64.whl",
-              "python_interpreter_target": "@@rules_python~~python~python_3_12_host//:python",
-              "repo": "rules_mypy_pip_312",
-              "requirement": "mypy==1.11.2",
-              "sha256": "06d26c277962f3fb50e13044674aa10553981ae514288cb7d0a738f495550b36",
-              "urls": [
-                "https://files.pythonhosted.org/packages/04/e4/1a9051e2ef10296d206519f1df13d2cc896aea39e8683302f89bf5792a59/mypy-1.11.2-cp312-cp312-macosx_11_0_arm64.whl"
-              ]
             }
           },
           "python_packages_311_isort": {
@@ -2997,14 +2972,16 @@
             "attributes": {
               "repo_name": "rules_mypy_pip",
               "whl_map": {
-                "mypy": "[{\"config_setting\":\"//_config:is_python_3.12\",\"filename\":\"mypy-1.11.2-cp312-cp312-macosx_11_0_arm64.whl\",\"repo\":\"rules_mypy_pip_312_mypy_cp312_cp312_macosx_11_0_arm64_06d26c27\",\"target_platforms\":null,\"version\":\"3.12\"},{\"config_setting\":\"//_config:is_python_3.12\",\"filename\":\"mypy-1.11.2-cp312-cp312-musllinux_1_1_x86_64.whl\",\"repo\":\"rules_mypy_pip_312_mypy_cp312_cp312_musllinux_1_1_x86_64_3a66169b\",\"target_platforms\":null,\"version\":\"3.12\"},{\"config_setting\":\"//_config:is_python_3.12\",\"filename\":\"mypy-1.11.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl\",\"repo\":\"rules_mypy_pip_312_mypy_cp312_cp312_manylinux_2_17_x86_64_6e718463\",\"target_platforms\":null,\"version\":\"3.12\"},{\"config_setting\":\"//_config:is_python_3.12\",\"filename\":\"mypy-1.11.2-cp312-cp312-win_amd64.whl\",\"repo\":\"rules_mypy_pip_312_mypy_cp312_cp312_win_amd64_969ea3ef\",\"target_platforms\":null,\"version\":\"3.12\"},{\"config_setting\":\"//_config:is_python_3.12\",\"filename\":\"mypy-1.11.2-py3-none-any.whl\",\"repo\":\"rules_mypy_pip_312_mypy_py3_none_any_b499bc07\",\"target_platforms\":null,\"version\":\"3.12\"},{\"config_setting\":\"//_config:is_python_3.12\",\"filename\":\"mypy-1.11.2-cp312-cp312-macosx_10_9_x86_64.whl\",\"repo\":\"rules_mypy_pip_312_mypy_cp312_cp312_macosx_10_9_x86_64_e8960dbb\",\"target_platforms\":null,\"version\":\"3.12\"},{\"config_setting\":\"//_config:is_python_3.12\",\"filename\":\"mypy-1.11.2.tar.gz\",\"repo\":\"rules_mypy_pip_312_mypy_sdist_7f9993ad\",\"target_platforms\":null,\"version\":\"3.12\"}]",
+                "mypy": "[{\"config_setting\":\"//_config:is_python_3.12\",\"filename\":\"mypy-1.13.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl\",\"repo\":\"rules_mypy_pip_312_mypy_cp312_cp312_manylinux_2_17_x86_64_164f28cb\",\"target_platforms\":null,\"version\":\"3.12\"},{\"config_setting\":\"//_config:is_python_3.12\",\"filename\":\"mypy-1.13.0-cp312-cp312-macosx_11_0_arm64.whl\",\"repo\":\"rules_mypy_pip_312_mypy_cp312_cp312_macosx_11_0_arm64_39bb21c6\",\"target_platforms\":null,\"version\":\"3.12\"},{\"config_setting\":\"//_config:is_python_3.12\",\"filename\":\"mypy-1.13.0-cp312-cp312-macosx_10_13_x86_64.whl\",\"repo\":\"rules_mypy_pip_312_mypy_cp312_cp312_macosx_10_13_x86_64_5c7051a3\",\"target_platforms\":null,\"version\":\"3.12\"},{\"config_setting\":\"//_config:is_python_3.12\",\"filename\":\"mypy-1.13.0-py3-none-any.whl\",\"repo\":\"rules_mypy_pip_312_mypy_py3_none_any_9c250883\",\"target_platforms\":null,\"version\":\"3.12\"},{\"config_setting\":\"//_config:is_python_3.12\",\"filename\":\"mypy-1.13.0-cp312-cp312-win_amd64.whl\",\"repo\":\"rules_mypy_pip_312_mypy_cp312_cp312_win_amd64_a0affb3a\",\"target_platforms\":null,\"version\":\"3.12\"},{\"config_setting\":\"//_config:is_python_3.12\",\"filename\":\"mypy-1.13.0-cp312-cp312-musllinux_1_1_x86_64.whl\",\"repo\":\"rules_mypy_pip_312_mypy_cp312_cp312_musllinux_1_1_x86_64_a4c1bfcd\",\"target_platforms\":null,\"version\":\"3.12\"},{\"config_setting\":\"//_config:is_python_3.12\",\"filename\":\"mypy-1.13.0.tar.gz\",\"repo\":\"rules_mypy_pip_312_mypy_sdist_0291a61b\",\"target_platforms\":null,\"version\":\"3.12\"}]",
                 "click": "[{\"config_setting\":\"//_config:is_python_3.12\",\"filename\":\"click-8.1.7-py3-none-any.whl\",\"repo\":\"rules_mypy_pip_312_click_py3_none_any_ae74fb96\",\"target_platforms\":null,\"version\":\"3.12\"},{\"config_setting\":\"//_config:is_python_3.12\",\"filename\":\"click-8.1.7.tar.gz\",\"repo\":\"rules_mypy_pip_312_click_sdist_ca9853ad\",\"target_platforms\":null,\"version\":\"3.12\"}]",
+                "colorama": "[{\"config_setting\":\"//_config:is_python_3.12\",\"filename\":\"colorama-0.4.6-py2.py3-none-any.whl\",\"repo\":\"rules_mypy_pip_312_colorama_py2_none_any_4f1d9991\",\"target_platforms\":null,\"version\":\"3.12\"},{\"config_setting\":\"//_config:is_python_3.12\",\"filename\":\"colorama-0.4.6.tar.gz\",\"repo\":\"rules_mypy_pip_312_colorama_sdist_08695f5c\",\"target_platforms\":null,\"version\":\"3.12\"}]",
                 "mypy_extensions": "[{\"config_setting\":\"//_config:is_python_3.12\",\"filename\":\"mypy_extensions-1.0.0-py3-none-any.whl\",\"repo\":\"rules_mypy_pip_312_mypy_extensions_py3_none_any_4392f6c0\",\"target_platforms\":null,\"version\":\"3.12\"},{\"config_setting\":\"//_config:is_python_3.12\",\"filename\":\"mypy_extensions-1.0.0.tar.gz\",\"repo\":\"rules_mypy_pip_312_mypy_extensions_sdist_75dbf895\",\"target_platforms\":null,\"version\":\"3.12\"}]",
                 "typing_extensions": "[{\"config_setting\":\"//_config:is_python_3.12\",\"filename\":\"typing_extensions-4.12.2-py3-none-any.whl\",\"repo\":\"rules_mypy_pip_312_typing_extensions_py3_none_any_04e5ca03\",\"target_platforms\":null,\"version\":\"3.12\"},{\"config_setting\":\"//_config:is_python_3.12\",\"filename\":\"typing_extensions-4.12.2.tar.gz\",\"repo\":\"rules_mypy_pip_312_typing_extensions_sdist_1a7ead55\",\"target_platforms\":null,\"version\":\"3.12\"}]"
               },
               "default_version": "3.11",
               "packages": [
                 "click",
+                "colorama",
                 "mypy",
                 "mypy_extensions",
                 "typing_extensions"
@@ -3076,6 +3053,32 @@
               "requirement": "kconfiglib==14.1.0     --hash=sha256:bed2cc2216f538eca4255a83a4588d8823563cdd50114f86cf1a2674e602c93c     --hash=sha256:edcd35a20e7e138a9a9e96149027f805f785e818d2eae400b6fa8b0c8845114a"
             }
           },
+          "rules_mypy_pip_312_colorama_py2_none_any_4f1d9991": {
+            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
+            "ruleClassName": "whl_library",
+            "attributes": {
+              "dep_template": "@rules_mypy_pip//{name}:{target}",
+              "enable_implicit_namespace_pkgs": true,
+              "experimental_target_platforms": [
+                "linux_aarch64",
+                "linux_arm",
+                "linux_ppc",
+                "linux_s390x",
+                "linux_x86_64",
+                "osx_aarch64",
+                "osx_x86_64",
+                "windows_x86_64"
+              ],
+              "filename": "colorama-0.4.6-py2.py3-none-any.whl",
+              "python_interpreter_target": "@@rules_python~~python~python_3_12_host//:python",
+              "repo": "rules_mypy_pip_312",
+              "requirement": "colorama==0.4.6",
+              "sha256": "4f1d9991f5acc0ca119f9d443620b77f9d6b33703e51011c16baf57afb285fc6",
+              "urls": [
+                "https://files.pythonhosted.org/packages/d1/d6/3965ed04c63042e047cb6a3e6ed1a63a35087b6a609aa3a15ed8ac56c221/colorama-0.4.6-py2.py3-none-any.whl"
+              ]
+            }
+          },
           "python_packages_311_idna": {
             "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
             "ruleClassName": "whl_library",
@@ -3084,6 +3087,32 @@
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "python_packages_311",
               "requirement": "idna==3.4     --hash=sha256:814f528e8dead7d329833b91c5faa87d60bf71824cd12a7530b5526063d02cb4     --hash=sha256:90b77e79eaa3eba6de819a0c442c0b4ceefc341a7a2ab77d7562bf49f425c5c2"
+            }
+          },
+          "rules_mypy_pip_312_mypy_cp312_cp312_macosx_11_0_arm64_39bb21c6": {
+            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
+            "ruleClassName": "whl_library",
+            "attributes": {
+              "dep_template": "@rules_mypy_pip//{name}:{target}",
+              "enable_implicit_namespace_pkgs": true,
+              "experimental_target_platforms": [
+                "linux_aarch64",
+                "linux_arm",
+                "linux_ppc",
+                "linux_s390x",
+                "linux_x86_64",
+                "osx_aarch64",
+                "osx_x86_64",
+                "windows_x86_64"
+              ],
+              "filename": "mypy-1.13.0-cp312-cp312-macosx_11_0_arm64.whl",
+              "python_interpreter_target": "@@rules_python~~python~python_3_12_host//:python",
+              "repo": "rules_mypy_pip_312",
+              "requirement": "mypy==1.13.0",
+              "sha256": "39bb21c69a5d6342f4ce526e4584bc5c197fd20a60d14a8624d8743fffb9472e",
+              "urls": [
+                "https://files.pythonhosted.org/packages/83/67/b7419c6b503679d10bd26fc67529bc6a1f7a5f220bbb9f292dc10d33352f/mypy-1.13.0-cp312-cp312-macosx_11_0_arm64.whl"
+              ]
             }
           },
           "python_packages_311_black": {
@@ -3260,6 +3289,58 @@
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
               "requirement": "pandocfilters==1.5.1     --hash=sha256:002b4a555ee4ebc03f8b66307e287fa492e4a77b4ea14d3f934328297bb4939e     --hash=sha256:93be382804a9cdb0a7267585f157e5d1731bbe5545a85b268d6f5fe6232de2bc"
+            }
+          },
+          "rules_mypy_pip_312_mypy_cp312_cp312_win_amd64_a0affb3a": {
+            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
+            "ruleClassName": "whl_library",
+            "attributes": {
+              "dep_template": "@rules_mypy_pip//{name}:{target}",
+              "enable_implicit_namespace_pkgs": true,
+              "experimental_target_platforms": [
+                "linux_aarch64",
+                "linux_arm",
+                "linux_ppc",
+                "linux_s390x",
+                "linux_x86_64",
+                "osx_aarch64",
+                "osx_x86_64",
+                "windows_x86_64"
+              ],
+              "filename": "mypy-1.13.0-cp312-cp312-win_amd64.whl",
+              "python_interpreter_target": "@@rules_python~~python~python_3_12_host//:python",
+              "repo": "rules_mypy_pip_312",
+              "requirement": "mypy==1.13.0",
+              "sha256": "a0affb3a79a256b4183ba09811e3577c5163ed06685e4d4b46429a271ba174d2",
+              "urls": [
+                "https://files.pythonhosted.org/packages/cb/32/cd540755579e54a88099aee0287086d996f5a24281a673f78a0e14dba150/mypy-1.13.0-cp312-cp312-win_amd64.whl"
+              ]
+            }
+          },
+          "rules_mypy_pip_312_colorama_sdist_08695f5c": {
+            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
+            "ruleClassName": "whl_library",
+            "attributes": {
+              "dep_template": "@rules_mypy_pip//{name}:{target}",
+              "enable_implicit_namespace_pkgs": true,
+              "experimental_target_platforms": [
+                "linux_aarch64",
+                "linux_arm",
+                "linux_ppc",
+                "linux_s390x",
+                "linux_x86_64",
+                "osx_aarch64",
+                "osx_x86_64",
+                "windows_x86_64"
+              ],
+              "filename": "colorama-0.4.6.tar.gz",
+              "python_interpreter_target": "@@rules_python~~python~python_3_12_host//:python",
+              "repo": "rules_mypy_pip_312",
+              "requirement": "colorama==0.4.6",
+              "sha256": "08695f5cb7ed6e0531a20572697297273c47b8cae5a63ffc6d6ed5c201be6e44",
+              "urls": [
+                "https://files.pythonhosted.org/packages/d8/53/6f443c9a4a8358a93a6792e2acffb9d9d5cb0a5cfd8802644b7b1c9a02e4/colorama-0.4.6.tar.gz"
+              ]
             }
           },
           "nanopb_pypi_311_grpcio": {
@@ -3605,32 +3686,6 @@
               "requirement": "jupyter-client==8.6.2     --hash=sha256:2bda14d55ee5ba58552a8c53ae43d215ad9868853489213f37da060ced54d8df     --hash=sha256:50cbc5c66fd1b8f65ecb66bc490ab73217993632809b6e505687de18e9dea39f"
             }
           },
-          "rules_mypy_pip_312_mypy_cp312_cp312_musllinux_1_1_x86_64_3a66169b": {
-            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
-            "ruleClassName": "whl_library",
-            "attributes": {
-              "dep_template": "@rules_mypy_pip//{name}:{target}",
-              "enable_implicit_namespace_pkgs": true,
-              "experimental_target_platforms": [
-                "linux_aarch64",
-                "linux_arm",
-                "linux_ppc",
-                "linux_s390x",
-                "linux_x86_64",
-                "osx_aarch64",
-                "osx_x86_64",
-                "windows_x86_64"
-              ],
-              "filename": "mypy-1.11.2-cp312-cp312-musllinux_1_1_x86_64.whl",
-              "python_interpreter_target": "@@rules_python~~python~python_3_12_host//:python",
-              "repo": "rules_mypy_pip_312",
-              "requirement": "mypy==1.11.2",
-              "sha256": "3a66169b92452f72117e2da3a576087025449018afc2d8e9bfe5ffab865709ca",
-              "urls": [
-                "https://files.pythonhosted.org/packages/b6/49/ee5adf6a49ff13f4202d949544d3d08abb0ea1f3e7f2a6d5b4c10ba0360a/mypy-1.11.2-cp312-cp312-musllinux_1_1_x86_64.whl"
-              ]
-            }
-          },
           "pip_311_idna": {
             "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
             "ruleClassName": "whl_library",
@@ -3659,6 +3714,32 @@
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
               "requirement": "websocket-client==1.8.0     --hash=sha256:17b44cc997f5c498e809b22cdf2d9c7a9e71c02c8cc2b6c56e7c2d1239bfa526     --hash=sha256:3239df9f44da632f96012472805d40a23281a991027ce11d2f45a6f24ac4c3da"
+            }
+          },
+          "rules_mypy_pip_312_mypy_cp312_cp312_musllinux_1_1_x86_64_a4c1bfcd": {
+            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
+            "ruleClassName": "whl_library",
+            "attributes": {
+              "dep_template": "@rules_mypy_pip//{name}:{target}",
+              "enable_implicit_namespace_pkgs": true,
+              "experimental_target_platforms": [
+                "linux_aarch64",
+                "linux_arm",
+                "linux_ppc",
+                "linux_s390x",
+                "linux_x86_64",
+                "osx_aarch64",
+                "osx_x86_64",
+                "windows_x86_64"
+              ],
+              "filename": "mypy-1.13.0-cp312-cp312-musllinux_1_1_x86_64.whl",
+              "python_interpreter_target": "@@rules_python~~python~python_3_12_host//:python",
+              "repo": "rules_mypy_pip_312",
+              "requirement": "mypy==1.13.0",
+              "sha256": "a4c1bfcdbce96ff5d96fc9b08e3831acb30dc44ab02671eca5953eadad07d6d0",
+              "urls": [
+                "https://files.pythonhosted.org/packages/1f/17/b1018c6bb3e9f1ce3956722b3bf91bff86c1cefccca71cec05eae49d6d41/mypy-1.13.0-cp312-cp312-musllinux_1_1_x86_64.whl"
+              ]
             }
           },
           "python_packages_311_six": {
@@ -3785,6 +3866,32 @@
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
               "requirement": "notebook==7.2.2     --hash=sha256:2ef07d4220421623ad3fe88118d687bc0450055570cdd160814a59cf3a1c516e     --hash=sha256:c89264081f671bc02eec0ed470a627ed791b9156cad9285226b31611d3e9fe1c"
+            }
+          },
+          "rules_mypy_pip_312_mypy_sdist_0291a61b": {
+            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
+            "ruleClassName": "whl_library",
+            "attributes": {
+              "dep_template": "@rules_mypy_pip//{name}:{target}",
+              "enable_implicit_namespace_pkgs": true,
+              "experimental_target_platforms": [
+                "linux_aarch64",
+                "linux_arm",
+                "linux_ppc",
+                "linux_s390x",
+                "linux_x86_64",
+                "osx_aarch64",
+                "osx_x86_64",
+                "windows_x86_64"
+              ],
+              "filename": "mypy-1.13.0.tar.gz",
+              "python_interpreter_target": "@@rules_python~~python~python_3_12_host//:python",
+              "repo": "rules_mypy_pip_312",
+              "requirement": "mypy==1.13.0",
+              "sha256": "0291a61b6fbf3e6673e3405cfcc0e7650bebc7939659fdca2702958038bd835e",
+              "urls": [
+                "https://files.pythonhosted.org/packages/e8/21/7e9e523537991d145ab8a0a2fd98548d67646dc2aaaf6091c31ad883e7c1/mypy-1.13.0.tar.gz"
+              ]
             }
           },
           "python_packages_311_urllib3": {
@@ -4042,32 +4149,6 @@
               "requirement": "matplotlib-inline==0.1.7     --hash=sha256:8423b23ec666be3d16e16b60bdd8ac4e86e840ebd1dd11a30b9f117f2fa0ab90     --hash=sha256:df192d39a4ff8f21b1895d72e6a13f5fcc5099f00fa84384e0ea28c2cc0653ca"
             }
           },
-          "rules_mypy_pip_312_mypy_cp312_cp312_manylinux_2_17_x86_64_6e718463": {
-            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
-            "ruleClassName": "whl_library",
-            "attributes": {
-              "dep_template": "@rules_mypy_pip//{name}:{target}",
-              "enable_implicit_namespace_pkgs": true,
-              "experimental_target_platforms": [
-                "linux_aarch64",
-                "linux_arm",
-                "linux_ppc",
-                "linux_s390x",
-                "linux_x86_64",
-                "osx_aarch64",
-                "osx_x86_64",
-                "windows_x86_64"
-              ],
-              "filename": "mypy-1.11.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl",
-              "python_interpreter_target": "@@rules_python~~python~python_3_12_host//:python",
-              "repo": "rules_mypy_pip_312",
-              "requirement": "mypy==1.11.2",
-              "sha256": "6e7184632d89d677973a14d00ae4d03214c8bc301ceefcdaf5c474866814c987",
-              "urls": [
-                "https://files.pythonhosted.org/packages/f3/3c/350a9da895f8a7e87ade0028b962be0252d152e0c2fbaafa6f0658b4d0d4/mypy-1.11.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl"
-              ]
-            }
-          },
           "python_packages_311_setuptools": {
             "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
             "ruleClassName": "whl_library",
@@ -4086,32 +4167,6 @@
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
               "requirement": "debugpy==1.8.5     --hash=sha256:0a1029a2869d01cb777216af8c53cda0476875ef02a2b6ff8b2f2c9a4b04176c     --hash=sha256:1cd04a73eb2769eb0bfe43f5bfde1215c5923d6924b9b90f94d15f207a402226     --hash=sha256:28ced650c974aaf179231668a293ecd5c63c0a671ae6d56b8795ecc5d2f48d3c     --hash=sha256:345d6a0206e81eb68b1493ce2fbffd57c3088e2ce4b46592077a943d2b968ca3     --hash=sha256:3df6692351172a42af7558daa5019651f898fc67450bf091335aa8a18fbf6f3a     --hash=sha256:4413b7a3ede757dc33a273a17d685ea2b0c09dbd312cc03f5534a0fd4d40750a     --hash=sha256:4fbb3b39ae1aa3e5ad578f37a48a7a303dad9a3d018d369bc9ec629c1cfa7408     --hash=sha256:55919dce65b471eff25901acf82d328bbd5b833526b6c1364bd5133754777a44     --hash=sha256:5b5c770977c8ec6c40c60d6f58cacc7f7fe5a45960363d6974ddb9b62dbee156     --hash=sha256:606bccba19f7188b6ea9579c8a4f5a5364ecd0bf5a0659c8a5d0e10dcee3032a     --hash=sha256:7b0fe36ed9d26cb6836b0a51453653f8f2e347ba7348f2bbfe76bfeb670bfb1c     --hash=sha256:7e4d594367d6407a120b76bdaa03886e9eb652c05ba7f87e37418426ad2079f7     --hash=sha256:8f913ee8e9fcf9d38a751f56e6de12a297ae7832749d35de26d960f14280750a     --hash=sha256:a697beca97dad3780b89a7fb525d5e79f33821a8bc0c06faf1f1289e549743cf     --hash=sha256:ad84b7cde7fd96cf6eea34ff6c4a1b7887e0fe2ea46e099e53234856f9d99a34     --hash=sha256:b2112cfeb34b4507399d298fe7023a16656fc553ed5246536060ca7bd0e668d0     --hash=sha256:b78c1250441ce893cb5035dd6f5fc12db968cc07f91cc06996b2087f7cefdd8e     --hash=sha256:c0a65b00b7cdd2ee0c2cf4c7335fef31e15f1b7056c7fdbce9e90193e1a8c8cb     --hash=sha256:c9f7c15ea1da18d2fcc2709e9f3d6de98b69a5b0fff1807fb80bc55f906691f7     --hash=sha256:db9fb642938a7a609a6c865c32ecd0d795d56c1aaa7a7a5722d77855d5e77f2b     --hash=sha256:dd3811bd63632bb25eda6bd73bea8e0521794cda02be41fa3160eb26fc29e7ed     --hash=sha256:e84c276489e141ed0b93b0af648eef891546143d6a48f610945416453a8ad406"
-            }
-          },
-          "rules_mypy_pip_312_mypy_py3_none_any_b499bc07": {
-            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
-            "ruleClassName": "whl_library",
-            "attributes": {
-              "dep_template": "@rules_mypy_pip//{name}:{target}",
-              "enable_implicit_namespace_pkgs": true,
-              "experimental_target_platforms": [
-                "linux_aarch64",
-                "linux_arm",
-                "linux_ppc",
-                "linux_s390x",
-                "linux_x86_64",
-                "osx_aarch64",
-                "osx_x86_64",
-                "windows_x86_64"
-              ],
-              "filename": "mypy-1.11.2-py3-none-any.whl",
-              "python_interpreter_target": "@@rules_python~~python~python_3_12_host//:python",
-              "repo": "rules_mypy_pip_312",
-              "requirement": "mypy==1.11.2",
-              "sha256": "b499bc07dbdcd3de92b0a8b29fdf592c111276f6a12fe29c30f6c417dd546d12",
-              "urls": [
-                "https://files.pythonhosted.org/packages/42/3a/bdf730640ac523229dd6578e8a581795720a9321399de494374afc437ec5/mypy-1.11.2-py3-none-any.whl"
-              ]
             }
           },
           "python_packages_311_sphinxcontrib_htmlhelp": {

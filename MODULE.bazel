@@ -181,7 +181,7 @@ bazel_dep(name = "hedron_compile_commands", dev_dependency = True)
 
 # Python Type Checking - mypy
 #############################
-bazel_dep(name = "rules_mypy", version = "0.6.0")
+bazel_dep(name = "rules_mypy", version = "0.17.0")
 
 types = use_extension("@rules_mypy//mypy:types.bzl", "types")
 types.requirements(
