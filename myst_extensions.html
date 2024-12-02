@@ -507,9 +507,9 @@ a_1=b_1+c_1\\
 a_2=b_2+c_2-d_2+e_2
 \end{gather*}\]</div>
 </div>
-<div class="math-wrapper amsmath docutils container" id="equation-16c9ce22-c8b1-4342-ac4d-a70a58e4d9fb">
-<div class="amsmath math notranslate nohighlight" id="equation-16c9ce22-c8b1-4342-ac4d-a70a58e4d9fb">
-<span class="eqno">(2)<a class="headerlink" href="#equation-16c9ce22-c8b1-4342-ac4d-a70a58e4d9fb" title="Permalink to this equation"></a></span>\[\begin{align}
+<div class="math-wrapper amsmath docutils container" id="equation-912ba5f4-02cd-46f5-aae0-ccb1ccd66508">
+<div class="amsmath math notranslate nohighlight" id="equation-912ba5f4-02cd-46f5-aae0-ccb1ccd66508">
+<span class="eqno">(2)<a class="headerlink" href="#equation-912ba5f4-02cd-46f5-aae0-ccb1ccd66508" title="Permalink to this equation"></a></span>\[\begin{align}
 a_{11}&amp; =b_{11}&amp;
   a_{12}&amp; =b_{12}\\
 a_{21}&amp; =b_{21}&amp;
@@ -548,7 +548,7 @@ a_1=b_1+c_1\\a_2=b_2+c_2-d_2+e_2
 </section>
 <section id="mathjax-and-math-parsing">
 <span id="syntax-mathjax"></span><h3>Mathjax and math parsing<a class="headerlink" href="#mathjax-and-math-parsing" title="Link to this heading"></a></h3>
-<p>When building HTML using the <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/extensions/math.html#module-sphinx.ext.mathjax" title="Sphinx 8.2.0"><code class="docutils literal notranslate"><span class="pre">sphinx.ext.mathjax</span></code></a> extension (enabled by default),
+<p>When building HTML using the  extension (enabled by default),
 If <code class="docutils literal notranslate"><span class="pre">dollarmath</span></code> is enabled, Myst-Parser injects the <code class="docutils literal notranslate"><span class="pre">tex2jax_ignore</span></code> (MathJax v2) and  <code class="docutils literal notranslate"><span class="pre">mathjax_ignore</span></code> (MathJax v3) classes in to the top-level section of each MyST document, and adds the following default MathJax configuration:</p>
 <p>MathJax version 2 (see <a class="reference external" href="https://docs.mathjax.org/en/v2.7-latest/options/preprocessors/tex2jax.html#configure-tex2jax">the tex2jax preprocessor</a>:</p>
 <div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="nx">MathJax</span><span class="p">.</span><span class="nx">Hub</span><span class="p">.</span><span class="nx">Config</span><span class="p">({</span><span class="s2">&quot;tex2jax&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;processClass&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;tex2jax_process|mathjax_process|math|output_area&quot;</span><span class="p">}})</span>
@@ -648,7 +648,7 @@ Either directly; <code class="docutils literal notranslate"><span class="pre">pi
 <p>One should also be wary of using unsuitable directives for inline substitutions.
 This may lead to unexpected outcomes.</p>
 <div class="docutils">
-<p>Substitution references are assessed as <a class="reference external" href="http://jinja.palletsprojects.com">Jinja2 expressions</a> which can use <a class="reference external" href="https://jinja.palletsprojects.com/en/2.11.x/templates/#list-of-builtin-filters">filters</a>, and also contains the <a class="reference external" href="https://www.sphinx-doc.org/en/master/extdev/envapi.html" title="Sphinx 8.2.0">Sphinx Environment</a> in the context (as <code class="docutils literal notranslate"><span class="pre">env</span></code>).
+<p>Substitution references are assessed as <a class="reference external" href="http://jinja.palletsprojects.com">Jinja2 expressions</a> which can use <a class="reference external" href="https://jinja.palletsprojects.com/en/2.11.x/templates/#list-of-builtin-filters">filters</a>, and also contains the  in the context (as <code class="docutils literal notranslate"><span class="pre">env</span></code>).
 Therefore you can do things like:</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -795,7 +795,7 @@ e.g. <code class="docutils literal notranslate"><span class="pre">myst_heading_s
 <span id="syntax-definition-lists"></span><h2>Definition Lists<a class="headerlink" href="#definition-lists" title="Link to this heading"></a></h2>
 <p>By adding <code class="docutils literal notranslate"><span class="pre">&quot;deflist&quot;</span></code> to <code class="docutils literal notranslate"><span class="pre">myst_enable_extensions</span></code> (in the sphinx <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>),
 you will be able to utilise definition lists.
-Definition lists utilise the <a class="reference external" href="https://markdown-it-py.readthedocs.io/en/latest/plugins.html#md-plugins" title="markdown-it-py">markdown-it-py deflist plugin</a>, which itself is based on the <a class="reference external" href="http://johnmacfarlane.net/pandoc/README.html#definition-lists">Pandoc definition list specification</a>.</p>
+Definition lists utilise the , which itself is based on the <a class="reference external" href="http://johnmacfarlane.net/pandoc/README.html#definition-lists">Pandoc definition list specification</a>.</p>
 <p>This syntax can be useful, for example, as an alternative to nested bullet-lists:</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -862,7 +862,7 @@ A definition begins with a colon or tilde, which may be indented one or two spac
 <span id="syntax-tasklists"></span><h2>Task Lists<a class="headerlink" href="#task-lists" title="Link to this heading"></a></h2>
 <p>By adding <code class="docutils literal notranslate"><span class="pre">&quot;tasklist&quot;</span></code> to <code class="docutils literal notranslate"><span class="pre">myst_enable_extensions</span></code> (in the sphinx <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>),
 you will be able to utilise task lists.
-Task lists utilise the <a class="reference external" href="https://markdown-it-py.readthedocs.io/en/latest/plugins.html#md-plugins" title="markdown-it-py">markdown-it-py tasklists plugin</a>,
+Task lists utilise the ,
 and are applied to markdown list items starting with <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">]</span></code> or <code class="docutils literal notranslate"><span class="pre">[x]</span></code>:</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -910,7 +910,7 @@ with the first line.</p>
 </dd>
 </dl>
 </div>
-<p>A prominent use case of field lists is for use in API docstrings, as used in <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/domains/python.html" title="Sphinx 8.2.0">Sphinx’s docstring renderers</a>:</p>
+<p>A prominent use case of field lists is for use in API docstrings, as used in :</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <dl class="py function">
@@ -920,18 +920,18 @@ with the first line.</p>
 <dl class="myst field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>sender</strong> (<a class="reference external" href="https://docs.python.org/3.10/library/stdtypes.html#str" title="(in Python v3.10)"><em>str</em></a>) – The person sending the message</p></li>
-<li><p><strong>priority</strong> (<a class="reference external" href="https://docs.python.org/3.10/library/functions.html#int" title="(in Python v3.10)"><em>int</em></a>) – The priority of the message, can be a number 1-5</p></li>
+<li><p><strong>sender</strong> (<em>str</em>) – The person sending the message</p></li>
+<li><p><strong>priority</strong> (<em>int</em>) – The priority of the message, can be a number 1-5</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>the message id</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3.10/library/functions.html#int" title="(in Python v3.10)">int</a></p>
+<dd class="field-odd"><p>int</p>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3.10/library/exceptions.html#ValueError" title="(in Python v3.10)"><strong>ValueError</strong></a> – if the message_body exceeds 160 characters</p>
+<dd class="field-even"><p><strong>ValueError</strong> – if the message_body exceeds 160 characters</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1036,7 +1036,7 @@ but only certain key-value attributes are supported for each syntax.</p>
 <p class="attribution">—Chris Sewell, <a class="reference external" href="https://example.com">link</a></p>
 </div></blockquote>
 </div>
-<p>For <em>definition lists</em>, the adding a glossary key turns the definition list into a glossary (similar to using the <a class="reference external" href="https://www.sphinx-doc.org/en/master/usage/restructuredtext/directives.html#directive-glossary" title="Sphinx 8.2.0"><code class="docutils literal notranslate"><span class="pre">glossary</span></code> directive</a> in Sphinx):</p>
+<p>For <em>definition lists</em>, the adding a glossary key turns the definition list into a glossary (similar to using the  in Sphinx):</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <dl class="simple myst glossary">
@@ -1310,7 +1310,7 @@ If you want to use multiple paragraphs then they can be enclosed in <code class=
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
     <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
-    <script defer="defer" src="_static/tippy/myst_extensions.911bc29f-cd5c-4fc3-83d9-09ce944b8bdc.js"></script>
+    <script defer="defer" src="_static/tippy/myst_extensions.71885c21-df1d-4b62-aa90-5766577214f9.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
