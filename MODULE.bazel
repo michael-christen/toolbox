@@ -13,7 +13,7 @@ module(
 ########################################
 # Generic deps
 ########################################
-bazel_dep(name = "aspect_bazel_lib", version = "2.9.3")
+bazel_dep(name = "aspect_bazel_lib", version = "2.9.4")
 
 ########################################
 # Set up rules_python and pip
@@ -192,7 +192,7 @@ bazel_dep(name = "toolchains_llvm", version = "0.10.3")
 
 # Python Type Checking - mypy
 #############################
-bazel_dep(name = "rules_mypy", version = "0.6.0")
+bazel_dep(name = "rules_mypy", version = "0.17.0")
 
 types = use_extension("@rules_mypy//mypy:types.bzl", "types")
 types.requirements(
