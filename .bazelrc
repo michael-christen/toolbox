@@ -32,19 +32,6 @@ build --incompatible_enable_cc_toolchain_resolution
 common --experimental_exclude_defines_from_exec_config
 common --experimental_exclude_starlark_flags_from_exec_config
 
-# Don't automatically create __init__.py files.
-#
-# This prevents spurious package name collisions at import time, and should be
-# the default (https://github.com/bazelbuild/bazel/issues/7386). It's
-# particularly helpful for Pigweed, because we have many potential package name
-# collisions due to a profusion of stuttering paths like
-# pw_transfer/py/pw_transfer.
-common --incompatible_default_to_explicit_init_py
-
-# Don't inherit system PATH. Improves hermeticity and cache hit rates. Should
-# be true by default one day (https://github.com/bazelbuild/bazel/issues/7026).
-common --incompatible_strict_action_env
-
 # Expose exec toolchains for Python. We use these toolchains in some rule
 # implementations (git grep for
 # "@rules_python//python:exec_tools_toolchain_type").
@@ -71,8 +58,6 @@ build --@pico-sdk//bazel/config:PICO_STDIO_UART=True
 # ===========
 # Error output settings.
 common --verbose_failures
-# View failed test output
-test --test_output=errors
 
 # Platform configuration
 # ======================
@@ -170,4 +155,6 @@ build --output_groups=+mypy
 # note: this should be at the bottom of the file, so that user-specified
 # options override anything in this file
 # (https://bazel.build/run/bazelrc#imports)
+#
+# Note that ci configures this file to specify ci overrides, etc.
 try-import %workspace%/user.bazelrc
