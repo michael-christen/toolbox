@@ -26,7 +26,7 @@ package(default_visibility = ["//visibility:public"])
 
 filegroup(
     name = "python_source",
-    srcs = glob(["*.py"]) + [
+    srcs = glob(["*.py"], allow_empty=True) + [
     ],
     visibility = ["//visibility:public"],
 )

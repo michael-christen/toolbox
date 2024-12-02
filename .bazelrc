@@ -8,6 +8,31 @@ import %workspace%/.aspect/bazelrc/debug.bazelrc
 import %workspace%/.aspect/bazelrc/java.bazelrc
 import %workspace%/.aspect/bazelrc/javascript.bazelrc
 import %workspace%/.aspect/bazelrc/performance.bazelrc
+#
+# NOTE for:
+# build --incompatible_default_to_explicit_init_py
+#
+# This also prevents spurious package name collisions at import time, and
+# should be the default (https://github.com/bazelbuild/bazel/issues/7386). It's
+# particularly helpful for Pigweed, because we have many potential package name
+# collisions due to a profusion of stuttering paths like
+# pw_transfer/py/pw_transfer.
+#
+# NOTE for:
+# build --incompatible_strict_action_env
+#
+# Don't inherit system PATH. Improves hermeticity and cache hit rates. Should
+# be true by default one day (https://github.com/bazelbuild/bazel/issues/7026).
+
+# My overrides of the above imports
+# TODO(#172): Update these
+#
+# pw_protobuf/BUILD.bazel, llvm_toolchain
+common --noincompatible_disallow_empty_glob
+# loud / I don't want to set `timeout=short` on all tests
+test --notest_verbose_timeout_warnings
+# No module named 'pw_protobuf_codegen_protos' in pw_protobuf options
+build --legacy_external_runfiles
 
 # See https://bazel.build/docs/user-manual for option definitions
 #

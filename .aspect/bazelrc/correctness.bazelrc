@@ -19,8 +19,7 @@ build --sandbox_default_allow_network=false
 # For instance, a test that normally executes in a minute or two should not have a timeout of
 # ETERNAL or LONG as these are much, much too generous.
 # Docs: https://bazel.build/docs/user-manual#test-verbose-timeout-warnings
-# XXX: loud / I don't want to set `timeout=short` on all tests
-# test --test_verbose_timeout_warnings
+test --test_verbose_timeout_warnings
 
 # Allow the Bazel server to check directory sources for changes. Ensures that the Bazel server
 # notices when a directory changes, if you have a directory listed in the srcs of some target.
@@ -41,10 +40,6 @@ test --incompatible_exclusive_test_sandboxed
 # Use `--action_env=ENV_VARIABLE` if you want to inherit specific environment variables from the
 # client, but note that doing so can prevent cross-user caching if a shared cache is used.
 # Docs: https://bazel.build/reference/command-line-reference#flag--incompatible_strict_action_env
-#
-# NOTE:
-# Don't inherit system PATH. Improves hermeticity and cache hit rates. Should
-# be true by default one day (https://github.com/bazelbuild/bazel/issues/7026).
 build --incompatible_strict_action_env
 
 # Do not automatically create `__init__.py` files in the runfiles of Python targets. Fixes the wrong
@@ -53,20 +48,13 @@ build --incompatible_strict_action_env
 # default), it is treated as false if and only if this flag is set. See
 # https://github.com/bazelbuild/bazel/issues/10076.
 # Docs: https://bazel.build/reference/command-line-reference#flag--incompatible_default_to_explicit_init_py
-#
-# NOTE: This also prevents spurious package name collisions at import time, and
-# should be the default (https://github.com/bazelbuild/bazel/issues/7386). It's
-# particularly helpful for Pigweed, because we have many potential package name
-# collisions due to a profusion of stuttering paths like
-# pw_transfer/py/pw_transfer.
 build --incompatible_default_to_explicit_init_py
 
 # Set default value of `allow_empty` to `False` in `glob()`. This prevents a common mistake when
 # attempting to use `glob()` to match files in a subdirectory that is opaque to the current package
 # because it contains a BUILD file. See https://github.com/bazelbuild/bazel/issues/8195.
 # Docs: https://bazel.build/reference/command-line-reference#flag--incompatible_disallow_empty_glob
-# XXX
-# common --incompatible_disallow_empty_glob
+common --incompatible_disallow_empty_glob
 
 # Always download coverage files for tests from the remote cache. By default, coverage files are not
 # downloaded on test result cache hits when --remote_download_minimal is enabled, making it impossible

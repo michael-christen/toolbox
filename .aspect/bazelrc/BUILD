@@ -16,11 +16,9 @@ write_aspect_bazelrc_presets(
         "bazel7",
         "ci",
         "convenience",
-        # Avoid a few changes and comments
-        # "correctness",
+        "correctness",
         "debug",
         "javascript",
-        # NOTE issue
-        # "performance",
+        "performance",
     ],
 )

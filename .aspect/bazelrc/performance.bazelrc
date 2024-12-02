@@ -11,8 +11,7 @@ build --experimental_reuse_sandbox_directories
 # default in the future. Note, some rules may fail under this flag, please file issues with the rule
 # author.
 # Docs: https://bazel.build/reference/command-line-reference#flag--legacy_external_runfiles
-# XXX: No module named 'pw_protobuf_codegen_protos' in pw_protobuf options
-# build --nolegacy_external_runfiles
+build --nolegacy_external_runfiles
 
 # Avoid creating a runfiles tree for binaries or tests until it is needed.
 # Docs: https://bazel.build/reference/command-line-reference#flag--build_runfile_links
