@@ -3,16 +3,16 @@
 This is just a place for me to put small commands that I find myself looking up
 frequently.
 
-### Reload udev rules:
+## Reload udev rules:
 
 ```
 sudo udevadm control --reload-rules
 sudo udevadm trigger
 ```
 
-### Bash
+## Bash
 
-#### Argument shortcuts
+### Argument shortcuts
 
 https://stackoverflow.com/questions/4009412/how-to-use-arguments-from-previous-command
 
@@ -31,7 +31,7 @@ https://stackoverflow.com/questions/4009412/how-to-use-arguments-from-previous-c
 !!      repeat the previous line
 ```
 
-#### Package Commands
+### Package Commands
 
 Get package dependencies:
 

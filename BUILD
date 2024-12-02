@@ -15,6 +15,8 @@ exports_files(
     [
         ".flake8",
         ".prettierrc",
+        ".clang-format",
+        ".clang-tidy",
         "mypy.ini",
         "pytest.ini",
         "pyproject.toml",
@@ -121,9 +123,11 @@ gazelle(
 # gazelle:map_kind proto_py_library proto_py_library //bzl:py.bzl
 
 # TODO: Figure out a way to not need these
+# gazelle:resolve py hw_services.sbr.sbr_pb2 //hw_services/sbr:sbr_py_library
 # gazelle:resolve py examples.basic.hello_pb2 //examples/basic:hello_py_library
 # gazelle:resolve py examples.basic.hello_pb2_grpc //examples/basic:hello_grpc_py_library
 # gazelle:resolve py third_party.bazel.src.main.protobuf.build_pb2 //third_party/bazel/src/main/protobuf:build_py_library
+# gazelle:resolve py third_party.bazel.proto.build_event_stream_pb2 //third_party/bazel/proto:build_event_stream_py_library
 # gazelle:resolve proto pw_protobuf_protos/common.proto @pigweed//pw_protobuf:common_proto
 # gazelle:resolve py examples.pigweed.modules.blinky.blinky_pb2 //examples/pigweed/modules/blinky:blinky_pb2
 # gazelle:resolve py pw_cli @pigweed//pw_system/py:pw_system_lib
@@ -132,3 +136,20 @@ gazelle(
 # gazelle:resolve py pw_system.device_connection @pigweed//pw_system/py:pw_system_lib
 
 npm_link_all_packages(name = "node_modules")
+
+filegroup(
+    name = "python_source",
+    srcs = glob(["*.py"]) + [
+        "//apps:python_source",
+        "//examples/basic:python_source",
+        "//examples/bazel:python_source",
+        "//examples/pigweed/modules/blinky:python_source",
+        "//third_party/pigweed/tools:python_source",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "format",
+    actual = "//tools/format",
+)

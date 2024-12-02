@@ -137,6 +137,11 @@ build --remote_timeout=3600
 # Specify this in your user.bazelrc
 # build --remote_header=x-buildbuddy-api-key="$BUILDBUDDY_API_KEY"
 
+# When my network is slow, I can build with --config local instead of
+# commenting on/off
+build:local --bes_backend=
+build:local --remote_cache=
+
 
 # Python Type Checking - mypy
 #############################

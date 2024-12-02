@@ -12,3 +12,6 @@ actions:
       - 'build //...'
       - 'test //...'
       - 'coverage //... --combined_report=lcov --instrument_test_targets --instrumentation_filter="^//" --test_size_filters=-enormous'
+    resource_requests:
+      # The default 20GB was too small
+      disk: 40GB

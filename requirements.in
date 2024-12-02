@@ -9,10 +9,36 @@ grpcio
 mypy
 protobuf
 types-protobuf
+# Analyze graphs easily
+# https://networkx.org/documentation/stable/index.html
+networkx[default]
+# Make nice-looking table output
+tabulate
+
 # largely for development
 pytest
-black
+black[jupyter]
 flake8
 isort
 ipdb
 notebook
+# Documentation
+sphinx
+sphinx-rtd-theme
+myst-parser
+# - generates links with raw urls, eg) www.example.com
+linkify-it-py
+# - diagram generation
+sphinxcontrib-mermaid
+# - python code (parse, not executing)
+sphinx-autoapi
+# - lots of miscellaneous plugins for sphinx
+sphinx-design
+sphinx-copybutton
+sphinxext-rediraffe
+sphinxext-opengraph
+sphinx-pyscript
+sphinx-tippy
+sphinx-togglebutton
+# A more modern sphinx theme
+furo

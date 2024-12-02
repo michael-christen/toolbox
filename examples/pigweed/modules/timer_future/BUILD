@@ -12,12 +12,13 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
-package(default_visibility = ["//visibility:public"])
+package(default_visibility = ["//visibility:private"])
 
 cc_library(
     name = "timer_future",
     srcs = ["timer_future.cc"],
     hdrs = ["timer_future.h"],
+    visibility = ["//visibility:public"],
     deps = [
         "@pigweed//pw_async2:dispatcher",
         "@pigweed//pw_chrono:system_clock",

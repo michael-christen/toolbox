@@ -24,6 +24,13 @@ load("@rules_python//python:proto.bzl", "py_proto_library")
 
 package(default_visibility = ["//visibility:public"])
 
+filegroup(
+    name = "python_source",
+    srcs = glob(["*.py"]) + [
+    ],
+    visibility = ["//visibility:public"],
+)
+
 cc_library(
     name = "blinky",
     srcs = ["blinky.cc"],
@@ -33,8 +40,8 @@ cc_library(
         "@pigweed//pw_preprocessor",
     ],
     deps = [
+        "//examples/pigweed/apps/blinky/system",
         "//examples/pigweed/modules/timer_future",
-        "//examples/pigweed/system",
         "@pigweed//pw_async2:coro",
         "@pigweed//pw_async2:coro_or_else_task",
         "@pigweed//pw_async2:dispatcher",

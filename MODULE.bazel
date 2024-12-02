@@ -13,7 +13,7 @@ module(
 ########################################
 # Generic deps
 ########################################
-bazel_dep(name = "aspect_bazel_lib", version = "2.5.1")
+bazel_dep(name = "aspect_bazel_lib", version = "2.9.3")
 
 ########################################
 # Set up rules_python and pip
@@ -119,6 +119,15 @@ bazel_dep(
 # pull a few javascript packages used for repo tooling, like prettier for linting.
 bazel_dep(name = "aspect_rules_js", version = "1.39.0")
 
+##################
+# Setup rules_lint
+##################
+bazel_dep(name = "aspect_rules_lint", version = "1.0.3")
+
+# Next, follow the install instructions for
+# - linting: https://github.com/aspect-build/rules_lint/blob/v1.0.3/docs/linting.md
+# - formatting: https://github.com/aspect-build/rules_lint/blob/v1.0.3/docs/formatting.md
+
 ####### OPTIONAL: Customize Node.js version #########
 # By default you get the node version from DEFAULT_NODE_VERSION in @rules_nodejs//nodejs:repositories.bzl
 # Optionally you can pin a different node version:
@@ -178,6 +187,8 @@ bazel_dep(name = "pw_toolchain")
 bazel_dep(name = "rules_cc")
 
 bazel_dep(name = "hedron_compile_commands", dev_dependency = True)
+
+bazel_dep(name = "toolchains_llvm", version = "0.10.3")
 
 # Python Type Checking - mypy
 #############################
@@ -262,3 +273,13 @@ archive_override(
         "https://github.com/bazelbuild/rules_cc/archive/1acf5213b6170f1f0133e273cb85ede0e732048f.zip",
     ],
 )
+
+# Configure and register the toolchain.
+llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
+llvm.toolchain(
+    llvm_versions = {
+        "": "16.0.0",
+        "darwin-x86_64": "15.0.7",
+    },
+)
+use_repo(llvm, "llvm_toolchain", "llvm_toolchain_llvm")

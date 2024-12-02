@@ -2,6 +2,8 @@
 
 My personal monorepo.
 
+Find [docs here](https://michael-christen.github.io/toolbox)
+
 This will include everything from one-off scripts and experiments to libraries
 and applications. I'll likely mostly use Python, C++, and Rust (fingers crossed)
 and tie it all into 1 build tool to bring them all together.
@@ -131,6 +133,14 @@ Testing utilizes [catch2](https://github.com/catchorg/Catch2)
 bazel run //tools/buildozer -- <args>
 bazel run //tools/buildifier -- <args>
 bazel run -- @pnpm//:pnpm --dir $PWD install --lockfile-only
+```
+
+#### Bazel Options
+
+```
+# Avoid networked backends / remote caches, particularly helpful when home
+network is slow
+--config local
 ```
 
 #### Get tsan to work on Ubuntu 24.04

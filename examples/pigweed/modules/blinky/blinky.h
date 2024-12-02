@@ -41,8 +41,7 @@ class Blinky final {
   /// Injects this object's dependencies.
   ///
   /// This method MUST be called before using any other method.
-  void Init(pw::async2::Dispatcher& dispatcher,
-            pw::Allocator& allocator,
+  void Init(pw::async2::Dispatcher& dispatcher, pw::Allocator& allocator,
             pw::digital_io::DigitalInOut& monochrome_led);
 
   /// Turns the LED on if it is off, and off if it is on.
@@ -64,8 +63,7 @@ class Blinky final {
  private:
   /// Creates a blinking coroutine.
   pw::async2::Coro<pw::Status> BlinkLoop(
-      pw::async2::CoroContext&,
-      uint32_t blink_count,
+      pw::async2::CoroContext&, uint32_t blink_count,
       pw::chrono::SystemClock::duration interval) PW_LOCKS_EXCLUDED(lock_);
 
   pw::async2::Dispatcher* dispatcher_;
