@@ -22,3 +22,5 @@ write_aspect_bazelrc_presets(
         # "performance",
     ],
 )
+
+package(default_visibility = ["//visibility:private"])
