@@ -1,3 +1,15 @@
+# Import Apsect bazelrc presets
+# From https://docs.aspect.build/guides/bazelrc/
+# & https://github.com/bazel-contrib/bazel-lib/tree/5853e2e441df850dc332910a0808e9dee2ed9e27/.aspect/bazelrc
+import %workspace%/.aspect/bazelrc/bazel6.bazelrc
+import %workspace%/.aspect/bazelrc/bazel7.bazelrc
+import %workspace%/.aspect/bazelrc/convenience.bazelrc
+import %workspace%/.aspect/bazelrc/correctness.bazelrc
+import %workspace%/.aspect/bazelrc/debug.bazelrc
+import %workspace%/.aspect/bazelrc/java.bazelrc
+import %workspace%/.aspect/bazelrc/javascript.bazelrc
+import %workspace%/.aspect/bazelrc/performance.bazelrc
+
 # See https://bazel.build/docs/user-manual for option definitions
 #
 # Standard Pigweed flags
