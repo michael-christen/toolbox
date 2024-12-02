@@ -128,9 +128,9 @@ _py_gazelle_deps()
 # TODO: https://pwbug.dev/354747966 - Update the BCR version of Emboss.
 git_repository(
     name = "com_google_emboss",
+    commit = "8c45c34c7d163ecd87ae98c70f33276861276404",
     # LINT.IfChange(emboss)
     remote = "https://pigweed.googlesource.com/third_party/github/google/emboss",
-    commit = "8c45c34c7d163ecd87ae98c70f33276861276404",
     # tag = "v2024.0809.170004",
     # LINT.ThenChange(/pw_package/py/pw_package/packages/emboss.py:emboss)
 )

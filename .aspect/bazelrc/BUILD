@@ -8,6 +8,8 @@
 
 load("@aspect_bazel_lib//lib:bazelrc_presets.bzl", "write_aspect_bazelrc_presets")
 
+package(default_visibility = ["//visibility:private"])
+
 write_aspect_bazelrc_presets(
     name = "update_aspect_bazelrc_presets",
     presets = [
@@ -22,5 +24,3 @@ write_aspect_bazelrc_presets(
         # "performance",
     ],
 )
-
-package(default_visibility = ["//visibility:private"])
