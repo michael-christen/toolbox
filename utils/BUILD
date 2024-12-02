@@ -24,7 +24,7 @@ py_binary(
     visibility = ["//:__subpackages__"],
     deps = [
         "//third_party/bazel/proto:build_event_stream_py_library",
-        "//third_party/delimited_protobuf",
+        "//third_party/delimited_protobuf:util",
         "@pip//tabulate",
     ],
 )

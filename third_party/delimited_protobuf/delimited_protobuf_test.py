@@ -2,7 +2,7 @@ import io
 import unittest
 
 from examples.basic import hello_pb2
-from third_party.delimited_protobuf import delimited_protobuf
+from third_party.delimited_protobuf import util as delimited_protobuf
 
 
 class TestProtoDelimited(unittest.TestCase):
