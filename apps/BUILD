@@ -16,6 +16,9 @@ py_binary(
     deps = [
         "//third_party/bazel/src/main/protobuf:build_py_library",
         "//tools:bazel_utils",
+        "//tools:git_utils",
+        "//utils:bep_reader",
+        "//utils:graph_algorithms",
         "@pip//networkx",
     ],
 )

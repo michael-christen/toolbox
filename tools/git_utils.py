@@ -11,8 +11,8 @@ def _get_git_output(
 ) -> list[str]:
     # XXX: Why isn't type-hinting for these lists working?
     output = subprocess.check_output(
-        ["git", "-C", git_directory] + args
-    )  # type: ignore
+        ["git", "-C", git_directory] + args  # type: ignore
+    )
     result = output.decode("utf-8").strip()
     if not result:
         return []
@@ -53,6 +53,7 @@ def list_file_commits(
 
 def get_commits(
     git_directory: pathlib.Path | str,
+    # XXX: Should this be selectable
     target: str = "HEAD",
     after: datetime.datetime | None = None,
 ) -> list[str]:
