@@ -139,7 +139,10 @@ npm_link_all_packages(name = "node_modules")
 
 filegroup(
     name = "python_source",
-    srcs = glob(["*.py"], allow_empty=True) + [
+    srcs = glob(
+        ["*.py"],
+        allow_empty = True,
+    ) + [
         "//apps:python_source",
         "//examples/basic:python_source",
         "//examples/bazel:python_source",
