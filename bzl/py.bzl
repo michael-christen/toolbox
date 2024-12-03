@@ -16,7 +16,7 @@ def py_binary(**kwargs):
 def py_library(**kwargs):
     _py_library(**kwargs)
 
-def py_test(srcs, deps = [], args = [], data = [], **kwargs):
+def py_test(srcs, deps = [], args = [], data = [], timeout = "short", **kwargs):
     deps = deps + [
         "@pip//pytest",
     ]
@@ -31,6 +31,7 @@ def py_test(srcs, deps = [], args = [], data = [], **kwargs):
             "--config-file=$(location //:pytest.ini)",
         ] + ["$(location :%s)" % s for s in srcs],
         data = data + ["//:pytest.ini"],
+        timeout=timeout,
         **kwargs
     )
 

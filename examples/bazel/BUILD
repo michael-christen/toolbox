@@ -136,6 +136,7 @@ sh_test(
         "'Hello from nice_guy to Alice!'",
     ],
     data = [":cat_bin1_pure"],
+    timeout = "short",
 )
 
 sh_test(
@@ -146,4 +147,5 @@ sh_test(
         "'Hello from rude_guy to Bob!'",
     ],
     data = [":cat_bin1_evil"],
+    timeout = "short",
 )

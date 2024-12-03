@@ -67,6 +67,8 @@ pw_cc_test(
         "@pigweed//pw_thread:sleep",
         "@pigweed//pw_unit_test",
     ],
+    # XXX: Make a macro for this?
+    timeout="short",
 )
 
 cc_library(

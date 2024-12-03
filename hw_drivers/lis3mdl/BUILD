@@ -53,6 +53,7 @@ pw_cc_test(
         "@pigweed//pw_result",
         "@pigweed//pw_unit_test",
     ],
+    timeout = "short",
 )
 
 cc_test(

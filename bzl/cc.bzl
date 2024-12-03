@@ -76,8 +76,8 @@ def cc_binary(**kwargs):
 def cc_library(**kwargs):
     _cc_library(copts = COPTS + CXX_OPTS, **kwargs)
 
-def cc_test(**kwargs):
-    _cc_test(copts = COPTS + CXX_OPTS, **kwargs)
+def cc_test(timeout="short", **kwargs):
+    _cc_test(copts = COPTS + CXX_OPTS, timeout=timeout, **kwargs)
 
 def c_binary(**kwargs):
     _cc_binary(copts = COPTS + CONLY_OPTS, **kwargs)
