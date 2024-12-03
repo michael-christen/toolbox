@@ -58,6 +58,8 @@ cc_library(
 
 pw_cc_test(
     name = "blinky_test",
+    # XXX: Make a macro for this?
+    timeout = "short",
     srcs = ["blinky_test.cc"],
     deps = [
         ":blinky",
@@ -67,8 +69,6 @@ pw_cc_test(
         "@pigweed//pw_thread:sleep",
         "@pigweed//pw_unit_test",
     ],
-    # XXX: Make a macro for this?
-    timeout="short",
 )
 
 cc_library(

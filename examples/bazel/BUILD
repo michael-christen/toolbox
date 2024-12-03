@@ -130,22 +130,22 @@ platform_data(
 # Prove this is working as expected (changing prefix)
 sh_test(
     name = "cat_bin1_pure_test",
+    timeout = "short",
     srcs = ["check_equality.sh"],
     args = [
         "$(location :cat_bin1_pure)",
         "'Hello from nice_guy to Alice!'",
     ],
     data = [":cat_bin1_pure"],
-    timeout = "short",
 )
 
 sh_test(
     name = "cat_bin1_evil_test",
+    timeout = "short",
     srcs = ["check_equality.sh"],
     args = [
         "$(location :cat_bin1_evil)",
         "'Hello from rude_guy to Bob!'",
     ],
     data = [":cat_bin1_evil"],
-    timeout = "short",
 )

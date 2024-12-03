@@ -40,6 +40,7 @@ cc_library(
 
 pw_cc_test(
     name = "lis3mdl_pw_test",
+    timeout = "short",
     srcs = ["lis3mdl_pw_test.cc"],
     deps = [
         ":lis3mdl",
@@ -53,7 +54,6 @@ pw_cc_test(
         "@pigweed//pw_result",
         "@pigweed//pw_unit_test",
     ],
-    timeout = "short",
 )
 
 cc_test(

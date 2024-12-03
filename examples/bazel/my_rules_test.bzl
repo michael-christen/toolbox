@@ -17,7 +17,7 @@ typ_foo_binary_test = analysistest.make(_foo_binary_test_impl)
 def _test_contents():
     # Leave manual so this only gets built as dependency of the test, not :all
     foo_binary(name = "test_foo", username = "Bob", tags = ["manual"])
-    typ_foo_binary_test(name = "foo_binary_test", target_under_test = ":test_foo", timeout="short")
+    typ_foo_binary_test(name = "foo_binary_test", target_under_test = ":test_foo", timeout = "short")
 
 def my_rules_test_suite(name):
     # Need to instantiate

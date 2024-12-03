@@ -31,7 +31,7 @@ def py_test(srcs, deps = [], args = [], data = [], timeout = "short", **kwargs):
             "--config-file=$(location //:pytest.ini)",
         ] + ["$(location :%s)" % s for s in srcs],
         data = data + ["//:pytest.ini"],
-        timeout=timeout,
+        timeout = timeout,
         **kwargs
     )
 
