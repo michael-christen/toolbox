@@ -29,8 +29,6 @@ import %workspace%/.aspect/bazelrc/performance.bazelrc
 #
 # pw_protobuf/BUILD.bazel, llvm_toolchain
 common --noincompatible_disallow_empty_glob
-# loud / I don't want to set `timeout=short` on all tests
-# test --notest_verbose_timeout_warnings
 # No module named 'pw_protobuf_codegen_protos' in pw_protobuf options
 build --legacy_external_runfiles
 

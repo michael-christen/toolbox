@@ -18,6 +18,7 @@
 # If you want to use custom COPTS, then just use @rules_cc//cc:defs.bzl
 # directly and include all of the pieces you want
 load("@rules_cc//cc:defs.bzl", _cc_binary = "cc_binary", _cc_library = "cc_library", _cc_test = "cc_test")
+load("@pigweed//pw_build:pigweed.bzl", _pw_cc_test = "pw_cc_test")
 
 # C Compiler Options: https://gcc.gnu.org/onlinedocs/gcc/Option-Summary.html
 
@@ -84,3 +85,6 @@ def c_binary(**kwargs):
 
 def c_library(**kwargs):
     _cc_library(copts = COPTS + CONLY_OPTS, **kwargs)
+
+def pw_cc_test(timeout = "short", **kwargs):
+    _pw_cc_test(timeout = timeout, **kwargs)

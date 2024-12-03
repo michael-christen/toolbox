@@ -1,14 +1,13 @@
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
 load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_library")
 load("@com_google_emboss//:build_defs.bzl", "emboss_cc_library")
-load("@pigweed//pw_build:pigweed.bzl", "pw_cc_test")
 load(
     "@pigweed//pw_protobuf_compiler:pw_proto_library.bzl",
     "nanopb_proto_library",
     "nanopb_rpc_proto_library",
 )
 load("@rules_proto//proto:defs.bzl", "proto_library")
-load("//bzl:cc.bzl", "cc_library", "cc_test")
+load("//bzl:cc.bzl", "cc_library", "cc_test", "pw_cc_test")
 load("//bzl:py.bzl", "proto_py_library")
 
 package(default_visibility = ["//visibility:private"])
@@ -40,7 +39,6 @@ cc_library(
 
 pw_cc_test(
     name = "lis3mdl_pw_test",
-    timeout = "short",
     srcs = ["lis3mdl_pw_test.cc"],
     deps = [
         ":lis3mdl",
