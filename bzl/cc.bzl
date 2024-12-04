@@ -1,3 +1,5 @@
+load("@pigweed//pw_build:pigweed.bzl", _pw_cc_test = "pw_cc_test")
+
 # Custom macros of common cc rules to enable common modifications
 #
 # See https://bazel.build/reference/be/c-cpp for documentation
@@ -76,11 +78,14 @@ def cc_binary(**kwargs):
 def cc_library(**kwargs):
     _cc_library(copts = COPTS + CXX_OPTS, **kwargs)
 
-def cc_test(**kwargs):
-    _cc_test(copts = COPTS + CXX_OPTS, **kwargs)
+def cc_test(timeout = "short", **kwargs):
+    _cc_test(copts = COPTS + CXX_OPTS, timeout = timeout, **kwargs)
 
 def c_binary(**kwargs):
     _cc_binary(copts = COPTS + CONLY_OPTS, **kwargs)
 
 def c_library(**kwargs):
     _cc_library(copts = COPTS + CONLY_OPTS, **kwargs)
+
+def pw_cc_test(timeout = "short", **kwargs):
+    _pw_cc_test(timeout = timeout, **kwargs)
