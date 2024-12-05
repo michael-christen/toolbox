@@ -23,7 +23,7 @@ def compute_group_probability(
     Group probability for a node can be defined for node
     N as a function GP as such:
 
-    GP(N) = P(N) * PRODUCT{CHILDREN(N)}
+    GP(N) = P(N) * PRODUCT{DESCENDANTS(N)}
 
     Arguments:
     - graph: A directed acyclic graph with any type of node naming
@@ -37,13 +37,12 @@ def compute_group_probability(
     Returns: The group probability for each node.
     """
     node_group_probability: dict[T, float] = {}
-    for node in networkx.dfs_postorder_nodes(graph):
+    for node in graph.nodes:
         # Get our own probability, assume 100% if not specified
         product = node_probability.get(node, 1.0)
         # Get product of each child
-        for child in graph.successors(node):
-            # If postorder traversal is correct this should already be set.
-            product *= node_group_probability[child]
+        for descendant in networkx.descendants(graph, node):
+            product *= node_probability.get(descendant, 1.0)
         node_group_probability[node] = product
     return node_group_probability
 
@@ -59,7 +58,7 @@ def compute_group_duration(
 
     Group duration for a node N as a function GD:
 
-    GD(N) = D(N) + SUM{PARENTS(N)}
+    GD(N) = D(N) + SUM{ANCESTORS(N)}
 
     Arguments:
     - graph: A directed acyclic graph
@@ -69,19 +68,10 @@ def compute_group_duration(
     Returns: Group duration for each node.
     """
     node_group_durations: dict[T, float] = {}
-    # Reverse the graph in order to do a "proper" traversal and don't end up
-    # with unvisited parents. If we didn't reverse and did a preorder traversal
-    # we could end up traversing from one parent down to a child without having
-    # visited the other parent. Doing this allows us to avoid that
-    # possibility
-    graph = graph.reverse(copy=True)
-    for node in networkx.dfs_postorder_nodes(graph):
+    for node in graph.nodes:
         # Get our own duration
         total = node_duration_s.get(node, 0.0)
-        # Get sum of parents (referring to as succssors becasue we've reversed
-        # the graph in order to handle multiple parents)
-        for parent in graph.successors(node):
-            # If preorder traversal is correct this should already be set.
-            total += node_group_durations[parent]
+        for ancestor in networkx.ancestors(graph, node):
+            total += node_duration_s.get(ancestor, 0.0)
         node_group_durations[node] = total
     return node_group_durations
