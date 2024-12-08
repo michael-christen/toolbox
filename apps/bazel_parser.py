@@ -2,7 +2,7 @@
 
 A larger system description:
 - inputs:
-  - bazel query //... --ouput proto > query_result.pb
+  - bazel query //... --output proto > query_result.pb
     - the full dependency tree
   - bazel test //... --build_event_binary_file=test_all.pb
     - bazel run //utils:bep_reader < test_all.pb
@@ -41,7 +41,7 @@ from utils import graph_algorithms
 logger = logging.getLogger(__name__)
 
 from networkx.drawing import nx_agraph
-from bokeh.models import ColumnDataSource, MultiLine, Circle, CustomJS, TapTool
+from bokeh.models import ColumnDataSource, MultiLine, Circle, CustomJS, TapTool, HoverTool
 from bokeh.plotting import figure, from_networkx
 from bokeh.layouts import column
 from bokeh.models.widgets import DataTable, TableColumn
@@ -115,8 +115,8 @@ def _normalize_bazel_target_to_intermediate(target: str) -> str:
 
 
 class Node(TypedDict):
-    rule_name: str
-    rule_class: str
+    node_name: str
+    node_class: str
     num_parents: int
     num_ancestors: int
     num_children: int
@@ -138,8 +138,8 @@ def get_node_field_names() -> list[str]:
     Keep in sync with Node
     """
     return [
-        'rule_name',
-        'rule_class',
+        'node_name',
+        'node_class',
         'num_parents',
         'num_ancestors',
         'num_children',
@@ -155,29 +155,12 @@ def get_node_field_names() -> list[str]:
     ]
 
 
-def dependency_analysis(
-    query_result: build_pb2.QueryResult, ignore_external: bool,
-    repo_dir: pathlib.Path, git_query_after: datetime.datetime,
-    bep_path: pathlib.Path,
-) -> tuple[networkx.DiGraph, list[Node]]:
-    """Analyze the dependencies that we're getting to understand them."""
-    # Get execution times
-    with bep_path.open('rb') as bep_buf:
-        node_duration = bep_reader.get_label_to_runtime(bep_buf)
-        node_duration_s = {label: dt.total_seconds()
-                           for label, dt in node_duration.items()}
-
-    # Get FileCommitMap
-    file_commit_map = git_utils.get_file_commit_map_from_follow(
-        git_directory=repo_dir,
-        after=git_query_after)
-    bazel_intermediates = _normalize_paths_to_bazel_intermediates(file_commit_map.file_map.keys())
-
-    # Get rules and graph
-    rules = _get_rules(query_result)
-    graph = get_dependency_digraph(rules, ignore_external=ignore_external)
-
+def _get_node_probability(
+    graph: networkx.DiGraph,
+    file_commit_map: git_utils.FileCommitMap,
+) -> dict[str, float]:
     # XXX: Test case with BUILD further up, ensure we still get the right match
+    bazel_intermediates = _normalize_paths_to_bazel_intermediates(file_commit_map.file_map.keys())
     bazel_src_target_to_file = {}
     for node in graph.nodes:
         src_path = bazel_intermediates.get(
@@ -190,6 +173,17 @@ def dependency_analysis(
     for node, f in bazel_src_target_to_file.items():
         node_probability[node] = 1 - (len(file_commit_map.file_map[f]) /
                                       total_commits)
+    return node_probability
+
+
+def dependency_analysis(
+    node_to_class: dict[str, str],
+    graph: networkx.DiGraph,
+    node_probability: dict[str, float],
+    node_duration_s: dict[str, float],
+) -> dict[str, Node]:
+    """Analyze the dependencies that we're getting to understand them."""
+
     group_probability = graph_algorithms.compute_group_probability(
         graph=graph,
         node_probability=node_probability)
@@ -198,67 +192,73 @@ def dependency_analysis(
         graph=graph,
         node_duration_s=node_duration_s)
 
+    pagerank = networkx.pagerank(graph)
+    hubs, authorities = networkx.hits(graph)
+    # XXX: Should we have a data structure that's just a big collection of
+    # components
+    # - use cases:
+    #  - dictionary of node-specific info for js callbacks
+    #  - set of lists / DataFrame for csv or DataSource
+
     # XXX: Setup cli arguments and overall workflow
 
     logger.debug(f"nodes: {len(graph.nodes)}")
     logger.debug(f"edges: {len(graph.edges)}")
-    logger.debug(f"rules: {len(rules)}")
-
-    pagerank = networkx.pagerank(graph)
-    hubs, authorities = networkx.hits(graph)
+    # XXX: Show graph density
 
     writer = csv.DictWriter(sys.stdout, fieldnames=get_node_field_names())
     writer.writeheader()
-    rule_and_class: list[tuple[str, str]] = []
-    for rule_name, rule in rules.items():
-        rule_and_class.append((rule_name, rule.rule_class))
-    # Probably want the source files too
-    for bazel_src in node_probability.keys():
-        rule_and_class.append((bazel_src, 'source_file'))
-    nodes: list[Node] = []
-    for rule_name, rule_class in rule_and_class:
+
+
+    nodes: dict[str, Node] = {}
+    for node_name, node_class in node_to_class.items():
         try:
-            num_parents = len(list(graph.predecessors(rule_name)))
-            num_children = len(list(graph.successors(rule_name)))
-            num_ancestors = len(list(networkx.ancestors(graph, rule_name)))
-            num_descendants = len(list(networkx.descendants(graph, rule_name)))
-            gp = group_probability.get(rule_name, 1.0)
-            gd = group_duration.get(rule_name, 0)
+            num_parents = len(list(graph.predecessors(node_name)))
+            num_children = len(list(graph.successors(node_name)))
+            num_ancestors = len(list(networkx.ancestors(graph, node_name)))
+            num_descendants = len(list(networkx.descendants(graph, node_name)))
+            gp = group_probability.get(node_name, 1.0)
+            gd = group_duration.get(node_name, 0)
             row: Node = {
-                "rule_name": rule_name,
-                "rule_class": rule_class,
+                "node_name": node_name,
+                "node_class": node_class,
                 "num_parents": num_parents,
                 "num_ancestors": num_ancestors,
                 "num_children": num_children,
                 "num_descendants": num_descendants,
-                "pagerank": pagerank[rule_name],
-                "hubs_metric": hubs[rule_name],
-                "authorities_metric": authorities[rule_name],
-                "node_duration_s": node_duration_s.get(rule_name, 0),
+                "pagerank": pagerank[node_name],
+                "hubs_metric": hubs[node_name],
+                "authorities_metric": authorities[node_name],
+                "node_duration_s": node_duration_s.get(node_name, 0),
                 # XXX: determine_main is getting the attribution, but not the
                 # main library, etc. not sure
                 "group_duration_s": gd,
                 "expected_duration_s": gd * (1 - gp),
-                "node_probability_cache_hit": node_probability.get(rule_name, 1.0),
+                "node_probability_cache_hit": node_probability.get(node_name, 1.0),
                 "group_probability_cache_hit": gp,
             }
-            nodes.append(row)
+            nodes[node_name] = row
             writer.writerow(row)
 
         except networkx.NetworkXError as e:
-            raise AssertionError(f"Exception with {rule_name}") from e
+            raise AssertionError(f"Exception with {node_name}") from e
     # Temporary way to export
     networkx.write_gml(graph, "/tmp/my.gml")
-    return graph, nodes
+    return nodes
 
 
-def run_bokeh(graph: networkx.DiGraph, nodes: list[Node]) -> None:
+def run_bokeh(graph: networkx.DiGraph, nodes: dict[str, Node]) -> None:
     # Prepare data for the table
     # XXX: Hook up nodes
     node_data = {
-        "Node": [f"Node {i}" for i in graph.nodes],
-        "Highlight": ["No" for _ in graph.nodes],
+        "Node": [n for n in nodes],
+        "Highlight": ["No" for _ in nodes],
+        "num_descendants": [v['num_descendants'] for v in nodes.values()],
     }
+    # XXX: Apply Node information to graph
+    for name, node in nodes.items():
+        for k, v in node.items():
+            graph.nodes[name][k] = v
 
     # Initialize Panel for interactive layout
     pn.extension()
@@ -285,36 +285,126 @@ def get_panel_layout(graph: networkx.DiGraph, node_data: dict[str, list[str]]
                   tools="tap,box_zoom,wheel_zoom,reset,pan",
                   active_scroll="wheel_zoom",
                   title="Network Graph")
+    plot.axis.visible = True
     # XXX: probably just make pos
     network_graph = from_networkx(graph, nx_agraph.graphviz_layout, prog='dot')  # type: ignore
+    # Node
+    network_graph.node_renderer.data_source.data['color'] = ['skyblue'] * len(graph.nodes)
+    network_graph.node_renderer.data_source.data['alpha'] = [1.0] * len(graph.nodes)
+    # Edge
+    network_graph.edge_renderer.data_source.data['line_color'] = ['gray' for edge in graph.edges]
+    network_graph.edge_renderer.data_source.data['alpha'] = [1.0] * len(graph.edges)
 
+    hover = HoverTool(tooltips=[
+        ("Node", "@index"),
+        ("Name", "@node_name"),
+        ("num_descendants", "@num_descendants"),
+        ("num_ancestors", "@num_ancestors"),
+        ("node_duration_s", "@node_duration_s"),
+        ("group_duration_s", "@group_duration_s"),
+        ("node_probability_cache_hit", "@node_probability_cache_hit"),
+        ("group_probability_cache_hit", "@group_probability_cache_hit"),
+        ("expected_duration_s", "@expected_duration_s"),
+    ])
+    plot.add_tools(hover)
+
+
+    # Don't let selection overwrite our properties
+    network_graph.node_renderer.selection_glyph = None
+    network_graph.node_renderer.nonselection_glyph = None
+    network_graph.edge_renderer.selection_glyph = None
+    network_graph.edge_renderer.nonselection_glyph = None
     # Add visual properties to the graph
-    network_graph.node_renderer.glyph = Circle(radius=5, fill_color="skyblue")
+    network_graph.node_renderer.glyph = Circle(radius=150,
+                                               fill_color="skyblue",
+                                               # line_color="skyblue",
+                                               )
     network_graph.edge_renderer.glyph = MultiLine(line_color="gray", line_alpha=0.5, line_width=1)
+
+    network_graph.node_renderer.glyph.update(fill_color="color",
+                                             fill_alpha="alpha",
+                                             # This allows us to hide completely
+                                             line_alpha="alpha",
+                                             )
+    network_graph.edge_renderer.glyph.update(line_color="line_color", line_alpha="alpha")
     plot.renderers.append(network_graph)
 
     source = ColumnDataSource(node_data)
 
+    # Precompute ancestors and descendants
+    label_to_index = {n: i for i, n in enumerate(graph.nodes)}
+    ancestors = {index: list(label_to_index[l] for l in networkx.ancestors(graph, node)) for index, node in enumerate(graph.nodes)}
+    descendants = {index: list(label_to_index[l] for l in networkx.descendants(graph, node)) for index, node in enumerate(graph.nodes)}
+
     # JavaScript callback for interactivity
     # XXX: Likely define the type of the input graph a little better, TypedDict
     callback = CustomJS(
-        args=dict(source=source, graph_renderer=network_graph),
+        args=dict(source=source,
+                  graph_renderer=network_graph,
+                  ancestors=ancestors,
+                  descendants=descendants,
+                  label_to_index=label_to_index,
+                  ),
         code="""
         const selected_index = graph_renderer.node_renderer.data_source.selected.indices[0];
         const data = source.data;
+        const node_data = graph_renderer.node_renderer.data_source.data;
+        const edge_data = graph_renderer.edge_renderer.data_source.data;
         if (selected_index !== undefined) {
+            const selected_ancestors = ancestors.get(selected_index);
+            const selected_descendants = descendants.get(selected_index);
+            const subgraph_nodes = new Set([[selected_index], selected_ancestors, selected_descendants].flat());
+            const ancestor_nodes = new Set(selected_ancestors);
+            const descendant_nodes = new Set(selected_descendants);
+
             for (let i = 0; i < data['Highlight'].length; i++) {
                 data['Highlight'][i] = (i === selected_index) ? "Yes" : "No";
+                var color = "skyblue";
+                if (i === selected_index) {
+                  color = "skyblue";
+                } else if (ancestor_nodes.has(i)) {
+                  color = "orange";
+                } else if (descendant_nodes.has(i)) {
+                  color = "gold";
+                } else {
+                  color = "skyblue";
+                }
+                node_data['color'][i] = color;
+                node_data['alpha'][i] = subgraph_nodes.has(i) ? 1.0 : 0.0;
             }
-            source.change.emit();
+
+            console.log(subgraph_nodes);
+            for (let i = 0; i < edge_data['start'].length; i++) {
+                const edge_start = label_to_index[edge_data['start'][i]];
+                const edge_end = label_to_index[edge_data['end'][i]];
+                const in_subgraph = subgraph_nodes.has(edge_start) && subgraph_nodes.has(edge_end);
+                console.log(edge_start);
+                console.log(edge_end);
+                console.log(in_subgraph);
+                edge_data['alpha'][i] = in_subgraph ? 1.0 : 0.0;
+            }
+        } else {
+            for (let i = 0; i < data['Highlight'].length; i++) {
+                node_data['color'][i] = "skyblue";
+                node_data['alpha'][i] = 1.0;
+            }
+            for (let i = 0; i < edge_data['start'].length; i++) {
+                edge_data['alpha'][i] = 1.0;
+            }
         }
+        source.change.emit();
+        graph_renderer.node_renderer.data_source.change.emit();
+        graph_renderer.edge_renderer.data_source.change.emit();
     """
     )
+    # XXX: The color change is only happening after the graph is manually
+    # adjusted (eg, zooming in / out)
     # Callback for clicking a row (table -> graph)
     table_to_graph_callback = CustomJS(
         args=dict(source=source, graph_renderer=network_graph),
         code="""
         const selected_index = cb_obj.indices[0];
+        console.log("Index: " + selected_index);
         if (selected_index !== undefined) {
             graph_renderer.node_renderer.data_source.selected.indices = [selected_index];
         }
@@ -326,8 +416,9 @@ def get_panel_layout(graph: networkx.DiGraph, node_data: dict[str, list[str]]
 
 
     # Create a DataTable to view source
+    # XXX: This and graph are disagreeing :scream:
     columns = [TableColumn(field=k, title=k) for k in node_data.keys()]
-    data_table = DataTable(source=source, columns=columns, width=400, height=800)
+    data_table = DataTable(source=source, columns=columns, width=800, height=800)
 
     # Combine the plot and table into a Panel layout
     layout = pn.Row(pn.pane.Bokeh(plot), pn.pane.Bokeh(data_table))
@@ -350,10 +441,40 @@ def main():
     with open("/tmp/my.prototxt", "w") as f:
         f.write(str(query_result))
     repo_dir = pathlib.Path('/home/mchristen/devel/toolbox')  # XXX
-    git_query_after = datetime.datetime.now() - datetime.timedelta(days=2100) # XXX
+    git_query_after = datetime.datetime.now() - datetime.timedelta(days=2) # XXX
+    file_commit_map = git_utils.get_file_commit_map_from_follow(
+        git_directory=repo_dir,
+        after=git_query_after)
+    # Get execution times
     bep_path = repo_dir / 'test_all.pb'
-    graph, nodes = dependency_analysis(query_result, ignore_external=True, repo_dir=repo_dir,
-                                       git_query_after=git_query_after, bep_path=bep_path)
+    with bep_path.open('rb') as bep_buf:
+        node_duration = bep_reader.get_label_to_runtime(bep_buf)
+        node_duration_s = {label: dt.total_seconds()
+                           for label, dt in node_duration.items()}
+    # Get rules and graph
+    rules = _get_rules(query_result)
+    graph = get_dependency_digraph(rules, ignore_external=True)
+    node_probability = _get_node_probability(graph=graph,
+                                             file_commit_map=file_commit_map)
+
+    node_to_class: dict[str, str] = {}
+    # Gotta make table for all, in a consistent order, otherwise table, etc. won't line up:
+    # XXX: (not) Select which nodes to view
+    for node_name in graph.nodes:
+        node_rule = rules.get(node_name)
+        if node_name in node_probability:
+            # Probably want the source files too
+            node_to_class[node_name] = 'source_file'
+        elif node_rule:
+            node_to_class[node_name] = node_rule.rule_class
+        else:
+            node_to_class[node_name] = 'unknown'
+
+    nodes = dependency_analysis(node_to_class=node_to_class,
+                                graph=graph,
+                                node_duration_s=node_duration_s,
+                                node_probability=node_probability,
+                                )
     run_bokeh(graph=graph, nodes=nodes)
 
 
