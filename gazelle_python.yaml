@@ -2673,7 +2673,7 @@ manifest:
     numpy.lib.scimath: numpy
     numpy.lib.stride_tricks: numpy
     numpy.lib.user_array: numpy
-    numpy.libs.libscipy_openblas64_-ff651d7f: numpy
+    numpy.libs.libscipy_openblas64_-6bb31eeb: numpy
     numpy.linalg: numpy
     numpy.linalg.lapack_lite: numpy
     numpy.linalg.linalg: numpy
@@ -4328,4 +4328,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: cd3f7b14f1354bdc06b7319feb89d0d3a7aad8696326c1b942352ede70ebc056
+integrity: 5426fcfa8450cbcdcf4b3dc3c472584bbb1bbd573ee18c3d67157d6210798725
