@@ -253,8 +253,24 @@ def run_bokeh(graph: networkx.DiGraph, nodes: dict[str, Node]) -> None:
     node_data = {
         "Node": [n for n in nodes],
         "Highlight": ["No" for _ in nodes],
-        "num_descendants": [v['num_descendants'] for v in nodes.values()],
     }
+    fields = [
+        'node_class',
+        'num_descendants',
+        'num_children',
+        'num_ancestors',
+        'num_parents',
+        'pagerank',
+        'hubs_metric',
+        'authorities_metric',
+        'node_duration_s',
+        'group_duration_s',
+        'expected_duration_s',
+        'node_probability_cache_hit',
+        'group_probability_cache_hit',
+    ]
+    for f in fields:
+        node_data[f] = [v[f] for v in nodes.values()]
     # XXX: Apply Node information to graph
     for name, node in nodes.items():
         for k, v in node.items():
