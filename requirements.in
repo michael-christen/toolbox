@@ -19,7 +19,7 @@ tabulate
 # https://github.com/pytest-dev/pytest/issues/12592#issuecomment-2515100428
 # introduced an issue with files named the same as their parent modules from
 # properly getting imported
-pytest<8.3.4
+pytest @ git+https://github.com/pytest-dev/pytest@28e1e25a6782513db8a2963bd5ed5a9d66682f86
 black[jupyter]
 flake8
 isort
