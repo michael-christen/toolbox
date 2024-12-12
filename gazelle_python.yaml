@@ -4071,6 +4071,11 @@ manifest:
     pygments.token: pygments
     pygments.unistring: pygments
     pygments.util: pygments
+    pygraphviz: pygraphviz
+    pygraphviz.agraph: pygraphviz
+    pygraphviz.graphviz: pygraphviz
+    pygraphviz.scraper: pygraphviz
+    pygraphviz.testing: pygraphviz
     pylab: matplotlib
     pyparsing: pyparsing
     pyparsing.actions: pyparsing
@@ -4911,4 +4916,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: 154b8589ae1d6d22117888e8da97c7f92362f1c9cf0e1eb0132df6fe5e39b433
+integrity: d7d91a9dd271cfa4b11f2d1790f4191a93a6cc0c37bcc990dc42c596c97830a4

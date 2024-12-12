@@ -41,12 +41,13 @@ from utils import graph_algorithms
 logger = logging.getLogger(__name__)
 
 from networkx.drawing import nx_agraph
-from bokeh.models import ColumnDataSource, MultiLine, Circle, CustomJS, TapTool, HoverTool
+from bokeh.models import ColumnDataSource, MultiLine, Circle, CustomJS, TapTool, HoverTool, CheckboxGroup, RadioGroup
 from bokeh.plotting import figure, from_networkx
 from bokeh.layouts import column
 from bokeh.models.widgets import DataTable, TableColumn
 from bokeh.io import show
 import panel as pn
+from panel.io import save
 
 
 def _get_rules(
@@ -246,15 +247,59 @@ def dependency_analysis(
     networkx.write_gml(graph, "/tmp/my.gml")
     return nodes
 
+SIZING_MODE = 'fixed'
+
 
 def run_bokeh(graph: networkx.DiGraph, nodes: dict[str, Node]) -> None:
-    # Prepare data for the table
-    # XXX: Hook up nodes
-    node_data = {
-        "Node": [n for n in nodes],
-        "Highlight": ["No" for _ in nodes],
-    }
+    for name, node in nodes.items():
+        for k, v in node.items():
+            graph.nodes[name][k] = v
+        graph.nodes[name]['Node'] = node['node_name']
+        graph.nodes[name]['Highlight'] = 'No'
+
+    # Initialize Panel for interactive layout
+    pn.extension(sizing_mode=SIZING_MODE)
+    layout = get_panel_layout(graph=graph)
+    save.save(layout, '/tmp/my_app.html')
+    pn.serve(layout)
+
+
+def get_panel_layout(graph: networkx.DiGraph) -> pn.layout.base.Panel:
+    """Get Panel Layout
+
+    References
+
+    # network_graph = from_networkx(graph, networkx.spring_layout, scale=1, center=(0, 0))
+    # neato
+    # dot
+    # twopi
+    # fdp
+    # sfdp
+    # circo
+    """
+    # Prepare Bokeh graph layout
+    plot = figure(
+                  height=800,
+                  width=800,
+                  tools="tap,box_zoom,wheel_zoom,reset,pan",
+                  active_scroll="wheel_zoom",
+                  sizing_mode=SIZING_MODE,
+                  title="Network Graph")
+    plot.axis.visible = False
+    # pos = nx_agraph.graphviz_layout(graph, prog='dot')
+    # network_graph = from_networkx(graph, pos)  # type: ignore
+    network_graph = from_networkx(graph, networkx.spring_layout)  # type: ignore
+    # Node
+    network_graph.node_renderer.data_source.data['color'] = ['skyblue'] * len(graph.nodes)
+    network_graph.node_renderer.data_source.data['alpha'] = [1.0] * len(graph.nodes)
+    # Edge
+    network_graph.edge_renderer.data_source.data['line_color'] = ['gray' for edge in graph.edges]
+    network_graph.edge_renderer.data_source.data['alpha'] = [1.0] * len(graph.edges)
+
+    # Create a DataTable to view source
     fields = [
+        'Node',
+        'Highlight',
         'node_class',
         'num_descendants',
         'num_children',
@@ -269,51 +314,76 @@ def run_bokeh(graph: networkx.DiGraph, nodes: dict[str, Node]) -> None:
         'node_probability_cache_hit',
         'group_probability_cache_hit',
     ]
-    for f in fields:
-        node_data[f] = [v[f] for v in nodes.values()]
-    # XXX: Apply Node information to graph
-    for name, node in nodes.items():
-        for k, v in node.items():
-            graph.nodes[name][k] = v
+    columns = [TableColumn(field=k, title=k) for k in fields]
+    data_table = DataTable(source=network_graph.node_renderer.data_source,
+                           columns=columns,
+                           height=800,
+                           width=800,
+                           sizing_mode=SIZING_MODE,
+                           fit_columns=True,
+                           )
+    # Create a CheckboxGroup for toggling columns
+    checkbox_group = CheckboxGroup(labels=fields, active=list(range(len(fields))))
 
-    # Initialize Panel for interactive layout
-    pn.extension()
-    layout = get_panel_layout(graph=graph, node_data=node_data)
-    pn.serve(layout)
+    # CustomJS to toggle column visibility
+    check_callback = CustomJS(args=dict(data_table=data_table, columns=columns), code="""
+        const active = cb_obj.active;  // Indices of selected checkboxes
 
+        const visible_columns = [];
+        for (let i = 0; i < columns.length; i++) {
+          if (active.includes(i)) {
+            visible_columns.push(columns[i]);
+          }
+        }
 
-def get_panel_layout(graph: networkx.DiGraph, node_data: dict[str, list[str]]
-                     ) -> pn.layout.base.Panel:
-    """Get Panel Layout
+        data_table.columns = visible_columns;  // Update DataTable's columns
+    """)
+    checkbox_group.js_on_change("active", check_callback)
 
-    References
+    radio_labels = fields + ["NONE"]
+    radio_group = RadioGroup(labels=radio_labels, active=len(radio_labels) - 1)
+    radio_callback = CustomJS(args=dict(labels=radio_labels,
+                                        data_table=data_table, columns=columns,
+                                        node_source=network_graph.node_renderer.data_source,
+    ), code="""
+        const active = cb_obj.active;  // Indices of selected checkboxes
+        const label = labels[active];
+        console.log(label);
+        if (label === "NONE") {
+          // XXX: Need to de-select all and when unselected, go back to this
+          return;
+        }
 
-    # network_graph = from_networkx(graph, networkx.spring_layout, scale=1, center=(0, 0))
-    # neato
-    # dot
-    # twopi
-    # fdp
-    # sfdp
-    # circo
-    """
-    # Prepare Bokeh graph layout
-    plot = figure(width=800, height=800,
-                  tools="tap,box_zoom,wheel_zoom,reset,pan",
-                  active_scroll="wheel_zoom",
-                  title="Network Graph")
-    plot.axis.visible = True
-    # XXX: probably just make pos
-    network_graph = from_networkx(graph, nx_agraph.graphviz_layout, prog='dot')  # type: ignore
-    # Node
-    network_graph.node_renderer.data_source.data['color'] = ['skyblue'] * len(graph.nodes)
-    network_graph.node_renderer.data_source.data['alpha'] = [1.0] * len(graph.nodes)
-    # Edge
-    network_graph.edge_renderer.data_source.data['line_color'] = ['gray' for edge in graph.edges]
-    network_graph.edge_renderer.data_source.data['alpha'] = [1.0] * len(graph.edges)
+        const n_data = node_source.data;
+        const values = n_data[label];
+        const colors = n_data['color'];
+
+        // Determine min and max of the node attribute
+        const minVal = Math.min(...values);
+        const maxVal = Math.max(...values);
+
+        // Define a Viridis256 color palette (you can replace this with other palettes)
+        const palette = [
+            '#440154', '#481567', '#482677', '#453781', '#404788', '#39568c', '#33638d', '#2d708e',
+            '#287d8e', '#238a8d', '#1f968b', '#20a387', '#29af7f', '#3cbc75', '#55c667', '#73d055',
+            '#95d840', '#b8de29', '#dce319', '#fde725'
+        ];
+
+        // Map each value to a color based on its normalized position
+        for (let i = 0; i < values.length; i++) {
+            const normalized = (values[i] - minVal) / (maxVal - minVal); // Normalize to [0, 1]
+            const paletteIndex = Math.floor(normalized * (palette.length - 1)); // Map to palette index
+            colors[i] = palette[paletteIndex]; // Assign color
+        }
+
+        // Trigger the update
+        node_source.change.emit();
+    """)
+    radio_group.js_on_change("active", radio_callback)
 
     hover = HoverTool(tooltips=[
-        ("Node", "@index"),
-        ("Name", "@node_name"),
+        ("Name", "@index"),
+        ("Class", "@node_class"),
         ("num_descendants", "@num_descendants"),
         ("num_ancestors", "@num_ancestors"),
         ("node_duration_s", "@node_duration_s"),
@@ -345,8 +415,6 @@ def get_panel_layout(graph: networkx.DiGraph, node_data: dict[str, list[str]]
     network_graph.edge_renderer.glyph.update(line_color="line_color", line_alpha="alpha")
     plot.renderers.append(network_graph)
 
-    source = ColumnDataSource(node_data)
-
     # Precompute ancestors and descendants
     label_to_index = {n: i for i, n in enumerate(graph.nodes)}
     ancestors = {index: list(label_to_index[l] for l in networkx.ancestors(graph, node)) for index, node in enumerate(graph.nodes)}
@@ -355,15 +423,13 @@ def get_panel_layout(graph: networkx.DiGraph, node_data: dict[str, list[str]]
     # JavaScript callback for interactivity
     # XXX: Likely define the type of the input graph a little better, TypedDict
     callback = CustomJS(
-        args=dict(source=source,
-                  graph_renderer=network_graph,
+        args=dict(graph_renderer=network_graph,
                   ancestors=ancestors,
                   descendants=descendants,
                   label_to_index=label_to_index,
                   ),
         code="""
         const selected_index = graph_renderer.node_renderer.data_source.selected.indices[0];
-        const data = source.data;
         const node_data = graph_renderer.node_renderer.data_source.data;
         const edge_data = graph_renderer.edge_renderer.data_source.data;
         if (selected_index !== undefined) {
@@ -373,8 +439,8 @@ def get_panel_layout(graph: networkx.DiGraph, node_data: dict[str, list[str]]
             const ancestor_nodes = new Set(selected_ancestors);
             const descendant_nodes = new Set(selected_descendants);
 
-            for (let i = 0; i < data['Highlight'].length; i++) {
-                data['Highlight'][i] = (i === selected_index) ? "Yes" : "No";
+            for (let i = 0; i < node_data['Highlight'].length; i++) {
+                node_data['Highlight'][i] = (i === selected_index) ? "Yes" : "No";
                 var color = "skyblue";
                 if (i === selected_index) {
                   color = "skyblue";
@@ -389,18 +455,14 @@ def get_panel_layout(graph: networkx.DiGraph, node_data: dict[str, list[str]]
                 node_data['alpha'][i] = subgraph_nodes.has(i) ? 1.0 : 0.0;
             }
 
-            console.log(subgraph_nodes);
             for (let i = 0; i < edge_data['start'].length; i++) {
                 const edge_start = label_to_index[edge_data['start'][i]];
                 const edge_end = label_to_index[edge_data['end'][i]];
                 const in_subgraph = subgraph_nodes.has(edge_start) && subgraph_nodes.has(edge_end);
-                console.log(edge_start);
-                console.log(edge_end);
-                console.log(in_subgraph);
                 edge_data['alpha'][i] = in_subgraph ? 1.0 : 0.0;
             }
         } else {
-            for (let i = 0; i < data['Highlight'].length; i++) {
+            for (let i = 0; i < node_data['Highlight'].length; i++) {
                 node_data['color'][i] = "skyblue";
                 node_data['alpha'][i] = 1.0;
             }
@@ -408,56 +470,26 @@ def get_panel_layout(graph: networkx.DiGraph, node_data: dict[str, list[str]]
                 edge_data['alpha'][i] = 1.0;
             }
         }
-        source.change.emit();
         graph_renderer.node_renderer.data_source.change.emit();
         graph_renderer.edge_renderer.data_source.change.emit();
     """
     )
-    # XXX: The color change is only happening after the graph is manually
-    # adjusted (eg, zooming in / out)
-    # Callback for clicking a row (table -> graph)
-    table_to_graph_callback = CustomJS(
-        args=dict(source=source, graph_renderer=network_graph),
-        code="""
-        const selected_index = cb_obj.indices[0];
-        console.log("Index: " + selected_index);
-        if (selected_index !== undefined) {
-            graph_renderer.node_renderer.data_source.selected.indices = [selected_index];
-        }
-    """
-    )
-
     network_graph.node_renderer.data_source.selected.js_on_change("indices", callback)
-    source.selected.js_on_change("indices", table_to_graph_callback)
 
-
-    # Create a DataTable to view source
-    # XXX: This and graph are disagreeing :scream:
-    columns = [TableColumn(field=k, title=k) for k in node_data.keys()]
-    data_table = DataTable(source=source, columns=columns, width=800, height=800)
 
     # Combine the plot and table into a Panel layout
-    layout = pn.Row(pn.pane.Bokeh(plot), pn.pane.Bokeh(data_table))
+    layout = pn.Column(
+        pn.Row(pn.pane.Bokeh(plot), pn.pane.Bokeh(data_table)),
+        pn.Row(pn.pane.Bokeh(checkbox_group), pn.pane.Bokeh(radio_group)),
+    )
     return layout
-
-
-# def draw():
-#     import matplotlib.pyplot as plt
-#     from networkx.drawing import nx_agraph
-#     import networkx as nx
-#
-#     g = nx.read_gml('/tmp/my.gml')
-#     pos = nx_agraph.graphviz_layout(g, prog='dot')
-#     nx.draw(g, pos, with_labels=True, arrows=True)
-#     plt.show()
 
 
 def main():
     query_result = bazel_utils.parse_build_output(sys.stdin.buffer.read())
-    with open("/tmp/my.prototxt", "w") as f:
-        f.write(str(query_result))
     repo_dir = pathlib.Path('/home/mchristen/devel/toolbox')  # XXX
-    git_query_after = datetime.datetime.now() - datetime.timedelta(days=2) # XXX
+    # repo_dir = pathlib.Path('/home/mchristen/tmp/drake')  # XXX
+    git_query_after = datetime.datetime.now() - datetime.timedelta(days=5) # XXX
     file_commit_map = git_utils.get_file_commit_map_from_follow(
         git_directory=repo_dir,
         after=git_query_after)
