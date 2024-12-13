@@ -6,20 +6,31 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Cache Bazel
-      uses: actions/cache@v4.0.2
+    - name: Setup Bazel
+      uses: bazel-contrib/setup-bazel@0.9.1
       with:
-        path: |
-          ~/.cache/bazelisk
-          ~/.cache/bazel
-        # key: ${{ runner.os }}-bazel
-        # Add .bazelrc, .bazelversion, MODULE.bazel, possibly other
-        # dependencies too
-        # Or should we just setup remote caching more fully?
-        key: bazel-${{ hashFiles('WORKSPACE') }}
-        # An ordered list of prefix-matched keys to use for restoring stale cache if no cache hit occurred for key.
-        restore-keys: |
-          bazel-
+        # Avoid downloading Bazel every time.
+        bazelisk-cache: true
+        # Store build cache per workflow.
+        disk-cache: true
+        # Share repository cache between workflows.
+        repository-cache: true
+        # Enable external repositories cache
+        external-cache: true
+        # - name: Cache Bazel
+        #   uses: actions/cache@v4.0.2
+        #   with:
+        #     path: |
+        #       ~/.cache/bazelisk
+        #       ~/.cache/bazel
+        #     # key: ${{ runner.os }}-bazel
+        #     # Add .bazelrc, .bazelversion, MODULE.bazel, possibly other
+        #     # dependencies too
+        #     # Or should we just setup remote caching more fully?
+        #     key: bazel-${{ hashFiles('WORKSPACE') }}
+        #     # An ordered list of prefix-matched keys to use for restoring stale cache if no cache hit occurred for key.
+        #     restore-keys: |
+        #       bazel-
     - name: Specify user.bazelrc for CI only settings
       env:
         BUILDBUDDY_API_KEY: ${{ inputs.buildbuddy_api_key }}
