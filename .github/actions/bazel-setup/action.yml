@@ -14,9 +14,9 @@ runs:
         # Store build cache per workflow.
         disk-cache: true
         # Share repository cache between workflows.
-        repository-cache: true
+        # repository-cache: true
         # Enable external repositories cache
-        # external-cache: true
+        external-cache: true
         # - name: Cache Bazel
         #   uses: actions/cache@v4.0.2
         #   with:
