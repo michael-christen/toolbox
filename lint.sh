@@ -102,7 +102,6 @@ function print_error {
 trap print_error ERR
 
 CONFIG="--config quiet"
-# --config quiet"
 # Can uncomment to get more verbose
 # CONFIG=""
 echo $BAZEL_FILES | xargs bazel run ${CONFIG} -- //tools/buildifier ${BUILDIFIER_ARGS[@]}
