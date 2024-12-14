@@ -144,6 +144,7 @@ filegroup(
         allow_empty = True,
     ) + [
         "//apps:python_source",
+        "//apps/bazel_parser:python_source",
         "//examples/basic:python_source",
         "//examples/bazel:python_source",
         "//examples/pigweed/modules/blinky:python_source",

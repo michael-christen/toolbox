@@ -38,8 +38,6 @@ from tools import git_utils
 from utils import bep_reader
 from utils import graph_algorithms
 
-logger = logging.getLogger(__name__)
-
 from networkx.drawing import nx_agraph
 from bokeh.models import ColumnDataSource, MultiLine, Circle, CustomJS, TapTool, HoverTool, CheckboxGroup, RadioGroup
 from bokeh.plotting import figure, from_networkx
@@ -48,6 +46,8 @@ from bokeh.models.widgets import DataTable, TableColumn
 from bokeh.io import show
 import panel as pn
 from panel.io import save
+
+logger = logging.getLogger(__name__)
 
 
 def _get_rules(
