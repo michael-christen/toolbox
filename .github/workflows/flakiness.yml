@@ -11,7 +11,7 @@ on:
     - cron: "0 15 * * *"
 jobs:
   flaky_finder:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - run: echo "The job was triggered by a ${{ github.event_name }} event, running on ${{ runner.os }}, ${{ github.ref }} @ ${{ github.repository }}."
       - uses: actions/checkout@v4
