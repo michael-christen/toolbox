@@ -101,7 +101,7 @@ function print_error {
 }
 trap print_error ERR
 
-CONFIG=""
+CONFIG="--config quiet"
 # --config quiet"
 # Can uncomment to get more verbose
 # CONFIG=""
