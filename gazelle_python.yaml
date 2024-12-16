@@ -1365,6 +1365,7 @@ manifest:
     furo.navigation: furo
     furo.sphinxext: furo
     google.protobuf: protobuf
+    google.protobuf.any: protobuf
     google.protobuf.any_pb2: protobuf
     google.protobuf.api_pb2: protobuf
     google.protobuf.compiler: protobuf
@@ -1373,6 +1374,7 @@ manifest:
     google.protobuf.descriptor_database: protobuf
     google.protobuf.descriptor_pb2: protobuf
     google.protobuf.descriptor_pool: protobuf
+    google.protobuf.duration: protobuf
     google.protobuf.duration_pb2: protobuf
     google.protobuf.empty_pb2: protobuf
     google.protobuf.field_mask_pb2: protobuf
@@ -1410,6 +1412,7 @@ manifest:
     google.protobuf.testdata: protobuf
     google.protobuf.text_encoding: protobuf
     google.protobuf.text_format: protobuf
+    google.protobuf.timestamp: protobuf
     google.protobuf.timestamp_pb2: protobuf
     google.protobuf.type_pb2: protobuf
     google.protobuf.unknown_fields: protobuf
@@ -1657,7 +1660,6 @@ manifest:
     jinja2.utils: jinja2
     jinja2.visitor: jinja2
     json5: json5
-    json5.arg_parser: json5
     json5.host: json5
     json5.lib: json5
     json5.parser: json5
@@ -3039,7 +3041,7 @@ manifest:
     numpy.lib.scimath: numpy
     numpy.lib.stride_tricks: numpy
     numpy.lib.user_array: numpy
-    numpy.libs.libscipy_openblas64_-ff651d7f: numpy
+    numpy.libs.libscipy_openblas64_-6bb31eeb: numpy
     numpy.linalg: numpy
     numpy.linalg.lapack_lite: numpy
     numpy.linalg.linalg: numpy
@@ -4916,4 +4918,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: d7d91a9dd271cfa4b11f2d1790f4191a93a6cc0c37bcc990dc42c596c97830a4
+integrity: f77690d9e880869d92a987edd61834c832593ac0a4f563d563c6c6b71e483164

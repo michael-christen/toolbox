@@ -5,9 +5,11 @@
 load("@bazel_gazelle//:def.bzl", "gazelle", "gazelle_binary")
 load("@npm//:defs.bzl", "npm_link_all_packages")
 load("@pip//:requirements.bzl", "all_whl_requirements")
-load("@rules_python//python:pip.bzl", "compile_pip_requirements")
+# XXX: load("@rules_python//python:pip.bzl", "compile_pip_requirements")
 load("@rules_python_gazelle_plugin//manifest:defs.bzl", "gazelle_python_manifest")
 load("@rules_python_gazelle_plugin//modules_mapping:def.bzl", "modules_mapping")
+load("@rules_uv//uv:pip.bzl", "pip_compile")
+load("@rules_uv//uv:venv.bzl", "create_venv")
 
 package(default_visibility = ["//visibility:private"])
 
@@ -24,15 +26,21 @@ exports_files(
     visibility = ["//visibility:public"],
 )
 
-compile_pip_requirements(
+pip_compile(
     name = "requirements",
+    # XXX: How to avoid in flake?
     # https://bazel.build/reference/be/common-definitions
-    size = "enormous",
-    timeout = "eternal",  # 60m
+    # size = "enormous",
+    # timeout = "eternal",  # 60m
     requirements_in = "requirements.in",
     requirements_txt = "requirements_lock.txt",
     # Don't want to type-check requirements building
     tags = ["no-mypy"],
+)
+
+create_venv(
+    name = "create_venv",
+    requirements_txt = "//:requirements_lock.txt",
 )
 
 # This repository rule fetches the metadata for python packages we
@@ -130,6 +138,7 @@ gazelle(
 # gazelle:resolve py third_party.bazel.proto.build_event_stream_pb2 //third_party/bazel/proto:build_event_stream_py_library
 # gazelle:resolve proto pw_protobuf_protos/common.proto @pigweed//pw_protobuf:common_proto
 # gazelle:resolve py examples.pigweed.modules.blinky.blinky_pb2 //examples/pigweed/modules/blinky:blinky_pb2
+# gazelle:resolve py tools.git_pb2 //tools:git_py_library
 # gazelle:resolve py pw_cli @pigweed//pw_system/py:pw_system_lib
 # gazelle:resolve py pw_system.console @pigweed//pw_system/py:pw_system_lib
 # gazelle:resolve py pw_system.device @pigweed//pw_system/py:pw_system_lib

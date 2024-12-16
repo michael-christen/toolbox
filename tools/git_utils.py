@@ -5,6 +5,8 @@ import pathlib
 import subprocess
 from typing import Sequence
 
+from tools import git_pb2
+
 
 def _get_git_output(
     args: Sequence[pathlib.Path | str], git_directory: pathlib.Path | str
@@ -77,6 +79,26 @@ class FileCommitMap:
     commit_map: dict[str, set[pathlib.Path]]
     # Keyed by file, to set of commits involved in
     file_map: dict[pathlib.Path, list[str]]
+
+    def to_proto(self) -> git_pb2.FileCommitMap:
+        msg = git_pb2.FileCommitMap()
+        for c, files in self.commit_map.items():
+            msg.commit_map[c].files.extend([str(f) for f in files])
+        for f, commits in self.file_map.items():
+            msg.file_map[str(f)].commits.extend(commits)
+        return msg
+
+    # XXX: Possibly don't have a python class at all?
+    @classmethod
+    def from_proto(cls, proto_map: git_pb2.FileCommitMap) -> 'FileCommitMap':
+        file_map = {}
+        commit_map = {}
+        # XXX: Use pathlib.Path?
+        for f, f_entry in proto_map.file_map.items():
+            file_map[f] = f_entry.commits
+        for c, c_entry in proto_map.commit_map.items():
+            commit_map[c] = set(c_entry.files)
+        return cls(commit_map=commit_map, file_map=file_map)
 
 
 # XXX: maybe we want to experiment with both mechanisms?

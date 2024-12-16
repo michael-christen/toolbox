@@ -10,5 +10,7 @@ py_binary(
     deps = [
         "//tools:git_utils",  # keep
         "@pip//ipython",
+        "@pip//grpcio",
+        "@pip//networkx",
     ] + all_requirements,  # keep
 )

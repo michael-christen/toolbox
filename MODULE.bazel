@@ -18,7 +18,7 @@ bazel_dep(name = "aspect_bazel_lib", version = "2.9.4")
 ########################################
 # Set up rules_python and pip
 ########################################
-bazel_dep(name = "aspect_rules_py", version = "0.7.3")
+bazel_dep(name = "aspect_rules_py", version = "1.0.0")
 
 # Minimum version needs:
 # feat: add interpreter_version_info to py_runtime by @mattem in #1671
@@ -34,6 +34,8 @@ python.toolchain(
     configure_coverage_tool = True,
     python_version = PYTHON_VERSION,
 )
+
+bazel_dep(name = "rules_uv", version = "0.45.0")
 
 pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip")
 pip.parse(
