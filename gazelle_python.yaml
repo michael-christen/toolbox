@@ -1691,6 +1691,7 @@ manifest:
     matplotlib.cm: matplotlib
     matplotlib.collections: matplotlib
     matplotlib.colorbar: matplotlib
+    matplotlib.colorizer: matplotlib
     matplotlib.colors: matplotlib
     matplotlib.container: matplotlib
     matplotlib.contour: matplotlib
@@ -1702,6 +1703,7 @@ manifest:
     matplotlib.gridspec: matplotlib
     matplotlib.hatch: matplotlib
     matplotlib.image: matplotlib
+    matplotlib.inset: matplotlib
     matplotlib.layout_engine: matplotlib
     matplotlib.legend: matplotlib
     matplotlib.legend_handler: matplotlib
@@ -1834,8 +1836,6 @@ manifest:
     mpl_toolkits.axisartist: matplotlib
     mpl_toolkits.axisartist.angle_helper: matplotlib
     mpl_toolkits.axisartist.axes_divider: matplotlib
-    mpl_toolkits.axisartist.axes_grid: matplotlib
-    mpl_toolkits.axisartist.axes_rgb: matplotlib
     mpl_toolkits.axisartist.axis_artist: matplotlib
     mpl_toolkits.axisartist.axisline_style: matplotlib
     mpl_toolkits.axisartist.axislines: matplotlib
@@ -3530,7 +3530,14 @@ manifest:
     pyparsing.util: pyparsing
     pytest: pytest
     pythonjsonlogger: python_json_logger
+    pythonjsonlogger.core: python_json_logger
+    pythonjsonlogger.defaults: python_json_logger
+    pythonjsonlogger.exception: python_json_logger
+    pythonjsonlogger.json: python_json_logger
     pythonjsonlogger.jsonlogger: python_json_logger
+    pythonjsonlogger.msgspec: python_json_logger
+    pythonjsonlogger.orjson: python_json_logger
+    pythonjsonlogger.utils: python_json_logger
     pytz: pytz
     pytz.exceptions: pytz
     pytz.lazy: pytz
@@ -4328,4 +4335,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: 5426fcfa8450cbcdcf4b3dc3c472584bbb1bbd573ee18c3d67157d6210798725
+integrity: bd2bc5fdc261556b79fe20b0359fe458527d130ed4d2c1d0439a7af65e34c098
