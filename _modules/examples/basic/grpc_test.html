@@ -6,7 +6,7 @@
 
     <link rel="shortcut icon" href="../../../_static/wrench.png"/><!-- Generated with Sphinx 8.1.3 and Furo 2024.08.06 -->
         <title>examples.basic.grpc_test - toolbox documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=a746c00c" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -265,21 +265,21 @@
         </div>
         <article role="main" id="furo-main-content">
           <h1>Source code for examples.basic.grpc_test</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">unittest</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">unittest</span>
 
-<span class="kn">from</span> <span class="nn">examples.basic</span> <span class="kn">import</span> <span class="n">client</span>
-<span class="kn">from</span> <span class="nn">examples.basic</span> <span class="kn">import</span> <span class="n">hello_pb2</span>
-<span class="kn">from</span> <span class="nn">examples.basic</span> <span class="kn">import</span> <span class="n">server</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">examples.basic</span><span class="w"> </span><span class="kn">import</span> <span class="n">client</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">examples.basic</span><span class="w"> </span><span class="kn">import</span> <span class="n">hello_pb2</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">examples.basic</span><span class="w"> </span><span class="kn">import</span> <span class="n">server</span>
 
 
 <div class="viewcode-block" id="TestHello">
 <a class="viewcode-back" href="../../../autoapi/examples/basic/grpc_test/index.html#examples.basic.grpc_test.TestHello">[docs]</a>
-<span class="k">class</span> <span class="nc">TestHello</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">IsolatedAsyncioTestCase</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TestHello</span><span class="p">(</span><span class="n">unittest</span><span class="o">.</span><span class="n">IsolatedAsyncioTestCase</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Test asyncio client and server with gRPC.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="TestHello.asyncSetUp">
 <a class="viewcode-back" href="../../../autoapi/examples/basic/grpc_test/index.html#examples.basic.grpc_test.TestHello.asyncSetUp">[docs]</a>
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">asyncSetUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">asyncSetUp</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">server</span> <span class="o">=</span> <span class="n">server</span><span class="o">.</span><span class="n">get_server</span><span class="p">()</span>
         <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">start</span><span class="p">()</span></div>
 
@@ -287,14 +287,14 @@
     <span class="c1"># Why does coverage not see wait_for_termination as ran?</span>
 <div class="viewcode-block" id="TestHello.asyncTearDown">
 <a class="viewcode-back" href="../../../autoapi/examples/basic/grpc_test/index.html#examples.basic.grpc_test.TestHello.asyncTearDown">[docs]</a>
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">asyncTearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">asyncTearDown</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
         <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">stop</span><span class="p">(</span><span class="n">grace</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
         <span class="k">await</span> <span class="bp">self</span><span class="o">.</span><span class="n">server</span><span class="o">.</span><span class="n">wait_for_termination</span><span class="p">()</span></div>
 
 
 <div class="viewcode-block" id="TestHello.test_basics">
 <a class="viewcode-back" href="../../../autoapi/examples/basic/grpc_test/index.html#examples.basic.grpc_test.TestHello.test_basics">[docs]</a>
-    <span class="k">async</span> <span class="k">def</span> <span class="nf">test_basics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">test_basics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">client</span><span class="o">.</span><span class="n">get_response</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">assertEqual</span><span class="p">(</span><span class="n">hello_pb2</span><span class="o">.</span><span class="n">HelloReply</span><span class="p">(</span><span class="n">message</span><span class="o">=</span><span class="s2">&quot;Hello, you!&quot;</span><span class="p">),</span> <span class="n">result</span><span class="p">)</span></div>
 </div>
