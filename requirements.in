@@ -29,6 +29,9 @@ flake8
 isort
 ipdb
 notebook
+# https://jupytext.readthedocs.io/en/stable/index.html
+# Source control jupyter notebooks by pairing with an ingnored .ipynb file.
+jupytext
 # Documentation
 sphinx
 sphinx-rtd-theme

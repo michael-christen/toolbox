@@ -2296,7 +2296,7 @@
         "recordedFileInputs": {
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_windows_lock.txt": "4367c7d4cc4a1c2d6a136edace02581066f1c9ead10937685dde568d1061189f",
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_linux_lock.txt": "ce8b16e007309a610c37eec908b75451733ae5efb9c14ec7e6f04557b81d621e",
-          "@@//requirements_lock.txt": "ad63b069f1779b55696ee97f3bb66e4f6b42448c6397c7ac06fa1fcb12570b6e",
+          "@@//requirements_lock.txt": "15fcbb5ca1f5a9ce707f897965f4d15ce757056cc0ab0937b1b02a6f006ccd33",
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_darwin_lock.txt": "91de3b2cdbe8f8fc7136ce309824355684c2a6ae2395c1e12f4aa59d02d52f3b",
           "@@rules_fuzzing~//fuzzing/requirements.txt": "ab04664be026b632a0d2a2446c4f65982b7654f5b6851d2f9d399a19b7242a5b",
           "@@nanopb~//extra/requirements_lock.txt": "8a44f53e5c48123742970b4e9d6f8730eaa143134c08db0706ccd6d2c78c03ca",
@@ -2481,6 +2481,20 @@
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
               "requirement": "tokenize-rt==6.1.0     --hash=sha256:d706141cdec4aa5f358945abe36b911b8cbdc844545da99e811250c0cee9b6fc     --hash=sha256:e8ee836616c0877ab7c7b54776d2fefcc3bde714449a206762425ae114b53c86"
+            }
+          },
+          "pip_311_jupytext": {
+            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
+            "ruleClassName": "whl_library",
+            "attributes": {
+              "dep_template": "@pip//{name}:{target}",
+              "extra_pip_args": [
+                "--index-url",
+                "https://pypi.org/simple"
+              ],
+              "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
+              "repo": "pip_311",
+              "requirement": "jupytext==1.16.6     --hash=sha256:900132031f73fee15a1c9ebd862e05eb5f51e1ad6ab3a2c6fdd97ce2f9c913b4     --hash=sha256:dbd03f9263c34b737003f388fc069e9030834fb7136879c4c32c32473557baa0"
             }
           },
           "python_packages_311_ptyprocess": {
@@ -5958,6 +5972,7 @@
                 "wcwidth": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_wcwidth\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "docutils": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_docutils\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "httpcore": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_httpcore\",\"target_platforms\":null,\"version\":\"3.11\"}]",
+                "jupytext": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_jupytext\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "markdown": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_markdown\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "nbclient": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_nbclient\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "nbformat": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_nbformat\",\"target_platforms\":null,\"version\":\"3.11\"}]",

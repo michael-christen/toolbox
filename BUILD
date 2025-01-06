@@ -41,6 +41,7 @@ pip_compile(
 create_venv(
     name = "create_venv",
     requirements_txt = "//:requirements_lock.txt",
+    site_packages_extra_files = ["//tools:git_utils"],
 )
 
 # This repository rule fetches the metadata for python packages we

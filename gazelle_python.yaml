@@ -1886,6 +1886,7 @@ manifest:
     jupyterlab.serverextension: jupyterlab
     jupyterlab.upgrade_extension: jupyterlab
     jupyterlab.utils: jupyterlab
+    jupyterlab_jupytext: jupytext
     jupyterlab_pygments: jupyterlab_pygments
     jupyterlab_pygments.style: jupyterlab_pygments
     jupyterlab_server: jupyterlab_server
@@ -1908,6 +1909,35 @@ manifest:
     jupyterlab_server.translations_handler: jupyterlab_server
     jupyterlab_server.workspaces_app: jupyterlab_server
     jupyterlab_server.workspaces_handler: jupyterlab_server
+    jupytext: jupytext
+    jupytext.cell_metadata: jupytext
+    jupytext.cell_reader: jupytext
+    jupytext.cell_to_text: jupytext
+    jupytext.cli: jupytext
+    jupytext.combine: jupytext
+    jupytext.compare: jupytext
+    jupytext.config: jupytext
+    jupytext.contentsmanager: jupytext
+    jupytext.doxygen: jupytext
+    jupytext.formats: jupytext
+    jupytext.header: jupytext
+    jupytext.jupytext: jupytext
+    jupytext.kernels: jupytext
+    jupytext.languages: jupytext
+    jupytext.magics: jupytext
+    jupytext.metadata_filter: jupytext
+    jupytext.myst: jupytext
+    jupytext.paired_paths: jupytext
+    jupytext.pairs: jupytext
+    jupytext.pandoc: jupytext
+    jupytext.pep8: jupytext
+    jupytext.quarto: jupytext
+    jupytext.reraise: jupytext
+    jupytext.stringparser: jupytext
+    jupytext.version: jupytext
+    jupytext_config: jupytext
+    jupytext_config.jupytext_config: jupytext
+    jupytext_config.labconfig: jupytext
     kiwisolver: kiwisolver
     kiwisolver.exceptions: kiwisolver
     linkify_it: linkify_it_py
@@ -4918,4 +4948,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: f77690d9e880869d92a987edd61834c832593ac0a4f563d563c6c6b71e483164
+integrity: 5e1f6f875ff2d38a80396023777d04d600153add8473477eecbc2be9d3b67de7

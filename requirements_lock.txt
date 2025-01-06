@@ -679,6 +679,10 @@ jupyterlab-server==2.27.3 \
     # via
     #   jupyterlab
     #   notebook
+jupytext==1.16.6 \
+    --hash=sha256:900132031f73fee15a1c9ebd862e05eb5f51e1ad6ab3a2c6fdd97ce2f9c913b4 \
+    --hash=sha256:dbd03f9263c34b737003f388fc069e9030834fb7136879c4c32c32473557baa0
+    # via -r requirements.in
 kiwisolver==1.4.7 \
     --hash=sha256:073a36c8273647592ea332e816e75ef8da5c303236ec0167196793eb1e34657a \
     --hash=sha256:08471d4d86cbaec61f86b217dd938a83d85e03785f51121e791a6e6689a3be95 \
@@ -809,6 +813,7 @@ markdown-it-py==3.0.0 \
     --hash=sha256:355216845c60bd96232cd8d8c40e8f9765cc86f46880e43a8fd22dc1a1a8cab1 \
     --hash=sha256:e3f60a94fa066dc52ec76661e37c851cb232d92f9886b15cb560aaada2df8feb
     # via
+    #   jupytext
     #   mdit-py-plugins
     #   myst-parser
     #   panel
@@ -934,6 +939,7 @@ mdit-py-plugins==0.4.2 \
     --hash=sha256:0c673c3f889399a33b95e88d2f0d111b4447bdfea7f237dab2d488f459835636 \
     --hash=sha256:5f2cd1fdb606ddf152d37ec30e46101a60512bc0e5fa1a7002c36647b09e26b5
     # via
+    #   jupytext
     #   myst-parser
     #   panel
 mdurl==0.1.2 \
@@ -1001,6 +1007,7 @@ nbformat==5.10.4 \
     --hash=sha256:3b48d6c8fbca4b299bf3982ea7db1af21580e4fec269ad087b9e81588891200b
     # via
     #   jupyter-server
+    #   jupytext
     #   nbclient
     #   nbconvert
 nest-asyncio==1.6.0 \
@@ -1098,6 +1105,7 @@ packaging==24.2 \
     #   jupyter-server
     #   jupyterlab
     #   jupyterlab-server
+    #   jupytext
     #   matplotlib
     #   nbconvert
     #   panel
@@ -1423,6 +1431,7 @@ pyyaml==6.0.2 \
     # via
     #   bokeh
     #   jupyter-events
+    #   jupytext
     #   myst-parser
     #   sphinx-autoapi
     #   sphinx-pyscript
