@@ -281,6 +281,7 @@ manifest:
     anyio.streams.stapled: anyio
     anyio.streams.text: anyio
     anyio.streams.tls: anyio
+    anyio.to_interpreter: anyio
     anyio.to_process: anyio
     anyio.to_thread: anyio
     argon2: argon2_cffi
@@ -2996,7 +2997,6 @@ manifest:
     pexpect.socket_pexpect: pexpect
     pexpect.spawnbase: pexpect
     pexpect.utils: pexpect
-    pillow.libs.libopenjp2-05423b53: pillow
     pkg_resources: setuptools
     platformdirs: platformdirs
     platformdirs.android: platformdirs
@@ -3273,6 +3273,7 @@ manifest:
     pygments.lexers.cddl: pygments
     pygments.lexers.chapel: pygments
     pygments.lexers.clean: pygments
+    pygments.lexers.codeql: pygments
     pygments.lexers.comal: pygments
     pygments.lexers.compiled: pygments
     pygments.lexers.configs: pygments
@@ -3313,6 +3314,7 @@ manifest:
     pygments.lexers.futhark: pygments
     pygments.lexers.gcodelexer: pygments
     pygments.lexers.gdscript: pygments
+    pygments.lexers.gleam: pygments
     pygments.lexers.go: pygments
     pygments.lexers.grammar_notation: pygments
     pygments.lexers.graph: pygments
@@ -3320,6 +3322,7 @@ manifest:
     pygments.lexers.graphql: pygments
     pygments.lexers.graphviz: pygments
     pygments.lexers.gsql: pygments
+    pygments.lexers.hare: pygments
     pygments.lexers.haskell: pygments
     pygments.lexers.haxe: pygments
     pygments.lexers.hdl: pygments
@@ -3335,6 +3338,7 @@ manifest:
     pygments.lexers.javascript: pygments
     pygments.lexers.jmespath: pygments
     pygments.lexers.jslt: pygments
+    pygments.lexers.json5: pygments
     pygments.lexers.jsonnet: pygments
     pygments.lexers.jsx: pygments
     pygments.lexers.julia: pygments
@@ -3347,6 +3351,7 @@ manifest:
     pygments.lexers.lisp: pygments
     pygments.lexers.macaulay2: pygments
     pygments.lexers.make: pygments
+    pygments.lexers.maple: pygments
     pygments.lexers.markup: pygments
     pygments.lexers.math: pygments
     pygments.lexers.matlab: pygments
@@ -3365,6 +3370,7 @@ manifest:
     pygments.lexers.nimrod: pygments
     pygments.lexers.nit: pygments
     pygments.lexers.nix: pygments
+    pygments.lexers.numbair: pygments
     pygments.lexers.oberon: pygments
     pygments.lexers.objective: pygments
     pygments.lexers.ooc: pygments
@@ -3374,6 +3380,7 @@ manifest:
     pygments.lexers.parsers: pygments
     pygments.lexers.pascal: pygments
     pygments.lexers.pawn: pygments
+    pygments.lexers.pddl: pygments
     pygments.lexers.perl: pygments
     pygments.lexers.phix: pygments
     pygments.lexers.php: pygments
@@ -3392,6 +3399,7 @@ manifest:
     pygments.lexers.r: pygments
     pygments.lexers.rdf: pygments
     pygments.lexers.rebol: pygments
+    pygments.lexers.rego: pygments
     pygments.lexers.resource: pygments
     pygments.lexers.ride: pygments
     pygments.lexers.rita: pygments
@@ -3421,6 +3429,7 @@ manifest:
     pygments.lexers.srcinfo: pygments
     pygments.lexers.stata: pygments
     pygments.lexers.supercollider: pygments
+    pygments.lexers.tablegen: pygments
     pygments.lexers.tact: pygments
     pygments.lexers.tal: pygments
     pygments.lexers.tcl: pygments
@@ -3579,6 +3588,7 @@ manifest:
     scipy.constants.codata: scipy
     scipy.constants.constants: scipy
     scipy.datasets: scipy
+    scipy.differentiate: scipy
     scipy.fft: scipy
     scipy.fftpack: scipy
     scipy.fftpack.basic: scipy
@@ -3619,7 +3629,7 @@ manifest:
     scipy.io.mmio: scipy
     scipy.io.netcdf: scipy
     scipy.io.wavfile: scipy
-    scipy.libs.libscipy_openblas-c128ec02: scipy
+    scipy.libs.libscipy_openblas-68440149: scipy
     scipy.linalg: scipy
     scipy.linalg.basic: scipy
     scipy.linalg.blas: scipy
@@ -3651,6 +3661,7 @@ manifest:
     scipy.optimize: scipy
     scipy.optimize.cobyla: scipy
     scipy.optimize.cython_optimize: scipy
+    scipy.optimize.elementwise: scipy
     scipy.optimize.lbfgsb: scipy
     scipy.optimize.linesearch: scipy
     scipy.optimize.minpack: scipy
@@ -4336,4 +4347,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: 5bda168c010842a631d410f9a1ab0f5cb5d72a5105e14cfdc56505263ca0810c
+integrity: d04b298390ac3376072dbc6239f48a0a711b8b96986a5d0eec0766306bbf3aae
