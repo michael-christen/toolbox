@@ -4347,4 +4347,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: d04b298390ac3376072dbc6239f48a0a711b8b96986a5d0eec0766306bbf3aae
+integrity: 29ba58cdfb09238b225f0ac6e10357d0506f91bda8fd4ad49af475583b4f1a45
