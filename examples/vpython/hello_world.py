@@ -55,8 +55,10 @@ def main() -> None:
     def key_pressed(evt):  # info about event is stored in evt
         WHEEL_ANGLE_PER_DT = 5 * (math.pi / 180)
         BODY_ANGLE_PER_DT = math.pi / 180
-        keyname = evt.key
-        print('The ' + keyname + ' key was pressed.')
+        if isinstance(evt, str):
+            keyname = evt
+        else:
+            keyname = evt.key
         if keyname == 'k':
             r_wheel_assembly.rotate(angle=WHEEL_ANGLE_PER_DT)
         elif keyname == 'j':
@@ -75,8 +77,9 @@ def main() -> None:
 
     while True:
         vpython.rate(60)
-    #     k = vpython.keysdown()
-    #     print(k)
+        keys_down = vpython.keysdown()
+        for k in keys_down:
+            key_pressed(k)
 
 
 if __name__ == '__main__':
