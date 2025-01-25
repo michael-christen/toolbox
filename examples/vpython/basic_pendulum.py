@@ -87,7 +87,8 @@ def main() -> None:
                                            state=state)
         # XXX: Do I need to add in this way in order to conserve energy?
         # (compare)
-        state.theta_d0 += state.theta_d1 * dt
+        # - this odd ordering wasn't working either
+        state.theta_d0 += state.theta_d1 * dt + state.theta_d2 * (dt ** 2)
         state.theta_d1 += state.theta_d2 * dt
         state.theta_d2 = d_state.theta_d1
 
