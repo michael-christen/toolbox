@@ -178,10 +178,10 @@ def main() -> None:
         d_state = compute_derivative_state(constants=constants,
                                            input_val=input_val,
                                            state=state)
-        state.phi_d0 += d_state.phi_d0 * dt
         state.phi_d1 += d_state.phi_d1 * dt
-        state.theta_d0 += d_state.theta_d0 * dt
+        state.phi_d0 += state.phi_d1 * dt
         state.theta_d1 += d_state.theta_d1 * dt
+        state.theta_d0 += state.theta_d1 * dt
 
         # Apply to animation
         x = state.phi_d0 * constants.r

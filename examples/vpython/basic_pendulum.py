@@ -10,13 +10,13 @@ class Constants:
     l: float
     m1: float
     g: float
+    friction: float
 
 
 @dataclasses.dataclass
 class State:
     theta_d0: float
     theta_d1: float
-    theta_d2: float
 
 
 @dataclasses.dataclass
@@ -36,24 +36,22 @@ def compute_derivative_state(
     """
     return State(
         theta_d0=state.theta_d1,
-        theta_d1=(constants.g / constants.l) * math.sin(state.theta_d0),
-        theta_d2=0,
+        theta_d1=(constants.g / constants.l) * math.sin(state.theta_d0) -
+        state.theta_d1 * constants.friction,
     )
 
 
 def main() -> None:
 
-    dt = 1/60
-
     constants = Constants(
         l=1,
         m1=0.1,
         g=9.81,
+        friction=0.0,
     )
     state = State(
         theta_d0=math.pi / 6,
         theta_d1=0,
-        theta_d2=0,
     )
     input_val = Input(tau_0=0)
 
@@ -76,28 +74,30 @@ def main() -> None:
     graph_kinetic = vpython.gcurve(color=vpython.color.blue, label='kinetic')
     graph_total = vpython.gcurve(color=vpython.color.green, label='total')
 
-    dt = 1/(60 * 5)
+    dt = 1/(60)
     t = 0
     while True:
-        # vpython.rate(1/dt)
-        vpython.rate(60)
+        vpython.rate(1/dt)
 
         d_state = compute_derivative_state(constants=constants,
                                            input_val=input_val,
                                            state=state)
-        # XXX: Do I need to add in this way in order to conserve energy?
-        # (compare)
-        # - this odd ordering wasn't working either
-        state.theta_d0 += state.theta_d1 * dt + state.theta_d2 * (dt ** 2)
-        state.theta_d1 += state.theta_d2 * dt
-        state.theta_d2 = d_state.theta_d1
+        # XXX: Doing all at the same time is likely best (use same value, see
+        # elsewhere)
+        state.theta_d1 += d_state.theta_d1 * dt
+        state.theta_d0 += state.theta_d1 * dt
 
         # Animate
         staff.rotate(angle=-d_state.theta_d0 * dt, axis=vpython.vec(0,0,1))
 
-        potential_energy = constants.m1 * constants.g * math.cos(state.theta_d0)
+        potential_energy = (constants.m1 * constants.g *
+                            math.cos(state.theta_d0) * constants.l)
         v = state.theta_d1 * constants.l
         kinetic_energy = constants.m1 * (v **2) / 2
+        # XXX: Not growing unbounded anymore, but still oscillating ~ 0.02,
+        # though it changes based on the dt used, so perhaps it's ok?
+        # NOTE: This is not factoring in heat loss of friction, so if that's
+        # non-zero, you'll see this dropping
         total_energy = potential_energy + kinetic_energy
 
         # Graph (XXX: Maybe before)
