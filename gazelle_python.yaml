@@ -267,6 +267,56 @@ manifest:
     PIL.XpmImagePlugin: pillow
     PIL.features: pillow
     PIL.report: pillow
+    aiohappyeyeballs: aiohappyeyeballs
+    aiohappyeyeballs.impl: aiohappyeyeballs
+    aiohappyeyeballs.types: aiohappyeyeballs
+    aiohappyeyeballs.utils: aiohappyeyeballs
+    aiohttp: aiohttp
+    aiohttp.abc: aiohttp
+    aiohttp.base_protocol: aiohttp
+    aiohttp.client: aiohttp
+    aiohttp.client_exceptions: aiohttp
+    aiohttp.client_proto: aiohttp
+    aiohttp.client_reqrep: aiohttp
+    aiohttp.client_ws: aiohttp
+    aiohttp.compression_utils: aiohttp
+    aiohttp.connector: aiohttp
+    aiohttp.cookiejar: aiohttp
+    aiohttp.formdata: aiohttp
+    aiohttp.hdrs: aiohttp
+    aiohttp.helpers: aiohttp
+    aiohttp.http: aiohttp
+    aiohttp.http_exceptions: aiohttp
+    aiohttp.http_parser: aiohttp
+    aiohttp.http_websocket: aiohttp
+    aiohttp.http_writer: aiohttp
+    aiohttp.log: aiohttp
+    aiohttp.multipart: aiohttp
+    aiohttp.payload: aiohttp
+    aiohttp.payload_streamer: aiohttp
+    aiohttp.pytest_plugin: aiohttp
+    aiohttp.resolver: aiohttp
+    aiohttp.streams: aiohttp
+    aiohttp.tcp_helpers: aiohttp
+    aiohttp.test_utils: aiohttp
+    aiohttp.tracing: aiohttp
+    aiohttp.typedefs: aiohttp
+    aiohttp.web: aiohttp
+    aiohttp.web_app: aiohttp
+    aiohttp.web_exceptions: aiohttp
+    aiohttp.web_fileresponse: aiohttp
+    aiohttp.web_log: aiohttp
+    aiohttp.web_middlewares: aiohttp
+    aiohttp.web_protocol: aiohttp
+    aiohttp.web_request: aiohttp
+    aiohttp.web_response: aiohttp
+    aiohttp.web_routedef: aiohttp
+    aiohttp.web_runner: aiohttp
+    aiohttp.web_server: aiohttp
+    aiohttp.web_urldispatcher: aiohttp
+    aiohttp.web_ws: aiohttp
+    aiohttp.worker: aiohttp
+    aiosignal: aiosignal
     alabaster: alabaster
     alabaster.support: alabaster
     anyio: anyio
@@ -411,6 +461,179 @@ manifest:
     autoapi.extension: sphinx_autoapi
     autoapi.inheritance_diagrams: sphinx_autoapi
     autoapi.settings: sphinx_autoapi
+    autobahn: autobahn
+    autobahn.asyncio: autobahn
+    autobahn.asyncio.component: autobahn
+    autobahn.asyncio.rawsocket: autobahn
+    autobahn.asyncio.test.test_aio_rawsocket: autobahn
+    autobahn.asyncio.test.test_aio_websocket: autobahn
+    autobahn.asyncio.test.test_wamp_runner: autobahn
+    autobahn.asyncio.util: autobahn
+    autobahn.asyncio.wamp: autobahn
+    autobahn.asyncio.websocket: autobahn
+    autobahn.asyncio.xbr: autobahn
+    autobahn.exception: autobahn
+    autobahn.nvx: autobahn
+    autobahn.nvx.test: autobahn
+    autobahn.nvx.test.test_nvx_utf8validator: autobahn
+    autobahn.rawsocket: autobahn
+    autobahn.rawsocket.test: autobahn
+    autobahn.rawsocket.test.test_rawsocket_url: autobahn
+    autobahn.rawsocket.util: autobahn
+    autobahn.test: autobahn
+    autobahn.test.test_rng: autobahn
+    autobahn.test.test_util: autobahn
+    autobahn.testutil: autobahn
+    autobahn.twisted: autobahn
+    autobahn.twisted.choosereactor: autobahn
+    autobahn.twisted.component: autobahn
+    autobahn.twisted.cryptosign: autobahn
+    autobahn.twisted.forwarder: autobahn
+    autobahn.twisted.rawsocket: autobahn
+    autobahn.twisted.resource: autobahn
+    autobahn.twisted.test: autobahn
+    autobahn.twisted.test.test_tx_application_runner: autobahn
+    autobahn.twisted.test.test_tx_choosereactor: autobahn
+    autobahn.twisted.test.test_tx_component: autobahn
+    autobahn.twisted.test.test_tx_endpoint_plugins: autobahn
+    autobahn.twisted.test.test_tx_protocol: autobahn
+    autobahn.twisted.test.test_tx_rawsocket: autobahn
+    autobahn.twisted.test.test_tx_websocket_agent: autobahn
+    autobahn.twisted.test.test_wamp_runner: autobahn
+    autobahn.twisted.testing: autobahn
+    autobahn.twisted.util: autobahn
+    autobahn.twisted.wamp: autobahn
+    autobahn.twisted.websocket: autobahn
+    autobahn.twisted.xbr: autobahn
+    autobahn.util: autobahn
+    autobahn.wamp: autobahn
+    autobahn.wamp.auth: autobahn
+    autobahn.wamp.component: autobahn
+    autobahn.wamp.cryptobox: autobahn
+    autobahn.wamp.cryptosign: autobahn
+    autobahn.wamp.exception: autobahn
+    autobahn.wamp.gen: autobahn
+    autobahn.wamp.gen.wamp: autobahn
+    autobahn.wamp.gen.wamp.Map: autobahn
+    autobahn.wamp.gen.wamp.Void: autobahn
+    autobahn.wamp.gen.wamp.proto: autobahn
+    autobahn.wamp.gen.wamp.proto.Abort: autobahn
+    autobahn.wamp.gen.wamp.proto.AnyMessage: autobahn
+    autobahn.wamp.gen.wamp.proto.AuthCraChallenge: autobahn
+    autobahn.wamp.gen.wamp.proto.AuthCraRequest: autobahn
+    autobahn.wamp.gen.wamp.proto.AuthCraWelcome: autobahn
+    autobahn.wamp.gen.wamp.proto.AuthCryptosignChallenge: autobahn
+    autobahn.wamp.gen.wamp.proto.AuthCryptosignRequest: autobahn
+    autobahn.wamp.gen.wamp.proto.AuthCryptosignWelcome: autobahn
+    autobahn.wamp.gen.wamp.proto.AuthFactor: autobahn
+    autobahn.wamp.gen.wamp.proto.AuthMethod: autobahn
+    autobahn.wamp.gen.wamp.proto.AuthMode: autobahn
+    autobahn.wamp.gen.wamp.proto.AuthScramChallenge: autobahn
+    autobahn.wamp.gen.wamp.proto.AuthScramRequest: autobahn
+    autobahn.wamp.gen.wamp.proto.AuthScramWelcome: autobahn
+    autobahn.wamp.gen.wamp.proto.AuthTicketChallenge: autobahn
+    autobahn.wamp.gen.wamp.proto.AuthTicketRequest: autobahn
+    autobahn.wamp.gen.wamp.proto.AuthTicketWelcome: autobahn
+    autobahn.wamp.gen.wamp.proto.Authenticate: autobahn
+    autobahn.wamp.gen.wamp.proto.BrokerFeatures: autobahn
+    autobahn.wamp.gen.wamp.proto.Call: autobahn
+    autobahn.wamp.gen.wamp.proto.CalleeFeatures: autobahn
+    autobahn.wamp.gen.wamp.proto.CallerFeatures: autobahn
+    autobahn.wamp.gen.wamp.proto.Cancel: autobahn
+    autobahn.wamp.gen.wamp.proto.CancelMode: autobahn
+    autobahn.wamp.gen.wamp.proto.Challenge: autobahn
+    autobahn.wamp.gen.wamp.proto.ChannelBinding: autobahn
+    autobahn.wamp.gen.wamp.proto.ClientRoles: autobahn
+    autobahn.wamp.gen.wamp.proto.DealerFeatures: autobahn
+    autobahn.wamp.gen.wamp.proto.Error: autobahn
+    autobahn.wamp.gen.wamp.proto.Event: autobahn
+    autobahn.wamp.gen.wamp.proto.EventReceived: autobahn
+    autobahn.wamp.gen.wamp.proto.Goodbye: autobahn
+    autobahn.wamp.gen.wamp.proto.Hello: autobahn
+    autobahn.wamp.gen.wamp.proto.HelloNew: autobahn
+    autobahn.wamp.gen.wamp.proto.Interrupt: autobahn
+    autobahn.wamp.gen.wamp.proto.Invocation: autobahn
+    autobahn.wamp.gen.wamp.proto.InvocationPolicy: autobahn
+    autobahn.wamp.gen.wamp.proto.Kdf: autobahn
+    autobahn.wamp.gen.wamp.proto.Match: autobahn
+    autobahn.wamp.gen.wamp.proto.Message: autobahn
+    autobahn.wamp.gen.wamp.proto.MessageType: autobahn
+    autobahn.wamp.gen.wamp.proto.Payload: autobahn
+    autobahn.wamp.gen.wamp.proto.Principal: autobahn
+    autobahn.wamp.gen.wamp.proto.Publish: autobahn
+    autobahn.wamp.gen.wamp.proto.Published: autobahn
+    autobahn.wamp.gen.wamp.proto.PublisherFeatures: autobahn
+    autobahn.wamp.gen.wamp.proto.Register: autobahn
+    autobahn.wamp.gen.wamp.proto.Registered: autobahn
+    autobahn.wamp.gen.wamp.proto.Result: autobahn
+    autobahn.wamp.gen.wamp.proto.RouterRoles: autobahn
+    autobahn.wamp.gen.wamp.proto.Serializer: autobahn
+    autobahn.wamp.gen.wamp.proto.Subscribe: autobahn
+    autobahn.wamp.gen.wamp.proto.Subscribed: autobahn
+    autobahn.wamp.gen.wamp.proto.SubscriberFeatures: autobahn
+    autobahn.wamp.gen.wamp.proto.SubscriberReceived: autobahn
+    autobahn.wamp.gen.wamp.proto.Unregister: autobahn
+    autobahn.wamp.gen.wamp.proto.Unregistered: autobahn
+    autobahn.wamp.gen.wamp.proto.Unsubscribe: autobahn
+    autobahn.wamp.gen.wamp.proto.Unsubscribed: autobahn
+    autobahn.wamp.gen.wamp.proto.Welcome: autobahn
+    autobahn.wamp.gen.wamp.proto.Yield: autobahn
+    autobahn.wamp.interfaces: autobahn
+    autobahn.wamp.message: autobahn
+    autobahn.wamp.message_fbs: autobahn
+    autobahn.wamp.protocol: autobahn
+    autobahn.wamp.request: autobahn
+    autobahn.wamp.role: autobahn
+    autobahn.wamp.serializer: autobahn
+    autobahn.wamp.test: autobahn
+    autobahn.wamp.test.test_wamp_auth: autobahn
+    autobahn.wamp.test.test_wamp_component: autobahn
+    autobahn.wamp.test.test_wamp_component_aio: autobahn
+    autobahn.wamp.test.test_wamp_cryptobox: autobahn
+    autobahn.wamp.test.test_wamp_cryptosign: autobahn
+    autobahn.wamp.test.test_wamp_exception: autobahn
+    autobahn.wamp.test.test_wamp_identifiers: autobahn
+    autobahn.wamp.test.test_wamp_message: autobahn
+    autobahn.wamp.test.test_wamp_protocol: autobahn
+    autobahn.wamp.test.test_wamp_protocol_peer: autobahn
+    autobahn.wamp.test.test_wamp_scram: autobahn
+    autobahn.wamp.test.test_wamp_serializer: autobahn
+    autobahn.wamp.test.test_wamp_session_details: autobahn
+    autobahn.wamp.test.test_wamp_transport_details: autobahn
+    autobahn.wamp.test.test_wamp_uri_pattern: autobahn
+    autobahn.wamp.test.test_wamp_user_handler_errors: autobahn
+    autobahn.wamp.test.test_wamp_websocket: autobahn
+    autobahn.wamp.types: autobahn
+    autobahn.wamp.uri: autobahn
+    autobahn.wamp.websocket: autobahn
+    autobahn.websocket: autobahn
+    autobahn.websocket.compress: autobahn
+    autobahn.websocket.compress_base: autobahn
+    autobahn.websocket.compress_bzip2: autobahn
+    autobahn.websocket.compress_deflate: autobahn
+    autobahn.websocket.compress_snappy: autobahn
+    autobahn.websocket.interfaces: autobahn
+    autobahn.websocket.protocol: autobahn
+    autobahn.websocket.test: autobahn
+    autobahn.websocket.test.test_websocket_frame: autobahn
+    autobahn.websocket.test.test_websocket_protocol: autobahn
+    autobahn.websocket.test.test_websocket_url: autobahn
+    autobahn.websocket.types: autobahn
+    autobahn.websocket.utf8validator: autobahn
+    autobahn.websocket.util: autobahn
+    autobahn.websocket.xormasker: autobahn
+    autobahn.xbr: autobahn
+    autobahn.xbr.test: autobahn
+    autobahn.xbr.test.test_xbr_argon2: autobahn
+    autobahn.xbr.test.test_xbr_config: autobahn
+    autobahn.xbr.test.test_xbr_eip712: autobahn
+    autobahn.xbr.test.test_xbr_frealm: autobahn
+    autobahn.xbr.test.test_xbr_mnemonic: autobahn
+    autobahn.xbr.test.test_xbr_schema_demo: autobahn
+    autobahn.xbr.test.test_xbr_schema_wamp: autobahn
+    autobahn.xbr.test.test_xbr_schema_wamp_control: autobahn
+    autobahn.xbr.test.test_xbr_secmod: autobahn
+    autobahn.xbr.test.test_xbr_web3: autobahn
     babel: babel
     babel.core: babel
     babel.dates: babel
@@ -543,6 +766,70 @@ manifest:
     contourpy.util.mpl_renderer: contourpy
     contourpy.util.mpl_util: contourpy
     contourpy.util.renderer: contourpy
+    cryptography: cryptography
+    cryptography.exceptions: cryptography
+    cryptography.fernet: cryptography
+    cryptography.hazmat: cryptography
+    cryptography.hazmat.backends: cryptography
+    cryptography.hazmat.backends.openssl: cryptography
+    cryptography.hazmat.backends.openssl.backend: cryptography
+    cryptography.hazmat.bindings: cryptography
+    cryptography.hazmat.bindings.openssl: cryptography
+    cryptography.hazmat.bindings.openssl.binding: cryptography
+    cryptography.hazmat.decrepit: cryptography
+    cryptography.hazmat.decrepit.ciphers: cryptography
+    cryptography.hazmat.decrepit.ciphers.algorithms: cryptography
+    cryptography.hazmat.primitives: cryptography
+    cryptography.hazmat.primitives.asymmetric: cryptography
+    cryptography.hazmat.primitives.asymmetric.dh: cryptography
+    cryptography.hazmat.primitives.asymmetric.dsa: cryptography
+    cryptography.hazmat.primitives.asymmetric.ec: cryptography
+    cryptography.hazmat.primitives.asymmetric.ed25519: cryptography
+    cryptography.hazmat.primitives.asymmetric.ed448: cryptography
+    cryptography.hazmat.primitives.asymmetric.padding: cryptography
+    cryptography.hazmat.primitives.asymmetric.rsa: cryptography
+    cryptography.hazmat.primitives.asymmetric.types: cryptography
+    cryptography.hazmat.primitives.asymmetric.utils: cryptography
+    cryptography.hazmat.primitives.asymmetric.x25519: cryptography
+    cryptography.hazmat.primitives.asymmetric.x448: cryptography
+    cryptography.hazmat.primitives.ciphers: cryptography
+    cryptography.hazmat.primitives.ciphers.aead: cryptography
+    cryptography.hazmat.primitives.ciphers.algorithms: cryptography
+    cryptography.hazmat.primitives.ciphers.base: cryptography
+    cryptography.hazmat.primitives.ciphers.modes: cryptography
+    cryptography.hazmat.primitives.cmac: cryptography
+    cryptography.hazmat.primitives.constant_time: cryptography
+    cryptography.hazmat.primitives.hashes: cryptography
+    cryptography.hazmat.primitives.hmac: cryptography
+    cryptography.hazmat.primitives.kdf: cryptography
+    cryptography.hazmat.primitives.kdf.argon2: cryptography
+    cryptography.hazmat.primitives.kdf.concatkdf: cryptography
+    cryptography.hazmat.primitives.kdf.hkdf: cryptography
+    cryptography.hazmat.primitives.kdf.kbkdf: cryptography
+    cryptography.hazmat.primitives.kdf.pbkdf2: cryptography
+    cryptography.hazmat.primitives.kdf.scrypt: cryptography
+    cryptography.hazmat.primitives.kdf.x963kdf: cryptography
+    cryptography.hazmat.primitives.keywrap: cryptography
+    cryptography.hazmat.primitives.padding: cryptography
+    cryptography.hazmat.primitives.poly1305: cryptography
+    cryptography.hazmat.primitives.serialization: cryptography
+    cryptography.hazmat.primitives.serialization.base: cryptography
+    cryptography.hazmat.primitives.serialization.pkcs12: cryptography
+    cryptography.hazmat.primitives.serialization.pkcs7: cryptography
+    cryptography.hazmat.primitives.serialization.ssh: cryptography
+    cryptography.hazmat.primitives.twofactor: cryptography
+    cryptography.hazmat.primitives.twofactor.hotp: cryptography
+    cryptography.hazmat.primitives.twofactor.totp: cryptography
+    cryptography.utils: cryptography
+    cryptography.x509: cryptography
+    cryptography.x509.base: cryptography
+    cryptography.x509.certificate_transparency: cryptography
+    cryptography.x509.extensions: cryptography
+    cryptography.x509.general_name: cryptography
+    cryptography.x509.name: cryptography
+    cryptography.x509.ocsp: cryptography
+    cryptography.x509.oid: cryptography
+    cryptography.x509.verification: cryptography
     cycler: cycler
     dateutil: python_dateutil
     dateutil.easter: python_dateutil
@@ -1025,6 +1312,7 @@ manifest:
     fontTools.voltLib.parser: fonttools
     fontTools.voltLib.voltToFea: fonttools
     fqdn: fqdn
+    frozenlist: frozenlist
     furo: furo
     furo.navigation: furo
     furo.sphinxext: furo
@@ -1113,6 +1401,17 @@ manifest:
     h11: h11
     httpcore: httpcore
     httpx: httpx
+    hyperlink: hyperlink
+    hyperlink.hypothesis: hyperlink
+    hyperlink.test: hyperlink
+    hyperlink.test.common: hyperlink
+    hyperlink.test.test_common: hyperlink
+    hyperlink.test.test_decoded_url: hyperlink
+    hyperlink.test.test_hypothesis: hyperlink
+    hyperlink.test.test_parse: hyperlink
+    hyperlink.test.test_scheme_registration: hyperlink
+    hyperlink.test.test_socket: hyperlink
+    hyperlink.test.test_url: hyperlink
     idna: idna
     idna.codec: idna
     idna.compat: idna
@@ -1167,6 +1466,40 @@ manifest:
     ipykernel.trio_runner: ipykernel
     ipykernel.zmqshell: ipykernel
     ipykernel_launcher: ipykernel
+    ipywidgets: ipywidgets
+    ipywidgets.comm: ipywidgets
+    ipywidgets.embed: ipywidgets
+    ipywidgets.widgets: ipywidgets
+    ipywidgets.widgets.docutils: ipywidgets
+    ipywidgets.widgets.domwidget: ipywidgets
+    ipywidgets.widgets.interaction: ipywidgets
+    ipywidgets.widgets.trait_types: ipywidgets
+    ipywidgets.widgets.utils: ipywidgets
+    ipywidgets.widgets.valuewidget: ipywidgets
+    ipywidgets.widgets.widget: ipywidgets
+    ipywidgets.widgets.widget_bool: ipywidgets
+    ipywidgets.widgets.widget_box: ipywidgets
+    ipywidgets.widgets.widget_button: ipywidgets
+    ipywidgets.widgets.widget_color: ipywidgets
+    ipywidgets.widgets.widget_controller: ipywidgets
+    ipywidgets.widgets.widget_core: ipywidgets
+    ipywidgets.widgets.widget_date: ipywidgets
+    ipywidgets.widgets.widget_datetime: ipywidgets
+    ipywidgets.widgets.widget_description: ipywidgets
+    ipywidgets.widgets.widget_float: ipywidgets
+    ipywidgets.widgets.widget_int: ipywidgets
+    ipywidgets.widgets.widget_layout: ipywidgets
+    ipywidgets.widgets.widget_link: ipywidgets
+    ipywidgets.widgets.widget_media: ipywidgets
+    ipywidgets.widgets.widget_output: ipywidgets
+    ipywidgets.widgets.widget_selection: ipywidgets
+    ipywidgets.widgets.widget_selectioncontainer: ipywidgets
+    ipywidgets.widgets.widget_string: ipywidgets
+    ipywidgets.widgets.widget_style: ipywidgets
+    ipywidgets.widgets.widget_tagsinput: ipywidgets
+    ipywidgets.widgets.widget_templates: ipywidgets
+    ipywidgets.widgets.widget_time: ipywidgets
+    ipywidgets.widgets.widget_upload: ipywidgets
     isoduration: isoduration
     isoduration.constants: isoduration
     isoduration.formatter: isoduration
@@ -1385,6 +1718,12 @@ manifest:
     jupyter_client.threaded: jupyter_client
     jupyter_client.utils: jupyter_client
     jupyter_client.win_interrupt: jupyter_client
+    jupyter_console: jupyter_console
+    jupyter_console.app: jupyter_console
+    jupyter_console.completer: jupyter_console
+    jupyter_console.ptshell: jupyter_console
+    jupyter_console.utils: jupyter_console
+    jupyter_console.zmqhistory: jupyter_console
     jupyter_core: jupyter_core
     jupyter_core.application: jupyter_core
     jupyter_core.command: jupyter_core
@@ -1518,6 +1857,14 @@ manifest:
     jupyter_server.utils: jupyter_server
     jupyter_server.view: jupyter_server
     jupyter_server.view.handlers: jupyter_server
+    jupyter_server_proxy: jupyter_server_proxy
+    jupyter_server_proxy.api: jupyter_server_proxy
+    jupyter_server_proxy.config: jupyter_server_proxy
+    jupyter_server_proxy.handlers: jupyter_server_proxy
+    jupyter_server_proxy.rawsocket: jupyter_server_proxy
+    jupyter_server_proxy.unixsock: jupyter_server_proxy
+    jupyter_server_proxy.utils: jupyter_server_proxy
+    jupyter_server_proxy.websocket: jupyter_server_proxy
     jupyter_server_terminals: jupyter_server_terminals
     jupyter_server_terminals.api_handlers: jupyter_server_terminals
     jupyter_server_terminals.app: jupyter_server_terminals
@@ -1572,6 +1919,8 @@ manifest:
     jupyterlab_server.translations_handler: jupyterlab_server
     jupyterlab_server.workspaces_app: jupyterlab_server
     jupyterlab_server.workspaces_handler: jupyterlab_server
+    jupyterlab_vpython: jupyterlab_vpython
+    jupyterlab_widgets: jupyterlab_widgets
     kiwisolver: kiwisolver
     kiwisolver.exceptions: kiwisolver
     linkify_it: linkify_it_py
@@ -1848,6 +2197,7 @@ manifest:
     mpl_toolkits.mplot3d.axes3d: matplotlib
     mpl_toolkits.mplot3d.axis3d: matplotlib
     mpl_toolkits.mplot3d.proj3d: matplotlib
+    multidict: multidict
     mypy: mypy
     mypy.api: mypy
     mypy.applytype: mypy
@@ -3173,6 +3523,8 @@ manifest:
     prompt_toolkit.widgets.menus: prompt_toolkit
     prompt_toolkit.widgets.toolbars: prompt_toolkit
     prompt_toolkit.win32_types: prompt_toolkit
+    propcache: propcache
+    propcache.api: propcache
     psutil: psutil
     ptyprocess: ptyprocess
     ptyprocess.ptyprocess: ptyprocess
@@ -3787,6 +4139,9 @@ manifest:
     setuptools.warnings: setuptools
     setuptools.wheel: setuptools
     setuptools.windows_support: setuptools
+    simpervisor: simpervisor
+    simpervisor.atexitasync: simpervisor
+    simpervisor.process: simpervisor
     six: six
     sniffio: sniffio
     snowballstemmer: snowballstemmer
@@ -4145,6 +4500,15 @@ manifest:
     traitlets.utils.sentinel: traitlets
     traitlets.utils.text: traitlets
     traitlets.utils.warnings: traitlets
+    twisted.plugins.autobahn_endpoints: autobahn
+    twisted.plugins.autobahn_twistd: autobahn
+    txaio: txaio
+    txaio.aio: txaio
+    txaio.interfaces: txaio
+    txaio.testutil: txaio
+    txaio.tx: txaio
+    txaio.with_asyncio: txaio
+    txaio.with_twisted: txaio
     typing_extensions: typing_extensions
     tzdata: tzdata
     tzdata.zoneinfo: tzdata
@@ -4218,6 +4582,16 @@ manifest:
     urllib3.util.url: urllib3
     urllib3.util.util: urllib3
     urllib3.util.wait: urllib3
+    vpython: vpython
+    vpython.cyvector: vpython
+    vpython.gs_version: vpython
+    vpython.no_notebook: vpython
+    vpython.qtbrowser: vpython
+    vpython.rate_control: vpython
+    vpython.shapespaths: vpython
+    vpython.vector: vpython
+    vpython.vpython: vpython
+    vpython.with_notebook: vpython
     wcwidth: wcwidth
     wcwidth.table_vs16: wcwidth
     wcwidth.table_wide: wcwidth
@@ -4249,6 +4623,7 @@ manifest:
     wheel.vendored.packaging.utils: wheel
     wheel.vendored.packaging.version: wheel
     wheel.wheelfile: wheel
+    widgetsnbextension: widgetsnbextension
     yaml: PyYAML
     yaml.composer: PyYAML
     yaml.constructor: PyYAML
@@ -4266,6 +4641,7 @@ manifest:
     yaml.scanner: PyYAML
     yaml.serializer: PyYAML
     yaml.tokens: PyYAML
+    yarl: yarl
     zmq: pyzmq
     zmq.asyncio: pyzmq
     zmq.auth: pyzmq
@@ -4328,4 +4704,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: 5426fcfa8450cbcdcf4b3dc3c472584bbb1bbd573ee18c3d67157d6210798725
+integrity: a060ad416dcef8939d2908de2816fbdf65629b5c9356c05445241debf3dd8be0

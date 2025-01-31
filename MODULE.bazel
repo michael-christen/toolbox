@@ -213,6 +213,7 @@ archive_override(
     module_name = "hedron_compile_commands",
     strip_prefix = "bazel-compile-commands-extractor-163521345aa6366fd1ed801b989b668b5c806f69",
     urls = ["https://github.com/chadnorvell/bazel-compile-commands-extractor/archive/163521345aa6366fd1ed801b989b668b5c806f69.tar.gz"],
+    integrity = "sha256-twHI8300PvX9eTiGi14d5+qtNaJ1xF0jW/6SSg1D738=",
 )
 
 archive_override(
