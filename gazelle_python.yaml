@@ -331,6 +331,7 @@ manifest:
     anyio.streams.stapled: anyio
     anyio.streams.text: anyio
     anyio.streams.tls: anyio
+    anyio.to_interpreter: anyio
     anyio.to_process: anyio
     anyio.to_thread: anyio
     argon2: argon2_cffi
@@ -1739,6 +1740,7 @@ manifest:
     jupyter_events.schema: jupyter_events
     jupyter_events.schema_registry: jupyter_events
     jupyter_events.traits: jupyter_events
+    jupyter_events.utils: jupyter_events
     jupyter_events.validators: jupyter_events
     jupyter_events.yaml: jupyter_events
     jupyter_lsp: jupyter_lsp
@@ -2040,6 +2042,7 @@ manifest:
     matplotlib.cm: matplotlib
     matplotlib.collections: matplotlib
     matplotlib.colorbar: matplotlib
+    matplotlib.colorizer: matplotlib
     matplotlib.colors: matplotlib
     matplotlib.container: matplotlib
     matplotlib.contour: matplotlib
@@ -2051,6 +2054,7 @@ manifest:
     matplotlib.gridspec: matplotlib
     matplotlib.hatch: matplotlib
     matplotlib.image: matplotlib
+    matplotlib.inset: matplotlib
     matplotlib.layout_engine: matplotlib
     matplotlib.legend: matplotlib
     matplotlib.legend_handler: matplotlib
@@ -2183,8 +2187,6 @@ manifest:
     mpl_toolkits.axisartist: matplotlib
     mpl_toolkits.axisartist.angle_helper: matplotlib
     mpl_toolkits.axisartist.axes_divider: matplotlib
-    mpl_toolkits.axisartist.axes_grid: matplotlib
-    mpl_toolkits.axisartist.axes_rgb: matplotlib
     mpl_toolkits.axisartist.axis_artist: matplotlib
     mpl_toolkits.axisartist.axisline_style: matplotlib
     mpl_toolkits.axisartist.axislines: matplotlib
@@ -3345,7 +3347,6 @@ manifest:
     pexpect.socket_pexpect: pexpect
     pexpect.spawnbase: pexpect
     pexpect.utils: pexpect
-    pillow.libs.libopenjp2-05423b53: pillow
     pkg_resources: setuptools
     platformdirs: platformdirs
     platformdirs.android: platformdirs
@@ -3624,6 +3625,7 @@ manifest:
     pygments.lexers.cddl: pygments
     pygments.lexers.chapel: pygments
     pygments.lexers.clean: pygments
+    pygments.lexers.codeql: pygments
     pygments.lexers.comal: pygments
     pygments.lexers.compiled: pygments
     pygments.lexers.configs: pygments
@@ -3664,6 +3666,7 @@ manifest:
     pygments.lexers.futhark: pygments
     pygments.lexers.gcodelexer: pygments
     pygments.lexers.gdscript: pygments
+    pygments.lexers.gleam: pygments
     pygments.lexers.go: pygments
     pygments.lexers.grammar_notation: pygments
     pygments.lexers.graph: pygments
@@ -3671,6 +3674,7 @@ manifest:
     pygments.lexers.graphql: pygments
     pygments.lexers.graphviz: pygments
     pygments.lexers.gsql: pygments
+    pygments.lexers.hare: pygments
     pygments.lexers.haskell: pygments
     pygments.lexers.haxe: pygments
     pygments.lexers.hdl: pygments
@@ -3686,6 +3690,7 @@ manifest:
     pygments.lexers.javascript: pygments
     pygments.lexers.jmespath: pygments
     pygments.lexers.jslt: pygments
+    pygments.lexers.json5: pygments
     pygments.lexers.jsonnet: pygments
     pygments.lexers.jsx: pygments
     pygments.lexers.julia: pygments
@@ -3698,6 +3703,7 @@ manifest:
     pygments.lexers.lisp: pygments
     pygments.lexers.macaulay2: pygments
     pygments.lexers.make: pygments
+    pygments.lexers.maple: pygments
     pygments.lexers.markup: pygments
     pygments.lexers.math: pygments
     pygments.lexers.matlab: pygments
@@ -3716,6 +3722,7 @@ manifest:
     pygments.lexers.nimrod: pygments
     pygments.lexers.nit: pygments
     pygments.lexers.nix: pygments
+    pygments.lexers.numbair: pygments
     pygments.lexers.oberon: pygments
     pygments.lexers.objective: pygments
     pygments.lexers.ooc: pygments
@@ -3725,6 +3732,7 @@ manifest:
     pygments.lexers.parsers: pygments
     pygments.lexers.pascal: pygments
     pygments.lexers.pawn: pygments
+    pygments.lexers.pddl: pygments
     pygments.lexers.perl: pygments
     pygments.lexers.phix: pygments
     pygments.lexers.php: pygments
@@ -3743,6 +3751,7 @@ manifest:
     pygments.lexers.r: pygments
     pygments.lexers.rdf: pygments
     pygments.lexers.rebol: pygments
+    pygments.lexers.rego: pygments
     pygments.lexers.resource: pygments
     pygments.lexers.ride: pygments
     pygments.lexers.rita: pygments
@@ -3772,6 +3781,7 @@ manifest:
     pygments.lexers.srcinfo: pygments
     pygments.lexers.stata: pygments
     pygments.lexers.supercollider: pygments
+    pygments.lexers.tablegen: pygments
     pygments.lexers.tact: pygments
     pygments.lexers.tal: pygments
     pygments.lexers.tcl: pygments
@@ -3882,7 +3892,14 @@ manifest:
     pyparsing.util: pyparsing
     pytest: pytest
     pythonjsonlogger: python_json_logger
+    pythonjsonlogger.core: python_json_logger
+    pythonjsonlogger.defaults: python_json_logger
+    pythonjsonlogger.exception: python_json_logger
+    pythonjsonlogger.json: python_json_logger
     pythonjsonlogger.jsonlogger: python_json_logger
+    pythonjsonlogger.msgspec: python_json_logger
+    pythonjsonlogger.orjson: python_json_logger
+    pythonjsonlogger.utils: python_json_logger
     pytz: pytz
     pytz.exceptions: pytz
     pytz.lazy: pytz
@@ -3923,6 +3940,7 @@ manifest:
     scipy.constants.codata: scipy
     scipy.constants.constants: scipy
     scipy.datasets: scipy
+    scipy.differentiate: scipy
     scipy.fft: scipy
     scipy.fftpack: scipy
     scipy.fftpack.basic: scipy
@@ -3963,7 +3981,7 @@ manifest:
     scipy.io.mmio: scipy
     scipy.io.netcdf: scipy
     scipy.io.wavfile: scipy
-    scipy.libs.libscipy_openblas-c128ec02: scipy
+    scipy.libs.libscipy_openblas-68440149: scipy
     scipy.linalg: scipy
     scipy.linalg.basic: scipy
     scipy.linalg.blas: scipy
@@ -3995,6 +4013,7 @@ manifest:
     scipy.optimize: scipy
     scipy.optimize.cobyla: scipy
     scipy.optimize.cython_optimize: scipy
+    scipy.optimize.elementwise: scipy
     scipy.optimize.lbfgsb: scipy
     scipy.optimize.linesearch: scipy
     scipy.optimize.minpack: scipy
@@ -4704,4 +4723,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: a060ad416dcef8939d2908de2816fbdf65629b5c9356c05445241debf3dd8be0
+integrity: 6da7dbe16eb61085d367a80474cbbdf9dede6eda4d47f3e74767dc8f285ac707
