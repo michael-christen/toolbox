@@ -15,6 +15,10 @@ networkx[default]
 # Make nice-looking table output
 tabulate
 
+bokeh
+panel
+pygraphviz
+
 # largely for development
 # https://github.com/pytest-dev/pytest/issues/12592#issuecomment-2515100428
 # introduced an issue with files named the same as their parent modules from
@@ -25,6 +29,9 @@ flake8
 isort
 ipdb
 notebook
+# https://jupytext.readthedocs.io/en/stable/index.html
+# Source control jupyter notebooks by pairing with an ingnored .ipynb file.
+jupytext
 # Documentation
 sphinx
 sphinx-rtd-theme

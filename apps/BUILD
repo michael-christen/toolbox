@@ -9,9 +9,18 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
+# XXX: Example case of py_binary conflicting
 py_binary(
-    name = "bazel_parser",
-    srcs = ["bazel_parser.py"],
+    name = "example_bokeh",
+    srcs = ["example_bokeh.py"],
     visibility = ["//:__subpackages__"],
-    deps = ["//tools:bazel_utils"],
+    deps = [
+        "@pip//bokeh",
+        "@pip//networkx",
+        "@pip//panel",
+        # XXX: I needed to install system clang to build the wheel, I likely
+        # should point elsewhere for hermeticity
+        # XXX: Should associate with networkx
+        "@pip//pygraphviz",  # keep
+    ],
 )

@@ -1,4 +1,5 @@
-import ipdb
+import IPython
 
 if __name__ == "__main__":
-    ipdb.set_trace()
+    # https://ipython.readthedocs.io/en/stable/interactive/reference.html#embedding
+    IPython.start_ipython(argv=[])

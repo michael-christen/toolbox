@@ -1,5 +1,10 @@
 """Tools for working with bazel.
 
+XXX: Should --notool_deps be specified?
+
+Should we denote source files in some way? eg)
+- bazel query 'labels(srcs, //...) union labels(hdrs, //...)'
+
 ```
 bazel query //... --output proto > query_result.pb
 # Load then operate on it
