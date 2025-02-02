@@ -2226,7 +2226,7 @@
         "recordedFileInputs": {
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_windows_lock.txt": "4367c7d4cc4a1c2d6a136edace02581066f1c9ead10937685dde568d1061189f",
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_linux_lock.txt": "ce8b16e007309a610c37eec908b75451733ae5efb9c14ec7e6f04557b81d621e",
-          "@@//requirements_lock.txt": "b4f0a0fba54a930a7e82d37f61543da3b31d3891fa47e91266e73d1f85a109a6",
+          "@@//requirements_lock.txt": "4d8d6f6ed3b912b5b3f2d9f1a74b54ec8b1d0ac24ea240368cd8d21483090231",
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_darwin_lock.txt": "91de3b2cdbe8f8fc7136ce309824355684c2a6ae2395c1e12f4aa59d02d52f3b",
           "@@rules_fuzzing~//fuzzing/requirements.txt": "ab04664be026b632a0d2a2446c4f65982b7654f5b6851d2f9d399a19b7242a5b",
           "@@nanopb~//extra/requirements_lock.txt": "8a44f53e5c48123742970b4e9d6f8730eaa143134c08db0706ccd6d2c78c03ca",
@@ -5052,16 +5052,6 @@
               "requirement": "requests==2.31.0     --hash=sha256:58cd2187c01e70e6e26505bca751777aa9f2ee0b7f4300988b709f44e013003f     --hash=sha256:942c5a758f98d790eaed1a29cb6eefc7ffb0d1cf7af05c3d2791656dbd6ad1e1"
             }
           },
-          "pip_311_setuptools": {
-            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
-            "ruleClassName": "whl_library",
-            "attributes": {
-              "dep_template": "@pip//{name}:{target}",
-              "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
-              "repo": "pip_311",
-              "requirement": "setuptools==75.6.0     --hash=sha256:8199222558df7c86216af4f84c30e9b34a61d8ba19366cc914424cdbd28252f6     --hash=sha256:ce74b49e8f7110f9bf04883b730f4765b774ef3ef28f722cce7c273d253aaf7d"
-            }
-          },
           "pip_311_fastjsonschema": {
             "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
             "ruleClassName": "whl_library",
@@ -5267,7 +5257,6 @@
                 "matplotlib": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_matplotlib\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "ptyprocess": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_ptyprocess\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "send2trash": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_send2trash\",\"target_platforms\":null,\"version\":\"3.11\"}]",
-                "setuptools": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_setuptools\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "stack_data": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_stack_data\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "argon2_cffi": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_argon2_cffi\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "isoduration": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_isoduration\",\"target_platforms\":null,\"version\":\"3.11\"}]",

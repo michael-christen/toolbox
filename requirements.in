@@ -22,7 +22,7 @@ myst-parser
 # Analyze graphs easily https://networkx.org/documentation/stable/index.html
 networkx[default]
 notebook
-# Tool for running hardware-style tests
+# Tool for running hardware-style tests; https://www.openhtf.com/
 openhtf
 protobuf
 pytest
@@ -43,6 +43,6 @@ sphinx-tippy
 sphinx-togglebutton
 # Make nice-looking table output
 tabulate
-# Convenient backend for openhtf
+# Convenient backend for openhtf; https://www.tofupilot.com/
 tofupilot
 types-protobuf
