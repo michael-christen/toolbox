@@ -5,9 +5,6 @@
 # Upgrade by
 # bazel run //:requirements.update -- --upgrade && bazel run //:gazelle_python_manifest.update
 
-
-
-beautifulsoup4
 black[jupyter]
 flake8
 # A more modern sphinx theme
@@ -25,7 +22,11 @@ notebook
 # Tool for running hardware-style tests; https://www.openhtf.com/
 openhtf
 protobuf
-pytest
+# largely for development
+# https://github.com/pytest-dev/pytest/issues/12592#issuecomment-2515100428
+# introduced an issue with files named the same as their parent modules from
+# properly getting imported
+pytest<8.3.4
 # - python code (parse, not executing)
 sphinx-autoapi
 # - diagram generation

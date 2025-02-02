@@ -6,7 +6,10 @@ package(default_visibility = ["//visibility:private"])
 
 filegroup(
     name = "python_source",
-    srcs = glob(["*.py"]) + [
+    srcs = glob(
+        ["*.py"],
+        allow_empty = True,
+    ) + [
     ],
     visibility = ["//visibility:public"],
 )
@@ -127,6 +130,7 @@ platform_data(
 # Prove this is working as expected (changing prefix)
 sh_test(
     name = "cat_bin1_pure_test",
+    timeout = "short",
     srcs = ["check_equality.sh"],
     args = [
         "$(location :cat_bin1_pure)",
@@ -137,6 +141,7 @@ sh_test(
 
 sh_test(
     name = "cat_bin1_evil_test",
+    timeout = "short",
     srcs = ["check_equality.sh"],
     args = [
         "$(location :cat_bin1_evil)",

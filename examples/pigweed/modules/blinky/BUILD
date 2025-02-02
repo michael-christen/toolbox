@@ -14,19 +14,22 @@
 
 # Don't autogenerate any protos here
 # gazelle:ignore
-load("@pigweed//pw_build:pigweed.bzl", "pw_cc_test")
 load(
     "@pigweed//pw_protobuf_compiler:pw_proto_library.bzl",
     "nanopb_proto_library",
     "nanopb_rpc_proto_library",
 )
 load("@rules_python//python:proto.bzl", "py_proto_library")
+load("//bzl:cc.bzl", "cc_library", "pw_cc_test")
 
 package(default_visibility = ["//visibility:public"])
 
 filegroup(
     name = "python_source",
-    srcs = glob(["*.py"]) + [
+    srcs = glob(
+        ["*.py"],
+        allow_empty = True,
+    ) + [
     ],
     visibility = ["//visibility:public"],
 )

@@ -1,0 +1,24 @@
+"Aspect bazelrc presets; see https://docs.aspect.build/guides/bazelrc"
+
+# Use the following command to update the .bazelrc files in this workspace to
+# the latest versions maintained by Aspect. More details are in the guide
+# linked above.
+
+# bazel run //.aspect/bazelrc:update_aspect_bazelrc_presets
+
+load("@aspect_bazel_lib//lib:bazelrc_presets.bzl", "write_aspect_bazelrc_presets")
+
+package(default_visibility = ["//visibility:private"])
+
+write_aspect_bazelrc_presets(
+    name = "update_aspect_bazelrc_presets",
+    presets = [
+        "bazel7",
+        "ci",
+        "convenience",
+        "correctness",
+        "debug",
+        "javascript",
+        "performance",
+    ],
+)

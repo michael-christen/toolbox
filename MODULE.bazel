@@ -13,12 +13,12 @@ module(
 ########################################
 # Generic deps
 ########################################
-bazel_dep(name = "aspect_bazel_lib", version = "2.9.3")
+bazel_dep(name = "aspect_bazel_lib", version = "2.9.4")
 
 ########################################
 # Set up rules_python and pip
 ########################################
-bazel_dep(name = "aspect_rules_py", version = "0.7.3")
+bazel_dep(name = "aspect_rules_py", version = "1.0.0")
 
 # Minimum version needs:
 # feat: add interpreter_version_info to py_runtime by @mattem in #1671
@@ -35,12 +35,26 @@ python.toolchain(
     python_version = PYTHON_VERSION,
 )
 
+bazel_dep(name = "rules_uv", version = "0.45.0")
+
 pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip")
 pip.parse(
     hub_name = "pip",
     python_version = PYTHON_VERSION,
     requirements_lock = "//:requirements_lock.txt",
+    # Avoid building wheels with system compiler
+    # - pygraphviz
+    # download_only = True,
+    # Could put --extra-index-url here to grab my own wheels
+    # extra_pip_args = [],
 )
+
+# Could support multi-platform by specifying a different target for each
+# platform
+# --platform
+# --python-version
+# --implementation
+# --abi
 use_repo(pip, "pip")
 
 # TODO(#91): Allow bumping this up to 26 or greater while avoiding segfault
@@ -192,7 +206,7 @@ bazel_dep(name = "toolchains_llvm", version = "0.10.3")
 
 # Python Type Checking - mypy
 #############################
-bazel_dep(name = "rules_mypy", version = "0.6.0")
+bazel_dep(name = "rules_mypy", version = "0.17.0")
 
 types = use_extension("@rules_mypy//mypy:types.bzl", "types")
 types.requirements(
