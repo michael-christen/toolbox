@@ -27,6 +27,8 @@ protobuf
 # introduced an issue with files named the same as their parent modules from
 # properly getting imported
 pytest<8.3.4
+# https://github.com/bazelbuild/bazel/issues/4327
+setuptools<71
 # - python code (parse, not executing)
 sphinx-autoapi
 # - diagram generation
