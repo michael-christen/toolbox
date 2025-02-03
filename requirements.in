@@ -47,3 +47,4 @@ sphinx-togglebutton
 vpython
 # A more modern sphinx theme
 furo
+setuptools<71

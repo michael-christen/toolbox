@@ -3348,6 +3348,7 @@ manifest:
     pexpect.spawnbase: pexpect
     pexpect.utils: pexpect
     pkg_resources: setuptools
+    pkg_resources.extern: setuptools
     platformdirs: platformdirs
     platformdirs.android: platformdirs
     platformdirs.api: platformdirs
@@ -4124,15 +4125,17 @@ manifest:
     setuptools.command.install_egg_info: setuptools
     setuptools.command.install_lib: setuptools
     setuptools.command.install_scripts: setuptools
+    setuptools.command.register: setuptools
     setuptools.command.rotate: setuptools
     setuptools.command.saveopts: setuptools
     setuptools.command.sdist: setuptools
     setuptools.command.setopt: setuptools
     setuptools.command.test: setuptools
+    setuptools.command.upload: setuptools
+    setuptools.command.upload_docs: setuptools
     setuptools.compat: setuptools
     setuptools.compat.py310: setuptools
     setuptools.compat.py311: setuptools
-    setuptools.compat.py312: setuptools
     setuptools.compat.py39: setuptools
     setuptools.config: setuptools
     setuptools.config.expand: setuptools
@@ -4143,6 +4146,7 @@ manifest:
     setuptools.dist: setuptools
     setuptools.errors: setuptools
     setuptools.extension: setuptools
+    setuptools.extern: setuptools
     setuptools.glob: setuptools
     setuptools.installer: setuptools
     setuptools.launch: setuptools
@@ -4723,4 +4727,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: 6da7dbe16eb61085d367a80474cbbdf9dede6eda4d47f3e74767dc8f285ac707
+integrity: 8f8b137a0c8364d8f536b635b4cb06e777cbe86123db8a8eee6e85fe72fbe477

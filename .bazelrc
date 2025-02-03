@@ -51,9 +51,8 @@ build --incompatible_enable_cc_toolchain_resolution
 # improve cache hit rates between builds targeting different platforms. This is
 # especially impactful for large host tools like protoc, which will have its
 # cache invalidated when your host C++ config changes.
-# XXX
-# common --experimental_exclude_defines_from_exec_config
-# common --experimental_exclude_starlark_flags_from_exec_config
+common --experimental_exclude_defines_from_exec_config
+common --experimental_exclude_starlark_flags_from_exec_config
 
 # Expose exec toolchains for Python. We use these toolchains in some rule
 # implementations (git grep for
