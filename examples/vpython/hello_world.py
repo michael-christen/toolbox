@@ -140,7 +140,7 @@ def main() -> None:
     )
 
     dt = 1 / 60.0
-    t = 0
+    t = 0.0
 
     def key_pressed(evt):  # info about event is stored in evt
         WHEEL_ANGLE_PER_DT = 360 * (math.pi / 180)

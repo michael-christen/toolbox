@@ -87,7 +87,7 @@ def main() -> None:
     graph_total = vpython.gcurve(color=vpython.color.green, label="total")
 
     dt = 1 / (60)
-    t = 0
+    t = 0.0
     while True:
         vpython.rate(1 / dt)
 

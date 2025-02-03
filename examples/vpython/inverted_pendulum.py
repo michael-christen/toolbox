@@ -60,7 +60,7 @@ def compute_derivative_state(
     )
     G = np.matrix(
         [
-            [0],
+            [0.0],
             [-c.m * c.g * c.l],
         ]
     )
@@ -184,7 +184,7 @@ def main() -> None:
         origin=vpython.vec(0, -body.height / 2, 0),
     )
 
-    t = 0
+    t = 0.0
     while True:
         vpython.rate(1 / dt)
         # import time
@@ -192,7 +192,7 @@ def main() -> None:
 
         # Control
         keys_down = vpython.keysdown()
-        tau_0 = 0
+        tau_0 = 0.0
 
         IMPULSE = 1e-12
         if "up" in keys_down:
