@@ -43,5 +43,8 @@ sphinxext-opengraph
 sphinx-pyscript
 sphinx-tippy
 sphinx-togglebutton
+# A beginner-friendly 3d visualization
+vpython
 # A more modern sphinx theme
 furo
+setuptools<71
