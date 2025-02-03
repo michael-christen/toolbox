@@ -120,14 +120,14 @@ def get_constants() -> Constants:
     # XXX: Why 12?
     i = m1 * (l1 / 2 + l2) ** 2 + m2 * l2 * l2 / 12
     # position of center of mass
-    l = l2 / 2 + (l1 + l2) * m1 / (2 * m)
+    length = l2 / 2 + (l1 + l2) * m1 / (2 * m)
     return Constants(
         # XXX: Why x 2?
         i_w=389.6e-9 * 2,
         m_w=7.2e-3,
         m=m,
         r=16e-3,
-        l=l,
+        l=length,
         i=i,
         b_r=0.01,
         b_m=0.01,
@@ -149,8 +149,8 @@ def main() -> None:
     input_val = Input(tau_0=0)
 
     vpython.scene.visible = False
-    my_scene = vpython.canvas(width=1_000, height=1_000)
-    graph = vpython.graph(
+    my_scene = vpython.canvas(width=1_000, height=1_000)  # noqa: F841
+    graph = vpython.graph(  # noqa: F841
         title="Misc",
         xtitle="t",
         ytitle="Misc",

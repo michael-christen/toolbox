@@ -53,12 +53,12 @@ def main() -> None:
     )
     input_val = Input(tau_0=0)
 
-    plane = vpython.box(length=5, height=0.001, width=5)
+    plane = vpython.box(length=5, height=0.001, width=5)  # noqa: F841
     staff = vpython.cylinder(length=constants.l, height=0.1, width=0.1)
     staff.rotate(math.pi / 2, axis=vpython.vec(0, 0, 1))
     staff.rotate(-state.theta_d0, axis=vpython.vec(0, 0, 1))
 
-    graph = vpython.graph(
+    graph = vpython.graph(  # noqa: F841
         title="Misc",
         xtitle="t",
         ytitle="Misc",
@@ -72,7 +72,7 @@ def main() -> None:
         color=vpython.color.green, label="theta_d2"
     )
 
-    energy = vpython.graph(
+    energy = vpython.graph(  # noqa: F841
         title="Energy",
         xtitle="t",
         ytitle="Energy (J)",

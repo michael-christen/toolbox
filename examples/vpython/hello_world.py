@@ -54,9 +54,9 @@ def compute_derivative_state(
 
 def main() -> None:
     vpython.scene.visible = False
-    my_scene = vpython.canvas(width=1_000, height=1_000)
+    my_scene = vpython.canvas(width=1_000, height=1_000)  # noqa: F841
 
-    graph_pos = vpython.graph(
+    graph_pos = vpython.graph(  # noqa: F841
         title="Positions",
         xtitle="t",
         ytitle="position",
@@ -67,7 +67,7 @@ def main() -> None:
     graph_x = vpython.gcurve(color=vpython.color.red, label="x")
     graph_y = vpython.gcurve(color=vpython.color.blue, label="y")
 
-    graph_angle = vpython.graph(
+    graph_angle = vpython.graph(  # noqa: F841
         title="Angle",
         xtitle="t",
         ytitle="angle",
@@ -111,11 +111,13 @@ def main() -> None:
         # trail_type="points",
         # retain=1000,
     )
-    myarrow = vpython.attach_arrow(vehicle, "axis", scale=1.0, shaftwidth=0.2)
+    myarrow = vpython.attach_arrow(
+        vehicle, "axis", scale=1.0, shaftwidth=0.2
+    )  # noqa: F841
 
     # XXX: Make the plane actually a set of curves
     PLANE_HEIGHT = 0.5
-    plane = vpython.box(
+    plane = vpython.box(  # noqa: F841
         pos=(
             vpython.vec(
                 0, -(body.height / 2 + WHEEL_RADIUS) - PLANE_HEIGHT / 2, 0
