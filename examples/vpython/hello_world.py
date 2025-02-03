@@ -111,9 +111,9 @@ def main() -> None:
         # trail_type="points",
         # retain=1000,
     )
-    myarrow = vpython.attach_arrow(
+    myarrow = vpython.attach_arrow(  # noqa: F841
         vehicle, "axis", scale=1.0, shaftwidth=0.2
-    )  # noqa: F841
+    )
 
     # XXX: Make the plane actually a set of curves
     PLANE_HEIGHT = 0.5
