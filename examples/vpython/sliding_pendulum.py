@@ -4,7 +4,6 @@ import math
 import vpython
 
 
-
 @dataclasses.dataclass
 class Constants:
     l: float
@@ -24,7 +23,6 @@ class Input:
     tau_0: float
 
 
-
 def compute_derivative_state(
     constants: Constants,
     input_val: Input,
@@ -36,8 +34,8 @@ def compute_derivative_state(
     """
     return State(
         theta_d0=state.theta_d1,
-        theta_d1=(constants.g / constants.l) * math.sin(state.theta_d0) -
-        state.theta_d1 * constants.friction,
+        theta_d1=(constants.g / constants.l) * math.sin(state.theta_d0)
+        - state.theta_d1 * constants.friction,
     )
 
 
@@ -57,43 +55,58 @@ def main() -> None:
 
     plane = vpython.box(length=5, height=0.001, width=5)
     staff = vpython.cylinder(length=constants.l, height=0.1, width=0.1)
-    staff.rotate(math.pi/2, axis=vpython.vec(0,0,1))
-    staff.rotate(-state.theta_d0, axis=vpython.vec(0,0,1))
+    staff.rotate(math.pi / 2, axis=vpython.vec(0, 0, 1))
+    staff.rotate(-state.theta_d0, axis=vpython.vec(0, 0, 1))
 
-    graph = vpython.graph(title='Misc', xtitle='t', ytitle='Misc',
-                              scroll=True, xmin=0, xmax=30,
-                              )
-    graph_theta_d0 = vpython.gcurve(color=vpython.color.red, label='theta_d0')
-    graph_theta_d1 = vpython.gcurve(color=vpython.color.blue, label='theta_d1')
-    graph_theta_d2 = vpython.gcurve(color=vpython.color.green, label='theta_d2')
+    graph = vpython.graph(
+        title="Misc",
+        xtitle="t",
+        ytitle="Misc",
+        scroll=True,
+        xmin=0,
+        xmax=30,
+    )
+    graph_theta_d0 = vpython.gcurve(color=vpython.color.red, label="theta_d0")
+    graph_theta_d1 = vpython.gcurve(color=vpython.color.blue, label="theta_d1")
+    graph_theta_d2 = vpython.gcurve(
+        color=vpython.color.green, label="theta_d2"
+    )
 
-    energy = vpython.graph(title='Energy', xtitle='t', ytitle='Energy (J)',
-                              scroll=True, xmin=0, xmax=30,
-                              )
-    graph_potential = vpython.gcurve(color=vpython.color.red, label='potential')
-    graph_kinetic = vpython.gcurve(color=vpython.color.blue, label='kinetic')
-    graph_total = vpython.gcurve(color=vpython.color.green, label='total')
+    energy = vpython.graph(
+        title="Energy",
+        xtitle="t",
+        ytitle="Energy (J)",
+        scroll=True,
+        xmin=0,
+        xmax=30,
+    )
+    graph_potential = vpython.gcurve(
+        color=vpython.color.red, label="potential"
+    )
+    graph_kinetic = vpython.gcurve(color=vpython.color.blue, label="kinetic")
+    graph_total = vpython.gcurve(color=vpython.color.green, label="total")
 
-    dt = 1/(60)
+    dt = 1 / (60)
     t = 0
     while True:
-        vpython.rate(1/dt)
+        vpython.rate(1 / dt)
 
-        d_state = compute_derivative_state(constants=constants,
-                                           input_val=input_val,
-                                           state=state)
+        d_state = compute_derivative_state(
+            constants=constants, input_val=input_val, state=state
+        )
         # XXX: Doing all at the same time is likely best (use same value, see
         # elsewhere)
         state.theta_d1 += d_state.theta_d1 * dt
         state.theta_d0 += state.theta_d1 * dt
 
         # Animate
-        staff.rotate(angle=-d_state.theta_d0 * dt, axis=vpython.vec(0,0,1))
+        staff.rotate(angle=-d_state.theta_d0 * dt, axis=vpython.vec(0, 0, 1))
 
-        potential_energy = (constants.m1 * constants.g *
-                            math.cos(state.theta_d0) * constants.l)
+        potential_energy = (
+            constants.m1 * constants.g * math.cos(state.theta_d0) * constants.l
+        )
         v = state.theta_d1 * constants.l
-        kinetic_energy = constants.m1 * (v **2) / 2
+        kinetic_energy = constants.m1 * (v**2) / 2
         # XXX: Not growing unbounded anymore, but still oscillating ~ 0.02,
         # though it changes based on the dt used, so perhaps it's ok?
         # NOTE: This is not factoring in heat loss of friction, so if that's
@@ -112,5 +125,5 @@ def main() -> None:
         t += dt
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
