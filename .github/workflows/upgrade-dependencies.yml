@@ -4,8 +4,10 @@ on:
   workflow_dispatch:
   schedule:
     # https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#schedule
-    # Run every monday at 15:00 UTC
-    - cron: "0 15 * * MON"
+    # https://crontab.guru/
+    # min hour day month weekday
+    # Run the first of every month at 15:00 UTC
+    - cron: "0 15 1 * *"
 jobs:
   updgrade_dependencies:
     runs-on: ubuntu-22.04
