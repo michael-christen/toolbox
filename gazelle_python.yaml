@@ -485,6 +485,8 @@ manifest:
     bs4.dammit: beautifulsoup4
     bs4.diagnose: beautifulsoup4
     bs4.element: beautifulsoup4
+    bs4.exceptions: beautifulsoup4
+    bs4.filter: beautifulsoup4
     bs4.formatter: beautifulsoup4
     certifi: certifi
     certifi.core: certifi
@@ -1213,6 +1215,7 @@ manifest:
     isort.stdlibs.py310: isort
     isort.stdlibs.py311: isort
     isort.stdlibs.py312: isort
+    isort.stdlibs.py313: isort
     isort.stdlibs.py36: isort
     isort.stdlibs.py37: isort
     isort.stdlibs.py38: isort
@@ -1973,6 +1976,7 @@ manifest:
     mypy.test.meta.test_diff_helper: mypy
     mypy.test.meta.test_parse_data: mypy
     mypy.test.meta.test_update_data: mypy
+    mypy.test.test_config_parser: mypy
     mypy.test.test_find_sources: mypy
     mypy.test.test_ref_info: mypy
     mypy.test.testapi: mypy
@@ -2040,7 +2044,6 @@ manifest:
     mypyc.codegen.literals: mypy
     mypyc.common: mypy
     mypyc.crash: mypy
-    mypyc.doc.conf: mypy
     mypyc.errors: mypy
     mypyc.ir: mypy
     mypyc.ir.class_ir: mypy
@@ -2075,7 +2078,6 @@ manifest:
     mypyc.irbuild.util: mypy
     mypyc.irbuild.visitor: mypy
     mypyc.irbuild.vtable: mypy
-    mypyc.lib-rt.setup: mypy
     mypyc.lower: mypy
     mypyc.lower.int_ops: mypy
     mypyc.lower.list_ops: mypy
@@ -2100,9 +2102,6 @@ manifest:
     mypyc.sametype: mypy
     mypyc.subtype: mypy
     mypyc.test: mypy
-    mypyc.test-data.driver.driver: mypy
-    mypyc.test-data.fixtures.ir: mypy
-    mypyc.test-data.fixtures.testutil: mypy
     mypyc.test.config: mypy
     mypyc.test.test_alwaysdefined: mypy
     mypyc.test.test_analysis: mypy
@@ -4347,4 +4346,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: 3f2ff5d149fdece13f4f764d53a4082675209a5f6c0e13e5942cfc8b80c12279
+integrity: b7daac57954d02098982cc0bf0621fef7833f8d322b629f89e42e0e854eef144
