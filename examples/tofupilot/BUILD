@@ -8,7 +8,6 @@ py_binary(
     visibility = ["//:__subpackages__"],
     deps = [
         "@pip//openhtf",
-        "@pip//six",  # keep
         "@pip//tofupilot",
     ],
 )

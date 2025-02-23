@@ -47,6 +47,14 @@ pip.parse(
     # download_only = True,
     # Could put --extra-index-url here to grab my own wheels
     # extra_pip_args = [],
+    # https://rules-python.readthedocs.io/en/latest/pypi-dependencies.html
+    experimental_requirement_cycles = {
+        "openhtf": [
+            "openhtf",
+            # specify undeclared dependency on six
+            "six",
+        ],
+    },
 )
 
 # Could support multi-platform by specifying a different target for each
