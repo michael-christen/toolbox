@@ -1,6 +1,7 @@
 import collections
 import collections.abc
-setattr(collections, 'MutableMapping', collections.abc.MutableMapping)
+
+setattr(collections, "MutableMapping", collections.abc.MutableMapping)
 
 import os
 import re

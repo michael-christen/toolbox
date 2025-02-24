@@ -2292,7 +2292,7 @@
     "@@rules_python~//python/extensions:pip.bzl%pip": {
       "general": {
         "bzlTransitiveDigest": "MnNArHHY8j8NDVbZuG3K3RqZcPVAM/4yMTGq0VScRm0=",
-        "usagesDigest": "UJ5HmPC2fmSkSzwKC2I4clbo0bTLE4oalPOgwSBCwHY=",
+        "usagesDigest": "DZsQo09Ud7EjhWHnt9FooxaI2Hu84u619i83zv8/LYA=",
         "recordedFileInputs": {
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_windows_lock.txt": "4367c7d4cc4a1c2d6a136edace02581066f1c9ead10937685dde568d1061189f",
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_linux_lock.txt": "ce8b16e007309a610c37eec908b75451733ae5efb9c14ec7e6f04557b81d621e",
@@ -3282,6 +3282,11 @@
                 "--index-url",
                 "https://pypi.org/simple"
               ],
+              "group_deps": [
+                "openhtf",
+                "six"
+              ],
+              "group_name": "openhtf",
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
               "requirement": "six==1.17.0     --hash=sha256:4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274     --hash=sha256:ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81"
@@ -4084,6 +4089,11 @@
                 "--index-url",
                 "https://pypi.org/simple"
               ],
+              "group_deps": [
+                "openhtf",
+                "six"
+              ],
+              "group_name": "openhtf",
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
               "requirement": "openhtf==1.5.2     --hash=sha256:2d9c117be0fada96b98279e9872cb6fd44285bfc181f911c70a034a101373294     --hash=sha256:ff8b2d20563c8ee2f512a5126adee18bc5c0adf7040f75d7b498ee99161b8c6e"
@@ -5738,7 +5748,12 @@
               },
               "default_version": "3.11",
               "packages": [],
-              "groups": {}
+              "groups": {
+                "openhtf": [
+                  "openhtf",
+                  "six"
+                ]
+              }
             }
           },
           "pip_311_pure_eval": {
