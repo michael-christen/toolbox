@@ -6,6 +6,9 @@ py_binary(
     name = "flake8",
     srcs = ["flake8.py"],
     data = ["//:.flake8"],
+    tags = [
+        "no-mypy",
+    ],
     visibility = ["//:__subpackages__"],
     deps = [
         "//tools:utils",

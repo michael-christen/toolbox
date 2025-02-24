@@ -3,11 +3,11 @@ import collections.abc
 
 setattr(collections, "MutableMapping", collections.abc.MutableMapping)
 
-import os
-import re
-import sys
+import os  # noqa: E402
+import re  # noqa: E402
+import sys  # noqa: E402
 
-from notebook import notebookapp
+from notebook import notebookapp  # noqa: E402
 
 if __name__ == "__main__":
     if "BUILD_WORKSPACE_DIRECTORY" in os.environ:
