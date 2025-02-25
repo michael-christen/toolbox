@@ -3,15 +3,11 @@ load("//bzl:py.bzl", "py_binary")
 package(default_visibility = ["//visibility:private"])
 
 py_binary(
-    name = "flake8",
-    srcs = ["flake8.py"],
-    data = ["//:.flake8"],
-    tags = [
-        "no-mypy",
-    ],
+    name = "tofupilot_example",
+    srcs = ["tofupilot_example.py"],
     visibility = ["//:__subpackages__"],
     deps = [
-        "//tools:utils",
-        "@pip//flake8",
+        "@pip//openhtf",
+        "@pip//tofupilot",
     ],
 )

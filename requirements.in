@@ -4,44 +4,51 @@
 # bazel test //:gazelle_python_manifest.test //:requirements_test
 # Upgrade by
 # bazel run //:requirements.update -- --upgrade && bazel run //:gazelle_python_manifest.update
-beautifulsoup4
-grpcio
-mypy
-protobuf
-types-protobuf
-# Analyze graphs easily
-# https://networkx.org/documentation/stable/index.html
-networkx[default]
-# Make nice-looking table output
-tabulate
 
+black[jupyter]
+flake8
+# A more modern sphinx theme
+furo
+grpcio
+ipdb
+isort
+# - generates links with raw urls, eg) www.example.com
+linkify-it-py
+mypy
+myst-parser
+# Analyze graphs easily https://networkx.org/documentation/stable/index.html
+networkx[default]
+# Required by openhtf's requirements of tornado
+notebook>=5,<6
+# Tool for running hardware-style tests; https://www.openhtf.com/
+openhtf
+# Undeclared dependency of openhtf
+six
+protobuf
 # largely for development
 # https://github.com/pytest-dev/pytest/issues/12592#issuecomment-2515100428
 # introduced an issue with files named the same as their parent modules from
 # properly getting imported
 pytest<8.3.4
-black[jupyter]
-flake8
-isort
-ipdb
-notebook
-# Documentation
-sphinx
-sphinx-rtd-theme
-myst-parser
-# - generates links with raw urls, eg) www.example.com
-linkify-it-py
-# - diagram generation
-sphinxcontrib-mermaid
+# https://github.com/bazelbuild/bazel/issues/4327
+setuptools<71
 # - python code (parse, not executing)
 sphinx-autoapi
+# - diagram generation
+sphinxcontrib-mermaid
+sphinx-copybutton
 # - lots of miscellaneous plugins for sphinx
 sphinx-design
-sphinx-copybutton
-sphinxext-rediraffe
+# Documentation
+sphinx
 sphinxext-opengraph
+sphinxext-rediraffe
 sphinx-pyscript
+sphinx-rtd-theme
 sphinx-tippy
 sphinx-togglebutton
-# A more modern sphinx theme
-furo
+# Make nice-looking table output
+tabulate
+# Convenient backend for openhtf; https://www.tofupilot.com/
+tofupilot
+types-protobuf

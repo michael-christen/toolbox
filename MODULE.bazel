@@ -39,14 +39,22 @@ bazel_dep(name = "rules_uv", version = "0.45.0")
 
 pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip")
 pip.parse(
-    hub_name = "pip",
-    python_version = PYTHON_VERSION,
-    requirements_lock = "//:requirements_lock.txt",
     # Avoid building wheels with system compiler
     # - pygraphviz
     # download_only = True,
     # Could put --extra-index-url here to grab my own wheels
     # extra_pip_args = [],
+    # https://rules-python.readthedocs.io/en/latest/pypi-dependencies.html
+    experimental_requirement_cycles = {
+        "openhtf": [
+            "openhtf",
+            # specify undeclared dependency on six
+            "six",
+        ],
+    },
+    hub_name = "pip",
+    python_version = PYTHON_VERSION,
+    requirements_lock = "//:requirements_lock.txt",
 )
 
 # Could support multi-platform by specifying a different target for each
