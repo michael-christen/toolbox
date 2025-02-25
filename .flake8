@@ -5,3 +5,14 @@
 # extend-ignore
 # exclude
 # inline-quotes
+exclude =
+    .git,
+    __pycache__,
+    docs/conf.py,
+    bazel-bin,
+    bazel-out,
+    bazel-testlogs,
+    bazel-toolbox,
+    dist,
+    *venv,
+    .ipynb_checkpoints

@@ -2292,7 +2292,7 @@
     "@@rules_python~//python/extensions:pip.bzl%pip": {
       "general": {
         "bzlTransitiveDigest": "MnNArHHY8j8NDVbZuG3K3RqZcPVAM/4yMTGq0VScRm0=",
-        "usagesDigest": "DZsQo09Ud7EjhWHnt9FooxaI2Hu84u619i83zv8/LYA=",
+        "usagesDigest": "Rg9SYpgmPLgLajVIvIIeX2m3KYZzIlrImRQcdsRr5t8=",
         "recordedFileInputs": {
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_windows_lock.txt": "4367c7d4cc4a1c2d6a136edace02581066f1c9ead10937685dde568d1061189f",
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_linux_lock.txt": "ce8b16e007309a610c37eec908b75451733ae5efb9c14ec7e6f04557b81d621e",
