@@ -8,8 +8,6 @@ manifest:
     30fcd23745efe32ce681__mypyc: black
     3204bda914b7f2c6f497__mypyc: mypy
     IPython: ipython
-    IPython.conftest: ipython
-    IPython.consoleapp: ipython
     IPython.core: ipython
     IPython.core.alias: ipython
     IPython.core.application: ipython
@@ -26,9 +24,9 @@ manifest:
     IPython.core.display_trap: ipython
     IPython.core.displayhook: ipython
     IPython.core.displaypub: ipython
+    IPython.core.doctb: ipython
     IPython.core.error: ipython
     IPython.core.events: ipython
-    IPython.core.excolors: ipython
     IPython.core.extensions: ipython
     IPython.core.formatters: ipython
     IPython.core.getipython: ipython
@@ -36,8 +34,6 @@ manifest:
     IPython.core.history: ipython
     IPython.core.historyapp: ipython
     IPython.core.hooks: ipython
-    IPython.core.inputsplitter: ipython
-    IPython.core.inputtransformer: ipython
     IPython.core.inputtransformer2: ipython
     IPython.core.interactiveshell: ipython
     IPython.core.latex_symbols: ipython
@@ -68,11 +64,12 @@ manifest:
     IPython.core.prefilter: ipython
     IPython.core.profileapp: ipython
     IPython.core.profiledir: ipython
-    IPython.core.prompts: ipython
     IPython.core.pylabtools: ipython
     IPython.core.release: ipython
     IPython.core.shellapp: ipython
     IPython.core.splitinput: ipython
+    IPython.core.tbtools: ipython
+    IPython.core.tips: ipython
     IPython.core.ultratb: ipython
     IPython.core.usage: ipython
     IPython.display: ipython
@@ -80,6 +77,7 @@ manifest:
     IPython.extensions.autoreload: ipython
     IPython.extensions.storemagic: ipython
     IPython.external: ipython
+    IPython.external.pickleshare: ipython
     IPython.external.qt_for_kernel: ipython
     IPython.external.qt_loaders: ipython
     IPython.lib: ipython
@@ -99,7 +97,6 @@ manifest:
     IPython.sphinxext.ipython_console_highlighting: ipython
     IPython.sphinxext.ipython_directive: ipython
     IPython.terminal: ipython
-    IPython.terminal.console: ipython
     IPython.terminal.debugger: ipython
     IPython.terminal.embed: ipython
     IPython.terminal.interactiveshell: ipython
@@ -140,10 +137,7 @@ manifest:
     IPython.utils: ipython
     IPython.utils.PyColorize: ipython
     IPython.utils.capture: ipython
-    IPython.utils.colorable: ipython
-    IPython.utils.coloransi: ipython
     IPython.utils.contexts: ipython
-    IPython.utils.daemonize: ipython
     IPython.utils.data: ipython
     IPython.utils.decorators: ipython
     IPython.utils.dir2: ipython
@@ -156,7 +150,6 @@ manifest:
     IPython.utils.io: ipython
     IPython.utils.ipstruct: ipython
     IPython.utils.jsonutil: ipython
-    IPython.utils.localinterfaces: ipython
     IPython.utils.log: ipython
     IPython.utils.module_paths: ipython
     IPython.utils.openpy: ipython
@@ -164,8 +157,6 @@ manifest:
     IPython.utils.process: ipython
     IPython.utils.py3compat: ipython
     IPython.utils.sentinel: ipython
-    IPython.utils.shimmodule: ipython
-    IPython.utils.signatures: ipython
     IPython.utils.strdispatch: ipython
     IPython.utils.sysinfo: ipython
     IPython.utils.syspathcontext: ipython
@@ -174,10 +165,6 @@ manifest:
     IPython.utils.text: ipython
     IPython.utils.timing: ipython
     IPython.utils.tokenutil: ipython
-    IPython.utils.traitlets: ipython
-    IPython.utils.tz: ipython
-    IPython.utils.ulinecache: ipython
-    IPython.utils.version: ipython
     IPython.utils.wildcard: ipython
     OpenSSL: pyOpenSSL
     OpenSSL.SSL: pyOpenSSL
@@ -1284,6 +1271,7 @@ manifest:
     ipython_genutils.testing: ipython_genutils
     ipython_genutils.testing.decorators: ipython_genutils
     ipython_genutils.text: ipython_genutils
+    ipython_pygments_lexers: ipython_pygments_lexers
     isort: isort
     isort.api: isort
     isort.comments: isort
@@ -4600,4 +4588,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: 37c3994d0fe7df48b0164faa2c99da14c3a6a92ae09b389104cbb1f1ea17d3ce
+integrity: a6010ddad274d34bafa9121e023b3dfbeaf72a4526b5d0771f46e38d45cc1d1e
