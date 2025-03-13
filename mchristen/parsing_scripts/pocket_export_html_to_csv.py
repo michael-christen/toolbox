@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-"""Get data from pocket export: https://getpocket.com/export
-"""
+"""Get data from pocket export: https://getpocket.com/export"""
 import argparse
 import csv
 import sys

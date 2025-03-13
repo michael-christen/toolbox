@@ -5,7 +5,6 @@
 load("@bazel_gazelle//:def.bzl", "gazelle", "gazelle_binary")
 load("@npm//:defs.bzl", "npm_link_all_packages")
 load("@pip//:requirements.bzl", "all_whl_requirements")
-# XXX: load("@rules_python//python:pip.bzl", "compile_pip_requirements")
 load("@rules_python_gazelle_plugin//manifest:defs.bzl", "gazelle_python_manifest")
 load("@rules_python_gazelle_plugin//modules_mapping:def.bzl", "modules_mapping")
 load("@rules_uv//uv:pip.bzl", "pip_compile")
@@ -28,20 +27,25 @@ exports_files(
 
 pip_compile(
     name = "requirements",
-    # XXX: How to avoid in flake?
     # https://bazel.build/reference/be/common-definitions
-    # size = "enormous",
-    # timeout = "eternal",  # 60m
     requirements_in = "requirements.in",
     requirements_txt = "requirements_lock.txt",
-    # Don't want to type-check requirements building
-    tags = ["no-mypy"],
+    tags = [
+        # Don't want to type-check requirements building
+        "no-mypy",
+        # Avoid in flake detection
+        "skip-flakiness",
+    ],
 )
 
 create_venv(
     name = "create_venv",
     requirements_txt = "//:requirements_lock.txt",
-    site_packages_extra_files = ["//tools:git_utils"],
+    # Example extras
+    site_packages_extra_files = [
+        "//tools:utils",
+        "//tools:git_utils",
+    ],
 )
 
 # This repository rule fetches the metadata for python packages we

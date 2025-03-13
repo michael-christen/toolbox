@@ -22,5 +22,5 @@ jobs:
         run: |
           # Run several times to identify flakiness, but avoid enormous tests
           # Can find them with: `bazel query 'attr(size, enormous, //...)'`
-          bazel test --runs_per_test_detects_flakes --runs_per_test=5 --test_size_filters=-enormous -- //...
+          bazel test --runs_per_test_detects_flakes --runs_per_test=5 --test_tag_filters=-skip-flakiness -- //...
       - run: echo "Status is ${{ job.status }}."
