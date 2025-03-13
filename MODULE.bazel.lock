@@ -2292,7 +2292,7 @@
     "@@rules_python~//python/extensions:pip.bzl%pip": {
       "general": {
         "bzlTransitiveDigest": "MnNArHHY8j8NDVbZuG3K3RqZcPVAM/4yMTGq0VScRm0=",
-        "usagesDigest": "Rg9SYpgmPLgLajVIvIIeX2m3KYZzIlrImRQcdsRr5t8=",
+        "usagesDigest": "w/IBJZ1yyah5uwNfAF5da1Icf5aiPTr4mo6jjHWvWc4=",
         "recordedFileInputs": {
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_windows_lock.txt": "4367c7d4cc4a1c2d6a136edace02581066f1c9ead10937685dde568d1061189f",
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_linux_lock.txt": "ce8b16e007309a610c37eec908b75451733ae5efb9c14ec7e6f04557b81d621e",
@@ -3272,6 +3272,11 @@
                 "--index-url",
                 "https://pypi.org/simple"
               ],
+              "group_deps": [
+                "networkx",
+                "pygraphviz"
+              ],
+              "group_name": "networkx",
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
               "requirement": "networkx[default]==3.4.2     --hash=sha256:307c3669428c5362aab27c8a1260aa8f47c4e91d3891f48be0141738d8d053e1     --hash=sha256:df5d4365b724cf81b8c6a7312509d0c22386097011ad1abe274afd5e9d3bbc5f"
@@ -3702,6 +3707,11 @@
                 "--index-url",
                 "https://pypi.org/simple"
               ],
+              "group_deps": [
+                "networkx",
+                "pygraphviz"
+              ],
+              "group_name": "networkx",
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
               "requirement": "pygraphviz==1.14     --hash=sha256:c10df02377f4e39b00ae17c862f4ee7e5767317f1c6b2dfd04cea6acc7fc2bea"
@@ -5917,6 +5927,10 @@
                 "openhtf": [
                   "openhtf",
                   "six"
+                ],
+                "networkx": [
+                  "networkx",
+                  "pygraphviz"
                 ]
               }
             }

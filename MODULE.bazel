@@ -51,6 +51,10 @@ pip.parse(
             # specify undeclared dependency on six
             "six",
         ],
+        "networkx": [
+            "networkx",
+            "pygraphviz",
+        ],
     },
     hub_name = "pip",
     python_version = PYTHON_VERSION,
