@@ -17,7 +17,6 @@ Example:
 
 import collections
 import datetime
-import io
 import sys
 from typing import BinaryIO
 
