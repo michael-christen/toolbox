@@ -48,7 +48,7 @@ class TestGroupProbability(unittest.TestCase):
             2: p2,
             1: p1,
             8: p3 * node_probability[8],
-            9: node_probability[9]
+            9: node_probability[9],
         }
         group_probability = graph_algorithms.compute_group_probability(
             graph=g, node_probability=node_probability
