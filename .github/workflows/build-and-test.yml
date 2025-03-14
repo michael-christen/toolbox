@@ -71,3 +71,13 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage.dat
       - run: echo "Status is ${{ job.status }}."
+  type_check:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/bazel-setup
+        with:
+          buildbuddy_api_key: ${{ secrets.BUILDBUDDY_API_KEY }}
+      - name: Build & Type Check
+        run: |
+          bazel build //... --output_groups=+mypy
