@@ -1,0 +1,29 @@
+syntax = "proto2";
+
+package tools.git;
+
+import "google/protobuf/timestamp.proto";
+
+message CommitEntry {
+  // Time of the commit
+  // XXX: Maybe don't include?
+  optional google.protobuf.Timestamp time = 1;
+
+  // List of files associated with this commit (in no particular order)
+  repeated string files = 2;
+};
+
+
+message FileEntry {
+  // Ordered list of commits (first is most recent)
+  repeated string commits = 1;
+};
+
+
+
+message FileCommitMap {
+  // Keyed by commit hash
+  map<string, CommitEntry> commit_map = 1;
+  // Keyed by file path
+  map<string, FileEntry> file_map = 2;
+};
