@@ -28,3 +28,15 @@ py_binary(
         "@pip//tabulate",
     ],
 )
+
+py_library(
+    name = "path_utils",
+    srcs = ["path_utils.py"],
+    visibility = ["//:__subpackages__"],
+)
+
+py_test(
+    name = "path_utils_test",
+    srcs = ["path_utils_test.py"],
+    deps = [":path_utils"],
+)
