@@ -5,3 +5,6 @@
 # extend-ignore
 # exclude
 # inline-quotes
+exclude =
+  *venv*
+  .ipynb_checkpoints
