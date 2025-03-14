@@ -90,7 +90,7 @@ class FileCommitMap:
 
     # XXX: Possibly don't have a python class at all?
     @classmethod
-    def from_proto(cls, proto_map: git_pb2.FileCommitMap) -> 'FileCommitMap':
+    def from_proto(cls, proto_map: git_pb2.FileCommitMap) -> "FileCommitMap":
         file_map = {}
         commit_map = {}
         # XXX: Use pathlib.Path?
