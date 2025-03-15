@@ -45,6 +45,7 @@ pip_compile(
 create_venv(
     name = "create_venv",
     requirements_txt = "//:requirements_lock.txt",
+    destination_folder = ".venv",
     # Example extras
     # site_packages_extra_files = ["//tools:utils"],
 )
