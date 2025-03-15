@@ -411,7 +411,6 @@ manifest:
     babel.support: babel
     babel.units: babel
     babel.util: babel
-    bin.units_from_xls: openhtf
     black: black
     black.brackets: black
     black.cache: black
@@ -2995,6 +2994,7 @@ manifest:
     pexpect.socket_pexpect: pexpect
     pexpect.spawnbase: pexpect
     pexpect.utils: pexpect
+    pip: pip
     pkg_resources: setuptools
     pkg_resources.extern: setuptools
     platformdirs: platformdirs
@@ -4255,32 +4255,6 @@ manifest:
     terminado.management: terminado
     terminado.uimodule: terminado
     terminado.websocket: terminado
-    test.capture_source_test: openhtf
-    test.core.diagnoses_test: openhtf
-    test.core.exe_test: openhtf
-    test.core.measurements_test: openhtf
-    test.core.monitors_test: openhtf
-    test.core.phase_branches_test: openhtf
-    test.core.phase_collections_test: openhtf
-    test.core.phase_executor_test: openhtf
-    test.core.phase_group_test: openhtf
-    test.core.test_descriptor_test: openhtf
-    test.core.test_record_test: openhtf
-    test.output.callbacks.callbacks_test: openhtf
-    test.output.callbacks.mfg_event_converter_test: openhtf
-    test.output.callbacks.mfg_inspector_test: openhtf
-    test.phase_descriptor_test: openhtf
-    test.plugs.plugs_test: openhtf
-    test.plugs.user_input_test: openhtf
-    test.test_state_test: openhtf
-    test.util.conf_test: openhtf
-    test.util.data_test: openhtf
-    test.util.functions_test: openhtf
-    test.util.logs_test: openhtf
-    test.util.test_test: openhtf
-    test.util.text_test: openhtf
-    test.util.util_test: openhtf
-    test.util.validators_test: openhtf
     testpath: testpath
     testpath.asserts: testpath
     testpath.commands: testpath
@@ -4324,21 +4298,28 @@ manifest:
     tornado.options: tornado
     tornado.platform: tornado
     tornado.platform.asyncio: tornado
+    tornado.platform.auto: tornado
     tornado.platform.caresresolver: tornado
+    tornado.platform.common: tornado
+    tornado.platform.epoll: tornado
+    tornado.platform.interface: tornado
+    tornado.platform.kqueue: tornado
+    tornado.platform.posix: tornado
+    tornado.platform.select: tornado
     tornado.platform.twisted: tornado
+    tornado.platform.windows: tornado
     tornado.process: tornado
     tornado.queues: tornado
     tornado.routing: tornado
     tornado.simple_httpclient: tornado
     tornado.speedups: tornado
+    tornado.stack_context: tornado
     tornado.tcpclient: tornado
     tornado.tcpserver: tornado
     tornado.template: tornado
     tornado.test: tornado
     tornado.test.asyncio_test: tornado
     tornado.test.auth_test: tornado
-    tornado.test.autoreload_test: tornado
-    tornado.test.circlerefs_test: tornado
     tornado.test.concurrent_test: tornado
     tornado.test.curl_httpclient_test: tornado
     tornado.test.escape_test: tornado
@@ -4361,6 +4342,7 @@ manifest:
     tornado.test.routing_test: tornado
     tornado.test.runtests: tornado
     tornado.test.simple_httpclient_test: tornado
+    tornado.test.stack_context_test: tornado
     tornado.test.tcpclient_test: tornado
     tornado.test.tcpserver_test: tornado
     tornado.test.template_test: tornado
@@ -4370,6 +4352,7 @@ manifest:
     tornado.test.util_test: tornado
     tornado.test.web_test: tornado
     tornado.test.websocket_test: tornado
+    tornado.test.windows_test: tornado
     tornado.test.wsgi_test: tornado
     tornado.testing: tornado
     tornado.util: tornado
@@ -4484,7 +4467,6 @@ manifest:
     websockets.asyncio.router: websockets
     websockets.asyncio.server: websockets
     websockets.auth: websockets
-    websockets.cli: websockets
     websockets.client: websockets
     websockets.connection: websockets
     websockets.datastructures: websockets
@@ -4619,4 +4601,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: e1704090e4bac2ced62c803a0afa5b3e99ad364fc05a6d4d2a62a8b6aac8f365
+integrity: 1ca8d4f2e4b7dacdb394eee50ccdb1c9856369e261ea51f5fc92d2a4f0043031
