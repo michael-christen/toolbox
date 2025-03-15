@@ -8,13 +8,38 @@ from typing import Sequence
 from tools import git_pb2
 
 
+@dataclasses.dataclass
+class FileCommitMap:
+    """Describe how the current files map to past commits."""
+
+    # Keyed by commit to set of files changed
+    commit_map: dict[str, set[pathlib.Path]]
+    # Keyed by file, to set of commits involved in
+    file_map: dict[pathlib.Path, list[str]]
+
+    def to_proto(self) -> git_pb2.FileCommitMap:
+        msg = git_pb2.FileCommitMap()
+        for c, files in self.commit_map.items():
+            msg.commit_map[c].files.extend([str(f) for f in files])
+        for f, commits in self.file_map.items():
+            msg.file_map[str(f)].commits.extend(commits)
+        return msg
+
+    @classmethod
+    def from_proto(cls, proto_map: git_pb2.FileCommitMap) -> "FileCommitMap":
+        file_map = {}
+        commit_map = {}
+        for f, f_entry in proto_map.file_map.items():
+            file_map[pathlib.Path(f)] = list(f_entry.commits)
+        for c, c_entry in proto_map.commit_map.items():
+            commit_map[c] = set(pathlib.Path(f) for f in c_entry.files)
+        return cls(commit_map=commit_map, file_map=file_map)
+
+
 def _get_git_output(
     args: Sequence[pathlib.Path | str], git_directory: pathlib.Path | str
 ) -> list[str]:
-    # XXX: Why isn't type-hinting for these lists working?
-    output = subprocess.check_output(
-        ["git", "-C", git_directory] + args  # type: ignore
-    )
+    output = subprocess.check_output(["git", "-C", git_directory] + list(args))
     result = output.decode("utf-8").strip()
     if not result:
         return []
@@ -55,7 +80,6 @@ def list_file_commits(
 
 def get_commits(
     git_directory: pathlib.Path | str,
-    # XXX: Should this be selectable
     target: str = "HEAD",
     after: datetime.datetime | None = None,
 ) -> list[str]:
@@ -71,37 +95,7 @@ def get_files_changed_at_commit(
     return [pathlib.Path(p) for p in _get_git_output(args, git_directory)]
 
 
-@dataclasses.dataclass
-class FileCommitMap:
-    """Describe how the current files map to past commits."""
-
-    # Keyed by commit to set of files changed
-    commit_map: dict[str, set[pathlib.Path]]
-    # Keyed by file, to set of commits involved in
-    file_map: dict[pathlib.Path, list[str]]
-
-    def to_proto(self) -> git_pb2.FileCommitMap:
-        msg = git_pb2.FileCommitMap()
-        for c, files in self.commit_map.items():
-            msg.commit_map[c].files.extend([str(f) for f in files])
-        for f, commits in self.file_map.items():
-            msg.file_map[str(f)].commits.extend(commits)
-        return msg
-
-    # XXX: Possibly don't have a python class at all?
-    @classmethod
-    def from_proto(cls, proto_map: git_pb2.FileCommitMap) -> 'FileCommitMap':
-        file_map = {}
-        commit_map = {}
-        # XXX: Use pathlib.Path?
-        for f, f_entry in proto_map.file_map.items():
-            file_map[f] = f_entry.commits
-        for c, c_entry in proto_map.commit_map.items():
-            commit_map[c] = set(c_entry.files)
-        return cls(commit_map=commit_map, file_map=file_map)
-
-
-# XXX: maybe we want to experiment with both mechanisms?
+# Most likely want follow to preserve name
 def get_file_commit_map_from_follow(
     git_directory: pathlib.Path | str,
     after: datetime.datetime | None = None,

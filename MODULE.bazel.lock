@@ -2292,11 +2292,11 @@
     "@@rules_python~//python/extensions:pip.bzl%pip": {
       "general": {
         "bzlTransitiveDigest": "MnNArHHY8j8NDVbZuG3K3RqZcPVAM/4yMTGq0VScRm0=",
-        "usagesDigest": "w/IBJZ1yyah5uwNfAF5da1Icf5aiPTr4mo6jjHWvWc4=",
+        "usagesDigest": "Rg9SYpgmPLgLajVIvIIeX2m3KYZzIlrImRQcdsRr5t8=",
         "recordedFileInputs": {
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_windows_lock.txt": "4367c7d4cc4a1c2d6a136edace02581066f1c9ead10937685dde568d1061189f",
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_linux_lock.txt": "ce8b16e007309a610c37eec908b75451733ae5efb9c14ec7e6f04557b81d621e",
-          "@@//requirements_lock.txt": "58f8704bc6037cdb1b4bd2c0c45ca6b223422cb0aeaa9e894e797e90c7a7c58f",
+          "@@//requirements_lock.txt": "b9b9c946736493443b1e2821b5df3a7def77cc9a91cf9f69a5786268ea55cd67",
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_darwin_lock.txt": "91de3b2cdbe8f8fc7136ce309824355684c2a6ae2395c1e12f4aa59d02d52f3b",
           "@@rules_fuzzing~//fuzzing/requirements.txt": "ab04664be026b632a0d2a2446c4f65982b7654f5b6851d2f9d399a19b7242a5b",
           "@@nanopb~//extra/requirements_lock.txt": "8a44f53e5c48123742970b4e9d6f8730eaa143134c08db0706ccd6d2c78c03ca",
@@ -2481,20 +2481,6 @@
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
               "requirement": "tokenize-rt==6.1.0     --hash=sha256:d706141cdec4aa5f358945abe36b911b8cbdc844545da99e811250c0cee9b6fc     --hash=sha256:e8ee836616c0877ab7c7b54776d2fefcc3bde714449a206762425ae114b53c86"
-            }
-          },
-          "pip_311_jupytext": {
-            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
-            "ruleClassName": "whl_library",
-            "attributes": {
-              "dep_template": "@pip//{name}:{target}",
-              "extra_pip_args": [
-                "--index-url",
-                "https://pypi.org/simple"
-              ],
-              "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
-              "repo": "pip_311",
-              "requirement": "jupytext==1.16.7     --hash=sha256:912f9d9af7bd3f15470105e5c5dddf1669b2d8c17f0c55772687fc5a4a73fe69     --hash=sha256:fc4e97f0890e22062c4ef10313c7ca960b07b3767246a1fef7585888cc2afe5d"
             }
           },
           "python_packages_311_ptyprocess": {
@@ -3272,11 +3258,6 @@
                 "--index-url",
                 "https://pypi.org/simple"
               ],
-              "group_deps": [
-                "networkx",
-                "pygraphviz"
-              ],
-              "group_name": "networkx",
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
               "requirement": "networkx[default]==3.4.2     --hash=sha256:307c3669428c5362aab27c8a1260aa8f47c4e91d3891f48be0141738d8d053e1     --hash=sha256:df5d4365b724cf81b8c6a7312509d0c22386097011ad1abe274afd5e9d3bbc5f"
@@ -3343,20 +3324,6 @@
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "python_packages_311",
               "requirement": "traitlets==5.1.1     --hash=sha256:059f456c5a7c1c82b98c2e8c799f39c9b8128f6d0d46941ee118daace9eb70c7     --hash=sha256:2d313cc50a42cd6c277e7d7dc8d4d7fedd06a2c215f78766ae7b1a66277e0033"
-            }
-          },
-          "pip_311_bokeh": {
-            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
-            "ruleClassName": "whl_library",
-            "attributes": {
-              "dep_template": "@pip//{name}:{target}",
-              "extra_pip_args": [
-                "--index-url",
-                "https://pypi.org/simple"
-              ],
-              "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
-              "repo": "pip_311",
-              "requirement": "bokeh==3.7.0     --hash=sha256:0e53301e5ac26f7545b51961e8851351e809f23a2caa7fc37c44f377ece759c4     --hash=sha256:f19d74e40066a8c237ced80c181fd1329c3b28a9cf347126ea1409f90a9c7874"
             }
           },
           "python_packages_311_beautifulsoup4": {
@@ -3462,20 +3429,6 @@
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "python_packages_311",
               "requirement": "pyusb==1.2.1     --hash=sha256:2b4c7cb86dbadf044dfb9d3a4ff69fd217013dbe78a792177a3feb172449ea36     --hash=sha256:a4cc7404a203144754164b8b40994e2849fde1cfff06b08492f12fff9d9de7b9"
-            }
-          },
-          "pip_311_tqdm": {
-            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
-            "ruleClassName": "whl_library",
-            "attributes": {
-              "dep_template": "@pip//{name}:{target}",
-              "extra_pip_args": [
-                "--index-url",
-                "https://pypi.org/simple"
-              ],
-              "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
-              "repo": "pip_311",
-              "requirement": "tqdm==4.67.1     --hash=sha256:26445eca388f82e72884e0d580d5464cd801a3ea01e63e5601bdff9ba6a48de2     --hash=sha256:f8aef9c52c08c13a65f30ea34f4e5aac3fd1a34959879d7e59e63027286627f2"
             }
           },
           "python_packages_311_pure_eval": {
@@ -3698,25 +3651,6 @@
               "requirement": "appdirs==1.4.4     --hash=sha256:7d5d0167b2b1ba821647616af46a749d1c653740dd0d2415100fe26e27afdf41     --hash=sha256:a841dacd6b99318a741b166adb07e19ee71a274450e68237b4650ca1055ab128"
             }
           },
-          "pip_311_pygraphviz": {
-            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
-            "ruleClassName": "whl_library",
-            "attributes": {
-              "dep_template": "@pip//{name}:{target}",
-              "extra_pip_args": [
-                "--index-url",
-                "https://pypi.org/simple"
-              ],
-              "group_deps": [
-                "networkx",
-                "pygraphviz"
-              ],
-              "group_name": "networkx",
-              "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
-              "repo": "pip_311",
-              "requirement": "pygraphviz==1.14     --hash=sha256:c10df02377f4e39b00ae17c862f4ee7e5767317f1c6b2dfd04cea6acc7fc2bea"
-            }
-          },
           "pip_311_inflection": {
             "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
             "ruleClassName": "whl_library",
@@ -3743,20 +3677,6 @@
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
               "requirement": "mdurl==0.1.2     --hash=sha256:84008a41e51615a49fc9966191ff91509e3c40b939176e643fd50a5c2196b8f8     --hash=sha256:bb413d29f5eea38f31dd4754dd7377d4465116fb207585f97bf925588687c1ba"
-            }
-          },
-          "pip_311_pyviz_comms": {
-            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
-            "ruleClassName": "whl_library",
-            "attributes": {
-              "dep_template": "@pip//{name}:{target}",
-              "extra_pip_args": [
-                "--index-url",
-                "https://pypi.org/simple"
-              ],
-              "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
-              "repo": "pip_311",
-              "requirement": "pyviz-comms==3.0.4     --hash=sha256:a40d17db26ec13cf975809633804e712bd24b473e77388c193c44043f85d0b25     --hash=sha256:d70e17555f7262c4884a6b7bc9ca19cb816507a032a334d9cb411b4546caff4c"
             }
           },
           "rules_mypy_pip_312_typing_extensions_py3_none_any_04e5ca03": {
@@ -4176,7 +4096,7 @@
               "group_name": "openhtf",
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
-              "requirement": "openhtf==1.6.1     --hash=sha256:5e3c4279452a45cf193c3cbdb972fe30b6e6ecf0d1835ca28f76c85f85a640bb     --hash=sha256:ecb51a8961ed73791bd14191fadc8dbfd344596a0054524f2196801aabbb00e6"
+              "requirement": "openhtf==1.5.2     --hash=sha256:2d9c117be0fada96b98279e9872cb6fd44285bfc181f911c70a034a101373294     --hash=sha256:ff8b2d20563c8ee2f512a5126adee18bc5c0adf7040f75d7b498ee99161b8c6e"
             }
           },
           "pip_311_ipykernel": {
@@ -4573,20 +4493,6 @@
               ]
             }
           },
-          "pip_311_param": {
-            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
-            "ruleClassName": "whl_library",
-            "attributes": {
-              "dep_template": "@pip//{name}:{target}",
-              "extra_pip_args": [
-                "--index-url",
-                "https://pypi.org/simple"
-              ],
-              "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
-              "repo": "pip_311",
-              "requirement": "param==2.2.0     --hash=sha256:2ef63ef7aef37412eeb8ee3a06189a51f69c58c068824ae070baecb5b2abd0b8     --hash=sha256:777f8c7b66ab820b70ea5ad09faaa6818308220caae89da3b5c5f359faa72a5e"
-            }
-          },
           "python_packages_311_urllib3": {
             "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
             "ruleClassName": "whl_library",
@@ -4692,20 +4598,6 @@
               "requirement": "sphinx==7.3.7     --hash=sha256:413f75440be4cacf328f580b4274ada4565fb2187d696a84970c23f77b64d8c3     --hash=sha256:a4a7db75ed37531c05002d56ed6948d4c42f473a36f46e1382b0bd76ca9627bc"
             }
           },
-          "pip_311_pyct": {
-            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
-            "ruleClassName": "whl_library",
-            "attributes": {
-              "dep_template": "@pip//{name}:{target}",
-              "extra_pip_args": [
-                "--index-url",
-                "https://pypi.org/simple"
-              ],
-              "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
-              "repo": "pip_311",
-              "requirement": "pyct==0.5.0     --hash=sha256:a4038a8885059ab8cac6f946ea30e0b5e6bdbe0b92b6723f06737035f9d65e8c     --hash=sha256:dd9f4ac5cbd8e37c352c04036062d3c5f67efec76d404761ef16b0cbf26aa6a0"
-            }
-          },
           "python_packages_311_pyyaml": {
             "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
             "ruleClassName": "whl_library",
@@ -4768,20 +4660,6 @@
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
               "requirement": "sphinx-togglebutton==0.3.2     --hash=sha256:9647ba7874b7d1e2d43413d8497153a85edc6ac95a3fea9a75ef9c1e08aaae2b     --hash=sha256:ab0c8b366427b01e4c89802d5d078472c427fa6e9d12d521c34fa0442559dc7a"
-            }
-          },
-          "pip_311_markdown": {
-            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
-            "ruleClassName": "whl_library",
-            "attributes": {
-              "dep_template": "@pip//{name}:{target}",
-              "extra_pip_args": [
-                "--index-url",
-                "https://pypi.org/simple"
-              ],
-              "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
-              "repo": "pip_311",
-              "requirement": "markdown==3.7     --hash=sha256:2ae2471477cfd02dbbf038d5d9bc226d40def84b4fe2986e49b59b6b472bbed2     --hash=sha256:7eb6df5690b81a1d7942992c97fad2938e956e79df20cbc6186e9c3a77b1c803"
             }
           },
           "pip_311_sphinxcontrib_mermaid": {
@@ -4876,20 +4754,6 @@
               "requirement": "soupsieve==2.5     --hash=sha256:5663d5a7b3bfaeee0bc4372e7fc48f9cff4940b3eec54a6451cc5299f1097690     --hash=sha256:eaa337ff55a1579b6549dc679565eac1e3d000563bcb1c8ab0d0fefbc0c2cdc7"
             }
           },
-          "pip_311_narwhals": {
-            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
-            "ruleClassName": "whl_library",
-            "attributes": {
-              "dep_template": "@pip//{name}:{target}",
-              "extra_pip_args": [
-                "--index-url",
-                "https://pypi.org/simple"
-              ],
-              "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
-              "repo": "pip_311",
-              "requirement": "narwhals==1.30.0     --hash=sha256:0c50cc67a5404da501302882838ec17dce51703d22cd8ad89162d6f60ea0bb19     --hash=sha256:443aa0a1abfae89bc65a6b888a7e310a03d1818bfb2ccd61c150199a5f954c17"
-            }
-          },
           "pip_311_numpy": {
             "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
             "ruleClassName": "whl_library",
@@ -4926,20 +4790,6 @@
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "python_packages_311",
               "requirement": "coverage==7.2.7     --hash=sha256:06a9a2be0b5b576c3f18f1a241f0473575c4a26021b52b2a85263a00f034d51f     --hash=sha256:06fb182e69f33f6cd1d39a6c597294cff3143554b64b9825d1dc69d18cc2fff2     --hash=sha256:0a5f9e1dbd7fbe30196578ca36f3fba75376fb99888c395c5880b355e2875f8a     --hash=sha256:0e1f928eaf5469c11e886fe0885ad2bf1ec606434e79842a879277895a50942a     --hash=sha256:171717c7cb6b453aebac9a2ef603699da237f341b38eebfee9be75d27dc38e01     --hash=sha256:1e9d683426464e4a252bf70c3498756055016f99ddaec3774bf368e76bbe02b6     --hash=sha256:201e7389591af40950a6480bd9edfa8ed04346ff80002cec1a66cac4549c1ad7     --hash=sha256:245167dd26180ab4c91d5e1496a30be4cd721a5cf2abf52974f965f10f11419f     --hash=sha256:2aee274c46590717f38ae5e4650988d1af340fe06167546cc32fe2f58ed05b02     --hash=sha256:2e07b54284e381531c87f785f613b833569c14ecacdcb85d56b25c4622c16c3c     --hash=sha256:31563e97dae5598556600466ad9beea39fb04e0229e61c12eaa206e0aa202063     --hash=sha256:33d6d3ea29d5b3a1a632b3c4e4f4ecae24ef170b0b9ee493883f2df10039959a     --hash=sha256:3d376df58cc111dc8e21e3b6e24606b5bb5dee6024f46a5abca99124b2229ef5     --hash=sha256:419bfd2caae268623dd469eff96d510a920c90928b60f2073d79f8fe2bbc5959     --hash=sha256:48c19d2159d433ccc99e729ceae7d5293fbffa0bdb94952d3579983d1c8c9d97     --hash=sha256:49969a9f7ffa086d973d91cec8d2e31080436ef0fb4a359cae927e742abfaaa6     --hash=sha256:52edc1a60c0d34afa421c9c37078817b2e67a392cab17d97283b64c5833f427f     --hash=sha256:537891ae8ce59ef63d0123f7ac9e2ae0fc8b72c7ccbe5296fec45fd68967b6c9     --hash=sha256:54b896376ab563bd38453cecb813c295cf347cf5906e8b41d340b0321a5433e5     --hash=sha256:58c2ccc2f00ecb51253cbe5d8d7122a34590fac9646a960d1430d5b15321d95f     --hash=sha256:5b7540161790b2f28143191f5f8ec02fb132660ff175b7747b95dcb77ac26562     --hash=sha256:5baa06420f837184130752b7c5ea0808762083bf3487b5038d68b012e5937dbe     --hash=sha256:5e330fc79bd7207e46c7d7fd2bb4af2963f5f635703925543a70b99574b0fea9     --hash=sha256:61b9a528fb348373c433e8966535074b802c7a5d7f23c4f421e6c6e2f1697a6f     --hash=sha256:63426706118b7f5cf6bb6c895dc215d8a418d5952544042c8a2d9fe87fcf09cb     --hash=sha256:6d040ef7c9859bb11dfeb056ff5b3872436e3b5e401817d87a31e1750b9ae2fb     --hash=sha256:6f48351d66575f535669306aa7d6d6f71bc43372473b54a832222803eb956fd1     --hash=sha256:7ee7d9d4822c8acc74a5e26c50604dff824710bc8de424904c0982e25c39c6cb     --hash=sha256:81c13a1fc7468c40f13420732805a4c38a105d89848b7c10af65a90beff25250     --hash=sha256:8d13c64ee2d33eccf7437961b6ea7ad8673e2be040b4f7fd4fd4d4d28d9ccb1e     --hash=sha256:8de8bb0e5ad103888d65abef8bca41ab93721647590a3f740100cd65c3b00511     --hash=sha256:8fa03bce9bfbeeef9f3b160a8bed39a221d82308b4152b27d82d8daa7041fee5     --hash=sha256:924d94291ca674905fe9481f12294eb11f2d3d3fd1adb20314ba89e94f44ed59     --hash=sha256:975d70ab7e3c80a3fe86001d8751f6778905ec723f5b110aed1e450da9d4b7f2     --hash=sha256:976b9c42fb2a43ebf304fa7d4a310e5f16cc99992f33eced91ef6f908bd8f33d     --hash=sha256:9e31cb64d7de6b6f09702bb27c02d1904b3aebfca610c12772452c4e6c21a0d3     --hash=sha256:a342242fe22407f3c17f4b499276a02b01e80f861f1682ad1d95b04018e0c0d4     --hash=sha256:a3d33a6b3eae87ceaefa91ffdc130b5e8536182cd6dfdbfc1aa56b46ff8c86de     --hash=sha256:a895fcc7b15c3fc72beb43cdcbdf0ddb7d2ebc959edac9cef390b0d14f39f8a9     --hash=sha256:afb17f84d56068a7c29f5fa37bfd38d5aba69e3304af08ee94da8ed5b0865833     --hash=sha256:b1c546aca0ca4d028901d825015dc8e4d56aac4b541877690eb76490f1dc8ed0     --hash=sha256:b29019c76039dc3c0fd815c41392a044ce555d9bcdd38b0fb60fb4cd8e475ba9     --hash=sha256:b46517c02ccd08092f4fa99f24c3b83d8f92f739b4657b0f146246a0ca6a831d     --hash=sha256:b7aa5f8a41217360e600da646004f878250a0d6738bcdc11a0a39928d7dc2050     --hash=sha256:b7b4c971f05e6ae490fef852c218b0e79d4e52f79ef0c8475566584a8fb3e01d     --hash=sha256:ba90a9563ba44a72fda2e85302c3abc71c5589cea608ca16c22b9804262aaeb6     --hash=sha256:cb017fd1b2603ef59e374ba2063f593abe0fc45f2ad9abdde5b4d83bd922a353     --hash=sha256:d22656368f0e6189e24722214ed8d66b8022db19d182927b9a248a2a8a2f67eb     --hash=sha256:d2c2db7fd82e9b72937969bceac4d6ca89660db0a0967614ce2481e81a0b771e     --hash=sha256:d39b5b4f2a66ccae8b7263ac3c8170994b65266797fb96cbbfd3fb5b23921db8     --hash=sha256:d62a5c7dad11015c66fbb9d881bc4caa5b12f16292f857842d9d1871595f4495     --hash=sha256:e7d9405291c6928619403db1d10bd07888888ec1abcbd9748fdaa971d7d661b2     --hash=sha256:e84606b74eb7de6ff581a7915e2dab7a28a0517fbe1c9239eb227e1354064dcd     --hash=sha256:eb393e5ebc85245347950143969b241d08b52b88a3dc39479822e073a1a8eb27     --hash=sha256:ebba1cd308ef115925421d3e6a586e655ca5a77b5bf41e02eb0e4562a111f2d1     --hash=sha256:ee57190f24fba796e36bb6d3aa8a8783c643d8fa9760c89f7a98ab5455fbf818     --hash=sha256:f2f67fe12b22cd130d34d0ef79206061bfb5eda52feb6ce0dba0644e20a03cf4     --hash=sha256:f6951407391b639504e3b3be51b7ba5f3528adbf1a8ac3302b687ecababf929e     --hash=sha256:f75f7168ab25dd93110c8a8117a22450c19976afbc44234cbf71481094c1b850     --hash=sha256:fdec9e8cbf13a5bf63290fc6013d216a4c7232efb51548594ca3631a7f13c3a3"
-            }
-          },
-          "pip_311_xyzservices": {
-            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
-            "ruleClassName": "whl_library",
-            "attributes": {
-              "dep_template": "@pip//{name}:{target}",
-              "extra_pip_args": [
-                "--index-url",
-                "https://pypi.org/simple"
-              ],
-              "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
-              "repo": "pip_311",
-              "requirement": "xyzservices==2025.1.0     --hash=sha256:5cdbb0907c20be1be066c6e2dc69c645842d1113a4e83e642065604a21f254ba     --hash=sha256:fa599956c5ab32dad1689960b3bb08fdcdbe0252cc82d84fc60ae415dc648907"
             }
           },
           "python_packages_311_ptpython": {
@@ -5526,20 +5376,6 @@
               "requirement": "rpds-py==0.18.1     --hash=sha256:05f3d615099bd9b13ecf2fc9cf2d839ad3f20239c678f461c753e93755d629ee     --hash=sha256:06d218939e1bf2ca50e6b0ec700ffe755e5216a8230ab3e87c059ebb4ea06afc     --hash=sha256:07f2139741e5deb2c5154a7b9629bc5aa48c766b643c1a6750d16f865a82c5fc     --hash=sha256:08d74b184f9ab6289b87b19fe6a6d1a97fbfea84b8a3e745e87a5de3029bf944     --hash=sha256:0abeee75434e2ee2d142d650d1e54ac1f8b01e6e6abdde8ffd6eeac6e9c38e20     --hash=sha256:154bf5c93d79558b44e5b50cc354aa0459e518e83677791e6adb0b039b7aa6a7     --hash=sha256:17c6d2155e2423f7e79e3bb18151c686d40db42d8645e7977442170c360194d4     --hash=sha256:1805d5901779662d599d0e2e4159d8a82c0b05faa86ef9222bf974572286b2b6     --hash=sha256:19ba472b9606c36716062c023afa2484d1e4220548751bda14f725a7de17b4f6     --hash=sha256:19e515b78c3fc1039dd7da0a33c28c3154458f947f4dc198d3c72db2b6b5dc93     --hash=sha256:1d54f74f40b1f7aaa595a02ff42ef38ca654b1469bef7d52867da474243cc633     --hash=sha256:207c82978115baa1fd8d706d720b4a4d2b0913df1c78c85ba73fe6c5804505f0     --hash=sha256:2625f03b105328729f9450c8badda34d5243231eef6535f80064d57035738360     --hash=sha256:27bba383e8c5231cd559affe169ca0b96ec78d39909ffd817f28b166d7ddd4d8     --hash=sha256:2c3caec4ec5cd1d18e5dd6ae5194d24ed12785212a90b37f5f7f06b8bedd7139     --hash=sha256:2cc7c1a47f3a63282ab0f422d90ddac4aa3034e39fc66a559ab93041e6505da7     --hash=sha256:2fc24a329a717f9e2448f8cd1f960f9dac4e45b6224d60734edeb67499bab03a     --hash=sha256:312fe69b4fe1ffbe76520a7676b1e5ac06ddf7826d764cc10265c3b53f96dbe9     --hash=sha256:32b7daaa3e9389db3695964ce8e566e3413b0c43e3394c05e4b243a4cd7bef26     --hash=sha256:338dee44b0cef8b70fd2ef54b4e09bb1b97fc6c3a58fea5db6cc083fd9fc2724     --hash=sha256:352a88dc7892f1da66b6027af06a2e7e5d53fe05924cc2cfc56495b586a10b72     --hash=sha256:35b2b771b13eee8729a5049c976197ff58a27a3829c018a04341bcf1ae409b2b     --hash=sha256:38e14fb4e370885c4ecd734f093a2225ee52dc384b86fa55fe3f74638b2cfb09     --hash=sha256:3c20f05e8e3d4fc76875fc9cb8cf24b90a63f5a1b4c5b9273f0e8225e169b100     --hash=sha256:3dd3cd86e1db5aadd334e011eba4e29d37a104b403e8ca24dcd6703c68ca55b3     --hash=sha256:489bdfe1abd0406eba6b3bb4fdc87c7fa40f1031de073d0cfb744634cc8fa261     --hash=sha256:48c2faaa8adfacefcbfdb5f2e2e7bdad081e5ace8d182e5f4ade971f128e6bb3     --hash=sha256:4a98a1f0552b5f227a3d6422dbd61bc6f30db170939bd87ed14f3c339aa6c7c9     --hash=sha256:4adec039b8e2928983f885c53b7cc4cda8965b62b6596501a0308d2703f8af1b     --hash=sha256:4e0ee01ad8260184db21468a6e1c37afa0529acc12c3a697ee498d3c2c4dcaf3     --hash=sha256:51584acc5916212e1bf45edd17f3a6b05fe0cbb40482d25e619f824dccb679de     --hash=sha256:531796fb842b53f2695e94dc338929e9f9dbf473b64710c28af5a160b2a8927d     --hash=sha256:5463c47c08630007dc0fe99fb480ea4f34a89712410592380425a9b4e1611d8e     --hash=sha256:5c45a639e93a0c5d4b788b2613bd637468edd62f8f95ebc6fcc303d58ab3f0a8     --hash=sha256:6031b25fb1b06327b43d841f33842b383beba399884f8228a6bb3df3088485ff     --hash=sha256:607345bd5912aacc0c5a63d45a1f73fef29e697884f7e861094e443187c02be5     --hash=sha256:618916f5535784960f3ecf8111581f4ad31d347c3de66d02e728de460a46303c     --hash=sha256:636a15acc588f70fda1661234761f9ed9ad79ebed3f2125d44be0862708b666e     --hash=sha256:673fdbbf668dd958eff750e500495ef3f611e2ecc209464f661bc82e9838991e     --hash=sha256:6afd80f6c79893cfc0574956f78a0add8c76e3696f2d6a15bca2c66c415cf2d4     --hash=sha256:6b5ff7e1d63a8281654b5e2896d7f08799378e594f09cf3674e832ecaf396ce8     --hash=sha256:6c4c4c3f878df21faf5fac86eda32671c27889e13570645a9eea0a1abdd50922     --hash=sha256:6cd8098517c64a85e790657e7b1e509b9fe07487fd358e19431cb120f7d96338     --hash=sha256:6d1e42d2735d437e7e80bab4d78eb2e459af48c0a46e686ea35f690b93db792d     --hash=sha256:6e30ac5e329098903262dc5bdd7e2086e0256aa762cc8b744f9e7bf2a427d3f8     --hash=sha256:70a838f7754483bcdc830444952fd89645569e7452e3226de4a613a4c1793fb2     --hash=sha256:720edcb916df872d80f80a1cc5ea9058300b97721efda8651efcd938a9c70a72     --hash=sha256:732672fbc449bab754e0b15356c077cc31566df874964d4801ab14f71951ea80     --hash=sha256:740884bc62a5e2bbb31e584f5d23b32320fd75d79f916f15a788d527a5e83644     --hash=sha256:7700936ef9d006b7ef605dc53aa364da2de5a3aa65516a1f3ce73bf82ecfc7ae     --hash=sha256:7732770412bab81c5a9f6d20aeb60ae943a9b36dcd990d876a773526468e7163     --hash=sha256:7750569d9526199c5b97e5a9f8d96a13300950d910cf04a861d96f4273d5b104     --hash=sha256:7f1944ce16401aad1e3f7d312247b3d5de7981f634dc9dfe90da72b87d37887d     --hash=sha256:81c5196a790032e0fc2464c0b4ab95f8610f96f1f2fa3d4deacce6a79852da60     --hash=sha256:8352f48d511de5f973e4f2f9412736d7dea76c69faa6d36bcf885b50c758ab9a     --hash=sha256:8927638a4d4137a289e41d0fd631551e89fa346d6dbcfc31ad627557d03ceb6d     --hash=sha256:8c7672e9fba7425f79019db9945b16e308ed8bc89348c23d955c8c0540da0a07     --hash=sha256:8d2e182c9ee01135e11e9676e9a62dfad791a7a467738f06726872374a83db49     --hash=sha256:910e71711d1055b2768181efa0a17537b2622afeb0424116619817007f8a2b10     --hash=sha256:942695a206a58d2575033ff1e42b12b2aece98d6003c6bc739fbf33d1773b12f     --hash=sha256:9437ca26784120a279f3137ee080b0e717012c42921eb07861b412340f85bae2     --hash=sha256:967342e045564cef76dfcf1edb700b1e20838d83b1aa02ab313e6a497cf923b8     --hash=sha256:998125738de0158f088aef3cb264a34251908dd2e5d9966774fdab7402edfab7     --hash=sha256:9e6934d70dc50f9f8ea47081ceafdec09245fd9f6032669c3b45705dea096b88     --hash=sha256:a3d456ff2a6a4d2adcdf3c1c960a36f4fd2fec6e3b4902a42a384d17cf4e7a65     --hash=sha256:a7b28c5b066bca9a4eb4e2f2663012debe680f097979d880657f00e1c30875a0     --hash=sha256:a888e8bdb45916234b99da2d859566f1e8a1d2275a801bb8e4a9644e3c7e7909     --hash=sha256:aa3679e751408d75a0b4d8d26d6647b6d9326f5e35c00a7ccd82b78ef64f65f8     --hash=sha256:aaa71ee43a703c321906813bb252f69524f02aa05bf4eec85f0c41d5d62d0f4c     --hash=sha256:b646bf655b135ccf4522ed43d6902af37d3f5dbcf0da66c769a2b3938b9d8184     --hash=sha256:b906b5f58892813e5ba5c6056d6a5ad08f358ba49f046d910ad992196ea61397     --hash=sha256:b9bb1f182a97880f6078283b3505a707057c42bf55d8fca604f70dedfdc0772a     --hash=sha256:bd1105b50ede37461c1d51b9698c4f4be6e13e69a908ab7751e3807985fc0346     --hash=sha256:bf18932d0003c8c4d51a39f244231986ab23ee057d235a12b2684ea26a353590     --hash=sha256:c273e795e7a0f1fddd46e1e3cb8be15634c29ae8ff31c196debb620e1edb9333     --hash=sha256:c69882964516dc143083d3795cb508e806b09fc3800fd0d4cddc1df6c36e76bb     --hash=sha256:c827576e2fa017a081346dce87d532a5310241648eb3700af9a571a6e9fc7e74     --hash=sha256:cbfbea39ba64f5e53ae2915de36f130588bba71245b418060ec3330ebf85678e     --hash=sha256:ce0bb20e3a11bd04461324a6a798af34d503f8d6f1aa3d2aa8901ceaf039176d     --hash=sha256:d0cee71bc618cd93716f3c1bf56653740d2d13ddbd47673efa8bf41435a60daa     --hash=sha256:d21be4770ff4e08698e1e8e0bce06edb6ea0626e7c8f560bc08222880aca6a6f     --hash=sha256:d31dea506d718693b6b2cffc0648a8929bdc51c70a311b2770f09611caa10d53     --hash=sha256:d44607f98caa2961bab4fa3c4309724b185b464cdc3ba6f3d7340bac3ec97cc1     --hash=sha256:d58ad6317d188c43750cb76e9deacf6051d0f884d87dc6518e0280438648a9ac     --hash=sha256:d70129cef4a8d979caa37e7fe957202e7eee8ea02c5e16455bc9808a59c6b2f0     --hash=sha256:d85164315bd68c0806768dc6bb0429c6f95c354f87485ee3593c4f6b14def2bd     --hash=sha256:d960de62227635d2e61068f42a6cb6aae91a7fe00fca0e3aeed17667c8a34611     --hash=sha256:dc48b479d540770c811fbd1eb9ba2bb66951863e448efec2e2c102625328e92f     --hash=sha256:e1735502458621921cee039c47318cb90b51d532c2766593be6207eec53e5c4c     --hash=sha256:e2be6e9dd4111d5b31ba3b74d17da54a8319d8168890fbaea4b9e5c3de630ae5     --hash=sha256:e4c39ad2f512b4041343ea3c7894339e4ca7839ac38ca83d68a832fc8b3748ab     --hash=sha256:ed402d6153c5d519a0faf1bb69898e97fb31613b49da27a84a13935ea9164dfc     --hash=sha256:ee17cd26b97d537af8f33635ef38be873073d516fd425e80559f4585a7b90c43     --hash=sha256:f3027be483868c99b4985fda802a57a67fdf30c5d9a50338d9db646d590198da     --hash=sha256:f5bab211605d91db0e2995a17b5c6ee5edec1270e46223e513eaa20da20076ac     --hash=sha256:f6f8e3fecca256fefc91bb6765a693d96692459d7d4c644660a9fff32e517843     --hash=sha256:f7afbfee1157e0f9376c00bb232e80a60e59ed716e3211a80cb8506550671e6e     --hash=sha256:fa242ac1ff583e4ec7771141606aafc92b361cd90a05c30d93e343a0c2d82a89     --hash=sha256:fab6ce90574645a0d6c58890e9bcaac8d94dff54fb51c69e5522a7358b80ab64"
             }
           },
-          "pip_311_panel": {
-            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
-            "ruleClassName": "whl_library",
-            "attributes": {
-              "dep_template": "@pip//{name}:{target}",
-              "extra_pip_args": [
-                "--index-url",
-                "https://pypi.org/simple"
-              ],
-              "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
-              "repo": "pip_311",
-              "requirement": "panel==0.10.3     --hash=sha256:0a97efd48ad9e88289c7e37b488a70eaa6e9946c8b3f886e184d5fd31aea1301     --hash=sha256:3619d8d3aec631ba047b294163ddecfa62727ca89576bff4a8c08e84416eb212"
-            }
-          },
           "pip_311_pytest": {
             "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
             "ruleClassName": "whl_library",
@@ -5776,18 +5612,13 @@
                 "ipdb": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_ipdb\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "jedi": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_jedi\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "mypy": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_mypy\",\"target_platforms\":null,\"version\":\"3.11\"}]",
-                "pyct": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_pyct\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "pytz": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_pytz\",\"target_platforms\":null,\"version\":\"3.11\"}]",
-                "tqdm": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_tqdm\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "attrs": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_attrs\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "babel": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_babel\",\"target_platforms\":null,\"version\":\"3.11\"}]",
-                "bokeh": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_bokeh\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "click": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_click\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "isort": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_isort\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "mdurl": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_mdurl\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "numpy": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_numpy\",\"target_platforms\":null,\"version\":\"3.11\"}]",
-                "panel": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_panel\",\"target_platforms\":null,\"version\":\"3.11\"}]",
-                "param": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_param\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "parso": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_parso\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "pyzmq": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_pyzmq\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "scipy": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_scipy\",\"target_platforms\":null,\"version\":\"3.11\"}]",
@@ -5820,9 +5651,6 @@
                 "wcwidth": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_wcwidth\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "colorama": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_colorama\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "docutils": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_docutils\",\"target_platforms\":null,\"version\":\"3.11\"}]",
-                "jupytext": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_jupytext\",\"target_platforms\":null,\"version\":\"3.11\"}]",
-                "markdown": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_markdown\",\"target_platforms\":null,\"version\":\"3.11\"}]",
-                "narwhals": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_narwhals\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "nbformat": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_nbformat\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "notebook": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_notebook\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "pathspec": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_pathspec\",\"target_platforms\":null,\"version\":\"3.11\"}]",
@@ -5859,7 +5687,6 @@
                 "markupsafe": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_markupsafe\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "matplotlib": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_matplotlib\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "ptyprocess": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_ptyprocess\",\"target_platforms\":null,\"version\":\"3.11\"}]",
-                "pygraphviz": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_pygraphviz\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "send2trash": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_send2trash\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "setuptools": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_setuptools\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "stack_data": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_stack_data\",\"target_platforms\":null,\"version\":\"3.11\"}]",
@@ -5869,11 +5696,9 @@
                 "google_auth": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_google_auth\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "myst_parser": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_myst_parser\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "pycodestyle": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_pycodestyle\",\"target_platforms\":null,\"version\":\"3.11\"}]",
-                "pyviz_comms": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_pyviz_comms\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "referencing": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_referencing\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "tokenize_rt": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_tokenize_rt\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "uc_micro_py": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_uc_micro_py\",\"target_platforms\":null,\"version\":\"3.11\"}]",
-                "xyzservices": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_xyzservices\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "cryptography": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_cryptography\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "jupyter_core": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_jupyter_core\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "nest_asyncio": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_nest_asyncio\",\"target_platforms\":null,\"version\":\"3.11\"}]",
@@ -5927,10 +5752,6 @@
                 "openhtf": [
                   "openhtf",
                   "six"
-                ],
-                "networkx": [
-                  "networkx",
-                  "pygraphviz"
                 ]
               }
             }
@@ -6162,7 +5983,7 @@
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
-              "requirement": "tornado==6.4.2     --hash=sha256:072ce12ada169c5b00b7d92a99ba089447ccc993ea2143c9ede887e0937aa803     --hash=sha256:1a017d239bd1bb0919f72af256a970624241f070496635784d9bf0db640d3fec     --hash=sha256:2876cef82e6c5978fde1e0d5b1f919d756968d5b4282418f3146b79b58556482     --hash=sha256:304463bd0772442ff4d0f5149c6f1c2135a1fae045adf070821c6cdc76980634     --hash=sha256:908b71bf3ff37d81073356a5fadcc660eb10c1476ee6e2725588626ce7e5ca38     --hash=sha256:92bad5b4746e9879fd7bf1eb21dce4e3fc5128d71601f80005afa39237ad620b     --hash=sha256:932d195ca9015956fa502c6b56af9eb06106140d844a335590c1ec7f5277d10c     --hash=sha256:bca9eb02196e789c9cb5c3c7c0f04fb447dc2adffd95265b2c7223a8a615ccbf     --hash=sha256:c36e62ce8f63409301537222faffcef7dfc5284f27eec227389f2ad11b09d946     --hash=sha256:c82c46813ba483a385ab2a99caeaedf92585a1f90defb5693351fa7e4ea0bf73     --hash=sha256:e828cce1123e9e44ae2a50a9de3055497ab1d0aeb440c5ac23064d9e44880da1"
+              "requirement": "tornado==4.5.3     --hash=sha256:5ef073ac6180038ccf99411fe05ae9aafb675952a2c8db60592d5daf8401f803     --hash=sha256:6d14e47eab0e15799cf3cdcc86b0b98279da68522caace2bd7ce644287685f0a     --hash=sha256:92b7ca81e18ba9ec3031a7ee73d4577ac21d41a0c9b775a9182f43301c3b5f8e     --hash=sha256:ab587996fe6fb9ce65abfda440f9b61e4f9f2cf921967723540679176915e4c3     --hash=sha256:b36298e9f63f18cad97378db2222c0e0ca6a55f6304e605515e05a25483ed51a"
             }
           },
           "python_packages_311_ipython": {
