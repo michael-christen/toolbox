@@ -69,6 +69,6 @@ def main(compare: bool) -> None:
 
 
 if __name__ == '__main__':
-    # XXX: Add argparse
+    # XXX: Add argparse and put this in the linter
     compare = False
     main(compare=compare)
