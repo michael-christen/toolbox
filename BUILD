@@ -38,11 +38,15 @@ pip_compile(
     ],
 )
 
+# bazel run //:create_venv
+# venv/bin/<cmd>
+#
+# Note that you should likely be able to modify non-generated source and see
+# this reflected by venv binary references, etc.
 create_venv(
     name = "create_venv",
+    destination_folder = "venv",
     requirements_txt = "//:requirements_lock.txt",
-    # Example extras
-    site_packages_extra_files = ["//tools:utils"],
 )
 
 # This repository rule fetches the metadata for python packages we

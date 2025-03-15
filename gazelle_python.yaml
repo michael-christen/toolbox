@@ -2994,6 +2994,7 @@ manifest:
     pexpect.socket_pexpect: pexpect
     pexpect.spawnbase: pexpect
     pexpect.utils: pexpect
+    pip: pip
     pkg_resources: setuptools
     pkg_resources.extern: setuptools
     platformdirs: platformdirs
@@ -4600,4 +4601,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: 37c3994d0fe7df48b0164faa2c99da14c3a6a92ae09b389104cbb1f1ea17d3ce
+integrity: 1ca8d4f2e4b7dacdb394eee50ccdb1c9856369e261ea51f5fc92d2a4f0043031
