@@ -45,8 +45,8 @@ pip_compile(
 # this reflected by venv binary references, etc.
 create_venv(
     name = "create_venv",
-    requirements_txt = "//:requirements_lock.txt",
     destination_folder = "venv",
+    requirements_txt = "//:requirements_lock.txt",
 )
 
 # This repository rule fetches the metadata for python packages we
