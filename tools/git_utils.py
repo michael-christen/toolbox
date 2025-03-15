@@ -39,10 +39,7 @@ class FileCommitMap:
 def _get_git_output(
     args: Sequence[pathlib.Path | str], git_directory: pathlib.Path | str
 ) -> list[str]:
-    # XXX: Why isn't type-hinting for these lists working?
-    output = subprocess.check_output(
-        ["git", "-C", git_directory] + args  # type: ignore
-    )
+    output = subprocess.check_output(["git", "-C", git_directory] + list(args))
     result = output.decode("utf-8").strip()
     if not result:
         return []
