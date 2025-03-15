@@ -1,6 +1,9 @@
 # Generated via:
 # `bazel query 'kind("py_binary", //...) + kind("py_library", //...)'`
 # XXX: Resolve comments
+# Finds all proto_py_library (note that if someone decided to name their python
+# target similarly, we'd catch it too)
+# bazel query 'attr(name, "_py_library", //...) intersect kind("py_library", //...)'
 PYTHON_TARGETS = [
     "//apps:bazel_parser",
     "//bzl:pytest_main",

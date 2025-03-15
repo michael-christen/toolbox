@@ -10,9 +10,6 @@ load("@rules_oci//oci:defs.bzl", "oci_image", "oci_tarball")
 # TODO(#52): Add aspect_rules_py back for py_test
 load("@rules_python//python:defs.bzl", _py_test = "py_test")
 
-load("@aspect_rules_py//py:defs.bzl", "py_venv")
-load("@rules_pyvenv//:venv.bzl", _venv_py_venv = "py_venv")
-
 def py_binary(**kwargs):
     _py_binary(**kwargs)
 

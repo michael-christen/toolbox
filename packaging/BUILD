@@ -22,3 +22,11 @@ py_wheel(
     version = "0.0.0",
     deps = [":py_package_all"],
 )
+
+genrule(
+    name = "py_wheel_all.reference",
+    srcs = [":py_wheel_all"],
+    outs = ["py_wheel_all.txt"],
+    cmd = "echo $(location :py_wheel_all) >$@",
+)
+
