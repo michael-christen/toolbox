@@ -44,12 +44,24 @@ def generate(query_file: QueryFile, compare: bool) -> None:
 
 
 def main(compare: bool) -> None:
+    """Update or compare files generated via queries.
+
+    Note that any file added here should have an entry in `.gitattributes`:
+        packaging/generated.bzl linguist-generated=true
+    This will prevent it from making the diffs too busy.
+    """
+    # XXX: Find the right location to call this from (ensure folks don't call
+    # elsewhere)
     QUERY_FILES = [
         QueryFile(
             out_file=pathlib.Path('packaging/generated.bzl'),
             variable_name='PYTHON_TARGETS',
-            query='kind("py_binary", //...) + kind("py_library", //...)',
+            query='kind("py_binary", //...) + kind("py_library", //...) - //tools:_mypy_cli',
         ),
+        # XXX: Add just protos?
+        # Finds all proto_py_library (note that if someone decided to name their python
+        # target similarly, we'd catch it too)
+        # bazel query 'attr(name, "_py_library", //...) intersect kind("py_library", //...)'
     ]
     for query_file in QUERY_FILES:
         # XXX: Allow other generations to work if a single one fails?
@@ -58,5 +70,5 @@ def main(compare: bool) -> None:
 
 if __name__ == '__main__':
     # XXX: Add argparse
-    compare = True
+    compare = False
     main(compare=compare)

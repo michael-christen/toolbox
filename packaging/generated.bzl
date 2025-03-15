@@ -1,9 +1,5 @@
 # Generated via:
-# `bazel query 'kind("py_binary", //...) + kind("py_library", //...)'`
-# XXX: Resolve comments
-# Finds all proto_py_library (note that if someone decided to name their python
-# target similarly, we'd catch it too)
-# bazel query 'attr(name, "_py_library", //...) intersect kind("py_library", //...)'
+# `bazel query 'kind("py_binary", //...) + kind("py_library", //...) - //tools:_mypy_cli'`
 PYTHON_TARGETS = [
     "//apps:bazel_parser",
     "//bzl:pytest_main",
@@ -30,7 +26,6 @@ PYTHON_TARGETS = [
     "//third_party/bazel/src/main/protobuf:build_py_library",
     "//third_party/delimited_protobuf:delimited_protobuf",
     "//third_party/pigweed/tools:console",
-    # "//tools:_mypy_cli",
     "//tools:bazel_utils",
     "//tools:coverage_baseline",
     "//tools:git_py_library",
@@ -45,4 +40,5 @@ PYTHON_TARGETS = [
     "//tools/sphinx:sphinx_build_wrapper",
     "//utils:bep_reader",
     "//utils:graph_algorithms",
+    "//utils:path_utils",
 ]
