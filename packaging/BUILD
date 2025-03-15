@@ -1,14 +1,15 @@
-load("//packaging:generated.bzl", "PYTHON_TARGETS")
+load("//bzl:py.bzl", "py_binary")
 load("@rules_python//python:packaging.bzl", "py_package", "py_wheel")
+load("//packaging:generated.bzl", "PYTHON_TARGETS")
 
 # https://rules-python.readthedocs.io/en/latest/api/rules_python/python/packaging.html#py_package
 py_package(
     name = "py_package_all",
     # XXX: Do we need to name each of the packages used?
     packages = [
-        "mchristen",
         "apps",
         "examples",
+        "mchristen",
         "tools",
         "utils",
     ],
@@ -30,3 +31,10 @@ genrule(
     cmd = "echo $(location :py_wheel_all) >$@",
 )
 
+package(default_visibility = ["//visibility:private"])
+
+py_binary(
+    name = "query_generator",
+    srcs = ["query_generator.py"],
+    visibility = ["//:__subpackages__"],
+)
