@@ -12,7 +12,6 @@ load("@rules_uv//uv:venv.bzl", "create_venv")
 load("@aspect_rules_py//py:defs.bzl", "py_venv")
 load("@rules_pyvenv//:venv.bzl", _venv_py_venv = "py_venv")
 load("@pip//:requirements.bzl", "all_requirements")
-load("//packaging:generated.bzl", "PYTHON_TARGETS")
 
 package(default_visibility = ["//visibility:private"])
 
@@ -42,6 +41,7 @@ pip_compile(
     ],
 )
 
+# bazel run //:create_venv uv_venv
 create_venv(
     name = "create_venv",
     requirements_txt = "//:requirements_lock.txt",

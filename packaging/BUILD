@@ -1,6 +1,5 @@
 load("//packaging:generated.bzl", "PYTHON_TARGETS")
 load("@rules_python//python:packaging.bzl", "py_package", "py_wheel")
-load("@pip//:requirements.bzl", "all_requirements")
 
 # https://rules-python.readthedocs.io/en/latest/api/rules_python/python/packaging.html#py_package
 py_package(
