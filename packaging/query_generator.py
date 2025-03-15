@@ -67,7 +67,7 @@ def main(compare: bool) -> None:
             # target '//tools:_mypy_cli' is not visible, but gets included
             query=(
                 'kind("py_binary", //...) + kind("py_library", //...)'
-                "- //tools:_mypy_cli"
+                " - //tools:_mypy_cli"
             ),
         ),
         # XXX: Add just protos?
