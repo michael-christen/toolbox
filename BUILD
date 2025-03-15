@@ -45,6 +45,30 @@ create_venv(
     site_packages_extra_files = ["//tools:utils"],
 )
 
+# bazel run //packaging:py_venv_all
+# .packaging+py_venv_all/bin/python3 -m IPython
+py_venv(
+    name="py_venv_all",
+    # XXX: Add all requirements
+    deps = PYTHON_TARGETS + all_requirements,
+    # XXX: error, warning, ignore
+    # pick better / justify
+    package_collisions = "ignore",
+)
+
+# bazel run //packaging:venv_pyvenv
+# ./rules_pyvenv/bin/python ...
+_venv_py_venv(
+    name = "venv_pyvenv",
+    deps = PYTHON_TARGETS + all_requirements,
+    data = [],
+    extra_pip_commands = [],
+    # Drops in a pre-destined location
+    venv_location = "rules_pyvenv",
+    # Allows generated files to be reached
+    always_link = True,
+)
+
 # This repository rule fetches the metadata for python packages we
 # depend on. That data is required for the gazelle_python_manifest
 # rule to update our manifest file.
