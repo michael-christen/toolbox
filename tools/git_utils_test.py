@@ -1,3 +1,4 @@
+import datetime
 import pathlib
 import subprocess
 import tempfile
@@ -148,6 +149,13 @@ class TestGitUtils(unittest.TestCase):
         )
         self.assertEqual(list_map, expected_list)
 
+        # Check the proto is invertible w/ no data loss
+        proto = follow_map.to_proto()
+        inverted_proto = git_utils.FileCommitMap.from_proto(proto)
+        self.assertEqual(follow_map, inverted_proto)
 
-if __name__ == "__main__":
-    unittest.main()
+    def test_extras(self) -> None:
+        self.assertEqual([], git_utils._get_args_for_after(None))
+        self.assertEqual(['--after="2025-01-01"'],
+                         git_utils._get_args_for_after(datetime.datetime(
+                             year=2025, month=1, day=1)))

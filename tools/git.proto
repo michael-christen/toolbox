@@ -5,12 +5,8 @@ package tools.git;
 import "google/protobuf/timestamp.proto";
 
 message CommitEntry {
-  // Time of the commit
-  // XXX: Maybe don't include?
-  optional google.protobuf.Timestamp time = 1;
-
   // List of files associated with this commit (in no particular order)
-  repeated string files = 2;
+  repeated string files = 1;
 };
 
 

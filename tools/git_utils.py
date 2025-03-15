@@ -29,7 +29,6 @@ class FileCommitMap:
     def from_proto(cls, proto_map: git_pb2.FileCommitMap) -> "FileCommitMap":
         file_map = {}
         commit_map = {}
-        # XXX: Use pathlib.Path?
         for f, f_entry in proto_map.file_map.items():
             file_map[pathlib.Path(f)] = list(f_entry.commits)
         for c, c_entry in proto_map.commit_map.items():
@@ -84,7 +83,6 @@ def list_file_commits(
 
 def get_commits(
     git_directory: pathlib.Path | str,
-    # XXX: Should this be selectable
     target: str = "HEAD",
     after: datetime.datetime | None = None,
 ) -> list[str]:
@@ -100,7 +98,7 @@ def get_files_changed_at_commit(
     return [pathlib.Path(p) for p in _get_git_output(args, git_directory)]
 
 
-# XXX: maybe we want to experiment with both mechanisms?
+# Most likely want follow to preserve name
 def get_file_commit_map_from_follow(
     git_directory: pathlib.Path | str,
     after: datetime.datetime | None = None,
