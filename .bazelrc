@@ -170,6 +170,7 @@ build --aspects //tools:aspects.bzl%mypy_aspect
 
 # optionally, default enable the mypy checks
 build --output_groups=+mypy
+build:local --output_groups=-mypy
 
 # Allow user to extend .bazelrc
 # https://bazel.build/configure/best-practices#bazelrc-file
