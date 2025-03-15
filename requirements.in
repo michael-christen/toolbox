@@ -24,6 +24,8 @@ notebook
 openhtf
 # Undeclared dependency of openhtf
 six
+# Install so we can easily install a wheel into a virtualenv
+pip
 protobuf
 # largely for development
 # https://github.com/pytest-dev/pytest/issues/12592#issuecomment-2515100428
