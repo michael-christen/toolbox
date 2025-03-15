@@ -18,6 +18,7 @@ Example:
 import collections
 import datetime
 import sys
+from typing import BinaryIO
 
 import tabulate
 
@@ -25,15 +26,13 @@ from third_party.bazel.proto import build_event_stream_pb2
 from third_party.delimited_protobuf import delimited_protobuf
 
 
-def main() -> None:
-    msgs = []
+def get_label_to_runtime(buf: BinaryIO) -> dict[str, datetime.timedelta]:
     label_to_runtime: dict[str, list[datetime.timedelta]] = (
         collections.defaultdict(list)
     )
     while msg := delimited_protobuf.read_delimited(
-        sys.stdin.buffer, build_event_stream_pb2.BuildEvent
+        buf, build_event_stream_pb2.BuildEvent
     ):
-        msgs.append(msg)
         msg_id = msg.id.WhichOneof("id")
         if msg_id == "test_result":
             # Only register succesful tests
@@ -50,6 +49,12 @@ def main() -> None:
         for runtime in runtimes:
             total_runtime += runtime
         label_to_avg_runtime[label] = total_runtime / len(runtimes)
+    return label_to_avg_runtime
+
+
+def main() -> None:
+    buf = sys.stdin.buffer
+    label_to_avg_runtime = get_label_to_runtime(buf)
     table = sorted(label_to_avg_runtime.items(), key=lambda kv: -kv[1])
     print(tabulate.tabulate(table, headers=["Label", "dt"]))
 
