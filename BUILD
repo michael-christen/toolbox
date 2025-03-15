@@ -41,36 +41,83 @@ pip_compile(
     ],
 )
 
-# bazel run //:create_venv uv_venv
+# bazel run //:create_venv
+# .venv/bin/python
+#
+# time: 1.529s, 1.001s
+# bin: fully populated
+#
+# Workflow (jupyter + generated files):
+# - requires pip installed
+#
+# bazel run //:create_venv
+# bazel build //packaging:py_package_all
+# .venv/bin/pip install bazel-bin/packaging/mchristen_toolbox-0.0.0-py3-none-any.whl
+# # Then you can access generated files, etc.
+# .venv/bin/jupyter notebook
+# etc.
+#
+# Workflow (ipython + generated files):
+#
+# Must install separately
+#
+# Workflow (ipython + non-generated source files):
+#
+# bazel run //:create_venv
+# .venv/bin/ipython
+# > from mchristen.parsing_scripts import pocket_export_html_to_csv
+#
+# - no need to reference non-generated source
 create_venv(
     name = "create_venv",
     requirements_txt = "//:requirements_lock.txt",
     destination_folder = ".venv",
     # Example extras
-    # site_packages_extra_files = ["//tools:utils"],
+    site_packages_extra_files = ["//tools:git_utils"],
 )
 
-# bazel run //packaging:py_venv_all
-# .packaging+py_venv_all/bin/python3 -m IPython
+# bazel run //:py_venv_all
+# .py_venv_all/bin/python3 -m IPython
+#
+# time: 1.504s, 1.602s
+# bin: only python
+#
+# ipython w/o generated: ez
+# jupyter: some warning logs
+#
+# ipython w/ generated: declared as deps and worked fine
+# jupyter w/ generated: deps did not work
+# jupyter w/ pip installation: also did not work
+# - makes me think jupyter configuration is messed up somehow
 py_venv(
     name="py_venv_all",
-    deps = all_requirements,
+    deps = all_requirements + ["//tools:git_utils"],
     # XXX: error, warning, ignore
     # pick better / justify
     package_collisions = "ignore",
 )
 
-# bazel run //packaging:venv_pyvenv
+# bazel run //:venv_pyvenv
 # ./rules_pyvenv/bin/python ...
+#
+# time: 8s, 8.021s
+# bin: fully populated
+#      - pip is there as well
+# jupyter: schema not found, doesn't work flat out
+# ipython w/ deps: doesn't get generated
+# ipython does work with pip installation of wheel
 _venv_py_venv(
     name = "venv_pyvenv",
-    deps = all_requirements,
+    deps = all_requirements + ["//tools:git_utils"],
     data = [],
     extra_pip_commands = [],
     # Drops in a pre-destined location
     venv_location = "rules_pyvenv",
     # Allows generated files to be reached
     always_link = True,
+    tags = [
+        "no-mypy",
+    ],
 )
 
 # This repository rule fetches the metadata for python packages we
