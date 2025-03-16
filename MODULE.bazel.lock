@@ -2292,7 +2292,7 @@
     "@@rules_python~//python/extensions:pip.bzl%pip": {
       "general": {
         "bzlTransitiveDigest": "MnNArHHY8j8NDVbZuG3K3RqZcPVAM/4yMTGq0VScRm0=",
-        "usagesDigest": "w/IBJZ1yyah5uwNfAF5da1Icf5aiPTr4mo6jjHWvWc4=",
+        "usagesDigest": "VvQFV/lB11C0aXrs92hpDkKBLTN1m18ux3+aFUpSTAg=",
         "recordedFileInputs": {
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_windows_lock.txt": "4367c7d4cc4a1c2d6a136edace02581066f1c9ead10937685dde568d1061189f",
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_linux_lock.txt": "ce8b16e007309a610c37eec908b75451733ae5efb9c14ec7e6f04557b81d621e",
@@ -2312,7 +2312,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2349,7 +2351,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2363,7 +2367,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2410,7 +2416,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2424,7 +2432,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2438,7 +2448,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2452,7 +2464,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2476,7 +2490,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2490,7 +2506,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2504,7 +2522,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2584,7 +2604,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2598,7 +2620,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2622,7 +2646,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2636,7 +2662,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2660,7 +2688,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2674,7 +2704,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2688,7 +2720,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2702,7 +2736,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2726,7 +2762,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2740,7 +2778,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2784,7 +2824,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2828,7 +2870,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2842,7 +2886,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2856,7 +2902,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2880,7 +2928,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2894,7 +2944,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2934,7 +2986,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2948,7 +3002,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3008,7 +3064,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3032,7 +3090,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3066,7 +3126,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3080,7 +3142,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3094,7 +3158,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3148,7 +3214,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3162,7 +3230,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3176,7 +3246,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3190,7 +3262,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3214,7 +3288,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3238,7 +3314,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3272,7 +3350,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3358,7 +3438,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3372,7 +3454,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3386,7 +3470,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3400,7 +3486,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3424,7 +3512,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "group_deps": [
                 "networkx",
@@ -3453,7 +3543,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "group_deps": [
                 "openhtf",
@@ -3472,7 +3564,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3506,7 +3600,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3530,7 +3626,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3601,7 +3699,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3625,7 +3725,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3649,7 +3751,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3663,7 +3767,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3713,7 +3819,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3727,7 +3835,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3797,7 +3907,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3811,7 +3923,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3825,7 +3939,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3849,7 +3965,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3873,7 +3991,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "group_deps": [
                 "networkx",
@@ -3892,7 +4012,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3906,7 +4028,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3920,7 +4044,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3934,7 +4060,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4004,7 +4132,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4028,7 +4158,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4042,7 +4174,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4141,7 +4275,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4155,7 +4291,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4195,7 +4333,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4363,7 +4503,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "group_deps": [
                 "openhtf",
@@ -4382,7 +4524,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4396,7 +4540,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4430,7 +4576,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4444,7 +4592,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4488,7 +4638,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4502,7 +4654,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4516,7 +4670,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4530,7 +4686,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4544,7 +4702,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4558,7 +4718,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4572,7 +4734,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4586,7 +4750,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4600,7 +4766,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4660,7 +4828,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4694,7 +4864,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4708,7 +4880,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4745,7 +4919,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4792,7 +4968,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4832,7 +5010,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4869,7 +5049,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4883,7 +5065,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4917,7 +5101,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4951,7 +5137,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4965,7 +5153,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4989,7 +5179,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5003,7 +5195,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5043,7 +5237,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5057,7 +5253,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5071,7 +5269,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5085,7 +5285,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5125,7 +5327,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5139,7 +5343,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5163,7 +5369,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5177,7 +5385,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5191,7 +5401,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5215,7 +5427,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5249,7 +5463,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5273,7 +5489,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5287,7 +5505,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5311,7 +5531,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5335,7 +5557,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5349,7 +5573,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5403,7 +5629,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5427,7 +5655,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5441,7 +5671,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5465,7 +5697,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5479,7 +5713,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5519,7 +5755,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5533,7 +5771,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5557,7 +5797,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5591,7 +5833,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5615,7 +5859,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5649,7 +5895,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5663,7 +5911,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5687,7 +5937,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5701,7 +5953,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5735,7 +5989,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5759,7 +6015,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5773,7 +6031,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5787,7 +6047,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5821,7 +6083,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5845,7 +6109,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5869,7 +6135,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5883,7 +6151,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5910,7 +6180,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5934,7 +6206,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5958,7 +6232,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6005,7 +6281,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6019,7 +6297,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6033,7 +6313,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6067,7 +6349,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6081,7 +6365,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6095,7 +6381,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6109,7 +6397,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6123,7 +6413,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6147,7 +6439,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6366,7 +6660,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6400,7 +6696,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6434,7 +6732,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6448,7 +6748,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6492,7 +6794,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6516,7 +6820,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6530,7 +6836,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6544,7 +6852,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6568,7 +6878,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6582,7 +6894,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6596,7 +6910,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6610,7 +6926,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6634,7 +6952,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6648,7 +6968,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6682,7 +7004,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6696,7 +7020,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6710,7 +7036,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6757,7 +7085,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6771,7 +7101,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6785,7 +7117,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6809,7 +7143,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6843,7 +7179,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6857,7 +7195,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6871,7 +7211,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6885,7 +7227,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6922,7 +7266,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6956,7 +7302,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6970,7 +7318,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6984,7 +7334,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7018,7 +7370,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7032,7 +7386,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7046,7 +7402,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7070,7 +7428,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7104,7 +7464,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7118,7 +7480,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7132,7 +7496,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7146,7 +7512,9 @@
               "dep_template": "@pip//{name}:{target}",
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple"
+                "https://pypi.org/simple",
+                "--prefer-binary",
+                "--only-binary=pygraphviz"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
