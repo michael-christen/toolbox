@@ -4,6 +4,7 @@ Cannot depend on any of our other sources, as this is one of a very small
 amount of things that won't run with bazel.
 """
 
+import argparse
 import dataclasses
 import pathlib
 import subprocess
@@ -19,7 +20,16 @@ class QueryFile:
 def generate(query_file: QueryFile, compare: bool) -> None:
     output_arr = []
     targets = (
-        subprocess.check_output(["bazel", "query", query_file.query])
+        subprocess.check_output(
+            [
+                "bazel",
+                "query",
+                # Keep the output quiet
+                "--ui_event_filters=-info",
+                "--noshow_progress",
+                query_file.query,
+            ]
+        )
         .decode("utf-8")
         .strip()
         .splitlines()
@@ -82,6 +92,19 @@ def main(compare: bool) -> None:
 
 
 if __name__ == "__main__":
-    # XXX: Add argparse and put this in the linter
-    compare = False
+    parser = argparse.ArgumentParser(description="Process some choices.")
+    parser.add_argument(
+        "--mode",
+        choices=["check", "format"],
+        help="Choose check/format from the given options",
+        required=True,
+    )
+    args = parser.parse_args()
+    if args.mode == "check":
+        compare = True
+    elif args.mode == "format":
+        compare = False
+    else:
+        raise ValueError(f'"{args.mode}" is not a valid --mode')
+
     main(compare=compare)

@@ -104,6 +104,13 @@ trap print_error ERR
 CONFIG="--config quiet"
 # Can uncomment to get more verbose
 # CONFIG=""
+
+# Build for use
+# bazel build ${CONFIG} -- //packaging:query_generator
+
+# Run query generator
+# ./bazel-bin/packaging/query_generator --mode $mode
+
 echo $BAZEL_FILES | xargs bazel run ${CONFIG} -- //tools/buildifier ${BUILDIFIER_ARGS[@]}
 bazel run ${CONFIG} -- ${BAZEL_TOOL}
 echo $MARKDOWN_FILES | xargs bazel run ${CONFIG} -- //tools/prettier ${PRETTIER_ARGS[@]}

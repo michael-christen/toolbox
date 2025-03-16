@@ -15,6 +15,7 @@ PYTHON_TARGETS = [
     "//hw_services/sbr:sbr_py_library",
     "//mchristen/parsing_scripts:pocket_export_html_to_csv",
     "//mchristen/parsing_scripts:youtube_playlist_to_csv",
+    "//packaging:query_generator",
     "//third_party/bazel/proto:action_cache_py_library",
     "//third_party/bazel/proto:build_event_stream_py_library",
     "//third_party/bazel/proto:command_line_py_library",
