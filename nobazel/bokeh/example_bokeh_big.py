@@ -1,9 +1,15 @@
 import networkx as nx
-from networkx.drawing import nx_agraph
-from bokeh.models import ColumnDataSource, CustomJS, Circle, MultiLine, Tabs, TabPanel
-from bokeh.plotting import figure, from_networkx
-from bokeh.layouts import layout
 from bokeh.io import show
+from bokeh.layouts import layout
+from bokeh.models import Circle
+from bokeh.models import ColumnDataSource
+from bokeh.models import CustomJS
+from bokeh.models import MultiLine
+from bokeh.models import TabPanel
+from bokeh.models import Tabs
+from bokeh.plotting import figure
+from bokeh.plotting import from_networkx
+from networkx.drawing import nx_agraph
 
 # Create a sample directed graph
 # G = nx.DiGraph()
@@ -26,12 +32,14 @@ main_plot = figure(
 
 # Convert the graph to Bokeh's format
 layout = nx.spring_layout(G)
-main_graph = from_networkx(G, nx_agraph.graphviz_layout, prog='dot')
+main_graph = from_networkx(G, nx_agraph.graphviz_layout, prog="dot")
 
 # Node renderer
 RADIUS = 5
 main_graph.node_renderer.glyph = Circle(radius=RADIUS, fill_color="skyblue")
-main_graph.node_renderer.selection_glyph = Circle(radius=RADIUS, fill_color="orange")
+main_graph.node_renderer.selection_glyph = Circle(
+    radius=RADIUS, fill_color="orange"
+)
 
 # Edge renderer
 main_graph.edge_renderer.glyph = MultiLine(line_color="gray", line_width=2)
@@ -48,7 +56,7 @@ sub_plot = figure(
     title="Subgraph",
 )
 
-sub_graph = from_networkx(nx.DiGraph(), nx_agraph.graphviz_layout, prog='dot')
+sub_graph = from_networkx(nx.DiGraph(), nx_agraph.graphviz_layout, prog="dot")
 sub_plot.renderers.append(sub_graph)
 
 # Create Tabs
@@ -65,7 +73,7 @@ callback = CustomJS(
         ancestors=ancestors,
         descendants=descendants,
         edges=[(u, v) for u, v in G.edges],
-        #G=G,
+        # G=G,
     ),
     code="""
     const selected_indices = main_graph.node_renderer.data_source.selected.indices;
@@ -96,7 +104,7 @@ callback = CustomJS(
         sub_renderer.data = { start, end };
         sub_renderer.change.emit();
     }
-    """
+    """,
 )
 
 # Attach callback to the selection change

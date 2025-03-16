@@ -23,7 +23,9 @@ PROTO_PYTHON_TARGETS = [
 # PYTHON_TARGETS generated via:
 # `bazel query 'kind("py_binary", //...) + kind("py_library", //...) - //tools:_mypy_cli'`
 PYTHON_TARGETS = [
-    "//apps:bazel_parser",
+    "//apps:example_bokeh",
+    "//apps/bazel_parser:bazel_parser",
+    "//apps/bazel_parser:panel",
     "//bzl:pytest_main",
     "//docs:conf",
     "//examples/basic:client",
@@ -57,7 +59,6 @@ PYTHON_TARGETS = [
     "//tools:utils",
     "//tools/black:black",
     "//tools/flake8:flake8",
-    "//tools/ipython:ipython",
     "//tools/isort:isort",
     "//tools/sphinx:sphinx_build_wrapper",
     "//utils:bep_reader",

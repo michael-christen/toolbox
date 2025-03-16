@@ -1,35 +1,43 @@
 import networkx as nx
-from bokeh.plotting import figure, show, from_networkx
-from bokeh.models import ColumnDataSource, CustomJS, Button
 from bokeh.layouts import column
+from bokeh.models import Button
+from bokeh.models import ColumnDataSource
+from bokeh.models import CustomJS
+from bokeh.plotting import figure
+from bokeh.plotting import from_networkx
+from bokeh.plotting import show
 
 # Create a sample graph
 G = nx.karate_club_graph()
 
 # Add custom attributes
 for node in G.nodes:
-    G.nodes[node]['group'] = node % 3
+    G.nodes[node]["group"] = node % 3
 
 for edge in G.edges:
-    G.edges[edge]['weight'] = edge[0] % 2
+    G.edges[edge]["weight"] = edge[0] % 2
 
 # Set up the Bokeh plot
-plot = figure(title="Interactive NetworkX Graph",
-              x_range=(-1.5, 1.5), y_range=(-1.5, 1.5),
-              width=800, height=800)
+plot = figure(
+    title="Interactive NetworkX Graph",
+    x_range=(-1.5, 1.5),
+    y_range=(-1.5, 1.5),
+    width=800,
+    height=800,
+)
 
 # Convert NetworkX graph to Bokeh
 graph_renderer = from_networkx(G, nx.spring_layout)
 
 # Customize initial node and edge appearances
 node_colors = {0: "red", 1: "green", 2: "blue"}
-graph_renderer.node_renderer.data_source.data['color'] = [
-    node_colors[G.nodes[node]['group']] for node in G.nodes
+graph_renderer.node_renderer.data_source.data["color"] = [
+    node_colors[G.nodes[node]["group"]] for node in G.nodes
 ]
 
 edge_colors = ["black", "gray"]
-graph_renderer.edge_renderer.data_source.data['line_color'] = [
-    edge_colors[G.edges[edge]['weight']] for edge in G.edges
+graph_renderer.edge_renderer.data_source.data["line_color"] = [
+    edge_colors[G.edges[edge]["weight"]] for edge in G.edges
 ]
 
 # Set visual properties using the ColumnDataSource data
@@ -43,9 +51,12 @@ plot.renderers.append(graph_renderer)
 button = Button(label="Toggle Colors", button_type="success")
 
 # JavaScript callback
-callback = CustomJS(args=dict(node_source=graph_renderer.node_renderer.data_source,
-                              edge_source=graph_renderer.edge_renderer.data_source),
-                    code="""
+callback = CustomJS(
+    args=dict(
+        node_source=graph_renderer.node_renderer.data_source,
+        edge_source=graph_renderer.edge_renderer.data_source,
+    ),
+    code="""
     // Access the data sources
     let node_data = node_source.data;
     let edge_data = edge_source.data;
@@ -63,7 +74,8 @@ callback = CustomJS(args=dict(node_source=graph_renderer.node_renderer.data_sour
     // Emit changes
     node_source.change.emit();
     edge_source.change.emit();
-""")
+""",
+)
 button.js_on_click(callback)
 
 # Display the plot with the button

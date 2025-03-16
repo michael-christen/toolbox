@@ -42,6 +42,7 @@ bazel run //apps/bazel_parser --output_groups=-mypy -- git-capture --repo-dir $r
 bazel run //apps/bazel_parser --output_groups=-mypy -- process --file-commit-pb $file_commit_pb --query-pb $query_pb --bep-pb $bep_pb --out-gml $out_gml --out-csv $out_csv
 bazel run //apps/bazel_parser --output_groups=-mypy -- visualize --gml $out_gml --out-html $out_html
 """
+
 import csv
 import datetime
 import logging
@@ -55,8 +56,8 @@ import networkx
 from apps.bazel_parser import panel
 from third_party.bazel.src.main.protobuf import build_pb2
 from tools import bazel_utils
-from tools import git_utils
 from tools import git_pb2
+from tools import git_utils
 from utils import bep_reader
 from utils import graph_algorithms
 
@@ -67,7 +68,7 @@ OUT_PATH_TYPE = click.Path(exists=False, path_type=pathlib.Path)
 
 
 def _get_rules(
-    query_result: build_pb2.QueryResult
+    query_result: build_pb2.QueryResult,
 ) -> dict[str, build_pb2.Rule]:
     """Get rules by name"""
     rules = {}
@@ -120,19 +121,20 @@ def get_dependency_digraph(
 
 
 def _normalize_paths_to_bazel_intermediates(
-        files: list[pathlib.Path]) -> dict[str, pathlib.Path]:
+    files: list[pathlib.Path],
+) -> dict[str, pathlib.Path]:
     normalized_map = {}
     for f in files:
-        normalized = f'//{f}'
+        normalized = f"//{f}"
         normalized_map[normalized] = f
     return normalized_map
 
 
 def _normalize_bazel_target_to_intermediate(target: str) -> str:
-    if target.startswith('//:'):
-        return target.replace(':', '')
+    if target.startswith("//:"):
+        return target.replace(":", "")
     else:
-        return target.replace(':', '/')
+        return target.replace(":", "/")
 
 
 class Node(TypedDict):
@@ -161,22 +163,22 @@ def get_node_field_names() -> list[str]:
     Keep in sync with Node
     """
     return [
-        'node_name',
-        'node_class',
-        'num_parents',
-        'num_ancestors',
-        'num_duration_ancestors',
-        'num_children',
-        'num_descendants',
-        'num_source_descendants',
-        'pagerank',
-        'hubs_metric',
-        'authorities_metric',
-        'node_duration_s',
-        'group_duration_s',
-        'expected_duration_s',
-        'node_probability_cache_hit',
-        'group_probability_cache_hit',
+        "node_name",
+        "node_class",
+        "num_parents",
+        "num_ancestors",
+        "num_duration_ancestors",
+        "num_children",
+        "num_descendants",
+        "num_source_descendants",
+        "pagerank",
+        "hubs_metric",
+        "authorities_metric",
+        "node_duration_s",
+        "group_duration_s",
+        "expected_duration_s",
+        "node_probability_cache_hit",
+        "group_probability_cache_hit",
     ]
 
 
@@ -185,19 +187,23 @@ def _get_node_probability(
     file_commit_map: git_utils.FileCommitMap,
 ) -> dict[str, float]:
     # XXX: Test case with BUILD further up, ensure we still get the right match
-    bazel_intermediates = _normalize_paths_to_bazel_intermediates(file_commit_map.file_map.keys())
+    bazel_intermediates = _normalize_paths_to_bazel_intermediates(
+        file_commit_map.file_map.keys()
+    )
     bazel_src_target_to_file = {}
     for node in graph.nodes:
         src_path = bazel_intermediates.get(
-            _normalize_bazel_target_to_intermediate(node))
+            _normalize_bazel_target_to_intermediate(node)
+        )
         if src_path is not None:
             bazel_src_target_to_file[node] = src_path
 
     node_probability = {}
     total_commits = len(file_commit_map.commit_map)
     for node, f in bazel_src_target_to_file.items():
-        node_probability[node] = 1 - (len(file_commit_map.file_map[f]) /
-                                      total_commits)
+        node_probability[node] = 1 - (
+            len(file_commit_map.file_map[f]) / total_commits
+        )
     return node_probability
 
 
@@ -210,12 +216,12 @@ def dependency_analysis(
     """Analyze the dependencies that we're getting to understand them."""
 
     group_probability = graph_algorithms.compute_group_probability(
-        graph=graph,
-        node_probability=node_probability)
+        graph=graph, node_probability=node_probability
+    )
 
     group_duration = graph_algorithms.compute_group_duration(
-        graph=graph,
-        node_duration_s=node_duration_s)
+        graph=graph, node_duration_s=node_duration_s
+    )
 
     pagerank = networkx.pagerank(graph)
     hubs, authorities = networkx.hits(graph)
@@ -231,17 +237,20 @@ def dependency_analysis(
     # logger.debug(f"edges: {len(graph.edges)}")
     # XXX: Show graph density
 
-
     nodes: dict[str, Node] = {}
     for node_name, node_class in node_to_class.items():
         num_parents = len(list(graph.predecessors(node_name)))
         num_children = len(list(graph.successors(node_name)))
         ancestors = list(networkx.ancestors(graph, node_name))
         num_ancestors = len(ancestors)
-        num_duration_ancestors = len([a for a in ancestors if a in node_duration_s])
+        num_duration_ancestors = len(
+            [a for a in ancestors if a in node_duration_s]
+        )
         descendants = list(networkx.descendants(graph, node_name))
         num_descendants = len(descendants)
-        num_source_descendants = len([d for d in descendants if d in node_probability])
+        num_source_descendants = len(
+            [d for d in descendants if d in node_probability]
+        )
         gp = group_probability.get(node_name, 1.0)
         gd = group_duration.get(node_name, 0)
         row: Node = {
@@ -274,34 +283,38 @@ def cli():
 
 
 @click.command()
-@click.option('--repo-dir', type=PATH_TYPE, required=True)
-@click.option('--days-ago', type=int, required=True)
-@click.option('--file-commit-pb', type=OUT_PATH_TYPE, required=True)
-def git_capture(repo_dir: pathlib.Path,
-                days_ago: int,
-                file_commit_pb: pathlib.Path,
-                ) -> None:
-    git_query_after = (
-        datetime.datetime.now() - datetime.timedelta(days=days_ago))
+@click.option("--repo-dir", type=PATH_TYPE, required=True)
+@click.option("--days-ago", type=int, required=True)
+@click.option("--file-commit-pb", type=OUT_PATH_TYPE, required=True)
+def git_capture(
+    repo_dir: pathlib.Path,
+    days_ago: int,
+    file_commit_pb: pathlib.Path,
+) -> None:
+    git_query_after = datetime.datetime.now() - datetime.timedelta(
+        days=days_ago
+    )
     file_commit_map = git_utils.get_file_commit_map_from_follow(
-        git_directory=repo_dir,
-        after=git_query_after)
-    file_commit_pb.write_bytes(file_commit_map.to_proto()
-                               .SerializeToString(deterministic=True))
+        git_directory=repo_dir, after=git_query_after
+    )
+    file_commit_pb.write_bytes(
+        file_commit_map.to_proto().SerializeToString(deterministic=True)
+    )
 
 
 @click.command()
-@click.option('--query-pb', type=PATH_TYPE, required=True)
-@click.option('--bep-pb', type=PATH_TYPE, required=True)
-@click.option('--file-commit-pb', type=PATH_TYPE, required=True)
-@click.option('--out-gml', type=OUT_PATH_TYPE, required=True)
-@click.option('--out-csv', type=OUT_PATH_TYPE, required=True)
-def process(query_pb: pathlib.Path,
-            bep_pb: pathlib.Path,
-            file_commit_pb: pathlib.Path,
-            out_gml: pathlib.Path,
-            out_csv: pathlib.Path,
-            ) -> None:
+@click.option("--query-pb", type=PATH_TYPE, required=True)
+@click.option("--bep-pb", type=PATH_TYPE, required=True)
+@click.option("--file-commit-pb", type=PATH_TYPE, required=True)
+@click.option("--out-gml", type=OUT_PATH_TYPE, required=True)
+@click.option("--out-csv", type=OUT_PATH_TYPE, required=True)
+def process(
+    query_pb: pathlib.Path,
+    bep_pb: pathlib.Path,
+    file_commit_pb: pathlib.Path,
+    out_gml: pathlib.Path,
+    out_csv: pathlib.Path,
+) -> None:
     # Get query result
     query_result = bazel_utils.parse_build_output(query_pb.read_bytes())
 
@@ -311,17 +324,19 @@ def process(query_pb: pathlib.Path,
     file_commit_map = git_utils.FileCommitMap.from_proto(file_commit_proto)
 
     # Get execution times
-    with bep_pb.open('rb') as bep_buf:
+    with bep_pb.open("rb") as bep_buf:
         node_duration = bep_reader.get_label_to_runtime(bep_buf)
-        node_duration_s = {label: dt.total_seconds()
-                           for label, dt in node_duration.items()}
+        node_duration_s = {
+            label: dt.total_seconds() for label, dt in node_duration.items()
+        }
 
     # Get rules and graph
     rules = _get_rules(query_result)
     graph = get_dependency_digraph(rules, ignore_external=True)
 
-    node_probability = _get_node_probability(graph=graph,
-                                             file_commit_map=file_commit_map)
+    node_probability = _get_node_probability(
+        graph=graph, file_commit_map=file_commit_map
+    )
 
     node_to_class: dict[str, str] = {}
     # Gotta make table for all, in a consistent order, otherwise table, etc. won't line up:
@@ -330,24 +345,25 @@ def process(query_pb: pathlib.Path,
         node_rule = rules.get(node_name)
         if node_name in node_probability:
             # Probably want the source files too
-            node_to_class[node_name] = 'source_file'
+            node_to_class[node_name] = "source_file"
         elif node_rule:
             node_to_class[node_name] = node_rule.rule_class
         else:
-            node_to_class[node_name] = 'unknown'
-    nodes = dependency_analysis(node_to_class=node_to_class,
-                                graph=graph,
-                                node_duration_s=node_duration_s,
-                                node_probability=node_probability,
-                                )
+            node_to_class[node_name] = "unknown"
+    nodes = dependency_analysis(
+        node_to_class=node_to_class,
+        graph=graph,
+        node_duration_s=node_duration_s,
+        node_probability=node_probability,
+    )
     # Add node attributes to graph
     for name, node in nodes.items():
         for k, v in node.items():
             graph.nodes[name][k] = v
-        graph.nodes[name]['Node'] = node['node_name']
-        graph.nodes[name]['Highlight'] = 'No'
+        graph.nodes[name]["Node"] = node["node_name"]
+        graph.nodes[name]["Highlight"] = "No"
     # Write the nodes
-    with open(out_csv, 'w') as f:
+    with open(out_csv, "w") as f:
         writer = csv.DictWriter(f, fieldnames=get_node_field_names())
         writer.writeheader()
         for row in nodes.values():
@@ -357,11 +373,12 @@ def process(query_pb: pathlib.Path,
 
 
 @click.command()
-@click.option('--gml', type=PATH_TYPE, required=True)
-@click.option('--out-html', type=OUT_PATH_TYPE, required=False)
-def visualize(gml: pathlib.Path,
-              out_html: pathlib.Path | None,
-            ) -> None:
+@click.option("--gml", type=PATH_TYPE, required=True)
+@click.option("--out-html", type=OUT_PATH_TYPE, required=False)
+def visualize(
+    gml: pathlib.Path,
+    out_html: pathlib.Path | None,
+) -> None:
     graph = networkx.read_gml(gml)
     panel.run_panel(graph=graph, html_out=out_html)
 

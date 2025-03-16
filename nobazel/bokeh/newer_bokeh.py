@@ -1,14 +1,30 @@
-from bokeh.plotting import figure, from_networkx, curdoc
-from bokeh.models import ColumnDataSource, DataTable, TableColumn, Toggle, CustomJS, Circle, MultiLine
-from bokeh.layouts import column, row
 import networkx as nx
+from bokeh.layouts import column
+from bokeh.layouts import row
+from bokeh.models import Circle
+from bokeh.models import ColumnDataSource
+from bokeh.models import CustomJS
+from bokeh.models import DataTable
+from bokeh.models import MultiLine
+from bokeh.models import TableColumn
+from bokeh.models import Toggle
+from bokeh.plotting import curdoc
+from bokeh.plotting import figure
+from bokeh.plotting import from_networkx
 
 # Create a simple DAG
 G = nx.DiGraph()
-G.add_edges_from([
-    ("A", "B"), ("A", "C"), ("B", "D"), ("B", "E"),
-    ("C", "F"), ("E", "G"), ("F", "H")
-])
+G.add_edges_from(
+    [
+        ("A", "B"),
+        ("A", "C"),
+        ("B", "D"),
+        ("B", "E"),
+        ("C", "F"),
+        ("E", "G"),
+        ("F", "H"),
+    ]
+)
 
 # Generate a layout
 layout = nx.spring_layout(G)
@@ -32,14 +48,18 @@ node_data = {"name": list(G.nodes)}
 node_source = ColumnDataSource(data=node_data)
 
 columns = [TableColumn(field="name", title="Node")]
-data_table = DataTable(source=node_source, columns=columns, width=300, height=200)
+data_table = DataTable(
+    source=node_source, columns=columns, width=300, height=200
+)
 
 # JS Callback for hiding nodes and edges
-hide_callback = CustomJS(args=dict(
-    graph_renderer=graph_renderer,
-    node_source=node_source,
-    toggle=None,  # Placeholder for the toggle button
-), code="""
+hide_callback = CustomJS(
+    args=dict(
+        graph_renderer=graph_renderer,
+        node_source=node_source,
+        toggle=None,  # Placeholder for the toggle button
+    ),
+    code="""
     const selected_index = node_source.selected.indices[0];
     if (selected_index == null) {
         return;
@@ -104,10 +124,13 @@ hide_callback = CustomJS(args=dict(
 
     graph_renderer.node_renderer.data_source.change.emit();
     graph_renderer.edge_renderer.data_source.change.emit();
-""")
+""",
+)
 
 # Toggle Button
-toggle_button = Toggle(label="Show Subgraph", button_type="success", active=False)
+toggle_button = Toggle(
+    label="Show Subgraph", button_type="success", active=False
+)
 hide_callback.args["toggle"] = toggle_button
 
 # Link the callback to both table selection and the toggle button
@@ -117,4 +140,3 @@ toggle_button.js_on_click(hide_callback)
 # Layout
 layout = column(row(plot, column(data_table, toggle_button)))
 curdoc().add_root(layout)
-
