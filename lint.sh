@@ -103,7 +103,8 @@ trap print_error ERR
 
 CONFIG="--config quiet"
 # Can uncomment to get more verbose
-# CONFIG=""
+# XXX
+CONFIG=""
 
 # Build for use
 bazel build ${CONFIG} --output_groups=-mypy -- //packaging:query_generator
