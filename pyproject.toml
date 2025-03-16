@@ -38,3 +38,6 @@ extend-exclude = '''
 # exclude = [
 #     "bazel-*/",
 # ]
+
+[tool.jupytext]
+formats = "ipynb,py:percent"
