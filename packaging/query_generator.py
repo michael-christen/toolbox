@@ -43,6 +43,7 @@ def generate(query_file: QueryFile, compare: bool) -> None:
         + [f'    "{t}",' for t in targets]
         + [
             "]",
+            "",
         ]
     )
     output_msg = "\n".join(output_arr)
