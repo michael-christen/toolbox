@@ -106,7 +106,7 @@ CONFIG="--config quiet"
 # CONFIG=""
 
 # Build for use
-bazel build ${CONFIG} -- //packaging:query_generator
+bazel build ${CONFIG} --output_groups=-mypy -- //packaging:query_generator
 
 # Run query generator
 ./bazel-bin/packaging/query_generator --mode $mode

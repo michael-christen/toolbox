@@ -1,4 +1,26 @@
-# Generated via:
+# File generated via: query_generator.py
+#
+# PROTO_PYTHON_TARGETS generated via:
+# `bazel query 'attr(name, "_py_library", //...) intersect kind("py_library", //...)'`
+PROTO_PYTHON_TARGETS = [
+    "//examples/basic:hello_grpc_py_library",
+    "//examples/basic:hello_py_library",
+    "//hw_drivers/lis3mdl:lis3mdl_py_library",
+    "//hw_services/sbr:sbr_grpc_py_library",
+    "//hw_services/sbr:sbr_py_library",
+    "//third_party/bazel/proto:action_cache_py_library",
+    "//third_party/bazel/proto:build_event_stream_py_library",
+    "//third_party/bazel/proto:command_line_py_library",
+    "//third_party/bazel/proto:failure_details_py_library",
+    "//third_party/bazel/proto:invocation_policy_py_library",
+    "//third_party/bazel/proto:option_filters_py_library",
+    "//third_party/bazel/proto:package_load_metrics_py_library",
+    "//third_party/bazel/proto:strategy_policy_py_library",
+    "//third_party/bazel/src/main/protobuf:build_py_library",
+    "//tools:git_py_library",
+]
+
+# PYTHON_TARGETS generated via:
 # `bazel query 'kind("py_binary", //...) + kind("py_library", //...) - //tools:_mypy_cli'`
 PYTHON_TARGETS = [
     "//apps:bazel_parser",
