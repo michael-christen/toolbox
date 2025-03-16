@@ -104,6 +104,13 @@ trap print_error ERR
 CONFIG="--config quiet"
 # Can uncomment to get more verbose
 # CONFIG=""
+
+# Run query generator
+# TODO(#205): Build and run hermetic python with query_generator
+# bazel build ${CONFIG} --output_groups=-mypy -- //packaging:query_generator
+# ./bazel-bin/packaging/query_generator --mode $mode
+python packaging/query_generator.py --mode $mode
+
 echo $BAZEL_FILES | xargs bazel run ${CONFIG} -- //tools/buildifier ${BUILDIFIER_ARGS[@]}
 bazel run ${CONFIG} -- ${BAZEL_TOOL}
 echo $MARKDOWN_FILES | xargs bazel run ${CONFIG} -- //tools/prettier ${PRETTIER_ARGS[@]}

@@ -2,3 +2,4 @@
 gazelle_python.yaml linguist-generated=true -diff
 requirements_lock.txt linguist-generated=true -diff
 MODULE.bazel.lock linguist-generated=true -diff
+packaging/generated.bzl linguist-generated=true
