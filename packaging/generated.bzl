@@ -57,7 +57,6 @@ PYTHON_TARGETS = [
     "//tools:utils",
     "//tools/black:black",
     "//tools/flake8:flake8",
-    "//tools/ipython:ipython",
     "//tools/isort:isort",
     "//tools/sphinx:sphinx_build_wrapper",
     "//utils:bep_reader",
