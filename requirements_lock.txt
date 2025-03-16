@@ -102,10 +102,12 @@ black[jupyter]==25.1.0 \
 bleach[css]==6.2.0 \
     --hash=sha256:117d9c6097a7c3d22fd578fcd8d35ff1e125df6736f554da4e432fdd63f31e5e \
     --hash=sha256:123e894118b8a599fd80d3ec1a6d4cc7ce4e5882b1317a7e1ba69b56e95f991f
-    # via nbconvert
-bokeh==3.7.0 \
-    --hash=sha256:0e53301e5ac26f7545b51961e8851351e809f23a2caa7fc37c44f377ece759c4 \
-    --hash=sha256:f19d74e40066a8c237ced80c181fd1329c3b28a9cf347126ea1409f90a9c7874
+    # via
+    #   nbconvert
+    #   panel
+bokeh==3.6.3 \
+    --hash=sha256:1c219e2afe1405e6ada212071ac3bee91c95acfd1aa6d620eb6f61a751407747 \
+    --hash=sha256:9b81d6a9ea62e75a04a1a9d9f931942016890beec9ab5d129a2a4432cf595c0a
     # via
     #   -r requirements.in
     #   panel
@@ -812,7 +814,9 @@ kiwisolver==1.4.8 \
 linkify-it-py==2.0.3 \
     --hash=sha256:68cda27e162e9215c17d786649d1da0021a451bdc436ef9e0fa0ba5234b9b048 \
     --hash=sha256:6bcbc417b0ac14323382aef5c5192c0075bf8a9d6b41820a2b66371eac6b6d79
-    # via -r requirements.in
+    # via
+    #   -r requirements.in
+    #   panel
 markdown==3.7 \
     --hash=sha256:2ae2471477cfd02dbbf038d5d9bc226d40def84b4fe2986e49b59b6b472bbed2 \
     --hash=sha256:7eb6df5690b81a1d7942992c97fad2938e956e79df20cbc6186e9c3a77b1c803
@@ -824,6 +828,7 @@ markdown-it-py==3.0.0 \
     #   jupytext
     #   mdit-py-plugins
     #   myst-parser
+    #   panel
 markupsafe==3.0.2 \
     --hash=sha256:0bff5e0ae4ef2e1ae4fdf2dfd5b76c75e5c2fa4132d05fc1b0dabcd20c7e28c4 \
     --hash=sha256:0f4ca02bea9a23221c0182836703cbf8930c5e9454bacce27e767509fa286a30 \
@@ -941,6 +946,7 @@ mdit-py-plugins==0.4.2 \
     # via
     #   jupytext
     #   myst-parser
+    #   panel
 mdurl==0.1.2 \
     --hash=sha256:84008a41e51615a49fc9966191ff91509e3c40b939176e643fd50a5c2196b8f8 \
     --hash=sha256:bb413d29f5eea38f31dd4754dd7377d4465116fb207585f97bf925588687c1ba
@@ -997,10 +1003,6 @@ myst-parser==4.0.1 \
     --hash=sha256:5cfea715e4f3574138aecbf7d54132296bfd72bb614d31168f48c477a830a7c4 \
     --hash=sha256:9134e88959ec3b5780aedf8a99680ea242869d012e8821db3126d427edc9c95d
     # via -r requirements.in
-narwhals==1.30.0 \
-    --hash=sha256:0c50cc67a5404da501302882838ec17dce51703d22cd8ad89162d6f60ea0bb19 \
-    --hash=sha256:443aa0a1abfae89bc65a6b888a7e310a03d1818bfb2ccd61c150199a5f954c17
-    # via bokeh
 nbclient==0.10.2 \
     --hash=sha256:4ffee11e788b4a27fabeb7955547e4318a5298f34342a4bfd01f2e1faaeadc3d \
     --hash=sha256:90b7fc6b810630db87a6d0c2250b1f0ab4cf4d3c27a299b0cde78a4ed3fd9193
@@ -1120,6 +1122,7 @@ packaging==24.2 \
     #   jupytext
     #   matplotlib
     #   nbconvert
+    #   panel
     #   pytest
     #   sphinx
     #   tofupilot
@@ -1169,20 +1172,20 @@ pandas==2.2.3 \
     # via
     #   bokeh
     #   networkx
+    #   panel
 pandocfilters==1.5.1 \
     --hash=sha256:002b4a555ee4ebc03f8b66307e287fa492e4a77b4ea14d3f934328297bb4939e \
     --hash=sha256:93be382804a9cdb0a7267585f157e5d1731bbe5545a85b268d6f5fe6232de2bc
     # via nbconvert
-panel==0.10.3 \
-    --hash=sha256:0a97efd48ad9e88289c7e37b488a70eaa6e9946c8b3f886e184d5fd31aea1301 \
-    --hash=sha256:3619d8d3aec631ba047b294163ddecfa62727ca89576bff4a8c08e84416eb212
+panel==1.6.1 \
+    --hash=sha256:3ddbfed586c72ccdd83ab6bdf8af56e464b9f50f72afadddbe4eeaec409dc61d \
+    --hash=sha256:75f95701f03f6b64d00d69a5369c3f521126e697fb855e717816c4a02ddbfd57
     # via -r requirements.in
 param==2.2.0 \
     --hash=sha256:2ef63ef7aef37412eeb8ee3a06189a51f69c58c068824ae070baecb5b2abd0b8 \
     --hash=sha256:777f8c7b66ab820b70ea5ad09faaa6818308220caae89da3b5c5f359faa72a5e
     # via
     #   panel
-    #   pyct
     #   pyviz-comms
 parso==0.8.4 \
     --hash=sha256:a418670a20291dacd2dddc80c377c5c3791378ee1e8d12bffc35420643d43f18 \
@@ -1346,10 +1349,6 @@ pycparser==2.22 \
     --hash=sha256:491c8be9c040f5390f5bf44a5b07752bd07f56edf992381b05c701439eec10f6 \
     --hash=sha256:c3702b6d3dd8c7abc1afa565d7e63d53a1d0bd86cdc24edd75470f4de499cfcc
     # via cffi
-pyct==0.5.0 \
-    --hash=sha256:a4038a8885059ab8cac6f946ea30e0b5e6bdbe0b92b6723f06737035f9d65e8c \
-    --hash=sha256:dd9f4ac5cbd8e37c352c04036062d3c5f67efec76d404761ef16b0cbf26aa6a0
-    # via panel
 pyflakes==3.2.0 \
     --hash=sha256:1c61603ff154621fb2a9172037d84dca3500def8c8b630657d1701f026f8af3f \
     --hash=sha256:84b5be138a2dfbb40689ca07e2152deb896a65c3a3e24c251c5c62489568074a
@@ -1963,6 +1962,7 @@ typing-extensions==4.12.2 \
     #   ipython
     #   mypy
     #   openhtf
+    #   panel
     #   pyopenssl
     #   referencing
 tzdata==2025.1 \
