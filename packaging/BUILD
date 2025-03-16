@@ -7,7 +7,7 @@ package(default_visibility = ["//visibility:private"])
 # https://rules-python.readthedocs.io/en/latest/api/rules_python/python/packaging.html#py_package
 py_package(
     name = "py_package_all",
-    # XXX: Do we need to name each of the packages used?
+    # TODO(#203): Restructure repo so we don't need to update this
     packages = [
         "apps",
         "examples",
