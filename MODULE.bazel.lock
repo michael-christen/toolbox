@@ -2292,7 +2292,7 @@
     "@@rules_python~//python/extensions:pip.bzl%pip": {
       "general": {
         "bzlTransitiveDigest": "MnNArHHY8j8NDVbZuG3K3RqZcPVAM/4yMTGq0VScRm0=",
-        "usagesDigest": "VvQFV/lB11C0aXrs92hpDkKBLTN1m18ux3+aFUpSTAg=",
+        "usagesDigest": "+IFz/fexDJsGN0GJhI5woM0z2XCgx3J/Fc3u0FdU9C4=",
         "recordedFileInputs": {
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_windows_lock.txt": "4367c7d4cc4a1c2d6a136edace02581066f1c9ead10937685dde568d1061189f",
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_linux_lock.txt": "ce8b16e007309a610c37eec908b75451733ae5efb9c14ec7e6f04557b81d621e",
@@ -2310,11 +2310,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2349,11 +2350,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2365,11 +2367,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2414,11 +2417,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2430,11 +2434,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2446,11 +2451,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2462,11 +2468,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2488,11 +2495,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2504,11 +2512,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2520,11 +2529,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2602,11 +2612,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2618,11 +2629,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2644,11 +2656,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2660,11 +2673,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2686,11 +2700,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2702,11 +2717,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2718,11 +2734,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2734,11 +2751,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2760,11 +2778,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2776,11 +2795,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2822,11 +2842,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2868,11 +2889,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2884,11 +2906,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2900,11 +2923,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2926,11 +2950,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2942,11 +2967,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -2984,11 +3010,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3000,11 +3027,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3062,11 +3090,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3088,11 +3117,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3124,11 +3154,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3140,11 +3171,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3156,11 +3188,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3212,11 +3245,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3228,11 +3262,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3244,11 +3279,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3260,11 +3296,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3286,11 +3323,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3312,11 +3350,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3348,11 +3387,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3436,11 +3476,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3452,11 +3493,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3468,11 +3510,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3484,11 +3527,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3510,11 +3554,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "group_deps": [
                 "networkx",
@@ -3541,11 +3586,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "group_deps": [
                 "openhtf",
@@ -3562,11 +3608,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3598,11 +3645,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3624,11 +3672,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3697,11 +3746,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3723,11 +3773,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3749,11 +3800,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3765,11 +3817,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3817,11 +3870,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3833,11 +3887,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3905,11 +3960,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3921,11 +3977,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3937,11 +3994,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3963,11 +4021,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -3989,11 +4048,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "group_deps": [
                 "networkx",
@@ -4010,11 +4070,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4026,11 +4087,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4042,11 +4104,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4058,11 +4121,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4130,11 +4194,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4156,11 +4221,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4172,11 +4238,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4273,11 +4340,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4289,11 +4357,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4331,11 +4400,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4501,11 +4571,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "group_deps": [
                 "openhtf",
@@ -4522,11 +4593,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4538,11 +4610,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4574,11 +4647,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4590,11 +4664,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4636,11 +4711,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4652,11 +4728,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4668,11 +4745,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4684,11 +4762,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4700,11 +4779,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4716,11 +4796,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4732,11 +4813,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4748,11 +4830,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4764,11 +4847,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4826,11 +4910,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4862,11 +4947,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4878,11 +4964,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4917,11 +5004,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -4966,11 +5054,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5008,11 +5097,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5047,11 +5137,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5063,11 +5154,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5099,11 +5191,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5135,11 +5228,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5151,11 +5245,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5177,11 +5272,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5193,11 +5289,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5235,11 +5332,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5251,11 +5349,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5267,11 +5366,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5283,11 +5383,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5325,11 +5426,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5341,11 +5443,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5367,11 +5470,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5383,11 +5487,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5399,11 +5504,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5425,11 +5531,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5461,11 +5568,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5487,11 +5595,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5503,11 +5612,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5529,11 +5639,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5555,11 +5666,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5571,11 +5683,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5627,11 +5740,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5653,11 +5767,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5669,11 +5784,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5695,11 +5811,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5711,11 +5828,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5753,11 +5871,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5769,11 +5888,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5795,11 +5915,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5831,11 +5952,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5857,11 +5979,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5893,11 +6016,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5909,11 +6033,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5935,11 +6060,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5951,11 +6077,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -5987,11 +6114,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6013,11 +6141,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6029,11 +6158,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6045,11 +6175,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6081,11 +6212,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6107,11 +6239,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6133,11 +6266,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6149,11 +6283,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6178,11 +6313,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6204,11 +6340,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6230,11 +6367,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6279,11 +6417,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6295,11 +6434,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6311,11 +6451,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6347,11 +6488,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6363,11 +6505,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6379,11 +6522,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6395,11 +6539,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6411,11 +6556,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6437,11 +6583,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6658,11 +6805,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6694,11 +6842,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6730,11 +6879,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6746,11 +6896,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6792,11 +6943,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6818,11 +6970,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6834,11 +6987,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6850,11 +7004,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6876,11 +7031,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6892,11 +7048,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6908,11 +7065,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6924,11 +7082,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6950,11 +7109,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -6966,11 +7126,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7002,11 +7163,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7018,11 +7180,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7034,11 +7197,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7083,11 +7247,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7099,11 +7264,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7115,11 +7281,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7141,11 +7308,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7177,11 +7345,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7193,11 +7362,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7209,11 +7379,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7225,11 +7396,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7264,11 +7436,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7300,11 +7473,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7316,11 +7490,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7332,11 +7507,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7368,11 +7544,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7384,11 +7561,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7400,11 +7578,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7426,11 +7605,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7462,11 +7642,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7478,11 +7659,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7494,11 +7676,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
@@ -7510,11 +7693,12 @@
             "ruleClassName": "whl_library",
             "attributes": {
               "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
               "extra_pip_args": [
                 "--index-url",
-                "https://pypi.org/simple",
-                "--prefer-binary",
-                "--only-binary=pygraphviz"
+                "https://pypi.org/simple"
               ],
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
