@@ -1,6 +1,8 @@
-load("//bzl:py.bzl", "py_binary")
 load("@rules_python//python:packaging.bzl", "py_package", "py_wheel")
+load("//bzl:py.bzl", "py_binary")
 load("//packaging:generated.bzl", "PYTHON_TARGETS")
+
+package(default_visibility = ["//visibility:private"])
 
 # https://rules-python.readthedocs.io/en/latest/api/rules_python/python/packaging.html#py_package
 py_package(
@@ -30,8 +32,6 @@ genrule(
     outs = ["py_wheel_all.txt"],
     cmd = "echo $(location :py_wheel_all) >$@",
 )
-
-package(default_visibility = ["//visibility:private"])
 
 py_binary(
     name = "query_generator",
