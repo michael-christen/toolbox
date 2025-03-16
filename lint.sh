@@ -110,7 +110,8 @@ CONFIG=""
 bazel build ${CONFIG} --output_groups=-mypy -- //packaging:query_generator
 
 # Run query generator
-./bazel-bin/packaging/query_generator --mode $mode
+# XXX ./bazel-bin/packaging/query_generator --mode $mode
+python packaging/query_generator.py --mode $mode
 
 echo $BAZEL_FILES | xargs bazel run ${CONFIG} -- //tools/buildifier ${BUILDIFIER_ARGS[@]}
 bazel run ${CONFIG} -- ${BAZEL_TOOL}
