@@ -40,4 +40,5 @@ extend-exclude = '''
 # ]
 
 [tool.jupytext]
-formats = "ipynb,py:percent"
+# TODO(#211): Come to a conlusion on whether to have py:percent
+formats = "ipynb,md:myst"
