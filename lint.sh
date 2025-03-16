@@ -106,10 +106,10 @@ CONFIG="--config quiet"
 # CONFIG=""
 
 # Build for use
-# bazel build ${CONFIG} -- //packaging:query_generator
+bazel build ${CONFIG} -- //packaging:query_generator
 
 # Run query generator
-# ./bazel-bin/packaging/query_generator --mode $mode
+./bazel-bin/packaging/query_generator --mode $mode
 
 echo $BAZEL_FILES | xargs bazel run ${CONFIG} -- //tools/buildifier ${BUILDIFIER_ARGS[@]}
 bazel run ${CONFIG} -- ${BAZEL_TOOL}
