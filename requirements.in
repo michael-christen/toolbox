@@ -38,24 +38,24 @@ protobuf
 # introduced an issue with files named the same as their parent modules from
 # properly getting imported
 pytest<8.3.4
-# Documentation
-sphinx
-# - diagram generation
-sphinxcontrib-mermaid
 # https://github.com/bazelbuild/bazel/issues/4327
 setuptools<71
+# Documentation
+sphinx
 # - python code (parse, not executing)
 sphinx-autoapi
 sphinx-copybutton
-# - lots of miscellaneous plugins for sphinx
-sphinx-design
-# Documentation
-sphinxext-opengraph
-sphinxext-rediraffe
 sphinx-pyscript
 sphinx-rtd-theme
 sphinx-tippy
 sphinx-togglebutton
+# - lots of miscellaneous plugins for sphinx
+sphinx-design
+# - diagram generation
+sphinxcontrib-mermaid
+# Documentation
+sphinxext-opengraph
+sphinxext-rediraffe
 # Make nice-looking table output
 tabulate
 # Convenient backend for openhtf; https://www.tofupilot.com/

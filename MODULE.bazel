@@ -59,10 +59,13 @@ pip.parse(
     hub_name = "pip",
     python_version = PYTHON_VERSION,
     requirements_lock = "//:requirements_lock.txt",
+    # TODO(#209)
     # Avoid building wheels with system compiler
     # - pygraphviz
     # download_only = True,
     # Could put --extra-index-url here to grab my own wheels
+    # "--prefer-binary",
+    # "--only-binary=pygraphviz",
     # extra_pip_args = [],
 )
 
