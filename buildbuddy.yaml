@@ -1,6 +1,6 @@
 actions:
   - name: "Build and Test all targets"
-    container_image: "ubuntu-20.04"
+    container_image: "ubuntu-22.04"
     triggers:
       push:
         branches:
@@ -8,10 +8,12 @@ actions:
       pull_request:
         branches:
           - "*"
-    bazel_commands:
-      - 'build //...'
-      - 'test //...'
-      - 'coverage //... --combined_report=lcov --instrument_test_targets --instrumentation_filter="^//" --test_size_filters=-enormous'
+    steps:
+      # TODO(#209): Don't require installing this
+      - run: 'sudo apt-get update && sudo apt-get install -y graphviz graphviz-dev'
+      - run: 'bazel build //...'
+      - run: 'bazel test //...'
+      - run: 'bazel coverage //... --combined_report=lcov --instrument_test_targets --instrumentation_filter="^//" --test_size_filters=-enormous'
     resource_requests:
       # The default 20GB was too small
       disk: 40GB

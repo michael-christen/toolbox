@@ -26,3 +26,8 @@ runs:
         build --remote_header=x-buildbuddy-api-key="$BUILDBUDDY_API_KEY"
         import %workspace%/.aspect/bazelrc/ci.bazelrc
         EOF
+    - name: Install System Pre-requisites
+      shell: bash
+      run: |
+        # TODO(#209): Don't require installing this
+        sudo apt-get install -y graphviz graphviz-dev

@@ -39,6 +39,17 @@ bazel_dep(name = "rules_uv", version = "0.45.0")
 
 pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip")
 pip.parse(
+    # TODO(#209)
+    # Avoid building wheels with system compiler
+    # - pygraphviz
+    # download_only = True,
+    # Could put --extra-index-url here to grab my own wheels
+    # "--prefer-binary",
+    # "--only-binary=pygraphviz",
+    # extra_pip_args = [],
+    # TODO(#209): clang may not be available when building wheels, use clang
+    # instead (fix by not building here)
+    environment = {"CC": "gcc"},
     # Avoid building wheels with system compiler
     # - pygraphviz
     # download_only = True,
@@ -50,6 +61,10 @@ pip.parse(
             "openhtf",
             # specify undeclared dependency on six
             "six",
+        ],
+        "networkx": [
+            "networkx",
+            "pygraphviz",
         ],
     },
     hub_name = "pip",
