@@ -8,8 +8,6 @@ manifest:
     30fcd23745efe32ce681__mypyc: black
     3204bda914b7f2c6f497__mypyc: mypy
     IPython: ipython
-    IPython.conftest: ipython
-    IPython.consoleapp: ipython
     IPython.core: ipython
     IPython.core.alias: ipython
     IPython.core.application: ipython
@@ -26,9 +24,9 @@ manifest:
     IPython.core.display_trap: ipython
     IPython.core.displayhook: ipython
     IPython.core.displaypub: ipython
+    IPython.core.doctb: ipython
     IPython.core.error: ipython
     IPython.core.events: ipython
-    IPython.core.excolors: ipython
     IPython.core.extensions: ipython
     IPython.core.formatters: ipython
     IPython.core.getipython: ipython
@@ -36,8 +34,6 @@ manifest:
     IPython.core.history: ipython
     IPython.core.historyapp: ipython
     IPython.core.hooks: ipython
-    IPython.core.inputsplitter: ipython
-    IPython.core.inputtransformer: ipython
     IPython.core.inputtransformer2: ipython
     IPython.core.interactiveshell: ipython
     IPython.core.latex_symbols: ipython
@@ -68,18 +64,23 @@ manifest:
     IPython.core.prefilter: ipython
     IPython.core.profileapp: ipython
     IPython.core.profiledir: ipython
-    IPython.core.prompts: ipython
     IPython.core.pylabtools: ipython
     IPython.core.release: ipython
     IPython.core.shellapp: ipython
     IPython.core.splitinput: ipython
+    IPython.core.tbtools: ipython
+    IPython.core.tips: ipython
     IPython.core.ultratb: ipython
     IPython.core.usage: ipython
     IPython.display: ipython
     IPython.extensions: ipython
     IPython.extensions.autoreload: ipython
+    IPython.extensions.deduperreload: ipython
+    IPython.extensions.deduperreload.deduperreload: ipython
+    IPython.extensions.deduperreload.deduperreload_patching: ipython
     IPython.extensions.storemagic: ipython
     IPython.external: ipython
+    IPython.external.pickleshare: ipython
     IPython.external.qt_for_kernel: ipython
     IPython.external.qt_loaders: ipython
     IPython.lib: ipython
@@ -99,7 +100,6 @@ manifest:
     IPython.sphinxext.ipython_console_highlighting: ipython
     IPython.sphinxext.ipython_directive: ipython
     IPython.terminal: ipython
-    IPython.terminal.console: ipython
     IPython.terminal.debugger: ipython
     IPython.terminal.embed: ipython
     IPython.terminal.interactiveshell: ipython
@@ -140,10 +140,8 @@ manifest:
     IPython.utils: ipython
     IPython.utils.PyColorize: ipython
     IPython.utils.capture: ipython
-    IPython.utils.colorable: ipython
     IPython.utils.coloransi: ipython
     IPython.utils.contexts: ipython
-    IPython.utils.daemonize: ipython
     IPython.utils.data: ipython
     IPython.utils.decorators: ipython
     IPython.utils.dir2: ipython
@@ -156,7 +154,6 @@ manifest:
     IPython.utils.io: ipython
     IPython.utils.ipstruct: ipython
     IPython.utils.jsonutil: ipython
-    IPython.utils.localinterfaces: ipython
     IPython.utils.log: ipython
     IPython.utils.module_paths: ipython
     IPython.utils.openpy: ipython
@@ -164,8 +161,6 @@ manifest:
     IPython.utils.process: ipython
     IPython.utils.py3compat: ipython
     IPython.utils.sentinel: ipython
-    IPython.utils.shimmodule: ipython
-    IPython.utils.signatures: ipython
     IPython.utils.strdispatch: ipython
     IPython.utils.sysinfo: ipython
     IPython.utils.syspathcontext: ipython
@@ -174,10 +169,6 @@ manifest:
     IPython.utils.text: ipython
     IPython.utils.timing: ipython
     IPython.utils.tokenutil: ipython
-    IPython.utils.traitlets: ipython
-    IPython.utils.tz: ipython
-    IPython.utils.ulinecache: ipython
-    IPython.utils.version: ipython
     IPython.utils.wildcard: ipython
     OpenSSL: pyOpenSSL
     OpenSSL.SSL: pyOpenSSL
@@ -275,6 +266,34 @@ manifest:
     PIL.report: pillow
     alabaster: alabaster
     alabaster.support: alabaster
+    anyio: anyio
+    anyio.abc: anyio
+    anyio.from_thread: anyio
+    anyio.lowlevel: anyio
+    anyio.pytest_plugin: anyio
+    anyio.streams: anyio
+    anyio.streams.buffered: anyio
+    anyio.streams.file: anyio
+    anyio.streams.memory: anyio
+    anyio.streams.stapled: anyio
+    anyio.streams.text: anyio
+    anyio.streams.tls: anyio
+    anyio.to_interpreter: anyio
+    anyio.to_process: anyio
+    anyio.to_thread: anyio
+    argon2: argon2_cffi
+    argon2.exceptions: argon2_cffi
+    argon2.low_level: argon2_cffi
+    argon2.profiles: argon2_cffi
+    arrow: arrow
+    arrow.api: arrow
+    arrow.arrow: arrow
+    arrow.constants: arrow
+    arrow.factory: arrow
+    arrow.formatter: arrow
+    arrow.locales: arrow
+    arrow.parser: arrow
+    arrow.util: arrow
     astroid: astroid
     astroid.arguments: astroid
     astroid.astroid_manager: astroid
@@ -371,6 +390,7 @@ manifest:
     asttokens.mark_tokens: asttokens
     asttokens.util: asttokens
     asttokens.version: asttokens
+    async_lru: async_lru
     attr: attrs
     attr.converters: attrs
     attr.exceptions: attrs
@@ -457,344 +477,6 @@ manifest:
     blib2to3.pgen2.tokenize: black
     blib2to3.pygram: black
     blib2to3.pytree: black
-    bokeh: bokeh
-    bokeh.application: bokeh
-    bokeh.application.application: bokeh
-    bokeh.application.handlers: bokeh
-    bokeh.application.handlers.code: bokeh
-    bokeh.application.handlers.code_runner: bokeh
-    bokeh.application.handlers.directory: bokeh
-    bokeh.application.handlers.document_lifecycle: bokeh
-    bokeh.application.handlers.function: bokeh
-    bokeh.application.handlers.handler: bokeh
-    bokeh.application.handlers.lifecycle: bokeh
-    bokeh.application.handlers.notebook: bokeh
-    bokeh.application.handlers.request_handler: bokeh
-    bokeh.application.handlers.script: bokeh
-    bokeh.application.handlers.server_lifecycle: bokeh
-    bokeh.application.handlers.server_request_handler: bokeh
-    bokeh.client: bokeh
-    bokeh.client.connection: bokeh
-    bokeh.client.session: bokeh
-    bokeh.client.states: bokeh
-    bokeh.client.util: bokeh
-    bokeh.client.websocket: bokeh
-    bokeh.colors: bokeh
-    bokeh.colors.color: bokeh
-    bokeh.colors.groups: bokeh
-    bokeh.colors.named: bokeh
-    bokeh.colors.util: bokeh
-    bokeh.command: bokeh
-    bokeh.command.bootstrap: bokeh
-    bokeh.command.subcommand: bokeh
-    bokeh.command.subcommands: bokeh
-    bokeh.command.subcommands.build: bokeh
-    bokeh.command.subcommands.file_output: bokeh
-    bokeh.command.subcommands.info: bokeh
-    bokeh.command.subcommands.init: bokeh
-    bokeh.command.subcommands.json: bokeh
-    bokeh.command.subcommands.secret: bokeh
-    bokeh.command.subcommands.serve: bokeh
-    bokeh.command.subcommands.static: bokeh
-    bokeh.command.util: bokeh
-    bokeh.core: bokeh
-    bokeh.core.enums: bokeh
-    bokeh.core.has_props: bokeh
-    bokeh.core.json_encoder: bokeh
-    bokeh.core.properties: bokeh
-    bokeh.core.property: bokeh
-    bokeh.core.property.alias: bokeh
-    bokeh.core.property.aliases: bokeh
-    bokeh.core.property.any: bokeh
-    bokeh.core.property.auto: bokeh
-    bokeh.core.property.bases: bokeh
-    bokeh.core.property.color: bokeh
-    bokeh.core.property.constraints: bokeh
-    bokeh.core.property.container: bokeh
-    bokeh.core.property.data_frame: bokeh
-    bokeh.core.property.dataspec: bokeh
-    bokeh.core.property.datetime: bokeh
-    bokeh.core.property.descriptor_factory: bokeh
-    bokeh.core.property.descriptors: bokeh
-    bokeh.core.property.either: bokeh
-    bokeh.core.property.enum: bokeh
-    bokeh.core.property.factors: bokeh
-    bokeh.core.property.include: bokeh
-    bokeh.core.property.instance: bokeh
-    bokeh.core.property.json: bokeh
-    bokeh.core.property.nothing: bokeh
-    bokeh.core.property.nullable: bokeh
-    bokeh.core.property.numeric: bokeh
-    bokeh.core.property.override: bokeh
-    bokeh.core.property.primitive: bokeh
-    bokeh.core.property.readonly: bokeh
-    bokeh.core.property.required: bokeh
-    bokeh.core.property.serialized: bokeh
-    bokeh.core.property.singletons: bokeh
-    bokeh.core.property.string: bokeh
-    bokeh.core.property.struct: bokeh
-    bokeh.core.property.text_like: bokeh
-    bokeh.core.property.validation: bokeh
-    bokeh.core.property.vectorization: bokeh
-    bokeh.core.property.visual: bokeh
-    bokeh.core.property.wrappers: bokeh
-    bokeh.core.property_aliases: bokeh
-    bokeh.core.property_mixins: bokeh
-    bokeh.core.query: bokeh
-    bokeh.core.serialization: bokeh
-    bokeh.core.templates: bokeh
-    bokeh.core.types: bokeh
-    bokeh.core.validation: bokeh
-    bokeh.core.validation.check: bokeh
-    bokeh.core.validation.decorators: bokeh
-    bokeh.core.validation.errors: bokeh
-    bokeh.core.validation.issue: bokeh
-    bokeh.core.validation.warnings: bokeh
-    bokeh.document: bokeh
-    bokeh.document.callbacks: bokeh
-    bokeh.document.document: bokeh
-    bokeh.document.events: bokeh
-    bokeh.document.json: bokeh
-    bokeh.document.locking: bokeh
-    bokeh.document.models: bokeh
-    bokeh.document.modules: bokeh
-    bokeh.driving: bokeh
-    bokeh.embed: bokeh
-    bokeh.embed.bundle: bokeh
-    bokeh.embed.elements: bokeh
-    bokeh.embed.notebook: bokeh
-    bokeh.embed.server: bokeh
-    bokeh.embed.standalone: bokeh
-    bokeh.embed.util: bokeh
-    bokeh.embed.wrappers: bokeh
-    bokeh.events: bokeh
-    bokeh.ext: bokeh
-    bokeh.io: bokeh
-    bokeh.io.doc: bokeh
-    bokeh.io.export: bokeh
-    bokeh.io.notebook: bokeh
-    bokeh.io.output: bokeh
-    bokeh.io.saving: bokeh
-    bokeh.io.showing: bokeh
-    bokeh.io.state: bokeh
-    bokeh.io.util: bokeh
-    bokeh.io.webdriver: bokeh
-    bokeh.layouts: bokeh
-    bokeh.model: bokeh
-    bokeh.model.data_model: bokeh
-    bokeh.model.docs: bokeh
-    bokeh.model.model: bokeh
-    bokeh.model.util: bokeh
-    bokeh.models: bokeh
-    bokeh.models.annotations: bokeh
-    bokeh.models.annotations.annotation: bokeh
-    bokeh.models.annotations.arrows: bokeh
-    bokeh.models.annotations.dimensional: bokeh
-    bokeh.models.annotations.geometry: bokeh
-    bokeh.models.annotations.html: bokeh
-    bokeh.models.annotations.html.html_annotation: bokeh
-    bokeh.models.annotations.html.labels: bokeh
-    bokeh.models.annotations.html.toolbars: bokeh
-    bokeh.models.annotations.labels: bokeh
-    bokeh.models.annotations.legends: bokeh
-    bokeh.models.axes: bokeh
-    bokeh.models.callbacks: bokeh
-    bokeh.models.canvas: bokeh
-    bokeh.models.common.properties: bokeh
-    bokeh.models.comparisons: bokeh
-    bokeh.models.coordinates: bokeh
-    bokeh.models.css: bokeh
-    bokeh.models.dom: bokeh
-    bokeh.models.expressions: bokeh
-    bokeh.models.filters: bokeh
-    bokeh.models.formatters: bokeh
-    bokeh.models.glyph: bokeh
-    bokeh.models.glyphs: bokeh
-    bokeh.models.graphics: bokeh
-    bokeh.models.graphs: bokeh
-    bokeh.models.grids: bokeh
-    bokeh.models.labeling: bokeh
-    bokeh.models.layouts: bokeh
-    bokeh.models.map_plots: bokeh
-    bokeh.models.mappers: bokeh
-    bokeh.models.misc: bokeh
-    bokeh.models.misc.group_by: bokeh
-    bokeh.models.nodes: bokeh
-    bokeh.models.plots: bokeh
-    bokeh.models.ranges: bokeh
-    bokeh.models.renderers: bokeh
-    bokeh.models.renderers.contour_renderer: bokeh
-    bokeh.models.renderers.glyph_renderer: bokeh
-    bokeh.models.renderers.graph_renderer: bokeh
-    bokeh.models.renderers.renderer: bokeh
-    bokeh.models.renderers.tile_renderer: bokeh
-    bokeh.models.scales: bokeh
-    bokeh.models.selections: bokeh
-    bokeh.models.selectors: bokeh
-    bokeh.models.sources: bokeh
-    bokeh.models.text: bokeh
-    bokeh.models.textures: bokeh
-    bokeh.models.tickers: bokeh
-    bokeh.models.tiles: bokeh
-    bokeh.models.tools: bokeh
-    bokeh.models.transforms: bokeh
-    bokeh.models.ui: bokeh
-    bokeh.models.ui.dialogs: bokeh
-    bokeh.models.ui.examiner: bokeh
-    bokeh.models.ui.floating: bokeh
-    bokeh.models.ui.icons: bokeh
-    bokeh.models.ui.menus: bokeh
-    bokeh.models.ui.panels: bokeh
-    bokeh.models.ui.panes: bokeh
-    bokeh.models.ui.tooltips: bokeh
-    bokeh.models.ui.ui_element: bokeh
-    bokeh.models.util: bokeh
-    bokeh.models.util.structure: bokeh
-    bokeh.models.widgets: bokeh
-    bokeh.models.widgets.buttons: bokeh
-    bokeh.models.widgets.groups: bokeh
-    bokeh.models.widgets.indicators: bokeh
-    bokeh.models.widgets.inputs: bokeh
-    bokeh.models.widgets.markups: bokeh
-    bokeh.models.widgets.pickers: bokeh
-    bokeh.models.widgets.sliders: bokeh
-    bokeh.models.widgets.tables: bokeh
-    bokeh.models.widgets.widget: bokeh
-    bokeh.palettes: bokeh
-    bokeh.plotting: bokeh
-    bokeh.plotting.contour: bokeh
-    bokeh.plotting.glyph_api: bokeh
-    bokeh.plotting.gmap: bokeh
-    bokeh.plotting.graph: bokeh
-    bokeh.protocol: bokeh
-    bokeh.protocol.exceptions: bokeh
-    bokeh.protocol.message: bokeh
-    bokeh.protocol.messages: bokeh
-    bokeh.protocol.messages.ack: bokeh
-    bokeh.protocol.messages.error: bokeh
-    bokeh.protocol.messages.ok: bokeh
-    bokeh.protocol.messages.patch_doc: bokeh
-    bokeh.protocol.messages.pull_doc_reply: bokeh
-    bokeh.protocol.messages.pull_doc_req: bokeh
-    bokeh.protocol.messages.push_doc: bokeh
-    bokeh.protocol.messages.server_info_reply: bokeh
-    bokeh.protocol.messages.server_info_req: bokeh
-    bokeh.protocol.receiver: bokeh
-    bokeh.resources: bokeh
-    bokeh.sampledata: bokeh
-    bokeh.sampledata.airport_routes: bokeh
-    bokeh.sampledata.airports: bokeh
-    bokeh.sampledata.anscombe: bokeh
-    bokeh.sampledata.antibiotics: bokeh
-    bokeh.sampledata.autompg: bokeh
-    bokeh.sampledata.autompg2: bokeh
-    bokeh.sampledata.browsers: bokeh
-    bokeh.sampledata.commits: bokeh
-    bokeh.sampledata.cows: bokeh
-    bokeh.sampledata.daylight: bokeh
-    bokeh.sampledata.degrees: bokeh
-    bokeh.sampledata.emissions: bokeh
-    bokeh.sampledata.forensic_glass: bokeh
-    bokeh.sampledata.gapminder: bokeh
-    bokeh.sampledata.glucose: bokeh
-    bokeh.sampledata.haar_cascade: bokeh
-    bokeh.sampledata.iris: bokeh
-    bokeh.sampledata.les_mis: bokeh
-    bokeh.sampledata.lincoln: bokeh
-    bokeh.sampledata.movies_data: bokeh
-    bokeh.sampledata.mtb: bokeh
-    bokeh.sampledata.olympics2014: bokeh
-    bokeh.sampledata.penguins: bokeh
-    bokeh.sampledata.perceptions: bokeh
-    bokeh.sampledata.periodic_table: bokeh
-    bokeh.sampledata.population: bokeh
-    bokeh.sampledata.sample_geojson: bokeh
-    bokeh.sampledata.sample_superstore: bokeh
-    bokeh.sampledata.sea_surface_temperature: bokeh
-    bokeh.sampledata.sprint: bokeh
-    bokeh.sampledata.stocks: bokeh
-    bokeh.sampledata.titanic: bokeh
-    bokeh.sampledata.unemployment: bokeh
-    bokeh.sampledata.unemployment1948: bokeh
-    bokeh.sampledata.us_cities: bokeh
-    bokeh.sampledata.us_counties: bokeh
-    bokeh.sampledata.us_holidays: bokeh
-    bokeh.sampledata.us_marriages_divorces: bokeh
-    bokeh.sampledata.us_states: bokeh
-    bokeh.sampledata.world_cities: bokeh
-    bokeh.server: bokeh
-    bokeh.server.auth_provider: bokeh
-    bokeh.server.callbacks: bokeh
-    bokeh.server.connection: bokeh
-    bokeh.server.contexts: bokeh
-    bokeh.server.protocol_handler: bokeh
-    bokeh.server.server: bokeh
-    bokeh.server.session: bokeh
-    bokeh.server.tornado: bokeh
-    bokeh.server.urls: bokeh
-    bokeh.server.util: bokeh
-    bokeh.server.views: bokeh
-    bokeh.server.views.auth_request_handler: bokeh
-    bokeh.server.views.autoload_js_handler: bokeh
-    bokeh.server.views.doc_handler: bokeh
-    bokeh.server.views.ico_handler: bokeh
-    bokeh.server.views.metadata_handler: bokeh
-    bokeh.server.views.multi_root_static_handler: bokeh
-    bokeh.server.views.root_handler: bokeh
-    bokeh.server.views.session_handler: bokeh
-    bokeh.server.views.static_handler: bokeh
-    bokeh.server.views.ws: bokeh
-    bokeh.settings: bokeh
-    bokeh.sphinxext: bokeh
-    bokeh.sphinxext.bokeh_autodoc: bokeh
-    bokeh.sphinxext.bokeh_color: bokeh
-    bokeh.sphinxext.bokeh_dataframe: bokeh
-    bokeh.sphinxext.bokeh_directive: bokeh
-    bokeh.sphinxext.bokeh_enum: bokeh
-    bokeh.sphinxext.bokeh_example_metadata: bokeh
-    bokeh.sphinxext.bokeh_gallery: bokeh
-    bokeh.sphinxext.bokeh_jinja: bokeh
-    bokeh.sphinxext.bokeh_model: bokeh
-    bokeh.sphinxext.bokeh_options: bokeh
-    bokeh.sphinxext.bokeh_palette: bokeh
-    bokeh.sphinxext.bokeh_palette_group: bokeh
-    bokeh.sphinxext.bokeh_plot: bokeh
-    bokeh.sphinxext.bokeh_prop: bokeh
-    bokeh.sphinxext.bokeh_releases: bokeh
-    bokeh.sphinxext.bokeh_roles: bokeh
-    bokeh.sphinxext.bokeh_sampledata_xref: bokeh
-    bokeh.sphinxext.bokeh_settings: bokeh
-    bokeh.sphinxext.bokeh_sitemap: bokeh
-    bokeh.sphinxext.bokehjs_content: bokeh
-    bokeh.sphinxext.example_handler: bokeh
-    bokeh.sphinxext.sample: bokeh
-    bokeh.sphinxext.templates: bokeh
-    bokeh.sphinxext.util: bokeh
-    bokeh.themes: bokeh
-    bokeh.themes.theme: bokeh
-    bokeh.transform: bokeh
-    bokeh.util: bokeh
-    bokeh.util.browser: bokeh
-    bokeh.util.callback_manager: bokeh
-    bokeh.util.compiler: bokeh
-    bokeh.util.dataclasses: bokeh
-    bokeh.util.datatypes: bokeh
-    bokeh.util.dependencies: bokeh
-    bokeh.util.deprecation: bokeh
-    bokeh.util.functions: bokeh
-    bokeh.util.hex: bokeh
-    bokeh.util.info: bokeh
-    bokeh.util.logconfig: bokeh
-    bokeh.util.options: bokeh
-    bokeh.util.package: bokeh
-    bokeh.util.paths: bokeh
-    bokeh.util.serialization: bokeh
-    bokeh.util.strings: bokeh
-    bokeh.util.terminal: bokeh
-    bokeh.util.token: bokeh
-    bokeh.util.tornado: bokeh
-    bokeh.util.version: bokeh
-    bokeh.util.warnings: bokeh
     bs4: beautifulsoup4
     bs4.builder: beautifulsoup4
     bs4.css: beautifulsoup4
@@ -854,6 +536,8 @@ manifest:
     colorama.initialise: colorama
     colorama.win32: colorama
     colorama.winterm: colorama
+    comm: comm
+    comm.base_comm: comm
     contextlib2: contextlib2
     contourpy: contourpy
     contourpy.array: contourpy
@@ -1112,7 +796,6 @@ manifest:
     docutils.writers.pseudoxml: docutils
     docutils.writers.s5_html: docutils
     docutils.writers.xetex: docutils
-    entrypoints: entrypoints
     examples: openhtf
     examples.all_the_things: openhtf
     examples.checkpoints: openhtf
@@ -1428,6 +1111,7 @@ manifest:
     fontTools.voltLib.lexer: fonttools
     fontTools.voltLib.parser: fonttools
     fontTools.voltLib.voltToFea: fonttools
+    fqdn: fqdn
     furo: furo
     furo.navigation: furo
     furo.sphinxext: furo
@@ -1512,11 +1196,11 @@ manifest:
     google.protobuf.proto: protobuf
     google.protobuf.proto_builder: protobuf
     google.protobuf.proto_json: protobuf
+    google.protobuf.proto_text: protobuf
     google.protobuf.pyext: protobuf
     google.protobuf.pyext.cpp_message: protobuf
     google.protobuf.reflection: protobuf
     google.protobuf.runtime_version: protobuf
-    google.protobuf.service: protobuf
     google.protobuf.service_reflection: protobuf
     google.protobuf.source_context_pb2: protobuf
     google.protobuf.struct_pb2: protobuf
@@ -1558,6 +1242,9 @@ manifest:
     grpc.framework.interfaces.face: grpcio
     grpc.framework.interfaces.face.face: grpcio
     grpc.framework.interfaces.face.utilities: grpcio
+    h11: h11
+    httpcore: httpcore
+    httpx: httpx
     idna: idna
     idna.codec: idna
     idna.compat: idna
@@ -1613,16 +1300,20 @@ manifest:
     ipykernel.trio_runner: ipykernel
     ipykernel.zmqshell: ipykernel
     ipykernel_launcher: ipykernel
-    ipython_genutils: ipython_genutils
-    ipython_genutils.encoding: ipython_genutils
-    ipython_genutils.importstring: ipython_genutils
-    ipython_genutils.ipstruct: ipython_genutils
-    ipython_genutils.path: ipython_genutils
-    ipython_genutils.py3compat: ipython_genutils
-    ipython_genutils.tempdir: ipython_genutils
-    ipython_genutils.testing: ipython_genutils
-    ipython_genutils.testing.decorators: ipython_genutils
-    ipython_genutils.text: ipython_genutils
+    ipython_pygments_lexers: ipython_pygments_lexers
+    isoduration: isoduration
+    isoduration.constants: isoduration
+    isoduration.formatter: isoduration
+    isoduration.formatter.checking: isoduration
+    isoduration.formatter.exceptions: isoduration
+    isoduration.formatter.formatting: isoduration
+    isoduration.operations: isoduration
+    isoduration.operations.util: isoduration
+    isoduration.parser: isoduration
+    isoduration.parser.exceptions: isoduration
+    isoduration.parser.parsing: isoduration
+    isoduration.parser.util: isoduration
+    isoduration.types: isoduration
     isort: isort
     isort.api: isort
     isort.comments: isort
@@ -1744,29 +1435,36 @@ manifest:
     jedi.plugins.stdlib: jedi
     jedi.settings: jedi
     jedi.utils: jedi
-    jinja2: Jinja2
-    jinja2.async_utils: Jinja2
-    jinja2.bccache: Jinja2
-    jinja2.compiler: Jinja2
-    jinja2.constants: Jinja2
-    jinja2.debug: Jinja2
-    jinja2.defaults: Jinja2
-    jinja2.environment: Jinja2
-    jinja2.exceptions: Jinja2
-    jinja2.ext: Jinja2
-    jinja2.filters: Jinja2
-    jinja2.idtracking: Jinja2
-    jinja2.lexer: Jinja2
-    jinja2.loaders: Jinja2
-    jinja2.meta: Jinja2
-    jinja2.nativetypes: Jinja2
-    jinja2.nodes: Jinja2
-    jinja2.optimizer: Jinja2
-    jinja2.parser: Jinja2
-    jinja2.runtime: Jinja2
-    jinja2.sandbox: Jinja2
-    jinja2.utils: Jinja2
-    jinja2.visitor: Jinja2
+    jinja2: jinja2
+    jinja2.async_utils: jinja2
+    jinja2.bccache: jinja2
+    jinja2.compiler: jinja2
+    jinja2.constants: jinja2
+    jinja2.debug: jinja2
+    jinja2.defaults: jinja2
+    jinja2.environment: jinja2
+    jinja2.exceptions: jinja2
+    jinja2.ext: jinja2
+    jinja2.filters: jinja2
+    jinja2.idtracking: jinja2
+    jinja2.lexer: jinja2
+    jinja2.loaders: jinja2
+    jinja2.meta: jinja2
+    jinja2.nativetypes: jinja2
+    jinja2.nodes: jinja2
+    jinja2.optimizer: jinja2
+    jinja2.parser: jinja2
+    jinja2.runtime: jinja2
+    jinja2.sandbox: jinja2
+    jinja2.utils: jinja2
+    jinja2.visitor: jinja2
+    json5: json5
+    json5.host: json5
+    json5.lib: json5
+    json5.parser: json5
+    json5.tool: json5
+    json5.version: json5
+    jsonpointer: jsonpointer
     jsonschema: jsonschema
     jsonschema.benchmarks: jsonschema
     jsonschema.benchmarks.const_vs_enum: jsonschema
@@ -1788,10 +1486,8 @@ manifest:
     jupyter_client: jupyter_client
     jupyter_client.adapter: jupyter_client
     jupyter_client.asynchronous: jupyter_client
-    jupyter_client.asynchronous.channels: jupyter_client
     jupyter_client.asynchronous.client: jupyter_client
     jupyter_client.blocking: jupyter_client
-    jupyter_client.blocking.channels: jupyter_client
     jupyter_client.blocking.client: jupyter_client
     jupyter_client.channels: jupyter_client
     jupyter_client.channelsabc: jupyter_client
@@ -1811,6 +1507,10 @@ manifest:
     jupyter_client.manager: jupyter_client
     jupyter_client.managerabc: jupyter_client
     jupyter_client.multikernelmanager: jupyter_client
+    jupyter_client.provisioning: jupyter_client
+    jupyter_client.provisioning.factory: jupyter_client
+    jupyter_client.provisioning.local_provisioner: jupyter_client
+    jupyter_client.provisioning.provisioner_base: jupyter_client
     jupyter_client.restarter: jupyter_client
     jupyter_client.runapp: jupyter_client
     jupyter_client.session: jupyter_client
@@ -1828,73 +1528,192 @@ manifest:
     jupyter_core.troubleshoot: jupyter_core
     jupyter_core.utils: jupyter_core
     jupyter_core.version: jupyter_core
-    jupyterlab_jupytext: jupytext
-    jupytext: jupytext
-    jupytext.cell_metadata: jupytext
-    jupytext.cell_reader: jupytext
-    jupytext.cell_to_text: jupytext
-    jupytext.cli: jupytext
-    jupytext.combine: jupytext
-    jupytext.compare: jupytext
-    jupytext.config: jupytext
-    jupytext.contentsmanager: jupytext
-    jupytext.doxygen: jupytext
-    jupytext.formats: jupytext
-    jupytext.header: jupytext
-    jupytext.jupytext: jupytext
-    jupytext.kernels: jupytext
-    jupytext.languages: jupytext
-    jupytext.magics: jupytext
-    jupytext.metadata_filter: jupytext
-    jupytext.myst: jupytext
-    jupytext.paired_paths: jupytext
-    jupytext.pairs: jupytext
-    jupytext.pandoc: jupytext
-    jupytext.pep8: jupytext
-    jupytext.quarto: jupytext
-    jupytext.reraise: jupytext
-    jupytext.stringparser: jupytext
-    jupytext.version: jupytext
-    jupytext_config: jupytext
-    jupytext_config.jupytext_config: jupytext
-    jupytext_config.labconfig: jupytext
+    jupyter_events: jupyter_events
+    jupyter_events.cli: jupyter_events
+    jupyter_events.logger: jupyter_events
+    jupyter_events.pytest_plugin: jupyter_events
+    jupyter_events.schema: jupyter_events
+    jupyter_events.schema_registry: jupyter_events
+    jupyter_events.traits: jupyter_events
+    jupyter_events.utils: jupyter_events
+    jupyter_events.validators: jupyter_events
+    jupyter_events.yaml: jupyter_events
+    jupyter_lsp: jupyter_lsp
+    jupyter_lsp.constants: jupyter_lsp
+    jupyter_lsp.handlers: jupyter_lsp
+    jupyter_lsp.manager: jupyter_lsp
+    jupyter_lsp.non_blocking: jupyter_lsp
+    jupyter_lsp.paths: jupyter_lsp
+    jupyter_lsp.schema: jupyter_lsp
+    jupyter_lsp.serverextension: jupyter_lsp
+    jupyter_lsp.session: jupyter_lsp
+    jupyter_lsp.specs: jupyter_lsp
+    jupyter_lsp.specs.bash_language_server: jupyter_lsp
+    jupyter_lsp.specs.config: jupyter_lsp
+    jupyter_lsp.specs.dockerfile_language_server_nodejs: jupyter_lsp
+    jupyter_lsp.specs.javascript_typescript_langserver: jupyter_lsp
+    jupyter_lsp.specs.jedi_language_server: jupyter_lsp
+    jupyter_lsp.specs.julia_language_server: jupyter_lsp
+    jupyter_lsp.specs.pyls: jupyter_lsp
+    jupyter_lsp.specs.pyright: jupyter_lsp
+    jupyter_lsp.specs.python_lsp_server: jupyter_lsp
+    jupyter_lsp.specs.r_languageserver: jupyter_lsp
+    jupyter_lsp.specs.sql_language_server: jupyter_lsp
+    jupyter_lsp.specs.texlab: jupyter_lsp
+    jupyter_lsp.specs.typescript_language_server: jupyter_lsp
+    jupyter_lsp.specs.unified_language_server: jupyter_lsp
+    jupyter_lsp.specs.utils: jupyter_lsp
+    jupyter_lsp.specs.vscode_css_languageserver: jupyter_lsp
+    jupyter_lsp.specs.vscode_html_languageserver: jupyter_lsp
+    jupyter_lsp.specs.vscode_json_languageserver: jupyter_lsp
+    jupyter_lsp.specs.yaml_language_server: jupyter_lsp
+    jupyter_lsp.stdio: jupyter_lsp
+    jupyter_lsp.trait_types: jupyter_lsp
+    jupyter_lsp.types: jupyter_lsp
+    jupyter_lsp.virtual_documents_shadow: jupyter_lsp
+    jupyter_server: jupyter_server
+    jupyter_server.auth: jupyter_server
+    jupyter_server.auth.authorizer: jupyter_server
+    jupyter_server.auth.decorator: jupyter_server
+    jupyter_server.auth.identity: jupyter_server
+    jupyter_server.auth.login: jupyter_server
+    jupyter_server.auth.logout: jupyter_server
+    jupyter_server.auth.security: jupyter_server
+    jupyter_server.auth.utils: jupyter_server
+    jupyter_server.base: jupyter_server
+    jupyter_server.base.call_context: jupyter_server
+    jupyter_server.base.handlers: jupyter_server
+    jupyter_server.base.websocket: jupyter_server
+    jupyter_server.base.zmqhandlers: jupyter_server
+    jupyter_server.config_manager: jupyter_server
+    jupyter_server.extension: jupyter_server
+    jupyter_server.extension.application: jupyter_server
+    jupyter_server.extension.config: jupyter_server
+    jupyter_server.extension.handler: jupyter_server
+    jupyter_server.extension.manager: jupyter_server
+    jupyter_server.extension.serverextension: jupyter_server
+    jupyter_server.extension.utils: jupyter_server
+    jupyter_server.files: jupyter_server
+    jupyter_server.files.handlers: jupyter_server
+    jupyter_server.gateway: jupyter_server
+    jupyter_server.gateway.connections: jupyter_server
+    jupyter_server.gateway.gateway_client: jupyter_server
+    jupyter_server.gateway.handlers: jupyter_server
+    jupyter_server.gateway.managers: jupyter_server
+    jupyter_server.i18n: jupyter_server
+    jupyter_server.kernelspecs: jupyter_server
+    jupyter_server.kernelspecs.handlers: jupyter_server
+    jupyter_server.log: jupyter_server
+    jupyter_server.nbconvert: jupyter_server
+    jupyter_server.nbconvert.handlers: jupyter_server
+    jupyter_server.prometheus: jupyter_server
+    jupyter_server.prometheus.log_functions: jupyter_server
+    jupyter_server.prometheus.metrics: jupyter_server
+    jupyter_server.pytest_plugin: jupyter_server
+    jupyter_server.serverapp: jupyter_server
+    jupyter_server.services: jupyter_server
+    jupyter_server.services.api: jupyter_server
+    jupyter_server.services.api.handlers: jupyter_server
+    jupyter_server.services.config: jupyter_server
+    jupyter_server.services.config.handlers: jupyter_server
+    jupyter_server.services.config.manager: jupyter_server
+    jupyter_server.services.contents: jupyter_server
+    jupyter_server.services.contents.checkpoints: jupyter_server
+    jupyter_server.services.contents.filecheckpoints: jupyter_server
+    jupyter_server.services.contents.fileio: jupyter_server
+    jupyter_server.services.contents.filemanager: jupyter_server
+    jupyter_server.services.contents.handlers: jupyter_server
+    jupyter_server.services.contents.largefilemanager: jupyter_server
+    jupyter_server.services.contents.manager: jupyter_server
+    jupyter_server.services.events: jupyter_server
+    jupyter_server.services.events.handlers: jupyter_server
+    jupyter_server.services.kernels: jupyter_server
+    jupyter_server.services.kernels.connection: jupyter_server
+    jupyter_server.services.kernels.connection.abc: jupyter_server
+    jupyter_server.services.kernels.connection.base: jupyter_server
+    jupyter_server.services.kernels.connection.channels: jupyter_server
+    jupyter_server.services.kernels.handlers: jupyter_server
+    jupyter_server.services.kernels.kernelmanager: jupyter_server
+    jupyter_server.services.kernels.websocket: jupyter_server
+    jupyter_server.services.kernelspecs: jupyter_server
+    jupyter_server.services.kernelspecs.handlers: jupyter_server
+    jupyter_server.services.nbconvert: jupyter_server
+    jupyter_server.services.nbconvert.handlers: jupyter_server
+    jupyter_server.services.security: jupyter_server
+    jupyter_server.services.security.handlers: jupyter_server
+    jupyter_server.services.sessions: jupyter_server
+    jupyter_server.services.sessions.handlers: jupyter_server
+    jupyter_server.services.sessions.sessionmanager: jupyter_server
+    jupyter_server.services.shutdown: jupyter_server
+    jupyter_server.terminal: jupyter_server
+    jupyter_server.terminal.api_handlers: jupyter_server
+    jupyter_server.terminal.handlers: jupyter_server
+    jupyter_server.terminal.terminalmanager: jupyter_server
+    jupyter_server.traittypes: jupyter_server
+    jupyter_server.transutils: jupyter_server
+    jupyter_server.utils: jupyter_server
+    jupyter_server.view: jupyter_server
+    jupyter_server.view.handlers: jupyter_server
+    jupyter_server_terminals: jupyter_server_terminals
+    jupyter_server_terminals.api_handlers: jupyter_server_terminals
+    jupyter_server_terminals.app: jupyter_server_terminals
+    jupyter_server_terminals.base: jupyter_server_terminals
+    jupyter_server_terminals.handlers: jupyter_server_terminals
+    jupyter_server_terminals.terminalmanager: jupyter_server_terminals
+    jupyterlab: jupyterlab
+    jupyterlab.browser_check: jupyterlab
+    jupyterlab.commands: jupyterlab
+    jupyterlab.coreconfig: jupyterlab
+    jupyterlab.debuglog: jupyterlab
+    jupyterlab.extensions: jupyterlab
+    jupyterlab.extensions.manager: jupyterlab
+    jupyterlab.extensions.pypi: jupyterlab
+    jupyterlab.extensions.readonly: jupyterlab
+    jupyterlab.federated_labextensions: jupyterlab
+    jupyterlab.galata: jupyterlab
+    jupyterlab.handlers: jupyterlab
+    jupyterlab.handlers.announcements: jupyterlab
+    jupyterlab.handlers.build_handler: jupyterlab
+    jupyterlab.handlers.error_handler: jupyterlab
+    jupyterlab.handlers.extension_manager_handler: jupyterlab
+    jupyterlab.handlers.plugin_manager_handler: jupyterlab
+    jupyterlab.jlpmapp: jupyterlab
+    jupyterlab.labapp: jupyterlab
+    jupyterlab.labextensions: jupyterlab
+    jupyterlab.labhubapp: jupyterlab
+    jupyterlab.pytest_plugin: jupyterlab
+    jupyterlab.semver: jupyterlab
+    jupyterlab.serverextension: jupyterlab
+    jupyterlab.upgrade_extension: jupyterlab
+    jupyterlab.utils: jupyterlab
+    jupyterlab_pygments: jupyterlab_pygments
+    jupyterlab_pygments.style: jupyterlab_pygments
+    jupyterlab_server: jupyterlab_server
+    jupyterlab_server.app: jupyterlab_server
+    jupyterlab_server.config: jupyterlab_server
+    jupyterlab_server.handlers: jupyterlab_server
+    jupyterlab_server.licenses_app: jupyterlab_server
+    jupyterlab_server.licenses_handler: jupyterlab_server
+    jupyterlab_server.listings_handler: jupyterlab_server
+    jupyterlab_server.process: jupyterlab_server
+    jupyterlab_server.process_app: jupyterlab_server
+    jupyterlab_server.pytest_plugin: jupyterlab_server
+    jupyterlab_server.server: jupyterlab_server
+    jupyterlab_server.settings_handler: jupyterlab_server
+    jupyterlab_server.settings_utils: jupyterlab_server
+    jupyterlab_server.spec: jupyterlab_server
+    jupyterlab_server.test_utils: jupyterlab_server
+    jupyterlab_server.themes_handler: jupyterlab_server
+    jupyterlab_server.translation_utils: jupyterlab_server
+    jupyterlab_server.translations_handler: jupyterlab_server
+    jupyterlab_server.workspaces_app: jupyterlab_server
+    jupyterlab_server.workspaces_handler: jupyterlab_server
     kiwisolver: kiwisolver
     kiwisolver.exceptions: kiwisolver
     linkify_it: linkify_it_py
     linkify_it.main: linkify_it_py
     linkify_it.tlds: linkify_it_py
     linkify_it.ucre: linkify_it_py
-    markdown: Markdown
-    markdown.blockparser: Markdown
-    markdown.blockprocessors: Markdown
-    markdown.core: Markdown
-    markdown.extensions: Markdown
-    markdown.extensions.abbr: Markdown
-    markdown.extensions.admonition: Markdown
-    markdown.extensions.attr_list: Markdown
-    markdown.extensions.codehilite: Markdown
-    markdown.extensions.def_list: Markdown
-    markdown.extensions.extra: Markdown
-    markdown.extensions.fenced_code: Markdown
-    markdown.extensions.footnotes: Markdown
-    markdown.extensions.legacy_attrs: Markdown
-    markdown.extensions.legacy_em: Markdown
-    markdown.extensions.md_in_html: Markdown
-    markdown.extensions.meta: Markdown
-    markdown.extensions.nl2br: Markdown
-    markdown.extensions.sane_lists: Markdown
-    markdown.extensions.smarty: Markdown
-    markdown.extensions.tables: Markdown
-    markdown.extensions.toc: Markdown
-    markdown.extensions.wikilinks: Markdown
-    markdown.htmlparser: Markdown
-    markdown.inlinepatterns: Markdown
-    markdown.postprocessors: Markdown
-    markdown.preprocessors: Markdown
-    markdown.serializers: Markdown
-    markdown.test_tools: Markdown
-    markdown.treeprocessors: Markdown
-    markdown.util: Markdown
     markdown_it: markdown_it_py
     markdown_it.cli: markdown_it_py
     markdown_it.cli.parse: markdown_it_py
@@ -2112,6 +1931,35 @@ manifest:
     mdit_py_plugins.wordcount: mdit_py_plugins
     mdurl: mdurl
     mistune: mistune
+    mistune.block_parser: mistune
+    mistune.core: mistune
+    mistune.directives: mistune
+    mistune.directives.admonition: mistune
+    mistune.directives.image: mistune
+    mistune.directives.include: mistune
+    mistune.directives.toc: mistune
+    mistune.helpers: mistune
+    mistune.inline_parser: mistune
+    mistune.list_parser: mistune
+    mistune.markdown: mistune
+    mistune.plugins: mistune
+    mistune.plugins.abbr: mistune
+    mistune.plugins.def_list: mistune
+    mistune.plugins.footnotes: mistune
+    mistune.plugins.formatting: mistune
+    mistune.plugins.math: mistune
+    mistune.plugins.ruby: mistune
+    mistune.plugins.speedup: mistune
+    mistune.plugins.spoiler: mistune
+    mistune.plugins.table: mistune
+    mistune.plugins.task_lists: mistune
+    mistune.plugins.url: mistune
+    mistune.renderers: mistune
+    mistune.renderers.html: mistune
+    mistune.renderers.markdown: mistune
+    mistune.renderers.rst: mistune
+    mistune.toc: mistune
+    mistune.util: mistune
     mpl_toolkits.axes_grid1: matplotlib
     mpl_toolkits.axes_grid1.anchored_artists: matplotlib
     mpl_toolkits.axes_grid1.axes_divider: matplotlib
@@ -2448,55 +2296,34 @@ manifest:
     myst_parser.sphinx_ext.mathjax: myst_parser
     myst_parser.sphinx_ext.myst_refs: myst_parser
     myst_parser.warnings_: myst_parser
-    narwhals: narwhals
-    narwhals.dataframe: narwhals
-    narwhals.dependencies: narwhals
-    narwhals.dtypes: narwhals
-    narwhals.exceptions: narwhals
-    narwhals.expr: narwhals
-    narwhals.expr_cat: narwhals
-    narwhals.expr_dt: narwhals
-    narwhals.expr_list: narwhals
-    narwhals.expr_name: narwhals
-    narwhals.expr_str: narwhals
-    narwhals.expr_struct: narwhals
-    narwhals.functions: narwhals
-    narwhals.group_by: narwhals
-    narwhals.schema: narwhals
-    narwhals.selectors: narwhals
-    narwhals.series: narwhals
-    narwhals.series_cat: narwhals
-    narwhals.series_dt: narwhals
-    narwhals.series_list: narwhals
-    narwhals.series_str: narwhals
-    narwhals.series_struct: narwhals
-    narwhals.stable: narwhals
-    narwhals.stable.v1: narwhals
-    narwhals.stable.v1.dependencies: narwhals
-    narwhals.stable.v1.dtypes: narwhals
-    narwhals.stable.v1.selectors: narwhals
-    narwhals.stable.v1.typing: narwhals
-    narwhals.this: narwhals
-    narwhals.translate: narwhals
-    narwhals.typing: narwhals
-    narwhals.utils: narwhals
+    nbclient: nbclient
+    nbclient.cli: nbclient
+    nbclient.client: nbclient
+    nbclient.exceptions: nbclient
+    nbclient.jsonutil: nbclient
+    nbclient.output_widget: nbclient
+    nbclient.util: nbclient
     nbconvert: nbconvert
+    nbconvert.conftest: nbconvert
     nbconvert.exporters: nbconvert
     nbconvert.exporters.asciidoc: nbconvert
     nbconvert.exporters.base: nbconvert
-    nbconvert.exporters.export: nbconvert
     nbconvert.exporters.exporter: nbconvert
-    nbconvert.exporters.exporter_locator: nbconvert
     nbconvert.exporters.html: nbconvert
     nbconvert.exporters.latex: nbconvert
     nbconvert.exporters.markdown: nbconvert
     nbconvert.exporters.notebook: nbconvert
     nbconvert.exporters.pdf: nbconvert
     nbconvert.exporters.python: nbconvert
+    nbconvert.exporters.qt_exporter: nbconvert
+    nbconvert.exporters.qt_screenshot: nbconvert
+    nbconvert.exporters.qtpdf: nbconvert
+    nbconvert.exporters.qtpng: nbconvert
     nbconvert.exporters.rst: nbconvert
     nbconvert.exporters.script: nbconvert
     nbconvert.exporters.slides: nbconvert
     nbconvert.exporters.templateexporter: nbconvert
+    nbconvert.exporters.webpdf: nbconvert
     nbconvert.filters: nbconvert
     nbconvert.filters.ansi: nbconvert
     nbconvert.filters.citation: nbconvert
@@ -2509,6 +2336,7 @@ manifest:
     nbconvert.filters.metadata: nbconvert
     nbconvert.filters.pandoc: nbconvert
     nbconvert.filters.strings: nbconvert
+    nbconvert.filters.widgetsdatatypefilter: nbconvert
     nbconvert.nbconvertapp: nbconvert
     nbconvert.postprocessors: nbconvert
     nbconvert.postprocessors.base: nbconvert
@@ -2521,6 +2349,7 @@ manifest:
     nbconvert.preprocessors.convertfigures: nbconvert
     nbconvert.preprocessors.csshtmlheader: nbconvert
     nbconvert.preprocessors.execute: nbconvert
+    nbconvert.preprocessors.extractattachments: nbconvert
     nbconvert.preprocessors.extractoutput: nbconvert
     nbconvert.preprocessors.highlightmagics: nbconvert
     nbconvert.preprocessors.latex: nbconvert
@@ -2533,8 +2362,10 @@ manifest:
     nbconvert.utils.base: nbconvert
     nbconvert.utils.exceptions: nbconvert
     nbconvert.utils.io: nbconvert
+    nbconvert.utils.iso639_1: nbconvert
     nbconvert.utils.lexers: nbconvert
     nbconvert.utils.pandoc: nbconvert
+    nbconvert.utils.text: nbconvert
     nbconvert.utils.version: nbconvert
     nbconvert.writers: nbconvert
     nbconvert.writers.base: nbconvert
@@ -2860,75 +2691,11 @@ manifest:
     networkx.utils.rcm: networkx
     networkx.utils.union_find: networkx
     notebook: notebook
-    notebook.auth: notebook
-    notebook.auth.login: notebook
-    notebook.auth.logout: notebook
-    notebook.auth.security: notebook
-    notebook.base: notebook
-    notebook.base.handlers: notebook
-    notebook.base.zmqhandlers: notebook
-    notebook.bundler: notebook
-    notebook.bundler.bundlerextensions: notebook
-    notebook.bundler.handlers: notebook
-    notebook.bundler.tarball_bundler: notebook
-    notebook.bundler.tools: notebook
-    notebook.bundler.zip_bundler: notebook
-    notebook.config_manager: notebook
-    notebook.edit: notebook
-    notebook.edit.handlers: notebook
-    notebook.extensions: notebook
-    notebook.files: notebook
-    notebook.files.handlers: notebook
-    notebook.i18n: notebook
-    notebook.jstest: notebook
-    notebook.kernelspecs: notebook
-    notebook.kernelspecs.handlers: notebook
-    notebook.log: notebook
-    notebook.metrics: notebook
-    notebook.nbconvert: notebook
-    notebook.nbconvert.handlers: notebook
-    notebook.nbextensions: notebook
-    notebook.notebook: notebook
-    notebook.notebook.handlers: notebook
-    notebook.notebookapp: notebook
-    notebook.serverextensions: notebook
-    notebook.services: notebook
-    notebook.services.api: notebook
-    notebook.services.api.handlers: notebook
-    notebook.services.config: notebook
-    notebook.services.config.handlers: notebook
-    notebook.services.config.manager: notebook
-    notebook.services.contents: notebook
-    notebook.services.contents.checkpoints: notebook
-    notebook.services.contents.filecheckpoints: notebook
-    notebook.services.contents.fileio: notebook
-    notebook.services.contents.filemanager: notebook
-    notebook.services.contents.handlers: notebook
-    notebook.services.contents.largefilemanager: notebook
-    notebook.services.contents.manager: notebook
-    notebook.services.kernels: notebook
-    notebook.services.kernels.handlers: notebook
-    notebook.services.kernels.kernelmanager: notebook
-    notebook.services.kernelspecs: notebook
-    notebook.services.kernelspecs.handlers: notebook
-    notebook.services.nbconvert: notebook
-    notebook.services.nbconvert.handlers: notebook
-    notebook.services.security: notebook
-    notebook.services.security.handlers: notebook
-    notebook.services.sessions: notebook
-    notebook.services.sessions.handlers: notebook
-    notebook.services.sessions.sessionmanager: notebook
-    notebook.services.shutdown: notebook
-    notebook.terminal: notebook
-    notebook.terminal.api_handlers: notebook
-    notebook.terminal.handlers: notebook
-    notebook.transutils: notebook
-    notebook.tree: notebook
-    notebook.tree.handlers: notebook
-    notebook.utils: notebook
-    notebook.view: notebook
-    notebook.view.handlers: notebook
-    numbergen: param
+    notebook.app: notebook
+    notebook_shim: notebook_shim
+    notebook_shim.nbserver: notebook_shim
+    notebook_shim.shim: notebook_shim
+    notebook_shim.traits: notebook_shim
     numpy: numpy
     numpy.char: numpy
     numpy.compat: numpy
@@ -3143,6 +2910,12 @@ manifest:
     openhtf.util.units: openhtf
     openhtf.util.validators: openhtf
     openhtf.util.xmlrpcutil: openhtf
+    overrides: overrides
+    overrides.enforce: overrides
+    overrides.final: overrides
+    overrides.overrides: overrides
+    overrides.signature: overrides
+    overrides.typing_utils: overrides
     packaging: packaging
     packaging.licenses: packaging
     packaging.markers: packaging
@@ -3385,166 +3158,6 @@ manifest:
     pandas.util: pandas
     pandas.util.version: pandas
     pandocfilters: pandocfilters
-    panel: panel
-    panel.auth: panel
-    panel.callbacks: panel
-    panel.command: panel
-    panel.command.oauth_secret: panel
-    panel.command.serve: panel
-    panel.compiler: panel
-    panel.config: panel
-    panel.depends: panel
-    panel.examples.apps.django2.manage: panel
-    panel.examples.apps.django2.project: panel
-    panel.examples.apps.django2.project.asgi: panel
-    panel.examples.apps.django2.project.routing: panel
-    panel.examples.apps.django2.project.settings: panel
-    panel.examples.apps.django2.project.urls: panel
-    panel.examples.apps.django2.sliders: panel
-    panel.examples.apps.django2.sliders.admin: panel
-    panel.examples.apps.django2.sliders.apps: panel
-    panel.examples.apps.django2.sliders.migrations: panel
-    panel.examples.apps.django2.sliders.models: panel
-    panel.examples.apps.django2.sliders.pn_app: panel
-    panel.examples.apps.django2.sliders.sinewave: panel
-    panel.examples.apps.django2.sliders.urls: panel
-    panel.examples.apps.django2.sliders.views: panel
-    panel.examples.apps.django_multi_apps.django_multi_apps: panel
-    panel.examples.apps.django_multi_apps.django_multi_apps.asgi: panel
-    panel.examples.apps.django_multi_apps.django_multi_apps.routing: panel
-    panel.examples.apps.django_multi_apps.django_multi_apps.settings: panel
-    panel.examples.apps.django_multi_apps.django_multi_apps.themes: panel
-    panel.examples.apps.django_multi_apps.django_multi_apps.urls: panel
-    panel.examples.apps.django_multi_apps.gbm: panel
-    panel.examples.apps.django_multi_apps.gbm.admin: panel
-    panel.examples.apps.django_multi_apps.gbm.apps: panel
-    panel.examples.apps.django_multi_apps.gbm.migrations: panel
-    panel.examples.apps.django_multi_apps.gbm.models: panel
-    panel.examples.apps.django_multi_apps.gbm.pn_app: panel
-    panel.examples.apps.django_multi_apps.gbm.pn_model: panel
-    panel.examples.apps.django_multi_apps.gbm.urls: panel
-    panel.examples.apps.django_multi_apps.gbm.views: panel
-    panel.examples.apps.django_multi_apps.landing: panel
-    panel.examples.apps.django_multi_apps.landing.admin: panel
-    panel.examples.apps.django_multi_apps.landing.apps: panel
-    panel.examples.apps.django_multi_apps.landing.migrations: panel
-    panel.examples.apps.django_multi_apps.landing.models: panel
-    panel.examples.apps.django_multi_apps.landing.urls: panel
-    panel.examples.apps.django_multi_apps.landing.views: panel
-    panel.examples.apps.django_multi_apps.manage: panel
-    panel.examples.apps.django_multi_apps.sliders: panel
-    panel.examples.apps.django_multi_apps.sliders.admin: panel
-    panel.examples.apps.django_multi_apps.sliders.apps: panel
-    panel.examples.apps.django_multi_apps.sliders.migrations: panel
-    panel.examples.apps.django_multi_apps.sliders.models: panel
-    panel.examples.apps.django_multi_apps.sliders.pn_app: panel
-    panel.examples.apps.django_multi_apps.sliders.pn_model: panel
-    panel.examples.apps.django_multi_apps.sliders.urls: panel
-    panel.examples.apps.django_multi_apps.sliders.views: panel
-    panel.examples.apps.django_multi_apps.stockscreener: panel
-    panel.examples.apps.django_multi_apps.stockscreener.admin: panel
-    panel.examples.apps.django_multi_apps.stockscreener.apps: panel
-    panel.examples.apps.django_multi_apps.stockscreener.migrations: panel
-    panel.examples.apps.django_multi_apps.stockscreener.models: panel
-    panel.examples.apps.django_multi_apps.stockscreener.pn_app: panel
-    panel.examples.apps.django_multi_apps.stockscreener.pn_model: panel
-    panel.examples.apps.django_multi_apps.stockscreener.pn_model_20122019: panel
-    panel.examples.apps.django_multi_apps.stockscreener.urls: panel
-    panel.examples.apps.django_multi_apps.stockscreener.views: panel
-    panel.examples.apps.django_multi_apps.stockscreener.zTrials: panel
-    panel.interact: panel
-    panel.io: panel
-    panel.io.callbacks: panel
-    panel.io.embed: panel
-    panel.io.ipywidget: panel
-    panel.io.location: panel
-    panel.io.model: panel
-    panel.io.notebook: panel
-    panel.io.resources: panel
-    panel.io.rest: panel
-    panel.io.save: panel
-    panel.io.server: panel
-    panel.io.state: panel
-    panel.layout: panel
-    panel.layout.accordion: panel
-    panel.layout.base: panel
-    panel.layout.card: panel
-    panel.layout.grid: panel
-    panel.layout.spacer: panel
-    panel.layout.tabs: panel
-    panel.links: panel
-    panel.models: panel
-    panel.models.ace: panel
-    panel.models.comm_manager: panel
-    panel.models.deckgl: panel
-    panel.models.echarts: panel
-    panel.models.enums: panel
-    panel.models.ipywidget: panel
-    panel.models.katex: panel
-    panel.models.layout: panel
-    panel.models.location: panel
-    panel.models.markup: panel
-    panel.models.mathjax: panel
-    panel.models.plotly: panel
-    panel.models.state: panel
-    panel.models.vega: panel
-    panel.models.vtk: panel
-    panel.models.widgets: panel
-    panel.pane: panel
-    panel.pane.ace: panel
-    panel.pane.alert: panel
-    panel.pane.base: panel
-    panel.pane.deckgl: panel
-    panel.pane.echarts: panel
-    panel.pane.equation: panel
-    panel.pane.holoviews: panel
-    panel.pane.image: panel
-    panel.pane.ipywidget: panel
-    panel.pane.markup: panel
-    panel.pane.media: panel
-    panel.pane.plot: panel
-    panel.pane.plotly: panel
-    panel.pane.streamz: panel
-    panel.pane.vega: panel
-    panel.pane.vtk: panel
-    panel.pane.vtk.enums: panel
-    panel.pane.vtk.synchronizable_deserializer: panel
-    panel.pane.vtk.synchronizable_serializer: panel
-    panel.pane.vtk.vtk: panel
-    panel.param: panel
-    panel.pipeline: panel
-    panel.reactive: panel
-    panel.template: panel
-    panel.template.base: panel
-    panel.template.bootstrap: panel
-    panel.template.golden: panel
-    panel.template.material: panel
-    panel.template.react: panel
-    panel.template.theme: panel
-    panel.template.vanilla: panel
-    panel.util: panel
-    panel.viewable: panel
-    panel.widgets: panel
-    panel.widgets.ace: panel
-    panel.widgets.base: panel
-    panel.widgets.button: panel
-    panel.widgets.file_selector: panel
-    panel.widgets.indicators: panel
-    panel.widgets.input: panel
-    panel.widgets.misc: panel
-    panel.widgets.player: panel
-    panel.widgets.select: panel
-    panel.widgets.slider: panel
-    panel.widgets.tables: panel
-    param: param
-    param.depends: param
-    param.display: param
-    param.ipython: param
-    param.parameterized: param
-    param.parameters: param
-    param.reactive: param
-    param.serializer: param
-    param.version: param
     parso: parso
     parso.cache: parso
     parso.file_io: parso
@@ -3587,6 +3200,7 @@ manifest:
     pexpect.socket_pexpect: pexpect
     pexpect.spawnbase: pexpect
     pexpect.utils: pexpect
+    pip: pip
     pkg_resources: setuptools
     pkg_resources.extern: setuptools
     platformdirs: platformdirs
@@ -3955,10 +3569,6 @@ manifest:
     pycparser.ply.ygen: pycparser
     pycparser.plyparser: pycparser
     pycparser.yacctab: pycparser
-    pyct: pyct
-    pyct.build: pyct
-    pyct.cmd: pyct
-    pyct.report: pyct
     pyflakes: pyflakes
     pyflakes.api: pyflakes
     pyflakes.checker: pyflakes
@@ -4285,11 +3895,6 @@ manifest:
     pygments.token: pygments
     pygments.unistring: pygments
     pygments.util: pygments
-    pygraphviz: pygraphviz
-    pygraphviz.agraph: pygraphviz
-    pygraphviz.graphviz: pygraphviz
-    pygraphviz.scraper: pygraphviz
-    pygraphviz.testing: pygraphviz
     pylab: matplotlib
     pylint_plugins: openhtf
     pylint_plugins.conf_plugin: openhtf
@@ -4305,13 +3910,21 @@ manifest:
     pyparsing.unicode: pyparsing
     pyparsing.util: pyparsing
     pytest: pytest
+    pythonjsonlogger: python_json_logger
+    pythonjsonlogger.core: python_json_logger
+    pythonjsonlogger.defaults: python_json_logger
+    pythonjsonlogger.exception: python_json_logger
+    pythonjsonlogger.json: python_json_logger
+    pythonjsonlogger.jsonlogger: python_json_logger
+    pythonjsonlogger.msgspec: python_json_logger
+    pythonjsonlogger.orjson: python_json_logger
+    pythonjsonlogger.utils: python_json_logger
     pytz: pytz
     pytz.exceptions: pytz
     pytz.lazy: pytz
     pytz.reference: pytz
     pytz.tzfile: pytz
     pytz.tzinfo: pytz
-    pyviz_comms: pyviz_comms
     referencing: referencing
     referencing.exceptions: referencing
     referencing.jsonschema: referencing
@@ -4333,6 +3946,9 @@ manifest:
     requests.status_codes: requests
     requests.structures: requests
     requests.utils: requests
+    rfc3339_validator: rfc3339_validator
+    rfc3986_validator: rfc3986_validator
+    roman_numerals: roman_numerals_py
     rpds: rpds_py
     rpds.rpds: rpds_py
     rsa: rsa
@@ -4580,6 +4196,7 @@ manifest:
     setuptools.wheel: setuptools
     setuptools.windows_support: setuptools
     six: six
+    sniffio: sniffio
     snowballstemmer: snowballstemmer
     snowballstemmer.among: snowballstemmer
     snowballstemmer.arabic_stemmer: snowballstemmer
@@ -4652,7 +4269,6 @@ manifest:
     sphinx.builders.epub3: sphinx
     sphinx.builders.gettext: sphinx
     sphinx.builders.html: sphinx
-    sphinx.builders.html.transforms: sphinx
     sphinx.builders.latex: sphinx
     sphinx.builders.latex.constants: sphinx
     sphinx.builders.latex.nodes: sphinx
@@ -4672,6 +4288,7 @@ manifest:
     sphinx.config: sphinx
     sphinx.deprecation: sphinx
     sphinx.directives: sphinx
+    sphinx.directives.admonitions: sphinx
     sphinx.directives.code: sphinx
     sphinx.directives.other: sphinx
     sphinx.directives.patches: sphinx
@@ -4780,7 +4397,6 @@ manifest:
     sphinx.util.docfields: sphinx
     sphinx.util.docstrings: sphinx
     sphinx.util.docutils: sphinx
-    sphinx.util.exceptions: sphinx
     sphinx.util.fileutil: sphinx
     sphinx.util.http_date: sphinx
     sphinx.util.i18n: sphinx
@@ -4794,6 +4410,7 @@ manifest:
     sphinx.util.nodes: sphinx
     sphinx.util.osutil: sphinx
     sphinx.util.parallel: sphinx
+    sphinx.util.parsing: sphinx
     sphinx.util.png: sphinx
     sphinx.util.requests: sphinx
     sphinx.util.rst: sphinx
@@ -4883,11 +4500,15 @@ manifest:
     test.util.text_test: openhtf
     test.util.util_test: openhtf
     test.util.validators_test: openhtf
-    testpath: testpath
-    testpath.asserts: testpath
-    testpath.commands: testpath
-    testpath.env: testpath
-    testpath.tempdir: testpath
+    tinycss2: tinycss2
+    tinycss2.ast: tinycss2
+    tinycss2.bytes: tinycss2
+    tinycss2.color3: tinycss2
+    tinycss2.color4: tinycss2
+    tinycss2.nth: tinycss2
+    tinycss2.parser: tinycss2
+    tinycss2.serializer: tinycss2
+    tinycss2.tokenizer: tinycss2
     tofupilot: tofupilot
     tofupilot.client: tofupilot
     tofupilot.constants: tofupilot
@@ -4978,29 +4599,6 @@ manifest:
     tornado.web: tornado
     tornado.websocket: tornado
     tornado.wsgi: tornado
-    tqdm: tqdm
-    tqdm.asyncio: tqdm
-    tqdm.auto: tqdm
-    tqdm.autonotebook: tqdm
-    tqdm.cli: tqdm
-    tqdm.contrib: tqdm
-    tqdm.contrib.bells: tqdm
-    tqdm.contrib.concurrent: tqdm
-    tqdm.contrib.discord: tqdm
-    tqdm.contrib.itertools: tqdm
-    tqdm.contrib.logging: tqdm
-    tqdm.contrib.slack: tqdm
-    tqdm.contrib.telegram: tqdm
-    tqdm.contrib.utils_worker: tqdm
-    tqdm.dask: tqdm
-    tqdm.gui: tqdm
-    tqdm.keras: tqdm
-    tqdm.notebook: tqdm
-    tqdm.rich: tqdm
-    tqdm.std: tqdm
-    tqdm.tk: tqdm
-    tqdm.utils: tqdm
-    tqdm.version: tqdm
     traitlets: traitlets
     traitlets.config: traitlets
     traitlets.config.application: traitlets
@@ -5057,6 +4655,11 @@ manifest:
     uc_micro.properties: uc_micro_py
     uc_micro.properties.Any: uc_micro_py
     uc_micro.properties.Any.regex: uc_micro_py
+    uri_template: uri_template
+    uri_template.charset: uri_template
+    uri_template.expansions: uri_template
+    uri_template.uritemplate: uri_template
+    uri_template.variable: uri_template
     urllib3: urllib3
     urllib3.connection: urllib3
     urllib3.connectionpool: urllib3
@@ -5095,10 +4698,12 @@ manifest:
     wcwidth.table_zero: wcwidth
     wcwidth.unicode_versions: wcwidth
     wcwidth.wcwidth: wcwidth
+    webcolors: webcolors
     webencodings: webencodings
     webencodings.labels: webencodings
     webencodings.mklabels: webencodings
     webencodings.x_user_defined: webencodings
+    websocket: websocket_client
     websockets: websockets
     websockets.asyncio: websockets
     websockets.asyncio.async_timeout: websockets
@@ -5109,6 +4714,7 @@ manifest:
     websockets.asyncio.router: websockets
     websockets.asyncio.server: websockets
     websockets.auth: websockets
+    websockets.cli: websockets
     websockets.client: websockets
     websockets.connection: websockets
     websockets.datastructures: websockets
@@ -5164,10 +4770,6 @@ manifest:
     wheel.vendored.packaging.utils: wheel
     wheel.vendored.packaging.version: wheel
     wheel.wheelfile: wheel
-    xyzservices: xyzservices
-    xyzservices.data: xyzservices
-    xyzservices.lib: xyzservices
-    xyzservices.providers: xyzservices
     yaml: PyYAML
     yaml.composer: PyYAML
     yaml.constructor: PyYAML
@@ -5247,4 +4849,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: 235e48fccabb7d4a87c7f2223055069297e138736607d488773137e34c258d64
+integrity: 6029edba6237cb70419eb0eb9c1fc633300282f4da63271bd04e4bb3cd56891b

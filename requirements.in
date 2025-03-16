@@ -22,14 +22,16 @@ mypy
 myst-parser
 # Analyze graphs easily https://networkx.org/documentation/stable/index.html
 networkx[default]
-# Required by openhtf's requirements of tornado
-notebook>=5,<6
+# XXX: Required by openhtf's requirements of tornado
+notebook
 # Tool for running hardware-style tests; https://www.openhtf.com/
 openhtf
 panel
 pygraphviz
 # Undeclared dependency of openhtf
 six
+# Install so we can easily install a wheel into a virtualenv
+pip
 protobuf
 # largely for development
 # https://github.com/pytest-dev/pytest/issues/12592#issuecomment-2515100428
