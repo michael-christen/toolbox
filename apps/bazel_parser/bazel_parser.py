@@ -23,6 +23,42 @@ A larger system description:
     describe cost
   - graph that we could identify overly depended upon things
 
+XXX:
+ - bazel query --keep_going --noimplicit_deps --output proto "deps(//...)"
+   is much bigger than "//..." alone, compare what the differences are
+- git log --since="10 years ago" --name-only --pretty=format: | sort \
+        | uniq -c | sort -nr
+  - this is much faster
+  - could identify renames via:
+    - git log --since="1 month ago" --name-status --pretty=format: \
+            | grep -P 'R[0-9]*\t' | awk '{print $2, "->", $3}'
+    - then correct
+    - can get commit association via
+      - git log --since="1 month ago" --name-status --pretty=format:"%H"
+    - statuses are A,M,D,R\d\d\d
+```
+# Regex pattern to match the git log output
+pattern = r"^([AMD])\s+(.+?)(\s*->\s*(.+))?$|^R(\d+)\s+(.+?)\s*->\s*(.+)$"
+# Parse each line using the regex
+for line in git_log_output.strip().split('\n'):
+    match = re.match(pattern, line.strip())
+    if match:
+        if match.group(1):  # For A, M, D statuses
+            change_type = match.group(1)
+            old_file = match.group(2)
+            new_file = match.group(4) if match.group(4) else None
+            print(f"Change type: {change_type}, Old file: {old_file}, "
+                  f"New file: {new_file}")
+        elif match.group(5):  # For R status (renames)
+            change_type = 'R'
+            similarity_index = match.group(5)
+            old_file = match.group(6)
+            new_file = match.group(7)
+            print(f"Change type: {change_type}, Similarity index:"
+                  f" {similarity_index}, Old file: {old_file}, New file:"
+                  f" {new_file}")
+```
+
 Example Script:
 
 repo_dir=`pwd`
@@ -143,48 +179,125 @@ def _normalize_bazel_target_to_intermediate(target: str) -> str:
 
 
 class Node(TypedDict):
+    """The fields of a given node.
+
+    These can be used as columns of panda dataframes
+    """
+
+    # The bazel label
     node_name: str
+    # The class of the rule, eg. java_library
     node_class: str
+
+    # How many things depend on you, in_degree
     num_parents: int
+    # Total number of nodes that transitively depend on you
     num_ancestors: int
+    # Total number of nodes that transitively depend on you and have a defined
+    # execution time (such as tests)
     num_duration_ancestors: int
+
+    # How many things you depend on, out_degree
     num_children: int
+    # Total number of nodes that you transitively depend on
     num_descendants: int
+    # Total number of nodes that you transitively depend on and have a < 100%
+    # chance of being cached
     num_source_descendants: int
+
+    # ===== Link Analysis =====
     pagerank: float
     hubs_metric: float
     authorities_metric: float
+
+    # ===== Node Specific =====
+    # How long this node took to "execute"
+    # - mostly capturing test time at the moment
     node_duration_s: float
-    group_duration_s: float
-    expected_duration_s: float
+    # (1 - (# of commits this file changed / Total # of commits))
     node_probability_cache_hit: float
+
+    # ===== Accumulated   =====
+    # Sum of ancestors' node durations + your own
+    group_duration_s: float
+    # node_probability_cache_hit * PRODUCT{descendants}
     group_probability_cache_hit: float
-    # Keep in sync with get_node_field_names, and panel.py
+    # group_duration_s * (1 - group_probability_cache_hit)
+    expected_duration_s: float
+
+    # XXX: Move these back and add them where necessarry
+    # ==== New =====
+    # Max ancestor depth from this node
+    # XXX: How to compute this?
+    # - find "root" ancestors and get max shortest path from those to here?
+    ancestor_depth: int
+    # ancestor_depth, but descendant
+    descendant_depth: int
+    # The eccentricity of a node v is the maximum distance from v to all other
+    # nodes in G.
+    # XXX: How is this different than depth?
+    # - [ ] eccentricity
+    # - F this, I have no idea, let's just do depth ...
 
 
-def get_node_field_names() -> list[str]:
-    """Get ordered list of field names to display.
+    # 28d changes (node_probability_cache_hit)
+    # 28d changes transitive (group_probability_cache_hit)
 
-    Keep in sync with Node
-    """
-    return [
-        "node_name",
-        "node_class",
-        "num_parents",
-        "num_ancestors",
-        "num_duration_ancestors",
-        "num_children",
-        "num_descendants",
-        "num_source_descendants",
-        "pagerank",
-        "hubs_metric",
-        "authorities_metric",
-        "node_duration_s",
-        "group_duration_s",
-        "expected_duration_s",
-        "node_probability_cache_hit",
-        "group_probability_cache_hit",
-    ]
+    # changes to this node * num_ancestors
+    # > Score for how much changes to a single target affects others due to
+    # > cache invalidations
+    # > A high score means that you are a top cache invalidator in the graph.
+    # > E.g. “ios_pill” that we saw in the beginning.
+    rebuilt_targets: int
+
+    # changes to (all descendants + this) * num_ancestors
+    # > This can be interpreted as a score for bottleneck-ness, and captures
+    # > how a single target act as a force multiplier of graph invalidations in
+    # > the graph. This is an improved way to identify bottlenecks that could
+    # > benefit from isolation and cutting off the dependencies between the
+    # > upstream and downstream side.
+    rebuilt_targets_by_transitive_dependencies: int
+
+
+    # Betweenness centrality of a node is the sum of the fraction of all-pairs
+    # shortest paths that pass through
+    #
+    # >
+    # Related to this metric, an important centrality measure from the research
+    # field of graph structures is “Betweenness centrality”.
+    #
+    # This is the fraction of all dependency chains between other targets that
+    # passes through a single build target like A.
+    #
+    # This can be seen as a score for the broker-ness in the dependency network
+    # and that could also benefit from isolation.
+    betweenness_centrality: float
+    # XXX: betweennes_longest doesn't quite make sense
+
+    @staticmethod
+    def get_node_field_names() -> list[str]:
+        """Get ordered list of field names to display.
+
+        Keep in sync with Node
+        """
+        return [
+            "node_name",
+            "node_class",
+            "num_parents",
+            "num_ancestors",
+            "num_duration_ancestors",
+            "num_children",
+            "num_descendants",
+            "num_source_descendants",
+            "pagerank",
+            "hubs_metric",
+            "authorities_metric",
+            "node_duration_s",
+            "group_duration_s",
+            "expected_duration_s",
+            "node_probability_cache_hit",
+            "group_probability_cache_hit",
+        ]
 
 
 def _get_node_probability(
@@ -370,7 +483,7 @@ def process(
         graph.nodes[name]["Highlight"] = "No"
     # Write the nodes
     with open(out_csv, "w") as f:
-        writer = csv.DictWriter(f, fieldnames=get_node_field_names())
+        writer = csv.DictWriter(f, fieldnames=Node.get_node_field_names())
         writer.writeheader()
         for row in nodes.values():
             writer.writerow(row)

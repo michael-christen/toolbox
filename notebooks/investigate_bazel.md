@@ -1,6 +1,6 @@
 ---
 jupytext:
-  formats: ipynb,py:percent,md:myst
+  formats: ipynb,md:myst
   text_representation:
     extension: .md
     format_name: myst
@@ -24,6 +24,14 @@ from networkx.drawing import nx_agraph
 
 ```{code-cell} ipython3
 g = networkx.read_gml("/home/mchristen/devel/toolbox/my.gml")
+```
+
+```{code-cell} ipython3
+from apps.bazel_parser import bazel_parser
+```
+
+```{code-cell} ipython3
+bazel_parser.get_node_field_names()
 ```
 
 ```{code-cell} ipython3
@@ -98,6 +106,18 @@ df_nodes["num_parents"].plot.hist()
 ```
 
 ```{code-cell} ipython3
+import matplotlib.pyplot as plt
+
+ax = df_nodes['num_parents'].nlargest(20).sort_values().plot.barh(legend=False)
+# Align the y-axis labels to the left and adjust spacing
+ax.set_yticklabels(ax.get_yticklabels(), ha='left', position=(-0.75, 0))  # Adjust position to the left
+
+# Adjust the left margin to create space for the labels
+plt.subplots_adjust(left=0.2)
+ax
+```
+
+```{code-cell} ipython3
 def get_subgraph(label: str, graph: networkx.DiGraph) -> networkx.DiGraph:
     return graph.subgraph(
         networkx.ancestors(graph, label)
@@ -121,7 +141,7 @@ H = get_subgraph("//apps/sbr:simulator_sbr", g)
 ```
 
 ```{code-cell} ipython3
-show_graph(H, include_labels=False)
+show_graph(H, include_labels=True)
 ```
 
 ```{code-cell} ipython3

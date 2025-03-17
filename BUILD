@@ -158,7 +158,6 @@ filegroup(
         ["*.py"],
         allow_empty = True,
     ) + [
-        "//apps:python_source",
         "//apps/bazel_parser:python_source",
         "//examples/basic:python_source",
         "//examples/bazel:python_source",

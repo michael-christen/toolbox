@@ -1,19 +1,11 @@
 import pathlib
 
+from bokeh import models
+from bokeh.models import widgets
+from bokeh import plotting
 import networkx
+from networkx.drawing import nx_agraph
 import panel as pn
-from bokeh.models import CheckboxGroup
-from bokeh.models import Circle
-from bokeh.models import CustomJS
-from bokeh.models import HoverTool
-from bokeh.models import MultiLine
-from bokeh.models import RadioGroup
-from bokeh.models.widgets import DataTable
-from bokeh.models.widgets import TableColumn
-from bokeh.plotting import figure
-from bokeh.plotting import from_networkx
-
-# from networkx.drawing import nx_agraph
 from panel.io import save
 
 SIZING_MODE = "fixed"
@@ -43,7 +35,7 @@ def get_panel_layout(graph: networkx.DiGraph) -> pn.layout.base.Panel:
     # circo
     """
     # Prepare Bokeh graph layout
-    plot = figure(
+    plot = plotting.figure(
         height=800,
         width=800,
         tools="tap,box_zoom,wheel_zoom,reset,pan",
@@ -52,11 +44,11 @@ def get_panel_layout(graph: networkx.DiGraph) -> pn.layout.base.Panel:
         title="Network Graph",
     )
     plot.axis.visible = False
-    # pos = nx_agraph.graphviz_layout(graph, prog='dot')
-    # network_graph = from_networkx(graph, pos)  # type: ignore
-    network_graph = from_networkx(
-        graph, networkx.spring_layout
-    )  # type: ignore
+    pos = nx_agraph.graphviz_layout(graph, prog='dot')
+    network_graph = plotting.from_networkx(graph, pos)  # type: ignore
+    # network_graph = plotting.from_networkx(
+    #     graph, networkx.spring_layout
+    # )  # type: ignore
     # Node
     network_graph.node_renderer.data_source.data["color"] = ["skyblue"] * len(
         graph.nodes
@@ -93,8 +85,8 @@ def get_panel_layout(graph: networkx.DiGraph) -> pn.layout.base.Panel:
         "node_probability_cache_hit",
         "group_probability_cache_hit",
     ]
-    columns = [TableColumn(field=k, title=k) for k in fields]
-    data_table = DataTable(
+    columns = [widgets.TableColumn(field=k, title=k) for k in fields]
+    data_table = widgets.DataTable(
         source=network_graph.node_renderer.data_source,
         columns=columns,
         height=800,
@@ -103,12 +95,12 @@ def get_panel_layout(graph: networkx.DiGraph) -> pn.layout.base.Panel:
         fit_columns=True,
     )
     # Create a CheckboxGroup for toggling columns
-    checkbox_group = CheckboxGroup(
+    checkbox_group = models.CheckboxGroup(
         labels=fields, active=list(range(len(fields)))
     )
 
     # CustomJS to toggle column visibility
-    check_callback = CustomJS(
+    check_callback = models.CustomJS(
         args=dict(data_table=data_table, columns=columns),
         code="""
         const active = cb_obj.active;  // Indices of selected checkboxes
@@ -126,8 +118,9 @@ def get_panel_layout(graph: networkx.DiGraph) -> pn.layout.base.Panel:
     checkbox_group.js_on_change("active", check_callback)
 
     radio_labels = fields + ["NONE"]
-    radio_group = RadioGroup(labels=radio_labels, active=len(radio_labels) - 1)
-    radio_callback = CustomJS(
+    radio_group = models.RadioGroup(
+        labels=radio_labels, active=len(radio_labels) - 1)
+    radio_callback = models.CustomJS(
         args=dict(
             labels=radio_labels,
             data_table=data_table,
@@ -175,7 +168,7 @@ def get_panel_layout(graph: networkx.DiGraph) -> pn.layout.base.Panel:
     )
     radio_group.js_on_change("active", radio_callback)
 
-    hover = HoverTool(
+    hover = models.HoverTool(
         tooltips=[
             ("Name", "@index"),
             ("Class", "@node_class"),
@@ -196,12 +189,12 @@ def get_panel_layout(graph: networkx.DiGraph) -> pn.layout.base.Panel:
     network_graph.edge_renderer.selection_glyph = None
     network_graph.edge_renderer.nonselection_glyph = None
     # Add visual properties to the graph
-    network_graph.node_renderer.glyph = Circle(
-        radius=150,
+    network_graph.node_renderer.glyph = models.Circle(
+        radius=100,
         fill_color="skyblue",
         # line_color="skyblue",
     )
-    network_graph.edge_renderer.glyph = MultiLine(
+    network_graph.edge_renderer.glyph = models.MultiLine(
         line_color="gray", line_alpha=0.5, line_width=1
     )
 
@@ -234,7 +227,7 @@ def get_panel_layout(graph: networkx.DiGraph) -> pn.layout.base.Panel:
 
     # JavaScript callback for interactivity
     # XXX: Likely define the type of the input graph a little better, TypedDict
-    callback = CustomJS(
+    callback = models.CustomJS(
         args=dict(
             graph_renderer=network_graph,
             ancestors=ancestors,
