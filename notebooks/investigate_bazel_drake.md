@@ -14,23 +14,34 @@ kernelspec:
 
 # Dependency Graph Investigation
 
-With this notebook, we're aiming to take some pre-processed data, namely a directed graph with some associated info:
+With this notebook, we're aiming to take some pre-processed data, namely a
+directed graph with some associated info:
+
 - labeled/indexed by **node name**
 - associated with a **node class**
 - a **probability of being a cache hit**
 - an **execution duration**
 
 With that, we want to answer a few questions:
+
 - within the graph, which nodes create "bottlenecks"
   - we're still trying to figure out what the best definition for that is:
-    - ancestors * descendants
+    - ancestors \* descendants
     - highest in_degree, or out_degree
-    - expected duration is high, but not just high: it's higher than the expected duration for all descendants; is that essentially in-degree
-- among nodes with duration, which ones are the most likely to get invalidated and take a significant amount of time
-- among nodes which can change (source files), which ones affect the greatest sum of duration and what's the expected value, given its likelihood to change
+    - expected duration is high, but not just high: it's higher than the
+      expected duration for all descendants; is that essentially in-degree
+- among nodes with duration, which ones are the most likely to get invalidated
+  and take a significant amount of time
+- among nodes which can change (source files), which ones affect the greatest
+  sum of duration and what's the expected value, given its likelihood to change
 
-There are several ideas to pursue when deciding on which metrics to rank with, such as:
-- do we always want to use actual data for durations and probabilities? maybe we'd have a better idea of the structure / properly weight some of the "build" steps by assuming a more uniform duration and probability (that's roughly what we'd do by using a count of source ancestors / descendants)
+There are several ideas to pursue when deciding on which metrics to rank with,
+such as:
+
+- do we always want to use actual data for durations and probabilities? maybe
+  we'd have a better idea of the structure / properly weight some of the "build"
+  steps by assuming a more uniform duration and probability (that's roughly what
+  we'd do by using a count of source ancestors / descendants)
 
 +++
 
@@ -84,7 +95,9 @@ df_nodes
 
 ## Data Analysis
 
-Now, we want to get a better understanding of the "shape" of our data in order to refine the initial data we have. We'll want to do a few things.
+Now, we want to get a better understanding of the "shape" of our data in order
+to refine the initial data we have. We'll want to do a few things.
+
 - get a better idea for the nodes we have
   - how do the node_classes break down
   - which nodes may we want to exclude from this data set
@@ -94,19 +107,24 @@ Now, we want to get a better understanding of the "shape" of our data in order t
   - what has the possibility of changing
   - what is a possible "bottleneck"
 
-All of this may be informed by the type of analysis we're doing, eg) if we're just looking at C++ code, we may refine our nodes to `cc_*` classes, or `py_*` for python. Though, ideally we won't have to do that sort of selection up front as the groups will be fairly disjoint at most times.
+All of this may be informed by the type of analysis we're doing, eg) if we're
+just looking at C++ code, we may refine our nodes to `cc_*` classes, or `py_*`
+for python. Though, ideally we won't have to do that sort of selection up front
+as the groups will be fairly disjoint at most times.
 
 ```{code-cell} ipython3
 # df_nodes.groupby("node_class").describe()['num_duration_ancestors']['mean'].sort_values(ascending=False)[:40].plot.bar()
 ```
 
 From the above query, we can see a few things:
+
 - We have A LOT of `py_test` invocations (7,239)
 - What the heck is a `_redirect_test`?
   - Looks like that's mostly lint for us
 - We've got about 4,824 source files
 - There are a large portion of "unknown" objects
-- After that, we've got a majority of `cc_library` objects (10%) so we've probably got a predominately C++ repo, with some py_test tooling
+- After that, we've got a majority of `cc_library` objects (10%) so we've
+  probably got a predominately C++ repo, with some py_test tooling
 
 ```{code-cell} ipython3
 # XXX: This should be empty at start, and likely revisited / refined as we go
@@ -242,7 +260,8 @@ df_nodes.loc[
 
 ## Data definition
 
-Now that we have a smaller set, let's refine our information and derive the values we want
+Now that we have a smaller set, let's refine our information and derive the
+values we want
 
 ```{code-cell} ipython3
 g = g.subgraph(df_nodes.index.tolist())
@@ -401,13 +420,19 @@ for sub in disconnected_graphs:
 ## Thoughts
 
 Chatting w/ Ben:
+
 - 3 questions to answer
-  1. What are the bottlenecks in the graph, highest expected_duration_s; how does this compare to in-edges?
-  2. What are the most expensive source files, highest group_duration_s or expected_duration_s or num_duration_ancestors (uniform)
+  1. What are the bottlenecks in the graph, highest expected_duration_s; how
+     does this compare to in-edges?
+  2. What are the most expensive source files, highest group_duration_s or
+     expected_duration_s or num_duration_ancestors (uniform)
   3. What are the most expensive tests, highest expected_duration_s
-- The middle bottlenecks should be higher than the source files and tests since it's in the middle; has the same group_duration, but more nodes
-- Well, not quite, imagine it reconvenes to a higher node, that would also show this
-- Should we identify things that depend on a lot, not just things that are heavily depended upon?
+- The middle bottlenecks should be higher than the source files and tests since
+  it's in the middle; has the same group_duration, but more nodes
+- Well, not quite, imagine it reconvenes to a higher node, that would also show
+  this
+- Should we identify things that depend on a lot, not just things that are
+  heavily depended upon?
 
 ```{code-cell} ipython3
 # 5 nodes that take time, sorted by largest number of source_descendants

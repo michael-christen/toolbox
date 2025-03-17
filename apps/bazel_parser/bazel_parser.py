@@ -34,13 +34,18 @@ out_csv=$repo_dir/my.csv
 out_html=$repo_dir/my.html
 
 # Prepare data
-bazel query "//... - //docs/... - //third_party/bazel/..." --output proto > $query_pb
+bazel query "//... - //docs/... - //third_party/bazel/..." --output proto \
+        > $query_pb
 bazel test //... --build_event_binary_file=$bep_pb
-bazel run //apps/bazel_parser --output_groups=-mypy -- git-capture --repo-dir $repo_dir --days-ago 400 --file-commit-pb $file_commit_pb
+bazel run //apps/bazel_parser --output_groups=-mypy -- git-capture --repo-dir \
+        $repo_dir --days-ago 400 --file-commit-pb $file_commit_pb
 
 # Process and visualize the data
-bazel run //apps/bazel_parser --output_groups=-mypy -- process --file-commit-pb $file_commit_pb --query-pb $query_pb --bep-pb $bep_pb --out-gml $out_gml --out-csv $out_csv
-bazel run //apps/bazel_parser --output_groups=-mypy -- visualize --gml $out_gml --out-html $out_html
+bazel run //apps/bazel_parser --output_groups=-mypy -- process \
+        --file-commit-pb $file_commit_pb --query-pb $query_pb --bep-pb \
+        $bep_pb --out-gml $out_gml --out-csv $out_csv
+bazel run //apps/bazel_parser --output_groups=-mypy -- visualize \
+        --gml $out_gml --out-html $out_html
 """
 
 import csv
@@ -339,7 +344,8 @@ def process(
     )
 
     node_to_class: dict[str, str] = {}
-    # Gotta make table for all, in a consistent order, otherwise table, etc. won't line up:
+    # Gotta make table for all, in a consistent order, otherwise table, etc.
+    # won't line up:
     # Note that we're not selecting which nodes to view
     for node_name in graph.nodes:
         node_rule = rules.get(node_name)

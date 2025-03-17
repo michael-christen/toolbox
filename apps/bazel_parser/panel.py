@@ -2,21 +2,18 @@ import pathlib
 
 import networkx
 import panel as pn
-from bokeh.io import show
-from bokeh.layouts import column
 from bokeh.models import CheckboxGroup
 from bokeh.models import Circle
-from bokeh.models import ColumnDataSource
 from bokeh.models import CustomJS
 from bokeh.models import HoverTool
 from bokeh.models import MultiLine
 from bokeh.models import RadioGroup
-from bokeh.models import TapTool
 from bokeh.models.widgets import DataTable
 from bokeh.models.widgets import TableColumn
 from bokeh.plotting import figure
 from bokeh.plotting import from_networkx
-from networkx.drawing import nx_agraph
+
+# from networkx.drawing import nx_agraph
 from panel.io import save
 
 SIZING_MODE = "fixed"
@@ -36,7 +33,8 @@ def get_panel_layout(graph: networkx.DiGraph) -> pn.layout.base.Panel:
 
     References
 
-    # network_graph = from_networkx(graph, networkx.spring_layout, scale=1, center=(0, 0))
+    # network_graph = from_networkx(graph, networkx.spring_layout,
+    #                               scale=1, center=(0, 0))
     # neato
     # dot
     # twopi
@@ -56,7 +54,9 @@ def get_panel_layout(graph: networkx.DiGraph) -> pn.layout.base.Panel:
     plot.axis.visible = False
     # pos = nx_agraph.graphviz_layout(graph, prog='dot')
     # network_graph = from_networkx(graph, pos)  # type: ignore
-    network_graph = from_networkx(graph, networkx.spring_layout)  # type: ignore
+    network_graph = from_networkx(
+        graph, networkx.spring_layout
+    )  # type: ignore
     # Node
     network_graph.node_renderer.data_source.data["color"] = ["skyblue"] * len(
         graph.nodes
@@ -151,17 +151,21 @@ def get_panel_layout(graph: networkx.DiGraph) -> pn.layout.base.Panel:
         const minVal = Math.min(...values);
         const maxVal = Math.max(...values);
 
-        // Define a Viridis256 color palette (you can replace this with other palettes)
+        // Define a Viridis256 color palette (you can replace this with other
+        // palettes)
         const palette = [
-            '#440154', '#481567', '#482677', '#453781', '#404788', '#39568c', '#33638d', '#2d708e',
-            '#287d8e', '#238a8d', '#1f968b', '#20a387', '#29af7f', '#3cbc75', '#55c667', '#73d055',
-            '#95d840', '#b8de29', '#dce319', '#fde725'
+            '#440154', '#481567', '#482677', '#453781', '#404788', '#39568c',
+            '#33638d', '#2d708e', '#287d8e', '#238a8d', '#1f968b', '#20a387',
+            '#29af7f', '#3cbc75', '#55c667', '#73d055', '#95d840', '#b8de29',
+            '#dce319', '#fde725'
         ];
 
         // Map each value to a color based on its normalized position
         for (let i = 0; i < values.length; i++) {
-            const normalized = (values[i] - minVal) / (maxVal - minVal); // Normalize to [0, 1]
-            const paletteIndex = Math.floor(normalized * (palette.length - 1)); // Map to palette index
+            // Normalize to [0, 1]
+            const normalized = (values[i] - minVal) / (maxVal - minVal);
+            // Map to palette index
+            const paletteIndex = Math.floor(normalized * (palette.length - 1));
             colors[i] = palette[paletteIndex]; // Assign color
         }
 
@@ -215,12 +219,15 @@ def get_panel_layout(graph: networkx.DiGraph) -> pn.layout.base.Panel:
     # Precompute ancestors and descendants
     label_to_index = {n: i for i, n in enumerate(graph.nodes)}
     ancestors = {
-        index: list(label_to_index[l] for l in networkx.ancestors(graph, node))
+        index: list(
+            label_to_index[label] for label in networkx.ancestors(graph, node)
+        )
         for index, node in enumerate(graph.nodes)
     }
     descendants = {
         index: list(
-            label_to_index[l] for l in networkx.descendants(graph, node)
+            label_to_index[label]
+            for label in networkx.descendants(graph, node)
         )
         for index, node in enumerate(graph.nodes)
     }
@@ -235,18 +242,22 @@ def get_panel_layout(graph: networkx.DiGraph) -> pn.layout.base.Panel:
             label_to_index=label_to_index,
         ),
         code="""
-        const selected_index = graph_renderer.node_renderer.data_source.selected.indices[0];
+        const selected_index = (graph_renderer.node_renderer.data_source
+                                .selected.indices[0]);
         const node_data = graph_renderer.node_renderer.data_source.data;
         const edge_data = graph_renderer.edge_renderer.data_source.data;
         if (selected_index !== undefined) {
             const selected_ancestors = ancestors.get(selected_index);
             const selected_descendants = descendants.get(selected_index);
-            const subgraph_nodes = new Set([[selected_index], selected_ancestors, selected_descendants].flat());
+            const subgraph_nodes = new Set([
+                [selected_index], selected_ancestors,
+                selected_descendants].flat());
             const ancestor_nodes = new Set(selected_ancestors);
             const descendant_nodes = new Set(selected_descendants);
 
             for (let i = 0; i < node_data['Highlight'].length; i++) {
-                node_data['Highlight'][i] = (i === selected_index) ? "Yes" : "No";
+                node_data['Highlight'][i] = (
+                    (i === selected_index) ? "Yes" : "No");
                 var color = "skyblue";
                 if (i === selected_index) {
                   color = "skyblue";
@@ -264,7 +275,8 @@ def get_panel_layout(graph: networkx.DiGraph) -> pn.layout.base.Panel:
             for (let i = 0; i < edge_data['start'].length; i++) {
                 const edge_start = label_to_index[edge_data['start'][i]];
                 const edge_end = label_to_index[edge_data['end'][i]];
-                const in_subgraph = subgraph_nodes.has(edge_start) && subgraph_nodes.has(edge_end);
+                const in_subgraph = subgraph_nodes.has(edge_start) && (
+                    subgraph_nodes.has(edge_end));
                 edge_data['alpha'][i] = in_subgraph ? 1.0 : 0.0;
             }
         } else {
