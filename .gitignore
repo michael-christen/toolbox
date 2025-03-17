@@ -70,6 +70,8 @@ target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
+# jupytext preserves these with their paired .py notebooks
+*.ipynb
 
 # pyenv
 .python-version
