@@ -221,6 +221,8 @@ class Node(TypedDict):
     # Sum of ancestors' node durations + your own
     group_duration_s: float
     # node_probability_cache_hit * PRODUCT{descendants}
+    # - This makes the simplifying assumption that all changes are independent
+    # of one another, which isn't true, but convenient.
     group_probability_cache_hit: float
     # group_duration_s * (1 - group_probability_cache_hit)
     expected_duration_s: float
@@ -228,36 +230,35 @@ class Node(TypedDict):
     # XXX: Move these back and add them where necessarry
     # ==== New =====
     # Max ancestor depth from this node
-    # XXX: How to compute this?
-    # - find "root" ancestors and get max shortest path from those to here?
+    # - The max shortest path of this node in a reversed graph
     ancestor_depth: int
     # ancestor_depth, but descendant
+    # - The max shortest path of this node in a graph
     descendant_depth: int
-    # The eccentricity of a node v is the maximum distance from v to all other
-    # nodes in G.
-    # XXX: How is this different than depth?
-    # - [ ] eccentricity
-    # - F this, I have no idea, let's just do depth ...
 
-
-    # 28d changes (node_probability_cache_hit)
-    # 28d changes transitive (group_probability_cache_hit)
-
-    # changes to this node * num_ancestors
+    # A more node specific version of rebuilt_targets_by_transitive_dependencies
+    # XXX: May not be too helpful?
+    # (1 - node_probability_cache_hit) * num_ancestors
     # > Score for how much changes to a single target affects others due to
     # > cache invalidations
     # > A high score means that you are a top cache invalidator in the graph.
     # > E.g. “ios_pill” that we saw in the beginning.
-    rebuilt_targets: int
+    # related to rebuilt_target
+    ancestors_by_node_p: int
 
-    # changes to (all descendants + this) * num_ancestors
+    # An unweighted version of expected_duration_s wrt duration
+    # (1 - group_probability_cache_hit) * num_ancestors
     # > This can be interpreted as a score for bottleneck-ness, and captures
     # > how a single target act as a force multiplier of graph invalidations in
     # > the graph. This is an improved way to identify bottlenecks that could
     # > benefit from isolation and cutting off the dependencies between the
     # > upstream and downstream side.
-    rebuilt_targets_by_transitive_dependencies: int
+    # related to rebuilt_targets_by_transitive_dependencies
+    ancestors_by_group_p: float
 
+    # An unweighted version of expected_duration_s wrt probability
+    # num_descendants * num_ancestors
+    ancestors_by_descendants: int
 
     # Betweenness centrality of a node is the sum of the fraction of all-pairs
     # shortest paths that pass through
@@ -272,7 +273,10 @@ class Node(TypedDict):
     # This can be seen as a score for the broker-ness in the dependency network
     # and that could also benefit from isolation.
     betweenness_centrality: float
-    # XXX: betweennes_longest doesn't quite make sense
+
+    # Closeness centrality of a node u is the reciprocal of the average
+    # shortest path distance to u over all n-1 reachable nodes.
+    closeness_centrality: float
 
     @staticmethod
     def get_node_field_names() -> list[str]:
@@ -293,10 +297,17 @@ class Node(TypedDict):
             "hubs_metric",
             "authorities_metric",
             "node_duration_s",
-            "group_duration_s",
-            "expected_duration_s",
             "node_probability_cache_hit",
+            "group_duration_s",
             "group_probability_cache_hit",
+            "expected_duration_s",
+            "ancestor_depth",
+            "descendant_depth",
+            "ancestors_by_node_p",
+            "ancestors_by_group_p",
+            "ancestors_by_descendants",
+            "betweenness_centrality",
+            "closeness_centrality",
         ]
 
 
@@ -354,11 +365,33 @@ def dependency_analysis(
     # logger.debug(f"nodes: {len(graph.nodes)}")
     # logger.debug(f"edges: {len(graph.edges)}")
     # XXX: Show graph density
+    in_degree = graph.in_degree()
+    out_degree = graph.out_degree()
+
+    reversed_graph = graph.reverse()
+
+    # Compute depths
+    forward_all_pairs_shortest_path_length = (
+        networkx.all_pairs_shortest_path_length(graph))
+    reverse_all_pairs_shortest_path_length = (
+        networkx.all_pairs_shortest_path_length(reversed_graph))
+    descendant_depth: dict[str, int] = {}
+    ancestor_depth: dict[str, int] = {}
+    for node_name, pair_len_dict in (
+            forward_all_pairs_shortest_path_length):
+        descendant_depth[node_name] = max(pair_len_dict.values())
+    for node_name, pair_len_dict in (
+            reverse_all_pairs_shortest_path_length):
+        ancestor_depth[node_name] = max(pair_len_dict.values())
+
+    # Compute centrality metrics
+    betweenness = networkx.betweenness_centrality(graph)
+    closeness = networkx.closeness_centrality(graph)
 
     nodes: dict[str, Node] = {}
     for node_name, node_class in node_to_class.items():
-        num_parents = len(list(graph.predecessors(node_name)))
-        num_children = len(list(graph.successors(node_name)))
+        num_parents = in_degree[node_name]
+        num_children = out_degree[node_name]
         ancestors = list(networkx.ancestors(graph, node_name))
         num_ancestors = len(ancestors)
         num_duration_ancestors = len(
@@ -369,6 +402,7 @@ def dependency_analysis(
         num_source_descendants = len(
             [d for d in descendants if d in node_probability]
         )
+        np = node_probability.get(node_name, 1.0)
         gp = group_probability.get(node_name, 1.0)
         gd = group_duration.get(node_name, 0)
         row: Node = {
@@ -388,8 +422,18 @@ def dependency_analysis(
             # main library, etc. not sure
             "group_duration_s": gd,
             "expected_duration_s": gd * (1 - gp),
-            "node_probability_cache_hit": node_probability.get(node_name, 1.0),
+            "node_probability_cache_hit": np,
             "group_probability_cache_hit": gp,
+            "ancestor_depth": ancestor_depth[node_name],
+            "descendant_depth": descendant_depth[node_name],
+            "ancestors_by_node_p": num_ancestors * (1 - np),
+            "ancestors_by_group_p": num_ancestors * (1 - gp),
+            "ancestors_by_descendants":
+            num_ancestors * num_descendants,
+            "betweenness_centrality":
+            betweenness[node_name],
+            "closeness_centrality":
+            closeness[node_name],
         }
         nodes[node_name] = row
     return nodes

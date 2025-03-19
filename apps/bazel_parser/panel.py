@@ -84,6 +84,13 @@ def get_panel_layout(graph: networkx.DiGraph) -> pn.layout.base.Panel:
         "expected_duration_s",
         "node_probability_cache_hit",
         "group_probability_cache_hit",
+        "ancestor_depth",
+        "descendant_depth",
+        "ancestors_by_node_p",
+        "ancestors_by_group_p",
+        "ancestors_by_descendants",
+        "betweenness_centrality",
+        "closeness_centrality",
     ]
     columns = [widgets.TableColumn(field=k, title=k) for k in fields]
     data_table = widgets.DataTable(
