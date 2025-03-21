@@ -142,6 +142,7 @@ gazelle(
 # gazelle:resolve py examples.basic.hello_pb2_grpc //examples/basic:hello_grpc_py_library
 # gazelle:resolve py third_party.bazel.src.main.protobuf.build_pb2 //third_party/bazel/src/main/protobuf:build_py_library
 # gazelle:resolve py third_party.bazel.proto.build_event_stream_pb2 //third_party/bazel/proto:build_event_stream_py_library
+# gazelle:resolve py third_party.bazel.proto.spawn_pb2 //third_party/bazel/proto:spawn_py_library
 # gazelle:resolve proto pw_protobuf_protos/common.proto @pigweed//pw_protobuf:common_proto
 # gazelle:resolve py examples.pigweed.modules.blinky.blinky_pb2 //examples/pigweed/modules/blinky:blinky_pb2
 # gazelle:resolve py tools.git_pb2 //tools:git_py_library

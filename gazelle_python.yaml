@@ -5467,6 +5467,9 @@ manifest:
     zmq.utils.strtypes: pyzmq
     zmq.utils.win32: pyzmq
     zmq.utils.z85: pyzmq
+    zstandard: zstandard
+    zstandard.backend_c: zstandard
+    zstandard.backend_cffi: zstandard
   pip_repository:
     name: pip
-integrity: 025abeecb722da86716386f47fa0e3ed4ad856e850d3631fcbdb73536531ff06
+integrity: d0453154cc9faa86b4addb63e99dc97154b1d6c270484693100e1593cb8e0407

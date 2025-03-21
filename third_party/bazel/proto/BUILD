@@ -411,3 +411,52 @@ proto_py_library(
     visibility = ["//visibility:public"],
     deps = ["@com_google_protobuf//:protobuf_python"],
 )
+
+proto_library(
+    name = "spawn_proto",
+    srcs = ["spawn.proto"],
+    deps = [
+        "@com_google_protobuf//:duration_proto",
+        "@com_google_protobuf//:timestamp_proto",
+    ],
+)
+
+proto_cc_library(
+    name = "spawn_cc_library",
+    srcs = ["spawn.pb.cc"],
+    hdrs = ["spawn.pb.h"],
+    visibility = ["//visibility:public"],
+    deps = ["@com_google_protobuf//:protobuf"],
+)
+
+proto_compile(
+    name = "spawn_cpp_compile",
+    outputs = [
+        "spawn.pb.cc",
+        "spawn.pb.h",
+    ],
+    plugins = ["@build_stack_rules_proto//plugin/builtin:cpp"],
+    proto = "spawn_proto",
+    visibility = ["//visibility:public"],
+)
+
+proto_compile(
+    name = "spawn_python_compile",
+    outputs = [
+        "spawn_pb2.py",
+        "spawn_pb2.pyi",
+    ],
+    plugins = [
+        "@build_stack_rules_proto//plugin/builtin:pyi",
+        "@build_stack_rules_proto//plugin/builtin:python",
+    ],
+    proto = "spawn_proto",
+    visibility = ["//visibility:public"],
+)
+
+proto_py_library(
+    name = "spawn_py_library",
+    srcs = ["spawn_pb2.py"],
+    visibility = ["//visibility:public"],
+    deps = ["@com_google_protobuf//:protobuf_python"],
+)
