@@ -113,7 +113,23 @@ for python. Though, ideally we won't have to do that sort of selection up front
 as the groups will be fairly disjoint at most times.
 
 ```{code-cell} ipython3
-# df_nodes.groupby("node_class").describe()['num_duration_ancestors']['mean'].sort_values(ascending=False)[:40].plot.bar()
+# Quantity
+count_df = (
+    df_nodes.groupby("node_class")["node_class"]
+    .count()
+    .sort_values(ascending=False)
+    .to_frame()
+)
+count_df["pct"] = count_df["node_class"] * 100 / len(df_nodes)
+count_df
+```
+
+```{code-cell} ipython3
+count_df["node_class"].plot.bar()
+```
+
+```{code-cell} ipython3
+count_df["node_class"].plot.pie()
 ```
 
 From the above query, we can see a few things:
@@ -154,6 +170,18 @@ refined_df_nodes
 ```
 
 ```{code-cell} ipython3
+refined_df_nodes.index
+```
+
+```{code-cell} ipython3
+np.where??
+```
+
+```{code-cell} ipython3
+df_nodes['node_class'].str.fullmatch('^filegroup$')
+```
+
+```{code-cell} ipython3
 df_nodes = refined_df_nodes
 ```
 
@@ -162,26 +190,6 @@ df_nodes = refined_df_nodes
 # Had 25,836 nodes, now 9,630
 print(f"Nodes: {len(df_nodes)}")
 print(f"We have {df_nodes['node_class'].nunique()} node classes")
-```
-
-```{code-cell} ipython3
-# Quantity
-count_df = (
-    df_nodes.groupby("node_class")["node_class"]
-    .count()
-    .sort_values(ascending=False)
-    .to_frame()
-)
-count_df["pct"] = count_df["node_class"] * 100 / len(df_nodes)
-count_df
-```
-
-```{code-cell} ipython3
-count_df["node_class"].plot.bar()
-```
-
-```{code-cell} ipython3
-count_df["node_class"].plot.pie()
 ```
 
 ```{code-cell} ipython3
@@ -195,8 +203,8 @@ def show_indices(df: pandas.DataFrame, node_class: str) -> None:
 
 
 # Omitted for brevity, but looks like that's mostly lint, let's remove
-# for k in df_nodes.loc[df_nodes['node_class'] == '_redirect_test'].index:
-#     print(k)
+for k in df_nodes.loc[df_nodes['node_class'] == '_redirect_test'].index:
+    print(k)
 
 # for k in df_nodes.loc[df_nodes['node_class'] == '_redirect_test'].index:
 #     # if k.endswith('lint') or k.endswith('codestyle') or k.endswith('_buildifier'):
@@ -248,7 +256,7 @@ df_nodes.loc[
 
 ```{code-cell} ipython3
 # cc_library seems mostly legit
-# df_nodes.loc[(df_nodes['node_class'] == 'cc_library')].index.tolist()
+df_nodes.loc[(df_nodes['node_class'] == 'cc_library')].index.tolist()
 ```
 
 ```{code-cell} ipython3

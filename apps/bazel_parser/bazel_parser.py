@@ -1,4 +1,4 @@
-"""Parse bazel query outputs
+r"""Parse bazel query outputs
 
 A larger system description:
 - inputs:
@@ -75,6 +75,14 @@ bazel query "//... - //docs/... - //third_party/bazel/..." --output proto \
 bazel test //... --build_event_binary_file=$bep_pb
 bazel run //apps/bazel_parser --output_groups=-mypy -- git-capture --repo-dir \
         $repo_dir --days-ago 400 --file-commit-pb $file_commit_pb
+# Separate step if we want build timing data
+bazel clean
+bazel build --noremote_accept_cached \
+    --experimental_execution_log_compact_file=exec_log.pb.zst \
+    --generate_json_trace_profile --profile=example_profile_new.json \
+    //...
+# Would then need to process the exec_log.pb.zst file to get timing from it and
+# then add to the other timing information
 
 # Process and visualize the data
 bazel run //apps/bazel_parser --output_groups=-mypy -- process \
@@ -85,6 +93,7 @@ bazel run //apps/bazel_parser --output_groups=-mypy -- visualize \
 """
 
 import csv
+import dataclasses
 import datetime
 import logging
 import pathlib
@@ -115,7 +124,7 @@ def _get_rules(
     rules = {}
 
     for i, target in enumerate(query_result.target):
-        type_name = build_pb2.Target.Discriminator.Name(target.type)
+        type_name = build_pb2.Target.Discriminator.Name(target.type)  # type: ignore
         if target.type == build_pb2.Target.RULE:
             pass
         elif target.type in {
@@ -176,6 +185,25 @@ def _normalize_bazel_target_to_intermediate(target: str) -> str:
         return target.replace(":", "")
     else:
         return target.replace(":", "/")
+
+
+class GraphMetrics(TypedDict):
+    """Graph-wide metrics.
+    """
+    max_depth: int
+    # aka) order
+    num_nodes: int
+    # aka) size
+    num_edges: int
+    density: float
+    diameter: int
+    radius: int
+    num_connected_components: int
+    total_duration_s: float
+    expected_duration_s: float
+    probable_nodes_affected_per_change_by_node: float
+    probable_nodes_affected_per_change_by_group: float
+    # XXX: max of most of the node attributes
 
 
 class Node(TypedDict):
@@ -244,7 +272,7 @@ class Node(TypedDict):
     # > A high score means that you are a top cache invalidator in the graph.
     # > E.g. “ios_pill” that we saw in the beginning.
     # related to rebuilt_target
-    ancestors_by_node_p: int
+    ancestors_by_node_p: float
 
     # An unweighted version of expected_duration_s wrt duration
     # (1 - group_probability_cache_hit) * num_ancestors
@@ -278,37 +306,36 @@ class Node(TypedDict):
     # shortest path distance to u over all n-1 reachable nodes.
     closeness_centrality: float
 
-    @staticmethod
-    def get_node_field_names() -> list[str]:
-        """Get ordered list of field names to display.
+def get_node_field_names() -> list[str]:
+    """Get ordered list of field names to display.
 
-        Keep in sync with Node
-        """
-        return [
-            "node_name",
-            "node_class",
-            "num_parents",
-            "num_ancestors",
-            "num_duration_ancestors",
-            "num_children",
-            "num_descendants",
-            "num_source_descendants",
-            "pagerank",
-            "hubs_metric",
-            "authorities_metric",
-            "node_duration_s",
-            "node_probability_cache_hit",
-            "group_duration_s",
-            "group_probability_cache_hit",
-            "expected_duration_s",
-            "ancestor_depth",
-            "descendant_depth",
-            "ancestors_by_node_p",
-            "ancestors_by_group_p",
-            "ancestors_by_descendants",
-            "betweenness_centrality",
-            "closeness_centrality",
-        ]
+    Keep in sync with Node
+    """
+    return [
+        "node_name",
+        "node_class",
+        "num_parents",
+        "num_ancestors",
+        "num_duration_ancestors",
+        "num_children",
+        "num_descendants",
+        "num_source_descendants",
+        "pagerank",
+        "hubs_metric",
+        "authorities_metric",
+        "node_duration_s",
+        "node_probability_cache_hit",
+        "group_duration_s",
+        "group_probability_cache_hit",
+        "expected_duration_s",
+        "ancestor_depth",
+        "descendant_depth",
+        "ancestors_by_node_p",
+        "ancestors_by_group_p",
+        "ancestors_by_descendants",
+        "betweenness_centrality",
+        "closeness_centrality",
+    ]
 
 
 def _get_node_probability(
@@ -317,7 +344,7 @@ def _get_node_probability(
 ) -> dict[str, float]:
     # XXX: Test case with BUILD further up, ensure we still get the right match
     bazel_intermediates = _normalize_paths_to_bazel_intermediates(
-        file_commit_map.file_map.keys()
+        list(file_commit_map.file_map.keys())
     )
     bazel_src_target_to_file = {}
     for node in graph.nodes:
@@ -334,6 +361,29 @@ def _get_node_probability(
             len(file_commit_map.file_map[f]) / total_commits
         )
     return node_probability
+
+
+def get_graph_metrics(
+    graph: networkx.DiGraph,
+    node_probability: dict[str, float],
+    node_duration_s: dict[str, float],
+) -> GraphMetrics:
+    metrics: GraphMetrics = {
+        # XXX: Compare to max of all nodes
+        "max_depth": networkx.dag_longest_path_length(graph),
+        "num_nodes": graph.number_of_nodes(),
+        "num_edges": graph.number_of_edges(),
+        "density": networkx.density(graph),
+        "diameter": networkx.diameter(graph),
+        "radius": networkx.radius(graph),
+        "num_connected_components": networkx.number_connected_components(graph),
+        # XXX: Add these later:
+        # "total_duration_s": 0,
+        # "expected_duration_s": 0,
+        # "probable_nodes_affected_per_change_by_node": 0,
+        # "probable_nodes_affected_per_change_by_group": 0,
+    }
+    return metrics
 
 
 def dependency_analysis(
@@ -527,7 +577,7 @@ def process(
         graph.nodes[name]["Highlight"] = "No"
     # Write the nodes
     with open(out_csv, "w") as f:
-        writer = csv.DictWriter(f, fieldnames=Node.get_node_field_names())
+        writer = csv.DictWriter(f, fieldnames=get_node_field_names())
         writer.writeheader()
         for row in nodes.values():
             writer.writerow(row)

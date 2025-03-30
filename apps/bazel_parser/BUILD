@@ -37,4 +37,8 @@ py_library(
         "@pip//networkx",
         "@pip//panel",
     ],
+    tags = [
+        # Bokeh type-hinting is raising a lot of complaints that are invalid
+        "no-mypy",
+    ],
 )

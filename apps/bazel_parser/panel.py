@@ -20,6 +20,132 @@ def run_panel(graph: networkx.DiGraph, html_out: pathlib.Path | None) -> None:
     pn.serve(layout)
 
 
+def get_subgraph_layout(whole_graph: networkx.DiGraph, node_key: str) -> pn.layout.base.Panel:
+    # Compute sub-graph
+    ancestors = networkx.ancestors(whole_graph, node_key)
+    descendants = networkx.descendants(whole_graph, node_key)
+    all_node_set = ancestors | descendants | set([node_key])
+    graph = whole_graph.subgraph(all_node_set)
+    # Prepare Bokeh graph layout
+    plot = plotting.figure(
+        height=800,
+        width=800,
+        tools="tap,box_zoom,wheel_zoom,reset,pan",
+        active_scroll="wheel_zoom",
+        sizing_mode=SIZING_MODE,
+        title="Network Graph",
+    )
+    plot.axis.visible = False
+    pos = nx_agraph.graphviz_layout(graph, prog='dot')
+    network_graph = plotting.from_networkx(graph, pos)  # type: ignore
+    # network_graph = plotting.from_networkx(
+    #     graph, networkx.spring_layout
+    # )  # type: ignore
+    # Node
+    network_graph.node_renderer.data_source.data["color"] = ["skyblue"] * len(
+        graph.nodes
+    )
+    network_graph.node_renderer.data_source.data["alpha"] = [1.0] * len(
+        graph.nodes
+    )
+    # Edge
+    network_graph.edge_renderer.data_source.data["line_color"] = [
+        "gray" for edge in graph.edges
+    ]
+    network_graph.edge_renderer.data_source.data["alpha"] = [1.0] * len(
+        graph.edges
+    )
+    hover = models.HoverTool(
+        tooltips=[
+            ("Name", "@index"),
+            ("Class", "@node_class"),
+            ("num_descendants", "@num_descendants"),
+            ("num_ancestors", "@num_ancestors"),
+            ("node_duration_s", "@node_duration_s"),
+            ("group_duration_s", "@group_duration_s"),
+            ("node_probability_cache_hit", "@node_probability_cache_hit"),
+            ("group_probability_cache_hit", "@group_probability_cache_hit"),
+            ("expected_duration_s", "@expected_duration_s"),
+        ]
+    )
+    plot.add_tools(hover)
+    # Don't let selection overwrite our properties
+    network_graph.node_renderer.selection_glyph = None
+    network_graph.node_renderer.nonselection_glyph = None
+    network_graph.edge_renderer.selection_glyph = None
+    network_graph.edge_renderer.nonselection_glyph = None
+    # Add visual properties to the graph
+    network_graph.node_renderer.glyph = models.Circle(
+        radius=100,
+        fill_color="skyblue",
+        # line_color="skyblue",
+    )
+    network_graph.edge_renderer.glyph = models.MultiLine(
+        line_color="gray", line_alpha=0.5, line_width=1
+    )
+
+    network_graph.node_renderer.glyph.update(
+        fill_color="color",
+        fill_alpha="alpha",
+        # This allows us to hide completely
+        line_alpha="alpha",
+    )
+    network_graph.edge_renderer.glyph.update(
+        line_color="line_color", line_alpha="alpha"
+    )
+    node_data = network_graph.node_renderer.data_source.data
+    label_to_index = {n: i for i, n in enumerate(graph.nodes)}
+    index_to_label = {v: k for k, v in label_to_index.items()}
+    selected_index = label_to_index[node_key]
+    for i in range(len(node_data['Highlight'])):
+        if i == selected_index:
+            highlight = "Yes"
+            color = "skyblue"
+        else:
+            highlight = "No"
+            label = index_to_label[i]
+            if label in ancestors:
+                color = "orange"
+            elif label in descendants:
+                color = "gold"
+            else:
+                raise ValueError(f"Unclear: {label}")
+        node_data['Highlight'][i] = highlight
+        node_data['color'][i] = color
+    plot.renderers.append(network_graph)
+    # Not showing up well in Jupyter dark mode
+    # https://github.com/holoviz/panel/issues/3783
+    node_selection = models.AutocompleteInput(
+        title="Select Node:",
+        completions=sorted(all_node_set),
+        case_sensitive=False,
+        min_characters=1)
+
+    plot_pane = pn.pane.Bokeh(plot)
+
+    def node_selection_callback(attr, old, new) -> None:
+        node_data = network_graph.node_renderer.data_source.data
+        print(f"got selection: {new}")
+        print(f"Total: {len(node_data['Highlight'])}")
+        selected_index = label_to_index[new]
+        for i in range(len(node_data['Highlight'])):
+            if i == selected_index:
+                node_data['color'][i] = 'red'
+            else:
+                node_data['color'][i] = 'green'
+        # Explicitly re-draw
+        plot_pane.param.trigger("object")
+
+    # .on_change doesn't work in notebook
+    node_selection.on_change("value", node_selection_callback)
+
+    layout = pn.Column(
+        pn.Row(plot_pane),
+        pn.Row(pn.pane.Bokeh(node_selection)),
+    )
+    return layout
+
+
 def get_panel_layout(graph: networkx.DiGraph) -> pn.layout.base.Panel:
     """Get Panel Layout
 

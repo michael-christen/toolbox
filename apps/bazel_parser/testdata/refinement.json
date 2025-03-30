@@ -1,0 +1,20 @@
+{
+    "class_patterns": [
+        "^genquery$"
+    ],
+    "class_pattern_to_name_patterns": {
+        "^unknown$": [
+            ".*\.stripped$",
+            ".*\.dwp$",
+            ".*\.java$",
+            ".*\.jar$",
+            ".*\.pyi$"
+        ],
+        "^_redirect_test$": [
+            "^(?!.*_test$).*"
+        ],
+        "^py_test$": [
+            "^(?!.*_test$).*"
+        ]
+    }
+}

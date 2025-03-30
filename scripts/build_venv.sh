@@ -5,4 +5,4 @@ set -e
 
 bazel run //:create_venv
 bazel build //packaging:py_wheel_all.reference
-venv/bin/pip install `cat bazel-bin/packaging/py_wheel_all.txt`
+venv/bin/pip install --force-reinstall `cat bazel-bin/packaging/py_wheel_all.txt`

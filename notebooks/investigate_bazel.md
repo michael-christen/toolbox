@@ -13,6 +13,11 @@ kernelspec:
 ---
 
 ```{code-cell} ipython3
+%load_ext autoreload
+%autoreload 2
+```
+
+```{code-cell} ipython3
 import networkx
 import pandas
 from networkx.drawing import nx_agraph
@@ -121,19 +126,76 @@ ax
 def get_subgraph(label: str, graph: networkx.DiGraph) -> networkx.DiGraph:
     return graph.subgraph(
         networkx.ancestors(graph, label)
-        | networkx.descendants(g, label)
+        | networkx.descendants(graph, label)
         | set([label])
     )
 ```
 
 ```{code-cell} ipython3
-def show_graph(graph: networkx.DiGraph, include_labels: bool = True) -> None:
+def show_graph(graph: networkx.DiGraph, include_labels: bool = True, show_numbers: bool = False) -> None:
     if include_labels:
         a = nx_agraph.to_agraph(graph)
         a.layout("dot")
         display(a)
+    elif show_numbers:
+        number_labels = {name: idx for idx, name in enumerate(graph.nodes)}
+        networkx.draw(graph, pos=nx_agraph.graphviz_layout(graph, prog="dot"), labels=number_labels)
+        for name, idx in sorted(number_labels.items(), key=lambda x: x[1]):
+            print(f'- {idx}: {name}')
     else:
-        networkx.draw(graph, nx_agraph.graphviz_layout(graph, prog="dot"))
+          networkx.draw(graph, pos=nx_agraph.graphviz_layout(graph, prog="dot"))
+```
+
+```{code-cell} ipython3
+def show_subgraph(whole_graph: networkx.DiGraph, node_label: str, include_labels: bool = True, show_numbers: bool = False) -> None:
+    ancestors = networkx.ancestors(whole_graph, node_label)
+    descendants = networkx.descendants(whole_graph, node_label)
+    graph = whole_graph.subgraph(
+        ancestors | descendants | set([node_label])
+    )
+    if include_labels:
+        a = nx_agraph.to_agraph(graph)
+        a.layout("dot")
+        display(a)
+    elif show_numbers:
+        # XXX: Print adjacency list
+        idx = 0
+        number_labels = {
+            node_label: idx,
+        }
+        idx += 1
+        for src_node, next_nodes in networkx.bfs_successors(whole_graph, source=node_label):
+            print(f'{src_node} ->')
+            for node in next_nodes:
+                print(f'- {node}')
+                if node in number_labels:
+                    continue
+                # XXX: Print adjacency list as well
+                number_labels[node] = idx
+                idx += 1
+
+        for src_node, next_nodes in networkx.bfs_successors(networkx.reverse(whole_graph), source=node_label):
+            print(f'{src_node} <-')
+            for node in next_nodes:
+                print(f'- {node}')
+                if node in number_labels:
+                    continue
+                number_labels[node] = idx
+                idx += 1
+        print()    
+        # number_labels = {name: idx for idx, name in enumerate(graph.nodes)}
+        # XXX: Doesn't look great w/ 3-digit node numbers and greater
+        networkx.draw(graph, pos=nx_agraph.graphviz_layout(graph, prog="dot"), labels=number_labels)
+        for name, idx in sorted(number_labels.items(), key=lambda x: x[1]):
+            print(f'- {idx}: {name}')
+    else:
+          networkx.draw(graph, pos=nx_agraph.graphviz_layout(graph, prog="dot"))
+```
+
+```{code-cell} ipython3
+xyz = networkx.DiGraph([[0, 1], [0, 2], [1, 3]])
+print(dict(networkx.bfs_successors(xyz, source=0)))
+print(dict(networkx.bfs_successors(networkx.reverse(xyz), source=3)))
 ```
 
 ```{code-cell} ipython3
@@ -141,7 +203,7 @@ H = get_subgraph("//apps/sbr:simulator_sbr", g)
 ```
 
 ```{code-cell} ipython3
-show_graph(H, include_labels=True)
+show_subgraph(g, "//apps/sbr:simulator_sbr", include_labels=False, show_numbers=True)
 ```
 
 ```{code-cell} ipython3
@@ -215,6 +277,44 @@ df_nodes.loc["//:requirements_test"]
 
 ```{code-cell} ipython3
 df_nodes.loc["//:requirements_lock.txt"]
+```
+
+```{code-cell} ipython3
+from apps.bazel_parser import panel
+import panel as pn
+
+pn.extension()
+```
+
+```{code-cell} ipython3
+layout = panel.get_panel_layout(g)
+layout.servable()
+# Show in a separate window, helps with servable content
+# layout.show()
+# Displays inline
+# display(layout)
+```
+
+```{code-cell} ipython3
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Sample data
+data = np.random.rand(50)
+
+# Create the scatter plot on a single axis (y-axis in this case)
+plt.scatter(np.zeros_like(data), data)
+
+# Customize the plot
+plt.title("Scatter Plot on a Single Axis")
+plt.xlabel("Constant Value (e.g., 0)")
+plt.ylabel("Data Values")
+
+# Remove x-axis ticks for cleaner look
+plt.xticks([])
+
+# Display the plot
+plt.show()
 ```
 
 ```{code-cell} ipython3

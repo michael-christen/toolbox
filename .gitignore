@@ -64,6 +64,8 @@ instance/
 
 # Sphinx documentation
 docs/_build/
+# Obsidian
+docs/.obsidian/workspace.json
 
 # PyBuilder
 target/

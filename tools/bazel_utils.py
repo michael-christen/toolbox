@@ -16,6 +16,7 @@ bazel query //... --output=proto |tee result.pb |bazel run //apps:bazel_parser
 from third_party.bazel.src.main.protobuf import build_pb2
 
 
+# XXX: Move to utils/bep_reader ...
 def parse_build_output(query_bytes: bytes) -> build_pb2.QueryResult:
     result = build_pb2.QueryResult()
     result.ParseFromString(query_bytes)

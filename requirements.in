@@ -16,13 +16,13 @@ isort
 # https://jupytext.readthedocs.io/en/stable/index.html
 # Source control jupyter notebooks by pairing with an ingnored .ipynb file.
 jupytext
+# XXX: jupyterlab explicitly / jupyterlab-vim
 # - generates links with raw urls, eg) www.example.com
 linkify-it-py
 mypy
 myst-parser
 # Analyze graphs easily https://networkx.org/documentation/stable/index.html
 networkx[default]
-# XXX: Required by openhtf's requirements of tornado
 notebook
 # Tool for running hardware-style tests; https://www.openhtf.com/
 openhtf
