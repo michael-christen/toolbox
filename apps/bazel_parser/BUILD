@@ -31,14 +31,24 @@ py_binary(
 py_library(
     name = "panel",
     srcs = ["panel.py"],
+    tags = [
+        # Bokeh type-hinting is raising a lot of complaints that are invalid
+        "no-mypy",
+    ],
     visibility = ["//:__subpackages__"],
     deps = [
         "@pip//bokeh",
         "@pip//networkx",
         "@pip//panel",
     ],
-    tags = [
-        # Bokeh type-hinting is raising a lot of complaints that are invalid
-        "no-mypy",
+)
+
+py_library(
+    name = "refinement",
+    srcs = ["refinement.py"],
+    visibility = ["//:__subpackages__"],
+    deps = [
+        "@pip//numpy",
+        "@pip//pandas",
     ],
 )
