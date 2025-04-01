@@ -115,10 +115,10 @@ import matplotlib.pyplot as plt
 
 ax = df_nodes['num_parents'].nlargest(20).sort_values().plot.barh(legend=False)
 # Align the y-axis labels to the left and adjust spacing
-ax.set_yticklabels(ax.get_yticklabels(), ha='left', position=(-0.75, 0))  # Adjust position to the left
+# ax.set_yticklabels(ax.get_yticklabels(), ha='left', position=(-0.75, 0))  # Adjust position to the left
 
 # Adjust the left margin to create space for the labels
-plt.subplots_adjust(left=0.2)
+# plt.subplots_adjust(left=0.2)
 ax
 ```
 

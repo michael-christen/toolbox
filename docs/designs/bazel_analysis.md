@@ -31,6 +31,9 @@ Synonyms:
 - where do we have the deepest dependency chains
 - what node has the highest "expected value"
 - where can we take advantage of dependency inversion
+#### How can we refactor a given bottleneck?
+* We should help provide information that will let folks understand how to correct particular problems
+* This could be as simple as displaying the subgraph that includes a particular node
 #### What is the effect of a change?
 Synonyms:
 - how much compute does this change add to / remove from
@@ -73,6 +76,7 @@ That information likely consists of:
 		- I'm not sure how we'd want to weigh the build and test time, would we want to simply sum them, or take one or the other?
 			- When utilizing these cost metrics, I'm not too sure which will be the most helpful, my gut is that test time is the main factor, but that's probably over-stressing my use case
 		- These metrics presume a single label is only built in a certain manner and that we don't re-build with various configs
+- We should likely provide the ability to manually override certain values
 ###### Example Workflow
 
 ```bash
@@ -139,6 +143,9 @@ We may want to provide a configuration mechanism for folks to add to this initia
 |                 | `expected_duration_s`         | `group_duration_s` * (1 - `group_probability_cache_hit`)                                                                                                                                                                                                                  |
 Note that edge direction for us means "depends on", so a child of a node is a library that is depended upon. This is the opposite of the edge meaning in the [[bazelcon_2022_driving_architectural_improvements_with_dependency_metrics]] discussion.
 
+- [ ] Consider additional metrics
+	- ancestor_depth is the max shortest path for that node, we probably also want to use "longest path" as well ... well it's computationally tricky, so let's leave it alone for now
+
 ##### Repository-Wide / Node-Aggregated Metrics
 
 | Attribute                                                           | Description                                                                                                                                                                                                                                                                                    |
@@ -166,6 +173,7 @@ To aid in this step, we can make it easy to view the distribution of `node_class
 
 - [ ] When we remove nodes, what should we do with duration and probabilities?
 	- for now, we'll do nothing
+- [ ] We should likely remove connected components that are below some threshold, may change graph metrics (density, etc)
 
 #### Data Visualization
 
@@ -204,7 +212,3 @@ Most of what we've discussed so far has revolved around identifying bottleneck n
 	* change: we want to compare "now" to a single "baseline"
 	* historical trend: we want to view how different metrics change over time
 		* "change" is a special case of a trend (only 2 points of comparison)
-
-### How Will the Tool Accomplish this (Implementation)
-
-- [ ] Fill out the implementation

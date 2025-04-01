@@ -203,7 +203,9 @@ class GraphMetrics(TypedDict):
     expected_duration_s: float
     probable_nodes_affected_per_change_by_node: float
     probable_nodes_affected_per_change_by_group: float
-    # XXX: max of most of the node attributes
+
+    # Proposal for new attributes
+    # XXX: max/aggregation of most of the node attributes
 
 
 class Node(TypedDict):
@@ -306,6 +308,10 @@ class Node(TypedDict):
     # shortest path distance to u over all n-1 reachable nodes.
     closeness_centrality: float
 
+    # Proposed new fields
+    # - sum(num_ancestors + num_descendants), can get an idea of size of
+    # sub-graph
+
 def get_node_field_names() -> list[str]:
     """Get ordered list of field names to display.
 
@@ -368,15 +374,33 @@ def get_graph_metrics(
     node_probability: dict[str, float],
     node_duration_s: dict[str, float],
 ) -> GraphMetrics:
+    weakly_connected_components = networkx.weakly_connected_components(graph)
+    # XXX: Maybe we should remove weakly connected components < some threshold
+    # size
+    NODE_THRESHOLD = 10
+    max_diameter = 0
+    max_radius = 0
+    # XXX: Even this doesn't work ... since it expects strong connections
+    # for c in weakly_connected_components:
+    #     if len(c) < NODE_THRESHOLD:
+    #         continue
+    #     subgraph = graph.subgraph(c)
+    #     diameter = networkx.diameter(subgraph)
+    #     radius = networkx.radius(subgraph)
+    #     if diameter > max_diameter:
+    #         max_diameter = diameter
+    #         max_radius = radius
+
     metrics: GraphMetrics = {
         # XXX: Compare to max of all nodes
+        # XXX: we also want the max shortest path
         "max_depth": networkx.dag_longest_path_length(graph),
         "num_nodes": graph.number_of_nodes(),
         "num_edges": graph.number_of_edges(),
         "density": networkx.density(graph),
-        "diameter": networkx.diameter(graph),
-        "radius": networkx.radius(graph),
-        "num_connected_components": networkx.number_connected_components(graph),
+        "diameter": max_diameter,
+        "radius": max_radius,
+        "num_connected_components": networkx.number_weakly_connected_components(graph),
         # XXX: Add these later:
         # "total_duration_s": 0,
         # "expected_duration_s": 0,

@@ -1,6 +1,7 @@
 import dataclasses
 import enum
 
+import networkx
 import numpy as np
 import pandas
 
@@ -60,10 +61,10 @@ def refine_dataframe(df: pandas.DataFrame,
         exclude_by_class.append(match)
         include &= ~match
     exclude_by_class_then_name = {}
-    for class_pattern, name_patterns in class_pattern_to_name_patterns.items():
+    for class_pattern, name_patterns in refinement.class_pattern_to_name_patterns.items():
         name_exclusions = np.full(len(df), False, dtype=bool)
         for name_pattern in name_patterns:
-            name_exclusions |= df.index.str.fullmatch(pattern)
+            name_exclusions |= df.index.str.fullmatch(name_pattern)
         match = df['node_class'].str.fullmatch(class_pattern) & name_exclusions
         exclude_by_class_then_name[class_pattern] = match
         include &= ~match

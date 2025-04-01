@@ -125,7 +125,7 @@ count_df
 ```
 
 ```{code-cell} ipython3
-count_df["node_class"].plot.bar()
+count_df["node_class"].nlargest(30).sort_values().plot.barh()
 ```
 
 ```{code-cell} ipython3
