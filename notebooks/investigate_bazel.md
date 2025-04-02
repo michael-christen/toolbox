@@ -182,7 +182,7 @@ def show_subgraph(whole_graph: networkx.DiGraph, node_label: str, include_labels
                     continue
                 number_labels[node] = idx
                 idx += 1
-        print()    
+        print()
         # number_labels = {name: idx for idx, name in enumerate(graph.nodes)}
         # XXX: Doesn't look great w/ 3-digit node numbers and greater
         networkx.draw(graph, pos=nx_agraph.graphviz_layout(graph, prog="dot"), labels=number_labels)

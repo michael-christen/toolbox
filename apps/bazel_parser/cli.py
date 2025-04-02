@@ -92,27 +92,20 @@ bazel run //apps/bazel_parser --output_groups=-mypy -- visualize \
         --gml $out_gml --out-html $out_html
 """
 
-import csv
-import dataclasses
 import datetime
 import logging
 import pathlib
 import sys
-from typing import TypedDict
 
 import click
 import networkx
-import pandas
 
 from apps.bazel_parser import panel
 from apps.bazel_parser import parsing
-from apps.bazel_parser import repo_graph_data
-from third_party.bazel.src.main.protobuf import build_pb2
 from tools import bazel_utils
 from tools import git_pb2
 from tools import git_utils
 from utils import bep_reader
-from utils import graph_algorithms
 
 logger = logging.getLogger(__name__)
 
@@ -170,6 +163,7 @@ def process(
     )
     graph_metrics = r.get_graph_metrics()
     # XXX: What to do with graph_metrics?
+    print(graph_metrics)
     r.to_csv(out_csv)
     r.to_gml(out_gml)
 

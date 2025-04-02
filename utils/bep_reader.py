@@ -66,7 +66,6 @@ def get_label_to_buildtime_from_compact_exec_log(
     while msg := delimited_protobuf.read_delimited(
         decompressed_data, spawn_pb2.ExecLogEntry
     ):
-        msg_id = msg.id
         if msg.HasField("spawn"):
             label = msg.spawn.target_label
             if label in label_to_buildtime:

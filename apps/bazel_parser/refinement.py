@@ -37,7 +37,8 @@ def _show_exclusions(
     if verbosity == Verbosity.SILENT:
         return
     elif verbosity == Verbosity.COUNT:
-        count = len(np.where(exclusion == True)[0])
+        # XXX: Check we don't need == True
+        count = len(np.where(exclusion)[0])
         print(f"{pattern} = {count}")
     elif verbosity == Verbosity.LIST:
         print(f"{pattern} ->")
