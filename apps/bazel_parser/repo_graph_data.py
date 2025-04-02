@@ -155,6 +155,7 @@ def get_node_field_names() -> list[str]:
 class GraphMetrics(TypedDict):
     """Graph-wide metrics."""
 
+    longest_path: int
     max_depth: int
     # aka) order
     num_nodes: int
@@ -164,8 +165,8 @@ class GraphMetrics(TypedDict):
     num_connected_components: int
     total_duration_s: float
     expected_duration_s: float
-    probable_nodes_affected_per_change_by_node: float
-    probable_nodes_affected_per_change_by_group: float
+    avg_files_changed_per_commit: float
+    avg_nodes_affected_per_commit: float
 
     # Proposal for new attributes
     # XXX: max/aggregation of most of the node attributes
@@ -239,10 +240,10 @@ class RepoGraphData:
             ),
             "total_duration_s": self.df["node_duration_s"].sum(),
             "expected_duration_s": expected_duration_s,
-            "expected_files_changed_per_commit": (
+            "avg_files_changed_per_commit": (
                 1 - self.df["node_probability_cache_hit"]
             ).sum(),
-            "expected_nodes_affected_per_commit": (
+            "avg_nodes_affected_per_commit": (
                 1 - self.df["group_probability_cache_hit"]
             ).sum(),
         }

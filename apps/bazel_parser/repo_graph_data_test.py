@@ -1,3 +1,4 @@
+import pathlib
 import pprint
 import unittest
 
@@ -58,6 +59,6 @@ class TestRepoGraphData(unittest.TestCase):
         self.assertEqual(2, graph_metrics["max_depth"])
         pprint.pprint(graph_metrics)
         # XXX
-        r.to_gml("/tmp/mchristen_now.gml")
-        r.to_csv("/tmp/mchristen_now.csv")
+        r.to_gml(pathlib.Path("/tmp/mchristen_now.gml"))
+        r.to_csv(pathlib.Path("/tmp/mchristen_now.csv"))
         self.fail("hi")

@@ -18,9 +18,9 @@ def _get_rules(
     rules = {}
 
     for i, target in enumerate(query_result.target):
-        type_name = build_pb2.Target.Discriminator.Name(
+        type_name = build_pb2.Target.Discriminator.Name(  # type: ignore
             target.type
-        )  # type: ignore
+        )
         if target.type == build_pb2.Target.RULE:
             pass
         elif target.type in {
