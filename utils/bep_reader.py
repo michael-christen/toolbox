@@ -56,23 +56,27 @@ def get_label_to_runtime(buf: BinaryIO) -> dict[str, datetime.timedelta]:
 
 
 def get_label_to_buildtime_from_compact_exec_log(
-        buf: BinaryIO) -> dict[str, datetime.timedelta]:
+    buf: BinaryIO,
+) -> dict[str, datetime.timedelta]:
     dctx = zstandard.ZstdDecompressor()
     decompressed_data = io.BytesIO()
     dctx.copy_stream(buf, decompressed_data)
     decompressed_data.seek(0)
     label_to_buildtime = {}
     while msg := delimited_protobuf.read_delimited(
-            decompressed_data, spawn_pb2.ExecLogEntry):
+        decompressed_data, spawn_pb2.ExecLogEntry
+    ):
         msg_id = msg.id
-        if msg.HasField('spawn'):
+        if msg.HasField("spawn"):
             label = msg.spawn.target_label
             if label in label_to_buildtime:
                 raise AssertionError(
-                    f'Expected label {label} to be unique in exec log')
+                    f"Expected label {label} to be unique in exec log"
+                )
             label_to_buildtime[msg.spawn.target_label] = (
                 # Could consider execution_wall_time instead of total?
-                msg.spawn.metrics.total_time.ToTimedelta())
+                msg.spawn.metrics.total_time.ToTimedelta()
+            )
     return label_to_buildtime
 
 

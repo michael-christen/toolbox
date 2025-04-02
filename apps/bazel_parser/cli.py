@@ -1,0 +1,193 @@
+r"""Parse bazel query outputs
+
+A larger system description:
+- inputs:
+  - bazel query //... --output proto > query_result.pb
+    - the full dependency tree
+  - bazel test //... --build_event_binary_file=test_all.pb
+    - bazel run //utils:bep_reader < test_all.pb
+    - the execution time related to each test target
+  - git_utils.get_file_commit_map_from_follow
+    - how files have changed over time, can be used to generate
+      probabilities of files changing in the future
+- intermediates:
+  - representation for source files and bazel together
+- outputs:
+  - test targets:
+    - likelihood of executing
+      - expected value of runtime
+  - source files:
+    - cost in execution time of modification
+    - expected cost of file change (based on probability of change * cost)
+  - graph with the values above, we could take any set of file inputs and
+    describe cost
+  - graph that we could identify overly depended upon things
+
+XXX:
+ - bazel query --keep_going --noimplicit_deps --output proto "deps(//...)"
+   is much bigger than "//..." alone, compare what the differences are
+- git log --since="10 years ago" --name-only --pretty=format: | sort \
+        | uniq -c | sort -nr
+  - this is much faster
+  - could identify renames via:
+    - git log --since="1 month ago" --name-status --pretty=format: \
+            | grep -P 'R[0-9]*\t' | awk '{print $2, "->", $3}'
+    - then correct
+    - can get commit association via
+      - git log --since="1 month ago" --name-status --pretty=format:"%H"
+    - statuses are A,M,D,R\d\d\d
+```
+# Regex pattern to match the git log output
+pattern = r"^([AMD])\s+(.+?)(\s*->\s*(.+))?$|^R(\d+)\s+(.+?)\s*->\s*(.+)$"
+# Parse each line using the regex
+for line in git_log_output.strip().split('\n'):
+    match = re.match(pattern, line.strip())
+    if match:
+        if match.group(1):  # For A, M, D statuses
+            change_type = match.group(1)
+            old_file = match.group(2)
+            new_file = match.group(4) if match.group(4) else None
+            print(f"Change type: {change_type}, Old file: {old_file}, "
+                  f"New file: {new_file}")
+        elif match.group(5):  # For R status (renames)
+            change_type = 'R'
+            similarity_index = match.group(5)
+            old_file = match.group(6)
+            new_file = match.group(7)
+            print(f"Change type: {change_type}, Similarity index:"
+                  f" {similarity_index}, Old file: {old_file}, New file:"
+                  f" {new_file}")
+```
+
+Example Script:
+
+repo_dir=`pwd`
+file_commit_pb=$repo_dir/file_commit.pb
+query_pb=$repo_dir/s_result.pb
+bep_pb=$repo_dir/test_all.pb
+out_gml=$repo_dir/my.gml
+out_csv=$repo_dir/my.csv
+out_html=$repo_dir/my.html
+
+# Prepare data
+bazel query "//... - //docs/... - //third_party/bazel/..." --output proto \
+        > $query_pb
+bazel test //... --build_event_binary_file=$bep_pb
+bazel run //apps/bazel_parser --output_groups=-mypy -- git-capture --repo-dir \
+        $repo_dir --days-ago 400 --file-commit-pb $file_commit_pb
+# Separate step if we want build timing data
+bazel clean
+bazel build --noremote_accept_cached \
+    --experimental_execution_log_compact_file=exec_log.pb.zst \
+    --generate_json_trace_profile --profile=example_profile_new.json \
+    //...
+# Would then need to process the exec_log.pb.zst file to get timing from it and
+# then add to the other timing information
+
+# Process and visualize the data
+bazel run //apps/bazel_parser --output_groups=-mypy -- process \
+        --file-commit-pb $file_commit_pb --query-pb $query_pb --bep-pb \
+        $bep_pb --out-gml $out_gml --out-csv $out_csv
+bazel run //apps/bazel_parser --output_groups=-mypy -- visualize \
+        --gml $out_gml --out-html $out_html
+"""
+
+import csv
+import dataclasses
+import datetime
+import logging
+import pathlib
+import sys
+from typing import TypedDict
+
+import click
+import networkx
+import pandas
+
+from apps.bazel_parser import panel
+from apps.bazel_parser import parsing
+from apps.bazel_parser import repo_graph_data
+from third_party.bazel.src.main.protobuf import build_pb2
+from tools import bazel_utils
+from tools import git_pb2
+from tools import git_utils
+from utils import bep_reader
+from utils import graph_algorithms
+
+logger = logging.getLogger(__name__)
+
+PATH_TYPE = click.Path(exists=True, path_type=pathlib.Path)
+OUT_PATH_TYPE = click.Path(exists=False, path_type=pathlib.Path)
+
+
+@click.group()
+def cli():
+    pass
+
+
+@click.command()
+@click.option("--repo-dir", type=PATH_TYPE, required=True)
+@click.option("--days-ago", type=int, required=True)
+@click.option("--file-commit-pb", type=OUT_PATH_TYPE, required=True)
+def git_capture(
+    repo_dir: pathlib.Path,
+    days_ago: int,
+    file_commit_pb: pathlib.Path,
+) -> None:
+    git_query_after = datetime.datetime.now() - datetime.timedelta(
+        days=days_ago
+    )
+    file_commit_map = git_utils.get_file_commit_map_from_follow(
+        git_directory=repo_dir, after=git_query_after
+    )
+    file_commit_pb.write_bytes(
+        file_commit_map.to_proto().SerializeToString(deterministic=True)
+    )
+
+
+@click.command()
+@click.option("--query-pb", type=PATH_TYPE, required=True)
+@click.option("--bep-pb", type=PATH_TYPE, required=True)
+@click.option("--file-commit-pb", type=PATH_TYPE, required=True)
+@click.option("--out-gml", type=OUT_PATH_TYPE, required=True)
+@click.option("--out-csv", type=OUT_PATH_TYPE, required=True)
+def process(
+    query_pb: pathlib.Path,
+    bep_pb: pathlib.Path,
+    file_commit_pb: pathlib.Path,
+    out_gml: pathlib.Path,
+    out_csv: pathlib.Path,
+) -> None:
+    query_result = bazel_utils.parse_build_output(query_pb.read_bytes())
+    with bep_pb.open("rb") as bep_buf:
+        label_to_runtime = bep_reader.get_label_to_runtime(bep_buf)
+    file_commit_proto = git_pb2.FileCommitMap()
+    file_commit_proto.ParseFromString(file_commit_pb.read_bytes())
+    r = parsing.get_repo_graph_data(
+        query_result=query_result,
+        label_to_runtime=label_to_runtime,
+        file_commit_proto=file_commit_proto,
+    )
+    graph_metrics = r.get_graph_metrics()
+    # XXX: What to do with graph_metrics?
+    r.to_csv(out_csv)
+    r.to_gml(out_gml)
+
+
+@click.command()
+@click.option("--gml", type=PATH_TYPE, required=True)
+@click.option("--out-html", type=OUT_PATH_TYPE, required=False)
+def visualize(
+    gml: pathlib.Path,
+    out_html: pathlib.Path | None,
+) -> None:
+    graph = networkx.read_gml(gml)
+    panel.run_panel(graph=graph, html_out=out_html)
+
+
+if __name__ == "__main__":
+    logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
+    cli.add_command(git_capture)
+    cli.add_command(process)
+    cli.add_command(visualize)
+    cli()

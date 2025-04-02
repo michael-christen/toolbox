@@ -9,26 +9,6 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
-py_binary(
-    name = "bazel_parser",
-    srcs = ["bazel_parser.py"],
-    visibility = ["//:__subpackages__"],
-    deps = [
-        ":panel",
-        "//third_party/bazel/src/main/protobuf:build_py_library",
-        "//tools:bazel_utils",
-        "//tools:git_py_library",
-        "//tools:git_utils",
-        "//utils:bep_reader",
-        "//utils:graph_algorithms",
-        "@pip//click",
-        "@pip//networkx",
-        "@pip//pandas",
-        # XXX: Should associate with networkx
-        "@pip//pygraphviz",  # keep
-    ],
-)
-
 py_library(
     name = "panel",
     srcs = ["panel.py"],
@@ -55,11 +35,69 @@ py_library(
     ],
 )
 
-py_test(
-    name = "bazel_parser_test",
-    srcs = ["bazel_parser_test.py"],
+py_library(
+    name = "repo_graph_data",
+    srcs = ["repo_graph_data.py"],
+    visibility = ["//:__subpackages__"],
     deps = [
-        ":bazel_parser",
+        ":panel",
+        "//third_party/bazel/src/main/protobuf:build_py_library",
+        "//tools:bazel_utils",
+        "//tools:git_py_library",
+        "//tools:git_utils",
+        "//utils:bep_reader",
+        "//utils:graph_algorithms",
+        "@pip//click",
         "@pip//networkx",
+        "@pip//pandas",
+    ],
+)
+
+py_test(
+    name = "repo_graph_data_test",
+    srcs = ["repo_graph_data_test.py"],
+    deps = [
+        ":repo_graph_data",
+        "@pip//networkx",
+    ],
+)
+
+py_library(
+    name = "parsing",
+    srcs = ["parsing.py"],
+    visibility = ["//:__subpackages__"],
+    deps = [
+        ":repo_graph_data",
+        "//third_party/bazel/src/main/protobuf:build_py_library",
+        "//tools:bazel_utils",
+        "//tools:git_py_library",
+        "//tools:git_utils",
+        "//utils:bep_reader",
+        "//utils:graph_algorithms",
+        "@pip//click",
+        "@pip//networkx",
+        "@pip//pandas",
+    ],
+)
+
+py_binary(
+    name = "cli",
+    srcs = ["cli.py"],
+    visibility = ["//:__subpackages__"],
+    deps = [
+        ":panel",
+        ":parsing",
+        ":repo_graph_data",
+        "//third_party/bazel/src/main/protobuf:build_py_library",
+        "//tools:bazel_utils",
+        "//tools:git_py_library",
+        "//tools:git_utils",
+        "//utils:bep_reader",
+        "//utils:graph_algorithms",
+        "@pip//click",
+        "@pip//networkx",
+        "@pip//pandas",
+        # XXX: Should associate with networkx
+        "@pip//pygraphviz",  # keep
     ],
 )

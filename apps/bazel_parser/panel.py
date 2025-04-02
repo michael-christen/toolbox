@@ -1,11 +1,11 @@
 import pathlib
 
-from bokeh import models
-from bokeh.models import widgets
-from bokeh import plotting
 import networkx
-from networkx.drawing import nx_agraph
 import panel as pn
+from bokeh import models
+from bokeh import plotting
+from bokeh.models import widgets
+from networkx.drawing import nx_agraph
 from panel.io import save
 
 SIZING_MODE = "fixed"
@@ -20,7 +20,9 @@ def run_panel(graph: networkx.DiGraph, html_out: pathlib.Path | None) -> None:
     pn.serve(layout)
 
 
-def get_subgraph_layout(whole_graph: networkx.DiGraph, node_key: str) -> pn.layout.base.Panel:
+def get_subgraph_layout(
+    whole_graph: networkx.DiGraph, node_key: str
+) -> pn.layout.base.Panel:
     # Compute sub-graph
     ancestors = networkx.ancestors(whole_graph, node_key)
     descendants = networkx.descendants(whole_graph, node_key)
@@ -36,7 +38,7 @@ def get_subgraph_layout(whole_graph: networkx.DiGraph, node_key: str) -> pn.layo
         title="Network Graph",
     )
     plot.axis.visible = False
-    pos = nx_agraph.graphviz_layout(graph, prog='dot')
+    pos = nx_agraph.graphviz_layout(graph, prog="dot")
     network_graph = plotting.from_networkx(graph, pos)  # type: ignore
     # network_graph = plotting.from_networkx(
     #     graph, networkx.spring_layout
@@ -97,7 +99,7 @@ def get_subgraph_layout(whole_graph: networkx.DiGraph, node_key: str) -> pn.layo
     label_to_index = {n: i for i, n in enumerate(graph.nodes)}
     index_to_label = {v: k for k, v in label_to_index.items()}
     selected_index = label_to_index[node_key]
-    for i in range(len(node_data['Highlight'])):
+    for i in range(len(node_data["Highlight"])):
         if i == selected_index:
             highlight = "Yes"
             color = "skyblue"
@@ -110,8 +112,8 @@ def get_subgraph_layout(whole_graph: networkx.DiGraph, node_key: str) -> pn.layo
                 color = "gold"
             else:
                 raise ValueError(f"Unclear: {label}")
-        node_data['Highlight'][i] = highlight
-        node_data['color'][i] = color
+        node_data["Highlight"][i] = highlight
+        node_data["color"][i] = color
     plot.renderers.append(network_graph)
     # Not showing up well in Jupyter dark mode
     # https://github.com/holoviz/panel/issues/3783
@@ -119,7 +121,8 @@ def get_subgraph_layout(whole_graph: networkx.DiGraph, node_key: str) -> pn.layo
         title="Select Node:",
         completions=sorted(all_node_set),
         case_sensitive=False,
-        min_characters=1)
+        min_characters=1,
+    )
 
     plot_pane = pn.pane.Bokeh(plot)
 
@@ -128,11 +131,11 @@ def get_subgraph_layout(whole_graph: networkx.DiGraph, node_key: str) -> pn.layo
         print(f"got selection: {new}")
         print(f"Total: {len(node_data['Highlight'])}")
         selected_index = label_to_index[new]
-        for i in range(len(node_data['Highlight'])):
+        for i in range(len(node_data["Highlight"])):
             if i == selected_index:
-                node_data['color'][i] = 'red'
+                node_data["color"][i] = "red"
             else:
-                node_data['color'][i] = 'green'
+                node_data["color"][i] = "green"
         # Explicitly re-draw
         plot_pane.param.trigger("object")
 
@@ -170,7 +173,7 @@ def get_panel_layout(graph: networkx.DiGraph) -> pn.layout.base.Panel:
         title="Network Graph",
     )
     plot.axis.visible = False
-    pos = nx_agraph.graphviz_layout(graph, prog='dot')
+    pos = nx_agraph.graphviz_layout(graph, prog="dot")
     network_graph = plotting.from_networkx(graph, pos)  # type: ignore
     # network_graph = plotting.from_networkx(
     #     graph, networkx.spring_layout
@@ -252,7 +255,8 @@ def get_panel_layout(graph: networkx.DiGraph) -> pn.layout.base.Panel:
 
     radio_labels = fields + ["NONE"]
     radio_group = models.RadioGroup(
-        labels=radio_labels, active=len(radio_labels) - 1)
+        labels=radio_labels, active=len(radio_labels) - 1
+    )
     radio_callback = models.CustomJS(
         args=dict(
             labels=radio_labels,
