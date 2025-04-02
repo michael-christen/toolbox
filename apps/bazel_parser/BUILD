@@ -1,4 +1,4 @@
-load("//bzl:py.bzl", "py_binary", "py_library")
+load("//bzl:py.bzl", "py_binary", "py_library", "py_test")
 
 package(default_visibility = ["//visibility:private"])
 
@@ -23,6 +23,7 @@ py_binary(
         "//utils:graph_algorithms",
         "@pip//click",
         "@pip//networkx",
+        "@pip//pandas",
         # XXX: Should associate with networkx
         "@pip//pygraphviz",  # keep
     ],
@@ -48,7 +49,17 @@ py_library(
     srcs = ["refinement.py"],
     visibility = ["//:__subpackages__"],
     deps = [
+        "@pip//networkx",
         "@pip//numpy",
         "@pip//pandas",
+    ],
+)
+
+py_test(
+    name = "bazel_parser_test",
+    srcs = ["bazel_parser_test.py"],
+    deps = [
+        ":bazel_parser",
+        "@pip//networkx",
     ],
 )

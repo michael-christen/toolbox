@@ -97,6 +97,7 @@ import dataclasses
 import datetime
 import logging
 import pathlib
+import pandas
 import sys
 from typing import TypedDict
 
@@ -187,25 +188,50 @@ def _normalize_bazel_target_to_intermediate(target: str) -> str:
         return target.replace(":", "/")
 
 
-class GraphMetrics(TypedDict):
-    """Graph-wide metrics.
-    """
-    max_depth: int
-    # aka) order
-    num_nodes: int
-    # aka) size
-    num_edges: int
-    density: float
-    diameter: int
-    radius: int
-    num_connected_components: int
-    total_duration_s: float
-    expected_duration_s: float
-    probable_nodes_affected_per_change_by_node: float
-    probable_nodes_affected_per_change_by_group: float
+def _get_node_probability(
+    nodes: list[str],
+    file_commit_map: git_utils.FileCommitMap,
+) -> dict[str, float]:
+    # XXX: Test case with BUILD further up, ensure we still get the right match
+    bazel_intermediates = _normalize_paths_to_bazel_intermediates(
+        list(file_commit_map.file_map.keys())
+    )
+    bazel_src_target_to_file = {}
+    for node in nodes:
+        src_path = bazel_intermediates.get(
+            _normalize_bazel_target_to_intermediate(node)
+        )
+        if src_path is not None:
+            bazel_src_target_to_file[node] = src_path
 
-    # Proposal for new attributes
-    # XXX: max/aggregation of most of the node attributes
+    node_probability = {}
+    total_commits = len(file_commit_map.commit_map)
+    for node, f in bazel_src_target_to_file.items():
+        node_probability[node] = 1 - (
+            len(file_commit_map.file_map[f]) / total_commits
+        )
+    return node_probability
+
+
+def _get_node_to_class(nodes: list[str],
+                       node_probability: dict[str, float],
+                       rules:  dict[str, build_pb2.Rule]
+                       ) -> dict[str, str]:
+
+    node_to_class: dict[str, str] = {}
+    # Gotta make table for all, in a consistent order, otherwise table, etc.
+    # won't line up:
+    # Note that we're not selecting which nodes to view
+    for node_name in nodes:
+        node_rule = rules.get(node_name)
+        if node_name in node_probability:
+            # Probably want the source files too
+            node_to_class[node_name] = "source_file"
+        elif node_rule:
+            node_to_class[node_name] = node_rule.rule_class
+        else:
+            node_to_class[node_name] = "unknown"
+    return node_to_class
 
 
 class Node(TypedDict):
@@ -312,6 +338,8 @@ class Node(TypedDict):
     # - sum(num_ancestors + num_descendants), can get an idea of size of
     # sub-graph
 
+# XXX: Setup pandera type-hinting with mypy
+# https://pandera.readthedocs.io/en/stable/mypy_integration.html
 def get_node_field_names() -> list[str]:
     """Get ordered list of field names to display.
 
@@ -344,70 +372,114 @@ def get_node_field_names() -> list[str]:
     ]
 
 
-def _get_node_probability(
-    graph: networkx.DiGraph,
-    file_commit_map: git_utils.FileCommitMap,
-) -> dict[str, float]:
-    # XXX: Test case with BUILD further up, ensure we still get the right match
-    bazel_intermediates = _normalize_paths_to_bazel_intermediates(
-        list(file_commit_map.file_map.keys())
-    )
-    bazel_src_target_to_file = {}
-    for node in graph.nodes:
-        src_path = bazel_intermediates.get(
-            _normalize_bazel_target_to_intermediate(node)
+class GraphMetrics(TypedDict):
+    """Graph-wide metrics.
+    """
+    max_depth: int
+    # aka) order
+    num_nodes: int
+    # aka) size
+    num_edges: int
+    density: float
+    num_connected_components: int
+    total_duration_s: float
+    expected_duration_s: float
+    probable_nodes_affected_per_change_by_node: float
+    probable_nodes_affected_per_change_by_group: float
+
+    # Proposal for new attributes
+    # XXX: max/aggregation of most of the node attributes
+    # - networkx.average_shortest_path_length
+    # Not defining
+    # unable to capture these since requires strongly connected components
+    # diameter: int
+    # radius: int
+
+
+# Put graph and dataframe into a class to make it a bit easier to work with
+class RepoGraphData:
+    graph: networkx.DiGraph
+    df: pandas.DataFrame
+
+    def __init__(self, graph: networkx.DiGraph,
+                 node_to_class: dict[str, str],
+                 node_probability: dict[str, float],
+                 node_duration_s: dict[str, float],
+                 ):
+        self.graph = graph
+        data = {}
+        for node_name, node_class in node_to_class.items():
+            data[node_name] = {
+                "node_class": node_class,
+                "node_name": node_name,
+                "node_probability_cache_hit": node_probability.get(node_name, 1.0),
+                "node_duration_s": node_duration_s.get(node_name, 0.0),
+            }
+        self.df = pandas.DataFrame.from_dict(data, orient='index')
+        self.refresh()
+
+    def refresh(self) -> None:
+        """Update .df based on updates to graph, etc."""
+        nodes = dependency_analysis(
+            node_to_class=self.df['node_class'].to_dict(),
+            graph=self.graph,
+            # XXX: We use presence in these to determine source or test, etc
+            # ... should we do otherwise?
+            node_probability=self.df['node_probability_cache_hit'].to_dict(),
+            node_duration_s=self.df['node_duration_s'].to_dict(),
         )
-        if src_path is not None:
-            bazel_src_target_to_file[node] = src_path
+        self.df = pandas.DataFrame.from_dict(nodes, orient='index')
 
-    node_probability = {}
-    total_commits = len(file_commit_map.commit_map)
-    for node, f in bazel_src_target_to_file.items():
-        node_probability[node] = 1 - (
-            len(file_commit_map.file_map[f]) / total_commits
-        )
-    return node_probability
+    def get_node(self, node: str) -> Node:
+        return self.df.loc[node].to_dict()
 
+    def get_graph_metrics(self) -> GraphMetrics:
+        weakly_connected_components = (
+            networkx.weakly_connected_components(self.graph))
+        # XXX: Maybe we should remove weakly connected components < some threshold
+        # size
+        expected_duration_s = (
+            self.df['node_duration_s'] *
+            (1 - self.df['group_probability_cache_hit'])).sum()
 
-def get_graph_metrics(
-    graph: networkx.DiGraph,
-    node_probability: dict[str, float],
-    node_duration_s: dict[str, float],
-) -> GraphMetrics:
-    weakly_connected_components = networkx.weakly_connected_components(graph)
-    # XXX: Maybe we should remove weakly connected components < some threshold
-    # size
-    NODE_THRESHOLD = 10
-    max_diameter = 0
-    max_radius = 0
-    # XXX: Even this doesn't work ... since it expects strong connections
-    # for c in weakly_connected_components:
-    #     if len(c) < NODE_THRESHOLD:
-    #         continue
-    #     subgraph = graph.subgraph(c)
-    #     diameter = networkx.diameter(subgraph)
-    #     radius = networkx.radius(subgraph)
-    #     if diameter > max_diameter:
-    #         max_diameter = diameter
-    #         max_radius = radius
+        metrics: GraphMetrics = {
+            # longest path can be more than max depth
+            "longest_path": networkx.dag_longest_path_length(self.graph),
+            "max_depth":
+            # Equivalent of max descendant_depth
+            self.df['ancestor_depth'].max(),
+            "num_nodes": self.graph.number_of_nodes(),
+            "num_edges": self.graph.number_of_edges(),
+            "density": networkx.density(self.graph),
+            "num_connected_components":
+            networkx.number_weakly_connected_components(self.graph),
+            "total_duration_s": self.df['node_duration_s'].sum(),
+            "expected_duration_s": expected_duration_s,
+            "expected_files_changed_per_commit":
+            (1-self.df['node_probability_cache_hit']).sum(),
+            "expected_nodes_affected_per_commit":
+            (1-self.df['group_probability_cache_hit']).sum(),
+        }
+        return metrics
 
-    metrics: GraphMetrics = {
-        # XXX: Compare to max of all nodes
-        # XXX: we also want the max shortest path
-        "max_depth": networkx.dag_longest_path_length(graph),
-        "num_nodes": graph.number_of_nodes(),
-        "num_edges": graph.number_of_edges(),
-        "density": networkx.density(graph),
-        "diameter": max_diameter,
-        "radius": max_radius,
-        "num_connected_components": networkx.number_weakly_connected_components(graph),
-        # XXX: Add these later:
-        # "total_duration_s": 0,
-        # "expected_duration_s": 0,
-        # "probable_nodes_affected_per_change_by_node": 0,
-        # "probable_nodes_affected_per_change_by_group": 0,
-    }
-    return metrics
+    # XXX: label, node_name, Node are all doing the same thing
+    def to_gml(self, out_gml: pathlib.Path) -> None:
+        # Add node attributes to copy of the graph
+        graph = self.graph.copy()
+        for name, row in self.df.iterrows():
+            for k, v in row.items():
+                graph.nodes[name][k] = v
+            # Additional fields for visualization
+            graph.nodes[name]["Node"] = row["node_name"]
+            graph.nodes[name]["Highlight"] = "No"
+        # Write the graph
+        networkx.write_gml(graph, out_gml)
+
+    # XXX: Maybe don't even
+    # XXX: index column is empty
+    def to_csv(self, out_csv: pathlib.Path) -> None:
+        # node_name is preserved, so don't need to re-emit
+        self.df.to_csv(out_csv, index=False)
 
 
 def dependency_analysis(
@@ -421,11 +493,9 @@ def dependency_analysis(
     group_probability = graph_algorithms.compute_group_probability(
         graph=graph, node_probability=node_probability
     )
-
     group_duration = graph_algorithms.compute_group_duration(
         graph=graph, node_duration_s=node_duration_s
     )
-
     pagerank = networkx.pagerank(graph)
     hubs, authorities = networkx.hits(graph)
     # XXX: Should we have a data structure that's just a big collection of
@@ -469,11 +539,13 @@ def dependency_analysis(
         ancestors = list(networkx.ancestors(graph, node_name))
         num_ancestors = len(ancestors)
         num_duration_ancestors = len(
+            # XXX: Do we want presence or not ...
             [a for a in ancestors if a in node_duration_s]
         )
         descendants = list(networkx.descendants(graph, node_name))
         num_descendants = len(descendants)
         num_source_descendants = len(
+            # XXX: Do we want presence or not ... can we store null?
             [d for d in descendants if d in node_probability]
         )
         np = node_probability.get(node_name, 1.0)
@@ -511,6 +583,31 @@ def dependency_analysis(
         }
         nodes[node_name] = row
     return nodes
+
+
+def _get_repo_graph_data(
+    query_result: build_pb2.QueryResult,
+    label_to_runtime: dict[str, datetime.timedelta],
+    file_commit_proto: git_pb2.FileCommitmap,
+) -> RepoGraphData:
+    file_commit_map = git_utils.FileCommitMap.from_proto(file_commit_proto)
+    node_duration_s = {
+        label: dt.total_seconds() for label, dt in node_duration.items()
+    }
+    rules = _get_rules(query_result)
+    graph = get_dependency_digraph(rules, ignore_external=True)
+    node_probability = _get_node_probability(
+        nodes=list(graph.nodes), file_commit_map=file_commit_map
+    )
+    node_to_class = _get_node_to_class(nodes=list(graph.nodes),
+                                       node_probability=node_probability,
+                                       rules=rules)
+    return RepoGraphData(
+        graph=graph,
+        node_to_class=node_to_class,
+        node_probability=node_probability,
+        node_duration_s=node_duration_s,
+    )
 
 
 @click.group()
@@ -551,62 +648,20 @@ def process(
     out_gml: pathlib.Path,
     out_csv: pathlib.Path,
 ) -> None:
-    # Get query result
     query_result = bazel_utils.parse_build_output(query_pb.read_bytes())
-
-    # Get file commit map
+    with bep_pb.open("rb") as bep_buf:
+        label_to_runtime = bep_reader.get_label_to_runtime(bep_buf)
     file_commit_proto = git_pb2.FileCommitMap()
     file_commit_proto.ParseFromString(file_commit_pb.read_bytes())
-    file_commit_map = git_utils.FileCommitMap.from_proto(file_commit_proto)
-
-    # Get execution times
-    with bep_pb.open("rb") as bep_buf:
-        node_duration = bep_reader.get_label_to_runtime(bep_buf)
-        node_duration_s = {
-            label: dt.total_seconds() for label, dt in node_duration.items()
-        }
-
-    # Get rules and graph
-    rules = _get_rules(query_result)
-    graph = get_dependency_digraph(rules, ignore_external=True)
-
-    node_probability = _get_node_probability(
-        graph=graph, file_commit_map=file_commit_map
+    r = _get_repo_graph_data(
+        query_result=query_result,
+        label_to_runtime=label_to_runtime,
+        file_commit_proto=file_commit_proto,
     )
-
-    node_to_class: dict[str, str] = {}
-    # Gotta make table for all, in a consistent order, otherwise table, etc.
-    # won't line up:
-    # Note that we're not selecting which nodes to view
-    for node_name in graph.nodes:
-        node_rule = rules.get(node_name)
-        if node_name in node_probability:
-            # Probably want the source files too
-            node_to_class[node_name] = "source_file"
-        elif node_rule:
-            node_to_class[node_name] = node_rule.rule_class
-        else:
-            node_to_class[node_name] = "unknown"
-    nodes = dependency_analysis(
-        node_to_class=node_to_class,
-        graph=graph,
-        node_duration_s=node_duration_s,
-        node_probability=node_probability,
-    )
-    # Add node attributes to graph
-    for name, node in nodes.items():
-        for k, v in node.items():
-            graph.nodes[name][k] = v
-        graph.nodes[name]["Node"] = node["node_name"]
-        graph.nodes[name]["Highlight"] = "No"
-    # Write the nodes
-    with open(out_csv, "w") as f:
-        writer = csv.DictWriter(f, fieldnames=get_node_field_names())
-        writer.writeheader()
-        for row in nodes.values():
-            writer.writerow(row)
-    # Write the graph
-    networkx.write_gml(graph, out_gml)
+    graph_metrics = r.get_graph_metrics()
+    # XXX: What to do with graph_metrics?
+    r.to_csv(out_csv)
+    r.to_gml(out_gml)
 
 
 @click.command()
