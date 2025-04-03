@@ -133,9 +133,8 @@ def _get_node_to_class(
 def get_repo_graph_data(
     query_result: build_pb2.QueryResult,
     label_to_runtime: dict[str, datetime.timedelta],
-    file_commit_proto: git_pb2.FileCommitMap,
+    file_commit_map: git_utils.FileCommitMap,
 ) -> repo_graph_data.RepoGraphData:
-    file_commit_map = git_utils.FileCommitMap.from_proto(file_commit_proto)
     node_duration_s = {
         label: dt.total_seconds() for label, dt in label_to_runtime.items()
     }

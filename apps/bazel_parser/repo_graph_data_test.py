@@ -68,4 +68,3 @@ class TestRepoGraphData(unittest.TestCase):
         # XXX
         r.to_gml(pathlib.Path("/tmp/mchristen_now.gml"))
         r.to_csv(pathlib.Path("/tmp/mchristen_now.csv"))
-        self.fail("hi")

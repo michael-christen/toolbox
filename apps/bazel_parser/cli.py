@@ -95,10 +95,14 @@ bazel run //apps/bazel_parser --output_groups=-mypy -- visualize \
 import datetime
 import logging
 import pathlib
+import subprocess
 import sys
+import tempfile
+import time
 
 import click
 import networkx
+import tqdm
 
 from apps.bazel_parser import panel
 from apps.bazel_parser import parsing
@@ -156,16 +160,83 @@ def process(
         label_to_runtime = bep_reader.get_label_to_runtime(bep_buf)
     file_commit_proto = git_pb2.FileCommitMap()
     file_commit_proto.ParseFromString(file_commit_pb.read_bytes())
+    file_commit_map = git_utils.FileCommitMap.from_proto(file_commit_proto)
     r = parsing.get_repo_graph_data(
         query_result=query_result,
         label_to_runtime=label_to_runtime,
-        file_commit_proto=file_commit_proto,
+        file_commit_map=file_commit_map,
     )
     graph_metrics = r.get_graph_metrics()
     # XXX: What to do with graph_metrics?
     print(graph_metrics)
     r.to_csv(out_csv)
     r.to_gml(out_gml)
+
+
+@click.command()
+@click.option("--repo-dir", type=PATH_TYPE, required=True)
+@click.option("--days-ago", type=int, required=True)
+def full(
+    repo_dir: pathlib.Path,
+    days_ago: int,
+) -> None:
+    # XXX: Show progress?
+
+    # Query for graph
+    QUERY = "//..."
+    logger.info('Querying...')
+    query_pb = subprocess.check_output(
+        ["bazel", "query", "--output", "proto", QUERY],
+        cwd=repo_dir)
+    query_result = bazel_utils.parse_build_output(query_pb)
+    # Test for timing
+    logger.info('Testing...')
+    TEST = "//..."
+    with tempfile.NamedTemporaryFile() as tmpfile:
+        bep_pb = tmpfile.name
+        subprocess.check_call(
+            ["bazel", "test", f"--build_event_binary_file={bep_pb}", TEST],
+            cwd=repo_dir)
+        with open(bep_pb, "rb") as bep_buf:
+            label_to_runtime = bep_reader.get_label_to_runtime(bep_buf)
+    # XXX: Optional build timing data ...
+    # Capture git information
+    logger.info('History from git...')
+    git_query_after = datetime.datetime.now() - datetime.timedelta(
+        days=days_ago
+    )
+    file_commit_map = git_utils.get_file_commit_map_from_follow(
+        git_directory=repo_dir, after=git_query_after
+    )
+    logger.info('Parsing...')
+    r = parsing.get_repo_graph_data(
+        query_result=query_result,
+        label_to_runtime=label_to_runtime,
+        file_commit_map=file_commit_map,
+    )
+    graph_metrics = r.get_graph_metrics()
+    print(graph_metrics)
+    logger.info('Done...')
+
+    # # XXX: Run it all here!
+    # cmd = ['bazel', 'test', '//...']
+    # with tqdm.tqdm(desc="Query", unit="") as pbar:
+    #     # XXX: stderr
+    #     proc = subprocess.Popen(
+    #         cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
+    #         cwd=repo_dir,
+    #     )
+    #     while proc.poll() is None:
+    #         pbar.set_postfix(status="Running")
+    #         time.sleep(0.1)
+    #     # XXX: probably show whilst
+    #     stdout, stderr = proc.communicate()
+    #     # print(stdout)
+    #     pbar.set_postfix(status="Done")
+    #     if proc.returncode != 0:
+    #         print(stdout)
+    #         print(stderr)
+    #         raise RuntimeError("Failed to run command")
 
 
 @click.command()
@@ -180,8 +251,12 @@ def visualize(
 
 
 if __name__ == "__main__":
-    logging.basicConfig(stream=sys.stderr, level=logging.DEBUG)
+    logging.basicConfig(stream=sys.stderr,
+                        format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
+                        datefmt="%Y-%m-%d %H:%M:%S",
+                        level=logging.DEBUG)
     cli.add_command(git_capture)
     cli.add_command(process)
     cli.add_command(visualize)
+    cli.add_command(full)
     cli()

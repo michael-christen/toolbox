@@ -182,10 +182,8 @@ class RepoGraphData:
                 "pagerank": 0,
                 "hubs_metric": 0,
                 "authorities_metric": 0,
-                "node_duration_s": 0,
                 "group_duration_s": 0,
                 "expected_duration_s": 0,
-                "node_probability_cache_hit": 0,
                 "group_probability_cache_hit": 0,
                 "ancestor_depth": 0,
                 "descendant_depth": 0,
@@ -308,7 +306,7 @@ def dependency_analysis(
     closeness = networkx.closeness_centrality(repo.graph)
 
     nodes: dict[str, Node] = {}
-    for node_name, cur_node in repo.df.items():
+    for node_name, cur_node in repo.df.iterrows():
         num_parents = in_degree[node_name]
         num_children = out_degree[node_name]
         ancestors = list(networkx.ancestors(repo.graph, node_name))
