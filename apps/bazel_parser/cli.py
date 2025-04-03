@@ -199,10 +199,14 @@ def process(
 @click.option("--repo-dir", type=PATH_TYPE, required=True)
 @click.option("--days-ago", type=int, required=False)
 @click.option("--config-file", type=PATH_TYPE, required=False)
+@click.option("--out-gml", type=OUT_PATH_TYPE, required=False)
+@click.option("--out-csv", type=OUT_PATH_TYPE, required=False)
 def full(
     repo_dir: pathlib.Path,
     days_ago: int | None,
     config_file: pathlib.Path | None,
+    out_gml: pathlib.Path | None,
+    out_csv: pathlib.Path | None,
 ) -> None:
     if config_file:
         overrides = {}
@@ -263,8 +267,11 @@ def full(
     logger.info('Outputting...')
     graph_metrics = r.get_graph_metrics()
     print(graph_metrics)
+    if out_csv is not None:
+        r.to_csv(out_csv)
+    if out_gml is not None:
+        r.to_gml(out_gml)
     logger.info('Done...')
-
     # # XXX: Run it all here!
     # cmd = ['bazel', 'test', '//...']
     # with tqdm.tqdm(desc="Query", unit="") as pbar:
