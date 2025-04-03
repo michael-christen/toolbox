@@ -23,10 +23,18 @@ mypy
 myst-parser
 # Analyze graphs easily https://networkx.org/documentation/stable/index.html
 networkx[default]
+# Type-hint networkx
+types-networkx
 notebook
+# Needed for pandas, etc.
+numpy
 # Tool for running hardware-style tests; https://www.openhtf.com/
 openhtf
 panel>=1.6.1
+# spreadsheets in python ;)
+# TODO: Try out pandera, but I got hung up on numpy usage
+pandas
+pandas-stubs
 pygraphviz
 # Undeclared dependency of openhtf
 six

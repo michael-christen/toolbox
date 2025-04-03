@@ -5472,4 +5472,4 @@ manifest:
     zstandard.backend_cffi: zstandard
   pip_repository:
     name: pip
-integrity: d0453154cc9faa86b4addb63e99dc97154b1d6c270484693100e1593cb8e0407
+integrity: 267d1112fc147310aafcc37b4ff93332520a4ed3d56e38e26cb8e57339395356

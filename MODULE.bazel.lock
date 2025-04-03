@@ -2296,7 +2296,7 @@
         "recordedFileInputs": {
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_windows_lock.txt": "4367c7d4cc4a1c2d6a136edace02581066f1c9ead10937685dde568d1061189f",
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_linux_lock.txt": "ce8b16e007309a610c37eec908b75451733ae5efb9c14ec7e6f04557b81d621e",
-          "@@//requirements_lock.txt": "12bd67e08c85624fabc8f5344d613910b46bff651aceb2ed988416195444854f",
+          "@@//requirements_lock.txt": "d51e59bb0acafc09be3c0097e5913e03cb2ec9e5edf0af39e0620d7512be1a1d",
           "@@pigweed~//pw_env_setup/py/pw_env_setup/virtualenv_setup/upstream_requirements_darwin_lock.txt": "91de3b2cdbe8f8fc7136ce309824355684c2a6ae2395c1e12f4aa59d02d52f3b",
           "@@rules_fuzzing~//fuzzing/requirements.txt": "ab04664be026b632a0d2a2446c4f65982b7654f5b6851d2f9d399a19b7242a5b",
           "@@nanopb~//extra/requirements_lock.txt": "8a44f53e5c48123742970b4e9d6f8730eaa143134c08db0706ccd6d2c78c03ca",
@@ -4043,6 +4043,23 @@
               "requirement": "appdirs==1.4.4     --hash=sha256:7d5d0167b2b1ba821647616af46a749d1c653740dd0d2415100fe26e27afdf41     --hash=sha256:a841dacd6b99318a741b166adb07e19ee71a274450e68237b4650ca1055ab128"
             }
           },
+          "pip_311_types_pytz": {
+            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
+            "ruleClassName": "whl_library",
+            "attributes": {
+              "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
+              "extra_pip_args": [
+                "--index-url",
+                "https://pypi.org/simple"
+              ],
+              "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
+              "repo": "pip_311",
+              "requirement": "types-pytz==2025.2.0.20250326     --hash=sha256:3c397fd1b845cd2b3adc9398607764ced9e578a98a5d1fbb4a9bc9253edfb162     --hash=sha256:deda02de24f527066fc8d6a19e284ab3f3ae716a42b4adb6b40e75e408c08d36"
+            }
+          },
           "pip_311_pygraphviz": {
             "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
             "ruleClassName": "whl_library",
@@ -4622,6 +4639,23 @@
               "requirement": "contextlib2==21.6.0     --hash=sha256:3fbdb64466afd23abaf6c977627b75b6139a5a3e8ce38405c5b413aed7a0471f     --hash=sha256:ab1e2bfe1d01d968e1b7e8d9023bc51ef3509bba217bb730cee3827e1ee82869"
             }
           },
+          "pip_311_pandas_stubs": {
+            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
+            "ruleClassName": "whl_library",
+            "attributes": {
+              "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
+              "extra_pip_args": [
+                "--index-url",
+                "https://pypi.org/simple"
+              ],
+              "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
+              "repo": "pip_311",
+              "requirement": "pandas-stubs==2.2.3.250308     --hash=sha256:3a6e9daf161f00b85c83772ed3d5cff9522028f07a94817472c07b91f46710fd     --hash=sha256:a377edff3b61f8b268c82499fdbe7c00fdeed13235b8b71d6a1dc347aeddc74d"
+            }
+          },
           "python_packages_311_babel": {
             "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
             "ruleClassName": "whl_library",
@@ -4789,6 +4823,23 @@
               "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
               "repo": "pip_311",
               "requirement": "jupyter-client==8.6.3     --hash=sha256:35b3a0947c4a6e9d589eb97d7d4cd5e90f910ee73101611f01283732bd6d9419     --hash=sha256:e8a19cc986cc45905ac3362915f410f3af85424b4c0905e94fa5f2cb08e8f23f"
+            }
+          },
+          "pip_311_types_networkx": {
+            "bzlFile": "@@rules_python~//python/private/pypi:whl_library.bzl",
+            "ruleClassName": "whl_library",
+            "attributes": {
+              "dep_template": "@pip//{name}:{target}",
+              "environment": {
+                "CC": "gcc"
+              },
+              "extra_pip_args": [
+                "--index-url",
+                "https://pypi.org/simple"
+              ],
+              "python_interpreter_target": "@@rules_python~~python~python_3_11_host//:python",
+              "repo": "pip_311",
+              "requirement": "types-networkx==3.4.2.20250319     --hash=sha256:514b373c21f03fef94d71ca7182026ae73773fe3d4eaaf9139e9bdd78f5361c5     --hash=sha256:95266a3b4ee04779638231a8ef4c312e745f3eeab9da242614d03ad0bfbb0cc9"
             }
           },
           "pip_311_colorama": {
@@ -6691,6 +6742,7 @@
                 "send2trash": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_send2trash\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "setuptools": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_setuptools\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "stack_data": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_stack_data\",\"target_platforms\":null,\"version\":\"3.11\"}]",
+                "types_pytz": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_types_pytz\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "websockets": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_websockets\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "argon2_cffi": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_argon2_cffi\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "bleach": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_bleach\",\"target_platforms\":null,\"version\":\"3.11\"}]",
@@ -6709,6 +6761,7 @@
                 "cryptography": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_cryptography\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "jupyter_core": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_jupyter_core\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "nest_asyncio": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_nest_asyncio\",\"target_platforms\":null,\"version\":\"3.11\"}]",
+                "pandas_stubs": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_pandas_stubs\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "platformdirs": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_platformdirs\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "sphinx_tippy": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_sphinx_tippy\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "uri_template": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_uri_template\",\"target_platforms\":null,\"version\":\"3.11\"}]",
@@ -6729,6 +6782,7 @@
                 "pyasn1_modules": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_pyasn1_modules\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "sockjs_tornado": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_sockjs_tornado\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "sphinx_autoapi": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_sphinx_autoapi\",\"target_platforms\":null,\"version\":\"3.11\"}]",
+                "types_networkx": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_types_networkx\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "types_protobuf": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_types_protobuf\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "mdit_py_plugins": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_mdit_py_plugins\",\"target_platforms\":null,\"version\":\"3.11\"}]",
                 "mypy_extensions": "[{\"config_setting\":\"//_config:is_python_3.11\",\"filename\":null,\"repo\":\"pip_311_mypy_extensions\",\"target_platforms\":null,\"version\":\"3.11\"}]",

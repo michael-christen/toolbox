@@ -29,7 +29,7 @@ class RefinementConfig:
 
 def _show_exclusions(
     pattern: str,
-    exclusion: np.ndarray,
+    exclusion: pandas.Series[bool],
     df: pandas.DataFrame,
     verbosity: Verbosity,
 ) -> None:

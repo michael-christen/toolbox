@@ -19,6 +19,8 @@ class TestRepoGraphData(unittest.TestCase):
                 ("a", "f"),
                 ("f", "g"),
                 ("g", "c"),
+                # Separate component
+                ("h", "i"),
             ]
         )
         node_to_class = {
@@ -27,6 +29,10 @@ class TestRepoGraphData(unittest.TestCase):
             "c": "F",
             "d": "G",
             "e": "F",
+            "f": "H",
+            "g": "H",
+            "h": "H",
+            "i": "H",
         }
         node_probability = {
             "c": 0.5,
@@ -49,8 +55,9 @@ class TestRepoGraphData(unittest.TestCase):
         self.assertEqual(r.get_node("c")["node_probability_cache_hit"], 0.5)
         self.assertEqual(r.get_node("c")["num_duration_ancestors"], 2)
         self.assertEqual(r.get_node("d")["num_duration_ancestors"], 0)
-        # XXX: Currently 1
-        # self.assertEqual(r.get_node('e')['num_duration_ancestors'], 0)
+        self.assertEqual(r.get_node('i')['num_ancestors'], 1)
+        self.assertEqual(r.get_node('i')['num_duration_ancestors'], 0)
+        # XXX: num_source_descendants
         with self.assertRaisesRegex(KeyError, "not there"):
             r.get_node("not there")
 

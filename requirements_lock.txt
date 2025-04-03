@@ -1094,12 +1094,15 @@ numpy==2.2.3 \
     --hash=sha256:f4ca91d61a4bf61b0f2228f24bbfa6a9facd5f8af03759fe2a655c50ae2c6610 \
     --hash=sha256:f6b3dfc7661f8842babd8ea07e9897fe3d9b69a1d7e5fbb743e4160f9387833b
     # via
+    #   -r requirements.in
     #   bokeh
     #   contourpy
     #   matplotlib
     #   networkx
     #   pandas
+    #   pandas-stubs
     #   scipy
+    #   types-networkx
 openhtf==1.6.1 \
     --hash=sha256:5e3c4279452a45cf193c3cbdb972fe30b6e6ecf0d1835ca28f76c85f85a640bb \
     --hash=sha256:ecb51a8961ed73791bd14191fadc8dbfd344596a0054524f2196801aabbb00e6
@@ -1170,9 +1173,14 @@ pandas==2.2.3 \
     --hash=sha256:f3a255b2c19987fbbe62a9dfd6cff7ff2aa9ccab3fc75218fd4b7530f01efa24 \
     --hash=sha256:fffb8ae78d8af97f849404f21411c95062db1496aeb3e56f146f0355c9989319
     # via
+    #   -r requirements.in
     #   bokeh
     #   networkx
     #   panel
+pandas-stubs==2.2.3.250308 \
+    --hash=sha256:3a6e9daf161f00b85c83772ed3d5cff9522028f07a94817472c07b91f46710fd \
+    --hash=sha256:a377edff3b61f8b268c82499fdbe7c00fdeed13235b8b71d6a1dc347aeddc74d
+    # via -r requirements.in
 pandocfilters==1.5.1 \
     --hash=sha256:002b4a555ee4ebc03f8b66307e287fa492e4a77b4ea14d3f934328297bb4939e \
     --hash=sha256:93be382804a9cdb0a7267585f157e5d1731bbe5545a85b268d6f5fe6232de2bc
@@ -1945,6 +1953,10 @@ traitlets==5.14.3 \
     #   nbclient
     #   nbconvert
     #   nbformat
+types-networkx==3.4.2.20250319 \
+    --hash=sha256:514b373c21f03fef94d71ca7182026ae73773fe3d4eaaf9139e9bdd78f5361c5 \
+    --hash=sha256:95266a3b4ee04779638231a8ef4c312e745f3eeab9da242614d03ad0bfbb0cc9
+    # via -r requirements.in
 types-protobuf==5.29.1.20250315 \
     --hash=sha256:0b05bc34621d046de54b94fddd5f4eb3bf849fe2e13a50f8fb8e89f35045ff49 \
     --hash=sha256:57efd51fd0979d1f5e1d94053d1e7cfff9c028e8d05b17e341b91a1c7fce37c4
@@ -1953,6 +1965,10 @@ types-python-dateutil==2.9.0.20241206 \
     --hash=sha256:18f493414c26ffba692a72369fea7a154c502646301ebfe3d56a04b3767284cb \
     --hash=sha256:e248a4bc70a486d3e3ec84d0dc30eec3a5f979d6e7ee4123ae043eedbb987f53
     # via arrow
+types-pytz==2025.2.0.20250326 \
+    --hash=sha256:3c397fd1b845cd2b3adc9398607764ced9e578a98a5d1fbb4a9bc9253edfb162 \
+    --hash=sha256:deda02de24f527066fc8d6a19e284ab3f3ae716a42b4adb6b40e75e408c08d36
+    # via pandas-stubs
 typing-extensions==4.12.2 \
     --hash=sha256:04e5ca0351e0f3f85c6853954072df659d0d13fac324d0072316b67d7794700d \
     --hash=sha256:1a7ead55c7e559dd4dee8856e3a88b41225abfe1ce8df57b7c13915fe121ffb8
