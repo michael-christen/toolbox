@@ -266,6 +266,8 @@ manifest:
     PIL.report: pillow
     alabaster: alabaster
     alabaster.support: alabaster
+    annotated_types: annotated_types
+    annotated_types.test_cases: annotated_types
     anyio: anyio
     anyio.abc: anyio
     anyio.from_thread: anyio
@@ -4156,6 +4158,79 @@ manifest:
     pycparser.ply.ygen: pycparser
     pycparser.plyparser: pycparser
     pycparser.yacctab: pycparser
+    pydantic: pydantic
+    pydantic.alias_generators: pydantic
+    pydantic.aliases: pydantic
+    pydantic.annotated_handlers: pydantic
+    pydantic.class_validators: pydantic
+    pydantic.color: pydantic
+    pydantic.config: pydantic
+    pydantic.dataclasses: pydantic
+    pydantic.datetime_parse: pydantic
+    pydantic.decorator: pydantic
+    pydantic.deprecated: pydantic
+    pydantic.deprecated.class_validators: pydantic
+    pydantic.deprecated.config: pydantic
+    pydantic.deprecated.copy_internals: pydantic
+    pydantic.deprecated.decorator: pydantic
+    pydantic.deprecated.json: pydantic
+    pydantic.deprecated.parse: pydantic
+    pydantic.deprecated.tools: pydantic
+    pydantic.env_settings: pydantic
+    pydantic.error_wrappers: pydantic
+    pydantic.errors: pydantic
+    pydantic.experimental: pydantic
+    pydantic.experimental.arguments_schema: pydantic
+    pydantic.experimental.pipeline: pydantic
+    pydantic.fields: pydantic
+    pydantic.functional_serializers: pydantic
+    pydantic.functional_validators: pydantic
+    pydantic.generics: pydantic
+    pydantic.json: pydantic
+    pydantic.json_schema: pydantic
+    pydantic.main: pydantic
+    pydantic.mypy: pydantic
+    pydantic.networks: pydantic
+    pydantic.parse: pydantic
+    pydantic.plugin: pydantic
+    pydantic.root_model: pydantic
+    pydantic.schema: pydantic
+    pydantic.tools: pydantic
+    pydantic.type_adapter: pydantic
+    pydantic.types: pydantic
+    pydantic.typing: pydantic
+    pydantic.utils: pydantic
+    pydantic.v1: pydantic
+    pydantic.v1.annotated_types: pydantic
+    pydantic.v1.class_validators: pydantic
+    pydantic.v1.color: pydantic
+    pydantic.v1.config: pydantic
+    pydantic.v1.dataclasses: pydantic
+    pydantic.v1.datetime_parse: pydantic
+    pydantic.v1.decorator: pydantic
+    pydantic.v1.env_settings: pydantic
+    pydantic.v1.error_wrappers: pydantic
+    pydantic.v1.errors: pydantic
+    pydantic.v1.fields: pydantic
+    pydantic.v1.generics: pydantic
+    pydantic.v1.json: pydantic
+    pydantic.v1.main: pydantic
+    pydantic.v1.mypy: pydantic
+    pydantic.v1.networks: pydantic
+    pydantic.v1.parse: pydantic
+    pydantic.v1.schema: pydantic
+    pydantic.v1.tools: pydantic
+    pydantic.v1.types: pydantic
+    pydantic.v1.typing: pydantic
+    pydantic.v1.utils: pydantic
+    pydantic.v1.validators: pydantic
+    pydantic.v1.version: pydantic
+    pydantic.validate_call_decorator: pydantic
+    pydantic.validators: pydantic
+    pydantic.version: pydantic
+    pydantic.warnings: pydantic
+    pydantic_core: pydantic_core
+    pydantic_core.core_schema: pydantic_core
     pyflakes: pyflakes
     pyflakes.api: pyflakes
     pyflakes.checker: pyflakes
@@ -5236,6 +5311,9 @@ manifest:
     traitlets.utils.text: traitlets
     traitlets.utils.warnings: traitlets
     typing_extensions: typing_extensions
+    typing_inspection: typing_inspection
+    typing_inspection.introspection: typing_inspection
+    typing_inspection.typing_objects: typing_inspection
     tzdata: tzdata
     tzdata.zoneinfo: tzdata
     tzdata.zoneinfo.Africa: tzdata
@@ -5472,4 +5550,4 @@ manifest:
     zstandard.backend_cffi: zstandard
   pip_repository:
     name: pip
-integrity: 267d1112fc147310aafcc37b4ff93332520a4ed3d56e38e26cb8e57339395356
+integrity: 2c79fbe2859fcbd98ad4bfed41c9e8f53eef6a1f63b2a9279f8592723ae832d7

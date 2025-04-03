@@ -1,9 +1,12 @@
+from __future__ import annotations
 import dataclasses
 import enum
 
 import networkx
 import numpy as np
 import pandas
+
+from apps.bazel_parser import repo_graph_data
 
 
 class Verbosity(enum.Enum):
@@ -92,29 +95,28 @@ def refine_dataframe(
     return df.loc[include]
 
 
-def remove_node_from_graph(node: str, graph: networkx.DiGraph) -> None:
+def remove_node_from_repo(node: str, repo: repo_graph_data) -> None:
     """Modify graph by removing node, but preserving edges.
 
     XXX: How to handle probability / duration attributes of removed nodes?
     """
-    for parent in graph.predecessors(node):
-        for child in graph.successors(node):
-            graph.add_edge(parent, child)
-    graph.remove_node(node)
+    for parent in repo.graph.predecessors(node):
+        for child in repo.graph.successors(node):
+            repo.graph.add_edge(parent, child)
+    repo.graph.remove_node(node)
 
 
 def full_refinement(
-    graph: networkx.DiGraph,
-    df: pandas.DataFrame,
+    repo: repo_graph_data.RepoGraphData,
     refinement: RefinementConfig,
     verbosity: Verbosity,
 ) -> pandas.DataFrame:
     refined_df = refine_dataframe(
-        df=df,
+        df=repo.df,
         refinement=refinement,
         verbosity=verbosity,
     )
-    removed_nodes = set(df.index.tolist()) - set(refined_df.index.tolist())
+    removed_nodes = set(repo.df.index.tolist()) - set(refined_df.index.tolist())
+    repo.df = refined_df
     for node in removed_nodes:
-        remove_node_from_graph(node, graph)
-    return refined_df
+        remove_node_from_repo(node, repo)

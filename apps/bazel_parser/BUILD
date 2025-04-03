@@ -29,6 +29,7 @@ py_library(
     srcs = ["refinement.py"],
     visibility = ["//:__subpackages__"],
     deps = [
+        ":repo_graph_data",
         "@pip//networkx",
         "@pip//numpy",
         "@pip//pandas",
@@ -75,13 +76,17 @@ py_binary(
     deps = [
         ":panel",
         ":parsing",
+        ":refinement",
         "//tools:bazel_utils",
         "//tools:git_py_library",
         "//tools:git_utils",
         "//utils:bep_reader",
         "@pip//click",
         "@pip//networkx",
+        "@pip//pydantic",
         # XXX: Should associate with networkx
         "@pip//pygraphviz",  # keep
+        "@pip//pyyaml",
+        "@pip//tqdm",
     ],
 )

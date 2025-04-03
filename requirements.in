@@ -41,11 +41,15 @@ six
 # Install so we can easily install a wheel into a virtualenv
 pip
 protobuf
+# Validation & serialization
+pydantic
 # largely for development
 # https://github.com/pytest-dev/pytest/issues/12592#issuecomment-2515100428
 # introduced an issue with files named the same as their parent modules from
 # properly getting imported
 pytest<8.3.4
+# Yaml input/output (I hate it, but ...)
+pyyaml
 # https://github.com/bazelbuild/bazel/issues/4327
 setuptools<71
 # Documentation

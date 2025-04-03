@@ -102,10 +102,13 @@ import time
 
 import click
 import networkx
+import pydantic
 import tqdm
+import yaml
 
 from apps.bazel_parser import panel
 from apps.bazel_parser import parsing
+from apps.bazel_parser import refinement
 from tools import bazel_utils
 from tools import git_pb2
 from tools import git_utils
@@ -115,6 +118,25 @@ logger = logging.getLogger(__name__)
 
 PATH_TYPE = click.Path(exists=True, path_type=pathlib.Path)
 OUT_PATH_TYPE = click.Path(exists=False, path_type=pathlib.Path)
+
+
+class Config(pydantic.BaseModel):
+    # Error if extra arguments
+    model_config = pydantic.ConfigDict(extra='forbid')
+
+    query_target: str
+    test_target: str
+    days_ago: int
+    refinement: refinement.RefinementConfig
+
+
+def load_config(config_yaml_path: pathlib.Path, overrides: dict) -> Config:
+    with open(config_yaml_path, 'r') as f:
+        raw_data = yaml.safe_load(f)
+    # Apply overrides
+    raw_data.update(overrides)
+    # Validates and parses
+    return Config(**raw_data)
 
 
 @click.group()
@@ -175,27 +197,45 @@ def process(
 
 @click.command()
 @click.option("--repo-dir", type=PATH_TYPE, required=True)
-@click.option("--days-ago", type=int, required=True)
+@click.option("--days-ago", type=int, required=False)
+@click.option("--config-file", type=PATH_TYPE, required=False)
 def full(
     repo_dir: pathlib.Path,
-    days_ago: int,
+    days_ago: int | None,
+    config_file: pathlib.Path | None,
 ) -> None:
+    if config_file:
+        overrides = {}
+        if days_ago is not None:
+            overrides["days_ago"] = days_ago
+        config = load_config(config_file, overrides=overrides)
+    else:
+        assert days_ago is not None
+        config = Config(
+            query_target="//...",
+            test_target="//...",
+            days_ago=days_ago,
+            refinement=refinement.RefinementConfig(
+                name_patterns = [],
+                class_patterns = [],
+                class_pattern_to_name_patterns = {},
+            ),
+        )
     # XXX: Show progress?
 
     # Query for graph
-    QUERY = "//..."
     logger.info('Querying...')
     query_pb = subprocess.check_output(
-        ["bazel", "query", "--output", "proto", QUERY],
+        ["bazel", "query", "--output", "proto", config.query_target],
         cwd=repo_dir)
     query_result = bazel_utils.parse_build_output(query_pb)
     # Test for timing
     logger.info('Testing...')
-    TEST = "//..."
     with tempfile.NamedTemporaryFile() as tmpfile:
         bep_pb = tmpfile.name
         subprocess.check_call(
-            ["bazel", "test", f"--build_event_binary_file={bep_pb}", TEST],
+            ["bazel", "test", f"--build_event_binary_file={bep_pb}",
+             config.test_target],
             cwd=repo_dir)
         with open(bep_pb, "rb") as bep_buf:
             label_to_runtime = bep_reader.get_label_to_runtime(bep_buf)
@@ -203,7 +243,7 @@ def full(
     # Capture git information
     logger.info('History from git...')
     git_query_after = datetime.datetime.now() - datetime.timedelta(
-        days=days_ago
+        days=config.days_ago
     )
     file_commit_map = git_utils.get_file_commit_map_from_follow(
         git_directory=repo_dir, after=git_query_after
@@ -214,6 +254,13 @@ def full(
         label_to_runtime=label_to_runtime,
         file_commit_map=file_commit_map,
     )
+    logger.info('Refining...')
+    refinement.full_refinement(
+        repo=r,
+        refinement=config.refinement,
+        verbosity=refinement.Verbosity.COUNT,
+    )
+    logger.info('Outputting...')
     graph_metrics = r.get_graph_metrics()
     print(graph_metrics)
     logger.info('Done...')
