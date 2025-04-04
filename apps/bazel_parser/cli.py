@@ -225,8 +225,6 @@ def full(
                 class_pattern_to_name_patterns = {},
             ),
         )
-    # XXX: Show progress?
-
     # Query for graph
     logger.info('Querying...')
     query_pb = subprocess.check_output(
@@ -272,25 +270,6 @@ def full(
     if out_gml is not None:
         r.to_gml(out_gml)
     logger.info('Done...')
-    # # XXX: Run it all here!
-    # cmd = ['bazel', 'test', '//...']
-    # with tqdm.tqdm(desc="Query", unit="") as pbar:
-    #     # XXX: stderr
-    #     proc = subprocess.Popen(
-    #         cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
-    #         cwd=repo_dir,
-    #     )
-    #     while proc.poll() is None:
-    #         pbar.set_postfix(status="Running")
-    #         time.sleep(0.1)
-    #     # XXX: probably show whilst
-    #     stdout, stderr = proc.communicate()
-    #     # print(stdout)
-    #     pbar.set_postfix(status="Done")
-    #     if proc.returncode != 0:
-    #         print(stdout)
-    #         print(stderr)
-    #         raise RuntimeError("Failed to run command")
 
 
 @click.command()
