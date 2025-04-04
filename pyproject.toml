@@ -38,3 +38,7 @@ extend-exclude = '''
 # exclude = [
 #     "bazel-*/",
 # ]
+
+[tool.jupytext]
+# TODO(#211): Come to a conlusion on whether to have py:percent
+formats = "ipynb,md:myst"
