@@ -58,6 +58,8 @@ def ls_files(git_directory: pathlib.Path | str) -> list[pathlib.Path]:
 
 
 def _get_args_for_after(after: datetime.datetime | None) -> list[str]:
+    # XXX: ugh, testing equality with this is annoying
+    # return ['584a8baf3ff9a5cda9945b1ba97a6421154ca2ac^..HEAD']
     if after is not None:
         after_s = after.strftime("%Y-%m-%d")
         return [f'--after="{after_s}"']
@@ -100,6 +102,12 @@ def get_files_changed_at_commit(
 
 
 # Most likely want follow to preserve name
+# XXX: This has issues with copies / sees more than it should
+# XXX: Didn't find a few files too
+# - b2d98b30772ec8ec9de1b0025d77ae0ce81c3088
+# tensorflow/lite/g3doc/android/tutorials/text_classification.md
+# tensorflow/lite/g3doc/android/tutorials/object_detection.md
+# tensorflow/compiler/jit/compilability_check_util_test.cc
 def get_file_commit_map_from_follow(
     git_directory: pathlib.Path | str,
     after: datetime.datetime | None = None,
@@ -201,6 +209,8 @@ def get_file_commit_map_from_log(
 
     commit_map: dict[str, set[pathlib.Path]] = {}
     file_map: dict[pathlib.Path, list[str]] = collections.defaultdict(list)
+    for f in ls_files(git_directory):
+        file_map[f] = []
 
     all_tokens = []
     for line in lines:
@@ -276,7 +286,7 @@ def get_file_commit_map_from_log(
                     commit_map[commit].add(f)
                     file_map[f].append(commit)
                     # XXX: Should we note that we now expect to never see this
-                    # again?
+                    # again? Nope, could've gotten deleted and added back
             elif op_type == OperationType.MODIFY:
                 # Same as add, but don't need to worry about not-tracking (if
                 # we decide to do that)
@@ -291,7 +301,12 @@ def get_file_commit_map_from_log(
                 f = pathlib.Path(files[0])
                 # Can't have renamed to it if it's been deleted
                 assert f not in f_to_canonical
-                untracked_files.add(f)
+                # If it got deleted and re-added before
+                if f not in file_map:
+                    untracked_files.add(f)
+                else:
+                    commit_map[commit].add(f)
+                    file_map[f].append(commit)
             elif op_type == OperationType.REPLACE:
                 assert len(files) == 2
                 old_f = pathlib.Path(files[0])

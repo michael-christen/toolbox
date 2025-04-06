@@ -161,6 +161,8 @@ A       experiments/rust/hello-rust/BUILD
         print(output)
         self.fail('hi')
 
+    # XXX: Test deleted, then added back
+    # XXX: Show difference in copy?
     def test_git_utils(self):
 
         # diff-tree doesn't work on the first commit (and we accept that)
