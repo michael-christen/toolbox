@@ -184,6 +184,7 @@ class OperationType(enum.Enum):
     MODIFY = 'M'
     DELETE = 'D'
     REPLACE = 'R'
+    TYPE_CHANGE = 'T'
 
 
 def get_file_commit_map_from_log(
@@ -257,7 +258,7 @@ def get_file_commit_map_from_log(
                 raw_type = token[0]
                 new_op_type = OperationType(raw_type)
                 if new_op_type in {OperationType.ADD, OperationType.MODIFY,
-                               OperationType.DELETE}:
+                               OperationType.DELETE, OperationType.TYPE_CHANGE}:
                     if len(token) > 1:
                         raise ValueError(f'Unexpected extra: {token}')
                     op_type = new_op_type
@@ -287,7 +288,7 @@ def get_file_commit_map_from_log(
                     file_map[f].append(commit)
                     # XXX: Should we note that we now expect to never see this
                     # again? Nope, could've gotten deleted and added back
-            elif op_type == OperationType.MODIFY:
+            elif op_type in {OperationType.MODIFY, OperationType.TYPE_CHANGE}:
                 # Same as add, but don't need to worry about not-tracking (if
                 # we decide to do that)
                 assert len(files) == 1
@@ -299,8 +300,6 @@ def get_file_commit_map_from_log(
             elif op_type == OperationType.DELETE:
                 assert len(files) == 1
                 f = pathlib.Path(files[0])
-                # Can't have renamed to it if it's been deleted
-                assert f not in f_to_canonical
                 # If it got deleted and re-added before
                 if f not in file_map:
                     untracked_files.add(f)

@@ -163,6 +163,8 @@ A       experiments/rust/hello-rust/BUILD
 
     # XXX: Test deleted, then added back
     # XXX: Show difference in copy?
+    # XXX: Type change
+    # XXX: Delete, but was in f_to_canonical and added back
     def test_git_utils(self):
 
         # diff-tree doesn't work on the first commit (and we accept that)
