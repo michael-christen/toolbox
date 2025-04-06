@@ -62,6 +62,105 @@ class TestGitUtils(unittest.TestCase):
             .strip()
         )
 
+    # XXX
+    def xtest_parse_git_logs(self):
+        example_logs = """
+4f11bee540bfcde503b5bfd97e4d5e6b6748fa2d
+M       README.md
+M       WORKSPACE
+R100    tools/csv-to-sheets/.gitignore  apps/csv-to-sheets/.gitignore
+R100    tools/csv-to-sheets/csv2sheets.py       apps/csv-to-sheets/csv2sheets.py
+R100    tools/csv-to-sheets/requirements.txt    apps/csv-to-sheets/requirements.txt
+R100    tools/ical/README.md    apps/ical/README.md
+R100    tools/ical/read_ical_rrules.py  apps/ical/read_ical_rrules.py
+R100    tools/ical/requirements.txt     apps/ical/requirements.txt
+M       cargo-bazel-lock.json
+R100    tools/useful_commands.md        docs/useful_commands.md
+R100    experiments/rust/hello-rust/.gitignore  examples/basic/.gitignore
+R053    experiments/proto/hello/BUILD   examples/basic/BUILD
+R100    experiments/rust/hello-rust/Cargo.lock  examples/basic/Cargo.lock
+R100    experiments/rust/hello-rust/Cargo.toml  examples/basic/Cargo.toml
+R100    experiments/rust/README.md      examples/basic/README.md
+R072    experiments/cpp/hello/main/BUILD        examples/basic/app/BUILD
+R063    experiments/cpp/hello/main/hello-greet.cc       examples/basic/app/hello-greet.cc
+R100    experiments/cpp/hello/main/hello-greet.h        examples/basic/app/hello-greet.h
+R067    experiments/cpp/hello/main/hello-world.cc       examples/basic/app/hello-world.cc
+R100    experiments/proto/hello/hello.proto     examples/basic/hello.proto
+R076    experiments/proto/hello/hello_test.py   examples/basic/hello_test.py
+R070    experiments/cpp/hello/lib/BUILD examples/basic/lib/BUILD
+R076    experiments/cpp/hello/lib/hello-time.cc examples/basic/lib/hello-time.cc
+R100    experiments/cpp/hello/lib/hello-time.h  examples/basic/lib/hello-time.h
+R100    experiments/proto/hello/main.py examples/basic/main.py
+R100    experiments/rust/hello-rust/src/main.rs examples/basic/src/main.rs
+D       experiments/rust/hello-rust/BUILD
+A       mchristen/parsing_scripts/BUILD
+R100    tools/one-offs/pocket_export_html_to_csv.py     mchristen/parsing_scripts/pocket_export_html_to_csv.py
+R100    tools/one-offs/youtube_playlist_to_csv.py       mchristen/parsing_scripts/youtube_playlist_to_csv.py
+D       tools/miscellaneous/convert_movies.py
+D       tools/miscellaneous/trello_ex.py
+D       tools/motd/README.md
+D       tools/motd/config.ini
+D       tools/motd/header
+D       tools/motd/main.py
+
+6b93bf84597df4ceacab7877980122196adf68cb
+A       .bazelrc
+M       README.md
+M       WORKSPACE
+M       experiments/proto/hello/BUILD
+A       experiments/proto/hello/main.py
+
+9183bcdcebe2969acfe3fca7a15897e6b9a81773
+M       tools/csv-to-sheets/requirements.txt
+
+b55ed643b81812b36517f20a682279a7c3d150e2
+M       tools/csv-to-sheets/requirements.txt
+
+1d467d8d5695b953143f3eae50628f11e8cdc236
+M       tools/csv-to-sheets/requirements.txt
+
+ba0cd16e24fc910502d1bcde83bc98f27af58c4d
+M       tools/csv-to-sheets/requirements.txt
+
+8b6fdd662c80decdfc0db993711534b07661c702
+M       tools/csv-to-sheets/requirements.txt
+
+3e98b8d2e15f3f46502a957bc191bb26e22adfe0
+M       tools/csv-to-sheets/requirements.txt
+
+ebfecbe1c8460ef7b67bae6932009374167460a9
+M       tools/csv-to-sheets/requirements.txt
+
+f29c3acaa4f95d2572426540680cb3ecec5c4f2d
+M       tools/csv-to-sheets/requirements.txt
+
+b16030608b2dc68371fb89e8e7f1e88e6d2ab3b6
+159a96197ce027829412c0e6c2e4f1a6724954c3
+A       .github/workflows/build-and-test.yml
+M       .gitignore
+A       BUILD
+A       Cargo.lock
+M       README.md
+M       WORKSPACE
+A       cargo-bazel-lock.json
+A       experiments/cpp/hello/lib/BUILD
+A       experiments/cpp/hello/lib/hello-time.cc
+A       experiments/cpp/hello/lib/hello-time.h
+M       experiments/cpp/hello/main/BUILD
+M       experiments/cpp/hello/main/hello-world.cc
+A       experiments/proto/hello/BUILD
+A       experiments/proto/hello/hello.proto
+A       experiments/proto/hello/hello_test.py
+A       experiments/rust/hello-rust/BUILD
+        """
+        # XXX: Maybe we have FileCommitMap just not show an entry for files
+        # with empty lists? Probably not, if we want it to denote source file
+        files = []
+        logs = example_logs.strip().splitlines()
+        output = git_utils._parse_git_logs(logs=logs, files=files)
+        print(output)
+        self.fail('hi')
+
     def test_git_utils(self):
 
         # diff-tree doesn't work on the first commit (and we accept that)
@@ -123,6 +222,10 @@ class TestGitUtils(unittest.TestCase):
             },
         )
         self.assertEqual(follow_map, expected_follow)
+        log_map = git_utils.get_file_commit_map_from_log(self.tmp_path)
+        print(log_map)  # XXX
+        print(expected_follow)  # XXX
+        self.assertEqual(log_map, expected_follow)
 
         # Show how list misses out on tracking a file through history
         list_map = git_utils.get_file_commit_map_from_list(self.tmp_path)

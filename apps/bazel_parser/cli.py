@@ -156,7 +156,7 @@ def git_capture(
     git_query_after = datetime.datetime.now() - datetime.timedelta(
         days=days_ago
     )
-    file_commit_map = git_utils.get_file_commit_map_from_follow(
+    file_commit_map = git_utils.get_file_commit_map_from_log(
         git_directory=repo_dir, after=git_query_after
     )
     file_commit_pb.write_bytes(

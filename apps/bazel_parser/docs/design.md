@@ -19,7 +19,7 @@ added several utilities to:
   [talk](https://www.youtube.com/watch?v=k4H20WxhbsA&ab_channel=GoogleOpenSource)
   ([slides](https://docs.google.com/presentation/d/1McLw_yWbPuR1UqaoowHMsu5LskPJX7kWETkB-DkqNpo/edit?resourcekey=0-sVMAbv967ww2kWvJuzyN5w#slide=id.g1867ddcecfb_0_5287))
   that does very similar things to what I'm trying to do. I took notes on it in
-  [[bazelcon_2022_driving_architectural_improvements_with_dependency_metrics]].
+  [[notes_on_bazelcon_2022_driving_architectural_improvements_with_dependency_metrics]].
 
 ### To Do
 
@@ -217,7 +217,7 @@ initial set of metrics and possibly filter out some of them when viewing, etc.
 
 Note that edge direction for us means "depends on", so a child of a node is a
 library that is depended upon. This is the opposite of the edge meaning in the
-[[bazelcon_2022_driving_architectural_improvements_with_dependency_metrics]]
+[[notes_on_bazelcon_2022_driving_architectural_improvements_with_dependency_metrics]]
 discussion.
 
 - [ ] Consider additional metrics
