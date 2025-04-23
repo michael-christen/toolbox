@@ -140,7 +140,7 @@
     "https://bcr.bazel.build/modules/rules_kotlin/1.9.5/MODULE.bazel": "043a16a572f610558ec2030db3ff0c9938574e7dd9f58bded1bb07c0192ef025",
     "https://bcr.bazel.build/modules/rules_kotlin/1.9.5/source.json": "4ea6e867a7db5ef01187a07636070110db267f94ed038367bec7bbd3aea5e612",
     "https://bcr.bazel.build/modules/rules_libusb/0.1.0-rc1/MODULE.bazel": "e125975624d259e4c1749d5e80693bc6d7ebc8cdb6feb2b7f453b997d4467706",
-    "https://bcr.bazel.build/modules/rules_libusb/0.1.0-rc1/source.json": "3cfaff8651ceb8e6d57134a9a13a286bb424dc43b6c145765368581f22bb6391",
+    "https://bcr.bazel.build/modules/rules_libusb/0.1.0-rc1/source.json": "d9780fac55802dde9fccdc0563dcb2024d8488767c163be03cd0c24664715d4d",
     "https://bcr.bazel.build/modules/rules_license/0.0.3/MODULE.bazel": "627e9ab0247f7d1e05736b59dbb1b6871373de5ad31c3011880b4133cafd4bd0",
     "https://bcr.bazel.build/modules/rules_license/0.0.7/MODULE.bazel": "088fbeb0b6a419005b89cf93fe62d9517c0a2b8bb56af3244af65ecfe37e7d5d",
     "https://bcr.bazel.build/modules/rules_license/0.0.8/MODULE.bazel": "5669c6fe49b5134dbf534db681ad3d67a2d49cfc197e4a95f1ca2fd7f3aebe96",
