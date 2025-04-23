@@ -139,6 +139,26 @@ def load_config(config_yaml_path: pathlib.Path, overrides: dict) -> Config:
     return Config(**raw_data)
 
 
+def get_config(config_file: pathlib.Path | None, days_ago: int | None) -> Config:
+    if config_file:
+        overrides = {}
+        if days_ago is not None:
+            overrides["days_ago"] = days_ago
+        return load_config(config_file, overrides=overrides)
+    else:
+        assert days_ago is not None
+        return Config(
+            query_target="//...",
+            test_target="//...",
+            days_ago=days_ago,
+            refinement=refinement.RefinementConfig(
+                name_patterns = [],
+                class_patterns = [],
+                class_pattern_to_name_patterns = {},
+            ),
+        )
+
+
 @click.group()
 def cli():
     pass
@@ -170,24 +190,41 @@ def git_capture(
 @click.option("--file-commit-pb", type=PATH_TYPE, required=True)
 @click.option("--out-gml", type=OUT_PATH_TYPE, required=True)
 @click.option("--out-csv", type=OUT_PATH_TYPE, required=True)
+@click.option("--config-file", type=PATH_TYPE, required=False)
 def process(
     query_pb: pathlib.Path,
     bep_pb: pathlib.Path,
     file_commit_pb: pathlib.Path,
     out_gml: pathlib.Path,
     out_csv: pathlib.Path,
+    config_file: pathlib.Path | None,
 ) -> None:
+    # days_ago is unused here, but just placing to get a value
+    config = get_config(config_file, days_ago=28)
+    logger.info('Query...')
     query_result = bazel_utils.parse_build_output(query_pb.read_bytes())
+    logger.info('Runtime...')
     with bep_pb.open("rb") as bep_buf:
         label_to_runtime = bep_reader.get_label_to_runtime(bep_buf)
+    logger.info('Probability...')
     file_commit_proto = git_pb2.FileCommitMap()
     file_commit_proto.ParseFromString(file_commit_pb.read_bytes())
     file_commit_map = git_utils.FileCommitMap.from_proto(file_commit_proto)
+    logger.info('Get graph data')
     r = parsing.get_repo_graph_data(
         query_result=query_result,
         label_to_runtime=label_to_runtime,
         file_commit_map=file_commit_map,
     )
+    # XXX: Probably should refresh afterwards too, right?
+    # XXX: Probably want to refine before performing full refresh
+    logger.info('Refining...')
+    refinement.full_refinement(
+        repo=r,
+        refinement=config.refinement,
+        verbosity=refinement.Verbosity.COUNT,
+    )
+    r.refresh()
     graph_metrics = r.get_graph_metrics()
     # XXX: What to do with graph_metrics?
     print(graph_metrics)
@@ -208,23 +245,7 @@ def full(
     out_gml: pathlib.Path | None,
     out_csv: pathlib.Path | None,
 ) -> None:
-    if config_file:
-        overrides = {}
-        if days_ago is not None:
-            overrides["days_ago"] = days_ago
-        config = load_config(config_file, overrides=overrides)
-    else:
-        assert days_ago is not None
-        config = Config(
-            query_target="//...",
-            test_target="//...",
-            days_ago=days_ago,
-            refinement=refinement.RefinementConfig(
-                name_patterns = [],
-                class_patterns = [],
-                class_pattern_to_name_patterns = {},
-            ),
-        )
+    config = get_config(config_file, days_ago=days_ago)
     # Query for graph
     logger.info('Querying...')
     query_pb = subprocess.check_output(
@@ -285,7 +306,7 @@ def visualize(
 
 if __name__ == "__main__":
     logging.basicConfig(stream=sys.stderr,
-                        format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
+                        format="%(asctime)s - %(levelname)s - %(name)s:%(lineno)d - %(message)s",
                         datefmt="%Y-%m-%d %H:%M:%S",
                         level=logging.DEBUG)
     cli.add_command(git_capture)

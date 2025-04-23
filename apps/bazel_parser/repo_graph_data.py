@@ -6,6 +6,7 @@ from typing import TypedDict, cast
 
 import networkx
 import pandas
+import tqdm
 
 from utils import graph_algorithms
 
@@ -64,6 +65,8 @@ class Node(TypedDict):
     # of one another, which isn't true, but convenient.
     group_probability_cache_hit: float
     # group_duration_s * (1 - group_probability_cache_hit)
+    # XXX: Is that true / useful? Shouldn't it be (1 -
+    # node_probability_cache_hit)?
     expected_duration_s: float
 
     # XXX: Move these back and add them where necessarry
@@ -259,14 +262,18 @@ class RepoGraphData:
 def dependency_analysis(
     repo: RepoGraphData) -> dict[str, Node]:
     """Update repo based on a dependency analysis."""
+    num_nodes = repo.graph.number_of_nodes()
+    logger.debug(f'a: {num_nodes}')
     node_probability = repo.df['node_probability_cache_hit'].to_dict()
     node_duration_s = repo.df["node_duration_s"].to_dict()
     group_probability = graph_algorithms.compute_group_probability(
         graph=repo.graph, node_probability=node_probability
     )
+    logger.debug(f'a: {repo.graph.number_of_edges()}')
     group_duration = graph_algorithms.compute_group_duration(
         graph=repo.graph, node_duration_s=node_duration_s
     )
+    logger.debug('a')
     pagerank = networkx.pagerank(repo.graph)
     hubs, authorities = networkx.hits(repo.graph)
     # XXX: Should we have a data structure that's just a big collection of
@@ -286,6 +293,7 @@ def dependency_analysis(
     assert not isinstance(out_degree, int)
 
     reversed_graph = repo.graph.reverse()
+    logger.debug('a')
 
     # Compute depths
     forward_all_pairs_shortest_path_length = (
@@ -294,17 +302,27 @@ def dependency_analysis(
     reverse_all_pairs_shortest_path_length = (
         networkx.all_pairs_shortest_path_length(reversed_graph)
     )
+    logger.debug('a')
     descendant_depth: dict[str, int] = {}
     ancestor_depth: dict[str, int] = {}
-    for node_name, pair_len_dict in forward_all_pairs_shortest_path_length:
+    for node_name, pair_len_dict in tqdm.tqdm(forward_all_pairs_shortest_path_length):
         descendant_depth[node_name] = max(pair_len_dict.values())
-    for node_name, pair_len_dict in reverse_all_pairs_shortest_path_length:
+    for node_name, pair_len_dict in tqdm.tqdm(reverse_all_pairs_shortest_path_length):
         ancestor_depth[node_name] = max(pair_len_dict.values())
+    logger.debug('a')
 
     # Compute centrality metrics
-    betweenness = networkx.betweenness_centrality(repo.graph)
+    # XXX: Determine better mechanism to choose k
+    # // 4
+    k = int(min(num_nodes, max(1_000, num_nodes ** 0.5)))
+    # Compare performance of igraph: https://python.igraph.org/en/stable/api/igraph.GraphBase.html#betweenness
+    # O(VE), use k to make it quicker
+    # Only noticed any time during drake & pigweed trial
+    betweenness = networkx.betweenness_centrality(repo.graph, k=k)
+    logger.debug('a')
     closeness = networkx.closeness_centrality(repo.graph)
 
+    logger.debug('a')
     nodes: dict[str, Node] = {}
     for node_name, cur_node in repo.df.iterrows():
         num_parents = in_degree[node_name]
@@ -350,4 +368,5 @@ def dependency_analysis(
             "closeness_centrality": closeness[node_name],
         }
         nodes[node_name] = row
+    logger.debug('a')
     return nodes

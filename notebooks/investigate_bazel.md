@@ -32,14 +32,6 @@ g = networkx.read_gml("/home/mchristen/devel/toolbox/my.gml")
 ```
 
 ```{code-cell} ipython3
-from apps.bazel_parser import bazel_parser
-```
-
-```{code-cell} ipython3
-bazel_parser.get_node_field_names()
-```
-
-```{code-cell} ipython3
 nodes = g.nodes(data=True)
 ```
 
@@ -315,6 +307,10 @@ plt.xticks([])
 
 # Display the plot
 plt.show()
+```
+
+```{code-cell} ipython3
+df_nodes.sort_values(['num_ancestors'], ascending=False).style.background_gradient(axis=0)
 ```
 
 ```{code-cell} ipython3
