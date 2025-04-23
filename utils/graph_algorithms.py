@@ -10,6 +10,7 @@ from reverse dependencies if a given dependency changes.
 from typing import TypeVar
 
 import networkx
+import tqdm
 
 T = TypeVar("T")
 
@@ -37,7 +38,7 @@ def compute_group_probability(
     Returns: The group probability for each node.
     """
     node_group_probability: dict[T, float] = {}
-    for node in graph.nodes:
+    for node in tqdm.tqdm(graph.nodes):
         # Get our own probability, assume 100% if not specified
         product = node_probability.get(node, 1.0)
         # Get product of each child
@@ -68,8 +69,11 @@ def compute_group_duration(
     Returns: Group duration for each node.
     """
     node_group_durations: dict[T, float] = {}
-    for node in graph.nodes:
+    # xXX: Maybe I could make it quicker by only defining the graph as elements
+    # w/ nodes that have duration?
+    for node in tqdm.tqdm(graph.nodes):
         # Get our own duration
+
         total = node_duration_s.get(node, 0.0)
         for ancestor in networkx.ancestors(graph, node):
             total += node_duration_s.get(ancestor, 0.0)

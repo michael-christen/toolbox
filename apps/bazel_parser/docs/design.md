@@ -225,6 +225,78 @@ discussion.
     to use "longest path" as well ... well it's computationally tricky, so let's
     leave it alone for now
 
+One way to think about this is on 2 axes, here X is duration/ancestors and Y is probability/descendants. We can then derive several metrics based on these. There could even be other axes that define the operations we take to combine these metrics.
+
+|                   | node_d                                        | group_d                                                                | # parents (localized d) | # ancestors (uniform d)  | # d ancestors (uniform d: filtered) | anc. depth (uniform d: type) |
+| ----------------- | --------------------------------------------- | ---------------------------------------------------------------------- | ----------------------- | ------------------------ | ----------------------------------- | ---------------------------- |
+| **node_p**        | (typically 0)                                 | group_d_per_node_change <br> (expensive source)                        |                         | ancestors_by_node_p      |                                     |                              |
+| **group_p**       | node_d_per_group_change <br> (expensive test) | expected_duration_s <br> group_d_by_group_p (expensive node/structure) |                         | ancestors_by_group_p     |                                     |                              |
+| **# children**    |                                               |                                                                        |                         |                          |                                     |                              |
+| **# descendants** |                                               |                                                                        |                         | ancestors_by_descendants |                                     |                              |
+| **# src desc.**   |                                               |                                                                        |                         |                          |                                     |                              |
+| **desc. depth**   |                                               |                                                                        |                         |                          |                                     |                              |
+
+| Type                                 | Probability                   |           | Duration                 |           |
+| ------------------------------------ | ----------------------------- | --------- | ------------------------ | --------- |
+|                                      | name                          | short.    | name                     | short     |
+| measurement                          | `node_probability_cache_hit`  | `p_n`     | `node_duration_s`        | `d_n`     |
+| propagated                           | `group_probability_cache_hit` | `p_g`     | `group_duration_s`       | `d_g`     |
+| uniform approx.                      | `num_descendants`             | `num_d`   | `num_ancestors`          | `num_a`   |
+| uniform (filter out inner structure) | `num_source_descendants`      | `num_s_d` | `num_duration_ancestors` | `num_d_a` |
+| uniform (focused on shape)           | `descendant_depth`            | `depth_d` | `ancestor_depth`         | `depth_a` |
+| uniform (local)                      | `num_children`                | `num_c`   | `num_parents`            | `num_p`   |
+
+
+|               | `d_n`      | `d_g`      | `num_a`            | `num_d_a`               | `depth_a`                                | `num_p`                       |
+| ------------- | ---------- | ---------- | ------------------ | ----------------------- | ---------------------------------------- | ----------------------------- |
+| **`p_n`**     | 0          | d_g_n      | num_a_p_n          | num_d_a_p_n             | NC                                       | NC                            |
+| **`p_g`**     | d_n_g      | d_g_g      | num_a_p_g          | num_d_a_p_g             | NC                                       | NC                            |
+| **`num_d`**   | d_n_by_d   | d_g_by_d   | num_a_by_d (+ too) | NC                      | NC                                       | NC                            |
+| **`num_s_d`** | d_n_by_s_d | d_g_by_s_d | NC                 | num_d_a_by_s_d (+ too?) | NC                                       | NC                            |
+| **`depth_d`** | NC         | NC         | NC                 | NC                      | depth_a_by_d (center-ness) + tree height | NC                            |
+| **`num_c`**   | NC         | NC         | NC                 | NC                      | NC                                       | (+) degree_range (filter ...) |
+I suppose we've got 36 different possible derived metrics we could take from this ... we could take 12-15 more ... likely want to calculate after the fact, do some studies to find what's most helpful and remove these, hide or some combination.
+
+Maybe we could think of this as a selection:
+* Do you want precise information (each node is unique) or uniform (assume they're all the same) when answering questions about structure:
+	* How long does this test take (node_duration_s)
+	* How likely is this node to change (node_probability_cache_hit)
+	* The rest are 'aggregations':
+		* What's the cost of changing this file:
+			* Time: accumulated: group_duration_s
+			* Nodes (num_ancestors)
+				* Immediate/Local nodes (num_parents)
+				* Costly nodes (num_duration_ancestors)
+				* Level of nodes (depth)
+		* How likely is this node to accrue cost:
+			* Probability: accumulated: group_duration_s
+			* Nodes (num_descendants)
+				* Immediate/Local nodes (num_children)
+				* Likely nodes (num_source_descendants)
+				* Level of nodes (depth)
+	* Those aggregations can be further combined to answer more subtle questions:
+		* Localized (compare a node-specific attribute to others; weight opposite axis):
+			* Normalize duration against probability (how expensive is this test/build in practice)
+			* Normalize probability against duration (how expensive is it to change this file in practice)
+		* Group (how do these conflate / indicate bottlenecks)
+			* Group effects w/ different choice of uniformity; answers: "how expensive is it to have this node **here**"
+- [ ] Could be helpful to do a study and see the correlation between the various metrics, eg) if they're largely the same, maybe we don't need to offer as much selection
+	- at the end of the day, it depends on the repo, right? eg) what sort of structure is present, how uniform are the probability and duration distributions
+	- maybe that'd be some interesting analysis to do on the repo as a whole?
+		- eg) oh, only 5 files have changed, maybe you should just stick to uniformity
+Opinion:
+* num_parents / num_children isn't too helpful in this analysis (outside of filtering items that are their own connected component)
+
+| Short      | Name                        | Description                                         |
+| ---------- | --------------------------- | --------------------------------------------------- |
+| d_n_g      | `node_duration_per_group_p` | Is this an expensive test?                          |
+| d_g_n      | `group_duration_per_node_p` | Is this an expensive source?                        |
+| d_g_g      | `expected_duration_s`       | Is this node structure expensive?                   |
+| num_a_p_n  | `ancestors_by_node_p`       | Is this an expensive source? (uniform d)            |
+| num_a_p_g  | `ancestors_by_group_p`      | Is this node structure expensive? (uniform d)       |
+| num_a_by_d | `ancestors_by_descendants`  | Is this an expensive node structure (uniform d & p) |
+Are we using this to find: expensive source files, expensive tests, and expensive structures? That sounds about right ... the blatant one-offs and the bottlenecks (which may be the items we can actually leverage to affect the most change).
+
 ##### Repository-Wide / Node-Aggregated Metrics
 
 | Attribute                                                           | Description                                                                                                                                                                                                                                                                                    |
