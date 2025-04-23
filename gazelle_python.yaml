@@ -177,6 +177,7 @@ manifest:
     OpenSSL.rand: pyOpenSSL
     OpenSSL.version: pyOpenSSL
     PIL: pillow
+    PIL.AvifImagePlugin: pillow
     PIL.BdfFontFile: pillow
     PIL.BlpImagePlugin: pillow
     PIL.BmpImagePlugin: pillow
@@ -1424,6 +1425,7 @@ manifest:
     fontTools.varLib.cff: fonttools
     fontTools.varLib.errors: fonttools
     fontTools.varLib.featureVars: fonttools
+    fontTools.varLib.hvar: fonttools
     fontTools.varLib.instancer: fonttools
     fontTools.varLib.instancer.featureVars: fonttools
     fontTools.varLib.instancer.names: fonttools
@@ -2048,6 +2050,8 @@ manifest:
     jupyterlab_server.workspaces_app: jupyterlab_server
     jupyterlab_server.workspaces_handler: jupyterlab_server
     jupytext: jupytext
+    jupytext.async_contentsmanager: jupytext
+    jupytext.async_pairs: jupytext
     jupytext.cell_metadata: jupytext
     jupytext.cell_reader: jupytext
     jupytext.cell_to_text: jupytext
@@ -2055,7 +2059,6 @@ manifest:
     jupytext.combine: jupytext
     jupytext.compare: jupytext
     jupytext.config: jupytext
-    jupytext.contentsmanager: jupytext
     jupytext.doxygen: jupytext
     jupytext.formats: jupytext
     jupytext.header: jupytext
@@ -2072,6 +2075,8 @@ manifest:
     jupytext.quarto: jupytext
     jupytext.reraise: jupytext
     jupytext.stringparser: jupytext
+    jupytext.sync_contentsmanager: jupytext
+    jupytext.sync_pairs: jupytext
     jupytext.version: jupytext
     jupytext_config: jupytext
     jupytext_config.jupytext_config: jupytext
@@ -2082,37 +2087,37 @@ manifest:
     linkify_it.main: linkify_it_py
     linkify_it.tlds: linkify_it_py
     linkify_it.ucre: linkify_it_py
-    markdown: Markdown
-    markdown.blockparser: Markdown
-    markdown.blockprocessors: Markdown
-    markdown.core: Markdown
-    markdown.extensions: Markdown
-    markdown.extensions.abbr: Markdown
-    markdown.extensions.admonition: Markdown
-    markdown.extensions.attr_list: Markdown
-    markdown.extensions.codehilite: Markdown
-    markdown.extensions.def_list: Markdown
-    markdown.extensions.extra: Markdown
-    markdown.extensions.fenced_code: Markdown
-    markdown.extensions.footnotes: Markdown
-    markdown.extensions.legacy_attrs: Markdown
-    markdown.extensions.legacy_em: Markdown
-    markdown.extensions.md_in_html: Markdown
-    markdown.extensions.meta: Markdown
-    markdown.extensions.nl2br: Markdown
-    markdown.extensions.sane_lists: Markdown
-    markdown.extensions.smarty: Markdown
-    markdown.extensions.tables: Markdown
-    markdown.extensions.toc: Markdown
-    markdown.extensions.wikilinks: Markdown
-    markdown.htmlparser: Markdown
-    markdown.inlinepatterns: Markdown
-    markdown.postprocessors: Markdown
-    markdown.preprocessors: Markdown
-    markdown.serializers: Markdown
-    markdown.test_tools: Markdown
-    markdown.treeprocessors: Markdown
-    markdown.util: Markdown
+    markdown: markdown
+    markdown.blockparser: markdown
+    markdown.blockprocessors: markdown
+    markdown.core: markdown
+    markdown.extensions: markdown
+    markdown.extensions.abbr: markdown
+    markdown.extensions.admonition: markdown
+    markdown.extensions.attr_list: markdown
+    markdown.extensions.codehilite: markdown
+    markdown.extensions.def_list: markdown
+    markdown.extensions.extra: markdown
+    markdown.extensions.fenced_code: markdown
+    markdown.extensions.footnotes: markdown
+    markdown.extensions.legacy_attrs: markdown
+    markdown.extensions.legacy_em: markdown
+    markdown.extensions.md_in_html: markdown
+    markdown.extensions.meta: markdown
+    markdown.extensions.nl2br: markdown
+    markdown.extensions.sane_lists: markdown
+    markdown.extensions.smarty: markdown
+    markdown.extensions.tables: markdown
+    markdown.extensions.toc: markdown
+    markdown.extensions.wikilinks: markdown
+    markdown.htmlparser: markdown
+    markdown.inlinepatterns: markdown
+    markdown.postprocessors: markdown
+    markdown.preprocessors: markdown
+    markdown.serializers: markdown
+    markdown.test_tools: markdown
+    markdown.treeprocessors: markdown
+    markdown.util: markdown
     markdown_it: markdown_it_py
     markdown_it.cli: markdown_it_py
     markdown_it.cli.parse: markdown_it_py
@@ -3592,111 +3597,115 @@ manifest:
     pandocfilters: pandocfilters
     panel: panel
     panel.auth: panel
-    panel.callbacks: panel
+    panel.chat: panel
+    panel.chat.feed: panel
+    panel.chat.icon: panel
+    panel.chat.input: panel
+    panel.chat.interface: panel
+    panel.chat.langchain: panel
+    panel.chat.message: panel
+    panel.chat.step: panel
+    panel.chat.utils: panel
     panel.command: panel
+    panel.command.bundle: panel
+    panel.command.compile: panel
+    panel.command.convert: panel
     panel.command.oauth_secret: panel
     panel.command.serve: panel
     panel.compiler: panel
     panel.config: panel
+    panel.custom: panel
     panel.depends: panel
-    panel.examples.apps.django2.manage: panel
-    panel.examples.apps.django2.project: panel
-    panel.examples.apps.django2.project.asgi: panel
-    panel.examples.apps.django2.project.routing: panel
-    panel.examples.apps.django2.project.settings: panel
-    panel.examples.apps.django2.project.urls: panel
-    panel.examples.apps.django2.sliders: panel
-    panel.examples.apps.django2.sliders.admin: panel
-    panel.examples.apps.django2.sliders.apps: panel
-    panel.examples.apps.django2.sliders.migrations: panel
-    panel.examples.apps.django2.sliders.models: panel
-    panel.examples.apps.django2.sliders.pn_app: panel
-    panel.examples.apps.django2.sliders.sinewave: panel
-    panel.examples.apps.django2.sliders.urls: panel
-    panel.examples.apps.django2.sliders.views: panel
-    panel.examples.apps.django_multi_apps.django_multi_apps: panel
-    panel.examples.apps.django_multi_apps.django_multi_apps.asgi: panel
-    panel.examples.apps.django_multi_apps.django_multi_apps.routing: panel
-    panel.examples.apps.django_multi_apps.django_multi_apps.settings: panel
-    panel.examples.apps.django_multi_apps.django_multi_apps.themes: panel
-    panel.examples.apps.django_multi_apps.django_multi_apps.urls: panel
-    panel.examples.apps.django_multi_apps.gbm: panel
-    panel.examples.apps.django_multi_apps.gbm.admin: panel
-    panel.examples.apps.django_multi_apps.gbm.apps: panel
-    panel.examples.apps.django_multi_apps.gbm.migrations: panel
-    panel.examples.apps.django_multi_apps.gbm.models: panel
-    panel.examples.apps.django_multi_apps.gbm.pn_app: panel
-    panel.examples.apps.django_multi_apps.gbm.pn_model: panel
-    panel.examples.apps.django_multi_apps.gbm.urls: panel
-    panel.examples.apps.django_multi_apps.gbm.views: panel
-    panel.examples.apps.django_multi_apps.landing: panel
-    panel.examples.apps.django_multi_apps.landing.admin: panel
-    panel.examples.apps.django_multi_apps.landing.apps: panel
-    panel.examples.apps.django_multi_apps.landing.migrations: panel
-    panel.examples.apps.django_multi_apps.landing.models: panel
-    panel.examples.apps.django_multi_apps.landing.urls: panel
-    panel.examples.apps.django_multi_apps.landing.views: panel
-    panel.examples.apps.django_multi_apps.manage: panel
-    panel.examples.apps.django_multi_apps.sliders: panel
-    panel.examples.apps.django_multi_apps.sliders.admin: panel
-    panel.examples.apps.django_multi_apps.sliders.apps: panel
-    panel.examples.apps.django_multi_apps.sliders.migrations: panel
-    panel.examples.apps.django_multi_apps.sliders.models: panel
-    panel.examples.apps.django_multi_apps.sliders.pn_app: panel
-    panel.examples.apps.django_multi_apps.sliders.pn_model: panel
-    panel.examples.apps.django_multi_apps.sliders.urls: panel
-    panel.examples.apps.django_multi_apps.sliders.views: panel
-    panel.examples.apps.django_multi_apps.stockscreener: panel
-    panel.examples.apps.django_multi_apps.stockscreener.admin: panel
-    panel.examples.apps.django_multi_apps.stockscreener.apps: panel
-    panel.examples.apps.django_multi_apps.stockscreener.migrations: panel
-    panel.examples.apps.django_multi_apps.stockscreener.models: panel
-    panel.examples.apps.django_multi_apps.stockscreener.pn_app: panel
-    panel.examples.apps.django_multi_apps.stockscreener.pn_model: panel
-    panel.examples.apps.django_multi_apps.stockscreener.pn_model_20122019: panel
-    panel.examples.apps.django_multi_apps.stockscreener.urls: panel
-    panel.examples.apps.django_multi_apps.stockscreener.views: panel
-    panel.examples.apps.django_multi_apps.stockscreener.zTrials: panel
+    panel.entry_points: panel
     panel.interact: panel
     panel.io: panel
+    panel.io.admin: panel
+    panel.io.application: panel
+    panel.io.browser: panel
+    panel.io.cache: panel
     panel.io.callbacks: panel
+    panel.io.compile: panel
+    panel.io.convert: panel
+    panel.io.datamodel: panel
+    panel.io.django: panel
+    panel.io.document: panel
     panel.io.embed: panel
+    panel.io.fastapi: panel
+    panel.io.handlers: panel
     panel.io.ipywidget: panel
+    panel.io.jupyter_executor: panel
+    panel.io.jupyter_server_extension: panel
+    panel.io.liveness: panel
+    panel.io.loading: panel
     panel.io.location: panel
+    panel.io.logging: panel
+    panel.io.mime_render: panel
     panel.io.model: panel
     panel.io.notebook: panel
+    panel.io.notifications: panel
+    panel.io.profile: panel
+    panel.io.pyodide: panel
+    panel.io.reload: panel
     panel.io.resources: panel
     panel.io.rest: panel
     panel.io.save: panel
     panel.io.server: panel
+    panel.io.session: panel
     panel.io.state: panel
+    panel.io.threads: panel
     panel.layout: panel
     panel.layout.accordion: panel
     panel.layout.base: panel
     panel.layout.card: panel
+    panel.layout.feed: panel
+    panel.layout.flex: panel
+    panel.layout.float: panel
     panel.layout.grid: panel
+    panel.layout.gridstack: panel
+    panel.layout.modal: panel
     panel.layout.spacer: panel
+    panel.layout.swipe: panel
     panel.layout.tabs: panel
     panel.links: panel
     panel.models: panel
     panel.models.ace: panel
+    panel.models.browser: panel
+    panel.models.chatarea_input: panel
     panel.models.comm_manager: panel
+    panel.models.datetime_picker: panel
+    panel.models.datetime_slider: panel
     panel.models.deckgl: panel
     panel.models.echarts: panel
     panel.models.enums: panel
+    panel.models.esm: panel
+    panel.models.feed: panel
+    panel.models.file_dropper: panel
+    panel.models.icon: panel
     panel.models.ipywidget: panel
+    panel.models.jsoneditor: panel
     panel.models.katex: panel
     panel.models.layout: panel
     panel.models.location: panel
     panel.models.markup: panel
     panel.models.mathjax: panel
+    panel.models.modal: panel
+    panel.models.perspective: panel
     panel.models.plotly: panel
+    panel.models.quill: panel
+    panel.models.reactive_html: panel
+    panel.models.speech_to_text: panel
     panel.models.state: panel
+    panel.models.tabs: panel
+    panel.models.tabulator: panel
+    panel.models.terminal: panel
+    panel.models.text_to_speech: panel
+    panel.models.time_picker: panel
+    panel.models.trend: panel
     panel.models.vega: panel
+    panel.models.vizzu: panel
     panel.models.vtk: panel
     panel.models.widgets: panel
     panel.pane: panel
-    panel.pane.ace: panel
     panel.pane.alert: panel
     panel.pane.base: panel
     panel.pane.deckgl: panel
@@ -3707,10 +3716,14 @@ manifest:
     panel.pane.ipywidget: panel
     panel.pane.markup: panel
     panel.pane.media: panel
+    panel.pane.perspective: panel
+    panel.pane.placeholder: panel
     panel.pane.plot: panel
     panel.pane.plotly: panel
     panel.pane.streamz: panel
+    panel.pane.textual: panel
     panel.pane.vega: panel
+    panel.pane.vizzu: panel
     panel.pane.vtk: panel
     panel.pane.vtk.enums: panel
     panel.pane.vtk.synchronizable_deserializer: panel
@@ -3722,25 +3735,46 @@ manifest:
     panel.template: panel
     panel.template.base: panel
     panel.template.bootstrap: panel
+    panel.template.editable: panel
+    panel.template.fast: panel
+    panel.template.fast.base: panel
+    panel.template.fast.grid: panel
+    panel.template.fast.list: panel
     panel.template.golden: panel
     panel.template.material: panel
     panel.template.react: panel
-    panel.template.theme: panel
+    panel.template.slides: panel
     panel.template.vanilla: panel
+    panel.theme: panel
+    panel.theme.base: panel
+    panel.theme.bootstrap: panel
+    panel.theme.fast: panel
+    panel.theme.material: panel
+    panel.theme.native: panel
     panel.util: panel
+    panel.util.checks: panel
+    panel.util.parameters: panel
+    panel.util.warnings: panel
     panel.viewable: panel
     panel.widgets: panel
-    panel.widgets.ace: panel
     panel.widgets.base: panel
     panel.widgets.button: panel
+    panel.widgets.codeeditor: panel
+    panel.widgets.debugger: panel
     panel.widgets.file_selector: panel
+    panel.widgets.icon: panel
     panel.widgets.indicators: panel
     panel.widgets.input: panel
     panel.widgets.misc: panel
     panel.widgets.player: panel
     panel.widgets.select: panel
     panel.widgets.slider: panel
+    panel.widgets.speech_to_text: panel
     panel.widgets.tables: panel
+    panel.widgets.terminal: panel
+    panel.widgets.text_to_speech: panel
+    panel.widgets.texteditor: panel
+    panel.widgets.widget: panel
     param: param
     param.depends: param
     param.display: param
@@ -4161,10 +4195,6 @@ manifest:
     pycparser.ply.ygen: pycparser
     pycparser.plyparser: pycparser
     pycparser.yacctab: pycparser
-    pyct: pyct
-    pyct.build: pyct
-    pyct.cmd: pyct
-    pyct.report: pyct
     pyflakes: pyflakes
     pyflakes.api: pyflakes
     pyflakes.checker: pyflakes
@@ -4508,6 +4538,8 @@ manifest:
     pyparsing.helpers: pyparsing
     pyparsing.results: pyparsing
     pyparsing.testing: pyparsing
+    pyparsing.tools: pyparsing
+    pyparsing.tools.cvt_pyparsing_pep8_names: pyparsing
     pyparsing.unicode: pyparsing
     pyparsing.util: pyparsing
     pytest: pytest
@@ -5478,4 +5510,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: 370a4650f163a2beaa524817c5f6096468e48d764cf7045165ea05f8fa9d0258
+integrity: 9b0c83bbee72f12654cf9704ab6d63a1e6e44caa41890d4702bd192ef0e8ecf7
