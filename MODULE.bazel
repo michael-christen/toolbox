@@ -219,10 +219,9 @@ bazel_dep(name = "freertos", version = "10.5.1.bcr.2")
 bazel_dep(name = "nanopb", repo_name = "com_github_nanopb_nanopb")
 bazel_dep(name = "pico-sdk", version = "2.0.0")
 bazel_dep(name = "pigweed")
-
 bazel_dep(name = "platforms", version = "0.0.10")
-# bazel_dep(name = "pw_toolchain")
-# bazel_dep(name = "rules_cc")
+bazel_dep(name = "pw_toolchain")
+bazel_dep(name = "rules_cc")
 
 bazel_dep(name = "hedron_compile_commands", dev_dependency = True)
 
@@ -283,32 +282,34 @@ git_override(
 
 git_override(
     module_name = "pigweed",
-    commit = "c00e9e430addee0c8add16c32eb6d8ab94189b9e",
-    remote = "https://pigweed.googlesource.com/pigweed/pigweed.git",
+    # ROLL: Warning: this entry is automatically updated.
+    # ROLL: Last updated 2024-08-14.
+    # ROLL: By https://cr-buildbucket.appspot.com/build/8739669590315800497.
+    commit = "c9d5bef2f82612fa8d4be0d53b614bbc02bab62b",
+    remote = "https://pigweed.googlesource.com/pigweed/pigweed",
 )
 
-# XXX: needed?
-# git_override(
-#     module_name = "pw_toolchain",
-#     # ROLL: Warning: this entry is automatically updated.
-#     # ROLL: Last updated 2024-08-14.
-#     # ROLL: By https://cr-buildbucket.appspot.com/build/8739669590315800497.
-#     commit = "c9d5bef2f82612fa8d4be0d53b614bbc02bab62b",
-#     remote = "https://pigweed.googlesource.com/pigweed/pigweed",
-#     strip_prefix = "pw_toolchain_bazel",
-# )
-# 
-# # TODO: https://pwbug.dev/258836641 - Pre-release version needed for the Pico
-# # SDK. Remove this once rules_cc 0.10.0 is released and the Pico SDK
-# # MODULE.bazel declares its dependency on it.
-# archive_override(
-#     module_name = "rules_cc",
-#     integrity = "sha256-NddP6xi6LzsIHT8bMSVJ2NtoURbN+l3xpjvmIgB6aSg=",
-#     strip_prefix = "rules_cc-1acf5213b6170f1f0133e273cb85ede0e732048f",
-#     urls = [
-#         "https://github.com/bazelbuild/rules_cc/archive/1acf5213b6170f1f0133e273cb85ede0e732048f.zip",
-#     ],
-# )
+git_override(
+    module_name = "pw_toolchain",
+    # ROLL: Warning: this entry is automatically updated.
+    # ROLL: Last updated 2024-08-14.
+    # ROLL: By https://cr-buildbucket.appspot.com/build/8739669590315800497.
+    commit = "c9d5bef2f82612fa8d4be0d53b614bbc02bab62b",
+    remote = "https://pigweed.googlesource.com/pigweed/pigweed",
+    strip_prefix = "pw_toolchain_bazel",
+)
+
+# TODO: https://pwbug.dev/258836641 - Pre-release version needed for the Pico
+# SDK. Remove this once rules_cc 0.10.0 is released and the Pico SDK
+# MODULE.bazel declares its dependency on it.
+archive_override(
+    module_name = "rules_cc",
+    integrity = "sha256-NddP6xi6LzsIHT8bMSVJ2NtoURbN+l3xpjvmIgB6aSg=",
+    strip_prefix = "rules_cc-1acf5213b6170f1f0133e273cb85ede0e732048f",
+    urls = [
+        "https://github.com/bazelbuild/rules_cc/archive/1acf5213b6170f1f0133e273cb85ede0e732048f.zip",
+    ],
+)
 
 # Configure and register the toolchain.
 llvm = use_extension("@toolchains_llvm//toolchain/extensions:llvm.bzl", "llvm")
