@@ -11,7 +11,29 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - run: echo "The job was triggered by a ${{ github.event_name }} event, running on ${{ runner.os }}, ${{ github.ref }} @ ${{ github.repository }}."
+      - name: Check Disk Usage
+        if: always()
+        run: |
+          echo "Checking disk usage..."
+          df -h
+          echo "Disk usage by directory (sorted by size):"
+          du -h / --max-depth=1 2>/dev/null | sort -hr | head -n 20
+          sudo du /usr/ -hx -d 4 --threshold=1G | sort -hr | head
+          sudo du /home/ -hx -d 4 --threshold=1G | sort -hr | head
+          sudo du /opt/ -hx -d 4 --threshold=1G | sort -hr | head
+          sudo du /mnt/ -hx -d 4 --threshold=1G | sort -hr | head
       - uses: actions/checkout@v4
+      - name: Check Disk Usage
+        if: always()
+        run: |
+          echo "Checking disk usage..."
+          df -h
+          echo "Disk usage by directory (sorted by size):"
+          du -h / --max-depth=1 2>/dev/null | sort -hr | head -n 20
+          sudo du /usr/ -hx -d 4 --threshold=1G | sort -hr | head
+          sudo du /home/ -hx -d 4 --threshold=1G | sort -hr | head
+          sudo du /opt/ -hx -d 4 --threshold=1G | sort -hr | head
+          sudo du /mnt/ -hx -d 4 --threshold=1G | sort -hr | head
       - uses: ./.github/actions/bazel-setup
         with:
           buildbuddy_api_key: ${{ secrets.BUILDBUDDY_API_KEY }}
@@ -20,12 +42,45 @@ jobs:
           # Needed for clang-format / llvm_toolchain, otherwise libtinfo.so.5
           # is not found
           sudo apt-get install -y libncurses5
+      - name: Check Disk Usage
+        if: always()
+        run: |
+          echo "Checking disk usage..."
+          df -h
+          echo "Disk usage by directory (sorted by size):"
+          du -h / --max-depth=1 2>/dev/null | sort -hr | head -n 20
+          sudo du /usr/ -hx -d 4 --threshold=1G | sort -hr | head
+          sudo du /home/ -hx -d 4 --threshold=1G | sort -hr | head
+          sudo du /opt/ -hx -d 4 --threshold=1G | sort -hr | head
+          sudo du /mnt/ -hx -d 4 --threshold=1G | sort -hr | head
       - name: Lint
         run: |
           ./lint.sh --mode check
+      - name: Check Disk Usage
+        if: always()
+        run: |
+          echo "Checking disk usage..."
+          df -h
+          echo "Disk usage by directory (sorted by size):"
+          du -h / --max-depth=1 2>/dev/null | sort -hr | head -n 20
+          sudo du /usr/ -hx -d 4 --threshold=1G | sort -hr | head
+          sudo du /home/ -hx -d 4 --threshold=1G | sort -hr | head
+          sudo du /opt/ -hx -d 4 --threshold=1G | sort -hr | head
+          sudo du /mnt/ -hx -d 4 --threshold=1G | sort -hr | head
       - name: Build
         run: |
           bazel build //...
+      - name: Check Disk Usage
+        if: always()
+        run: |
+          echo "Checking disk usage..."
+          df -h
+          echo "Disk usage by directory (sorted by size):"
+          du -h / --max-depth=1 2>/dev/null | sort -hr | head -n 20
+          sudo du /usr/ -hx -d 4 --threshold=1G | sort -hr | head
+          sudo du /home/ -hx -d 4 --threshold=1G | sort -hr | head
+          sudo du /opt/ -hx -d 4 --threshold=1G | sort -hr | head
+          sudo du /mnt/ -hx -d 4 --threshold=1G | sort -hr | head
       - name: Test
         run: |
           bazel test //... --output_groups=-mypy
@@ -42,12 +97,10 @@ jobs:
           df -h
           echo "Disk usage by directory (sorted by size):"
           du -h / --max-depth=1 2>/dev/null | sort -hr | head -n 20
-      - name: Check disk space
-        if: always()
-        run: |
-          sudo dpkg-query -Wf '${Installed-Size}\t${Package}\n' | sort -nr | head
-          df . -h
           sudo du /usr/ -hx -d 4 --threshold=1G | sort -hr | head
+          sudo du /home/ -hx -d 4 --threshold=1G | sort -hr | head
+          sudo du /opt/ -hx -d 4 --threshold=1G | sort -hr | head
+          sudo du /mnt/ -hx -d 4 --threshold=1G | sort -hr | head
       - name: Coverage
         run: |
           # Avoid enormous tests; can find them with: `bazel query 'attr(size, enormous, //...)'`
