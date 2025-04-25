@@ -11,13 +11,6 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - run: echo "The job was triggered by a ${{ github.event_name }} event, running on ${{ runner.os }}, ${{ github.ref }} @ ${{ github.repository }}."
-      - name: Check Disk Usage
-        if: always()
-        # echo "Disk usage by directory (sorted by size):"
-        # du -h / --max-depth=1 2>/dev/null | sort -hr | head -n 20
-        # sudo du /usr/ -hx -d 4 --threshold=1G | sort -hr | head
-        run: |
-          df -h
       - uses: actions/checkout@v4
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@v1.3.1
@@ -25,9 +18,6 @@ jobs:
           # this might remove tools that are actually needed,
           # if set to "true" but frees about 6 GB
           tool-cache: false
-          
-          # all of these default to true, but feel free to set to
-          # "false" if necessary for your workflow
           # Data on sizes from this run on 2025-04-25:
           # https://github.com/michael-christen/toolbox/actions/runs/14666765877/job/41163363493
           # 8.21 GB
@@ -43,10 +33,6 @@ jobs:
           docker-images: true
           # 4.0 GB
           swap-storage: true
-      - name: Check Disk Usage
-        if: always()
-        run: |
-          df -h
       - uses: ./.github/actions/bazel-setup
         with:
           buildbuddy_api_key: ${{ secrets.BUILDBUDDY_API_KEY }}
@@ -55,24 +41,12 @@ jobs:
           # Needed for clang-format / llvm_toolchain, otherwise libtinfo.so.5
           # is not found
           sudo apt-get install -y libncurses5
-      - name: Check Disk Usage
-        if: always()
-        run: |
-          df -h
       - name: Lint
         run: |
           ./lint.sh --mode check
-      - name: Check Disk Usage
-        if: always()
-        run: |
-          df -h
       - name: Build
         run: |
           bazel build //...
-      - name: Check Disk Usage
-        if: always()
-        run: |
-          df -h
       - name: Test
         run: |
           bazel test //... --output_groups=-mypy
@@ -82,17 +56,9 @@ jobs:
           # - Should we add instrumentation_filter to .bazelrc to reduce
           # analysis cache thrashing?
           # Could leave the above to buildbuddy ...
-      - name: Check Disk Usage
-        if: always()
-        run: |
-          df -h
       - name: Coverage
         run: |
           bazel coverage //... --combined_report=lcov --instrument_test_targets --instrumentation_filter="^//" --test_tag_filters=-skip-large-tests --output_groups=-mypy
-      - name: Check Disk Usage
-        if: always()
-        run: |
-          df -h
       - name: Setup LCOV
         uses: hrishikesh-kadam/setup-lcov@v1
       - name: Coverage Report Generation
@@ -124,4 +90,7 @@ jobs:
           verbose: true
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage.dat
+      - name: Check Disk Usage
+        run: |
+          df -h
       - run: echo "Status is ${{ job.status }}."
