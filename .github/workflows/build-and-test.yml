@@ -35,10 +35,6 @@ jobs:
           # - Should we add instrumentation_filter to .bazelrc to reduce
           # analysis cache thrashing?
           # Could leave the above to buildbuddy ...
-      - name: Coverage
-        run: |
-          # Avoid enormous tests; can find them with: `bazel query 'attr(size, enormous, //...)'`
-          bazel coverage //... --combined_report=lcov --instrument_test_targets --instrumentation_filter="^//" --test_size_filters=-enormous --output_groups=-mypy
       - name: Check Disk Usage
         if: always()
         run: |
@@ -52,6 +48,10 @@ jobs:
           sudo dpkg-query -Wf '${Installed-Size}\t${Package}\n' | sort -nr | head
           df . -h
           sudo du /usr/ -hx -d 4 --threshold=1G | sort -hr | head
+      - name: Coverage
+        run: |
+          # Avoid enormous tests; can find them with: `bazel query 'attr(size, enormous, //...)'`
+          bazel coverage //... --combined_report=lcov --instrument_test_targets --instrumentation_filter="^//" --test_size_filters=-enormous --output_groups=-mypy
       - name: Setup LCOV
         uses: hrishikesh-kadam/setup-lcov@v1
       - name: Coverage Report Generation
