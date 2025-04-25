@@ -34,7 +34,7 @@ pip_compile(
         # Don't want to type-check requirements building
         "no-mypy",
         # Avoid in flake detection
-        "skip-flakiness",
+        "skip-large-tests",
     ],
 )
 

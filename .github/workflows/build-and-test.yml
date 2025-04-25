@@ -88,8 +88,7 @@ jobs:
           df -h
       - name: Coverage
         run: |
-          # Avoid enormous tests; can find them with: `bazel query 'attr(size, enormous, //...)'`
-          bazel coverage //... --combined_report=lcov --instrument_test_targets --instrumentation_filter="^//" --test_size_filters=-enormous --output_groups=-mypy
+          bazel coverage //... --combined_report=lcov --instrument_test_targets --instrumentation_filter="^//" --test_tag_filters=-skip-large-tests --output_groups=-mypy
       - name: Check Disk Usage
         if: always()
         run: |

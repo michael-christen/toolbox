@@ -12,8 +12,8 @@ actions:
       # TODO(#209): Don't require installing this
       - run: 'sudo apt-get update && sudo apt-get install -y graphviz graphviz-dev'
       - run: 'bazel build //...'
-      - run: 'bazel test //...'
-      - run: 'bazel coverage //... --combined_report=lcov --instrument_test_targets --instrumentation_filter="^//" --test_size_filters=-enormous'
+      - run: 'bazel test //... --output_groups=-mypy'
+      - run: 'bazel coverage //... --combined_report=lcov --instrument_test_targets --instrumentation_filter="^//" --test_tag_filters=-skip-large-tests --output_groups=-mypy'
     resource_requests:
       # The default 20GB was too small
       disk: 40GB
