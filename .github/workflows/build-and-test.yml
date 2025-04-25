@@ -13,15 +13,11 @@ jobs:
       - run: echo "The job was triggered by a ${{ github.event_name }} event, running on ${{ runner.os }}, ${{ github.ref }} @ ${{ github.repository }}."
       - name: Check Disk Usage
         if: always()
+        # echo "Disk usage by directory (sorted by size):"
+        # du -h / --max-depth=1 2>/dev/null | sort -hr | head -n 20
+        # sudo du /usr/ -hx -d 4 --threshold=1G | sort -hr | head
         run: |
-          echo "Checking disk usage..."
           df -h
-          echo "Disk usage by directory (sorted by size):"
-          du -h / --max-depth=1 2>/dev/null | sort -hr | head -n 20
-          sudo du /usr/ -hx -d 4 --threshold=1G | sort -hr | head
-          sudo du /home/ -hx -d 4 --threshold=1G | sort -hr | head
-          sudo du /opt/ -hx -d 4 --threshold=1G | sort -hr | head
-          sudo du /mnt/ -hx -d 4 --threshold=1G | sort -hr | head
       - uses: actions/checkout@v4
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@main
@@ -41,14 +37,7 @@ jobs:
       - name: Check Disk Usage
         if: always()
         run: |
-          echo "Checking disk usage..."
           df -h
-          echo "Disk usage by directory (sorted by size):"
-          du -h / --max-depth=1 2>/dev/null | sort -hr | head -n 20
-          sudo du /usr/ -hx -d 4 --threshold=1G | sort -hr | head
-          sudo du /home/ -hx -d 4 --threshold=1G | sort -hr | head
-          sudo du /opt/ -hx -d 4 --threshold=1G | sort -hr | head
-          sudo du /mnt/ -hx -d 4 --threshold=1G | sort -hr | head
       - uses: ./.github/actions/bazel-setup
         with:
           buildbuddy_api_key: ${{ secrets.BUILDBUDDY_API_KEY }}
@@ -60,42 +49,21 @@ jobs:
       - name: Check Disk Usage
         if: always()
         run: |
-          echo "Checking disk usage..."
           df -h
-          echo "Disk usage by directory (sorted by size):"
-          du -h / --max-depth=1 2>/dev/null | sort -hr | head -n 20
-          sudo du /usr/ -hx -d 4 --threshold=1G | sort -hr | head
-          sudo du /home/ -hx -d 4 --threshold=1G | sort -hr | head
-          sudo du /opt/ -hx -d 4 --threshold=1G | sort -hr | head
-          sudo du /mnt/ -hx -d 4 --threshold=1G | sort -hr | head
       - name: Lint
         run: |
           ./lint.sh --mode check
       - name: Check Disk Usage
         if: always()
         run: |
-          echo "Checking disk usage..."
           df -h
-          echo "Disk usage by directory (sorted by size):"
-          du -h / --max-depth=1 2>/dev/null | sort -hr | head -n 20
-          sudo du /usr/ -hx -d 4 --threshold=1G | sort -hr | head
-          sudo du /home/ -hx -d 4 --threshold=1G | sort -hr | head
-          sudo du /opt/ -hx -d 4 --threshold=1G | sort -hr | head
-          sudo du /mnt/ -hx -d 4 --threshold=1G | sort -hr | head
       - name: Build
         run: |
           bazel build //...
       - name: Check Disk Usage
         if: always()
         run: |
-          echo "Checking disk usage..."
           df -h
-          echo "Disk usage by directory (sorted by size):"
-          du -h / --max-depth=1 2>/dev/null | sort -hr | head -n 20
-          sudo du /usr/ -hx -d 4 --threshold=1G | sort -hr | head
-          sudo du /home/ -hx -d 4 --threshold=1G | sort -hr | head
-          sudo du /opt/ -hx -d 4 --threshold=1G | sort -hr | head
-          sudo du /mnt/ -hx -d 4 --threshold=1G | sort -hr | head
       - name: Test
         run: |
           bazel test //... --output_groups=-mypy
@@ -108,18 +76,15 @@ jobs:
       - name: Check Disk Usage
         if: always()
         run: |
-          echo "Checking disk usage..."
           df -h
-          echo "Disk usage by directory (sorted by size):"
-          du -h / --max-depth=1 2>/dev/null | sort -hr | head -n 20
-          sudo du /usr/ -hx -d 4 --threshold=1G | sort -hr | head
-          sudo du /home/ -hx -d 4 --threshold=1G | sort -hr | head
-          sudo du /opt/ -hx -d 4 --threshold=1G | sort -hr | head
-          sudo du /mnt/ -hx -d 4 --threshold=1G | sort -hr | head
       - name: Coverage
         run: |
           # Avoid enormous tests; can find them with: `bazel query 'attr(size, enormous, //...)'`
           bazel coverage //... --combined_report=lcov --instrument_test_targets --instrumentation_filter="^//" --test_size_filters=-enormous --output_groups=-mypy
+      - name: Check Disk Usage
+        if: always()
+        run: |
+          df -h
       - name: Setup LCOV
         uses: hrishikesh-kadam/setup-lcov@v1
       - name: Coverage Report Generation
