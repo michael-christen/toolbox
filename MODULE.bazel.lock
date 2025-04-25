@@ -705,12 +705,41 @@
         "bzlTransitiveDigest": "NW3RPyX7AzbM5n6W9Lq3C8nq6+zHc2Gpdb/9qA/EaBQ=",
         "usagesDigest": "BUNRFu5PJwV+654qjCEMm35j532aVifdF+KS/2ScG1k=",
         "recordedFileInputs": {
-          "@@//pnpm-lock.yaml": "1baa68e303de121e341b61ae739de66d66ebfb669bb21471a1142c348b4d4c98",
+          "@@//pnpm-lock.yaml": "b08e12820845d0cc390ebf8fbfff6911f3f65f2d5c2e6912ee3959e406b938f0",
           "@@aspect_bazel_lib~~toolchains~yq_linux_amd64//yq": "042f7462ec8378f8b0d3bac85d1b1a063b63beef5d8e3826bb2377294116ae90"
         },
         "recordedDirentsInputs": {},
         "envVariables": {},
         "generatedRepoSpecs": {
+          "npm__fsevents__2.3.3__links": {
+            "bzlFile": "@@aspect_rules_js~//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "package": "fsevents",
+              "version": "2.3.3",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {},
+              "deps": {},
+              "transitive_closure": {
+                "fsevents": [
+                  "2.3.3"
+                ]
+              },
+              "lifecycle_build_target": true,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [
+                "no-sandbox"
+              ],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
+            }
+          },
           "npm__prettier__3.2.5": {
             "bzlFile": "@@aspect_rules_js~//npm/private:npm_import.bzl",
             "ruleClassName": "npm_import_rule",
@@ -738,6 +767,71 @@
               "extra_build_content": "",
               "generate_bzl_library_targets": false,
               "extract_full_archive": false
+            }
+          },
+          "npm__fsevents__2.3.3": {
+            "bzlFile": "@@aspect_rules_js~//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "package": "fsevents",
+              "version": "2.3.3",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {},
+              "integrity": "sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==",
+              "url": "https://registry.npmjs.org/fsevents/-/fsevents-2.3.3.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [
+                "preinstall",
+                "install",
+                "postinstall"
+              ],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false,
+              "extract_full_archive": false
+            }
+          },
+          "npm__pyright__1.1.400__links": {
+            "bzlFile": "@@aspect_rules_js~//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_links",
+            "attributes": {
+              "package": "pyright",
+              "version": "1.1.400",
+              "dev": true,
+              "root_package": "",
+              "link_packages": {
+                "": [
+                  "pyright"
+                ]
+              },
+              "deps": {
+                "fsevents": "2.3.3"
+              },
+              "transitive_closure": {
+                "fsevents": [
+                  "2.3.3"
+                ],
+                "pyright": [
+                  "1.1.400"
+                ]
+              },
+              "lifecycle_build_target": false,
+              "lifecycle_hooks_env": [],
+              "lifecycle_hooks_execution_requirements": [],
+              "lifecycle_hooks_use_default_shell_env": false,
+              "bins": {},
+              "npm_translate_lock_repo": "npm",
+              "package_visibility": [
+                "//visibility:public"
+              ],
+              "replace_package": ""
             }
           },
           "npm": {
@@ -821,6 +915,35 @@
                 "//visibility:public"
               ],
               "replace_package": ""
+            }
+          },
+          "npm__pyright__1.1.400": {
+            "bzlFile": "@@aspect_rules_js~//npm/private:npm_import.bzl",
+            "ruleClassName": "npm_import_rule",
+            "attributes": {
+              "package": "pyright",
+              "version": "1.1.400",
+              "root_package": "",
+              "link_workspace": "",
+              "link_packages": {
+                "": [
+                  "pyright"
+                ]
+              },
+              "integrity": "sha512-e0NFMPWhMvPn4siTAN6MsWZ6S/ePydUp1BOXbkh+8I+H+/KulnBb+2ceHNkI32nxZWalQxfUMNoGCHdGMXsmUA==",
+              "url": "https://registry.npmjs.org/pyright/-/pyright-1.1.400.tgz",
+              "commit": "",
+              "patch_args": [],
+              "patches": [],
+              "custom_postinstall": "",
+              "npm_auth": "",
+              "npm_auth_basic": "",
+              "npm_auth_username": "",
+              "npm_auth_password": "",
+              "lifecycle_hooks": [],
+              "extra_build_content": "",
+              "generate_bzl_library_targets": false,
+              "extract_full_archive": false
             }
           }
         },
