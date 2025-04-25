@@ -28,11 +28,20 @@ jobs:
           
           # all of these default to true, but feel free to set to
           # "false" if necessary for your workflow
+          # Data on sizes from this run on 2025-04-25:
+          # https://github.com/michael-christen/toolbox/actions/runs/14666765877/job/41163363493
+          # 8.21 GB
           android: true
+          # 1.6 GB
           dotnet: true
+          # 6.2 GB
           haskell: true
-          large-packages: true
+          # 4.9 GB
+          # But ... It takes about 120s to clean, so setting false
+          large-packages: false
+          # 2.5 GB
           docker-images: true
+          # 4.0 GB
           swap-storage: true
       - name: Check Disk Usage
         if: always()
