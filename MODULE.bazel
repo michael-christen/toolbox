@@ -22,7 +22,8 @@ bazel_dep(name = "aspect_rules_py", version = "1.0.0")
 
 # Minimum version needs:
 # feat: add interpreter_version_info to py_runtime by @mattem in #1671
-bazel_dep(name = "rules_python", version = "0.34.0", dev_dependency = True)
+bazel_dep(name = "rules_python", version = "1.3.0")
+bazel_dep(name = "rules_python_gazelle_plugin", version = "1.3.0")
 
 python = use_extension("@rules_python//python/extensions:python.bzl", "python")
 
