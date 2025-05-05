@@ -22,7 +22,6 @@ from typing import BinaryIO
 
 import tabulate
 
-from third_party.bazel.proto import build_event_stream_pb2
 from third_party.delimited_protobuf import delimited_protobuf
 
 
