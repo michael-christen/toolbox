@@ -320,3 +320,8 @@ llvm.toolchain(
     },
 )
 use_repo(llvm, "llvm_toolchain", "llvm_toolchain_llvm")
+
+# gazelle_cc
+######################################
+# bazel_dep(name = "gazelle", version = "0.42.0")
+bazel_dep(name = "gazelle_cc", version = "0.1.0") # This extension, use the latest version

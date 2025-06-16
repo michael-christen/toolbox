@@ -87,6 +87,7 @@ gazelle_binary(
         # Any languages that depend on the proto plugin must come after it
         "@rules_python_gazelle_plugin//python:python",  # Use gazelle from rules_python
         "@build_stack_rules_proto//language/protobuf",  # Protobuf language generation
+        "@gazelle_cc//language/cc",  # Use gazell_cc
         # TODO: Add buf suppport
         # "@rules_buf//gazelle/buf:buf",  # Generates buf lint and buf breaking detection rules
     ],
