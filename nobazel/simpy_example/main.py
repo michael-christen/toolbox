@@ -1,0 +1,201 @@
+from __future__ import annotations
+import dataclasses
+
+import simpy
+import time
+
+
+def clock(env, name, tick):
+    while True:
+        print(name, env.now, tick)
+        yield env.timeout(tick)
+
+
+def clock_main():
+    env = simpy.Environment()
+    fast_proc = env.process(clock(env, 'fast', 0.5))
+    slow_proc = env.process(clock(env, 'slow', 1))
+    env.run(until=2)
+
+
+def car(env):
+    while True:
+        print('Start parking at %d' % env.now)
+        parking_duration = 5
+        yield env.timeout(parking_duration)
+
+        print('Start driving at %d' % env.now)
+        trip_duration = 2
+        yield env.timeout(trip_duration)
+
+
+def car_main():
+    env = simpy.Environment()
+    env.process(car(env))
+    env.run(until=15)
+
+
+class Car(object):
+    def __init__(self, env):
+        self.env = env
+        self.action = env.process(self.run())
+
+    def run(self):
+        while True:
+            print('Start parking and charging at %d' % self.env.now)
+            charge_duration = 5
+            # We may get interrupted while charging the battery
+            try:
+                yield self.env.process(self.charge(charge_duration))
+            except simpy.Interrupt:
+                # When we received an interrupt, we stop charging and
+                # switch to the "driving" state
+                print('Was interrupted. Hope, the battery is full enough ...')
+
+            print('Start driving at %d' % self.env.now)
+            trip_duration = 2
+            try:
+                yield self.env.timeout(trip_duration)
+            except simpy.Interrupt:
+                print('trip was interrupted')
+
+    def charge(self, duration):
+        yield self.env.timeout(duration)
+
+
+def driver(env, car):
+    yield env.timeout(6)
+    car.action.interrupt()
+
+
+def car_class_main():
+    env = simpy.Environment()
+    car = Car(env)
+    env.process(driver(env, car))
+    env.run(until=15)
+
+def car(env, name, bcs, driving_time, charge_duration):
+    # Simulate driving to the BCS
+    yield env.timeout(driving_time)
+
+    # Request one of its charging spots
+    print('%s arriving at %d' % (name, env.now))
+    with bcs.request() as req:
+        yield req
+
+        # Charge the battery
+        print('%s starting to charge at %s' % (name, env.now))
+        yield env.timeout(charge_duration)
+        print('%s leaving the bcs at %s' % (name, env.now))
+
+def car_resource_main():
+
+    env = simpy.Environment()
+    bcs = simpy.Resource(env, capacity=2)
+    for i in range(4):
+        env.process(car(env, 'Car %d' % i, bcs, i*2, 5))
+    env.run()
+
+
+THERMOSTAT_PERIOD = 1
+
+@dataclasses.dataclass
+class ThermalObject:
+    thermal_mass: float
+    temperature_c: float
+    current_thermal_power_in_w: float
+    last_change_in_power_t: float
+
+    def update_power(self, now_t: float, new_power_w: float) -> None:
+        dt = now_t - self.last_change_in_power_t
+        thermal_energy = dt * self.current_thermal_power_in_w
+        temperature_change_c = thermal_energy / self.thermal_mass
+        # TODO(XXX): As you get colder or hotter, it will be harder and harder
+        # to actually apply this power into the system (eg, there are no
+        # perfect transducers of energy into temperature)
+        self.temperature_c += temperature_change_c
+        self.current_thermal_power_in_w = new_power_w
+        self.last_change_in_power_t = now_t
+
+    def get_temperature_c(self, now_t: float) -> float:
+        self.update_power(now_t=now_t,
+                          new_power_w=self.current_thermal_power_in_w)
+        return self.temperature_c
+
+
+@dataclasses.dataclass
+class ThermalContainer:
+    thermal_object: ThermalObject
+    power_combiner: dict[str, float]
+
+    def apply_power(self, now_t: float, name: str, power_w: float) -> None:
+        self.power_combiner[name] = power_w
+        total_power = sum(self.power_combiner.values())
+        self.thermal_object.update_power(now_t=now_t, new_power_w=total_power)
+
+
+def thermostat(env, setpoint_c: float, hysteresis_c: float, container: ThermalContainer):
+    while True:
+        yield env.timeout(THERMOSTAT_PERIOD)
+        temp_c = container.thermal_object.get_temperature_c(env.now)
+        print(f'TEMPERATURE: {temp_c}')
+        if (temp_c >= (setpoint_c + hysteresis_c)):
+            hvac_power_w = -1.0
+        elif temp_c <= (setpoint_c - hysteresis_c):
+            hvac_power_w = +1.0
+        else:
+            hvac_power_w = 0.0
+        container.apply_power(now_t=env.now, name='HVAC', power_w=hvac_power_w)
+
+
+def temperature_transducer(env, name: str, container: ThermalContainer):
+    power_w = 4
+    container.apply_power(now_t=env.now, name=name, power_w=power_w)
+
+
+def thermostat_main():
+    """Model a thermostat with control of a sensor and a HVAC unit.
+
+    There are other "actors" at play that can modify the temperature of the
+    sensor in addition to the HVAC unit.
+
+    The thermostat will work to get its sensor to the setpoint as desired.
+    """
+    SIM_DURATION = 30
+    INITIAL_TIME = 0
+
+    container = ThermalContainer(
+        thermal_object=ThermalObject(
+            thermal_mass=1,
+            temperature_c=0,
+            current_thermal_power_in_w=0,
+            last_change_in_power_t=INITIAL_TIME,
+        ),
+        # Each transducer can affect the power combiner
+        power_combiner={
+            'bias': 0.5,
+        },
+    )
+
+    env = simpy.Environment(initial_time=INITIAL_TIME)
+
+    t = env.process(thermostat(env, setpoint_c=20, hysteresis_c=1.0,
+                               container=container))
+
+    env.run(until=SIM_DURATION)
+
+
+def main():
+    # car_main()
+    # car_class_main()
+    # car_resource_main()
+    start = time.monotonic_ns()
+    thermostat_main()
+    end = time.monotonic_ns()
+    duration_ns = end - start
+    duration_us = duration_ns / 1e3
+    print(f'Took: {duration_us:.3f}(us)')
+
+
+if __name__ == '__main__':
+    main()
