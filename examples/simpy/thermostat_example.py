@@ -1,3 +1,5 @@
+"""Show a thermostat controlling a system.
+"""
 from __future__ import annotations
 import dataclasses
 
