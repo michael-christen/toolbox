@@ -1,3 +1,7 @@
+"""Follow the tutorial at simpy.
+
+https://simpy.readthedocs.io/en/latest/simpy_intro/index.html
+"""
 from __future__ import annotations
 import dataclasses
 
