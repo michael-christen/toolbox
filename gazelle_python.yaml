@@ -4829,6 +4829,17 @@ manifest:
     setuptools.warnings: setuptools
     setuptools.wheel: setuptools
     setuptools.windows_support: setuptools
+    simpy: simpy
+    simpy.core: simpy
+    simpy.events: simpy
+    simpy.exceptions: simpy
+    simpy.resources: simpy
+    simpy.resources.base: simpy
+    simpy.resources.container: simpy
+    simpy.resources.resource: simpy
+    simpy.resources.store: simpy
+    simpy.rt: simpy
+    simpy.util: simpy
     six: six
     sniffio: sniffio
     snowballstemmer: snowballstemmer
@@ -5510,4 +5521,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: f6839f19576a78d5a28e4b98b161b132b22d815ea218ca72368d84bfaf7347fd
+integrity: 056008c057ab76e83be560a3b5a70614f12f9a0fad53944c3ebd539466a17a08

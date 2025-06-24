@@ -1792,6 +1792,10 @@ setuptools==70.3.0 \
     #   jupyterlab
     #   sphinx-togglebutton
     #   tofupilot
+simpy==4.1.1 \
+    --hash=sha256:06d0750a7884b11e0e8e20ce0bc7c6d4ed5f1743d456695340d13fdff95001a6 \
+    --hash=sha256:7c5ae380240fd2238671160e4830956f8055830a8317edf5c05e495b3823cd88
+    # via -r requirements.in
 six==1.17.0 \
     --hash=sha256:4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274 \
     --hash=sha256:ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81
