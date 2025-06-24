@@ -36,6 +36,8 @@ PYTHON_TARGETS = [
     "//examples/basic:hello_py_library",
     "//examples/basic:main",
     "//examples/basic:server",
+    "//examples/simpy:car_tutorial",
+    "//examples/simpy:thermostat_example",
     "//examples/tofupilot:tofupilot_example",
     "//hw_drivers/lis3mdl:lis3mdl_py_library",
     "//hw_services/sbr:sbr_grpc_py_library",
