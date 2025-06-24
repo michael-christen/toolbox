@@ -40,6 +40,8 @@ protobuf
 pytest<8.3.4
 # https://github.com/bazelbuild/bazel/issues/4327
 setuptools<71
+# Process-based Discrete Event Simulation
+simpy>=4.1.1,<5
 # Documentation
 sphinx
 # - python code (parse, not executing)
