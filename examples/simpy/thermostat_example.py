@@ -1,13 +1,14 @@
-"""Show a thermostat controlling a system.
-"""
-from __future__ import annotations
-import dataclasses
+"""Show a thermostat controlling a system."""
 
-import simpy
+from __future__ import annotations
+
+import dataclasses
 import time
 
+import simpy
 
 THERMOSTAT_PERIOD = 1
+
 
 @dataclasses.dataclass
 class ThermalObject:
@@ -28,8 +29,9 @@ class ThermalObject:
         self.last_change_in_power_t = now_t
 
     def get_temperature_c(self, now_t: float) -> float:
-        self.update_power(now_t=now_t,
-                          new_power_w=self.current_thermal_power_in_w)
+        self.update_power(
+            now_t=now_t, new_power_w=self.current_thermal_power_in_w
+        )
         return self.temperature_c
 
 
@@ -44,18 +46,20 @@ class ThermalContainer:
         self.thermal_object.update_power(now_t=now_t, new_power_w=total_power)
 
 
-def thermostat(env, setpoint_c: float, hysteresis_c: float, container: ThermalContainer):
+def thermostat(
+    env, setpoint_c: float, hysteresis_c: float, container: ThermalContainer
+):
     while True:
         yield env.timeout(THERMOSTAT_PERIOD)
         temp_c = container.thermal_object.get_temperature_c(env.now)
-        print(f'TEMPERATURE: {temp_c}')
-        if (temp_c >= (setpoint_c + hysteresis_c)):
+        print(f"TEMPERATURE: {temp_c}")
+        if temp_c >= (setpoint_c + hysteresis_c):
             hvac_power_w = -1.0
         elif temp_c <= (setpoint_c - hysteresis_c):
             hvac_power_w = +1.0
         else:
             hvac_power_w = 0.0
-        container.apply_power(now_t=env.now, name='HVAC', power_w=hvac_power_w)
+        container.apply_power(now_t=env.now, name="HVAC", power_w=hvac_power_w)
 
 
 def temperature_transducer(env, name: str, container: ThermalContainer):
@@ -83,14 +87,15 @@ def thermostat_main():
         ),
         # Each transducer can affect the power combiner
         power_combiner={
-            'bias': 0.5,
+            "bias": 0.5,
         },
     )
 
     env = simpy.Environment(initial_time=INITIAL_TIME)
 
-    t = env.process(thermostat(env, setpoint_c=20, hysteresis_c=1.0,
-                               container=container))
+    env.process(
+        thermostat(env, setpoint_c=20, hysteresis_c=1.0, container=container)
+    )
 
     env.run(until=SIM_DURATION)
 
@@ -101,8 +106,8 @@ def main():
     end = time.monotonic_ns()
     duration_ns = end - start
     duration_us = duration_ns / 1e3
-    print(f'Took: {duration_us:.3f}(us)')
+    print(f"Took: {duration_us:.3f}(us)")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
