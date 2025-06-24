@@ -107,7 +107,7 @@ def main():
     duration_ns = end - start
     duration_us = duration_ns / 1e3
     print(f"Took: {duration_us:.3f}(us)")
-    print('XXX')
+    print("XXX")
 
 
 if __name__ == "__main__":
