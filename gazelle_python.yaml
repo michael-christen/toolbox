@@ -6,7 +6,7 @@
 manifest:
   modules_mapping:
     30fcd23745efe32ce681__mypyc: black
-    3204bda914b7f2c6f497__mypyc: mypy
+    91844386ccf7a24691a0__mypyc: mypy
     IPython: ipython
     IPython.core: ipython
     IPython.core.alias: ipython
@@ -19,6 +19,7 @@ manifest:
     IPython.core.completerlib: ipython
     IPython.core.crashhandler: ipython
     IPython.core.debugger: ipython
+    IPython.core.debugger_backport: ipython
     IPython.core.display: ipython
     IPython.core.display_functions: ipython
     IPython.core.display_trap: ipython
@@ -170,12 +171,12 @@ manifest:
     IPython.utils.timing: ipython
     IPython.utils.tokenutil: ipython
     IPython.utils.wildcard: ipython
-    OpenSSL: pyOpenSSL
-    OpenSSL.SSL: pyOpenSSL
-    OpenSSL.crypto: pyOpenSSL
-    OpenSSL.debug: pyOpenSSL
-    OpenSSL.rand: pyOpenSSL
-    OpenSSL.version: pyOpenSSL
+    OpenSSL: pyopenssl
+    OpenSSL.SSL: pyopenssl
+    OpenSSL.crypto: pyopenssl
+    OpenSSL.debug: pyopenssl
+    OpenSSL.rand: pyopenssl
+    OpenSSL.version: pyopenssl
     PIL: pillow
     PIL.AvifImagePlugin: pillow
     PIL.BdfFontFile: pillow
@@ -1353,6 +1354,7 @@ manifest:
     fontTools.ttLib.tables.G_P_K_G_: fonttools
     fontTools.ttLib.tables.G_P_O_S_: fonttools
     fontTools.ttLib.tables.G_S_U_B_: fonttools
+    fontTools.ttLib.tables.G_V_A_R_: fonttools
     fontTools.ttLib.tables.G__l_a_t: fonttools
     fontTools.ttLib.tables.G__l_o_c: fonttools
     fontTools.ttLib.tables.H_V_A_R_: fonttools
@@ -1415,6 +1417,7 @@ manifest:
     fontTools.unicode: fonttools
     fontTools.unicodedata: fonttools
     fontTools.unicodedata.Blocks: fonttools
+    fontTools.unicodedata.Mirrored: fonttools
     fontTools.unicodedata.OTTags: fonttools
     fontTools.unicodedata.ScriptExtensions: fonttools
     fontTools.unicodedata.Scripts: fonttools
@@ -2398,6 +2401,7 @@ manifest:
     mypy.bogus_type: mypy
     mypy.build: mypy
     mypy.checker: mypy
+    mypy.checker_shared: mypy
     mypy.checkexpr: mypy
     mypy.checkmember: mypy
     mypy.checkpattern: mypy
@@ -2570,6 +2574,7 @@ manifest:
     mypyc.analysis.dataflow: mypy
     mypyc.analysis.ircheck: mypy
     mypyc.analysis.selfleaks: mypy
+    mypyc.annotate: mypy
     mypyc.build: mypy
     mypyc.codegen: mypy
     mypyc.codegen.cstring: mypy
@@ -2606,6 +2611,7 @@ manifest:
     mypyc.irbuild.main: mypy
     mypyc.irbuild.mapper: mypy
     mypyc.irbuild.match: mypy
+    mypyc.irbuild.missingtypevisitor: mypy
     mypyc.irbuild.nonlocalcontrol: mypy
     mypyc.irbuild.prebuildvisitor: mypy
     mypyc.irbuild.prepare: mypy
@@ -2642,6 +2648,7 @@ manifest:
     mypyc.test.config: mypy
     mypyc.test.test_alwaysdefined: mypy
     mypyc.test.test_analysis: mypy
+    mypyc.test.test_annotate: mypy
     mypyc.test.test_cheader: mypy
     mypyc.test.test_commandline: mypy
     mypyc.test.test_emit: mypy
@@ -2654,6 +2661,7 @@ manifest:
     mypyc.test.test_ircheck: mypy
     mypyc.test.test_literals: mypy
     mypyc.test.test_lowering: mypy
+    mypyc.test.test_misc: mypy
     mypyc.test.test_namegen: mypy
     mypyc.test.test_optimizations: mypy
     mypyc.test.test_pprint: mypy
@@ -2672,6 +2680,7 @@ manifest:
     mypyc.transform.ir_transform: mypy
     mypyc.transform.lower: mypy
     mypyc.transform.refcount: mypy
+    mypyc.transform.spill: mypy
     mypyc.transform.uninit: mypy
     myst_parser: myst_parser
     myst_parser.cli: myst_parser
@@ -2850,6 +2859,7 @@ manifest:
     networkx.algorithms.approximation.clique: networkx
     networkx.algorithms.approximation.clustering_coefficient: networkx
     networkx.algorithms.approximation.connectivity: networkx
+    networkx.algorithms.approximation.density: networkx
     networkx.algorithms.approximation.distance_measures: networkx
     networkx.algorithms.approximation.dominating_set: networkx
     networkx.algorithms.approximation.kcomponents: networkx
@@ -2875,6 +2885,7 @@ manifest:
     networkx.algorithms.bipartite.edgelist: networkx
     networkx.algorithms.bipartite.extendability: networkx
     networkx.algorithms.bipartite.generators: networkx
+    networkx.algorithms.bipartite.link_analysis: networkx
     networkx.algorithms.bipartite.matching: networkx
     networkx.algorithms.bipartite.matrix: networkx
     networkx.algorithms.bipartite.projection: networkx
@@ -2921,6 +2932,8 @@ manifest:
     networkx.algorithms.community.kclique: networkx
     networkx.algorithms.community.kernighan_lin: networkx
     networkx.algorithms.community.label_propagation: networkx
+    networkx.algorithms.community.leiden: networkx
+    networkx.algorithms.community.local: networkx
     networkx.algorithms.community.louvain: networkx
     networkx.algorithms.community.lukes: networkx
     networkx.algorithms.community.modularity_max: networkx
@@ -3135,8 +3148,6 @@ manifest:
     numbergen: param
     numpy: numpy
     numpy.char: numpy
-    numpy.compat: numpy
-    numpy.compat.py3k: numpy
     numpy.conftest: numpy
     numpy.core: numpy
     numpy.core.arrayprint: numpy
@@ -3244,7 +3255,7 @@ manifest:
     numpy.lib.scimath: numpy
     numpy.lib.stride_tricks: numpy
     numpy.lib.user_array: numpy
-    numpy.libs.libscipy_openblas64_-6bb31eeb: numpy
+    numpy.libs.libscipy_openblas64_-56d6093b: numpy
     numpy.linalg: numpy
     numpy.linalg.lapack_lite: numpy
     numpy.linalg.linalg: numpy
@@ -3253,7 +3264,6 @@ manifest:
     numpy.ma.extras: numpy
     numpy.ma.mrecords: numpy
     numpy.ma.testutils: numpy
-    numpy.ma.timer_comparison: numpy
     numpy.matlib: numpy
     numpy.matrixlib: numpy
     numpy.matrixlib.defmatrix: numpy
@@ -3362,6 +3372,17 @@ manifest:
     packaging.tags: packaging
     packaging.utils: packaging
     packaging.version: packaging
+    paho: paho_mqtt
+    paho.mqtt: paho_mqtt
+    paho.mqtt.client: paho_mqtt
+    paho.mqtt.enums: paho_mqtt
+    paho.mqtt.matcher: paho_mqtt
+    paho.mqtt.packettypes: paho_mqtt
+    paho.mqtt.properties: paho_mqtt
+    paho.mqtt.publish: paho_mqtt
+    paho.mqtt.reasoncodes: paho_mqtt
+    paho.mqtt.subscribe: paho_mqtt
+    paho.mqtt.subscribeoptions: paho_mqtt
     pandas: pandas
     pandas.api: pandas
     pandas.api.extensions: pandas
@@ -3860,6 +3881,7 @@ manifest:
     prometheus_client.samples: prometheus_client
     prometheus_client.twisted: prometheus_client
     prometheus_client.utils: prometheus_client
+    prometheus_client.validation: prometheus_client
     prometheus_client.values: prometheus_client
     prompt_toolkit: prompt_toolkit
     prompt_toolkit.application: prompt_toolkit
@@ -4739,7 +4761,6 @@ manifest:
     scipy.special.add_newdocs: scipy
     scipy.special.basic: scipy
     scipy.special.cython_special: scipy
-    scipy.special.libsf_error_state: scipy
     scipy.special.orthogonal: scipy
     scipy.special.sf_error: scipy
     scipy.special.specfun: scipy
@@ -4771,6 +4792,154 @@ manifest:
     send2trash.win.IFileOperationProgressSink: Send2Trash
     send2trash.win.legacy: Send2Trash
     send2trash.win.modern: Send2Trash
+    sentry_sdk: sentry_sdk
+    sentry_sdk.ai: sentry_sdk
+    sentry_sdk.ai.monitoring: sentry_sdk
+    sentry_sdk.ai.utils: sentry_sdk
+    sentry_sdk.api: sentry_sdk
+    sentry_sdk.attachments: sentry_sdk
+    sentry_sdk.client: sentry_sdk
+    sentry_sdk.consts: sentry_sdk
+    sentry_sdk.crons: sentry_sdk
+    sentry_sdk.crons.api: sentry_sdk
+    sentry_sdk.crons.consts: sentry_sdk
+    sentry_sdk.crons.decorator: sentry_sdk
+    sentry_sdk.debug: sentry_sdk
+    sentry_sdk.envelope: sentry_sdk
+    sentry_sdk.feature_flags: sentry_sdk
+    sentry_sdk.hub: sentry_sdk
+    sentry_sdk.integrations: sentry_sdk
+    sentry_sdk.integrations.aiohttp: sentry_sdk
+    sentry_sdk.integrations.anthropic: sentry_sdk
+    sentry_sdk.integrations.argv: sentry_sdk
+    sentry_sdk.integrations.ariadne: sentry_sdk
+    sentry_sdk.integrations.arq: sentry_sdk
+    sentry_sdk.integrations.asgi: sentry_sdk
+    sentry_sdk.integrations.asyncio: sentry_sdk
+    sentry_sdk.integrations.asyncpg: sentry_sdk
+    sentry_sdk.integrations.atexit: sentry_sdk
+    sentry_sdk.integrations.aws_lambda: sentry_sdk
+    sentry_sdk.integrations.beam: sentry_sdk
+    sentry_sdk.integrations.boto3: sentry_sdk
+    sentry_sdk.integrations.bottle: sentry_sdk
+    sentry_sdk.integrations.celery: sentry_sdk
+    sentry_sdk.integrations.celery.beat: sentry_sdk
+    sentry_sdk.integrations.celery.utils: sentry_sdk
+    sentry_sdk.integrations.chalice: sentry_sdk
+    sentry_sdk.integrations.clickhouse_driver: sentry_sdk
+    sentry_sdk.integrations.cloud_resource_context: sentry_sdk
+    sentry_sdk.integrations.cohere: sentry_sdk
+    sentry_sdk.integrations.dedupe: sentry_sdk
+    sentry_sdk.integrations.django: sentry_sdk
+    sentry_sdk.integrations.django.asgi: sentry_sdk
+    sentry_sdk.integrations.django.caching: sentry_sdk
+    sentry_sdk.integrations.django.middleware: sentry_sdk
+    sentry_sdk.integrations.django.signals_handlers: sentry_sdk
+    sentry_sdk.integrations.django.templates: sentry_sdk
+    sentry_sdk.integrations.django.transactions: sentry_sdk
+    sentry_sdk.integrations.django.views: sentry_sdk
+    sentry_sdk.integrations.dramatiq: sentry_sdk
+    sentry_sdk.integrations.excepthook: sentry_sdk
+    sentry_sdk.integrations.executing: sentry_sdk
+    sentry_sdk.integrations.falcon: sentry_sdk
+    sentry_sdk.integrations.fastapi: sentry_sdk
+    sentry_sdk.integrations.flask: sentry_sdk
+    sentry_sdk.integrations.gcp: sentry_sdk
+    sentry_sdk.integrations.gnu_backtrace: sentry_sdk
+    sentry_sdk.integrations.gql: sentry_sdk
+    sentry_sdk.integrations.graphene: sentry_sdk
+    sentry_sdk.integrations.grpc: sentry_sdk
+    sentry_sdk.integrations.grpc.aio: sentry_sdk
+    sentry_sdk.integrations.grpc.aio.client: sentry_sdk
+    sentry_sdk.integrations.grpc.aio.server: sentry_sdk
+    sentry_sdk.integrations.grpc.client: sentry_sdk
+    sentry_sdk.integrations.grpc.consts: sentry_sdk
+    sentry_sdk.integrations.grpc.server: sentry_sdk
+    sentry_sdk.integrations.httpx: sentry_sdk
+    sentry_sdk.integrations.huey: sentry_sdk
+    sentry_sdk.integrations.huggingface_hub: sentry_sdk
+    sentry_sdk.integrations.langchain: sentry_sdk
+    sentry_sdk.integrations.launchdarkly: sentry_sdk
+    sentry_sdk.integrations.litestar: sentry_sdk
+    sentry_sdk.integrations.logging: sentry_sdk
+    sentry_sdk.integrations.loguru: sentry_sdk
+    sentry_sdk.integrations.modules: sentry_sdk
+    sentry_sdk.integrations.openai: sentry_sdk
+    sentry_sdk.integrations.openai_agents: sentry_sdk
+    sentry_sdk.integrations.openai_agents.consts: sentry_sdk
+    sentry_sdk.integrations.openai_agents.patches: sentry_sdk
+    sentry_sdk.integrations.openai_agents.patches.agent_run: sentry_sdk
+    sentry_sdk.integrations.openai_agents.patches.models: sentry_sdk
+    sentry_sdk.integrations.openai_agents.patches.runner: sentry_sdk
+    sentry_sdk.integrations.openai_agents.patches.tools: sentry_sdk
+    sentry_sdk.integrations.openai_agents.spans: sentry_sdk
+    sentry_sdk.integrations.openai_agents.spans.agent_workflow: sentry_sdk
+    sentry_sdk.integrations.openai_agents.spans.ai_client: sentry_sdk
+    sentry_sdk.integrations.openai_agents.spans.execute_tool: sentry_sdk
+    sentry_sdk.integrations.openai_agents.spans.handoff: sentry_sdk
+    sentry_sdk.integrations.openai_agents.spans.invoke_agent: sentry_sdk
+    sentry_sdk.integrations.openai_agents.utils: sentry_sdk
+    sentry_sdk.integrations.openfeature: sentry_sdk
+    sentry_sdk.integrations.opentelemetry: sentry_sdk
+    sentry_sdk.integrations.opentelemetry.consts: sentry_sdk
+    sentry_sdk.integrations.opentelemetry.integration: sentry_sdk
+    sentry_sdk.integrations.opentelemetry.propagator: sentry_sdk
+    sentry_sdk.integrations.opentelemetry.span_processor: sentry_sdk
+    sentry_sdk.integrations.pure_eval: sentry_sdk
+    sentry_sdk.integrations.pymongo: sentry_sdk
+    sentry_sdk.integrations.pyramid: sentry_sdk
+    sentry_sdk.integrations.quart: sentry_sdk
+    sentry_sdk.integrations.ray: sentry_sdk
+    sentry_sdk.integrations.redis: sentry_sdk
+    sentry_sdk.integrations.redis.consts: sentry_sdk
+    sentry_sdk.integrations.redis.modules: sentry_sdk
+    sentry_sdk.integrations.redis.modules.caches: sentry_sdk
+    sentry_sdk.integrations.redis.modules.queries: sentry_sdk
+    sentry_sdk.integrations.redis.rb: sentry_sdk
+    sentry_sdk.integrations.redis.redis: sentry_sdk
+    sentry_sdk.integrations.redis.redis_cluster: sentry_sdk
+    sentry_sdk.integrations.redis.redis_py_cluster_legacy: sentry_sdk
+    sentry_sdk.integrations.redis.utils: sentry_sdk
+    sentry_sdk.integrations.rq: sentry_sdk
+    sentry_sdk.integrations.rust_tracing: sentry_sdk
+    sentry_sdk.integrations.sanic: sentry_sdk
+    sentry_sdk.integrations.serverless: sentry_sdk
+    sentry_sdk.integrations.socket: sentry_sdk
+    sentry_sdk.integrations.spark: sentry_sdk
+    sentry_sdk.integrations.spark.spark_driver: sentry_sdk
+    sentry_sdk.integrations.spark.spark_worker: sentry_sdk
+    sentry_sdk.integrations.sqlalchemy: sentry_sdk
+    sentry_sdk.integrations.starlette: sentry_sdk
+    sentry_sdk.integrations.starlite: sentry_sdk
+    sentry_sdk.integrations.statsig: sentry_sdk
+    sentry_sdk.integrations.stdlib: sentry_sdk
+    sentry_sdk.integrations.strawberry: sentry_sdk
+    sentry_sdk.integrations.sys_exit: sentry_sdk
+    sentry_sdk.integrations.threading: sentry_sdk
+    sentry_sdk.integrations.tornado: sentry_sdk
+    sentry_sdk.integrations.trytond: sentry_sdk
+    sentry_sdk.integrations.typer: sentry_sdk
+    sentry_sdk.integrations.unleash: sentry_sdk
+    sentry_sdk.integrations.wsgi: sentry_sdk
+    sentry_sdk.logger: sentry_sdk
+    sentry_sdk.metrics: sentry_sdk
+    sentry_sdk.monitor: sentry_sdk
+    sentry_sdk.profiler: sentry_sdk
+    sentry_sdk.profiler.continuous_profiler: sentry_sdk
+    sentry_sdk.profiler.transaction_profiler: sentry_sdk
+    sentry_sdk.profiler.utils: sentry_sdk
+    sentry_sdk.scope: sentry_sdk
+    sentry_sdk.scrubber: sentry_sdk
+    sentry_sdk.serializer: sentry_sdk
+    sentry_sdk.session: sentry_sdk
+    sentry_sdk.sessions: sentry_sdk
+    sentry_sdk.spotlight: sentry_sdk
+    sentry_sdk.tracing: sentry_sdk
+    sentry_sdk.tracing_utils: sentry_sdk
+    sentry_sdk.transport: sentry_sdk
+    sentry_sdk.types: sentry_sdk
+    sentry_sdk.utils: sentry_sdk
+    sentry_sdk.worker: sentry_sdk
     setuptools: setuptools
     setuptools.archive_util: setuptools
     setuptools.build_meta: setuptools
@@ -4850,8 +5019,11 @@ manifest:
     snowballstemmer.basque_stemmer: snowballstemmer
     snowballstemmer.catalan_stemmer: snowballstemmer
     snowballstemmer.danish_stemmer: snowballstemmer
+    snowballstemmer.dutch_porter_stemmer: snowballstemmer
     snowballstemmer.dutch_stemmer: snowballstemmer
     snowballstemmer.english_stemmer: snowballstemmer
+    snowballstemmer.esperanto_stemmer: snowballstemmer
+    snowballstemmer.estonian_stemmer: snowballstemmer
     snowballstemmer.finnish_stemmer: snowballstemmer
     snowballstemmer.french_stemmer: snowballstemmer
     snowballstemmer.german_stemmer: snowballstemmer
@@ -5372,53 +5544,6 @@ manifest:
     webencodings.mklabels: webencodings
     webencodings.x_user_defined: webencodings
     websocket: websocket_client
-    websockets: websockets
-    websockets.asyncio: websockets
-    websockets.asyncio.async_timeout: websockets
-    websockets.asyncio.client: websockets
-    websockets.asyncio.compatibility: websockets
-    websockets.asyncio.connection: websockets
-    websockets.asyncio.messages: websockets
-    websockets.asyncio.router: websockets
-    websockets.asyncio.server: websockets
-    websockets.auth: websockets
-    websockets.cli: websockets
-    websockets.client: websockets
-    websockets.connection: websockets
-    websockets.datastructures: websockets
-    websockets.exceptions: websockets
-    websockets.extensions: websockets
-    websockets.extensions.base: websockets
-    websockets.extensions.permessage_deflate: websockets
-    websockets.frames: websockets
-    websockets.headers: websockets
-    websockets.http: websockets
-    websockets.http11: websockets
-    websockets.imports: websockets
-    websockets.legacy: websockets
-    websockets.legacy.auth: websockets
-    websockets.legacy.client: websockets
-    websockets.legacy.exceptions: websockets
-    websockets.legacy.framing: websockets
-    websockets.legacy.handshake: websockets
-    websockets.legacy.http: websockets
-    websockets.legacy.protocol: websockets
-    websockets.legacy.server: websockets
-    websockets.protocol: websockets
-    websockets.server: websockets
-    websockets.speedups: websockets
-    websockets.streams: websockets
-    websockets.sync: websockets
-    websockets.sync.client: websockets
-    websockets.sync.connection: websockets
-    websockets.sync.messages: websockets
-    websockets.sync.router: websockets
-    websockets.sync.server: websockets
-    websockets.sync.utils: websockets
-    websockets.typing: websockets
-    websockets.uri: websockets
-    websockets.utils: websockets
-    websockets.version: websockets
     wheel: wheel
     wheel.bdist_wheel: wheel
     wheel.cli: wheel
@@ -5521,4 +5646,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: 056008c057ab76e83be560a3b5a70614f12f9a0fad53944c3ebd539466a17a08
+integrity: c374d86d2f8a102e45d222b763fc0198a0d9f545e28853eb7fb5ff63db7ec09e
