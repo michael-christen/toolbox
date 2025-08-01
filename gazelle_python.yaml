@@ -6,7 +6,6 @@
 manifest:
   modules_mapping:
     30fcd23745efe32ce681__mypyc: black
-    91844386ccf7a24691a0__mypyc: mypy
     IPython: ipython
     IPython.core: ipython
     IPython.core.alias: ipython
@@ -266,6 +265,42 @@ manifest:
     PIL.XpmImagePlugin: pillow
     PIL.features: pillow
     PIL.report: pillow
+    a11y_pygments: accessible_pygments
+    a11y_pygments.a11y_dark: accessible_pygments
+    a11y_pygments.a11y_dark.style: accessible_pygments
+    a11y_pygments.a11y_high_contrast_dark: accessible_pygments
+    a11y_pygments.a11y_high_contrast_dark.style: accessible_pygments
+    a11y_pygments.a11y_high_contrast_light: accessible_pygments
+    a11y_pygments.a11y_high_contrast_light.style: accessible_pygments
+    a11y_pygments.a11y_light: accessible_pygments
+    a11y_pygments.a11y_light.style: accessible_pygments
+    a11y_pygments.blinds_dark: accessible_pygments
+    a11y_pygments.blinds_dark.style: accessible_pygments
+    a11y_pygments.blinds_light: accessible_pygments
+    a11y_pygments.blinds_light.style: accessible_pygments
+    a11y_pygments.github_dark: accessible_pygments
+    a11y_pygments.github_dark.style: accessible_pygments
+    a11y_pygments.github_dark_colorblind: accessible_pygments
+    a11y_pygments.github_dark_colorblind.style: accessible_pygments
+    a11y_pygments.github_dark_high_contrast: accessible_pygments
+    a11y_pygments.github_dark_high_contrast.style: accessible_pygments
+    a11y_pygments.github_light: accessible_pygments
+    a11y_pygments.github_light.style: accessible_pygments
+    a11y_pygments.github_light_colorblind: accessible_pygments
+    a11y_pygments.github_light_colorblind.style: accessible_pygments
+    a11y_pygments.github_light_high_contrast: accessible_pygments
+    a11y_pygments.github_light_high_contrast.style: accessible_pygments
+    a11y_pygments.gotthard_dark: accessible_pygments
+    a11y_pygments.gotthard_dark.style: accessible_pygments
+    a11y_pygments.gotthard_light: accessible_pygments
+    a11y_pygments.gotthard_light.style: accessible_pygments
+    a11y_pygments.greative: accessible_pygments
+    a11y_pygments.greative.style: accessible_pygments
+    a11y_pygments.pitaya_smoothie: accessible_pygments
+    a11y_pygments.pitaya_smoothie.style: accessible_pygments
+    a11y_pygments.utils: accessible_pygments
+    a11y_pygments.utils.utils: accessible_pygments
+    a11y_pygments.utils.wcag_contrast: accessible_pygments
     alabaster: alabaster
     alabaster.support: alabaster
     anyio: anyio
@@ -1136,6 +1171,7 @@ manifest:
     docutils.writers.pseudoxml: docutils
     docutils.writers.s5_html: docutils
     docutils.writers.xetex: docutils
+    edfc647aaf02b20aa651__mypyc: mypy
     examples: openhtf
     examples.all_the_things: openhtf
     examples.checkpoints: openhtf
@@ -1251,6 +1287,7 @@ manifest:
     fontTools.misc.encodingTools: fonttools
     fontTools.misc.etree: fonttools
     fontTools.misc.filenames: fonttools
+    fontTools.misc.filesystem: fonttools
     fontTools.misc.fixedTools: fonttools
     fontTools.misc.intTools: fonttools
     fontTools.misc.iterTools: fonttools
@@ -2086,6 +2123,39 @@ manifest:
     jupytext_config.labconfig: jupytext
     kiwisolver: kiwisolver
     kiwisolver.exceptions: kiwisolver
+    lark: lark
+    lark.ast_utils: lark
+    lark.common: lark
+    lark.exceptions: lark
+    lark.grammar: lark
+    lark.grammars: lark
+    lark.indenter: lark
+    lark.lark: lark
+    lark.lexer: lark
+    lark.load_grammar: lark
+    lark.parse_tree_builder: lark
+    lark.parser_frontends: lark
+    lark.parsers: lark
+    lark.parsers.cyk: lark
+    lark.parsers.earley: lark
+    lark.parsers.earley_common: lark
+    lark.parsers.earley_forest: lark
+    lark.parsers.grammar_analysis: lark
+    lark.parsers.lalr_analysis: lark
+    lark.parsers.lalr_interactive_parser: lark
+    lark.parsers.lalr_parser: lark
+    lark.parsers.lalr_parser_state: lark
+    lark.parsers.xearley: lark
+    lark.reconstruct: lark
+    lark.tools: lark
+    lark.tools.nearley: lark
+    lark.tools.serialize: lark
+    lark.tools.standalone: lark
+    lark.tree: lark
+    lark.tree_matcher: lark
+    lark.tree_templates: lark
+    lark.utils: lark
+    lark.visitors: lark
     linkify_it: linkify_it_py
     linkify_it.main: linkify_it_py
     linkify_it.tlds: linkify_it_py
@@ -2402,6 +2472,7 @@ manifest:
     mypy.build: mypy
     mypy.checker: mypy
     mypy.checker_shared: mypy
+    mypy.checker_state: mypy
     mypy.checkexpr: mypy
     mypy.checkmember: mypy
     mypy.checkpattern: mypy
@@ -2737,6 +2808,11 @@ manifest:
     narwhals.stable.v1.dtypes: narwhals
     narwhals.stable.v1.selectors: narwhals
     narwhals.stable.v1.typing: narwhals
+    narwhals.stable.v2: narwhals
+    narwhals.stable.v2.dependencies: narwhals
+    narwhals.stable.v2.dtypes: narwhals
+    narwhals.stable.v2.selectors: narwhals
+    narwhals.stable.v2.typing: narwhals
     narwhals.this: narwhals
     narwhals.translate: narwhals
     narwhals.typing: narwhals
@@ -3255,7 +3331,7 @@ manifest:
     numpy.lib.scimath: numpy
     numpy.lib.stride_tricks: numpy
     numpy.lib.user_array: numpy
-    numpy.libs.libscipy_openblas64_-56d6093b: numpy
+    numpy.libs.libscipy_openblas64_-8fb3d286: numpy
     numpy.linalg: numpy
     numpy.linalg.lapack_lite: numpy
     numpy.linalg.linalg: numpy
@@ -4604,6 +4680,9 @@ manifest:
     requests.utils: requests
     rfc3339_validator: rfc3339_validator
     rfc3986_validator: rfc3986_validator
+    rfc3987_syntax: rfc3987_syntax
+    rfc3987_syntax.syntax_helpers: rfc3987_syntax
+    rfc3987_syntax.utils: rfc3987_syntax
     roman_numerals: roman_numerals_py
     rpds: rpds_py
     rpds.rpds: rpds_py
@@ -5646,4 +5725,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: c374d86d2f8a102e45d222b763fc0198a0d9f545e28853eb7fb5ff63db7ec09e
+integrity: d46f0c9c3ab47d77aed0657f6fce1f0a7aceb8132d00f96f6ff40e502da64052
