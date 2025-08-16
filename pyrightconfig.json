@@ -1,0 +1,23 @@
+{
+    "include" : [
+        "algorithms",
+        "ansible_playbooks",
+        "apps",
+        "bzl",
+        "examples",
+        "mchristen",
+        "tools"
+        // XXX: How can I avoid having to include all?
+
+    ],
+    "ignore" : [
+    ],
+    "exclude" : [
+        "bazel*"
+    ],
+    "reportFunctionMemberAccess": "error",
+    // XXX: Lookup more options
+    // XXX: Requires venv
+    "venvPath": ".",
+    "venv": "venv"
+}
