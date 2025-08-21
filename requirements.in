@@ -63,3 +63,9 @@ tabulate
 # Convenient backend for openhtf; https://www.tofupilot.com/
 tofupilot
 types-protobuf
+# gmail
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib
+pandas
+matplotlib

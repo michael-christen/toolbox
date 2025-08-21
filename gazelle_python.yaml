@@ -282,6 +282,7 @@ manifest:
     anyio.to_interpreter: anyio
     anyio.to_process: anyio
     anyio.to_thread: anyio
+    apiclient: google_api_python_client
     argon2: argon2_cffi
     argon2.exceptions: argon2_cffi
     argon2.low_level: argon2_cffi
@@ -1455,6 +1456,96 @@ manifest:
     furo: furo
     furo.navigation: furo
     furo.sphinxext: furo
+    google.api.annotations_pb2: googleapis_common_protos
+    google.api.auth_pb2: googleapis_common_protos
+    google.api.backend_pb2: googleapis_common_protos
+    google.api.billing_pb2: googleapis_common_protos
+    google.api.client_pb2: googleapis_common_protos
+    google.api.config_change_pb2: googleapis_common_protos
+    google.api.consumer_pb2: googleapis_common_protos
+    google.api.context_pb2: googleapis_common_protos
+    google.api.control_pb2: googleapis_common_protos
+    google.api.distribution_pb2: googleapis_common_protos
+    google.api.documentation_pb2: googleapis_common_protos
+    google.api.endpoint_pb2: googleapis_common_protos
+    google.api.error_reason_pb2: googleapis_common_protos
+    google.api.field_behavior_pb2: googleapis_common_protos
+    google.api.field_info_pb2: googleapis_common_protos
+    google.api.http_pb2: googleapis_common_protos
+    google.api.httpbody_pb2: googleapis_common_protos
+    google.api.label_pb2: googleapis_common_protos
+    google.api.launch_stage_pb2: googleapis_common_protos
+    google.api.log_pb2: googleapis_common_protos
+    google.api.logging_pb2: googleapis_common_protos
+    google.api.metric_pb2: googleapis_common_protos
+    google.api.monitored_resource_pb2: googleapis_common_protos
+    google.api.monitoring_pb2: googleapis_common_protos
+    google.api.policy_pb2: googleapis_common_protos
+    google.api.quota_pb2: googleapis_common_protos
+    google.api.resource_pb2: googleapis_common_protos
+    google.api.routing_pb2: googleapis_common_protos
+    google.api.service_pb2: googleapis_common_protos
+    google.api.source_info_pb2: googleapis_common_protos
+    google.api.system_parameter_pb2: googleapis_common_protos
+    google.api.usage_pb2: googleapis_common_protos
+    google.api.visibility_pb2: googleapis_common_protos
+    google.api_core: google_api_core
+    google.api_core.bidi: google_api_core
+    google.api_core.client_info: google_api_core
+    google.api_core.client_logging: google_api_core
+    google.api_core.client_options: google_api_core
+    google.api_core.datetime_helpers: google_api_core
+    google.api_core.exceptions: google_api_core
+    google.api_core.extended_operation: google_api_core
+    google.api_core.future: google_api_core
+    google.api_core.future.async_future: google_api_core
+    google.api_core.future.base: google_api_core
+    google.api_core.future.polling: google_api_core
+    google.api_core.gapic_v1: google_api_core
+    google.api_core.gapic_v1.client_info: google_api_core
+    google.api_core.gapic_v1.config: google_api_core
+    google.api_core.gapic_v1.config_async: google_api_core
+    google.api_core.gapic_v1.method: google_api_core
+    google.api_core.gapic_v1.method_async: google_api_core
+    google.api_core.gapic_v1.routing_header: google_api_core
+    google.api_core.general_helpers: google_api_core
+    google.api_core.grpc_helpers: google_api_core
+    google.api_core.grpc_helpers_async: google_api_core
+    google.api_core.iam: google_api_core
+    google.api_core.operation: google_api_core
+    google.api_core.operation_async: google_api_core
+    google.api_core.operations_v1: google_api_core
+    google.api_core.operations_v1.abstract_operations_base_client: google_api_core
+    google.api_core.operations_v1.abstract_operations_client: google_api_core
+    google.api_core.operations_v1.operations_async_client: google_api_core
+    google.api_core.operations_v1.operations_client: google_api_core
+    google.api_core.operations_v1.operations_client_config: google_api_core
+    google.api_core.operations_v1.operations_rest_client_async: google_api_core
+    google.api_core.operations_v1.pagers: google_api_core
+    google.api_core.operations_v1.pagers_async: google_api_core
+    google.api_core.operations_v1.pagers_base: google_api_core
+    google.api_core.operations_v1.transports: google_api_core
+    google.api_core.operations_v1.transports.base: google_api_core
+    google.api_core.operations_v1.transports.rest: google_api_core
+    google.api_core.operations_v1.transports.rest_asyncio: google_api_core
+    google.api_core.page_iterator: google_api_core
+    google.api_core.page_iterator_async: google_api_core
+    google.api_core.path_template: google_api_core
+    google.api_core.protobuf_helpers: google_api_core
+    google.api_core.rest_helpers: google_api_core
+    google.api_core.rest_streaming: google_api_core
+    google.api_core.rest_streaming_async: google_api_core
+    google.api_core.retry: google_api_core
+    google.api_core.retry.retry_base: google_api_core
+    google.api_core.retry.retry_streaming: google_api_core
+    google.api_core.retry.retry_streaming_async: google_api_core
+    google.api_core.retry.retry_unary: google_api_core
+    google.api_core.retry.retry_unary_async: google_api_core
+    google.api_core.retry_async: google_api_core
+    google.api_core.timeout: google_api_core
+    google.api_core.universe: google_api_core
+    google.api_core.version: google_api_core
+    google.api_core.version_header: google_api_core
     google.auth: google_auth
     google.auth.aio: google_auth
     google.auth.aio.credentials: google_auth
@@ -1488,6 +1579,17 @@ manifest:
     google.auth.transport.requests: google_auth
     google.auth.transport.urllib3: google_auth
     google.auth.version: google_auth
+    google.cloud.extended_operations_pb2: googleapis_common_protos
+    google.cloud.location.locations_pb2: googleapis_common_protos
+    google.gapic.metadata.gapic_metadata_pb2: googleapis_common_protos
+    google.logging.type.http_request_pb2: googleapis_common_protos
+    google.logging.type.log_severity_pb2: googleapis_common_protos
+    google.longrunning.operations_grpc: googleapis_common_protos
+    google.longrunning.operations_grpc_pb2: googleapis_common_protos
+    google.longrunning.operations_pb2: googleapis_common_protos
+    google.longrunning.operations_pb2_grpc: googleapis_common_protos
+    google.longrunning.operations_proto: googleapis_common_protos
+    google.longrunning.operations_proto_pb2: googleapis_common_protos
     google.oauth2: google_auth
     google.oauth2.challenges: google_auth
     google.oauth2.credentials: google_auth
@@ -1554,6 +1656,49 @@ manifest:
     google.protobuf.unknown_fields: protobuf
     google.protobuf.util: protobuf
     google.protobuf.wrappers_pb2: protobuf
+    google.rpc.code_pb2: googleapis_common_protos
+    google.rpc.context.attribute_context_pb2: googleapis_common_protos
+    google.rpc.context.audit_context_pb2: googleapis_common_protos
+    google.rpc.error_details_pb2: googleapis_common_protos
+    google.rpc.http_pb2: googleapis_common_protos
+    google.rpc.status_pb2: googleapis_common_protos
+    google.type.calendar_period_pb2: googleapis_common_protos
+    google.type.color_pb2: googleapis_common_protos
+    google.type.date_pb2: googleapis_common_protos
+    google.type.datetime_pb2: googleapis_common_protos
+    google.type.dayofweek_pb2: googleapis_common_protos
+    google.type.decimal_pb2: googleapis_common_protos
+    google.type.expr_pb2: googleapis_common_protos
+    google.type.fraction_pb2: googleapis_common_protos
+    google.type.interval_pb2: googleapis_common_protos
+    google.type.latlng_pb2: googleapis_common_protos
+    google.type.localized_text_pb2: googleapis_common_protos
+    google.type.money_pb2: googleapis_common_protos
+    google.type.month_pb2: googleapis_common_protos
+    google.type.phone_number_pb2: googleapis_common_protos
+    google.type.postal_address_pb2: googleapis_common_protos
+    google.type.quaternion_pb2: googleapis_common_protos
+    google.type.timeofday_pb2: googleapis_common_protos
+    google_auth_httplib2: google_auth_httplib2
+    google_auth_oauthlib: google_auth_oauthlib
+    google_auth_oauthlib.flow: google_auth_oauthlib
+    google_auth_oauthlib.helpers: google_auth_oauthlib
+    google_auth_oauthlib.interactive: google_auth_oauthlib
+    google_auth_oauthlib.tool: google_auth_oauthlib
+    googleapiclient: google_api_python_client
+    googleapiclient.channel: google_api_python_client
+    googleapiclient.discovery: google_api_python_client
+    googleapiclient.discovery_cache: google_api_python_client
+    googleapiclient.discovery_cache.appengine_memcache: google_api_python_client
+    googleapiclient.discovery_cache.base: google_api_python_client
+    googleapiclient.discovery_cache.file_cache: google_api_python_client
+    googleapiclient.errors: google_api_python_client
+    googleapiclient.http: google_api_python_client
+    googleapiclient.mimeparse: google_api_python_client
+    googleapiclient.model: google_api_python_client
+    googleapiclient.sample_tools: google_api_python_client
+    googleapiclient.schema: google_api_python_client
+    googleapiclient.version: google_api_python_client
     grpc: grpcio
     grpc.aio: grpcio
     grpc.beta: grpcio
@@ -1584,6 +1729,12 @@ manifest:
     grpc.framework.interfaces.face.utilities: grpcio
     h11: h11
     httpcore: httpcore
+    httplib2: httplib2
+    httplib2.auth: httplib2
+    httplib2.certs: httplib2
+    httplib2.error: httplib2
+    httplib2.iri2uri: httplib2
+    httplib2.socks: httplib2
     httpx: httpx
     idna: idna
     idna.codec: idna
@@ -3276,6 +3427,81 @@ manifest:
     numpy.typing: numpy
     numpy.typing.mypy_plugin: numpy
     numpy.version: numpy
+    oauthlib: oauthlib
+    oauthlib.common: oauthlib
+    oauthlib.oauth1: oauthlib
+    oauthlib.oauth1.rfc5849: oauthlib
+    oauthlib.oauth1.rfc5849.endpoints: oauthlib
+    oauthlib.oauth1.rfc5849.endpoints.access_token: oauthlib
+    oauthlib.oauth1.rfc5849.endpoints.authorization: oauthlib
+    oauthlib.oauth1.rfc5849.endpoints.base: oauthlib
+    oauthlib.oauth1.rfc5849.endpoints.pre_configured: oauthlib
+    oauthlib.oauth1.rfc5849.endpoints.request_token: oauthlib
+    oauthlib.oauth1.rfc5849.endpoints.resource: oauthlib
+    oauthlib.oauth1.rfc5849.endpoints.signature_only: oauthlib
+    oauthlib.oauth1.rfc5849.errors: oauthlib
+    oauthlib.oauth1.rfc5849.parameters: oauthlib
+    oauthlib.oauth1.rfc5849.request_validator: oauthlib
+    oauthlib.oauth1.rfc5849.signature: oauthlib
+    oauthlib.oauth1.rfc5849.utils: oauthlib
+    oauthlib.oauth2: oauthlib
+    oauthlib.oauth2.rfc6749: oauthlib
+    oauthlib.oauth2.rfc6749.clients: oauthlib
+    oauthlib.oauth2.rfc6749.clients.backend_application: oauthlib
+    oauthlib.oauth2.rfc6749.clients.base: oauthlib
+    oauthlib.oauth2.rfc6749.clients.legacy_application: oauthlib
+    oauthlib.oauth2.rfc6749.clients.mobile_application: oauthlib
+    oauthlib.oauth2.rfc6749.clients.service_application: oauthlib
+    oauthlib.oauth2.rfc6749.clients.web_application: oauthlib
+    oauthlib.oauth2.rfc6749.endpoints: oauthlib
+    oauthlib.oauth2.rfc6749.endpoints.authorization: oauthlib
+    oauthlib.oauth2.rfc6749.endpoints.base: oauthlib
+    oauthlib.oauth2.rfc6749.endpoints.introspect: oauthlib
+    oauthlib.oauth2.rfc6749.endpoints.metadata: oauthlib
+    oauthlib.oauth2.rfc6749.endpoints.pre_configured: oauthlib
+    oauthlib.oauth2.rfc6749.endpoints.resource: oauthlib
+    oauthlib.oauth2.rfc6749.endpoints.revocation: oauthlib
+    oauthlib.oauth2.rfc6749.endpoints.token: oauthlib
+    oauthlib.oauth2.rfc6749.errors: oauthlib
+    oauthlib.oauth2.rfc6749.grant_types: oauthlib
+    oauthlib.oauth2.rfc6749.grant_types.authorization_code: oauthlib
+    oauthlib.oauth2.rfc6749.grant_types.base: oauthlib
+    oauthlib.oauth2.rfc6749.grant_types.client_credentials: oauthlib
+    oauthlib.oauth2.rfc6749.grant_types.implicit: oauthlib
+    oauthlib.oauth2.rfc6749.grant_types.refresh_token: oauthlib
+    oauthlib.oauth2.rfc6749.grant_types.resource_owner_password_credentials: oauthlib
+    oauthlib.oauth2.rfc6749.parameters: oauthlib
+    oauthlib.oauth2.rfc6749.request_validator: oauthlib
+    oauthlib.oauth2.rfc6749.tokens: oauthlib
+    oauthlib.oauth2.rfc6749.utils: oauthlib
+    oauthlib.oauth2.rfc8628: oauthlib
+    oauthlib.oauth2.rfc8628.clients: oauthlib
+    oauthlib.oauth2.rfc8628.clients.device: oauthlib
+    oauthlib.oauth2.rfc8628.endpoints: oauthlib
+    oauthlib.oauth2.rfc8628.endpoints.device_authorization: oauthlib
+    oauthlib.oauth2.rfc8628.endpoints.pre_configured: oauthlib
+    oauthlib.oauth2.rfc8628.errors: oauthlib
+    oauthlib.oauth2.rfc8628.grant_types: oauthlib
+    oauthlib.oauth2.rfc8628.grant_types.device_code: oauthlib
+    oauthlib.oauth2.rfc8628.request_validator: oauthlib
+    oauthlib.openid: oauthlib
+    oauthlib.openid.connect: oauthlib
+    oauthlib.openid.connect.core: oauthlib
+    oauthlib.openid.connect.core.endpoints: oauthlib
+    oauthlib.openid.connect.core.endpoints.pre_configured: oauthlib
+    oauthlib.openid.connect.core.endpoints.userinfo: oauthlib
+    oauthlib.openid.connect.core.exceptions: oauthlib
+    oauthlib.openid.connect.core.grant_types: oauthlib
+    oauthlib.openid.connect.core.grant_types.authorization_code: oauthlib
+    oauthlib.openid.connect.core.grant_types.base: oauthlib
+    oauthlib.openid.connect.core.grant_types.dispatchers: oauthlib
+    oauthlib.openid.connect.core.grant_types.hybrid: oauthlib
+    oauthlib.openid.connect.core.grant_types.implicit: oauthlib
+    oauthlib.openid.connect.core.grant_types.refresh_token: oauthlib
+    oauthlib.openid.connect.core.request_validator: oauthlib
+    oauthlib.openid.connect.core.tokens: oauthlib
+    oauthlib.signals: oauthlib
+    oauthlib.uri_validate: oauthlib
     openhtf: openhtf
     openhtf.core: openhtf
     openhtf.core.base_plugs: openhtf
@@ -4005,6 +4231,30 @@ manifest:
     prompt_toolkit.widgets.menus: prompt_toolkit
     prompt_toolkit.widgets.toolbars: prompt_toolkit
     prompt_toolkit.win32_types: prompt_toolkit
+    proto: proto_plus
+    proto.datetime_helpers: proto_plus
+    proto.enums: proto_plus
+    proto.fields: proto_plus
+    proto.marshal: proto_plus
+    proto.marshal.collections: proto_plus
+    proto.marshal.collections.maps: proto_plus
+    proto.marshal.collections.repeated: proto_plus
+    proto.marshal.compat: proto_plus
+    proto.marshal.marshal: proto_plus
+    proto.marshal.rules: proto_plus
+    proto.marshal.rules.bytes: proto_plus
+    proto.marshal.rules.dates: proto_plus
+    proto.marshal.rules.enums: proto_plus
+    proto.marshal.rules.field_mask: proto_plus
+    proto.marshal.rules.message: proto_plus
+    proto.marshal.rules.stringy_numbers: proto_plus
+    proto.marshal.rules.struct: proto_plus
+    proto.marshal.rules.wrappers: proto_plus
+    proto.message: proto_plus
+    proto.modules: proto_plus
+    proto.primitives: proto_plus
+    proto.utils: proto_plus
+    proto.version: proto_plus
     psutil: psutil
     ptyprocess: ptyprocess
     ptyprocess.ptyprocess: ptyprocess
@@ -4580,6 +4830,21 @@ manifest:
     requests.status_codes: requests
     requests.structures: requests
     requests.utils: requests
+    requests_oauthlib: requests_oauthlib
+    requests_oauthlib.compliance_fixes: requests_oauthlib
+    requests_oauthlib.compliance_fixes.douban: requests_oauthlib
+    requests_oauthlib.compliance_fixes.ebay: requests_oauthlib
+    requests_oauthlib.compliance_fixes.facebook: requests_oauthlib
+    requests_oauthlib.compliance_fixes.fitbit: requests_oauthlib
+    requests_oauthlib.compliance_fixes.instagram: requests_oauthlib
+    requests_oauthlib.compliance_fixes.mailchimp: requests_oauthlib
+    requests_oauthlib.compliance_fixes.plentymarkets: requests_oauthlib
+    requests_oauthlib.compliance_fixes.slack: requests_oauthlib
+    requests_oauthlib.compliance_fixes.weibo: requests_oauthlib
+    requests_oauthlib.oauth1_auth: requests_oauthlib
+    requests_oauthlib.oauth1_session: requests_oauthlib
+    requests_oauthlib.oauth2_auth: requests_oauthlib
+    requests_oauthlib.oauth2_session: requests_oauthlib
     rfc3339_validator: rfc3339_validator
     rfc3986_validator: rfc3986_validator
     roman_numerals: roman_numerals_py
@@ -5328,6 +5593,11 @@ manifest:
     uri_template.expansions: uri_template
     uri_template.uritemplate: uri_template
     uri_template.variable: uri_template
+    uritemplate: uritemplate
+    uritemplate.api: uritemplate
+    uritemplate.orderedset: uritemplate
+    uritemplate.template: uritemplate
+    uritemplate.variable: uritemplate
     urllib3: urllib3
     urllib3.connection: urllib3
     urllib3.connectionpool: urllib3
@@ -5521,4 +5791,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: 056008c057ab76e83be560a3b5a70614f12f9a0fad53944c3ebd539466a17a08
+integrity: 5c1bf61771cf554213e2f7281c731b0b01c654c8001cecf45a09589f7554d9cc
