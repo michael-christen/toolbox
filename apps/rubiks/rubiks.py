@@ -134,6 +134,9 @@ class PositionInfo:
             raise ValueError(f'Unhandled: {rotation_type}')
 
 
+# XXX: We could likely simplify by using a coordinate frame (F, U, R) and
+# defining each position as such. Orientation could use a similar scheme.
+# It's a hollow-shell coordinate frame.
 class Position(enum.Enum):
     POSITION_0 = 0
     POSITION_1 = 1
