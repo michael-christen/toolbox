@@ -6,4 +6,5 @@ py_binary(
     name = "rubiks",
     srcs = ["rubiks.py"],
     visibility = ["//:__subpackages__"],
+    deps = ["@pip//numpy"],
 )

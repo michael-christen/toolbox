@@ -97,6 +97,8 @@ import copy
 import dataclasses
 import enum
 
+import numpy as np
+
 
 POSITION_TO_NAME = {
     0: "∅ ",
@@ -114,6 +116,14 @@ class RotationType(enum.Enum):
     F = 'F'
     U = 'U'
     R = 'R'
+
+    def np_index(self) -> int:
+        TYP_TO_INDEX = {
+            RotationType.F: 0,
+            RotationType.U: 1,
+            RotationType.R: 2,
+        }
+        return TYP_TO_INDEX[self]
 
 
 @dataclasses.dataclass
@@ -233,6 +243,7 @@ class InnerCube:
     # "solved" position is
     # Or it could be the initial position
     identifier: Position
+
 
 
 # XXX: How to best manage overall position tracking vs. cube's data?
@@ -358,8 +369,218 @@ def _smoke_test(rubiks: RubiksCube2x2) -> None:
     # - could turn into benchmarks to measure performance if desired
     # - eyeballing it seems like it's fine
 
+# Thought about rotations some more, then simplified to a 1x1 cube, in that
+# case, it's equivalent to changing different coordinate frames which we can
+# represent as a rotation matrix or as a quaternion. We can keep it simple as a
+# rotation matrix
 
-if __name__ == "__main__":
+# https://en.wikipedia.org/wiki/Rotation_matrix
+# Rotation matrices for F/U/R (X/Y/Z)
+# R_x
+R_f = np.array([[1, 0, 0],
+                [0, 0, -1],
+                [0, 1, 0]])
+# R_y
+R_u = np.array([[0, 0, 1],
+                [0, 1, 0],
+                [-1, 0, 0],
+                ])
+# R_z
+R_r = np.array([[0, -1, 0],
+                [1, 0, 0],
+                [0, 0, 1]])
+ROTATION_MATRIX_BY_TYPE = {
+    RotationType.F: R_f,
+    RotationType.U: R_u,
+    RotationType.R: R_r,
+}
+
+IDENTITY_ROTATION = np.array([[1, 0, 0],
+                              [0, 1, 0],
+                              [0, 0, 1]])
+
+@dataclasses.dataclass
+class LinearInnerCube:
+    # Technically all we need is the starting orientation. The
+    # orientation/rotation matrix tells us how it changes over time.
+    # ID the cube
+    identifier: str
+    # Vector3 of position of the cube
+    position: np.ndarray
+    # Orientation matrix
+    orientation: np.ndarray
+
+    def rotate(self, rotation_type: RotationType, num_rotations: int) -> None:
+        np_index = rotation_type.np_index()
+        if self.position[np_index] > 0:
+            return
+
+        rot_matrix = ROTATION_MATRIX_BY_TYPE[rotation_type]
+        num_rotations %= NUM_ORIENTATIONS
+        for _ in range(num_rotations):
+            self.position = rot_matrix @ self.position
+            # XXX; What's the correct ordering here?
+            # - this seems right ...
+            self.orientation = rot_matrix @ self.orientation
+
+
+def run_linear_algorithm(rubiks: dict[int, LinearInnerCube], algorithm: str) -> list[dict[int, LinearInnerCube]]:
+    """Returns each state of a cube after applying steps of algorithm.
+
+    algorithm is a string, such as "r,ri,u,f"
+    """
+    result = []
+    for operation in algorithm.split(','):
+        rubiks = copy.deepcopy(rubiks)
+        operation = operation.lower()
+        operation_to_typ_and_num = {
+            'f': (RotationType.F, 1),
+            'fi': (RotationType.F, -1),
+            'u': (RotationType.U, 1),
+            'ui': (RotationType.U, -1),
+            'r': (RotationType.R, 1),
+            'ri': (RotationType.R, -1),
+        }
+        typ_num = operation_to_typ_and_num.get(operation)
+        if typ_num is None:
+            raise ValueError(f'Unsupported operation: "{operation}"')
+        typ, num = typ_num
+        for cube in rubiks.values():
+            cube.rotate(typ, num)
+        result.append(rubiks)
+    return result
+
+RAD_TO_DEG = 180 / np.pi
+
+def run_and_display_linear_algorithm(rubiks: dict[int, LinearInnerCube], algorithm: str) -> list[dict[int, LinearInnerCube]]:
+    result = run_linear_algorithm(rubiks, algorithm)
+    operations = algorithm.split(",")
+    assert len(operations) == len(result)
+
+    print("og:")
+    for cube in rubiks.values():
+        # angle, axis = rotation_matrix_to_angle_axis(cube.orientation)
+        euler = rot2eul(cube.orientation)
+        deg = euler * RAD_TO_DEG
+        f_deg = deg[RotationType.F.np_index()]
+        u_deg = deg[RotationType.U.np_index()]
+        r_deg = deg[RotationType.R.np_index()]
+        print(f'{cube.identifier}: {cube.position} (F: {f_deg}°, U: {u_deg}°, R: {r_deg}°)')
+
+    for result_i, operation_i in zip(result, operations):
+        print(operation_i)
+        for cube in result_i.values():
+            # angle, axis = rotation_matrix_to_angle_axis(cube.orientation)
+            # deg = angle * 180 / np.pi
+            # print(f'{cube.identifier}: {cube.position} ({axis} @ {deg}°)')
+            euler = rot2eul(cube.orientation)
+            deg = euler * RAD_TO_DEG
+            f_deg = deg[RotationType.F.np_index()]
+            u_deg = deg[RotationType.U.np_index()]
+            r_deg = deg[RotationType.R.np_index()]
+            print(f'{cube.identifier}: {cube.position} (F: {f_deg}°, U: {u_deg}°, R: {r_deg}°)')
+    return result
+
+
+def linear_algebra_cube():
+    rubiks = {
+        0: LinearInnerCube('0', np.array([1, 1, 1]), IDENTITY_ROTATION.copy()),
+        1: LinearInnerCube('1', np.array([1, 1, -1]), IDENTITY_ROTATION.copy()),
+        2: LinearInnerCube('2', np.array([-1, 1, 1]), IDENTITY_ROTATION.copy()),
+        3: LinearInnerCube('3', np.array([-1, 1, -1]), IDENTITY_ROTATION.copy()),
+        4: LinearInnerCube('4', np.array([1, -1, 1]), IDENTITY_ROTATION.copy()),
+        5: LinearInnerCube('5', np.array([1, -1, -1]), IDENTITY_ROTATION.copy()),
+        6: LinearInnerCube('6', np.array([-1, -1, 1]), IDENTITY_ROTATION.copy()),
+        7: LinearInnerCube('7', np.array([-1, -1, -1]), IDENTITY_ROTATION.copy()),
+    }
+    result = run_and_display_linear_algorithm(rubiks, "r,u,ri,u,r,u,u,ri")
+    print("new")
+    result = run_and_display_linear_algorithm(rubiks, "f,u,r,ui,ri,fi")
+    # print('og:')
+    # for cube in rubiks.values():
+    #     angle, axis = rotation_matrix_to_angle_axis(cube.orientation)
+    #     deg = angle * 180 / np.pi
+    #     print(f'{cube.identifier}: {cube.position} ({axis} @ {deg}°)')
+
+    # # Rotate F
+    # print('f:')
+    # for cube in rubiks.values():
+    #     cube.rotate(RotationType.F, 2)
+    # for cube in rubiks.values():
+    #     angle, axis = rotation_matrix_to_angle_axis(cube.orientation)
+    #     deg = angle * 180 / np.pi
+    #     print(f'{cube.identifier}: {cube.position} ({axis} @ {deg}°)')
+    # print('u:')
+    # for cube in rubiks.values():
+    #     cube.rotate(RotationType.U, 1)
+    # for cube in rubiks.values():
+    #     angle, axis = rotation_matrix_to_angle_axis(cube.orientation)
+    #     deg = angle * 180 / np.pi
+    #     print(f'{cube.identifier}: {cube.position} ({axis} @ {deg}°)')
+    # print('r:')
+    # for cube in rubiks.values():
+    #     cube.rotate(RotationType.R, 1)
+    # for cube in rubiks.values():
+    #     angle, axis = rotation_matrix_to_angle_axis(cube.orientation)
+    #     deg = angle * 180 / np.pi
+    #     print(f'{cube.identifier}: {cube.position} ({axis} @ {deg}°)')
+
+
+# XXX
+# from quick search
+import numpy as np
+
+def rotation_matrix_to_angle_axis(R):
+    trace = np.trace(R)
+    angle = np.arccos((trace - 1) / 2.0)
+
+    # Handle the case where angle is 0 (no rotation) or pi (180 degrees)
+    if np.isclose(angle, 0):
+        axis = np.array([0.0, 0.0, 1.0]) # Arbitrary axis for no rotation
+    elif np.isclose(angle, np.pi):
+        # For 180-degree rotation, the axis is not uniquely determined by the skew-symmetric part alone.
+        # We can find the axis by looking at the largest diagonal element.
+        # For example, if R[0,0] is the largest, the axis is along the x-axis.
+        # A more robust method involves eigenvector decomposition.
+        # Here, a simplified approach:
+        if R[0,0] > R[1,1] and R[0,0] > R[2,2]:
+            axis = np.array([np.sqrt((R[0,0] + 1) / 2), R[0,1] / (2 * np.sqrt((R[0,0] + 1) / 2)), R[0,2] / (2 * np.sqrt((R[0,0] + 1) / 2))])
+        elif R[1,1] > R[2,2]:
+            axis = np.array([R[1,0] / (2 * np.sqrt((R[1,1] + 1) / 2)), np.sqrt((R[1,1] + 1) / 2), R[1,2] / (2 * np.sqrt((R[1,1] + 1) / 2))])
+        else:
+            axis = np.array([R[2,0] / (2 * np.sqrt((R[2,2] + 1) / 2)), R[2,1] / (2 * np.sqrt((R[2,2] + 1) / 2)), np.sqrt((R[2,2] + 1) / 2)])
+    else:
+        axis = np.array([R[2,1] - R[1,2], R[0,2] - R[2,0], R[1,0] - R[0,1]])
+        axis = axis / (2 * np.sin(angle)) # Normalize the axis
+
+    return angle, axis
+
+def rot2eul(R):
+    """
+    Converts a 3x3 rotation matrix to Euler angles (roll, pitch, yaw) in radians.
+    Assumes ZYX extrinsic rotation (or XYZ intrinsic rotation).
+    """
+    sy = np.sqrt(R[0,0] * R[0,0] + R[1,0] * R[1,0])
+
+    singular = sy < 1e-6 # Check for gimbal lock
+
+    if not singular:
+        x = np.arctan2(R[2,1], R[2,2]) # Roll
+        y = np.arctan2(-R[2,0], sy)    # Pitch
+        z = np.arctan2(R[1,0], R[0,0]) # Yaw
+    else:
+        x = np.arctan2(-R[1,2], R[1,1]) # Roll
+        y = np.arctan2(-R[2,0], sy)    # Pitch
+        z = 0                          # Yaw
+
+    return np.array([x, y, z])
+
+
+def main():
+    linear_algebra_cube()
+
+    # XXX
+    return
     # TODO: Cool visualization
     rubiks = RubiksCube2x2([
         InnerCube(position=Position.POSITION_0,
@@ -401,3 +622,7 @@ if __name__ == "__main__":
 
     rubiks = copy.deepcopy(og)
     result = run_and_display_algorithm(rubiks, "r,u,ri,u,r,u,u,ri")
+
+
+if __name__ == "__main__":
+    main()
