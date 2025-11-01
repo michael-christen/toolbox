@@ -225,6 +225,7 @@ manifest:
     PIL.ImageSequence: pillow
     PIL.ImageShow: pillow
     PIL.ImageStat: pillow
+    PIL.ImageText: pillow
     PIL.ImageTk: pillow
     PIL.ImageTransform: pillow
     PIL.ImageWin: pillow
@@ -1643,7 +1644,6 @@ manifest:
     ipykernel.compiler: ipykernel
     ipykernel.connect: ipykernel
     ipykernel.control: ipykernel
-    ipykernel.datapub: ipykernel
     ipykernel.debugger: ipykernel
     ipykernel.displayhook: ipykernel
     ipykernel.embed: ipykernel
@@ -1668,12 +1668,16 @@ manifest:
     ipykernel.kernelspec: ipykernel
     ipykernel.log: ipykernel
     ipykernel.parentpoller: ipykernel
-    ipykernel.pickleutil: ipykernel
     ipykernel.pylab: ipykernel
     ipykernel.pylab.backend_inline: ipykernel
     ipykernel.pylab.config: ipykernel
-    ipykernel.serialize: ipykernel
+    ipykernel.shellchannel: ipykernel
+    ipykernel.socket_pair: ipykernel
+    ipykernel.subshell: ipykernel
+    ipykernel.subshell_manager: ipykernel
+    ipykernel.thread: ipykernel
     ipykernel.trio_runner: ipykernel
+    ipykernel.utils: ipykernel
     ipykernel.zmqshell: ipykernel
     ipykernel_launcher: ipykernel
     ipython_pygments_lexers: ipython_pygments_lexers
@@ -1709,7 +1713,6 @@ manifest:
     isort.parse: isort
     isort.place: isort
     isort.profiles: isort
-    isort.pylama_isort: isort
     isort.sections: isort
     isort.settings: isort
     isort.setuptools_commands: isort
@@ -1723,6 +1726,7 @@ manifest:
     isort.stdlibs.py311: isort
     isort.stdlibs.py312: isort
     isort.stdlibs.py313: isort
+    isort.stdlibs.py314: isort
     isort.stdlibs.py36: isort
     isort.stdlibs.py37: isort
     isort.stdlibs.py38: isort
@@ -2797,6 +2801,7 @@ manifest:
     narwhals.expr_struct: narwhals
     narwhals.functions: narwhals
     narwhals.group_by: narwhals
+    narwhals.plugins: narwhals
     narwhals.schema: narwhals
     narwhals.selectors: narwhals
     narwhals.series: narwhals
@@ -2816,6 +2821,10 @@ manifest:
     narwhals.stable.v2.dtypes: narwhals
     narwhals.stable.v2.selectors: narwhals
     narwhals.stable.v2.typing: narwhals
+    narwhals.testing: narwhals
+    narwhals.testing.asserts: narwhals
+    narwhals.testing.asserts.series: narwhals
+    narwhals.testing.asserts.utils: narwhals
     narwhals.this: narwhals
     narwhals.translate: narwhals
     narwhals.typing: narwhals
@@ -4369,6 +4378,7 @@ manifest:
     pydantic.errors: pydantic
     pydantic.experimental: pydantic
     pydantic.experimental.arguments_schema: pydantic
+    pydantic.experimental.missing_sentinel: pydantic
     pydantic.experimental.pipeline: pydantic
     pydantic.fields: pydantic
     pydantic.functional_serializers: pydantic
@@ -5802,4 +5812,4 @@ manifest:
     zmq.utils.z85: pyzmq
   pip_repository:
     name: pip
-integrity: f6ed5dd352c7a877ab646c084a9e7873a8b9423976f7d2586439abc4e17f5aed
+integrity: 7cc0d8794fd6778d65b1dcc47f20faecabf6dd4633648abc62260d283fe45607
