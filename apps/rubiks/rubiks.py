@@ -92,6 +92,44 @@ The "opposite posiion of ∅ we'll simply name Ω.
 
 We have 3 operaitons: F,U,R that both change the position and orientation of a
 cube.
+
+
+Changing to a matrix operation approach...
+
+Top
++----+----+
+| 4  | 5  |
++----+----+
+| 6  | 7  |
++----+----+
+
+Bottom
++----+----+
+| 0  | 1  |
++----+----+
+| 2  | 3  |
++----+----+
+
+Axes
+         (0)
+          ^
+          |
+     +----+----+
+     | 0  | 1  |
+(2)<-+----+----+
+     | 2  | 3  |
+     +----+----+
+
+(1) goes down from 4 -> 0, etc.
+
+0: [+1, +1, +1]
+1: [+1, +1, -1]
+2: [-1, +1, +1]
+3: [-1, +1, -1]
+4: [+1, -1, +1]
+5: [+1, -1, -1]
+6: [-1, -1, +1]
+7: [-1, -1, -1]
 """
 import copy
 import dataclasses
@@ -399,6 +437,16 @@ IDENTITY_ROTATION = np.array([[1, 0, 0],
                               [0, 1, 0],
                               [0, 0, 1]])
 
+
+def _get_degrees(orientation: np.ndarray) -> tuple[float, float, float]:
+    # angle, axis = rotation_matrix_to_angle_axis(cube.orientation)
+    euler = rot2eul(orientation)
+    deg = euler * RAD_TO_DEG
+    f_deg = deg[RotationType.F.np_index()]
+    u_deg = deg[RotationType.U.np_index()]
+    r_deg = deg[RotationType.R.np_index()]
+    return [f_deg, u_deg, r_deg]
+
 @dataclasses.dataclass
 class LinearInnerCube:
     # Technically all we need is the starting orientation. The
@@ -422,6 +470,36 @@ class LinearInnerCube:
             # XXX; What's the correct ordering here?
             # - this seems right ...
             self.orientation = rot_matrix @ self.orientation
+
+    def __str__(self) -> str:
+        f_deg, u_deg, r_deg = self.get_degrees()
+        return f'{self.identifier}: {self.position} (F: {f_deg}°, U: {u_deg}°, R: {r_deg}°)'
+
+    def get_degrees(self) -> tuple[float, float, float]:
+        return _get_degrees(self.orientation)
+
+    def compare_str(self, other: 'LinearInnerCube') -> str:
+        assert self.identifier == other.identifier
+        if self == other:
+            return(f'{self.identifier} MATCH')
+        else:
+            pos_change = other.position - self.position
+            # XXX: Can't change orientation, then get degrees from that
+            sf_deg, su_deg, sr_deg = self.get_degrees()
+            of_deg, ou_deg, or_deg = other.get_degrees()
+            f_deg = of_deg - sf_deg
+            u_deg = ou_deg - su_deg
+            r_deg = or_deg - sr_deg
+            return(f'{self.identifier} MISMATCH {pos_change} (F: {f_deg}°, U: {u_deg}°, R: {r_deg}°)')
+
+    def __eq__(self, other) -> bool:
+        if not isinstance(other, LinearInnerCube):
+            raise ValueError('Must compare with LinearInnerCube')
+        return (
+            self.identifier == other.identifier and
+            (self.position == other.position).all() and
+            (self.orientation == other.orientation).all()
+        )
 
 
 def run_linear_algorithm(rubiks: dict[int, LinearInnerCube], algorithm: str) -> list[dict[int, LinearInnerCube]]:
@@ -452,33 +530,23 @@ def run_linear_algorithm(rubiks: dict[int, LinearInnerCube], algorithm: str) -> 
 
 RAD_TO_DEG = 180 / np.pi
 
+
 def run_and_display_linear_algorithm(rubiks: dict[int, LinearInnerCube], algorithm: str) -> list[dict[int, LinearInnerCube]]:
     result = run_linear_algorithm(rubiks, algorithm)
     operations = algorithm.split(",")
     assert len(operations) == len(result)
+    print(algorithm)
+    # print("og:")
+    # for cube in rubiks.values():
+    #     print(cube)
 
-    print("og:")
-    for cube in rubiks.values():
-        # angle, axis = rotation_matrix_to_angle_axis(cube.orientation)
-        euler = rot2eul(cube.orientation)
-        deg = euler * RAD_TO_DEG
-        f_deg = deg[RotationType.F.np_index()]
-        u_deg = deg[RotationType.U.np_index()]
-        r_deg = deg[RotationType.R.np_index()]
-        print(f'{cube.identifier}: {cube.position} (F: {f_deg}°, U: {u_deg}°, R: {r_deg}°)')
-
-    for result_i, operation_i in zip(result, operations):
-        print(operation_i)
-        for cube in result_i.values():
-            # angle, axis = rotation_matrix_to_angle_axis(cube.orientation)
-            # deg = angle * 180 / np.pi
-            # print(f'{cube.identifier}: {cube.position} ({axis} @ {deg}°)')
-            euler = rot2eul(cube.orientation)
-            deg = euler * RAD_TO_DEG
-            f_deg = deg[RotationType.F.np_index()]
-            u_deg = deg[RotationType.U.np_index()]
-            r_deg = deg[RotationType.R.np_index()]
-            print(f'{cube.identifier}: {cube.position} (F: {f_deg}°, U: {u_deg}°, R: {r_deg}°)')
+    # for result_i, operation_i in zip(result, operations):
+    #     print(operation_i)
+    #     for cube in result_i.values():
+    #         print(cube)
+    # print('COMPARISON')
+    for og_cube, result_cube in zip(rubiks.values(), result[-1].values()):
+        print(og_cube.compare_str(result_cube))
     return result
 
 
@@ -493,8 +561,12 @@ def linear_algebra_cube():
         6: LinearInnerCube('6', np.array([-1, -1, 1]), IDENTITY_ROTATION.copy()),
         7: LinearInnerCube('7', np.array([-1, -1, -1]), IDENTITY_ROTATION.copy()),
     }
+    # 4/7 swap place; 4: F 90, R -90; 7: F -90, R 90
+    # 5/6 swap place; 5: F -90, U -90; 6: F 180, R 180
     result = run_and_display_linear_algorithm(rubiks, "r,u,ri,u,r,u,u,ri")
     print("new")
+    # 4/5 swap pos; 4 U 90°, 5: F -90°
+    # 6/7 swap pos; 6 U -90°, 7: F -90°
     result = run_and_display_linear_algorithm(rubiks, "f,u,r,ui,ri,fi")
     # print('og:')
     # for cube in rubiks.values():
