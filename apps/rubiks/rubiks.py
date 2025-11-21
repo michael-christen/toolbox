@@ -138,6 +138,8 @@ import enum
 import numpy as np
 
 
+RAD_TO_DEG = 180 / np.pi
+
 NUM_ORIENTATIONS = 4
 
 # Thought about rotations some more, then simplified to a 1x1 cube, in that
@@ -188,33 +190,8 @@ class RotationType(enum.Enum):
         return ROTATION_MATRIX_BY_TYPE[self]
 
 
-# XXX
-# from quick search
-def rotation_matrix_to_angle_axis(R):
-    trace = np.trace(R)
-    angle = np.arccos((trace - 1) / 2.0)
-
-    # Handle the case where angle is 0 (no rotation) or pi (180 degrees)
-    if np.isclose(angle, 0):
-        axis = np.array([0.0, 0.0, 1.0]) # Arbitrary axis for no rotation
-    elif np.isclose(angle, np.pi):
-        # For 180-degree rotation, the axis is not uniquely determined by the skew-symmetric part alone.
-        # We can find the axis by looking at the largest diagonal element.
-        # For example, if R[0,0] is the largest, the axis is along the x-axis.
-        # A more robust method involves eigenvector decomposition.
-        # Here, a simplified approach:
-        if R[0,0] > R[1,1] and R[0,0] > R[2,2]:
-            axis = np.array([np.sqrt((R[0,0] + 1) / 2), R[0,1] / (2 * np.sqrt((R[0,0] + 1) / 2)), R[0,2] / (2 * np.sqrt((R[0,0] + 1) / 2))])
-        elif R[1,1] > R[2,2]:
-            axis = np.array([R[1,0] / (2 * np.sqrt((R[1,1] + 1) / 2)), np.sqrt((R[1,1] + 1) / 2), R[1,2] / (2 * np.sqrt((R[1,1] + 1) / 2))])
-        else:
-            axis = np.array([R[2,0] / (2 * np.sqrt((R[2,2] + 1) / 2)), R[2,1] / (2 * np.sqrt((R[2,2] + 1) / 2)), np.sqrt((R[2,2] + 1) / 2)])
-    else:
-        axis = np.array([R[2,1] - R[1,2], R[0,2] - R[2,0], R[1,0] - R[0,1]])
-        axis = axis / (2 * np.sin(angle)) # Normalize the axis
-
-    return angle, axis
-
+# XXX from quick search
+# - typehinting too
 def rot2eul(R):
     """
     Converts a 3x3 rotation matrix to Euler angles (roll, pitch, yaw) in radians.
@@ -236,8 +213,8 @@ def rot2eul(R):
     return np.array([x, y, z])
 
 
+# XXX: Better type-hinting for the ndarrays
 def _get_degrees(orientation: np.ndarray) -> tuple[float, float, float]:
-    # angle, axis = rotation_matrix_to_angle_axis(cube.orientation)
     euler = rot2eul(orientation)
     deg = euler * RAD_TO_DEG
     f_deg = deg[RotationType.F.np_index()]
@@ -263,6 +240,8 @@ class LinearInnerCube:
             return
 
         rot_matrix = rotation_type.get_matrix()
+        # Here is where negative gets converted into NUM_ORIENTATIONS -  1
+        # - is there a more efficient way?
         num_rotations %= NUM_ORIENTATIONS
         for _ in range(num_rotations):
             self.position = rot_matrix @ self.position
@@ -327,8 +306,6 @@ def run_linear_algorithm(rubiks: dict[int, LinearInnerCube], algorithm: str) -> 
         result.append(rubiks)
     return result
 
-RAD_TO_DEG = 180 / np.pi
-
 
 def run_and_display_linear_algorithm(rubiks: dict[int, LinearInnerCube], algorithm: str) -> list[dict[int, LinearInnerCube]]:
     result = run_linear_algorithm(rubiks, algorithm)
@@ -369,7 +346,7 @@ def linear_algebra_cube():
     result = run_and_display_linear_algorithm(rubiks, "f,u,r,ui,ri,fi")
     # print('og:')
     # for cube in rubiks.values():
-    #     angle, axis = rotation_matrix_to_angle_axis(cube.orientation)
+    #     angle, axis = rot2eul(cube.orientation)
     #     deg = angle * 180 / np.pi
     #     print(f'{cube.identifier}: {cube.position} ({axis} @ {deg}°)')
 
@@ -378,21 +355,21 @@ def linear_algebra_cube():
     # for cube in rubiks.values():
     #     cube.rotate(RotationType.F, 2)
     # for cube in rubiks.values():
-    #     angle, axis = rotation_matrix_to_angle_axis(cube.orientation)
+    #     angle, axis = rot2eul(cube.orientation)
     #     deg = angle * 180 / np.pi
     #     print(f'{cube.identifier}: {cube.position} ({axis} @ {deg}°)')
     # print('u:')
     # for cube in rubiks.values():
     #     cube.rotate(RotationType.U, 1)
     # for cube in rubiks.values():
-    #     angle, axis = rotation_matrix_to_angle_axis(cube.orientation)
+    #     angle, axis = rot2eul(cube.orientation)
     #     deg = angle * 180 / np.pi
     #     print(f'{cube.identifier}: {cube.position} ({axis} @ {deg}°)')
     # print('r:')
     # for cube in rubiks.values():
     #     cube.rotate(RotationType.R, 1)
     # for cube in rubiks.values():
-    #     angle, axis = rotation_matrix_to_angle_axis(cube.orientation)
+    #     angle, axis = rot2eul(cube.orientation)
     #     deg = angle * 180 / np.pi
     #     print(f'{cube.identifier}: {cube.position} ({axis} @ {deg}°)')
 
@@ -401,12 +378,15 @@ def linear_algebra_cube():
     # - eyeballing it seems like it's fine
 
 
-import numpy as np
-
-
 def main():
     linear_algebra_cube()
     # TODO: Cool visualization
+    # TODO: unit testing
+    # TODO: Add sanity check that rubiks cube makes sense
+    # COULD: Extend to N-wide cube?
+    # TODO: Establish a baseline for how long performing operations takes
+    # TODO: Make a branch & bound optimal solver
+    # - compare to open source / existing solutions
 
 
 if __name__ == "__main__":
