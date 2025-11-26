@@ -10,6 +10,15 @@ module(
     version = "",
 )
 
+# Repo description / layout
+# | Repo                                               | bzlmod enabled |
+# | ---                                                | ---            |
+# | https://github.com/stackb/rules_proto              | NO             |
+# | https://github.com/aspect-build/gcc-toolchain      | NO             |
+# | https://github.com/bazelbuild/rules_python gazelle | YES, see #55   |
+#
+# Alternative to gcc-toolchain: https://github.com/uber/hermetic_cc_toolchain
+
 ########################################
 # Generic deps
 ########################################
@@ -22,7 +31,7 @@ bazel_dep(name = "aspect_rules_py", version = "1.0.0")
 
 # Minimum version needs:
 # feat: add interpreter_version_info to py_runtime by @mattem in #1671
-bazel_dep(name = "rules_python", version = "0.34.0", dev_dependency = True)
+bazel_dep(name = "rules_python", version = "0.40.0", dev_dependency = True)
 
 python = use_extension("@rules_python//python/extensions:python.bzl", "python")
 
@@ -81,7 +90,7 @@ pip.parse(
 use_repo(pip, "pip")
 
 # TODO(#91): Allow bumping this up to 26 or greater while avoiding segfault
-bazel_dep(name = "protobuf", version = "24.4")
+bazel_dep(name = "protobuf", version = "24.4", repo_name="com_google_protobuf")
 bazel_dep(name = "rules_rust", version = "0.48.0")
 
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
@@ -196,9 +205,6 @@ bazel_dep(name = "bazel_skylib", version = "1.7.1")
 
 bazel_dep(name = "bazel_skylib_gazelle_plugin", version = "1.7.1", dev_dependency = True)  # mchristen add
 
-# Allow platform transitions
-bazel_dep(name = "rules_platform", version = "0.1.0")
-
 # C++ Test framework
 # https://github.com/catchorg/Catch2
 # Consider adding listeners via https://github.com/catchorg/Catch2/blob/devel/docs/event-listeners.md
@@ -216,12 +222,13 @@ register_toolchains(
 ######################################
 
 bazel_dep(name = "freertos", version = "10.5.1.bcr.2")
-bazel_dep(name = "nanopb", repo_name = "com_github_nanopb_nanopb")
+bazel_dep(name = "nanopb", version = "0.4.9.1", repo_name = "com_github_nanopb_nanopb")
 bazel_dep(name = "pico-sdk", version = "2.0.0")
 bazel_dep(name = "pigweed")
 bazel_dep(name = "platforms", version = "0.0.10")
-bazel_dep(name = "pw_toolchain")
-bazel_dep(name = "rules_cc")
+bazel_dep(name = "rules_cc", version = "0.0.17")
+# Allow platform transitions
+bazel_dep(name = "rules_platform", version = "0.1.0")
 
 bazel_dep(name = "hedron_compile_commands", dev_dependency = True)
 
@@ -229,7 +236,7 @@ bazel_dep(name = "toolchains_llvm", version = "0.10.3")
 
 # Python Type Checking - mypy
 #############################
-bazel_dep(name = "rules_mypy", version = "0.17.0")
+bazel_dep(name = "rules_mypy", version = "0.38.0")
 
 types = use_extension("@rules_mypy//mypy:types.bzl", "types")
 types.requirements(
@@ -273,42 +280,12 @@ archive_override(
     urls = ["https://github.com/bazelbuild/rules_rust/releases/download/0.45.1/rules_rust-v0.45.1.tar.gz"],
 )
 
-# TODO: https://pwbug.dev/354274498 - nanopb is not yet in the BCR.
-git_override(
-    module_name = "nanopb",
-    commit = "7c6c581bc6f7406a4f01c3b9853251ff0a68458b",
-    remote = "https://github.com/nanopb/nanopb.git",
-)
-
 git_override(
     module_name = "pigweed",
-    # ROLL: Warning: this entry is automatically updated.
-    # ROLL: Last updated 2024-08-14.
-    # ROLL: By https://cr-buildbucket.appspot.com/build/8739669590315800497.
-    commit = "c9d5bef2f82612fa8d4be0d53b614bbc02bab62b",
+    # ROLL: Warning: this entry is automatically updated by
+    # ROLL: https://cr-buildbucket.appspot.com/builder/pigweed/quickstart.roll/pigweed-quickstart-bazel-roller
+    commit = "6e6d54426b139c4044dc9a5ccf635e1531ca16f2",
     remote = "https://pigweed.googlesource.com/pigweed/pigweed",
-)
-
-git_override(
-    module_name = "pw_toolchain",
-    # ROLL: Warning: this entry is automatically updated.
-    # ROLL: Last updated 2024-08-14.
-    # ROLL: By https://cr-buildbucket.appspot.com/build/8739669590315800497.
-    commit = "c9d5bef2f82612fa8d4be0d53b614bbc02bab62b",
-    remote = "https://pigweed.googlesource.com/pigweed/pigweed",
-    strip_prefix = "pw_toolchain_bazel",
-)
-
-# TODO: https://pwbug.dev/258836641 - Pre-release version needed for the Pico
-# SDK. Remove this once rules_cc 0.10.0 is released and the Pico SDK
-# MODULE.bazel declares its dependency on it.
-archive_override(
-    module_name = "rules_cc",
-    integrity = "sha256-NddP6xi6LzsIHT8bMSVJ2NtoURbN+l3xpjvmIgB6aSg=",
-    strip_prefix = "rules_cc-1acf5213b6170f1f0133e273cb85ede0e732048f",
-    urls = [
-        "https://github.com/bazelbuild/rules_cc/archive/1acf5213b6170f1f0133e273cb85ede0e732048f.zip",
-    ],
 )
 
 # Configure and register the toolchain.
@@ -320,3 +297,66 @@ llvm.toolchain(
     },
 )
 use_repo(llvm, "llvm_toolchain", "llvm_toolchain_llvm")
+
+### XXX
+bazel_dep(name = "build_stack_rules_proto", version = "4.1.2")
+bazel_dep(name = "rules_python_gazelle_plugin", version = "0.29.0")
+
+#### emboss
+bazel_dep(name = "emboss", repo_name="com_google_emboss")
+git_override(
+    module_name = "emboss",
+    commit = "f595908cba6f366746d6834a2e885868d1a836cd",
+    # LINT.IfChange(emboss)
+    remote = "https://pigweed.googlesource.com/third_party/github/google/emboss",
+    # tag = "v2024.0809.170004",
+    # LINT.ThenChange(/pw_package/py/pw_package/packages/emboss.py:emboss)
+)
+
+# TODO(#78): Consider re-enabling
+# http_archive(
+#     name = "aspect_gcc_toolchain",
+#     integrity = "sha256-iqcSkkfwbhKrNWeX957qE/I4fzKuj3GEB06OZAJ5Apk=",
+#     strip_prefix = "gcc-toolchain-0.6.0",
+#     urls = [
+#         "https://github.com/f0rmiga/gcc-toolchain/archive/refs/tags/0.6.0.tar.gz",
+#     ],
+# )
+#
+# load("@aspect_gcc_toolchain//toolchain:repositories.bzl", "gcc_toolchain_dependencies")
+#
+# gcc_toolchain_dependencies()
+#
+# load("@aspect_gcc_toolchain//toolchain:defs.bzl", "ARCHS", "gcc_register_toolchain")
+#
+# gcc_register_toolchain(
+#     name = "gcc_toolchain_x86_64",
+#     target_arch = ARCHS.x86_64,
+# )
+
+# TODO: Should add buf too
+
+switched_rules_by_language = use_repo_rule("@com_google_googleapis//:repository_rules.bzl", "switched_rules_by_language")
+
+# Initialize Google APIs with only C++ and Python targets
+switched_rules_by_language(
+    name = "com_google_googleapis_imports",
+    cc = True,
+    grpc = True,
+    python = True,
+)
+
+
+# Toolchain registration
+# ======================
+# Register Pigweed's C++ toolchains.
+register_toolchains(
+    "@pigweed//pw_toolchain:cc_toolchain_cortex-m0",
+    "@pigweed//pw_toolchain:cc_toolchain_cortex-m33",
+    "@pigweed//pw_toolchain/host_clang:host_cc_toolchain_linux",
+    "@pigweed//pw_toolchain/host_clang:host_cc_toolchain_macos",
+    dev_dependency = True,
+)
+
+bazel_dep(name = "rules_proto", version = "7.1.0")
+bazel_dep(name = "gazelle", version = "0.47.0", repo_name="bazel_gazelle")
