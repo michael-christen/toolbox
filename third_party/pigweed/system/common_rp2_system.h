@@ -27,7 +27,7 @@ void CommonRp2Init();
   static std::byte channel_buffer[channel_buffer_size];              \
   static pw::multibuf::SimpleAllocator multibuf_alloc(               \
       channel_buffer, pw::System().allocator());                     \
-  pw::SystemStart(pw::channel::Rp2StdioChannelInit(multibuf_alloc)); \
+  pw::SystemStart(pw::channel::Rp2StdioChannelInit(multibuf_alloc, multibuf_alloc)); \
   PW_UNREACHABLE;
 
 }  // namespace system

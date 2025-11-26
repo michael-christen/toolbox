@@ -296,11 +296,12 @@ llvm.toolchain(
         "darwin-x86_64": "15.0.7",
     },
 )
+# XXX: Seems like this isn't getting used properly
 use_repo(llvm, "llvm_toolchain", "llvm_toolchain_llvm")
 
 ### XXX
 bazel_dep(name = "build_stack_rules_proto", version = "4.1.2")
-bazel_dep(name = "rules_python_gazelle_plugin", version = "0.29.0")
+bazel_dep(name = "rules_python_gazelle_plugin", version = "1.7.0-rc4")
 
 #### emboss
 bazel_dep(name = "emboss", repo_name="com_google_emboss")

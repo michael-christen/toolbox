@@ -60,13 +60,13 @@ Coro<Status> Blinky::BlinkLoop(CoroContext&, uint32_t blink_count,
       std::lock_guard lock(lock_);
       TurnOff(*monochrome_led_);
     }
-    co_await timer_.WaitFor(interval);
+    co_await time_->WaitFor(interval);
     {
       PW_LOG_INFO("LED blinking: ON");
       std::lock_guard lock(lock_);
       TurnOn(*monochrome_led_);
     }
-    co_await timer_.WaitFor(interval);
+    co_await time_->WaitFor(interval);
   }
   {
     std::lock_guard lock(lock_);

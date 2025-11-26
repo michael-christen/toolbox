@@ -50,7 +50,7 @@ TEST(I2CTestSuite, I2CTransactions) {
   pw::i2c::MockInitiator initiator(expected_transactions);
   pw::i2c::RegisterDevice reg_device(initiator, kAddress, cpp20::endian::little,
                                      pw::i2c::RegisterAddressSize::k1Byte);
-  pw::ConstByteSpan kRegWrite = pw::bytes::Array<2, 3, 4, 5, 6>();
+  pw::ConstByteSpan kRegWrite = pw::bytes::Array<2, 3, 4, 5, 6>();  // XXX: dangling-gsl
   std::array<std::byte, 12> raw_buf = {std::byte{0}};
   auto buf = pw::as_writable_bytes(pw::span(raw_buf));
   auto status = reg_device.WriteRegisters(

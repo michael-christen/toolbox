@@ -9,7 +9,7 @@ namespace {
 constexpr std::chrono::milliseconds kI2cTimeout{100};
 }
 
-std::expected<::hw_drivers_lis3mdl_LIS3MDLConfiguration, ConfigurationError>
+std::variant<::hw_drivers_lis3mdl_LIS3MDLConfiguration, ConfigurationError>
 SolveConfiguration(
     const ::hw_drivers_lis3mdl_LIS3MDLConfiguration& desired_configuration,
     LIS3MDLControl* control) {
@@ -20,7 +20,7 @@ SolveConfiguration(
         desired_configuration.has_allowable_rms_noise_ug &&
         desired_configuration.has_data_rate_millihz &&
         desired_configuration.has_scale_gauss)) {
-    return std::unexpected(ConfigurationError::kInvalidConfig);
+    return ConfigurationError::kInvalidConfig;
   }
 
   // RMS Noise and OperatingMode
@@ -28,7 +28,7 @@ SolveConfiguration(
   uint32_t actual_rms_noise_ug;
   OperatingMode operating_mode;
   if (desired_rms_noise_ug < 3'500) {
-    return std::unexpected(ConfigurationError::kUnsupportedConfig);
+    return ConfigurationError::kUnsupportedConfig;
   } else if (desired_rms_noise_ug < 4'000) {
     actual_rms_noise_ug = 3'500;
     operating_mode = OperatingMode::OPERATING_MODE_ULTRA_HIGH_PERFORMANCE;
@@ -175,7 +175,7 @@ pw::Status ReadFromDevice(LIS3MDLData* data,
       kI2cTimeout);
 }
 
-std::expected<uint32_t, ConfigurationError> GetLsbPerGauss(
+std::variant<uint32_t, ConfigurationError> GetLsbPerGauss(
     uint32_t scale_gauss) {
   switch (scale_gauss) {
     case 4:
@@ -187,7 +187,7 @@ std::expected<uint32_t, ConfigurationError> GetLsbPerGauss(
     case 16:
       return kFullScale16LSBPerGauss;
     default:
-      return std::unexpected(ConfigurationError::kInvalidConfig);
+      return ConfigurationError::kInvalidConfig;
   }
 }
 

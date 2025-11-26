@@ -15,10 +15,10 @@
 
 #include <chrono>
 
-#include "examples/pigweed/modules/timer_future/timer_future.h"
 #include "pw_allocator/allocator.h"
 #include "pw_async2/coro_or_else_task.h"
 #include "pw_async2/dispatcher.h"
+#include "pw_async2/time_provider.h"
 #include "pw_chrono/system_clock.h"
 #include "pw_digital_io/digital_io.h"
 #include "pw_status/status.h"
@@ -67,10 +67,10 @@ class Blinky final {
       pw::chrono::SystemClock::duration interval) PW_LOCKS_EXCLUDED(lock_);
 
   pw::async2::Dispatcher* dispatcher_;
+  pw::async2::TimeProvider<pw::chrono::SystemClock>* time_;
   pw::Allocator* allocator_;
   mutable pw::sync::InterruptSpinLock lock_;
   pw::digital_io::DigitalInOut* monochrome_led_ PW_GUARDED_BY(lock_) = nullptr;
-  AsyncTimer timer_;
   mutable pw::async2::CoroOrElseTask blink_task_;
 };
 

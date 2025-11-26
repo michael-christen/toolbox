@@ -113,6 +113,7 @@ build --copt -Werror
 
 # Let's use the latest and greatest we can
 # NOTE this should probably match //bzl:cc.bzl
+# XXX: pigweed says they limit to C++17
 build --cxxopt='-std=c++23'
 build --host_cxxopt='-std=c++23'
 

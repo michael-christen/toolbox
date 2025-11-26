@@ -44,10 +44,10 @@ cc_library(
     ],
     deps = [
         "//examples/pigweed/apps/blinky/system",
-        "//examples/pigweed/modules/timer_future",
         "@pigweed//pw_async2:coro",
         "@pigweed//pw_async2:coro_or_else_task",
         "@pigweed//pw_async2:dispatcher",
+        "@pigweed//pw_async2:time_provider",
         "@pigweed//pw_chrono:system_clock",
         "@pigweed//pw_function",
         "@pigweed//pw_sync:interrupt_spin_lock",
