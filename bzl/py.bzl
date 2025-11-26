@@ -5,7 +5,7 @@ load("@aspect_bazel_lib//lib:transitions.bzl", "platform_transition_filegroup")
 load("@aspect_rules_py//py:defs.bzl", _py_binary = "py_binary", _py_library = "py_library")
 load("@build_stack_rules_proto//rules/py:grpc_py_library.bzl", _grpc_py_library = "grpc_py_library")
 load("@build_stack_rules_proto//rules/py:proto_py_library.bzl", _proto_py_library = "proto_py_library")
-load("@rules_oci//oci:defs.bzl", "oci_image", "oci_tarball")
+load("@rules_oci//oci:defs.bzl", "oci_image", "oci_load")
 
 # TODO(#52): Add aspect_rules_py back for py_test
 load("@rules_python//python:defs.bzl", _py_test = "py_test")
@@ -125,7 +125,7 @@ def py_image(name, binary, image_tags, tars = [], base = None, entrypoint = None
 
     The created target can be passed on to anything that expects an oci_image target, such as `oci_push`.
 
-    An implicit `oci_tarball` target is created for the image in question, which can be used to load
+    An implicit `oci_load` target is created for the image in question, which can be used to load
     this image into a running docker daemon automatically for testing. This is named `name + "_load_docker"`.
 
         ```sh
@@ -186,7 +186,7 @@ def py_image(name, binary, image_tags, tars = [], base = None, entrypoint = None
     )
 
     # Create a tarball that can be loaded into a docker daemon
-    oci_tarball(
+    oci_load(
         name = name + "_load_docker",
         image = name,
         repo_tags = image_tags,

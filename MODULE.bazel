@@ -115,7 +115,7 @@ use_repo(crate, "crate_index")
 ########################################
 # Set up rules_oci
 ########################################
-bazel_dep(name = "rules_oci", version = "1.7.4")
+bazel_dep(name = "rules_oci", version = "2.2.6")
 
 oci = use_extension("@rules_oci//oci:extensions.bzl", "oci")
 oci.pull(
