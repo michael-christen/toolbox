@@ -236,7 +236,7 @@ bazel_dep(name = "toolchains_llvm", version = "0.10.3")
 
 # Python Type Checking - mypy
 #############################
-bazel_dep(name = "rules_mypy", version = "0.38.0")
+bazel_dep(name = "rules_mypy", version = "0.38.0", dev_dependency = True)
 
 types = use_extension("@rules_mypy//mypy:types.bzl", "types")
 types.requirements(
