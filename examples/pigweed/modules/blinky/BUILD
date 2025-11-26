@@ -62,9 +62,9 @@ pw_cc_test(
     deps = [
         ":blinky",
         "@pigweed//pw_allocator:testing",
-        "@pigweed//pw_async2:dispatcher",
+        "@pigweed//pw_async2:simulated_time_provider",
+        "@pigweed//pw_async2:testing",
         "@pigweed//pw_digital_io:digital_io_mock",
-        "@pigweed//pw_thread:sleep",
         "@pigweed//pw_unit_test",
     ],
 )

@@ -15,15 +15,15 @@
 #include "examples/pigweed/modules/blinky/blinky.h"
 
 #include "pw_allocator/testing.h"
-#include "pw_async2/dispatcher.h"
+#include "pw_async2/dispatcher_for_test.h"
+#include "pw_async2/simulated_time_provider.h"
 #include "pw_digital_io/digital_io_mock.h"
-#include "pw_thread/sleep.h"
 #include "pw_unit_test/framework.h"
 
 namespace demo {
 
 using AllocatorForTest = ::pw::allocator::test::AllocatorForTest<256>;
-using ::pw::async2::Dispatcher;
+using ::pw::async2::DispatcherForTest;
 
 // Test fixtures.
 
@@ -42,7 +42,9 @@ class BlinkyTest : public ::testing::Test {
   // checking that the LED was in the right state for _at least_ the expected
   // number of intervals. On some platforms, the fake LED is implemented using
   // threads, and may sleep a bit longer.
-  BlinkyTest() : clock_(pw::chrono::VirtualSystemClock::RealClock()) {}
+  BlinkyTest() : monochrome_led_(time_) {
+    blinky_.Init(dispatcher_, time_, allocator_, monochrome_led_);
+  }
 
   pw::InlineDeque<Event>::iterator FirstActive() {
     pw::InlineDeque<Event>& events = monochrome_led_.events();
@@ -64,25 +66,25 @@ class BlinkyTest : public ::testing::Test {
   static constexpr const size_t kEventCapacity = 256;
 
   AllocatorForTest allocator_;
-  Dispatcher dispatcher_;
-  pw::chrono::VirtualSystemClock& clock_;
+  DispatcherForTest dispatcher_;
+  pw::async2::SimulatedTimeProvider<pw::chrono::SystemClock> time_;
   pw::digital_io::DigitalInOutMock<kEventCapacity> monochrome_led_;
+  Blinky blinky_;
 };
 
 // Unit tests.
 
+// XXX: Test is failing, re-evaluate
 TEST_F(BlinkyTest, Toggle) {
-  Blinky blinky;
-  blinky.Init(dispatcher_, allocator_, monochrome_led_);
 
-  auto start = clock_.now();
-  blinky.Toggle();
-  pw::this_thread::sleep_for(kInterval * 1);
-  blinky.Toggle();
-  pw::this_thread::sleep_for(kInterval * 2);
-  blinky.Toggle();
-  pw::this_thread::sleep_for(kInterval * 3);
-  blinky.Toggle();
+  auto start = time_.now();
+  blinky_.Toggle();
+  time_.AdvanceTime(kInterval * 1);
+  blinky_.Toggle();
+  time_.AdvanceTime(kInterval * 2);
+  blinky_.Toggle();
+  time_.AdvanceTime(kInterval * 3);
+  blinky_.Toggle();
 
   auto event = FirstActive();
   ASSERT_NE(event, monochrome_led_.events().end());
@@ -106,14 +108,12 @@ TEST_F(BlinkyTest, Toggle) {
 }
 
 TEST_F(BlinkyTest, Blink) {
-  Blinky blinky;
-  blinky.Init(dispatcher_, allocator_, monochrome_led_);
 
-  auto start = clock_.now();
-  EXPECT_EQ(blinky.Blink(1, kIntervalMs), pw::OkStatus());
-  while (!blinky.IsIdle()) {
-    dispatcher_.RunUntilStalled().IgnorePoll();
-    pw::this_thread::sleep_for(kInterval);
+  auto start = time_.now();
+  EXPECT_EQ(blinky_.Blink(1, kIntervalMs), pw::OkStatus());
+  while (!blinky_.IsIdle()) {
+    dispatcher_.RunUntilStalled();
+    time_.AdvanceTime(kInterval);
   }
 
   auto event = FirstActive();
@@ -128,30 +128,25 @@ TEST_F(BlinkyTest, Blink) {
 }
 
 TEST_F(BlinkyTest, BlinkMany) {
-  Blinky blinky;
-  blinky.Init(dispatcher_, allocator_, monochrome_led_);
-
-  auto start = clock_.now();
-  EXPECT_EQ(blinky.Blink(100, kIntervalMs), pw::OkStatus());
-  while (!blinky.IsIdle()) {
-    dispatcher_.RunUntilStalled().IgnorePoll();
-    pw::this_thread::sleep_for(kInterval);
+  auto start = time_.now();
+  EXPECT_EQ(blinky_.Blink(100, kIntervalMs), pw::OkStatus());
+  while (!blinky_.IsIdle()) {
+    dispatcher_.RunUntilStalled();
+    time_.AdvanceTime(kInterval);
   }
 
   // Every "on" and "off" is recorded.
   EXPECT_GE(monochrome_led_.events().size(), 200);
-  EXPECT_GE(ToMs(clock_.now() - start), kIntervalMs * 200);
+  EXPECT_GE(ToMs(time_.now() - start), kIntervalMs * 200);
 }
 
 TEST_F(BlinkyTest, BlinkSlow) {
-  Blinky blinky;
-  blinky.Init(dispatcher_, allocator_, monochrome_led_);
 
-  auto start = clock_.now();
-  EXPECT_EQ(blinky.Blink(1, kIntervalMs * 32), pw::OkStatus());
-  while (!blinky.IsIdle()) {
-    dispatcher_.RunUntilStalled().IgnorePoll();
-    pw::this_thread::sleep_for(kInterval);
+  auto start = time_.now();
+  EXPECT_EQ(blinky_.Blink(1, kIntervalMs * 32), pw::OkStatus());
+  while (!blinky_.IsIdle()) {
+    dispatcher_.RunUntilStalled();
+    time_.AdvanceTime(kInterval);
   }
 
   auto event = FirstActive();

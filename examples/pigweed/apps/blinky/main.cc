@@ -17,6 +17,7 @@
 #include "examples/pigweed/modules/blinky/service.h"
 #include "pw_log/log.h"
 #include "pw_system/system.h"
+#include "pw_async2/system_time_provider.h"
 
 int main() {
   demo::system::Init();
@@ -24,7 +25,9 @@ int main() {
   auto& monochrome_led = demo::system::MonochromeLed();
 
   static demo::BlinkyService blinky_service;
-  blinky_service.Init(pw::System().dispatcher(), pw::System().allocator(),
+  blinky_service.Init(pw::System().dispatcher(),
+      pw::async2::GetSystemTimeProvider(),
+      pw::System().allocator(),
                       monochrome_led);
   rpc_server.RegisterService(blinky_service);
 
