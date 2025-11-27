@@ -121,6 +121,10 @@ gazelle(
 
 # Exclude these folders from gazelle generation
 # gazelle:exclude venv
+# XXX: Avoid gazelle on these directories
+# gazelle:exclude apps/csv-to-sheets
+# gazelle:exclude apps/ical
+# gazelle:exclude examples/pyglet
 
 # Don't use go
 # gazelle:go_generate_proto false
