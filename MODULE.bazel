@@ -37,15 +37,15 @@ bazel_dep(name = "aspect_bazel_lib", version = "2.9.4")
 bazel_dep(name = "aspect_rules_js", version = "1.39.0")
 bazel_dep(name = "aspect_rules_lint", version = "1.0.3")
 bazel_dep(name = "aspect_rules_py", version = "1.6.6")
-bazel_dep(name = "bazel_skylib_gazelle_plugin", version = "1.7.1", dev_dependency = True)
+bazel_dep(name = "bazel_skylib_gazelle_plugin", version = "1.7.1")
 bazel_dep(name = "bazel_skylib", version = "1.7.1")
-bazel_dep(name = "buildifier_prebuilt", version = "6.4.0", dev_dependency = True)
+bazel_dep(name = "buildifier_prebuilt", version = "6.4.0")
 bazel_dep(name = "build_stack_rules_proto", version = "4.1.2")
 bazel_dep(name = "catch2", version = "3.6.0")
 bazel_dep(name = "emboss", repo_name = "com_google_emboss")
 bazel_dep(name = "freertos", version = "10.5.1.bcr.2")
 bazel_dep(name = "gazelle", version = "0.47.0", repo_name = "bazel_gazelle")
-bazel_dep(name = "hedron_compile_commands", dev_dependency = True)
+bazel_dep(name = "hedron_compile_commands")
 bazel_dep(name = "nanopb", version = "0.4.9.1", repo_name = "com_github_nanopb_nanopb")
 bazel_dep(name = "pico-sdk", version = "2.0.0")
 bazel_dep(name = "pigweed")
@@ -54,12 +54,12 @@ bazel_dep(name = "protobuf", version = "24.4", repo_name = "com_google_protobuf"
 bazel_dep(name = "rules_cc", version = "0.0.17")
 bazel_dep(name = "rules_multirun", version = "0.9.0")
 bazel_dep(name = "rules_multitool", version = "1.9.0")
-bazel_dep(name = "rules_mypy", version = "0.38.0", dev_dependency = True)
+bazel_dep(name = "rules_mypy", version = "0.38.0")
 bazel_dep(name = "rules_oci", version = "2.2.6")
 bazel_dep(name = "rules_platform", version = "0.1.0")
 bazel_dep(name = "rules_proto", version = "7.1.0")
 bazel_dep(name = "rules_python_gazelle_plugin", version = "1.7.0-rc4")
-bazel_dep(name = "rules_python", version = "1.7.0", dev_dependency = True)
+bazel_dep(name = "rules_python", version = "1.7.0")
 bazel_dep(name = "rules_rust", version = "0.48.0")
 bazel_dep(name = "rules_uv", version = "0.45.0")
 bazel_dep(name = "toolchains_llvm", version = "0.10.3")
@@ -174,14 +174,12 @@ bazel_dep(name = "toolchains_llvm", version = "0.10.3")
 #     target_arch = ARCHS.x86_64,
 # )
 
-
 ##########################################
 # bazel_dep Overrides
 ##########################################
 ##########################################
 # (NOTE: We don't put the overrides in-line with the bazel_dep for readability)
 # order to keep them clean / immediately viewable)
-
 
 git_override(
     module_name = "emboss",
@@ -234,7 +232,6 @@ archive_override(
 ##########################################
 ##########################################
 
-
 ########################
 # com_google_googleapis
 ########################
@@ -266,6 +263,7 @@ register_toolchains(
 # rules_js
 ###########
 npm = use_extension("@aspect_rules_js//npm:extensions.bzl", "npm", dev_dependency = True)
+
 pnpm = use_extension("@aspect_rules_js//npm:extensions.bzl", "pnpm", dev_dependency = True)
 
 npm.npm_translate_lock(
@@ -274,6 +272,7 @@ npm.npm_translate_lock(
     verify_node_modules_ignored = "//:.bazelignore",
 )
 use_repo(npm, "npm")
+
 use_repo(pnpm, "pnpm")
 
 ##################
@@ -324,6 +323,7 @@ oci.pull(
         "linux/arm64/v8",
     ],
 )
+
 # For each oci.pull call, repeat the "name" here to expose them as dependencies.
 use_repo(oci, "distroless_base", "distroless_base_linux_amd64", "distroless_base_linux_arm64_v8", "ubuntu_base", "ubuntu_base_linux_amd64", "ubuntu_base_linux_arm64_v8")
 
