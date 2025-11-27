@@ -8,8 +8,7 @@ py_library(
     visibility = ["//:__subpackages__"],
     deps = [
         "@com_google_protobuf//:protobuf_python",
-        # XXX: This is giving a bad mypy type-hint ...
-        # "@pip//protobuf",
+        "@pip//protobuf",
     ],
 )
 

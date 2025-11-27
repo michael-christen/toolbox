@@ -2,7 +2,7 @@
 # various rulesets and dependencies.
 # The `load` statement imports the symbol for the rule, in the defined
 # ruleset. When the symbol is loaded you can use the rule.
-load("@bazel_gazelle//:def.bzl", "gazelle")
+load("@bazel_gazelle//:def.bzl", "gazelle", "gazelle_binary")
 load("@npm//:defs.bzl", "npm_link_all_packages")
 load("@pip//:requirements.bzl", "all_whl_requirements")
 load("@rules_python_gazelle_plugin//manifest:defs.bzl", "gazelle_python_manifest")
@@ -79,20 +79,20 @@ gazelle_python_manifest(
     requirements = "//:requirements_lock.txt",
 )
 
-# XXX: Likely need this for languages
-# gazelle_binary(
-#     name = "gazelle_bin",
-#     languages = [
-#         "@bazel_gazelle//language/bazel/visibility",  # bazel visibility rules
-#         "@bazel_gazelle//language/go",  # Built-in rule from gazelle for Golang
-#         "@bazel_gazelle//language/proto",  # Built-in rule from gazelle for Protos
-#         # Any languages that depend on the proto plugin must come after it
-#         "@rules_python_gazelle_plugin//python:python",  # Use gazelle from rules_python
-#         "@build_stack_rules_proto//language/protobuf",  # Protobuf language generation
-#         # TODO: Add buf suppport
-#         # "@rules_buf//gazelle/buf:buf",  # Generates buf lint and buf breaking detection rules
-#     ],
-# )
+# XXX: Why is this just working now?
+gazelle_binary(
+    name = "gazelle_bin",
+    languages = [
+        "@bazel_gazelle//language/bazel/visibility",  # bazel visibility rules
+        "@bazel_gazelle//language/go",  # Built-in rule from gazelle for Golang
+        "@bazel_gazelle//language/proto",  # Built-in rule from gazelle for Protos
+        # Any languages that depend on the proto plugin must come after it
+        "@rules_python_gazelle_plugin//python:python",  # Use gazelle from rules_python
+        "@build_stack_rules_proto//language/protobuf",  # Protobuf language generation
+        # TODO: Add buf suppport
+        # "@rules_buf//gazelle/buf:buf",  # Generates buf lint and buf breaking detection rules
+    ],
+)
 
 # Our gazelle target points to the python gazelle binary.
 # This is the simple case where we only need one language supported.
@@ -101,13 +101,10 @@ gazelle_python_manifest(
 # See https://github.com/bazelbuild/bazel-gazelle/blob/master/extend.rst#example
 gazelle(
     name = "gazelle",
-    # XXX: How are languages presented?
-    # XXX: Re-enable ...
-    # args = [
-    #     "-proto_configs=gazelle_proto_config.yaml",
-    # ],
-    # gazelle = ":gazelle_bin",
-    gazelle = "@multitool//tools/gazelle",
+    args = [
+        "-proto_configs=gazelle_proto_config.yaml",
+    ],
+    gazelle = ":gazelle_bin",
 )
 
 # https://github.com/bazelbuild/bazel-gazelle#directives
