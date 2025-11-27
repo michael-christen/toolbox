@@ -98,12 +98,12 @@ py_binary(
 mypy_cli(
     name = "mypy_cli",
     mypy_requirement = requirement("mypy"),
+    # Must match PYTHON_VERSION in MODULE.bazel
+    # LINK(7e463bc3_e4d9_4464_ba39_3217c4a86004)
+    python_version = "3.11.9",
     deps = [
         "@pip//types_protobuf",
     ],
-    # Must match PYTHON_VERSION in MODULE.bazel
-    # LINK(7e463bc3_e4d9_4464_ba39_3217c4a86004)
-    python_version="3.11.9",
 )
 
 proto_library(

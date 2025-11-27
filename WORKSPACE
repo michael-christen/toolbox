@@ -1,2 +1,1 @@
-# Set the name of the bazel workspace.
-workspace(name = "mchristen")
+# Leave empty, see MODULE.bazel. We're fully migrated
