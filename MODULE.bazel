@@ -101,18 +101,18 @@ use_repo(rust, "rust_toolchains")
 register_toolchains("@rust_toolchains//:all")
 
 # XXX: bazel mod tidy fails, likely related to this
-# crate = use_extension(
-#     "@rules_rust//crate_universe:extension.bzl",
-#     "crate",
-# )
-# crate.from_cargo(
-#     name = "crate_index",
-#     cargo_lockfile = "//:Cargo.lock",
-#     manifests = [
-#         "//:examples/basic/Cargo.toml",
-#     ],
-# )
-# use_repo(crate, "crate_index")
+crate = use_extension(
+    "@rules_rust//crate_universe:extension.bzl",
+    "crate",
+)
+crate.from_cargo(
+    name = "crate_index",
+    cargo_lockfile = "//:Cargo.lock",
+    manifests = [
+        "//:examples/basic/Cargo.toml",
+    ],
+)
+use_repo(crate, "crate_index")
 
 ########################################
 # Set up rules_oci
