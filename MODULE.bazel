@@ -91,7 +91,7 @@ pip.parse(
 use_repo(pip, "pip")
 
 # TODO(#91): Allow bumping this up to 26 or greater while avoiding segfault
-bazel_dep(name = "protobuf", version = "24.4", repo_name="com_google_protobuf")
+bazel_dep(name = "protobuf", version = "24.4", repo_name = "com_google_protobuf")
 bazel_dep(name = "rules_rust", version = "0.48.0")
 
 rust = use_extension("@rules_rust//rust:extensions.bzl", "rust")
@@ -100,18 +100,19 @@ use_repo(rust, "rust_toolchains")
 
 register_toolchains("@rust_toolchains//:all")
 
-crate = use_extension(
-    "@rules_rust//crate_universe:extension.bzl",
-    "crate",
-)
-crate.from_cargo(
-    name = "crate_index",
-    cargo_lockfile = "//:Cargo.lock",
-    manifests = [
-        "//:examples/basic/Cargo.toml",
-    ],
-)
-use_repo(crate, "crate_index")
+# XXX: bazel mod tidy fails, likely related to this
+# crate = use_extension(
+#     "@rules_rust//crate_universe:extension.bzl",
+#     "crate",
+# )
+# crate.from_cargo(
+#     name = "crate_index",
+#     cargo_lockfile = "//:Cargo.lock",
+#     manifests = [
+#         "//:examples/basic/Cargo.toml",
+#     ],
+# )
+# use_repo(crate, "crate_index")
 
 ########################################
 # Set up rules_oci
@@ -144,7 +145,7 @@ oci.pull(
 )
 
 # For each oci.pull call, repeat the "name" here to expose them as dependencies.
-use_repo(oci, "distroless_base", "ubuntu_base")
+use_repo(oci, "distroless_base", "distroless_base_linux_amd64", "distroless_base_linux_arm64_v8", "ubuntu_base", "ubuntu_base_linux_amd64", "ubuntu_base_linux_arm64_v8")
 
 ########################################
 # Set up hermetic Buildifier tools
@@ -228,6 +229,7 @@ bazel_dep(name = "pico-sdk", version = "2.0.0")
 bazel_dep(name = "pigweed")
 bazel_dep(name = "platforms", version = "0.0.10")
 bazel_dep(name = "rules_cc", version = "0.0.17")
+
 # Allow platform transitions
 bazel_dep(name = "rules_platform", version = "0.1.0")
 
@@ -297,6 +299,7 @@ llvm.toolchain(
         "darwin-x86_64": "15.0.7",
     },
 )
+
 # XXX: Seems like this isn't getting used properly
 use_repo(llvm, "llvm_toolchain", "llvm_toolchain_llvm")
 
@@ -305,7 +308,7 @@ bazel_dep(name = "build_stack_rules_proto", version = "4.1.2")
 bazel_dep(name = "rules_python_gazelle_plugin", version = "1.7.0-rc4")
 
 #### emboss
-bazel_dep(name = "emboss", repo_name="com_google_emboss")
+bazel_dep(name = "emboss", repo_name = "com_google_emboss")
 git_override(
     module_name = "emboss",
     commit = "f595908cba6f366746d6834a2e885868d1a836cd",
@@ -338,6 +341,7 @@ git_override(
 
 # TODO: Should add buf too
 
+# XXX: bazel mod tidy also failing with this
 switched_rules_by_language = use_repo_rule("@com_google_googleapis//:repository_rules.bzl", "switched_rules_by_language")
 
 # Initialize Google APIs with only C++ and Python targets
@@ -347,7 +351,6 @@ switched_rules_by_language(
     grpc = True,
     python = True,
 )
-
 
 # Toolchain registration
 # ======================
@@ -361,9 +364,7 @@ register_toolchains(
 )
 
 bazel_dep(name = "rules_proto", version = "7.1.0")
-bazel_dep(name = "gazelle", version = "0.47.0", repo_name="bazel_gazelle")
-
-
+bazel_dep(name = "gazelle", version = "0.47.0", repo_name = "bazel_gazelle")
 bazel_dep(name = "rules_multitool", version = "1.9.0")
 
 multitool = use_extension("@rules_multitool//multitool:extension.bzl", "multitool")
