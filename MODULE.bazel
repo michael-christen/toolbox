@@ -51,7 +51,6 @@ bazel_dep(name = "pico-sdk", version = "2.0.0")
 bazel_dep(name = "pigweed")
 bazel_dep(name = "platforms", version = "0.0.10")
 bazel_dep(name = "protobuf", version = "24.4", repo_name = "com_google_protobuf")
-bazel_dep(name = "rules_apple", version = "3.7.0", repo_name = "build_bazel_rules_apple")
 bazel_dep(name = "rules_cc", version = "0.0.17")
 bazel_dep(name = "rules_multirun", version = "0.9.0")
 bazel_dep(name = "rules_multitool", version = "1.9.0")
@@ -111,13 +110,29 @@ bazel_dep(name = "toolchains_llvm", version = "0.10.3")
 # - hedron_compile_commands
 # - nanopb
 # - pico-sdk
-# - pigweed
+# - pigweed: https://pigweed.dev/get_started/bazel_integration/setup.html
+#   - Example repo: https://cs.opensource.google/pigweed/quickstart/bazel
+#   - Not available in bcr at the moment
+#   - This is a LARGE framework, which does a lot of heavy lifting for us, but
+#   also buys us into several other dependencies, etc. and establishes limits
+#   on settings we take, eg) there is currently a [C++17
+#   limitation](https://pigweed.dev/style/cpp.html#c-standard)
+#   - Causes us to pull in several other dependencies (we've chosen the
+#   versions to match what pigweed uses)
+#     - freertos
+#     - nanopb
+#     - pico-sdk
+#     - platforms
+#     - rules_platform
+#     - There are others, which we use separately:
+#       - bazel_skylib
+#       - hedron_compile_commands
+#       - rules_cc
+#       - rules_mypy
+#       - rules_python
 # - platforms
 # - protobuf:
 #   - TODO(#91): Allow bumping this up to 26 or greater while avoiding segfault
-# - rules_apple
-#   - Specify to support stackb_rules_proto in bazel 7
-#   - XXX: Can we remove?
 # - rules_cc
 # - rules_multirun
 # - rules_multitool
