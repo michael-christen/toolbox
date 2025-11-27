@@ -101,10 +101,11 @@ gazelle_python_manifest(
 # See https://github.com/bazelbuild/bazel-gazelle/blob/master/extend.rst#example
 gazelle(
     name = "gazelle",
-    args = [
-        "-proto_configs=gazelle_proto_config.yaml",
-    ],
     # XXX: How are languages presented?
+    # XXX: Re-enable ...
+    # args = [
+    #     "-proto_configs=gazelle_proto_config.yaml",
+    # ],
     # gazelle = ":gazelle_bin",
     gazelle = "@multitool//tools/gazelle",
 )

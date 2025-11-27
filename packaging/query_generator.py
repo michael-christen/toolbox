@@ -89,6 +89,7 @@ def main(compare: bool) -> None:
             variable_to_query={
                 "PYTHON_TARGETS": (
                     'kind("py_binary", //...) + kind("py_library", //...)'
+                    " - //:gazelle_python_manifest.update"
                 ),
                 # Finds all proto_py_library (note that if someone decided to
                 # name their python target similarly, we'd catch it too)

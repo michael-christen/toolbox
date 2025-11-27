@@ -21,9 +21,8 @@ PROTO_PYTHON_TARGETS = [
 ]
 
 # PYTHON_TARGETS generated via:
-# `bazel query 'kind("py_binary", //...) + kind("py_library", //...)'`
+# `bazel query 'kind("py_binary", //...) + kind("py_library", //...) - //:gazelle_python_manifest.update'`
 PYTHON_TARGETS = [
-    "//:gazelle_python_manifest.update",
     "//apps:bazel_parser",
     "//bzl:pytest_main",
     "//docs:conf",
