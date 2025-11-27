@@ -41,7 +41,7 @@ class Blinky final {
   /// Injects this object's dependencies.
   ///
   /// This method MUST be called before using any other method.
-  void Init(pw::async2::Dispatcher& dispatcher, 
+  void Init(pw::async2::Dispatcher& dispatcher,
             pw::async2::TimeProvider<pw::chrono::SystemClock>& time,
             pw::Allocator& allocator,
             pw::digital_io::DigitalInOut& monochrome_led);

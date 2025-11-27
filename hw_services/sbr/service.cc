@@ -34,7 +34,8 @@ pw::Status SbrService::ConfigureMagnetometer(
       cached_config_ = config;
     }
     return application_result;
-  } else if (std::holds_alternative<::hw_drivers::lis3mdl::ConfigurationError>(result)) {
+  } else if (std::holds_alternative<::hw_drivers::lis3mdl::ConfigurationError>(
+                 result)) {
     switch (std::get<::hw_drivers::lis3mdl::ConfigurationError>(result)) {
       case hw_drivers::lis3mdl::ConfigurationError::kInvalidConfig:
         return pw::Status::InvalidArgument();
@@ -65,7 +66,8 @@ pw::Status SbrService::ReadMagnetometer(
   if (!status.ok()) {
     return status;
   }
-  reading = hw_drivers::lis3mdl::InterpretReading(std::get<uint32_t>(lsb_per_gauss), data);
+  reading = hw_drivers::lis3mdl::InterpretReading(
+      std::get<uint32_t>(lsb_per_gauss), data);
   return pw::OkStatus();
 }
 

@@ -77,7 +77,8 @@ TEST(I2CTestSuite, I2CTransactions) {
   };
 
   auto result = SolveConfiguration(configuration, &control);
-  EXPECT_TRUE(std::holds_alternative<::hw_drivers_lis3mdl_LIS3MDLConfiguration>(result));
+  EXPECT_TRUE(std::holds_alternative<::hw_drivers_lis3mdl_LIS3MDLConfiguration>(
+      result));
 
   // COULD: Make this a utility?
   pw::StringBuffer<sizeof(control.bytes.data()) * 3 + 3> sb;

@@ -76,7 +76,6 @@ class BlinkyTest : public ::testing::Test {
 
 // XXX: Test is failing, re-evaluate
 TEST_F(BlinkyTest, Toggle) {
-
   auto start = time_.now();
   blinky_.Toggle();
   time_.AdvanceTime(kInterval * 1);
@@ -108,7 +107,6 @@ TEST_F(BlinkyTest, Toggle) {
 }
 
 TEST_F(BlinkyTest, Blink) {
-
   auto start = time_.now();
   EXPECT_EQ(blinky_.Blink(1, kIntervalMs), pw::OkStatus());
   while (!blinky_.IsIdle()) {
@@ -141,7 +139,6 @@ TEST_F(BlinkyTest, BlinkMany) {
 }
 
 TEST_F(BlinkyTest, BlinkSlow) {
-
   auto start = time_.now();
   EXPECT_EQ(blinky_.Blink(1, kIntervalMs * 32), pw::OkStatus());
   while (!blinky_.IsIdle()) {

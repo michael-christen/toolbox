@@ -24,9 +24,9 @@ namespace demo {
 class BlinkyService final
     : public ::blinky::pw_rpc::nanopb::Blinky::Service<BlinkyService> {
  public:
-  void Init(pw::async2::Dispatcher& dispatcher, 
-    pw::async2::TimeProvider<pw::chrono::SystemClock>& time,
-      pw::Allocator& allocator,
+  void Init(pw::async2::Dispatcher& dispatcher,
+            pw::async2::TimeProvider<pw::chrono::SystemClock>& time,
+            pw::Allocator& allocator,
             pw::digital_io::DigitalInOut& monochrome_led);
 
   pw::Status ToggleLed(const pw_protobuf_Empty&, pw_protobuf_Empty&);
