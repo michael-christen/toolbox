@@ -279,7 +279,7 @@
                 <span class="s1">&#39;/examples.basic.Greeter/SayHello&#39;</span><span class="p">,</span>
                 <span class="n">request_serializer</span><span class="o">=</span><span class="n">examples_dot_basic_dot_hello__pb2</span><span class="o">.</span><span class="n">HelloRequest</span><span class="o">.</span><span class="n">SerializeToString</span><span class="p">,</span>
                 <span class="n">response_deserializer</span><span class="o">=</span><span class="n">examples_dot_basic_dot_hello__pb2</span><span class="o">.</span><span class="n">HelloReply</span><span class="o">.</span><span class="n">FromString</span><span class="p">,</span>
-                <span class="p">)</span></div>
+                <span class="n">_registered_method</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="GreeterStub.SayHelloStreamReply">
 <a class="viewcode-back" href="../../../autoapi/examples/basic/hello_pb2_grpc/index.html#examples.basic.hello_pb2_grpc.GreeterStub.SayHelloStreamReply">[docs]</a>
@@ -287,7 +287,7 @@
                 <span class="s1">&#39;/examples.basic.Greeter/SayHelloStreamReply&#39;</span><span class="p">,</span>
                 <span class="n">request_serializer</span><span class="o">=</span><span class="n">examples_dot_basic_dot_hello__pb2</span><span class="o">.</span><span class="n">HelloRequest</span><span class="o">.</span><span class="n">SerializeToString</span><span class="p">,</span>
                 <span class="n">response_deserializer</span><span class="o">=</span><span class="n">examples_dot_basic_dot_hello__pb2</span><span class="o">.</span><span class="n">HelloReply</span><span class="o">.</span><span class="n">FromString</span><span class="p">,</span>
-                <span class="p">)</span></div>
+                <span class="n">_registered_method</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="GreeterStub.SayHelloBidiStream">
 <a class="viewcode-back" href="../../../autoapi/examples/basic/hello_pb2_grpc/index.html#examples.basic.hello_pb2_grpc.GreeterStub.SayHelloBidiStream">[docs]</a>
@@ -295,7 +295,7 @@
                 <span class="s1">&#39;/examples.basic.Greeter/SayHelloBidiStream&#39;</span><span class="p">,</span>
                 <span class="n">request_serializer</span><span class="o">=</span><span class="n">examples_dot_basic_dot_hello__pb2</span><span class="o">.</span><span class="n">HelloRequest</span><span class="o">.</span><span class="n">SerializeToString</span><span class="p">,</span>
                 <span class="n">response_deserializer</span><span class="o">=</span><span class="n">examples_dot_basic_dot_hello__pb2</span><span class="o">.</span><span class="n">HelloReply</span><span class="o">.</span><span class="n">FromString</span><span class="p">,</span>
-                <span class="p">)</span></div>
+                <span class="n">_registered_method</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 </div>
 
 
@@ -356,7 +356,8 @@
     <span class="p">}</span>
     <span class="n">generic_handler</span> <span class="o">=</span> <span class="n">grpc</span><span class="o">.</span><span class="n">method_handlers_generic_handler</span><span class="p">(</span>
             <span class="s1">&#39;examples.basic.Greeter&#39;</span><span class="p">,</span> <span class="n">rpc_method_handlers</span><span class="p">)</span>
-    <span class="n">server</span><span class="o">.</span><span class="n">add_generic_rpc_handlers</span><span class="p">((</span><span class="n">generic_handler</span><span class="p">,))</span></div>
+    <span class="n">server</span><span class="o">.</span><span class="n">add_generic_rpc_handlers</span><span class="p">((</span><span class="n">generic_handler</span><span class="p">,))</span>
+    <span class="n">server</span><span class="o">.</span><span class="n">add_registered_method_handlers</span><span class="p">(</span><span class="s1">&#39;examples.basic.Greeter&#39;</span><span class="p">,</span> <span class="n">rpc_method_handlers</span><span class="p">)</span></div>
 
 
 
@@ -379,11 +380,21 @@
             <span class="n">wait_for_ready</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">grpc</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">unary_unary</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="s1">&#39;/examples.basic.Greeter/SayHello&#39;</span><span class="p">,</span>
+        <span class="k">return</span> <span class="n">grpc</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">unary_unary</span><span class="p">(</span>
+            <span class="n">request</span><span class="p">,</span>
+            <span class="n">target</span><span class="p">,</span>
+            <span class="s1">&#39;/examples.basic.Greeter/SayHello&#39;</span><span class="p">,</span>
             <span class="n">examples_dot_basic_dot_hello__pb2</span><span class="o">.</span><span class="n">HelloRequest</span><span class="o">.</span><span class="n">SerializeToString</span><span class="p">,</span>
             <span class="n">examples_dot_basic_dot_hello__pb2</span><span class="o">.</span><span class="n">HelloReply</span><span class="o">.</span><span class="n">FromString</span><span class="p">,</span>
-            <span class="n">options</span><span class="p">,</span> <span class="n">channel_credentials</span><span class="p">,</span>
-            <span class="n">insecure</span><span class="p">,</span> <span class="n">call_credentials</span><span class="p">,</span> <span class="n">compression</span><span class="p">,</span> <span class="n">wait_for_ready</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">metadata</span><span class="p">)</span></div>
+            <span class="n">options</span><span class="p">,</span>
+            <span class="n">channel_credentials</span><span class="p">,</span>
+            <span class="n">insecure</span><span class="p">,</span>
+            <span class="n">call_credentials</span><span class="p">,</span>
+            <span class="n">compression</span><span class="p">,</span>
+            <span class="n">wait_for_ready</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="p">,</span>
+            <span class="n">metadata</span><span class="p">,</span>
+            <span class="n">_registered_method</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
     <span class="nd">@staticmethod</span>
@@ -399,11 +410,21 @@
             <span class="n">wait_for_ready</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">grpc</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">unary_stream</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="s1">&#39;/examples.basic.Greeter/SayHelloStreamReply&#39;</span><span class="p">,</span>
+        <span class="k">return</span> <span class="n">grpc</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">unary_stream</span><span class="p">(</span>
+            <span class="n">request</span><span class="p">,</span>
+            <span class="n">target</span><span class="p">,</span>
+            <span class="s1">&#39;/examples.basic.Greeter/SayHelloStreamReply&#39;</span><span class="p">,</span>
             <span class="n">examples_dot_basic_dot_hello__pb2</span><span class="o">.</span><span class="n">HelloRequest</span><span class="o">.</span><span class="n">SerializeToString</span><span class="p">,</span>
             <span class="n">examples_dot_basic_dot_hello__pb2</span><span class="o">.</span><span class="n">HelloReply</span><span class="o">.</span><span class="n">FromString</span><span class="p">,</span>
-            <span class="n">options</span><span class="p">,</span> <span class="n">channel_credentials</span><span class="p">,</span>
-            <span class="n">insecure</span><span class="p">,</span> <span class="n">call_credentials</span><span class="p">,</span> <span class="n">compression</span><span class="p">,</span> <span class="n">wait_for_ready</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">metadata</span><span class="p">)</span></div>
+            <span class="n">options</span><span class="p">,</span>
+            <span class="n">channel_credentials</span><span class="p">,</span>
+            <span class="n">insecure</span><span class="p">,</span>
+            <span class="n">call_credentials</span><span class="p">,</span>
+            <span class="n">compression</span><span class="p">,</span>
+            <span class="n">wait_for_ready</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="p">,</span>
+            <span class="n">metadata</span><span class="p">,</span>
+            <span class="n">_registered_method</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
     <span class="nd">@staticmethod</span>
@@ -419,11 +440,21 @@
             <span class="n">wait_for_ready</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
             <span class="n">metadata</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">grpc</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">stream_stream</span><span class="p">(</span><span class="n">request_iterator</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="s1">&#39;/examples.basic.Greeter/SayHelloBidiStream&#39;</span><span class="p">,</span>
+        <span class="k">return</span> <span class="n">grpc</span><span class="o">.</span><span class="n">experimental</span><span class="o">.</span><span class="n">stream_stream</span><span class="p">(</span>
+            <span class="n">request_iterator</span><span class="p">,</span>
+            <span class="n">target</span><span class="p">,</span>
+            <span class="s1">&#39;/examples.basic.Greeter/SayHelloBidiStream&#39;</span><span class="p">,</span>
             <span class="n">examples_dot_basic_dot_hello__pb2</span><span class="o">.</span><span class="n">HelloRequest</span><span class="o">.</span><span class="n">SerializeToString</span><span class="p">,</span>
             <span class="n">examples_dot_basic_dot_hello__pb2</span><span class="o">.</span><span class="n">HelloReply</span><span class="o">.</span><span class="n">FromString</span><span class="p">,</span>
-            <span class="n">options</span><span class="p">,</span> <span class="n">channel_credentials</span><span class="p">,</span>
-            <span class="n">insecure</span><span class="p">,</span> <span class="n">call_credentials</span><span class="p">,</span> <span class="n">compression</span><span class="p">,</span> <span class="n">wait_for_ready</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">metadata</span><span class="p">)</span></div>
+            <span class="n">options</span><span class="p">,</span>
+            <span class="n">channel_credentials</span><span class="p">,</span>
+            <span class="n">insecure</span><span class="p">,</span>
+            <span class="n">call_credentials</span><span class="p">,</span>
+            <span class="n">compression</span><span class="p">,</span>
+            <span class="n">wait_for_ready</span><span class="p">,</span>
+            <span class="n">timeout</span><span class="p">,</span>
+            <span class="n">metadata</span><span class="p">,</span>
+            <span class="n">_registered_method</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 </div>
 
 </pre></div>
