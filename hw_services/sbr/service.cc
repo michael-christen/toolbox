@@ -26,21 +26,24 @@ pw::Status SbrService::ConfigureMagnetometer(
 
   hw_drivers::lis3mdl::LIS3MDLControl control;
   auto result = hw_drivers::lis3mdl::SolveConfiguration(config, &control);
-  if (result.has_value()) {
-    actual_config = result.value();
+  if (std::holds_alternative<hw_drivers_lis3mdl_LIS3MDLConfiguration>(result)) {
+    actual_config = std::get<hw_drivers_lis3mdl_LIS3MDLConfiguration>(result);
     auto application_result = hw_drivers::lis3mdl::ApplyControlToDevice(
         control, register_device_.value());
     if (application_result.ok()) {
       cached_config_ = config;
     }
     return application_result;
-  } else {
-    switch (result.error()) {
+  } else if (std::holds_alternative<::hw_drivers::lis3mdl::ConfigurationError>(
+                 result)) {
+    switch (std::get<::hw_drivers::lis3mdl::ConfigurationError>(result)) {
       case hw_drivers::lis3mdl::ConfigurationError::kInvalidConfig:
         return pw::Status::InvalidArgument();
       case hw_drivers::lis3mdl::ConfigurationError::kUnsupportedConfig:
         return pw::Status::OutOfRange();
     }
+  } else {
+    PW_CRASH("Impossible condition for a variant");
   }
 };
 
@@ -52,7 +55,7 @@ pw::Status SbrService::ReadMagnetometer(
   }
   auto lsb_per_gauss =
       hw_drivers::lis3mdl::GetLsbPerGauss(cached_config_.scale_gauss);
-  if (!lsb_per_gauss.has_value()) {
+  if (!std::holds_alternative<uint32_t>(lsb_per_gauss)) {
     return pw::Status::FailedPrecondition();
   }
 
@@ -62,7 +65,8 @@ pw::Status SbrService::ReadMagnetometer(
   if (!status.ok()) {
     return status;
   }
-  reading = hw_drivers::lis3mdl::InterpretReading(lsb_per_gauss.value(), data);
+  reading = hw_drivers::lis3mdl::InterpretReading(
+      std::get<uint32_t>(lsb_per_gauss), data);
   return pw::OkStatus();
 }
 

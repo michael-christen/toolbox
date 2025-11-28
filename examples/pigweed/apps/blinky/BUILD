@@ -11,6 +11,7 @@ cc_binary(
         "//examples/pigweed/apps/blinky/system",
         "@pigweed//pw_log",
         "@pigweed//pw_system:async",
+        "@pigweed//pw_async2:system_time_provider",
 
         # These should be provided by pw_system:async.
         "@pigweed//pw_assert:assert_backend_impl",

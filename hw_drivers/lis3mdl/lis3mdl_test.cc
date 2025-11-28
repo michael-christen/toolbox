@@ -39,8 +39,9 @@ TEST_CASE("SolveConfiguration") {
   auto control_view =
       MakeControlView(control.bytes.data(), std::size(control.bytes));
   auto result = SolveConfiguration(configuration, &control);
-  REQUIRE(!result.has_value());
-  CHECK(result.error() == ConfigurationError::kInvalidConfig);
+  REQUIRE(std::holds_alternative<ConfigurationError>(result));
+  CHECK(std::get<ConfigurationError>(result) ==
+        ConfigurationError::kInvalidConfig);
 
   configuration = ::hw_drivers_lis3mdl_LIS3MDLConfiguration{
       .has_temperature_enabled = true,
@@ -55,8 +56,10 @@ TEST_CASE("SolveConfiguration") {
   };
 
   result = SolveConfiguration(configuration, &control);
-  REQUIRE(result.has_value());
-  auto actual_config = result.value();
+  REQUIRE(std::holds_alternative<::hw_drivers_lis3mdl_LIS3MDLConfiguration>(
+      result));
+  auto actual_config =
+      std::get<::hw_drivers_lis3mdl_LIS3MDLConfiguration>(result);
   REQUIRE(actual_config.has_temperature_enabled);
   CHECK(!actual_config.temperature_enabled);
   CHECK(!control_view.temperature_enable().Read());

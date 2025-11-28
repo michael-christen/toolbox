@@ -87,10 +87,9 @@ def main(compare: bool) -> None:
         QueryFile(
             out_file=pathlib.Path("packaging/generated.bzl"),
             variable_to_query={
-                # target '//tools:_mypy_cli' is not visible, but gets included
                 "PYTHON_TARGETS": (
                     'kind("py_binary", //...) + kind("py_library", //...)'
-                    " - //tools:_mypy_cli"
+                    " - //:gazelle_python_manifest.update"
                 ),
                 # Finds all proto_py_library (note that if someone decided to
                 # name their python target similarly, we'd catch it too)

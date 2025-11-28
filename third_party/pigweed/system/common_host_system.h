@@ -52,5 +52,5 @@ void CommonHostStartSetup(const char* bazel_console_path);
   static pw::NoDestructor<pw::channel::StreamChannel> channel(             \
       multibuf_alloc, pw::system::GetReader(), pw::thread::stl::Options(), \
       pw::system::GetWriter(), pw::thread::stl::Options());                \
-  pw::SystemStart(*channel);                                               \
+  pw::SystemStart(channel->channel());                                     \
   PW_UNREACHABLE;

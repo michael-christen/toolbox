@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <bit>
 #include <cstdint>
-#include <expected>
+#include <variant>
 
 #include "hw_drivers/lis3mdl/lis3mdl.emb.h"
 #include "hw_drivers/lis3mdl/lis3mdl.pb.h"
@@ -23,13 +23,6 @@ static constexpr uint32_t kFullScale8LSBPerGauss = 3421;
 static constexpr uint32_t kFullScale12LSBPerGauss = 2281;
 static constexpr uint32_t kFullScale16LSBPerGauss = 1711;
 
-enum class ConfigurationError {
-  // Config is not valid, eg) missing expected parameters
-  kInvalidConfig,
-  // Config is not supportable with the hardware
-  kUnsupportedConfig,
-};
-
 // Thin wrapper around lis3mdl.emb.h Data to own the data
 struct LIS3MDLData {
  public:
@@ -42,6 +35,13 @@ struct LIS3MDLControl {
   std::array<std::byte, Control::MaxSizeInBytes()> bytes{std::byte{0}};
 };
 
+enum class ConfigurationError {
+  // Config is not valid, eg) missing expected parameters
+  kInvalidConfig,
+  // Config is not supportable with the hardware
+  kUnsupportedConfig,
+};
+
 // Functions to help handle the .proto and .emb objects as well as how to
 // interact with an actual i2c device.
 
@@ -49,7 +49,7 @@ struct LIS3MDLControl {
 // error for why finding a given configuration is not achievable). Also, if
 // successful, modify control to have the correct values that fit that
 // configuration.
-std::expected<::hw_drivers_lis3mdl_LIS3MDLConfiguration, ConfigurationError>
+std::variant<hw_drivers_lis3mdl_LIS3MDLConfiguration, ConfigurationError>
 SolveConfiguration(
     const ::hw_drivers_lis3mdl_LIS3MDLConfiguration& desired_configuration,
     LIS3MDLControl* control);
@@ -67,8 +67,7 @@ pw::Status ApplyControlToDevice(const LIS3MDLControl& control,
 pw::Status ReadFromDevice(LIS3MDLData* data,
                           pw::i2c::RegisterDevice* register_device);
 
-std::expected<uint32_t, ConfigurationError> GetLsbPerGauss(
-    uint32_t scale_gauss);
+std::variant<uint32_t, ConfigurationError> GetLsbPerGauss(uint32_t scale_gauss);
 
 }  // namespace lis3mdl
 }  // namespace hw_drivers

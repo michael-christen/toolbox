@@ -50,7 +50,7 @@ TEST(I2CTestSuite, I2CTransactions) {
   pw::i2c::MockInitiator initiator(expected_transactions);
   pw::i2c::RegisterDevice reg_device(initiator, kAddress, cpp20::endian::little,
                                      pw::i2c::RegisterAddressSize::k1Byte);
-  pw::ConstByteSpan kRegWrite = pw::bytes::Array<2, 3, 4, 5, 6>();
+  constexpr auto kRegWrite = pw::bytes::Array<2, 3, 4, 5, 6>();
   std::array<std::byte, 12> raw_buf = {std::byte{0}};
   auto buf = pw::as_writable_bytes(pw::span(raw_buf));
   auto status = reg_device.WriteRegisters(
@@ -77,7 +77,8 @@ TEST(I2CTestSuite, I2CTransactions) {
   };
 
   auto result = SolveConfiguration(configuration, &control);
-  EXPECT_TRUE(result.has_value());
+  EXPECT_TRUE(std::holds_alternative<::hw_drivers_lis3mdl_LIS3MDLConfiguration>(
+      result));
 
   // COULD: Make this a utility?
   pw::StringBuffer<sizeof(control.bytes.data()) * 3 + 3> sb;

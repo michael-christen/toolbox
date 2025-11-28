@@ -28,6 +28,11 @@ from google.protobuf import message
 from google.protobuf.internal import decoder
 from google.protobuf.internal import encoder
 
+# Gazelle pulls this in as @pip//protobuf instead of
+# @com_google_protobuf//:protobuf_python, which causes a type-hinting issue
+# gazelle:ignore google.protobuf.internal
+
+
 T = TypeVar("T", bound=message.Message)
 
 

@@ -36,7 +36,7 @@ platform(
         "@pico-sdk//bazel/constraint:rp2040",
         # For toolchain selection.
         "@platforms//cpu:armv6-m",
-        "@pw_toolchain//constraints/arm_mcpu:cortex-m0",
+        "@pigweed//pw_build/constraints/arm:cortex-m0",
     ],
     parents = [":rp2_common"],
 )
@@ -48,7 +48,7 @@ platform(
         "@pico-sdk//bazel/constraint:rp2350",
         # For toolchain selection.
         "@platforms//cpu:armv8-m",
-        "@pw_toolchain//constraints/arm_mcpu:cortex-m33",
+        "@pigweed//pw_build/constraints/arm:cortex-m33",
     ],
     parents = [":rp2_common"],
 )
