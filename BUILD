@@ -177,6 +177,12 @@ gazelle(
 # gazelle:map_kind grpc_py_library grpc_py_library //bzl:py.bzl
 # gazelle:map_kind proto_py_library proto_py_library //bzl:py.bzl
 
+# gazelle:map_kind cc_binary cc_binary //bzl:cc.bzl
+# gazelle:map_kind cc_library cc_library //bzl:cc.bzl
+# gazelle:map_kind cc_test cc_test //bzl:cc.bzl
+# gazelle:map_kind c_binary c_binary //bzl:cc.bzl
+# gazelle:map_kind c_library c_library //bzl:cc.bzl
+
 # TODO: Figure out a way to not need these
 # gazelle:resolve py hw_services.sbr.sbr_pb2 //hw_services/sbr:sbr_py_library
 # gazelle:resolve py examples.basic.hello_pb2 //examples/basic:hello_py_library
