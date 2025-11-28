@@ -41,8 +41,7 @@ def _read_varint(stream: BinaryIO) -> int:
         if new_byte == b"":
             raise EOFError("unexpected EOF")
         buf += new_byte
-    # XXX: Unclear why these types are invalid
-    varint, _ = decoder._DecodeVarint(buf, 0)  # type:ignore
+    varint, _ = decoder._DecodeVarint(buf, 0)
     return varint
 
 
@@ -59,7 +58,5 @@ def read_delimited(stream: BinaryIO, proto_cls: Type[T]) -> Optional[T]:
 
 def write_delimited(stream: BinaryIO, msg: T):
     """Write a single length-delimited message to the given stream."""
-    # XXX: Unclear why these types are invalid, @pip//protobuf is the culprit,
-    # but why?
-    encoder._EncodeVarint(stream.write, msg.ByteSize())  # type:ignore
+    encoder._EncodeVarint(stream.write, msg.ByteSize())
     stream.write(msg.SerializeToString())

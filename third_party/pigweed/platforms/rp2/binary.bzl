@@ -32,7 +32,6 @@ _COMMON_FLAGS = merge_flags_for_transition_impl(
         "@pigweed//pw_system:io_backend": "@pigweed//pw_system:sys_io_target_io",
         "@pigweed//pw_toolchain:cortex-m_toolchain_kind": "clang",
         "@pigweed//pw_unit_test:config_override": "//third_party/pigweed/platforms/rp2:64k_unit_tests",
-        # XXX: "@pigweed//pw_unit_test:main": "//targets/rp2:unit_test_rpc_main",
     },
 )
 

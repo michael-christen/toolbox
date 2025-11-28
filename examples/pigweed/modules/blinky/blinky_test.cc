@@ -69,7 +69,6 @@ class BlinkyTest : public ::testing::Test {
 
 // Unit tests.
 
-// XXX: Test is failing, re-evaluate
 TEST_F(BlinkyTest, Toggle) {
   auto start = time_.now();
   blinky_.Toggle();
