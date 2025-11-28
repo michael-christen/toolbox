@@ -1,6 +1,5 @@
 load("@aspect_bazel_lib//lib:tar.bzl", "mtree_spec", "tar")
 load("@aspect_bazel_lib//lib:transitions.bzl", "platform_transition_filegroup")
-
 load("@aspect_rules_py//py:defs.bzl", _py_binary = "py_binary", _py_library = "py_library")
 load("@build_stack_rules_proto//rules/py:grpc_py_library.bzl", _grpc_py_library = "grpc_py_library")
 load("@build_stack_rules_proto//rules/py:proto_py_library.bzl", _proto_py_library = "proto_py_library")
