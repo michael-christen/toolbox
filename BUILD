@@ -143,7 +143,7 @@ gazelle(
 # Make a cc_... per file
 # gazelle:cc_group unit
 # XXX
-# gazelle:cc_generate false
+# gazelle:cc_generate true
 # gazelle:cc_generate_proto false
 # gazelle:cc_use_builtin_bzlmod_index true
 
