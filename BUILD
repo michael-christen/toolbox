@@ -142,8 +142,7 @@ gazelle(
 
 # Make a cc_... per file
 # gazelle:cc_group unit
-# gazelle:cc_generate true
-# gazelle:cc_generate_proto true
+# gazelle:cc_generate false
 # gazelle:cc_use_builtin_bzlmod_index true
 # gazelle:cc_unresolved_deps error
 

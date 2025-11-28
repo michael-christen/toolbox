@@ -6,6 +6,7 @@ load(":binary.bzl", "rp2040_binary", "rp2350_binary")
 
 package(default_visibility = ["//visibility:private"])
 
+# gazelle:cc_generate true
 cc_binary(
     name = "sbr",
     srcs = ["main.cc"],
