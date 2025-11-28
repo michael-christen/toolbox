@@ -23,6 +23,10 @@ from typing import TypeVar
 
 from google.protobuf import message
 
+# Gazelle pulls this in as @pip//protobuf instead of
+# @com_google_protobuf//:protobuf_python, which causes a type-hinting issue
+# gazelle:ignore google.protobuf.internal
+
 # NOTE: We use some internal mechanisms here for varint encoding, if we note
 # this as being an issue in the future, we can implement our own.
 from google.protobuf.internal import decoder
