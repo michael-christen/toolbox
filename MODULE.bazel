@@ -194,6 +194,12 @@ git_override(
     # LINT.ThenChange(/pw_package/py/pw_package/packages/emboss.py:emboss)
 )
 
+git_override(
+    module_name = "gazelle_cc",
+    tag = "v0.3.0",
+    remote = "https://github.com/EngFlow/gazelle_cc",
+)
+
 # ================
 # TODO: https://pwbug.dev/349880767 - Point this back to the upstream repo once this PR is merged.
 archive_override(
