@@ -45,6 +45,7 @@ bazel_dep(name = "build_stack_rules_proto", version = "4.1.2")
 bazel_dep(name = "catch2", version = "3.6.0")
 bazel_dep(name = "emboss", repo_name = "com_google_emboss")
 bazel_dep(name = "freertos", version = "10.5.1.bcr.2")
+bazel_dep(name = "gazelle_cc", version = "0.1.0")
 bazel_dep(name = "gazelle", version = "0.47.0", repo_name = "bazel_gazelle")
 bazel_dep(name = "hedron_compile_commands")
 bazel_dep(name = "nanopb", version = "0.4.9.1", repo_name = "com_github_nanopb_nanopb")
@@ -107,6 +108,7 @@ bazel_dep(name = "toolchains_llvm", version = "0.10.3")
 #     - bazel_dep(name = "googletest", version = "1.15.2")
 # - emboss
 # - freertos
+# - gazelle_cc: https://github.com/EngFlow/gazelle_cc
 # - gazelle: https://github.com/bazel-contrib/bazel-gazelle
 # - hedron_compile_commands
 # - nanopb

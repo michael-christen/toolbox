@@ -107,6 +107,7 @@ gazelle_binary(
         # compilepkg: error running subcommand external/pigweed++_repo_rules6+llvm_toolchain/bin/clang: exit status 1
         "@rules_python_gazelle_plugin//python:python",
         "@build_stack_rules_proto//language/protobuf",  # Protobuf language generation
+        "@gazelle_cc//language/cc",
         # TODO: Add buf suppport
         # "@rules_buf//gazelle/buf:buf",  # Generates buf lint and buf breaking detection rules
     ],
