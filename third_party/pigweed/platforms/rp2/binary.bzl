@@ -37,10 +37,12 @@ _COMMON_FLAGS = merge_flags_for_transition_impl(
 
 _RP2040_FLAGS = {
     "//command_line_option:platforms": "//third_party/pigweed/platforms/rp2:rp2040",
+    "@pico-sdk//bazel/config:PICO_DEFAULT_LINKER_SCRIPT": "@pigweed//targets/rp2040:rp2040_linker_script",
 }
 
 _RP2350_FLAGS = {
     "//command_line_option:platforms": "//third_party/pigweed/platforms/rp2:rp2350",
+    "@pico-sdk//bazel/config:PICO_DEFAULT_LINKER_SCRIPT": "@pigweed//targets/rp2040:rp2350_linker_script",
 }
 
 def _rp2_transition(device_specific_flags, app_flags):

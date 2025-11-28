@@ -21,8 +21,9 @@ PROTO_PYTHON_TARGETS = [
 ]
 
 # PYTHON_TARGETS generated via:
-# `bazel query 'kind("py_binary", //...) + kind("py_library", //...) - //tools:_mypy_cli'`
+# `bazel query 'kind("py_binary", //...) + kind("py_library", //...) - //:gazelle_python_manifest.update'`
 PYTHON_TARGETS = [
+    "//algorithms:weighted_probability",
     "//apps:bazel_parser",
     "//bzl:pytest_main",
     "//docs:conf",
@@ -31,6 +32,7 @@ PYTHON_TARGETS = [
     "//examples/basic:hello_py_library",
     "//examples/basic:main",
     "//examples/basic:server",
+    "//examples/python:hello",
     "//examples/simpy:car_tutorial",
     "//examples/simpy:thermostat_example",
     "//examples/tofupilot:tofupilot_example",

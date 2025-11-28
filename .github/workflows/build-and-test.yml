@@ -21,7 +21,8 @@ jobs:
           # Data on sizes from this run on 2025-04-25:
           # https://github.com/michael-christen/toolbox/actions/runs/14666765877/job/41163363493
           # 8.21 GB
-          android: true
+          # Required for rules_android
+          android: false
           # 1.6 GB
           dotnet: true
           # 6.2 GB

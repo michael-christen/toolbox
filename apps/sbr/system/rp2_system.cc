@@ -9,7 +9,7 @@ pw::i2c::Initiator& I2cInitiator() {
   constexpr unsigned int kPinScl = 5;
 
   static constexpr pw::i2c::Rp2040Initiator::Config kI2c0Config{
-      .clock_frequency = 400'000,
+      .clock_frequency_hz = 400'000,
       .sda_pin = kPinSda,
       .scl_pin = kPinScl,
   };
