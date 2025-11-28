@@ -142,10 +142,10 @@ gazelle(
 
 # Make a cc_... per file
 # gazelle:cc_group unit
-# XXX
 # gazelle:cc_generate true
-# gazelle:cc_generate_proto false
+# gazelle:cc_generate_proto true
 # gazelle:cc_use_builtin_bzlmod_index true
+# gazelle:cc_unresolved_deps error
 
 # Disable BUILD.bazel files
 # gazelle:build_file_name BUILD
