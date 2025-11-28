@@ -234,21 +234,6 @@ archive_override(
 ##########################################
 ##########################################
 
-########################
-# com_google_googleapis
-########################
-# XXX: bazel mod tidy also failing with this
-# - also, not defined in bazel_dep ...
-switched_rules_by_language = use_repo_rule("@com_google_googleapis//:repository_rules.bzl", "switched_rules_by_language")
-
-# Initialize Google APIs with only C++ and Python targets
-switched_rules_by_language(
-    name = "com_google_googleapis_imports",
-    cc = True,
-    grpc = True,
-    python = True,
-)
-
 ##########
 # pigweed
 ##########
@@ -424,7 +409,6 @@ llvm.toolchain(
     },
 )
 
-# XXX: Seems like this isn't getting used properly
 use_repo(llvm, "llvm_toolchain", "llvm_toolchain_llvm")
 
 ##########################################
