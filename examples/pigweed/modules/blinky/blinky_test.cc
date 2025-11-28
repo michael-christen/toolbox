@@ -22,7 +22,7 @@
 
 namespace demo {
 
-using AllocatorForTest = ::pw::allocator::test::AllocatorForTest<256>;
+using AllocatorForTest = ::pw::allocator::test::AllocatorForTest<512>;
 using ::pw::async2::DispatcherForTest;
 
 // Test fixtures.
