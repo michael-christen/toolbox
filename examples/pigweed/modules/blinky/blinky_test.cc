@@ -37,11 +37,6 @@ class BlinkyTest : public ::testing::Test {
       pw::chrono::SystemClock::for_at_least(
           std::chrono::milliseconds(kIntervalMs));
 
-  // TODO(b/352327457): Ideally this would use simulated time, but no
-  // simulated system timer exists yet. For now, relax the constraint by
-  // checking that the LED was in the right state for _at least_ the expected
-  // number of intervals. On some platforms, the fake LED is implemented using
-  // threads, and may sleep a bit longer.
   BlinkyTest() : monochrome_led_(time_) {
     blinky_.Init(dispatcher_, time_, allocator_, monochrome_led_);
   }
@@ -111,7 +106,7 @@ TEST_F(BlinkyTest, Blink) {
   EXPECT_EQ(blinky_.Blink(1, kIntervalMs), pw::OkStatus());
   while (!blinky_.IsIdle()) {
     dispatcher_.RunUntilStalled();
-    time_.AdvanceTime(kInterval);
+    time_.AdvanceUntilNextExpiration();
   }
 
   auto event = FirstActive();
@@ -130,7 +125,7 @@ TEST_F(BlinkyTest, BlinkMany) {
   EXPECT_EQ(blinky_.Blink(100, kIntervalMs), pw::OkStatus());
   while (!blinky_.IsIdle()) {
     dispatcher_.RunUntilStalled();
-    time_.AdvanceTime(kInterval);
+    time_.AdvanceUntilNextExpiration();
   }
 
   // Every "on" and "off" is recorded.
@@ -143,7 +138,7 @@ TEST_F(BlinkyTest, BlinkSlow) {
   EXPECT_EQ(blinky_.Blink(1, kIntervalMs * 32), pw::OkStatus());
   while (!blinky_.IsIdle()) {
     dispatcher_.RunUntilStalled();
-    time_.AdvanceTime(kInterval);
+    time_.AdvanceUntilNextExpiration();
   }
 
   auto event = FirstActive();
