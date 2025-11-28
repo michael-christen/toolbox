@@ -43,8 +43,7 @@ pw::Status SbrService::ConfigureMagnetometer(
         return pw::Status::OutOfRange();
     }
   } else {
-    // XXX: PANIC
-    return pw::Status::Unknown();
+    PW_CRASH("Impossible condition for a variant");
   }
 };
 
