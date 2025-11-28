@@ -140,6 +140,13 @@ gazelle(
 # Make a py_library per python file
 # gazelle:python_generation_mode file
 
+# Make a cc_... per file
+# gazelle:cc_group unit
+# XXX
+# gazelle:cc_generate false
+# gazelle:cc_generate_proto false
+# gazelle:cc_use_builtin_bzlmod_index true
+
 # Disable BUILD.bazel files
 # gazelle:build_file_name BUILD
 
