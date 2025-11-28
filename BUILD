@@ -9,6 +9,7 @@ load("@rules_python_gazelle_plugin//manifest:defs.bzl", "gazelle_python_manifest
 load("@rules_python_gazelle_plugin//modules_mapping:def.bzl", "modules_mapping")
 load("@rules_uv//uv:pip.bzl", "pip_compile")
 load("@rules_uv//uv:venv.bzl", "create_venv")
+load("//:copts_transition.bzl", "executable_with_copts")
 
 package(default_visibility = ["//visibility:private"])
 
@@ -80,18 +81,43 @@ gazelle_python_manifest(
 )
 
 gazelle_binary(
-    name = "gazelle_bin",
+    name = "og_gazelle_bin",
     languages = [
         "@bazel_gazelle//language/bazel/visibility",  # bazel visibility rules
         "@bazel_gazelle//language/go",  # Built-in rule from gazelle for Golang
         "@bazel_gazelle//language/proto",  # Built-in rule from gazelle for Protos
         # Any languages that depend on the proto plugin must come after it
-        # XXX: This is the problem child
-        # "@rules_python_gazelle_plugin//python:python",  # Use gazelle from rules_python
+        # NOTE: This is failing to compile without copt=["-w"]
+        # See  the failure below:
+        #
+        # Use --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging
+        # external/gazelle++go_deps+com_github_smacker_go_tree_sitter/get_changed_ranges.c:220:31: error: cast from 'const SubtreeHeapData *' to 'Subtree *' drops const qualifier [-Werror,-Wcast-qual]
+        #   220 |       const Subtree *child = &ts_subtree_children(*entry.subtree)[i];
+        #       |                               ^
+        # external/gazelle++go_deps+com_github_smacker_go_tree_sitter/./././subtree.h:238:46: note: expanded from macro 'ts_subtree_children'
+        #   238 |   ((self).data.is_inline ? NULL : (Subtree *)((self).ptr) - (self).ptr->child_count)
+        #       |                                              ^
+        # external/gazelle++go_deps+com_github_smacker_go_tree_sitter/get_changed_ranges.c:275:36: error: cast from 'const SubtreeHeapData *' to 'Subtree *' drops const qualifier [-Werror,-Wcast-qual]
+        #   275 |       const Subtree *next_child = &ts_subtree_children(*parent)[child_index];
+        #       |                                    ^
+        # external/gazelle++go_deps+com_github_smacker_go_tree_sitter/./././subtree.h:238:46: note: expanded from macro 'ts_subtree_children'
+        #   238 |   ((self).data.is_inline ? NULL : (Subtree *)((self).ptr) - (self).ptr->child_count)
+        #       |                                              ^
+        # 2 errors generated.
+        # compilepkg: error running subcommand external/pigweed++_repo_rules6+llvm_toolchain/bin/clang: exit status 1
+        "@rules_python_gazelle_plugin//python:python",
         "@build_stack_rules_proto//language/protobuf",  # Protobuf language generation
         # TODO: Add buf suppport
         # "@rules_buf//gazelle/buf:buf",  # Generates buf lint and buf breaking detection rules
     ],
+    # Don't create this w/ `//...`, as it won't have the copt used below
+    tags = ["manual"],
+)
+
+executable_with_copts(
+    name = "gazelle_bin",
+    wrapped = ":og_gazelle_bin",
+    extra_copts = ["-w"],
 )
 
 # Our gazelle target points to the python gazelle binary.

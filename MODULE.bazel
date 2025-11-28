@@ -33,6 +33,7 @@ module(
 ##########################################
 # Reminder: When adding dependencies, update the Notes section below and keep
 # any overrides / configuration in their respective sections ordered alphabetically
+# [BCR](https://registry.bazel.build/)
 bazel_dep(name = "aspect_bazel_lib", version = "2.9.4")
 bazel_dep(name = "aspect_rules_js", version = "1.39.0")
 bazel_dep(name = "aspect_rules_lint", version = "1.0.3")
@@ -142,6 +143,7 @@ bazel_dep(name = "toolchains_llvm", version = "0.10.3")
 #   - Allow platform transitions
 # - rules_proto: https://github.com/stackb/rules_proto
 # - rules_python_gazelle_plugin
+#   - Note this is a sub-directory of the rules_python repo
 # - rules_python: https://github.com/bazelbuild/rules_python
 #   - See #55
 # - rules_rust
