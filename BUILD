@@ -116,8 +116,8 @@ gazelle_binary(
 
 executable_with_copts(
     name = "gazelle_bin",
-    wrapped = ":og_gazelle_bin",
     extra_copts = ["-w"],
+    wrapped = ":og_gazelle_bin",
 )
 
 # Our gazelle target points to the python gazelle binary.
