@@ -147,6 +147,32 @@ gazelle(
 # gazelle:cc_use_builtin_bzlmod_index true
 # gazelle:cc_unresolved_deps error
 
+# gazelle:resolve cc pico/stdlib.h @pico-sdk//src/rp2_common/pico_stdlib:pico_stdlib
+# gazelle:resolve cc hw_drivers/lis3mdl/lis3mdl.emb.h //hw_drivers/lis3mdl:lis3mdl_emb
+# gazelle:resolve cc pw_assert/check.h @pigweed//pw_assert
+# gazelle:resolve cc pw_async2/system_time_provider.h @pigweed//pw_async2:system_time_provider
+# gazelle:resolve cc pw_bytes/array.h @pigweed//pw_bytes
+# gazelle:resolve cc pw_bytes/bit.h @pigweed//pw_bytes
+# gazelle:resolve cc pw_bytes/span.h @pigweed//pw_bytes
+# gazelle:resolve cc pw_channel/rp2_stdio_channel.h @pigweed//pw_channel:rp2_stdio_channel
+# gazelle:resolve cc pw_channel/stream_channel.h @pigweed//pw_channel:stream_channel
+# gazelle:resolve cc pw_cpu_exception/entry.h @pigweed//pw_exception:entry_backend_impl
+# gazelle:resolve cc pw_digital_io/digital_io.h @pigweed//pw_digital_io
+# gazelle:resolve cc pw_digital_io/digital_io_mock.h @pigweed//pw_digital_io:digital_io_mock
+# gazelle:resolve cc pw_i2c/address.h @pigweed//pw_i2c:address
+# gazelle:resolve cc pw_i2c/initiator.h @pigweed//pw_i2c:initiator
+# gazelle:resolve cc pw_i2c/initiator_mock.h @pigweed//pw_i2c:initiator_mock
+# gazelle:resolve cc pw_i2c/register_device.h @pigweed//pw_i2c:register_device
+# gazelle:resolve cc pw_i2c_rp2040/initiator.h @pigweed//pw_i2c_rp2040
+# gazelle:resolve cc pw_log/log.h @pigweed//pw_log
+# gazelle:resolve cc pw_multibuf/simple_allocator.h @pigweed//pw_multibuf:simple_allocator
+# gazelle:resolve cc pw_result/result.h @pigweed//pw_result
+# gazelle:resolve cc pw_system/io.h @pigweed//pw_system:io
+# gazelle:resolve cc pw_system/system.h @pigweed//pw_system:async
+# gazelle:resolve cc pw_third_party/freertos/config_assert.h @pigweed//third_party/freertos:config_assert
+# gazelle:resolve cc pw_thread_stl/options.h @pigweed//pw_thread_stl
+# gazelle:resolve cc pw_unit_test/framework.h @pigweed//pw_unit_test
+
 # Disable BUILD.bazel files
 # gazelle:build_file_name BUILD
 
