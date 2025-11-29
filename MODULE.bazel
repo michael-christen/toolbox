@@ -55,7 +55,7 @@ bazel_dep(name = "protobuf", version = "33.1", repo_name = "com_google_protobuf"
 bazel_dep(name = "rules_cc", version = "0.2.14")
 bazel_dep(name = "rules_multirun", version = "0.13.0")
 bazel_dep(name = "rules_multitool", version = "1.9.0")
-bazel_dep(name = "rules_mypy", version = "0.38.0")
+bazel_dep(name = "rules_mypy", version = "0.40.0")
 bazel_dep(name = "rules_oci", version = "2.2.6")
 bazel_dep(name = "rules_platform", version = "0.1.0")
 bazel_dep(name = "rules_proto", version = "7.1.0")
@@ -137,12 +137,13 @@ bazel_dep(name = "toolchains_llvm", version = "0.10.3")
 #   - TODO(#91): Allow bumping this up to 26 or greater while avoiding segfault
 # - rules_cc: https://registry.bazel.build/modules/rules_cc
 # - rules_multirun: https://registry.bazel.build/modules/rules_multirun
-# - rules_multitool
-# - rules_mypy
-# - rules_oci
-# - rules_platform
+# - rules_multitool: https://registry.bazel.build/modules/rules_multitool
+# - rules_mypy: https://registry.bazel.build/modules/rules_mypy
+# - rules_oci: https://registry.bazel.build/modules/rules_oci
+# - rules_platform: https://registry.bazel.build/modules/rules_platform
 #   - Allow platform transitions
-# - rules_proto: https://github.com/stackb/rules_proto
+# - rules_proto: https://registry.bazel.build/modules/rules_proto
+#   - https://github.com/stackb/rules_proto
 # - rules_python_gazelle_plugin
 #   - Note this is a sub-directory of the rules_python repo
 # - rules_python: https://github.com/bazelbuild/rules_python
