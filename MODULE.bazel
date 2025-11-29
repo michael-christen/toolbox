@@ -137,7 +137,6 @@ bazel_dep(name = "toolchains_llvm", version = "1.5.0")
 #   for recommendations on sub-dependencies
 # - platforms: https://registry.bazel.build/modules/platforms
 # - protobuf: https://registry.bazel.build/modules/protobuf
-#   - TODO(#91): Allow bumping this up to 26 or greater while avoiding segfault
 # - rules_cc: https://registry.bazel.build/modules/rules_cc
 # - rules_multirun: https://registry.bazel.build/modules/rules_multirun
 #   - allow parallel invocations (see lint.sh)
