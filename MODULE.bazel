@@ -89,7 +89,7 @@ bazel_dep(name = "toolchains_llvm", version = "0.10.3")
 #   - Next, follow the install instructions for
 #     - linting: https://github.com/aspect-build/rules_lint/blob/v1.0.3/docs/linting.md
 #     - formatting: https://github.com/aspect-build/rules_lint/blob/v1.0.3/docs/formatting.md
-# - aspect_rules_py
+# - aspect_rules_py: https://registry.bazel.build/modules/aspect_rules_py
 # - bazel_skylib_gazelle_plugin
 # - bazel_skylib
 #   - Bazel rule helpers, including testing
