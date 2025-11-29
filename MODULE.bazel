@@ -51,7 +51,7 @@ bazel_dep(name = "nanopb", version = "0.4.9.1", repo_name = "com_github_nanopb_n
 bazel_dep(name = "pico-sdk", version = "2.0.0")
 bazel_dep(name = "pigweed")
 bazel_dep(name = "platforms", version = "1.0.0")
-bazel_dep(name = "protobuf", version = "24.4", repo_name = "com_google_protobuf")
+bazel_dep(name = "protobuf", version = "33.1", repo_name = "com_google_protobuf")
 bazel_dep(name = "rules_cc", version = "0.0.17")
 bazel_dep(name = "rules_multirun", version = "0.9.0")
 bazel_dep(name = "rules_multitool", version = "1.9.0")
@@ -133,7 +133,7 @@ bazel_dep(name = "toolchains_llvm", version = "0.10.3")
 #       - rules_mypy
 #       - rules_python
 # - platforms: https://registry.bazel.build/modules/platforms
-# - protobuf:
+# - protobuf: https://registry.bazel.build/modules/protobuf
 #   - TODO(#91): Allow bumping this up to 26 or greater while avoiding segfault
 # - rules_cc
 # - rules_multirun
