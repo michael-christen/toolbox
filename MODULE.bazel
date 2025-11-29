@@ -61,8 +61,8 @@ bazel_dep(name = "rules_platform", version = "0.1.0")
 bazel_dep(name = "rules_proto", version = "7.1.0")
 bazel_dep(name = "rules_python_gazelle_plugin", version = "1.7.0-rc4")
 bazel_dep(name = "rules_python", version = "1.7.0")
-bazel_dep(name = "rules_rust", version = "0.48.0")
-bazel_dep(name = "rules_uv", version = "0.45.0")
+bazel_dep(name = "rules_rust")
+bazel_dep(name = "rules_uv", version = "0.88.0")
 bazel_dep(name = "toolchains_llvm", version = "0.10.3")
 
 ##########################################
@@ -137,6 +137,7 @@ bazel_dep(name = "toolchains_llvm", version = "0.10.3")
 #   - TODO(#91): Allow bumping this up to 26 or greater while avoiding segfault
 # - rules_cc: https://registry.bazel.build/modules/rules_cc
 # - rules_multirun: https://registry.bazel.build/modules/rules_multirun
+#   - allow parallel invocations (see lint.sh)
 # - rules_multitool: https://registry.bazel.build/modules/rules_multitool
 # - rules_mypy: https://registry.bazel.build/modules/rules_mypy
 # - rules_oci: https://registry.bazel.build/modules/rules_oci
@@ -144,12 +145,13 @@ bazel_dep(name = "toolchains_llvm", version = "0.10.3")
 #   - Allow platform transitions
 # - rules_proto: https://registry.bazel.build/modules/rules_proto
 #   - https://github.com/stackb/rules_proto
-# - rules_python_gazelle_plugin
+# - rules_python_gazelle_plugin: https://registry.bazel.build/modules/rules_python_gazelle_plugin
 #   - Note this is a sub-directory of the rules_python repo
-# - rules_python: https://github.com/bazelbuild/rules_python
+# - rules_python: https://registry.bazel.build/modules/rules_python
+#   - https://github.com/bazelbuild/rules_python
 #   - See #55
-# - rules_rust
-# - rules_uv
+# - rules_rust: https://registry.bazel.build/modules/rules_rust
+# - rules_uv: https://registry.bazel.build/modules/rules_uv
 # - toolchains_llvm
 
 # Considerations for the future
