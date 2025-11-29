@@ -39,8 +39,8 @@ bazel_dep(name = "aspect_rules_js", version = "2.8.2")
 bazel_dep(name = "aspect_rules_lint", version = "1.10.2")
 bazel_dep(name = "aspect_rules_py", version = "1.6.6")
 bazel_dep(name = "bazel_skylib_gazelle_plugin", version = "1.8.2")
-bazel_dep(name = "bazel_skylib", version = "1.7.1")
-bazel_dep(name = "buildifier_prebuilt", version = "6.4.0")
+bazel_dep(name = "bazel_skylib", version = "1.8.2")
+bazel_dep(name = "buildifier_prebuilt", version = "8.2.1")
 bazel_dep(name = "build_stack_rules_proto", version = "4.1.2")
 bazel_dep(name = "catch2", version = "3.6.0")
 bazel_dep(name = "emboss", repo_name = "com_google_emboss")
@@ -91,14 +91,15 @@ bazel_dep(name = "toolchains_llvm", version = "0.10.3")
 #     - formatting: https://github.com/aspect-build/rules_lint/blob/v1.0.3/docs/formatting.md
 # - aspect_rules_py: https://registry.bazel.build/modules/aspect_rules_py
 # - bazel_skylib_gazelle_plugin: https://registry.bazel.build/modules/bazel_skylib_gazelle_plugin
-# - bazel_skylib
+# - bazel_skylib: https://registry.bazel.build/modules/bazel_skylib
 #   - Bazel rule helpers, including testing
-# - buildifier_prebuilt
+# - buildifier_prebuilt:
+# https://registry.bazel.build/modules/buildifier_prebuilt
 #   - Set up hermetic Buildifier tools
 #   - This is helpful because the old version used an http_archive to fetch the buildtools
 #     WORKSPACE, but it is incompatible with bzlmod Go toolchains. Instead let's just use
 #     a prebuilt version.
-# - build_stack_rules_proto
+# - build_stack_rules_proto: https://registry.bazel.build/modules/build_stack_rules_proto
 # - catch2
 #   - C++ Test framework
 #   - https://github.com/catchorg/Catch2
