@@ -34,7 +34,7 @@ module(
 # Reminder: When adding dependencies, update the Notes section below and keep
 # any overrides / configuration in their respective sections ordered alphabetically
 # [BCR](https://registry.bazel.build/)
-bazel_dep(name = "aspect_bazel_lib", version = "2.9.4")
+bazel_dep(name = "aspect_bazel_lib", version = "2.21.2")
 bazel_dep(name = "aspect_rules_js", version = "1.39.0")
 bazel_dep(name = "aspect_rules_lint", version = "1.0.3")
 bazel_dep(name = "aspect_rules_py", version = "1.6.6")
@@ -73,7 +73,7 @@ bazel_dep(name = "toolchains_llvm", version = "0.10.3")
 # order to keep them clean / immediately viewable)
 
 # Repo Notes:
-# - aspect_bazel_lib
+# - aspect_bazel_lib: https://registry.bazel.build/modules/aspect_bazel_lib
 # - aspect_rules_js
 #   - NOTE: We don't really use/support JS in this repo, and if you need to
 #   you'll have some more config to do, but we register rules_js here so we can
