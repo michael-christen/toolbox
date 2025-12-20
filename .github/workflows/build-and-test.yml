@@ -17,7 +17,7 @@ jobs:
           message: |
             Hello world! :wave:
             This is an automated comment with **markdown** support.
-            This is Run # ${{ github.run_number }}
+            This is [${{github.workflow}}: #${{ github.run_number }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
           # Use a comment-tag to create a "sticky" comment that updates on subsequent runs
           comment-tag: automated-build-status
           # GITHUB_TOKEN is automatically available
