@@ -26,7 +26,11 @@ cc_binary(
     ],
 )
 
-cc_size(target="rp2040_sbr.elf")
+cc_size(target=":rp2040_sbr.elf",
+        # XXX: 100 and 100 are wrong ...
+        max_flash=100,
+        max_ram=100,
+)
 
 # pw_size_report(
 #     name = "sbr_size",
