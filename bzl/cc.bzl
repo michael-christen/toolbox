@@ -89,3 +89,30 @@ def c_library(**kwargs):
 
 def pw_cc_test(timeout = "short", **kwargs):
     _pw_cc_test(timeout = timeout, **kwargs)
+
+
+def cc_size(target, **kwargs):
+    """Calculate size metrics of binary."""
+    name = "{}.size".format(target)
+    max_flash = 100
+    max_ram = 100
+    # XXX: Probably want custom rule to properly accept label
+    target_label = ":{}".format(target)
+    # XXX: Do we always want this size tool?
+    size_tool = "@llvm_toolchain_llvm//:bin/llvm-size"
+    native.genrule(
+        name=name,
+        outs=["{}.txt".format(name)],
+        # XXX: 100 and 100 are wrong ...
+        cmd = "$(location //bzl:bin_size) $(location {}) $(location {}) {} {} > $@".format(size_tool, target_label, max_flash, max_ram),
+        srcs = [
+            target_label,
+        ],
+        tools = [
+            "//bzl:bin_size",
+            size_tool,
+        ],
+        # XXX: Maybe query for these?
+        tags = ["cc_size"],
+        **kwargs,
+    )

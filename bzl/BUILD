@@ -10,3 +10,9 @@ py_binary(
     visibility = ["//:__subpackages__"],
     deps = ["@pip//pytest"],
 )
+
+sh_binary(
+    name = "bin_size",
+    srcs = ["bin_size.sh"],
+    visibility = ["//:__subpackages__"],
+)

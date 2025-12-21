@@ -2,10 +2,14 @@ load("@pigweed//targets/host_device_simulator:transition.bzl", "host_device_simu
 load("@pigweed//targets/rp2040:flash.bzl", "flash_rp2040")
 load("//third_party/pigweed/tools:tools.bzl", "device_console", "host_console")
 load(":binary.bzl", "rp2040_binary", "rp2350_binary")
+load("@pigweed//pw_bloat:pw_cc_size_binary.bzl", "pw_cc_size_binary")
+load("@pigweed//pw_bloat:pw_size_report.bzl", "pw_size_report")
+load("//bzl:cc.bzl", "cc_size")
 
 package(default_visibility = ["//visibility:private"])
 
 cc_binary(
+# pw_cc_size_binary(
     name = "sbr",
     srcs = ["main.cc"],
     deps = [
@@ -21,6 +25,13 @@ cc_binary(
         "@pigweed//pw_system:extra_platform_libs",
     ],
 )
+
+cc_size(target="rp2040_sbr.elf")
+
+# pw_size_report(
+#     name = "sbr_size",
+#     target = ":sbr",
+# )
 
 # Create a host binary using the Pigweed upstream pw_system host_device_simulator.
 host_device_simulator_binary(

@@ -2,8 +2,9 @@
 
 
 ### Resources
-https://interrupt.memfault.com/blog/code-size-deltas
-https://pigweed.dev/pw_bloat/
+
+- https://interrupt.memfault.com/blog/code-size-deltas
+- https://pigweed.dev/pw_bloat/
 
 ### Topics
 
