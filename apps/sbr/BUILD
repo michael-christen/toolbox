@@ -26,12 +26,6 @@ cc_binary(
     ],
 )
 
-cc_size(target=":rp2040_sbr.elf",
-        # XXX: 100 and 100 are wrong ...
-        max_flash=100,
-        max_ram=100,
-)
-
 # pw_size_report(
 #     name = "sbr_size",
 #     target = ":sbr",
@@ -60,6 +54,12 @@ rp2040_binary(
     binary = ":sbr",
 )
 
+cc_size(target=":rp2040_sbr.elf",
+        # XXX: 100 and 100 are wrong ...
+        max_flash=100,
+        max_ram=100,
+)
+
 flash_rp2040(
     name = "flash_rp2040",
     rp2040_binary = "rp2040_sbr.elf",
@@ -74,6 +74,12 @@ device_console(
 rp2350_binary(
     name = "rp2350_sbr.elf",
     binary = ":sbr",
+)
+
+cc_size(target=":rp2350_sbr.elf",
+        # XXX: 100 and 100 are wrong ...
+        max_flash=100,
+        max_ram=100,
 )
 
 # Note: Despite the name, the rule works for the 2350.

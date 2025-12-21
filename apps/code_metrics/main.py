@@ -1,4 +1,5 @@
 """Run metrics collection, upload, comparison, etc."""
+import datetime
 import json
 import pathlib
 import subprocess
@@ -31,7 +32,7 @@ def collect_all_stats(workspace_dir: pathlib.Path):
             print(datum_val)
 
 
-def get_commit_information(workspace_dir: pathlib.Path, main_branch: str):
+def get_commit_information(now: datetime.datetime, workspace_dir: pathlib.Path, main_branch: str):
     current_commit = git_utils.get_head_commit(git_directory=workspace_dir,
                                                num_prev_commits=0)
     parent_commit = git_utils.get_head_commit(git_directory=workspace_dir,
@@ -44,6 +45,7 @@ def get_commit_information(workspace_dir: pathlib.Path, main_branch: str):
         f'parent_commit: {parent_commit}',
         f'merge_base: {merge_base}',
         f'is_dirty: {is_dirty}',
+        f'datetime: {now}',
     ])
     print(msg)
 
@@ -51,8 +53,9 @@ def get_commit_information(workspace_dir: pathlib.Path, main_branch: str):
 def main():
     # XXX: Pass in from CI / change default to main too
     main_branch = 'master'
+    now = datetime.datetime.now(datetime.timezone.utc)
     workspace_dir = bazel_utils.get_workspace_directory()
-    get_commit_information(main_branch=main_branch, workspace_dir=workspace_dir)
+    get_commit_information(now=now, main_branch=main_branch, workspace_dir=workspace_dir)
     collect_all_stats(workspace_dir=workspace_dir)
 
 
