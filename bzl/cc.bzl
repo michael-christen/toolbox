@@ -90,16 +90,16 @@ def c_library(**kwargs):
 def pw_cc_test(timeout = "short", **kwargs):
     _pw_cc_test(timeout = timeout, **kwargs)
 
-
 def cc_size(target, max_flash, max_ram, **kwargs):
     """Calculate size metrics of binary."""
     target_label = native.package_relative_label(target)
     name = "{}.size".format(target_label.name)
+
     # XXX: Do we always want this size tool?
     size_tool = "@llvm_toolchain_llvm//:bin/llvm-size"
     native.genrule(
-        name=name,
-        outs=["{}.json".format(name)],
+        name = name,
+        outs = ["{}.json".format(name)],
         cmd = "$(location //bzl:bin_size) $(location {}) $(location {}) {} {} {} > $@".format(size_tool, target, target_label, max_flash, max_ram),
         srcs = [
             target,
@@ -110,5 +110,5 @@ def cc_size(target, max_flash, max_ram, **kwargs):
         ],
         # XXX: Maybe query for these? Or make a rule/pkg that combines them all
         tags = ["cc_size"],
-        **kwargs,
+        **kwargs
     )

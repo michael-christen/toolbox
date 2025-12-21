@@ -1,4 +1,5 @@
 load("@pigweed//pw_build:compatibility.bzl", "host_backend_alias", "incompatible_with_mcu")
+load("@rules_cc//cc:cc_library.bzl", "cc_library")
 
 # gazelle:default_visibility //visibility:public
 package(default_visibility = ["//visibility:public"])

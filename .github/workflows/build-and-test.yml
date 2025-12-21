@@ -21,7 +21,7 @@ jobs:
           # Use a comment-tag to create a "sticky" comment that updates on subsequent runs
           comment-tag: automated-build-status
           # GITHUB_TOKEN is automatically available
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@v4
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@v1.3.1

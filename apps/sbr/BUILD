@@ -1,15 +1,14 @@
 load("@pigweed//targets/host_device_simulator:transition.bzl", "host_device_simulator_binary")
 load("@pigweed//targets/rp2040:flash.bzl", "flash_rp2040")
+load("@rules_cc//cc:cc_binary.bzl", "cc_binary")
+load("//bzl:cc.bzl", "cc_size")
 load("//third_party/pigweed/tools:tools.bzl", "device_console", "host_console")
 load(":binary.bzl", "rp2040_binary", "rp2350_binary")
-load("@pigweed//pw_bloat:pw_cc_size_binary.bzl", "pw_cc_size_binary")
-load("@pigweed//pw_bloat:pw_size_report.bzl", "pw_size_report")
-load("//bzl:cc.bzl", "cc_size")
 
 package(default_visibility = ["//visibility:private"])
 
 cc_binary(
-# pw_cc_size_binary(
+    # pw_cc_size_binary(
     name = "sbr",
     srcs = ["main.cc"],
     deps = [
@@ -54,10 +53,11 @@ rp2040_binary(
     binary = ":sbr",
 )
 
-cc_size(target=":rp2040_sbr.elf",
-        # XXX: 100 and 100 are wrong ...
-        max_flash=100,
-        max_ram=100,
+cc_size(
+    # XXX: 100 and 100 are wrong ...
+    max_flash = 100,
+    max_ram = 100,
+    target = ":rp2040_sbr.elf",
 )
 
 flash_rp2040(
@@ -76,10 +76,11 @@ rp2350_binary(
     binary = ":sbr",
 )
 
-cc_size(target=":rp2350_sbr.elf",
-        # XXX: 100 and 100 are wrong ...
-        max_flash=100,
-        max_ram=100,
+cc_size(
+    # XXX: 100 and 100 are wrong ...
+    max_flash = 100,
+    max_ram = 100,
+    target = ":rp2350_sbr.elf",
 )
 
 # Note: Despite the name, the rule works for the 2350.

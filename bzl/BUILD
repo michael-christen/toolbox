@@ -1,3 +1,4 @@
+load("@rules_shell//shell:sh_binary.bzl", "sh_binary")
 load("//bzl:py.bzl", "py_binary")
 
 exports_files([

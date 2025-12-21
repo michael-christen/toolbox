@@ -31,7 +31,7 @@ module(
 # bazel_dep Listing
 ##########################################
 ##########################################
-# Reminder: When adding dependencies, update the Notes section below and keep
+# REMINDER: When adding dependencies, update the Notes section below and keep
 # any overrides / configuration in their respective sections ordered alphabetically
 # [BCR](https://registry.bazel.build/)
 bazel_dep(name = "aspect_bazel_lib", version = "2.21.2")
@@ -62,6 +62,7 @@ bazel_dep(name = "rules_proto", version = "7.1.0")
 bazel_dep(name = "rules_python_gazelle_plugin", version = "1.7.0-rc4")
 bazel_dep(name = "rules_python", version = "1.7.0")
 bazel_dep(name = "rules_rust")
+bazel_dep(name = "rules_shell", version = "0.6.1")
 bazel_dep(name = "rules_uv", version = "0.88.0")
 bazel_dep(name = "toolchains_llvm", version = "1.5.0")
 
@@ -153,6 +154,7 @@ bazel_dep(name = "toolchains_llvm", version = "1.5.0")
 #   - https://github.com/bazelbuild/rules_python
 #   - See #55
 # - rules_rust: https://registry.bazel.build/modules/rules_rust
+# - rules_shell: https://registry.bazel.build/modules/rules_shell
 # - rules_uv: https://registry.bazel.build/modules/rules_uv
 # - toolchains_llvm: https://registry.bazel.build/modules/toolchains_llvm
 

@@ -6,3 +6,5 @@ py_binary(
     visibility = ["//:__subpackages__"],
     deps = ["@pip//sqlalchemy"],
 )
+
+package(default_visibility = ["//visibility:private"])

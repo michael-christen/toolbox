@@ -1,4 +1,6 @@
 load("@rules_platform//platform_data:defs.bzl", "platform_data")
+load("@rules_shell//shell:sh_binary.bzl", "sh_binary")
+load("@rules_shell//shell:sh_test.bzl", "sh_test")
 load(":my_rules.bzl", "foo_binary", "foo_toolchain")
 load(":my_rules_test.bzl", "my_rules_test_suite")
 

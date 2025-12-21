@@ -1,6 +1,8 @@
 """Experiment with: https://docs.sqlalchemy.org/en/20/tutorial/index.html."""
+
 import pathlib
-from typing import List, Optional
+from typing import List
+from typing import Optional
 
 import sqlalchemy
 from sqlalchemy import orm
@@ -13,7 +15,7 @@ def get_test_engine() -> sqlalchemy.Engine:
     file_path = pathlib.Path(file)
     if file_path.exists():
         file_path.unlink()
-    return sqlalchemy.create_engine(f'sqlite+pysqlite:///{file}', echo=True)
+    return sqlalchemy.create_engine(f"sqlite+pysqlite:///{file}", echo=True)
 
 
 def example_query(engine: sqlalchemy.Engine) -> None:
@@ -42,7 +44,9 @@ def query_2(engine: sqlalchemy.Engine) -> None:
         for row in result:
             print(f"x: {row.x}  y: {row.y}")
     # OR use a session
-    stmt = sqlalchemy.text("SELECT x, y FROM some_table WHERE y > :y ORDER BY x, y")
+    stmt = sqlalchemy.text(
+        "SELECT x, y FROM some_table WHERE y > :y ORDER BY x, y"
+    )
     with orm.Session(engine) as session:
         session_result = session.execute(stmt, {"y": 1})
         for row in session_result:
@@ -52,7 +56,7 @@ def query_2(engine: sqlalchemy.Engine) -> None:
 def make_tables(engine: sqlalchemy.Engine) -> None:
     metadata_obj = sqlalchemy.MetaData()
 
-    user_table = sqlalchemy.Table(
+    _ = sqlalchemy.Table(
         "user_account",
         metadata_obj,
         sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
@@ -60,11 +64,13 @@ def make_tables(engine: sqlalchemy.Engine) -> None:
         sqlalchemy.Column("fullname", sqlalchemy.String),
     )
 
-    address_table = sqlalchemy.Table(
+    _ = sqlalchemy.Table(
         "address",
         metadata_obj,
         sqlalchemy.Column("id", sqlalchemy.Integer, primary_key=True),
-        sqlalchemy.Column("user_id", sqlalchemy.ForeignKey("user_account.id"), nullable=False),
+        sqlalchemy.Column(
+            "user_id", sqlalchemy.ForeignKey("user_account.id"), nullable=False
+        ),
         sqlalchemy.Column("email_address", sqlalchemy.String, nullable=False),
     )
 
@@ -81,9 +87,16 @@ class User(Base):
     id: orm.Mapped[int] = orm.mapped_column(primary_key=True)
     name: orm.Mapped[str] = orm.mapped_column(sqlalchemy.String(30))
     fullname: orm.Mapped[Optional[str]]
-    addresses: orm.Mapped[List["Address"]] = orm.relationship(back_populates="user")
+    addresses: orm.Mapped[List["Address"]] = orm.relationship(
+        back_populates="user"
+    )
+
     def __repr__(self) -> str:
-        return f"User(id={self.id!r}, name={self.name!r}, fullname={self.fullname!r})"
+        return (
+            f"User(id={self.id!r}, name={self.name!r},"
+            f" fullname={self.fullname!r})"
+        )
+
 
 class Address(Base):
     __tablename__ = "address"
@@ -91,6 +104,7 @@ class Address(Base):
     email_address: orm.Mapped[str]
     user_id = orm.mapped_column(sqlalchemy.ForeignKey("user_account.id"))
     user: orm.Mapped[User] = orm.relationship(back_populates="addresses")
+
     def __repr__(self) -> str:
         return f"Address(id={self.id!r}, email_address={self.email_address!r})"
 

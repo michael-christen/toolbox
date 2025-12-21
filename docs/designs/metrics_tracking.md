@@ -47,44 +47,48 @@ git merge-base HEAD master
 #### Data Structure
 
 - Commit:
-    - revision: <commit SHA>
-    - parent_revision: <commit SHA>
-      - useful for comparisons?
-    - build: ? (perhaps it's the target?)
+
+  - revision: <commit SHA>
+  - parent_revision: <commit SHA>
+    - useful for comparisons?
+  - build: ? (perhaps it's the target?)
 
 - Run:
-    - > A unique collection within a commit
-    - > could have several runs on a single commit
-    - ? what data do we want?
-    - created_at: timestamp
-    - message: ?
+
+  - > A unique collection within a commit
+  - > could have several runs on a single commit
+  - ? what data do we want?
+  - created_at: timestamp
+  - message: ?
 
 - Tables per commit
-    - Code Size:
-        - Commit (ref)
-        - target / build: what're we referencing
-            - ? does this need its own table?
-        - <data>
-            - text
-            - data
-            - bss
+  - Code Size:
+    - Commit (ref)
+    - target / build: what're we referencing
+      - ? does this need its own table?
+    - <data>
+        - text
+        - data
+        - bss
 
 #### Storage Type
 
 - Options
-    - CI
-    - Sheets
-    - git notes
-    - DB
+
+  - CI
+  - Sheets
+  - git notes
+  - DB
 
 - Desires
-    - likely want the ability to quickly list or export all the historical code
-      sizes, query for a single build (for pull-request deltas), and be able to
-      ensure that no duplicates exist.
+  - likely want the ability to quickly list or export all the historical code
+    sizes, query for a single build (for pull-request deltas), and be able to
+    ensure that no duplicates exist.
 
 #### Visualization
 
 ##### Options
+
 - Export to `.csv`
 - Pandas scripts
 - Custom web-app

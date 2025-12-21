@@ -132,29 +132,37 @@ def get_file_commit_map_from_list(
     return FileCommitMap(commit_map=commit_map, file_map=file_map)
 
 
-def get_head_commit(git_directory: pathlib.Path | str, num_prev_commits: int = 0) -> str:
-    result = _get_git_output(['rev-parse', f'HEAD^{num_prev_commits}'], git_directory)
+def get_head_commit(
+    git_directory: pathlib.Path | str, num_prev_commits: int = 0
+) -> str:
+    result = _get_git_output(
+        ["rev-parse", f"HEAD^{num_prev_commits}"], git_directory
+    )
     assert len(result) == 1
     return result[0]
 
 
-def get_merge_base(commit_a: str, commit_b: str, git_directory: pathlib.Path | str) -> str:
-    result = _get_git_output(['merge-base', commit_a, commit_b], git_directory)
+def get_merge_base(
+    commit_a: str, commit_b: str, git_directory: pathlib.Path | str
+) -> str:
+    result = _get_git_output(["merge-base", commit_a, commit_b], git_directory)
     assert len(result) == 1
     return result[0]
 
 
 def get_branch(git_directory: pathlib.Path | str) -> str:
-    result = _get_git_output(['rev-parse', '--abbrev-ref', 'HEAD'], git_directory)
+    result = _get_git_output(
+        ["rev-parse", "--abbrev-ref", "HEAD"], git_directory
+    )
     assert len(result) == 1
     return result[0]
 
 
 def get_num_files(git_directory: pathlib.Path | str) -> int:
-    result = _get_git_output(['ls-files'], git_directory)
+    result = _get_git_output(["ls-files"], git_directory)
     return len(result)
 
 
 def is_dirty(git_directory: pathlib.Path | str) -> bool:
-    result = _get_git_output(['status', '--porcelain'], git_directory)
+    result = _get_git_output(["status", "--porcelain"], git_directory)
     return len(result) > 0

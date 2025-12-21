@@ -27,8 +27,8 @@ things we'll want:
 - migrations
   - how and when are migrations applied or rolled back
 
-
 ## Hackiest Thing
+
 - do most of the management manually
 - use GITHUB_SECRETS for the credentials
 - no backup or migrations to start

@@ -1,6 +1,6 @@
 import sqlalchemy
-from sqlalchemy import orm
 
+# from sqlalchemy import orm
 
 Base = sqlalchemy.declarative_base()
 
@@ -17,7 +17,8 @@ class RunInfo(Base):
     url = sqlalchemy.Column(sqlalchemy.String, primary_key=True)
 
 
-# XXX: Use declarative mapping? https://docs.sqlalchemy.org/en/20/orm/mapping_styles.html
+# XXX: Use declarative mapping?
+# https://docs.sqlalchemy.org/en/20/orm/mapping_styles.html
 # XXX: Should we have unique tables per thing
 #  - or target and repo metrics; what does growth look like?
 # XXX: How do we reduce duplication with serialization / schema formats?
