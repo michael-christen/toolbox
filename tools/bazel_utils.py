@@ -37,7 +37,7 @@ def normalize_label(label: str) -> pathlib.Path:
         label = label[len("//") :]  # noqa: E203 whitespace conflict
     if label.startswith(":"):
         label = label[len(":") :]  # noqa: E203 whitespace conflict
-    return label.replace(":", "/")
+    return pathlib.Path(label.replace(":", "/"))
 
 
 def parse_build_output(query_bytes: bytes) -> build_pb2.QueryResult:

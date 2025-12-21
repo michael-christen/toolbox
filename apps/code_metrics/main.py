@@ -35,7 +35,7 @@ def collect_target_stats(workspace_dir: pathlib.Path):
     # XXX: .bazelrc may not be getting picked up "--config=quiet" failed ...
     subprocess.check_call(["bazel", "build"] + targets, cwd=workspace_dir)
     bazel_bin = bazel_utils.get_bazel_bin_directory()
-    for target, data_labels in target_to_data.items():
+    for data_labels in target_to_data.values():
         for datum in data_labels:
             datum_path = bazel_bin / bazel_utils.normalize_label(datum)
             datum_val = json.loads(datum_path.read_text())

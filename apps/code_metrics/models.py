@@ -1,20 +1,23 @@
+import datetime
+
 import sqlalchemy
-
-# from sqlalchemy import orm
-
-Base = sqlalchemy.declarative_base()
+from sqlalchemy import orm
 
 
-class CommitInfo(Base):
-    sha_sum = sqlalchemy.Column(sqlalchemy.String, primary_key=True)
-    parent_sha_sum = sqlalchemy.Column(sqlalchemy.String)
+class Base(orm.DeclarativeBase):
+    pass
 
 
 # Maybe we don't need separate tables?
-class RunInfo(Base):
-    commit_sha_sum = sqlalchemy.Column(sqlalchemy.String)
-    created_at = sqlalchemy.Column(sqlalchemy.DateTime)
-    url = sqlalchemy.Column(sqlalchemy.String, primary_key=True)
+# class CommitInfo(Base):
+#     sha_sum = sqlalchemy.Column(sqlalchemy.String, primary_key=True)
+#     parent_sha_sum = sqlalchemy.Column(sqlalchemy.String)
+#
+#
+# class RunInfo(Base):
+#     commit_sha_sum = sqlalchemy.Column(sqlalchemy.String)
+#     created_at = sqlalchemy.Column(sqlalchemy.DateTime)
+#     url = sqlalchemy.Column(sqlalchemy.String, primary_key=True)
 
 
 # XXX: Use declarative mapping?
@@ -25,30 +28,33 @@ class RunInfo(Base):
 # XXX: Define primary_key constraints
 # XXX: Define as tutorial, not this
 class TargetMetrics(Base):
+    __tablename__ = "target_metrics"
     # XXX: Maybe should add a repo-specifier for the target?
-    target_label = sqlalchemy.Column(sqlalchemy.String)
+    target_label: orm.Mapped[str]
 
-    sha_sum = sqlalchemy.Column(sqlalchemy.String)
-    parent_sha_sum = sqlalchemy.Column(sqlalchemy.String)
-    branch_name = sqlalchemy.Column(sqlalchemy.String)
+    sha_sum: orm.Mapped[str]
+    parent_sha_sum: orm.Mapped[str]
+    branch_name: orm.Mapped[str]
 
-    run_created_at = sqlalchemy.Column(sqlalchemy.DateTime)
-    run_url = sqlalchemy.Column(sqlalchemy.String)
+    run_created_at: orm.Mapped[datetime.datetime] = orm.mapped_column(sqlalchemy.DateTime(timezone=True))
+    run_url: orm.Mapped[str]
 
-    text = sqlalchemy.Column(sqlalchemy.Int)
-    data = sqlalchemy.Column(sqlalchemy.Int)
-    bss = sqlalchemy.Column(sqlalchemy.Int)
+    text: orm.Mapped[int]
+    data: orm.Mapped[int]
+    bss: orm.Mapped[int]
     # XXX: flash, ram, and max sizes too?
 
 
 class RepoMetrics(Base):
-    sha_sum = sqlalchemy.Column(sqlalchemy.String)
-    parent_sha_sum = sqlalchemy.Column(sqlalchemy.String)
-    branch_name = sqlalchemy.Column(sqlalchemy.String)
+    __tablename__ = "repo_metrics"
 
-    run_created_at = sqlalchemy.Column(sqlalchemy.DateTime)
-    run_url = sqlalchemy.Column(sqlalchemy.String)
+    sha_sum: orm.Mapped[str]
+    parent_sha_sum: orm.Mapped[str]
+    branch_name: orm.Mapped[str]
+
+    run_created_at: orm.Mapped[datetime.datetime] = orm.mapped_column(sqlalchemy.DateTime(timezone=True))
+    run_url: orm.Mapped[str]
 
     # A bit of a toy metric to simply demonstrate an example of a repo-wide
     # metric
-    num_files = sqlalchemy.Column(sqlalchemy.Int)
+    num_files: orm.Mapped[int]
