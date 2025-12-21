@@ -1,5 +1,20 @@
 ## Spike to Track Repo / Target Metrics across Commits
 
+### Tasks
+
+- [ ] Upload on commit to main branch
+  - or all "release branches"
+  - or on PR?
+- [ ] Script to upload historical data
+- [ ] Viewer for historical trends
+  - grafana
+  - bulk download
+- [ ] Compare on PR
+- cleanup
+  - asyncio psql
+  - consider different table configuration
+    - should we have relations or mixins?
+  - alembic migration
 
 ### Resources
 
@@ -34,6 +49,7 @@ git merge-base HEAD master
 - Commit:
     - revision: <commit SHA>
     - parent_revision: <commit SHA>
+      - useful for comparisons?
     - build: ? (perhaps it's the target?)
 
 - Run:

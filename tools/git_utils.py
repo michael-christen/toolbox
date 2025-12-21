@@ -144,6 +144,17 @@ def get_merge_base(commit_a: str, commit_b: str, git_directory: pathlib.Path | s
     return result[0]
 
 
+def get_branch(git_directory: pathlib.Path | str) -> str:
+    result = _get_git_output(['rev-parse', '--abbrev-ref', 'HEAD'], git_directory)
+    assert len(result) == 1
+    return result[0]
+
+
+def get_num_files(git_directory: pathlib.Path | str) -> int:
+    result = _get_git_output(['ls-files'], git_directory)
+    return len(result)
+
+
 def is_dirty(git_directory: pathlib.Path | str) -> bool:
     result = _get_git_output(['status', '--porcelain'], git_directory)
     return len(result) > 0
