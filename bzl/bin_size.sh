@@ -32,9 +32,9 @@ ram=$(($data + $bss))
 cat <<EOF
 {
   "label": "${bazel_label}",
-  "text: ${text},
-  "data: ${data},
-  "bss: ${bss},
+  "text": ${text},
+  "data": ${data},
+  "bss": ${bss},
   "max_flash": ${max_flash},
   "flash": ${flash},
   "max_ram": ${max_ram},
