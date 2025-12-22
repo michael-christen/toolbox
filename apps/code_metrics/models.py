@@ -36,7 +36,9 @@ class TargetMetrics(Base):
     parent_sha_sum: orm.Mapped[str]
     branch_name: orm.Mapped[str]
 
-    run_created_at: orm.Mapped[datetime.datetime] = orm.mapped_column(sqlalchemy.DateTime(timezone=True))
+    run_created_at: orm.Mapped[datetime.datetime] = orm.mapped_column(
+        sqlalchemy.DateTime(timezone=True)
+    )
     run_url: orm.Mapped[str]
 
     text: orm.Mapped[int]
@@ -52,7 +54,9 @@ class RepoMetrics(Base):
     parent_sha_sum: orm.Mapped[str]
     branch_name: orm.Mapped[str]
 
-    run_created_at: orm.Mapped[datetime.datetime] = orm.mapped_column(sqlalchemy.DateTime(timezone=True))
+    run_created_at: orm.Mapped[datetime.datetime] = orm.mapped_column(
+        sqlalchemy.DateTime(timezone=True)
+    )
     run_url: orm.Mapped[str]
 
     # A bit of a toy metric to simply demonstrate an example of a repo-wide
