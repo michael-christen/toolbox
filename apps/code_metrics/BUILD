@@ -7,8 +7,11 @@ py_binary(
     srcs = ["main.py"],
     visibility = ["//:__subpackages__"],
     deps = [
+        ":models",
         "//tools:bazel_utils",
         "//tools:git_utils",
+        "@pip//psycopg2_binary",
+        "@pip//sqlalchemy",
     ],
 )
 
@@ -19,9 +22,12 @@ py_library(
     deps = ["@pip//sqlalchemy"],
 )
 
-py_library(
+py_binary(
     name = "models",
     srcs = ["models.py"],
     visibility = ["//:__subpackages__"],
-    deps = ["@pip//sqlalchemy"],
+    deps = [
+        "@pip//psycopg2_binary",
+        "@pip//sqlalchemy",
+    ],
 )

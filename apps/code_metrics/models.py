@@ -1,5 +1,7 @@
 import datetime
+import os
 
+import psycopg2
 import sqlalchemy
 from sqlalchemy import orm
 
@@ -30,7 +32,9 @@ class Base(orm.DeclarativeBase):
 class TargetMetrics(Base):
     __tablename__ = "target_metrics"
     # XXX: Maybe should add a repo-specifier for the target?
-    target_label: orm.Mapped[str]
+    # XXX: uniquness may not hold if you have 2 people making this at the exact
+    # same time ...
+    target_label: orm.Mapped[str] = orm.mapped_column(primary_key=True)
 
     sha_sum: orm.Mapped[str]
     parent_sha_sum: orm.Mapped[str]
@@ -39,12 +43,17 @@ class TargetMetrics(Base):
     run_created_at: orm.Mapped[datetime.datetime] = orm.mapped_column(
         sqlalchemy.DateTime(timezone=True)
     )
-    run_url: orm.Mapped[str]
+    run_url: orm.Mapped[str] = orm.mapped_column(primary_key=True)
 
     text: orm.Mapped[int]
     data: orm.Mapped[int]
     bss: orm.Mapped[int]
     # XXX: flash, ram, and max sizes too?
+
+    # __table_args__ = (
+    #     sqlalchemy.UniqueConstraint('run_url', 'target_label',
+    #                                 name='uq_target_run'),
+    # )
 
 
 class RepoMetrics(Base):
@@ -57,8 +66,31 @@ class RepoMetrics(Base):
     run_created_at: orm.Mapped[datetime.datetime] = orm.mapped_column(
         sqlalchemy.DateTime(timezone=True)
     )
-    run_url: orm.Mapped[str]
+    run_url: orm.Mapped[str] = orm.mapped_column(primary_key=True)
 
     # A bit of a toy metric to simply demonstrate an example of a repo-wide
     # metric
     num_files: orm.Mapped[int]
+
+
+def get_engine() -> sqlalchemy.Engine | None:
+    DB_PASSWORD = os.environ.get("DB_PASSWORD")
+    if DB_PASSWORD is None:
+        return None
+    psql_url = (
+        f"postgresql://avnadmin:{DB_PASSWORD}@pg-1f58963f-mchristen96-4420"
+        ".k.aivencloud.com:15807/defaultdb"
+    )
+    return sqlalchemy.create_engine(psql_url)
+
+
+def main():
+    engine = get_engine()
+    if engine is None:
+        return
+    # XXX: Use alembic for migrations, etc.
+    Base.metadata.create_all(engine)
+
+
+if __name__ == '__main__':
+    main()
