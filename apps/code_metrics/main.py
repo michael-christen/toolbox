@@ -87,7 +87,10 @@ def collect_github_stats() -> None:
     repository = os.environ.get("GITHUB_REPOSITORY")
     run_id = os.environ.get("GITHUB_RUN_ID")
     run_attempt = os.environ.get("GITHUB_RUN_ATTEMPT")
-    run_url = f'{server_url}/{repository}/actions/runs/{run_id}/attempts/{run_attempt}'
+    run_url = (
+        f"{server_url}/{repository}/actions/runs/{run_id}/attempts"
+        f"/{run_attempt}"
+    )
     msg = "\n".join(
         [
             f"{run_url=}",
