@@ -16,8 +16,7 @@ jobs:
           # Enable getting history of git for stats collection
           fetch-depth: 0
           # https://stackoverflow.com/a/75966904
-          # XXX
-          # filter: 'tree:0'
+          filter: 'tree:0'
       - run: |
           git fetch origin ${{ github.base_ref }}
       - name: Free Disk Space (Ubuntu)
@@ -45,24 +44,6 @@ jobs:
       - uses: ./.github/actions/bazel-setup
         with:
           buildbuddy_api_key: ${{ secrets.BUILDBUDDY_API_KEY }}
-      - name: Collect Stats
-        id: collect_stats
-        run: |
-          bazel run //apps/code_metrics:main > /tmp/collected_stats.txt
-      - name: Comment PR
-        # https://github.com/thollander/actions-comment-pull-request
-        uses: thollander/actions-comment-pull-request@v3
-        with:
-          file-path: /tmp/collected_stats.txt
-          # message: |
-          #   Hello world! :wave:
-          #   This is an automated comment with **markdown** support.
-          #   This is [${{github.workflow}}: #${{ github.run_number }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
-
-          # Use a comment-tag to create a "sticky" comment that updates on subsequent runs
-          comment-tag: automated-build-status
-          # GITHUB_TOKEN is automatically available
-          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Install Lint Pre-requisites
         run: |
           # Needed for clang-format / llvm_toolchain, otherwise libtinfo.so.5
@@ -111,6 +92,29 @@ jobs:
         with:
           name: code-coverage-html
           path: genhtml
+      - name: Collect Stats
+        id: collect_stats
+        run: |
+          bazel run //apps/code_metrics:main > /tmp/collected_stats.txt
+      - name: Archive stats
+        uses: actions/upload-artifact@v4
+        with:
+          name: collected_stats
+          path: /tmp/collected_stats.txt
+      - name: Comment PR
+        # https://github.com/thollander/actions-comment-pull-request
+        uses: thollander/actions-comment-pull-request@v3
+        with:
+          file-path: /tmp/collected_stats.txt
+          # message: |
+          #   Hello world! :wave:
+          #   This is an automated comment with **markdown** support.
+          #   This is [${{github.workflow}}: #${{ github.run_number }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+
+          # Use a comment-tag to create a "sticky" comment that updates on subsequent runs
+          comment-tag: automated-build-status
+          # GITHUB_TOKEN is automatically available
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload coverage report to Codecov
         uses: codecov/codecov-action@v4.0.1
         with:
