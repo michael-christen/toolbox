@@ -100,7 +100,7 @@ def collect_github_stats() -> None:
 
 def main():
     # XXX: Pass in from CI / change default to main too
-    base_ref = os.environ.get("GITHUB_BASE_REF", "master")
+    base_ref = "origin/" + os.environ.get("GITHUB_BASE_REF", "master")
     # head_ref = os.environ.get("GITHUB_HEAD_REF", "HEAD")
     head_ref = "HEAD"
     print(f"{base_ref=}, {head_ref=}")
