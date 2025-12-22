@@ -16,7 +16,8 @@ jobs:
           # Enable getting history of git for stats collection
           fetch-depth: 0
           # https://stackoverflow.com/a/75966904
-          filter: 'tree:0'
+          # XXX
+          # filter: 'tree:0'
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@v1.3.1
         with:
