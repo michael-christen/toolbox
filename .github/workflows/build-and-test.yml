@@ -18,6 +18,8 @@ jobs:
           # https://stackoverflow.com/a/75966904
           # XXX
           # filter: 'tree:0'
+      - run: |
+          git fetch origin ${{ github.base_ref }}
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@v1.3.1
         with:
