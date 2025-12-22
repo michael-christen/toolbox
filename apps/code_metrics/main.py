@@ -7,8 +7,7 @@ import os
 import pathlib
 import subprocess
 
-import psycopg2
-import sqlalchemy
+import psycopg2  # noqa: F401
 from sqlalchemy import orm
 
 from apps.code_metrics import models
@@ -71,8 +70,9 @@ def get_run_info(
     )
 
 
-def collect_repo_stats(workspace_dir: pathlib.Path, run_info: RunInfo
-                       ) -> RepoMetrics:
+def collect_repo_stats(
+    workspace_dir: pathlib.Path, run_info: RunInfo
+) -> models.RepoMetrics:
     num_files = git_utils.get_num_files(workspace_dir)
     return models.RepoMetrics(
         sha_sum=run_info.sha_sum,
@@ -151,14 +151,15 @@ def main():
     target_stats = collect_target_stats(
         workspace_dir=workspace_dir, run_info=run_info
     )
-    repo_stat = collect_repo_stats(workspace_dir=workspace_dir,
-                                   run_info=run_info)
+    repo_stat = collect_repo_stats(
+        workspace_dir=workspace_dir, run_info=run_info
+    )
 
     # XXX: Consider separating
     # XXX: Be robust to failures? or at gh level
     engine = models.get_engine()
     if engine is None:
-        print('No reporting since no DB connection could be made')
+        print("No reporting since no DB connection could be made")
         return
     with orm.Session(engine) as session:
         for target_stat in target_stats:

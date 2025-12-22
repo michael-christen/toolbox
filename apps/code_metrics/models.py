@@ -1,7 +1,7 @@
 import datetime
 import os
 
-import psycopg2
+import psycopg2  # noqa: F401
 import sqlalchemy
 from sqlalchemy import orm
 
@@ -92,5 +92,5 @@ def main():
     Base.metadata.create_all(engine)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
