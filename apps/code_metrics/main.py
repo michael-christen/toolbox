@@ -45,7 +45,7 @@ def collect_target_stats(workspace_dir: pathlib.Path) -> None:
 
 
 def get_commit_information(
-    now: datetime.datetime, workspace_dir: pathlib.Path, main_branch: str
+    now: datetime.datetime, workspace_dir: pathlib.Path, head_ref: str, base_ref: str
 ) -> None:
     current_commit = git_utils.get_head_commit(
         git_directory=workspace_dir, num_prev_commits=0
@@ -54,7 +54,7 @@ def get_commit_information(
         git_directory=workspace_dir, num_prev_commits=1
     )
     merge_base = git_utils.get_merge_base(
-        "HEAD", main_branch, git_directory=workspace_dir
+        head_ref, base_ref, git_directory=workspace_dir
     )
     current_branch = git_utils.get_branch(workspace_dir)
     is_dirty = git_utils.is_dirty(workspace_dir)
@@ -97,12 +97,14 @@ def collect_github_stats() -> None:
 
 def main():
     # XXX: Pass in from CI / change default to main too
-    main_branch = "master"
+    base_ref = os.environ.get('GITHUB_BASE_REF', 'master')
+    head_ref = os.environ.get('GITHUB_HEAD_REF', 'HEAD')
+    print(f'{base_ref=}, {head_ref=}')
     now = datetime.datetime.now(datetime.timezone.utc)
     workspace_dir = bazel_utils.get_workspace_directory()
     # XXX: Maybe move "now" to run information
     get_commit_information(
-        now=now, main_branch=main_branch, workspace_dir=workspace_dir
+        now=now, head_ref=head_ref, base_ref=base_ref, workspace_dir=workspace_dir
     )
     collect_target_stats(workspace_dir=workspace_dir)
     collect_repo_stats(workspace_dir=workspace_dir)
