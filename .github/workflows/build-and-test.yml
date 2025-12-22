@@ -94,6 +94,8 @@ jobs:
           path: genhtml
       - name: Collect Stats
         id: collect_stats
+        env:
+          DB_PASSWORD: ${{ secrets.METRICS_DB_PASSWORD }}
         run: |
           bazel run //apps/code_metrics:main > /tmp/collected_stats.txt
       - name: Archive stats
