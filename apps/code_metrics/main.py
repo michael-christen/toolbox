@@ -45,7 +45,10 @@ def collect_target_stats(workspace_dir: pathlib.Path) -> None:
 
 
 def get_commit_information(
-    now: datetime.datetime, workspace_dir: pathlib.Path, head_ref: str, base_ref: str
+    now: datetime.datetime,
+    workspace_dir: pathlib.Path,
+    head_ref: str,
+    base_ref: str,
 ) -> None:
     current_commit = git_utils.get_head_commit(
         git_directory=workspace_dir, num_prev_commits=0
@@ -97,14 +100,17 @@ def collect_github_stats() -> None:
 
 def main():
     # XXX: Pass in from CI / change default to main too
-    base_ref = os.environ.get('GITHUB_BASE_REF', 'master')
-    head_ref = os.environ.get('GITHUB_HEAD_REF', 'HEAD')
-    print(f'{base_ref=}, {head_ref=}')
+    base_ref = os.environ.get("GITHUB_BASE_REF", "master")
+    head_ref = os.environ.get("GITHUB_HEAD_REF", "HEAD")
+    print(f"{base_ref=}, {head_ref=}")
     now = datetime.datetime.now(datetime.timezone.utc)
     workspace_dir = bazel_utils.get_workspace_directory()
     # XXX: Maybe move "now" to run information
     get_commit_information(
-        now=now, head_ref=head_ref, base_ref=base_ref, workspace_dir=workspace_dir
+        now=now,
+        head_ref=head_ref,
+        base_ref=base_ref,
+        workspace_dir=workspace_dir,
     )
     collect_target_stats(workspace_dir=workspace_dir)
     collect_repo_stats(workspace_dir=workspace_dir)
