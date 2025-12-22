@@ -11,17 +11,6 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - run: echo "The job was triggered by a ${{ github.event_name }} event, running on ${{ runner.os }}, ${{ github.ref }} @ ${{ github.repository }}."
-      - name: Comment PR
-        uses: thollander/actions-comment-pull-request@v3
-        with:
-          message: |
-            Hello world! :wave:
-            This is an automated comment with **markdown** support.
-            This is [${{github.workflow}}: #${{ github.run_number }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
-          # Use a comment-tag to create a "sticky" comment that updates on subsequent runs
-          comment-tag: automated-build-status
-          # GITHUB_TOKEN is automatically available
-          github-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@v4
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@v1.3.1
@@ -102,6 +91,24 @@ jobs:
           verbose: true
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage.dat
+      - name: Collect Stats
+        id: collect_stats
+        run: |
+          bazel run //apps/code_metrics:main > /tmp/collected_stats.txt
+      - name: Comment PR
+        # https://github.com/thollander/actions-comment-pull-request
+        uses: thollander/actions-comment-pull-request@v3
+        with:
+          file-path: /tmp/collected_stats.txt
+          # message: |
+          #   Hello world! :wave:
+          #   This is an automated comment with **markdown** support.
+          #   This is [${{github.workflow}}: #${{ github.run_number }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+
+          # Use a comment-tag to create a "sticky" comment that updates on subsequent runs
+          comment-tag: automated-build-status
+          # GITHUB_TOKEN is automatically available
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Check Disk Usage
         run: |
           df -h

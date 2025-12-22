@@ -2,6 +2,7 @@
 
 import datetime
 import json
+import os
 import pathlib
 import subprocess
 
@@ -9,7 +10,7 @@ from tools import bazel_utils
 from tools import git_utils
 
 
-def collect_repo_stats(workspace_dir: pathlib.Path):
+def collect_repo_stats(workspace_dir: pathlib.Path) -> None:
     num_files = git_utils.get_num_files(workspace_dir)
     print(
         "\n".join(
@@ -20,7 +21,7 @@ def collect_repo_stats(workspace_dir: pathlib.Path):
     )
 
 
-def collect_target_stats(workspace_dir: pathlib.Path):
+def collect_target_stats(workspace_dir: pathlib.Path) -> None:
     data = bazel_utils.run_query(['attr(tags, "\\bcc_size\\b", //...)'])
     targets = []
     target_to_data = {}
@@ -45,7 +46,7 @@ def collect_target_stats(workspace_dir: pathlib.Path):
 
 def get_commit_information(
     now: datetime.datetime, workspace_dir: pathlib.Path, main_branch: str
-):
+) -> None:
     current_commit = git_utils.get_head_commit(
         git_directory=workspace_dir, num_prev_commits=0
     )
@@ -70,6 +71,30 @@ def get_commit_information(
     print(msg)
 
 
+def collect_github_stats() -> None:
+    """Collect information from GITHUB Workflow.
+
+    Reference:
+    https://docs.github.com/en/actions/reference/workflows-and-actions/variables
+    """
+    if os.environ.get("CI") != "true":
+        print("No GH info")
+        return
+    server_url = os.eniron.get("GITHUB_SERVER_URL")
+    repository = os.environ.get("GITHUB_REPOSITORY")
+    run_id = os.environ.get("GITHUB_RUN_ID")
+    run_attempt = os.environ.get("GITHUB_RUN_ATTEMPT")
+    msg = "\n".join(
+        [
+            f"{server_url=}",
+            f"{repository=}",
+            f"{run_id=}",
+            f"{run_attempt=}",
+        ]
+    )
+    print(msg)
+
+
 def main():
     # XXX: Pass in from CI / change default to main too
     main_branch = "master"
@@ -81,6 +106,7 @@ def main():
     )
     collect_target_stats(workspace_dir=workspace_dir)
     collect_repo_stats(workspace_dir=workspace_dir)
+    collect_github_stats()
 
 
 if __name__ == "__main__":
