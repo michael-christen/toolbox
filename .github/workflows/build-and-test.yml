@@ -12,10 +12,11 @@ jobs:
     steps:
       - run: echo "The job was triggered by a ${{ github.event_name }} event, running on ${{ runner.os }}, ${{ github.ref }} @ ${{ github.repository }}."
       - uses: actions/checkout@v4
-        # Enable getting history of git for stats collection
-        fetch-depth: 0
-        # https://stackoverflow.com/a/75966904
-        filter: 'tree:0'
+        with:
+          # Enable getting history of git for stats collection
+          fetch-depth: 0
+          # https://stackoverflow.com/a/75966904
+          filter: 'tree:0'
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@v1.3.1
         with:
