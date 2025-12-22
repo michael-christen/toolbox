@@ -80,7 +80,7 @@ def collect_github_stats() -> None:
     if os.environ.get("CI") != "true":
         print("No GH info")
         return
-    server_url = os.eniron.get("GITHUB_SERVER_URL")
+    server_url = os.environ.get("GITHUB_SERVER_URL")
     repository = os.environ.get("GITHUB_REPOSITORY")
     run_id = os.environ.get("GITHUB_RUN_ID")
     run_attempt = os.environ.get("GITHUB_RUN_ATTEMPT")
