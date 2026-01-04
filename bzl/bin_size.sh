@@ -8,7 +8,7 @@ set -e
 if [  $# -le 2 ]
 then
     echo "This script requires 5 arguments."
-    echo -e "\nUsage:\nget-fw-size TOOL FILE BAZEL_LABEL MAX_FLASH_SIZE MAX_RAM_SIZE \n"
+    echo -e "\nUsage:\nbin_size.sh TOOL FILE BAZEL_LABEL MAX_FLASH_SIZE MAX_RAM_SIZE \n"
     exit 1
 fi
 
@@ -27,8 +27,10 @@ bss=$(echo $raw | cut -d ' ' -f 9)
 flash=$(($text + $data))
 ram=$(($data + $bss))
 
-# XXX: Maybe normalize the label
-# XXX: Likely not escaped properly ..., use jq?
+# Note that we haven't normalized the label, and there's a chance our data here
+# may not yet be escaped properly, if this occurs we could end up with
+# improperly formatted json or even misinterpreted results. We're ok with that
+# for now, but sanitizing this information would be a welcome cleanup.
 cat <<EOF
 {
   "label": "${bazel_label}",

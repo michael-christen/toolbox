@@ -15,7 +15,8 @@ jobs:
         with:
           # Enable getting history of git for stats collection
           fetch-depth: 0
-          # https://stackoverflow.com/a/75966904
+          # Minimize clone traffic while still getting history
+          # - https://stackoverflow.com/a/75966904
           filter: 'tree:0'
       - run: |
           git fetch origin ${{ github.base_ref }}

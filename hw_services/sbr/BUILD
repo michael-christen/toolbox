@@ -4,8 +4,8 @@ load(
     "nanopb_proto_library",
     "nanopb_rpc_proto_library",
 )
-load("@rules_cc//cc:cc_library.bzl", "cc_library")
 load("@rules_proto//proto:defs.bzl", "proto_library")
+load("//bzl:cc.bzl", "cc_library")
 load("//bzl:py.bzl", "grpc_py_library", "proto_py_library")
 
 package(default_visibility = ["//visibility:private"])

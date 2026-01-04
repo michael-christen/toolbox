@@ -8,7 +8,6 @@ load(":binary.bzl", "rp2040_binary", "rp2350_binary")
 package(default_visibility = ["//visibility:private"])
 
 cc_binary(
-    # pw_cc_size_binary(
     name = "sbr",
     srcs = ["main.cc"],
     deps = [
@@ -24,11 +23,6 @@ cc_binary(
         "@pigweed//pw_system:extra_platform_libs",
     ],
 )
-
-# pw_size_report(
-#     name = "sbr_size",
-#     target = ":sbr",
-# )
 
 # Create a host binary using the Pigweed upstream pw_system host_device_simulator.
 host_device_simulator_binary(
