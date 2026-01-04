@@ -55,6 +55,7 @@ def get_run_info(
     parent_commit = git_utils.get_head_commit(
         git_directory=workspace_dir, num_prev_commits=1
     )
+    # XXX: Getting HEAD on CI, not the actual branch name
     current_branch = git_utils.get_branch(workspace_dir)
     # Not using yet ...
     # is_dirty = git_utils.is_dirty(workspace_dir)

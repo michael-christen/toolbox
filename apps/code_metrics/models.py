@@ -1,3 +1,23 @@
+"""
+
+Structure the tables s.t.
+- they aren't largely empty
+  - there shouldn't be emergent "patterns" where some are filled and others are
+    not, each of those should likely have their own table
+  - for example:
+    - targets:
+      - firmware binary sizes
+      - build targets
+      - tests
+        - success
+        - runtime
+      - coverage?
+        - accumulated from tests
+      - dependencies; expected runtime, etc.
+    - repo wide (singleton, so likely a single table would suffice for now,
+      only separating if it gets too unweildy)
+
+"""
 import datetime
 import os
 
