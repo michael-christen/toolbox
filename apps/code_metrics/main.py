@@ -43,13 +43,13 @@ def get_run_url() -> str | None:
 
 
 def get_branch_from_github_env() -> str:
-    head_ref = os.environ.get('GITHUB_HEAD_REF')
+    head_ref = os.environ.get("GITHUB_HEAD_REF")
     if head_ref is not None:
         # This is the case for pull_request
         return head_ref
-    ref_name = os.environ.get('GITHUB_REF_NAME')
+    ref_name = os.environ.get("GITHUB_REF_NAME")
     if ref_name is None:
-        raise RuntimeError('GITHUB_REF_NAME not defined')
+        raise RuntimeError("GITHUB_REF_NAME not defined")
     return ref_name
 
 
