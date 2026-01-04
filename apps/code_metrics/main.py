@@ -166,6 +166,7 @@ def main():
         for target_stat in target_stats:
             session.add(target_stat)
         session.add(repo_stat)
+        # XXX: Should we handle the database failing here or in workflow?
         session.commit()
 
 
