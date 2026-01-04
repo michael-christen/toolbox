@@ -95,7 +95,9 @@ manifest:
     jupytext_config: jupytext
     kiwisolver: kiwisolver
     lark: lark
+    librt.base64: librt
     librt.internal: librt
+    librt.strings: librt
     linkify_it: linkify_it_py
     markdown: markdown
     markdown_it: markdown_it_py
@@ -169,11 +171,11 @@ manifest:
     rfc3339_validator: rfc3339_validator
     rfc3986_validator: rfc3986_validator
     rfc3987_syntax: rfc3987_syntax
-    roman_numerals: roman_numerals_py
+    roman_numerals: roman_numerals
     rpds: rpds_py
     rsa: rsa
     scipy: scipy
-    send2trash: Send2Trash
+    send2trash: send2trash
     setuptools: setuptools
     simpy: simpy
     six: six
@@ -250,4 +252,4 @@ manifest:
     zmq: pyzmq
   pip_repository:
     name: pip
-integrity: 720c768e4de4e7ba6d31af1b8dc2c152ffe2de0d1edd08a787e5bc9c0b91117f
+integrity: e0f60ddb5fd00708b79af217e0a28de19b7056434228abe86eb5d8cbce3812d0
