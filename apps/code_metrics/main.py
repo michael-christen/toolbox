@@ -66,7 +66,6 @@ def get_run_info(
     parent_commit = git_utils.get_head_commit(
         git_directory=workspace_dir, num_prev_commits=1
     )
-    current_branch = get_branch_from_github_env()
     # Not using yet ...
     # is_dirty = git_utils.is_dirty(workspace_dir)
     run_url = get_run_url()
@@ -75,7 +74,7 @@ def get_run_info(
     return RunInfo(
         sha_sum=current_commit,
         parent_sha_sum=parent_commit,
-        branch_name=current_branch,
+        branch_name=head_ref,
         run_created_at=now,
         run_url=run_url,
     )
@@ -145,8 +144,7 @@ def main():
 
     # XXX: Pass in from CI / change default to main too
     base_ref = "origin/" + os.environ.get("GITHUB_BASE_REF", "master")
-    # head_ref = os.environ.get("GITHUB_HEAD_REF", "HEAD")
-    head_ref = "HEAD"
+    head_ref = get_branch_from_github_env()
     print(f"{base_ref=}, {head_ref=}")
     merge_base = git_utils.get_merge_base(
         head_ref, base_ref, git_directory=workspace_dir
