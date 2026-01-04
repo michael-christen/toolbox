@@ -42,6 +42,17 @@ def get_run_url() -> str | None:
     )
 
 
+def get_branch_from_github_env() -> str:
+    head_ref = os.environ.get('GITHUB_HEAD_REF')
+    if head_ref is not None:
+        # This is the case for pull_request
+        return head_ref
+    ref_name = os.environ.get('GITHUB_REF_NAME')
+    if ref_name is None:
+        raise RuntimeError('GITHUB_REF_NAME not defined')
+    return ref_name
+
+
 def get_run_info(
     now: datetime.datetime,
     workspace_dir: pathlib.Path,
@@ -55,8 +66,7 @@ def get_run_info(
     parent_commit = git_utils.get_head_commit(
         git_directory=workspace_dir, num_prev_commits=1
     )
-    # XXX: Getting HEAD on CI, not the actual branch name
-    current_branch = git_utils.get_branch(workspace_dir)
+    current_branch = get_branch_from_github_env()
     # Not using yet ...
     # is_dirty = git_utils.is_dirty(workspace_dir)
     run_url = get_run_url()
