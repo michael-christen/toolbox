@@ -18,6 +18,7 @@ Structure the tables s.t.
       only separating if it gets too unweildy)
 
 """
+
 import datetime
 import os
 
