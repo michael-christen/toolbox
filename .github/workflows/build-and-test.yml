@@ -10,7 +10,8 @@ jobs:
   build_and_test:
     runs-on: ubuntu-22.04
     steps:
-      - run: echo "The job was triggered by a ${{ github.event_name }} event, running on ${{ runner.os }}, ${{ github.ref }} @ ${{ github.repository }}."
+      - run: echo "The job was triggered by a ${{ github.event_name }} event, running on ${{ runner.os }}, ${{ github.ref }} @ ${{ github.repository }}. ${{ github.ref_name }} , ${{ github.head_ref }}"
+      - run: exit 1
       - uses: actions/checkout@v4
         with:
           # Enable getting history of git for stats collection
