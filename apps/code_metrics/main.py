@@ -138,7 +138,57 @@ def collect_target_stats(
     return stats
 
 
+def query_parent_target_stats(
+        engine: sqlalchemy.Engine,
+        parent_sha_sum: str) -> list[models.TargetMetrics]:
+    with orm.Session(engine) as session:
+        statement = sqlalchemy.select(models.TargetMetrics).where(models.TargetMetrics.sha_sum
+                                                      == parent_sha_sum)
+        return list(session.execute(statement).scalars().all())
+
+
+def query_parent_repo_stats(
+        engine: sqlalchemy.Engine,
+        parent_sha_sum: str) -> list[models.RepoMetrics]:
+    with orm.Session(engine) as session:
+        statement = sqlalchemy.select(models.RepoMetrics).where(models.RepoMetrics.sha_sum
+                                                                == parent_sha_sum)
+        return list(session.execute(statement).scalars().all())
+
+
+def compare_target_stats(
+        target_stats: list[models.TargetMetrics],
+        parent_target_stats: list[models.TargetMetrics],
+        ) -> None:
+    if not parent_target_stats:
+        print('No parent target stats')
+        return
+    # XXX: Actually compare and write in a format for viewing in PR
+    print(parent_target_stats)
+
+
+def compare_repo_stats(
+        repo_stat: models.RepoMetrics,
+        parent_repo_stat: list[models.RepoMetrics],
+        ) -> None:
+    if not parent_repo_stat:
+        print('No parent repo stats')
+        return
+    # XXX: Actually compare and write in a format for viewing in PR
+    print(parent_repo_stat)
+
+
 def main():
+    """Handle Code Metrics.
+
+    - Gather RunInfo
+    - Collect Target and Repo Stats
+    - Store stats
+      - in Github Archive for debug / backup for database outage
+      - as well as database
+    - Retrieve stats for parent
+    - Compare stats and write comparison output for usage
+    """
     now = datetime.datetime.now(datetime.timezone.utc)
     workspace_dir = bazel_utils.get_workspace_directory()
 
@@ -170,12 +220,26 @@ def main():
     if engine is None:
         print("No reporting since no DB connection could be made")
         return
+
     with orm.Session(engine) as session:
         for target_stat in target_stats:
             session.add(target_stat)
         session.add(repo_stat)
         # XXX: Should we handle the database failing here or in workflow?
         session.commit()
+
+    parent_target_stats = query_parent_target_stats(engine=engine,
+                                                    parent_sha_sum=run_info.parent_sha_sum)
+    parent_repo_stat = query_parent_repo_stats(engine=engine,
+                                               parent_sha_sum=run_info.parent_sha_sum)
+    compare_target_stats(
+        target_stats=target_stats,
+        parent_target_stats=parent_target_stats,
+    )
+    compare_repo_stats(
+        repo_stat=repo_stat,
+        parent_repo_stat=parent_repo_stat,
+    )
 
 
 if __name__ == "__main__":

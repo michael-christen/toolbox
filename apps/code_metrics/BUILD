@@ -15,13 +15,6 @@ py_binary(
     ],
 )
 
-py_library(
-    name = "db",
-    srcs = ["db.py"],
-    visibility = ["//:__subpackages__"],
-    deps = ["@pip//sqlalchemy"],
-)
-
 py_binary(
     name = "models",
     srcs = ["models.py"],

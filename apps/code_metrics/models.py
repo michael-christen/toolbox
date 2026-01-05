@@ -71,6 +71,9 @@ class TargetMetrics(Base):
     bss: orm.Mapped[int]
     # XXX: flash, ram, and max sizes too?
 
+    def __repr__(self) -> str:
+        return f'TargetMetrics({self.target_label=}, {self.branch_name=}, {self.run_url=}, {self.text=}, {self.data=}, {self.bss=})'
+
     # __table_args__ = (
     #     sqlalchemy.UniqueConstraint('run_url', 'target_label',
     #                                 name='uq_target_run'),
