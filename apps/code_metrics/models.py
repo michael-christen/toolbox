@@ -72,7 +72,10 @@ class TargetMetrics(Base):
     # XXX: flash, ram, and max sizes too?
 
     def __repr__(self) -> str:
-        return f'TargetMetrics({self.target_label=}, {self.branch_name=}, {self.run_url=}, {self.text=}, {self.data=}, {self.bss=})'
+        return (
+            f"TargetMetrics({self.target_label=}, {self.branch_name=},"
+            f" {self.run_url=}, {self.text=}, {self.data=}, {self.bss=})"
+        )
 
     # __table_args__ = (
     #     sqlalchemy.UniqueConstraint('run_url', 'target_label',

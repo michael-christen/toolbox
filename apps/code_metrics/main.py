@@ -8,6 +8,7 @@ import pathlib
 import subprocess
 
 import psycopg2  # noqa: F401
+import sqlalchemy
 from sqlalchemy import orm
 
 from apps.code_metrics import models
@@ -139,43 +140,63 @@ def collect_target_stats(
 
 
 def query_parent_target_stats(
-        engine: sqlalchemy.Engine,
-        parent_sha_sum: str) -> list[models.TargetMetrics]:
+    engine: sqlalchemy.Engine, parent_sha_sum: str
+) -> list[models.TargetMetrics]:
     with orm.Session(engine) as session:
-        statement = sqlalchemy.select(models.TargetMetrics).where(models.TargetMetrics.sha_sum
-                                                      == parent_sha_sum)
+        statement = sqlalchemy.select(models.TargetMetrics).where(
+            models.TargetMetrics.sha_sum == parent_sha_sum
+        )
         return list(session.execute(statement).scalars().all())
 
 
 def query_parent_repo_stats(
-        engine: sqlalchemy.Engine,
-        parent_sha_sum: str) -> list[models.RepoMetrics]:
+    engine: sqlalchemy.Engine, parent_sha_sum: str
+) -> list[models.RepoMetrics]:
     with orm.Session(engine) as session:
-        statement = sqlalchemy.select(models.RepoMetrics).where(models.RepoMetrics.sha_sum
-                                                                == parent_sha_sum)
+        statement = sqlalchemy.select(models.RepoMetrics).where(
+            models.RepoMetrics.sha_sum == parent_sha_sum
+        )
         return list(session.execute(statement).scalars().all())
 
 
 def compare_target_stats(
-        target_stats: list[models.TargetMetrics],
-        parent_target_stats: list[models.TargetMetrics],
-        ) -> None:
+    target_stats: list[models.TargetMetrics],
+    parent_target_stats: list[models.TargetMetrics],
+) -> None:
     if not parent_target_stats:
-        print('No parent target stats')
+        print("No parent target stats")
         return
     # XXX: Actually compare and write in a format for viewing in PR
-    print(parent_target_stats)
+    parent_target_stats_dict = {
+        stat.target_label: stat for stat in parent_target_stats
+    }
+    for target_stat in target_stats:
+        print(f"TARGET: {target_stat.target_label}")
+        parent_stat = parent_target_stats_dict.get(target_stat.target_label)
+        if parent_stat is None:
+            print("- NO PARENT FOUND")
+        diffs = {
+            "text": target_stat.text - parent_stat.text,
+            "data": target_stat.data - parent_stat.data,
+            "bss": target_stat.bss - parent_stat.bss,
+        }
+        for k, v in diffs.items():
+            print(f"- {k}: {v}")
 
 
 def compare_repo_stats(
-        repo_stat: models.RepoMetrics,
-        parent_repo_stat: list[models.RepoMetrics],
-        ) -> None:
+    repo_stat: models.RepoMetrics,
+    parent_repo_stat: list[models.RepoMetrics],
+) -> None:
     if not parent_repo_stat:
-        print('No parent repo stats')
+        print("No parent repo stats")
         return
     # XXX: Actually compare and write in a format for viewing in PR
     print(parent_repo_stat)
+    parent_repo_metric = parent_repo_stat[0]
+
+    num_files_diff = repo_stat.num_files - parent_repo_metric.num_files
+    print(f"REPO: num_files: {num_files_diff}")
 
 
 def main():
@@ -228,10 +249,12 @@ def main():
         # XXX: Should we handle the database failing here or in workflow?
         session.commit()
 
-    parent_target_stats = query_parent_target_stats(engine=engine,
-                                                    parent_sha_sum=run_info.parent_sha_sum)
-    parent_repo_stat = query_parent_repo_stats(engine=engine,
-                                               parent_sha_sum=run_info.parent_sha_sum)
+    parent_target_stats = query_parent_target_stats(
+        engine=engine, parent_sha_sum=run_info.parent_sha_sum
+    )
+    parent_repo_stat = query_parent_repo_stats(
+        engine=engine, parent_sha_sum=run_info.parent_sha_sum
+    )
     compare_target_stats(
         target_stats=target_stats,
         parent_target_stats=parent_target_stats,
