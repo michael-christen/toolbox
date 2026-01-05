@@ -175,6 +175,7 @@ def compare_target_stats(
         parent_stat = parent_target_stats_dict.get(target_stat.target_label)
         if parent_stat is None:
             print("- NO PARENT FOUND")
+            continue
         diffs = {
             "text": target_stat.text - parent_stat.text,
             "data": target_stat.data - parent_stat.data,
@@ -192,9 +193,7 @@ def compare_repo_stats(
         print("No parent repo stats")
         return
     # XXX: Actually compare and write in a format for viewing in PR
-    print(parent_repo_stat)
     parent_repo_metric = parent_repo_stat[0]
-
     num_files_diff = repo_stat.num_files - parent_repo_metric.num_files
     print(f"REPO: num_files: {num_files_diff}")
 
@@ -242,7 +241,7 @@ def main():
         print("No reporting since no DB connection could be made")
         return
 
-    with orm.Session(engine) as session:
+    with orm.Session(engine, expire_on_commit=False) as session:
         for target_stat in target_stats:
             session.add(target_stat)
         session.add(repo_stat)

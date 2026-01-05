@@ -48,9 +48,8 @@ rp2040_binary(
 )
 
 cc_size(
-    # XXX: 100 and 100 are wrong ...
-    max_flash = 100,
-    max_ram = 100,
+    max_flash = 261120,  # 255 Kb
+    max_ram = 65536,  # 64 Kb
     target = ":rp2040_sbr.elf",
 )
 
@@ -71,9 +70,8 @@ rp2350_binary(
 )
 
 cc_size(
-    # XXX: 100 and 100 are wrong ...
-    max_flash = 100,
-    max_ram = 100,
+    max_flash = 261120,  # 255 Kb
+    max_ram = 65536,  # 64 Kb
     target = ":rp2350_sbr.elf",
 )
 
