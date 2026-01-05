@@ -252,4 +252,4 @@ manifest:
     zmq: pyzmq
   pip_repository:
     name: pip
-integrity: e0f60ddb5fd00708b79af217e0a28de19b7056434228abe86eb5d8cbce3812d0
+integrity: 025a5674619604a0ce639ed1515dfa8e5cf588bfa101ac1ccd7b736032e6794c
