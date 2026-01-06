@@ -252,6 +252,13 @@ def main():
     # XXX: Pass in from CI / change default to main too
     base_ref = "origin/" + os.environ.get("GITHUB_BASE_REF", "master")
     head_ref = get_branch_from_github_env()
+    # XXX: merge_base seems synonmyous with get_head_commit(num_prev_commits=1)
+    # / good enough for us / otherwise what're we doing with parent?
+    # print(f"{base_ref=}, {head_ref=}")
+    # merge_base = git_utils.get_merge_base(
+    #     head_ref, base_ref, git_directory=workspace_dir
+    # )
+    # print(f"{merge_base=}")
     # XXX: Maybe move "now" to run information
     run_info = get_run_info(
         now=now,

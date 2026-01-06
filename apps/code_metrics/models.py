@@ -77,11 +77,6 @@ class TargetMetrics(Base):
             f" {self.run_url=}, {self.text=}, {self.data=}, {self.bss=})"
         )
 
-    # __table_args__ = (
-    #     sqlalchemy.UniqueConstraint('run_url', 'target_label',
-    #                                 name='uq_target_run'),
-    # )
-
 
 class RepoMetrics(Base):
     __tablename__ = "repo_metrics"
