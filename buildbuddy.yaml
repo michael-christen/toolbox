@@ -10,7 +10,7 @@ actions:
           - "*"
     steps:
       # TODO(#209): Don't require installing this
-      - run: 'sudo apt-get update && sudo apt-get install -y graphviz graphviz-dev'
+      - run: 'sudo apt-get update && sudo apt-get install -y graphviz graphviz-dev libtinfo5'
       - run: 'bazel build //...'
       - run: 'bazel test //... --output_groups=-mypy'
       - run: 'bazel coverage //... --combined_report=lcov --instrument_test_targets --instrumentation_filter="^//" --test_tag_filters=-skip-large-tests --output_groups=-mypy'

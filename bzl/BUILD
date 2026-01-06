@@ -1,3 +1,4 @@
+load("@rules_shell//shell:sh_binary.bzl", "sh_binary")
 load("//bzl:py.bzl", "py_binary")
 
 exports_files([
@@ -9,4 +10,10 @@ py_binary(
     srcs = ["pytest_main.py"],
     visibility = ["//:__subpackages__"],
     deps = ["@pip//pytest"],
+)
+
+sh_binary(
+    name = "bin_size",
+    srcs = ["bin_size.sh"],
+    visibility = ["//:__subpackages__"],
 )

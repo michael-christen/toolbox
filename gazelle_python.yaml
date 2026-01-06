@@ -59,6 +59,7 @@ manifest:
     google.auth: google_auth
     google.oauth2: google_auth
     google.protobuf: protobuf
+    greenlet: greenlet
     grpc: grpcio
     h11: h11
     httpcore: httpcore
@@ -144,6 +145,7 @@ manifest:
     prometheus_client: prometheus_client
     prompt_toolkit: prompt_toolkit
     psutil: psutil
+    psycopg2: psycopg2_binary
     ptyprocess: ptyprocess
     pure_eval: pure_eval
     py: pytest
@@ -198,6 +200,7 @@ manifest:
     sphinxcontrib.serializinghtml: sphinxcontrib_serializinghtml
     sphinxext.opengraph: sphinxext_opengraph
     sphinxext.rediraffe: sphinxext_rediraffe
+    sqlalchemy: sqlalchemy
     stack_data: stack_data
     tabulate: tabulate
     terminado: terminado
@@ -249,4 +252,4 @@ manifest:
     zmq: pyzmq
   pip_repository:
     name: pip
-integrity: f3db2cbb31dc79c98b2e07bc5dfb331e6e50cd6c08ba3fa4546eacd9751b346f
+integrity: 025a5674619604a0ce639ed1515dfa8e5cf588bfa101ac1ccd7b736032e6794c

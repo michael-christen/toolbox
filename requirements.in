@@ -33,6 +33,8 @@ six
 # Install so we can easily install a wheel into a virtualenv
 pip
 protobuf
+# Postgresql interactions
+psycopg2-binary
 # largely for development
 # https://github.com/pytest-dev/pytest/issues/12592#issuecomment-2515100428
 # introduced an issue with files named the same as their parent modules from
@@ -58,6 +60,8 @@ sphinxcontrib-mermaid
 # Documentation
 sphinxext-opengraph
 sphinxext-rediraffe
+# Database Management
+sqlalchemy
 # Make nice-looking table output
 tabulate
 # Convenient backend for openhtf; https://www.tofupilot.com/

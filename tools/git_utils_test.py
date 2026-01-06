@@ -68,6 +68,7 @@ class TestGitUtils(unittest.TestCase):
         # so let's just make an empty first commit
         self._cmd(["git", "commit", "--allow-empty", "-m", "initial"])
         first_hash = self._cmd(["git", "rev-parse", "HEAD"])
+        self.assertEqual(git_utils.get_num_files(self.tmp_path), 0)
 
         # Create a test file and commit it
         test_file = self.tmp_path / "test_file.txt"
@@ -84,6 +85,7 @@ class TestGitUtils(unittest.TestCase):
                 test_file.relative_to(self.tmp_path),
             ],
         )
+        self.assertEqual(git_utils.get_num_files(self.tmp_path), 1)
         self.assertEqual(
             git_utils.get_files_changed_at_commit(
                 commit=test_file_commit_hash, git_directory=self.tmp_path
@@ -95,6 +97,16 @@ class TestGitUtils(unittest.TestCase):
         self._cmd(["git", "mv", "test_file.txt", "moved_file.txt"])
         self._cmd(["git", "commit", "-m", "moved_file"])
         mv_commit_hash = self._cmd(["git", "rev-parse", "HEAD"])
+
+        self.assertEqual(
+            git_utils.get_head_commit(self.tmp_path, num_prev_commits=0),
+            mv_commit_hash,
+        )
+        self.assertEqual(
+            git_utils.get_head_commit(self.tmp_path, num_prev_commits=1),
+            test_file_commit_hash,
+        )
+        self.assertEqual(git_utils.get_num_files(self.tmp_path), 1)
 
         self.assertEqual(
             git_utils.list_file_commits("moved_file.txt", self.tmp_path),

@@ -13,6 +13,8 @@
 # the License.
 # From https://pigweed.googlesource.com/pigweed/showcase/sense/
 
+load("//bzl:cc.bzl", "cc_library")
+
 package(default_visibility = ["//visibility:public"])
 
 # This is an incomplete platform, do NOT try to pass this

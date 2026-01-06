@@ -89,3 +89,25 @@ def c_library(**kwargs):
 
 def pw_cc_test(timeout = "short", **kwargs):
     _pw_cc_test(timeout = timeout, **kwargs)
+
+def cc_size(target, max_flash, max_ram, **kwargs):
+    """Calculate size metrics of binary."""
+    target_label = native.package_relative_label(target)
+    name = "{}.size".format(target_label.name)
+
+    # TODO(#243): Do we always want this size tool?
+    size_tool = "@llvm_toolchain_llvm//:bin/llvm-size"
+    native.genrule(
+        name = name,
+        outs = ["{}.json".format(name)],
+        cmd = "$(location //bzl:bin_size) $(location {}) $(location {}) {} {} {} > $@".format(size_tool, target, target_label, max_flash, max_ram),
+        srcs = [
+            target,
+        ],
+        tools = [
+            "//bzl:bin_size",
+            size_tool,
+        ],
+        tags = ["cc_size"],
+        **kwargs
+    )

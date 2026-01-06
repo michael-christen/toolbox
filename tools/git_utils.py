@@ -130,3 +130,18 @@ def get_file_commit_map_from_list(
         for f in files:
             file_map[f].append(c)
     return FileCommitMap(commit_map=commit_map, file_map=file_map)
+
+
+def get_head_commit(
+    git_directory: pathlib.Path | str, num_prev_commits: int = 0
+) -> str:
+    result = _get_git_output(
+        ["rev-parse", f"HEAD^{num_prev_commits}"], git_directory
+    )
+    assert len(result) == 1
+    return result[0]
+
+
+def get_num_files(git_directory: pathlib.Path | str) -> int:
+    result = _get_git_output(["ls-files"], git_directory)
+    return len(result)

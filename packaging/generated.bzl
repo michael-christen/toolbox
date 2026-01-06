@@ -25,6 +25,8 @@ PROTO_PYTHON_TARGETS = [
 PYTHON_TARGETS = [
     "//algorithms:weighted_probability",
     "//apps:bazel_parser",
+    "//apps/code_metrics:main",
+    "//apps/code_metrics:models",
     "//bzl:pytest_main",
     "//docs:conf",
     "//examples/basic:client",
