@@ -100,11 +100,11 @@ class TestGitUtils(unittest.TestCase):
 
         self.assertEqual(
             git_utils.get_head_commit(self.tmp_path, num_prev_commits=0),
-            mv_commit_hash
+            mv_commit_hash,
         )
         self.assertEqual(
             git_utils.get_head_commit(self.tmp_path, num_prev_commits=1),
-            test_file_commit_hash
+            test_file_commit_hash,
         )
         self.assertEqual(git_utils.get_num_files(self.tmp_path), 1)
 

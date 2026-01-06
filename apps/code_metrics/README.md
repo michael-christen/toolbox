@@ -34,6 +34,7 @@ git rev-parse <commit>^1
 #### Data Structure
 
 - Commit:
+
   - revision: <commit SHA>
   - parent_revision: <commit SHA>
     - useful for comparisons
