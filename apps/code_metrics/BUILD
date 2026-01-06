@@ -10,6 +10,7 @@ py_binary(
         ":models",
         "//tools:bazel_utils",
         "//tools:git_utils",
+        "@pip//click",
         "@pip//psycopg2_binary",
         "@pip//sqlalchemy",
         "@pip//tabulate",

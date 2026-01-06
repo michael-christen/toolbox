@@ -98,25 +98,19 @@ jobs:
         env:
           DB_PASSWORD: ${{ secrets.METRICS_DB_PASSWORD }}
         run: |
-          bazel run //apps/code_metrics:main > /tmp/collected_stats.txt
+          bazel run //apps/code_metrics:main -- --pr_comment=/tmp/collect_stats_pr_diff.md --archive=/tmp/collect_stats_archive.json
       - name: Archive stats
         uses: actions/upload-artifact@v4
         with:
           name: collected_stats
-          path: /tmp/collected_stats.txt
+          path: /tmp/collect_stats_archive.json
       - name: Comment PR
         # https://github.com/thollander/actions-comment-pull-request
         uses: thollander/actions-comment-pull-request@v3
         with:
-          file-path: /tmp/collected_stats.txt
-          # message: |
-          #   Hello world! :wave:
-          #   This is an automated comment with **markdown** support.
-          #   This is [${{github.workflow}}: #${{ github.run_number }}](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
-
+          file-path: /tmp/collect_stats_pr_diff.md
           # Use a comment-tag to create a "sticky" comment that updates on subsequent runs
           comment-tag: automated-build-status
-          # GITHUB_TOKEN is automatically available
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload coverage report to Codecov
         uses: codecov/codecov-action@v4.0.1

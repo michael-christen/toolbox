@@ -7,6 +7,7 @@ import os
 import pathlib
 import subprocess
 
+import click
 import psycopg2  # noqa: F401
 import sqlalchemy
 import tabulate
@@ -162,15 +163,15 @@ def query_parent_repo_stats(
 def compare_target_stats(
     target_stats: list[models.TargetMetrics],
     parent_target_stats: list[models.TargetMetrics],
-) -> None:
-    # XXX: Actually compare and write in a format for viewing in PR
+) -> list[str]:
+    result = []
     if not parent_target_stats:
         parent_target_stats_dict = {}
     else:
         parent_target_stats_dict = {
             stat.target_label: stat for stat in parent_target_stats
         }
-    print("## Target Metrics\n")
+    result.append("## Target Metrics\n")
     for target_stat in target_stats:
         parent_stat = parent_target_stats_dict.get(target_stat.target_label)
         diffs: dict[str, tuple[int, int | None]]
@@ -202,15 +203,17 @@ def compare_target_stats(
                     ),
                 )
             )
-        print(f"### TARGET: `{target_stat.target_label}`\n")
-        print(tabulate.tabulate(table, headers, tablefmt="github"))
-        print()
+        result.append(f"### TARGET: `{target_stat.target_label}`\n")
+        result.append(tabulate.tabulate(table, headers, tablefmt="github"))
+        result.append("")
+    return result
 
 
 def compare_repo_stats(
     repo_stat: models.RepoMetrics,
     parent_repo_stat: list[models.RepoMetrics],
-) -> None:
+) -> list[str]:
+    result = []
     if parent_repo_stat:
         parent_repo_metric = parent_repo_stat[0]
         parent_num_files_str = str(parent_repo_metric.num_files)
@@ -220,7 +223,6 @@ def compare_repo_stats(
     else:
         parent_num_files_str = "missing"
         num_files_diff_str = "N/A"
-    # XXX: Actually compare and write in a format for viewing in PR
     headers = ["metric", "before", "now", "diff"]
     table = [
         (
@@ -230,12 +232,28 @@ def compare_repo_stats(
             num_files_diff_str,
         ),
     ]
-    print("## Repo Metrics\n")
-    print(tabulate.tabulate(table, headers, tablefmt="github"))
-    print()
+    result.append("## Repo Metrics\n")
+    result.append(tabulate.tabulate(table, headers, tablefmt="github"))
+    result.append("")
+    return result
 
 
-def main():
+def get_archive_format_for_stats(
+        target_stats: list[models.TargetMetrics],
+        repo_stat: models.RepoMetrics) -> str:
+    result_dict = {
+        'target_metrics': [
+            target_stat.to_dict() for target_stat in target_stats
+        ],
+        'repo_metrics': repo_stat.to_dict(),
+    }
+    return json.dumps(result_dict, indent=2)
+
+
+@click.command()
+@click.option("--pr_comment", type=click.Path(path_type=pathlib.Path), required=True)
+@click.option("--archive", type=click.Path(path_type=pathlib.Path), required=True)
+def main(pr_comment: pathlib.Path, archive: pathlib.Path) -> None:
     """Handle Code Metrics.
 
     - Gather RunInfo
@@ -272,6 +290,9 @@ def main():
     repo_stat = collect_repo_stats(
         workspace_dir=workspace_dir, run_info=run_info
     )
+    archive.write_text(get_archive_format_for_stats(
+        target_stats=target_stats,
+        repo_stat=repo_stat))
 
     # XXX: Consider separating
     # XXX: Be robust to failures? or at gh level
@@ -293,14 +314,16 @@ def main():
     parent_repo_stat = query_parent_repo_stats(
         engine=engine, parent_sha_sum=run_info.parent_sha_sum
     )
-    compare_target_stats(
+    pr_comparison_lines = []
+    pr_comparison_lines.extend(compare_target_stats(
         target_stats=target_stats,
         parent_target_stats=parent_target_stats,
-    )
-    compare_repo_stats(
+    ))
+    pr_comparison_lines.extend(compare_repo_stats(
         repo_stat=repo_stat,
         parent_repo_stat=parent_repo_stat,
-    )
+    ))
+    pr_comment.write_text("\n".join(pr_comparison_lines))
 
 
 if __name__ == "__main__":

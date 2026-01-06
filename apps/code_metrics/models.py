@@ -21,6 +21,7 @@ Structure the tables s.t.
 
 import datetime
 import os
+from typing import Any
 
 import psycopg2  # noqa: F401
 import sqlalchemy
@@ -77,6 +78,19 @@ class TargetMetrics(Base):
             f" {self.run_url=}, {self.text=}, {self.data=}, {self.bss=})"
         )
 
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            'target_label': self.target_label,
+            'sha_sum': self.sha_sum,
+            'parent_sha_sum': self.sha_sum,
+            'branch_name': self.branch_name,
+            'run_created_at': self.run_created_at.isoformat(),
+            'run_url': self.run_url,
+            'text': self.text,
+            'data': self.data,
+            'bss': self.bss,
+        }
+
 
 class RepoMetrics(Base):
     __tablename__ = "repo_metrics"
@@ -93,6 +107,16 @@ class RepoMetrics(Base):
     # A bit of a toy metric to simply demonstrate an example of a repo-wide
     # metric
     num_files: orm.Mapped[int]
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            'sha_sum': self.sha_sum,
+            'parent_sha_sum': self.sha_sum,
+            'branch_name': self.branch_name,
+            'run_created_at': self.run_created_at.isoformat(),
+            'run_url': self.run_url,
+            'num_files': self.num_files,
+        }
 
 
 def get_engine() -> sqlalchemy.Engine | None:
