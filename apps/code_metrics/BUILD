@@ -12,6 +12,7 @@ py_binary(
         "//tools:git_utils",
         "@pip//psycopg2_binary",
         "@pip//sqlalchemy",
+        "@pip//tabulate",
     ],
 )
 

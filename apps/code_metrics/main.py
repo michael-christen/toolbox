@@ -9,6 +9,7 @@ import subprocess
 
 import psycopg2  # noqa: F401
 import sqlalchemy
+import tabulate
 from sqlalchemy import orm
 
 from apps.code_metrics import models
@@ -107,7 +108,6 @@ def collect_target_stats(
         assert target.rule.HasField("name")
         # XXX: Handle other cases?
         targets.append(target.rule.name)
-        print(f"- {target.rule.name}")
         for attr in target.rule.attribute:
             if attr.name == "outs":
                 target_to_data[target.rule.name] = attr.string_list_value
@@ -121,7 +121,6 @@ def collect_target_stats(
             datum_val = json.loads(datum_path.read_text())
             # XXX: Collect some content
             # XXX: Validate ...
-            print(datum_val)
             stats.append(
                 models.TargetMetrics(
                     sha_sum=run_info.sha_sum,
@@ -134,6 +133,7 @@ def collect_target_stats(
                     text=datum_val["text"],
                     data=datum_val["data"],
                     bss=datum_val["bss"],
+                    # XXX: flash, ram, max_flash, max_ram
                 )
             )
     return stats
@@ -163,39 +163,76 @@ def compare_target_stats(
     target_stats: list[models.TargetMetrics],
     parent_target_stats: list[models.TargetMetrics],
 ) -> None:
-    if not parent_target_stats:
-        print("No parent target stats")
-        return
     # XXX: Actually compare and write in a format for viewing in PR
-    parent_target_stats_dict = {
-        stat.target_label: stat for stat in parent_target_stats
-    }
-    for target_stat in target_stats:
-        print(f"TARGET: {target_stat.target_label}")
-        parent_stat = parent_target_stats_dict.get(target_stat.target_label)
-        if parent_stat is None:
-            print("- NO PARENT FOUND")
-            continue
-        diffs = {
-            "text": target_stat.text - parent_stat.text,
-            "data": target_stat.data - parent_stat.data,
-            "bss": target_stat.bss - parent_stat.bss,
+    if not parent_target_stats:
+        parent_target_stats_dict = {}
+    else:
+        parent_target_stats_dict = {
+            stat.target_label: stat for stat in parent_target_stats
         }
+    print("## Target Metrics\n")
+    for target_stat in target_stats:
+        parent_stat = parent_target_stats_dict.get(target_stat.target_label)
+        diffs: dict[str, tuple[int, int | None]]
+        if parent_stat is None:
+            diffs = {
+                "text": (target_stat.text, None),
+                "data": (target_stat.data, None),
+                "bss": (target_stat.bss, None),
+            }
+        else:
+            diffs = {
+                "text": (target_stat.text, parent_stat.text),
+                "data": (target_stat.data, parent_stat.data),
+                "bss": (target_stat.bss, parent_stat.bss),
+            }
+        headers = ["metric", "before", "now", "diff"]
+        table = []
         for k, v in diffs.items():
-            print(f"- {k}: {v}")
+            cur_val, before_val = v
+            table.append(
+                (
+                    k,
+                    before_val,
+                    cur_val,
+                    (
+                        str(cur_val - before_val)
+                        if before_val is not None
+                        else "N/A"
+                    ),
+                )
+            )
+        print(f"### TARGET: `{target_stat.target_label}`\n")
+        print(tabulate.tabulate(table, headers, tablefmt="github"))
+        print()
 
 
 def compare_repo_stats(
     repo_stat: models.RepoMetrics,
     parent_repo_stat: list[models.RepoMetrics],
 ) -> None:
-    if not parent_repo_stat:
-        print("No parent repo stats")
-        return
+    if parent_repo_stat:
+        parent_repo_metric = parent_repo_stat[0]
+        parent_num_files_str = str(parent_repo_metric.num_files)
+        num_files_diff_str = str(
+            repo_stat.num_files - parent_repo_metric.num_files
+        )
+    else:
+        parent_num_files_str = "missing"
+        num_files_diff_str = "N/A"
     # XXX: Actually compare and write in a format for viewing in PR
-    parent_repo_metric = parent_repo_stat[0]
-    num_files_diff = repo_stat.num_files - parent_repo_metric.num_files
-    print(f"REPO: num_files: {num_files_diff}")
+    headers = ["metric", "before", "now", "diff"]
+    table = [
+        (
+            "num_files",
+            parent_num_files_str,
+            str(repo_stat.num_files),
+            num_files_diff_str,
+        ),
+    ]
+    print("## Repo Metrics\n")
+    print(tabulate.tabulate(table, headers, tablefmt="github"))
+    print()
 
 
 def main():
@@ -215,11 +252,6 @@ def main():
     # XXX: Pass in from CI / change default to main too
     base_ref = "origin/" + os.environ.get("GITHUB_BASE_REF", "master")
     head_ref = get_branch_from_github_env()
-    print(f"{base_ref=}, {head_ref=}")
-    merge_base = git_utils.get_merge_base(
-        head_ref, base_ref, git_directory=workspace_dir
-    )
-    print(f"{merge_base=}")
     # XXX: Maybe move "now" to run information
     run_info = get_run_info(
         now=now,
