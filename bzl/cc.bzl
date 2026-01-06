@@ -95,7 +95,7 @@ def cc_size(target, max_flash, max_ram, **kwargs):
     target_label = native.package_relative_label(target)
     name = "{}.size".format(target_label.name)
 
-    # XXX: Do we always want this size tool?
+    # TODO(#243): Do we always want this size tool?
     size_tool = "@llvm_toolchain_llvm//:bin/llvm-size"
     native.genrule(
         name = name,
@@ -108,7 +108,6 @@ def cc_size(target, max_flash, max_ram, **kwargs):
             "//bzl:bin_size",
             size_tool,
         ],
-        # XXX: Maybe query for these? Or make a rule/pkg that combines them all
         tags = ["cc_size"],
         **kwargs
     )

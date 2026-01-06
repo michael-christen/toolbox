@@ -16,7 +16,6 @@ from third_party.bazel.src.main.protobuf import build_pb2
 
 
 def get_workspace_directory() -> pathlib.Path:
-    # XXX: Detect if invoked from bazel or not
     workspace = os.environ.get("BUILD_WORKING_DIRECTORY")
     assert workspace is not None
     return pathlib.Path(workspace)

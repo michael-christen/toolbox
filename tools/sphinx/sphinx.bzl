@@ -6,8 +6,6 @@ SphinxInfo = provider(
     fields = ["open_uri"],
 )
 
-# XXX: Replace with rules_python variant:
-# https://rules-python.readthedocs.io/en/latest/api/sphinxdocs/sphinxdocs/sphinx.html
 def _sphinx_html_impl(ctx):
     sandbox = ctx.actions.declare_directory(ctx.label.name + "_sandbox")
     output_dir = ctx.actions.declare_directory(ctx.label.name + "_html")

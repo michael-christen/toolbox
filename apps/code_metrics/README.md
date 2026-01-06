@@ -1,20 +1,13 @@
-## Spike to Track Repo / Target Metrics across Commits
+## Track Repo / Target Metrics across Commits
 
 ### Tasks
 
-- [ ] Upload on commit to main branch
-  - or all "release branches"
-  - or on PR?
-- [ ] Script to upload historical data
-- [ ] Viewer for historical trends
-  - grafana
-  - bulk download
-- [ ] Compare on PR
-- cleanup
-  - asyncio psql
-  - consider different table configuration
-    - should we have relations or mixins?
-  - alembic migration
+- Upload metrics for every PR and commit to main branch
+  - stored as GH workflow archive
+  - also uploaded to postgres database
+- View
+  - PR diff in-comment
+  - Historical trends with something like grafana
 
 ### Resources
 
@@ -38,38 +31,16 @@ git rev-parse <commit>^1
 > single commit in the master branch that a developer could branch from has its
 > code size calculated and stored.
 
-Find common ancestor:
-
-```bash
-git merge-base HEAD master
-```
-
 #### Data Structure
 
 - Commit:
-
   - revision: <commit SHA>
   - parent_revision: <commit SHA>
-    - useful for comparisons?
-  - build: ? (perhaps it's the target?)
+    - useful for comparisons
 
 - Run:
-
-  - > A unique collection within a commit
-  - > could have several runs on a single commit
-  - ? what data do we want?
   - created_at: timestamp
-  - message: ?
-
-- Tables per commit
-  - Code Size:
-    - Commit (ref)
-    - target / build: what're we referencing
-      - ? does this need its own table?
-    - <data>
-        - text
-        - data
-        - bss
+  - run_url: should be unique
 
 #### Storage Type
 
@@ -89,12 +60,12 @@ git merge-base HEAD master
 
 ##### Options
 
+- Database Visualizer
+- Grafana
 - Export to `.csv`
 - Pandas scripts
 - Custom web-app
 - Use "intelligence" tool
-- Grafana
-- Database Visualizer
 
 ##### Views
 

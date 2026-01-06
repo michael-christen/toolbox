@@ -1,8 +1,7 @@
 #!/bin/bash
 # Modification of:
 # https://interrupt.memfault.com/blog/best-firmware-size-tools
-#
-# XXX: Cleanup
+
 set -e
 
 if [  $# -le 2 ]

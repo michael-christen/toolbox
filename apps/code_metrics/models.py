@@ -32,30 +32,8 @@ class Base(orm.DeclarativeBase):
     pass
 
 
-# Maybe we don't need separate tables?
-# class CommitInfo(Base):
-#     sha_sum = sqlalchemy.Column(sqlalchemy.String, primary_key=True)
-#     parent_sha_sum = sqlalchemy.Column(sqlalchemy.String)
-#
-#
-# class RunInfo(Base):
-#     commit_sha_sum = sqlalchemy.Column(sqlalchemy.String)
-#     created_at = sqlalchemy.Column(sqlalchemy.DateTime)
-#     url = sqlalchemy.Column(sqlalchemy.String, primary_key=True)
-
-
-# XXX: Use declarative mapping?
-# https://docs.sqlalchemy.org/en/20/orm/mapping_styles.html
-# XXX: Should we have unique tables per thing
-#  - or target and repo metrics; what does growth look like?
-# XXX: How do we reduce duplication with serialization / schema formats?
-# XXX: Define primary_key constraints
-# XXX: Define as tutorial, not this
 class TargetMetrics(Base):
     __tablename__ = "target_metrics"
-    # XXX: Maybe should add a repo-specifier for the target?
-    # XXX: uniquness may not hold if you have 2 people making this at the exact
-    # same time ...
     target_label: orm.Mapped[str] = orm.mapped_column(primary_key=True)
 
     sha_sum: orm.Mapped[str]
@@ -70,7 +48,6 @@ class TargetMetrics(Base):
     text: orm.Mapped[int]
     data: orm.Mapped[int]
     bss: orm.Mapped[int]
-    # XXX: flash, ram, and max sizes too?
 
     def __repr__(self) -> str:
         return (
@@ -134,7 +111,7 @@ def main():
     engine = get_engine()
     if engine is None:
         return
-    # XXX: Use alembic for migrations, etc.
+    # TODO(#243): Use alembic for migrations, etc.
     Base.metadata.create_all(engine)
 
 

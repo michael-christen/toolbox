@@ -69,10 +69,10 @@ def get_run_info(
     parent_commit = git_utils.get_head_commit(
         git_directory=workspace_dir, num_prev_commits=1
     )
-    # Not using yet ...
-    # is_dirty = git_utils.is_dirty(workspace_dir)
     run_url = get_run_url()
     if run_url is None:
+        # NOTE: uniquness may not hold if you have 2 people making this at the
+        # exact same time and not in CI
         run_url = str(now)
     return RunInfo(
         sha_sum=current_commit,
@@ -107,12 +107,10 @@ def collect_target_stats(
     target_to_data = {}
     for target in data.target:
         assert target.rule.HasField("name")
-        # XXX: Handle other cases?
         targets.append(target.rule.name)
         for attr in target.rule.attribute:
             if attr.name == "outs":
                 target_to_data[target.rule.name] = attr.string_list_value
-    # XXX: .bazelrc may not be getting picked up "--config=quiet" failed ...
     subprocess.check_call(["bazel", "build"] + targets, cwd=workspace_dir)
     bazel_bin = bazel_utils.get_bazel_bin_directory()
     stats = []
@@ -120,8 +118,6 @@ def collect_target_stats(
         for datum in data_labels:
             datum_path = bazel_bin / bazel_utils.normalize_label(datum)
             datum_val = json.loads(datum_path.read_text())
-            # XXX: Collect some content
-            # XXX: Validate ...
             stats.append(
                 models.TargetMetrics(
                     sha_sum=run_info.sha_sum,
@@ -134,7 +130,6 @@ def collect_target_stats(
                     text=datum_val["text"],
                     data=datum_val["data"],
                     bss=datum_val["bss"],
-                    # XXX: flash, ram, max_flash, max_ram
                 )
             )
     return stats
@@ -271,17 +266,8 @@ def main(pr_comment: pathlib.Path, archive: pathlib.Path) -> None:
     now = datetime.datetime.now(datetime.timezone.utc)
     workspace_dir = bazel_utils.get_workspace_directory()
 
-    # XXX: Pass in from CI / change default to main too
     base_ref = "origin/" + os.environ.get("GITHUB_BASE_REF", "master")
     head_ref = get_branch_from_github_env()
-    # XXX: merge_base seems synonmyous with get_head_commit(num_prev_commits=1)
-    # / good enough for us / otherwise what're we doing with parent?
-    # print(f"{base_ref=}, {head_ref=}")
-    # merge_base = git_utils.get_merge_base(
-    #     head_ref, base_ref, git_directory=workspace_dir
-    # )
-    # print(f"{merge_base=}")
-    # XXX: Maybe move "now" to run information
     run_info = get_run_info(
         now=now,
         head_ref=head_ref,
@@ -300,8 +286,6 @@ def main(pr_comment: pathlib.Path, archive: pathlib.Path) -> None:
         )
     )
 
-    # XXX: Consider separating
-    # XXX: Be robust to failures? or at gh level
     engine = models.get_engine()
     if engine is None:
         print("No reporting since no DB connection could be made")
@@ -311,7 +295,6 @@ def main(pr_comment: pathlib.Path, archive: pathlib.Path) -> None:
         for target_stat in target_stats:
             session.add(target_stat)
         session.add(repo_stat)
-        # XXX: Should we handle the database failing here or in workflow?
         session.commit()
 
     parent_target_stats = query_parent_target_stats(
