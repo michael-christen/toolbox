@@ -142,14 +142,6 @@ def get_head_commit(
     return result[0]
 
 
-def get_branch(git_directory: pathlib.Path | str) -> str:
-    result = _get_git_output(
-        ["rev-parse", "--abbrev-ref", "HEAD"], git_directory
-    )
-    assert len(result) == 1
-    return result[0]
-
-
 def get_num_files(git_directory: pathlib.Path | str) -> int:
     result = _get_git_output(["ls-files"], git_directory)
     return len(result)
