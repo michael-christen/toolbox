@@ -239,20 +239,24 @@ def compare_repo_stats(
 
 
 def get_archive_format_for_stats(
-        target_stats: list[models.TargetMetrics],
-        repo_stat: models.RepoMetrics) -> str:
+    target_stats: list[models.TargetMetrics], repo_stat: models.RepoMetrics
+) -> str:
     result_dict = {
-        'target_metrics': [
+        "target_metrics": [
             target_stat.to_dict() for target_stat in target_stats
         ],
-        'repo_metrics': repo_stat.to_dict(),
+        "repo_metrics": repo_stat.to_dict(),
     }
     return json.dumps(result_dict, indent=2)
 
 
 @click.command()
-@click.option("--pr_comment", type=click.Path(path_type=pathlib.Path), required=True)
-@click.option("--archive", type=click.Path(path_type=pathlib.Path), required=True)
+@click.option(
+    "--pr_comment", type=click.Path(path_type=pathlib.Path), required=True
+)
+@click.option(
+    "--archive", type=click.Path(path_type=pathlib.Path), required=True
+)
 def main(pr_comment: pathlib.Path, archive: pathlib.Path) -> None:
     """Handle Code Metrics.
 
@@ -290,9 +294,11 @@ def main(pr_comment: pathlib.Path, archive: pathlib.Path) -> None:
     repo_stat = collect_repo_stats(
         workspace_dir=workspace_dir, run_info=run_info
     )
-    archive.write_text(get_archive_format_for_stats(
-        target_stats=target_stats,
-        repo_stat=repo_stat))
+    archive.write_text(
+        get_archive_format_for_stats(
+            target_stats=target_stats, repo_stat=repo_stat
+        )
+    )
 
     # XXX: Consider separating
     # XXX: Be robust to failures? or at gh level
@@ -315,14 +321,18 @@ def main(pr_comment: pathlib.Path, archive: pathlib.Path) -> None:
         engine=engine, parent_sha_sum=run_info.parent_sha_sum
     )
     pr_comparison_lines = []
-    pr_comparison_lines.extend(compare_target_stats(
-        target_stats=target_stats,
-        parent_target_stats=parent_target_stats,
-    ))
-    pr_comparison_lines.extend(compare_repo_stats(
-        repo_stat=repo_stat,
-        parent_repo_stat=parent_repo_stat,
-    ))
+    pr_comparison_lines.extend(
+        compare_target_stats(
+            target_stats=target_stats,
+            parent_target_stats=parent_target_stats,
+        )
+    )
+    pr_comparison_lines.extend(
+        compare_repo_stats(
+            repo_stat=repo_stat,
+            parent_repo_stat=parent_repo_stat,
+        )
+    )
     pr_comment.write_text("\n".join(pr_comparison_lines))
 
 
