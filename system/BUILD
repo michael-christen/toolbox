@@ -1,3 +1,5 @@
+load("//bzl:cc.bzl", "cc_library")
+
 # gazelle:default_visibility //visibility:public
 package(default_visibility = ["//visibility:public"])
 

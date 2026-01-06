@@ -1,3 +1,5 @@
+load("//bzl:cc.bzl", "cc_library")
+
 package(default_visibility = ["//visibility:private"])
 
 cc_library(

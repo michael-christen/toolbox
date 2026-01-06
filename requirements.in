@@ -41,6 +41,8 @@ six
 # Install so we can easily install a wheel into a virtualenv
 pip
 protobuf
+# Postgresql interactions
+psycopg2-binary
 # Validation & serialization
 pydantic
 # largely for development
@@ -70,6 +72,8 @@ sphinxcontrib-mermaid
 # Documentation
 sphinxext-opengraph
 sphinxext-rediraffe
+# Database Management
+sqlalchemy
 # Make nice-looking table output
 tabulate
 # Convenient backend for openhtf; https://www.tofupilot.com/
