@@ -98,6 +98,7 @@ jobs:
             genhtml
             /tmp/collect_stats_archive.json
       - name: Comment PR
+        if: ${{ github.event_name == 'pull_request' }}
         # https://github.com/thollander/actions-comment-pull-request
         uses: thollander/actions-comment-pull-request@v3
         with:
