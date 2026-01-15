@@ -15,7 +15,6 @@ PROTO_PYTHON_TARGETS = [
     "//third_party/bazel/proto:invocation_policy_py_library",
     "//third_party/bazel/proto:option_filters_py_library",
     "//third_party/bazel/proto:package_load_metrics_py_library",
-    "//third_party/bazel/proto:spawn_py_library",
     "//third_party/bazel/proto:strategy_policy_py_library",
     "//third_party/bazel/src/main/protobuf:build_py_library",
     "//tools:git_py_library",
@@ -25,11 +24,7 @@ PROTO_PYTHON_TARGETS = [
 # `bazel query 'kind("py_binary", //...) + kind("py_library", //...) - //:gazelle_python_manifest.update'`
 PYTHON_TARGETS = [
     "//algorithms:weighted_probability",
-    "//apps/bazel_parser:cli",
-    "//apps/bazel_parser:panel",
-    "//apps/bazel_parser:parsing",
-    "//apps/bazel_parser:refinement",
-    "//apps/bazel_parser:repo_graph_data",
+    "//apps:bazel_parser",
     "//apps/code_metrics:main",
     "//apps/code_metrics:models",
     "//bzl:pytest_main",
@@ -56,7 +51,6 @@ PYTHON_TARGETS = [
     "//third_party/bazel/proto:invocation_policy_py_library",
     "//third_party/bazel/proto:option_filters_py_library",
     "//third_party/bazel/proto:package_load_metrics_py_library",
-    "//third_party/bazel/proto:spawn_py_library",
     "//third_party/bazel/proto:strategy_policy_py_library",
     "//third_party/bazel/src/main/protobuf:build_py_library",
     "//third_party/delimited_protobuf:delimited_protobuf",
