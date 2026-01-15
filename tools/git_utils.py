@@ -202,7 +202,7 @@ def get_file_commit_map_from_log(
         [
             "git",
             "-C",
-            git_directory,
+            str(git_directory),
         ]
         + [
             "log",

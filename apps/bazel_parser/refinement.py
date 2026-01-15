@@ -32,7 +32,7 @@ class RefinementConfig:
 
 def _show_exclusions(
     pattern: str,
-    exclusion: pandas.Series[bool],
+    exclusion: pandas.Series[bool] | np.ndarray[tuple[int]],
     df: pandas.DataFrame,
     verbosity: Verbosity,
 ) -> None:
@@ -64,9 +64,9 @@ def refine_dataframe(
         include &= ~match
     exclude_by_class = []
     for pattern in refinement.class_patterns:
-        match = df["node_class"].str.fullmatch(pattern)
-        exclude_by_class.append(match)
-        include &= ~match
+        cls_match = df["node_class"].str.fullmatch(pattern)
+        exclude_by_class.append(cls_match)
+        include &= ~cls_match
     exclude_by_class_then_name = {}
     for (
         class_pattern,
@@ -75,27 +75,28 @@ def refine_dataframe(
         name_exclusions = np.full(len(df), False, dtype=bool)
         for name_pattern in name_patterns:
             name_exclusions |= df.index.str.fullmatch(name_pattern)
-        match = df["node_class"].str.fullmatch(class_pattern) & name_exclusions
-        exclude_by_class_then_name[class_pattern] = match
-        include &= ~match
-    for pattern, exclusion in zip(refinement.name_patterns, exclude_by_name):
+        node_cls_match = (
+            df["node_class"].str.fullmatch(class_pattern) & name_exclusions)
+        exclude_by_class_then_name[class_pattern] = node_cls_match
+        include &= ~node_cls_match
+    for pattern, pat_exclusion in zip(refinement.name_patterns, exclude_by_name):
         _show_exclusions(
-            pattern=pattern, exclusion=exclusion, df=df, verbosity=verbosity
+            pattern=pattern, exclusion=pat_exclusion, df=df, verbosity=verbosity
         )
-    for pattern, exclusion in zip(refinement.class_patterns, exclude_by_class):
+    for pattern, pat_cls_exclusion in zip(refinement.class_patterns, exclude_by_class):
         _show_exclusions(
-            pattern=pattern, exclusion=exclusion, df=df, verbosity=verbosity
+            pattern=pattern, exclusion=pat_cls_exclusion, df=df, verbosity=verbosity
         )
-    for pattern, exclusion in exclude_by_class_then_name.items():
+    for pattern, pat_cls_name_exclusion in exclude_by_class_then_name.items():
         # XXX: Maybe display more than just the top-level class pattern
         _show_exclusions(
-            pattern=pattern, exclusion=exclusion, df=df, verbosity=verbosity
+            pattern=pattern, exclusion=pat_cls_name_exclusion, df=df, verbosity=verbosity
         )
     # XXX: Log / return the individual exclusions
     return df.loc[include]
 
 
-def remove_node_from_repo(node: str, repo: repo_graph_data) -> None:
+def remove_node_from_repo(node: str, repo: repo_graph_data.RepoGraphData) -> None:
     """Modify graph by removing node, but preserving edges.
 
     XXX: How to handle probability / duration attributes of removed nodes?
@@ -122,3 +123,4 @@ def full_refinement(
     repo.df = refined_df
     for node in removed_nodes:
         remove_node_from_repo(node, repo)
+    return repo.df

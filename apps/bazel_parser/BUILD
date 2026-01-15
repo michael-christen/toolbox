@@ -90,10 +90,10 @@ py_binary(
 )
 
 # XXX: This still requires that folks bring their own python runtime
-py_pex_binary(
-    name = "cli_pex",
-    binary = ":cli",
-)
+# py_pex_binary(
+#     name = "cli_pex",
+#     binary = ":cli",
+# )
 
 # XXX: Need to mount volume and bazel is not found, etc
 # Build and run this image with

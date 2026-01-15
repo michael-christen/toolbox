@@ -10,7 +10,7 @@ from apps.bazel_parser import repo_graph_data
 class TestRepoGraphData(unittest.TestCase):
 
     def test_basics(self) -> None:
-        g = networkx.DiGraph(
+        g: networkx.DiGraph = networkx.DiGraph(
             [
                 ("a", "b"),
                 ("b", "c"),

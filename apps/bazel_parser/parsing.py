@@ -50,7 +50,7 @@ def _get_rules(
 def get_dependency_digraph(
     rules: dict[str, build_pb2.Rule], ignore_external: bool
 ) -> networkx.DiGraph:
-    graph = networkx.DiGraph()
+    graph: networkx.DiGraph = networkx.DiGraph()
     for rule in rules.values():
         # Specify X depends on Y as X is a parent of Y
         for rule_input in rule.rule_input:

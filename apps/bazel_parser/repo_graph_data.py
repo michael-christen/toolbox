@@ -330,6 +330,7 @@ def dependency_analysis(repo: RepoGraphData) -> dict[str, Node]:
     logger.debug("a")
     nodes: dict[str, Node] = {}
     for node_name, cur_node in repo.df.iterrows():
+        node_name = str(node_name)
         num_parents = in_degree[node_name]
         num_children = out_degree[node_name]
         ancestors = list(networkx.ancestors(repo.graph, node_name))
