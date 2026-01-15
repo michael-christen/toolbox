@@ -7,6 +7,12 @@ This page contains auto-generated API reference documentation [#f1]_.
    :titlesonly:
 
 
+   /autoapi/apps/bazel_parser/cli/index
+   /autoapi/apps/bazel_parser/panel/index
+   /autoapi/apps/bazel_parser/parsing/index
+   /autoapi/apps/bazel_parser/refinement/index
+   /autoapi/apps/bazel_parser/repo_graph_data/index
+   /autoapi/apps/bazel_parser/repo_graph_data_test/index
    /autoapi/examples/basic/client/index
    /autoapi/examples/basic/grpc_test/index
    /autoapi/examples/basic/hello_pb2/index

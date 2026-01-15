@@ -1,0 +1,760 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="apps.bazel_parser.repo_graph_data" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="autoapi/apps/bazel_parser/repo_graph_data/index.html" />
+<meta property="og:site_name" content="toolbox" />
+<meta property="og:description" content="Contain the core data-classes for analyzing repo’s and their composition. Attributes: Classes: Functions: Module Contents:" />
+<meta name="description" content="Contain the core data-classes for analyzing repo’s and their composition. Attributes: Classes: Functions: Module Contents:" />
+<link rel="index" title="Index" href="../../../../genindex.html"><link rel="search" title="Search" href="../../../../search.html"><link rel="next" title="apps.bazel_parser.repo_graph_data_test" href="../repo_graph_data_test/index.html"><link rel="prev" title="apps.bazel_parser.refinement" href="../refinement/index.html">
+
+    <link rel="shortcut icon" href="../../../../_static/wrench.png"><!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
+        <title>apps.bazel_parser.repo_graph_data - toolbox documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../../../index.html"><div class="brand">toolbox  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../../index.html">
+  
+  <span class="sidebar-brand-text">toolbox  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../README.html">toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../myst.html">MyST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples.html">My nifty title</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../myst_extensions.html">Syntax Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../bringup.html">Log for How I am Bringing up This Repo and My New Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../useful_commands.html">Useful Commands</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../common_references.html">Common References</a><input aria-label="Toggle navigation of Common References" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../common/python_references.html">Python References</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1 current has-children"><a class="reference internal" href="../../../index.html">API Reference</a><input aria-label="Toggle navigation of API Reference" checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../cli/index.html">apps.bazel_parser.cli</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../panel/index.html">apps.bazel_parser.panel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../parsing/index.html">apps.bazel_parser.parsing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../refinement/index.html">apps.bazel_parser.refinement</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">apps.bazel_parser.repo_graph_data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../repo_graph_data_test/index.html">apps.bazel_parser.repo_graph_data_test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/basic/client/index.html">examples.basic.client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/basic/grpc_test/index.html">examples.basic.grpc_test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/basic/hello_pb2/index.html">examples.basic.hello_pb2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/basic/hello_pb2_grpc/index.html">examples.basic.hello_pb2_grpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/basic/hello_test/index.html">examples.basic.hello_test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/basic/main/index.html">examples.basic.main</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../examples/basic/server/index.html">examples.basic.server</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../../../_sources/autoapi/apps/bazel_parser/repo_graph_data/index.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="module-apps.bazel_parser.repo_graph_data">
+<span id="apps-bazel-parser-repo-graph-data"></span><h1>apps.bazel_parser.repo_graph_data<a class="headerlink" href="#module-apps.bazel_parser.repo_graph_data" title="Link to this heading"></a></h1>
+<p>Contain the core data-classes for analyzing repo’s and their composition.</p>
+<section id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading"></a></h2>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.logger" title="apps.bazel_parser.repo_graph_data.logger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logger</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node" title="apps.bazel_parser.repo_graph_data.Node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Node</span></code></a></p></td>
+<td><p>The fields of a given node.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.GraphMetrics" title="apps.bazel_parser.repo_graph_data.GraphMetrics"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GraphMetrics</span></code></a></p></td>
+<td><p>Graph-wide metrics.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.RepoGraphData" title="apps.bazel_parser.repo_graph_data.RepoGraphData"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RepoGraphData</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.dependency_analysis" title="apps.bazel_parser.repo_graph_data.dependency_analysis"><code class="xref py py-obj docutils literal notranslate"><span class="pre">dependency_analysis</span></code></a>(→ dict[str, Node])</p></td>
+<td><p>Update repo based on a dependency analysis.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py data">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.logger">
+<span class="sig-prename descclassname"><span class="pre">apps.bazel_parser.repo_graph_data.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#logger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.logger" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.Node">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.bazel_parser.repo_graph_data.</span></span><span class="sig-name descname"><span class="pre">Node</span></span><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#Node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.Node" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">TypedDict</span></code></p>
+<p>The fields of a given node.</p>
+<p>These can be used as columns of panda dataframes</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.Node.node_name">
+<span class="sig-name descname"><span class="pre">node_name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#Node.node_name"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.Node.node_name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.Node.node_class">
+<span class="sig-name descname"><span class="pre">node_class</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#Node.node_class"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.Node.node_class" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.Node.num_parents">
+<span class="sig-name descname"><span class="pre">num_parents</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#Node.num_parents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.Node.num_parents" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.Node.num_ancestors">
+<span class="sig-name descname"><span class="pre">num_ancestors</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#Node.num_ancestors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.Node.num_ancestors" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.Node.num_duration_ancestors">
+<span class="sig-name descname"><span class="pre">num_duration_ancestors</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#Node.num_duration_ancestors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.Node.num_duration_ancestors" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.Node.has_duration">
+<span class="sig-name descname"><span class="pre">has_duration</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#Node.has_duration"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.Node.has_duration" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.Node.num_children">
+<span class="sig-name descname"><span class="pre">num_children</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#Node.num_children"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.Node.num_children" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.Node.num_descendants">
+<span class="sig-name descname"><span class="pre">num_descendants</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#Node.num_descendants"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.Node.num_descendants" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.Node.num_source_descendants">
+<span class="sig-name descname"><span class="pre">num_source_descendants</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#Node.num_source_descendants"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.Node.num_source_descendants" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.Node.is_source">
+<span class="sig-name descname"><span class="pre">is_source</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#Node.is_source"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.Node.is_source" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.Node.pagerank">
+<span class="sig-name descname"><span class="pre">pagerank</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#Node.pagerank"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.Node.pagerank" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.Node.hubs_metric">
+<span class="sig-name descname"><span class="pre">hubs_metric</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#Node.hubs_metric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.Node.hubs_metric" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.Node.authorities_metric">
+<span class="sig-name descname"><span class="pre">authorities_metric</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#Node.authorities_metric"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.Node.authorities_metric" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.Node.node_duration_s">
+<span class="sig-name descname"><span class="pre">node_duration_s</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#Node.node_duration_s"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.Node.node_duration_s" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.Node.node_probability_cache_hit">
+<span class="sig-name descname"><span class="pre">node_probability_cache_hit</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#Node.node_probability_cache_hit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.Node.node_probability_cache_hit" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.Node.group_duration_s">
+<span class="sig-name descname"><span class="pre">group_duration_s</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#Node.group_duration_s"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.Node.group_duration_s" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.Node.group_probability_cache_hit">
+<span class="sig-name descname"><span class="pre">group_probability_cache_hit</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#Node.group_probability_cache_hit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.Node.group_probability_cache_hit" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.Node.expected_duration_s">
+<span class="sig-name descname"><span class="pre">expected_duration_s</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#Node.expected_duration_s"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.Node.expected_duration_s" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.Node.ancestor_depth">
+<span class="sig-name descname"><span class="pre">ancestor_depth</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#Node.ancestor_depth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.Node.ancestor_depth" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.Node.descendant_depth">
+<span class="sig-name descname"><span class="pre">descendant_depth</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#Node.descendant_depth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.Node.descendant_depth" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.Node.ancestors_by_node_p">
+<span class="sig-name descname"><span class="pre">ancestors_by_node_p</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#Node.ancestors_by_node_p"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.Node.ancestors_by_node_p" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.Node.ancestors_by_group_p">
+<span class="sig-name descname"><span class="pre">ancestors_by_group_p</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#Node.ancestors_by_group_p"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.Node.ancestors_by_group_p" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.Node.ancestors_by_descendants">
+<span class="sig-name descname"><span class="pre">ancestors_by_descendants</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#Node.ancestors_by_descendants"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.Node.ancestors_by_descendants" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.Node.betweenness_centrality">
+<span class="sig-name descname"><span class="pre">betweenness_centrality</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#Node.betweenness_centrality"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.Node.betweenness_centrality" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.Node.closeness_centrality">
+<span class="sig-name descname"><span class="pre">closeness_centrality</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#Node.closeness_centrality"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.Node.closeness_centrality" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.GraphMetrics">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.bazel_parser.repo_graph_data.</span></span><span class="sig-name descname"><span class="pre">GraphMetrics</span></span><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#GraphMetrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.GraphMetrics" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">TypedDict</span></code></p>
+<p>Graph-wide metrics.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.GraphMetrics.longest_path">
+<span class="sig-name descname"><span class="pre">longest_path</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#GraphMetrics.longest_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.GraphMetrics.longest_path" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.GraphMetrics.max_depth">
+<span class="sig-name descname"><span class="pre">max_depth</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#GraphMetrics.max_depth"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.GraphMetrics.max_depth" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.GraphMetrics.num_nodes">
+<span class="sig-name descname"><span class="pre">num_nodes</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#GraphMetrics.num_nodes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.GraphMetrics.num_nodes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.GraphMetrics.num_edges">
+<span class="sig-name descname"><span class="pre">num_edges</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#GraphMetrics.num_edges"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.GraphMetrics.num_edges" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.GraphMetrics.density">
+<span class="sig-name descname"><span class="pre">density</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#GraphMetrics.density"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.GraphMetrics.density" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.GraphMetrics.num_connected_components">
+<span class="sig-name descname"><span class="pre">num_connected_components</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#GraphMetrics.num_connected_components"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.GraphMetrics.num_connected_components" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.GraphMetrics.total_duration_s">
+<span class="sig-name descname"><span class="pre">total_duration_s</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#GraphMetrics.total_duration_s"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.GraphMetrics.total_duration_s" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.GraphMetrics.expected_duration_s">
+<span class="sig-name descname"><span class="pre">expected_duration_s</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#GraphMetrics.expected_duration_s"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.GraphMetrics.expected_duration_s" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.GraphMetrics.avg_files_changed_per_commit">
+<span class="sig-name descname"><span class="pre">avg_files_changed_per_commit</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#GraphMetrics.avg_files_changed_per_commit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.GraphMetrics.avg_files_changed_per_commit" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.GraphMetrics.avg_nodes_affected_per_commit">
+<span class="sig-name descname"><span class="pre">avg_nodes_affected_per_commit</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#GraphMetrics.avg_nodes_affected_per_commit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.GraphMetrics.avg_nodes_affected_per_commit" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.RepoGraphData">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.bazel_parser.repo_graph_data.</span></span><span class="sig-name descname"><span class="pre">RepoGraphData</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">graph</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">networkx.DiGraph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_to_class</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_probability</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">node_duration_s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#RepoGraphData"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.RepoGraphData" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>graph</strong> (<em>networkx.DiGraph</em>)</p></li>
+<li><p><strong>node_to_class</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>str</em><em>]</em>)</p></li>
+<li><p><strong>node_probability</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>float</em><em>]</em>)</p></li>
+<li><p><strong>node_duration_s</strong> (<em>dict</em><em>[</em><em>str</em><em>, </em><em>float</em><em>]</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.RepoGraphData.graph">
+<span class="sig-name descname"><span class="pre">graph</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">networkx.DiGraph</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#RepoGraphData.graph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.RepoGraphData.graph" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.RepoGraphData.df">
+<span class="sig-name descname"><span class="pre">df</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">pandas.DataFrame</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#RepoGraphData.df"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.RepoGraphData.df" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.RepoGraphData.refresh">
+<span class="sig-name descname"><span class="pre">refresh</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#RepoGraphData.refresh"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.RepoGraphData.refresh" title="Link to this definition"></a></dt>
+<dd><p>Update .df based on updates to graph, etc.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.RepoGraphData.get_node">
+<span class="sig-name descname"><span class="pre">get_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node" title="apps.bazel_parser.repo_graph_data.Node"><span class="pre">Node</span></a></span></span><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#RepoGraphData.get_node"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.RepoGraphData.get_node" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>node</strong> (<em>str</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node" title="apps.bazel_parser.repo_graph_data.Node">Node</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.RepoGraphData.get_graph_metrics">
+<span class="sig-name descname"><span class="pre">get_graph_metrics</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.GraphMetrics" title="apps.bazel_parser.repo_graph_data.GraphMetrics"><span class="pre">GraphMetrics</span></a></span></span><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#RepoGraphData.get_graph_metrics"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.RepoGraphData.get_graph_metrics" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.GraphMetrics" title="apps.bazel_parser.repo_graph_data.GraphMetrics">GraphMetrics</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.RepoGraphData.to_gml">
+<span class="sig-name descname"><span class="pre">to_gml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out_gml</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#RepoGraphData.to_gml"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.RepoGraphData.to_gml" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>out_gml</strong> (<em>pathlib.Path</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.RepoGraphData.to_csv">
+<span class="sig-name descname"><span class="pre">to_csv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">out_csv</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#RepoGraphData.to_csv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.RepoGraphData.to_csv" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>out_csv</strong> (<em>pathlib.Path</em>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="apps.bazel_parser.repo_graph_data.dependency_analysis">
+<span class="sig-prename descclassname"><span class="pre">apps.bazel_parser.repo_graph_data.</span></span><span class="sig-name descname"><span class="pre">dependency_analysis</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">repo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.RepoGraphData" title="apps.bazel_parser.repo_graph_data.RepoGraphData"><span class="pre">RepoGraphData</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node" title="apps.bazel_parser.repo_graph_data.Node"><span class="pre">Node</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../../../_modules/apps/bazel_parser/repo_graph_data.html#dependency_analysis"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.repo_graph_data.dependency_analysis" title="Link to this definition"></a></dt>
+<dd><p>Update repo based on a dependency analysis.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>repo</strong> (<a class="reference internal" href="#apps.bazel_parser.repo_graph_data.RepoGraphData" title="apps.bazel_parser.repo_graph_data.RepoGraphData"><em>RepoGraphData</em></a>)</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>dict[str, <a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node" title="apps.bazel_parser.repo_graph_data.Node">Node</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../repo_graph_data_test/index.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">apps.bazel_parser.repo_graph_data_test</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../refinement/index.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">apps.bazel_parser.refinement</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Michael Christen
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">apps.bazel_parser.repo_graph_data</a><ul>
+<li><a class="reference internal" href="#attributes">Attributes</a></li>
+<li><a class="reference internal" href="#classes">Classes</a></li>
+<li><a class="reference internal" href="#functions">Functions</a></li>
+<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node"><code class="docutils literal notranslate"><span class="pre">Node</span></code></a><ul>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node.node_name"><code class="docutils literal notranslate"><span class="pre">Node.node_name</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node.node_class"><code class="docutils literal notranslate"><span class="pre">Node.node_class</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node.num_parents"><code class="docutils literal notranslate"><span class="pre">Node.num_parents</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node.num_ancestors"><code class="docutils literal notranslate"><span class="pre">Node.num_ancestors</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node.num_duration_ancestors"><code class="docutils literal notranslate"><span class="pre">Node.num_duration_ancestors</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node.has_duration"><code class="docutils literal notranslate"><span class="pre">Node.has_duration</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node.num_children"><code class="docutils literal notranslate"><span class="pre">Node.num_children</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node.num_descendants"><code class="docutils literal notranslate"><span class="pre">Node.num_descendants</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node.num_source_descendants"><code class="docutils literal notranslate"><span class="pre">Node.num_source_descendants</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node.is_source"><code class="docutils literal notranslate"><span class="pre">Node.is_source</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node.pagerank"><code class="docutils literal notranslate"><span class="pre">Node.pagerank</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node.hubs_metric"><code class="docutils literal notranslate"><span class="pre">Node.hubs_metric</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node.authorities_metric"><code class="docutils literal notranslate"><span class="pre">Node.authorities_metric</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node.node_duration_s"><code class="docutils literal notranslate"><span class="pre">Node.node_duration_s</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node.node_probability_cache_hit"><code class="docutils literal notranslate"><span class="pre">Node.node_probability_cache_hit</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node.group_duration_s"><code class="docutils literal notranslate"><span class="pre">Node.group_duration_s</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node.group_probability_cache_hit"><code class="docutils literal notranslate"><span class="pre">Node.group_probability_cache_hit</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node.expected_duration_s"><code class="docutils literal notranslate"><span class="pre">Node.expected_duration_s</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node.ancestor_depth"><code class="docutils literal notranslate"><span class="pre">Node.ancestor_depth</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node.descendant_depth"><code class="docutils literal notranslate"><span class="pre">Node.descendant_depth</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node.ancestors_by_node_p"><code class="docutils literal notranslate"><span class="pre">Node.ancestors_by_node_p</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node.ancestors_by_group_p"><code class="docutils literal notranslate"><span class="pre">Node.ancestors_by_group_p</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node.ancestors_by_descendants"><code class="docutils literal notranslate"><span class="pre">Node.ancestors_by_descendants</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node.betweenness_centrality"><code class="docutils literal notranslate"><span class="pre">Node.betweenness_centrality</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.Node.closeness_centrality"><code class="docutils literal notranslate"><span class="pre">Node.closeness_centrality</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.GraphMetrics"><code class="docutils literal notranslate"><span class="pre">GraphMetrics</span></code></a><ul>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.GraphMetrics.longest_path"><code class="docutils literal notranslate"><span class="pre">GraphMetrics.longest_path</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.GraphMetrics.max_depth"><code class="docutils literal notranslate"><span class="pre">GraphMetrics.max_depth</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.GraphMetrics.num_nodes"><code class="docutils literal notranslate"><span class="pre">GraphMetrics.num_nodes</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.GraphMetrics.num_edges"><code class="docutils literal notranslate"><span class="pre">GraphMetrics.num_edges</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.GraphMetrics.density"><code class="docutils literal notranslate"><span class="pre">GraphMetrics.density</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.GraphMetrics.num_connected_components"><code class="docutils literal notranslate"><span class="pre">GraphMetrics.num_connected_components</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.GraphMetrics.total_duration_s"><code class="docutils literal notranslate"><span class="pre">GraphMetrics.total_duration_s</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.GraphMetrics.expected_duration_s"><code class="docutils literal notranslate"><span class="pre">GraphMetrics.expected_duration_s</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.GraphMetrics.avg_files_changed_per_commit"><code class="docutils literal notranslate"><span class="pre">GraphMetrics.avg_files_changed_per_commit</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.GraphMetrics.avg_nodes_affected_per_commit"><code class="docutils literal notranslate"><span class="pre">GraphMetrics.avg_nodes_affected_per_commit</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.RepoGraphData"><code class="docutils literal notranslate"><span class="pre">RepoGraphData</span></code></a><ul>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.RepoGraphData.graph"><code class="docutils literal notranslate"><span class="pre">RepoGraphData.graph</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.RepoGraphData.df"><code class="docutils literal notranslate"><span class="pre">RepoGraphData.df</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.RepoGraphData.refresh"><code class="docutils literal notranslate"><span class="pre">RepoGraphData.refresh()</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.RepoGraphData.get_node"><code class="docutils literal notranslate"><span class="pre">RepoGraphData.get_node()</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.RepoGraphData.get_graph_metrics"><code class="docutils literal notranslate"><span class="pre">RepoGraphData.get_graph_metrics()</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.RepoGraphData.to_gml"><code class="docutils literal notranslate"><span class="pre">RepoGraphData.to_gml()</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.RepoGraphData.to_csv"><code class="docutils literal notranslate"><span class="pre">RepoGraphData.to_csv()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#apps.bazel_parser.repo_graph_data.dependency_analysis"><code class="docutils literal notranslate"><span class="pre">dependency_analysis()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+    <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../../_static/copybutton.js?v=f281be69"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
+    <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
+    <script defer="defer" src="../../../../_static/tippy/autoapi/apps/bazel_parser/repo_graph_data/index.cac9be79-2ce8-4ec4-81b8-43ad0b1f8792.js"></script>
+    </body>
+</html>

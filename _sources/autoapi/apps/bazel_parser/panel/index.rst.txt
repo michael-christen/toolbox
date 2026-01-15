@@ -1,0 +1,51 @@
+apps.bazel_parser.panel
+=======================
+
+.. py:module:: apps.bazel_parser.panel
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   apps.bazel_parser.panel.SIZING_MODE
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   apps.bazel_parser.panel.run_panel
+   apps.bazel_parser.panel.get_subgraph_layout
+   apps.bazel_parser.panel.get_panel_layout
+
+
+Module Contents
+---------------
+
+.. py:data:: SIZING_MODE
+   :value: 'fixed'
+
+
+.. py:function:: run_panel(graph: networkx.DiGraph, html_out: pathlib.Path | None) -> None
+
+.. py:function:: get_subgraph_layout(whole_graph: networkx.DiGraph, node_key: str) -> panel.layout.base.Panel
+
+.. py:function:: get_panel_layout(graph: networkx.DiGraph) -> panel.layout.base.Panel
+
+   Get Panel Layout
+
+   References
+
+   # network_graph = from_networkx(graph, networkx.spring_layout,
+   #                               scale=1, center=(0, 0))
+   # neato
+   # dot
+   # twopi
+   # fdp
+   # sfdp
+   # circo
+
+

@@ -1,0 +1,233 @@
+apps.bazel_parser.repo_graph_data
+=================================
+
+.. py:module:: apps.bazel_parser.repo_graph_data
+
+.. autoapi-nested-parse::
+
+   Contain the core data-classes for analyzing repo's and their composition.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   apps.bazel_parser.repo_graph_data.logger
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   apps.bazel_parser.repo_graph_data.Node
+   apps.bazel_parser.repo_graph_data.GraphMetrics
+   apps.bazel_parser.repo_graph_data.RepoGraphData
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   apps.bazel_parser.repo_graph_data.dependency_analysis
+
+
+Module Contents
+---------------
+
+.. py:data:: logger
+
+.. py:class:: Node
+
+   Bases: :py:obj:`TypedDict`
+
+
+   The fields of a given node.
+
+   These can be used as columns of panda dataframes
+
+
+   .. py:attribute:: node_name
+      :type:  str
+
+
+   .. py:attribute:: node_class
+      :type:  str
+
+
+   .. py:attribute:: num_parents
+      :type:  int
+
+
+   .. py:attribute:: num_ancestors
+      :type:  int
+
+
+   .. py:attribute:: num_duration_ancestors
+      :type:  int
+
+
+   .. py:attribute:: has_duration
+      :type:  bool
+
+
+   .. py:attribute:: num_children
+      :type:  int
+
+
+   .. py:attribute:: num_descendants
+      :type:  int
+
+
+   .. py:attribute:: num_source_descendants
+      :type:  int
+
+
+   .. py:attribute:: is_source
+      :type:  bool
+
+
+   .. py:attribute:: pagerank
+      :type:  float
+
+
+   .. py:attribute:: hubs_metric
+      :type:  float
+
+
+   .. py:attribute:: authorities_metric
+      :type:  float
+
+
+   .. py:attribute:: node_duration_s
+      :type:  float
+
+
+   .. py:attribute:: node_probability_cache_hit
+      :type:  float
+
+
+   .. py:attribute:: group_duration_s
+      :type:  float
+
+
+   .. py:attribute:: group_probability_cache_hit
+      :type:  float
+
+
+   .. py:attribute:: expected_duration_s
+      :type:  float
+
+
+   .. py:attribute:: ancestor_depth
+      :type:  int
+
+
+   .. py:attribute:: descendant_depth
+      :type:  int
+
+
+   .. py:attribute:: ancestors_by_node_p
+      :type:  float
+
+
+   .. py:attribute:: ancestors_by_group_p
+      :type:  float
+
+
+   .. py:attribute:: ancestors_by_descendants
+      :type:  int
+
+
+   .. py:attribute:: betweenness_centrality
+      :type:  float
+
+
+   .. py:attribute:: closeness_centrality
+      :type:  float
+
+
+.. py:class:: GraphMetrics
+
+   Bases: :py:obj:`TypedDict`
+
+
+   Graph-wide metrics.
+
+
+   .. py:attribute:: longest_path
+      :type:  int
+
+
+   .. py:attribute:: max_depth
+      :type:  int
+
+
+   .. py:attribute:: num_nodes
+      :type:  int
+
+
+   .. py:attribute:: num_edges
+      :type:  int
+
+
+   .. py:attribute:: density
+      :type:  float
+
+
+   .. py:attribute:: num_connected_components
+      :type:  int
+
+
+   .. py:attribute:: total_duration_s
+      :type:  float
+
+
+   .. py:attribute:: expected_duration_s
+      :type:  float
+
+
+   .. py:attribute:: avg_files_changed_per_commit
+      :type:  float
+
+
+   .. py:attribute:: avg_nodes_affected_per_commit
+      :type:  float
+
+
+.. py:class:: RepoGraphData(graph: networkx.DiGraph, node_to_class: dict[str, str], node_probability: dict[str, float], node_duration_s: dict[str, float])
+
+   .. py:attribute:: graph
+      :type:  networkx.DiGraph
+
+
+   .. py:attribute:: df
+      :type:  pandas.DataFrame
+
+
+   .. py:method:: refresh() -> None
+
+      Update .df based on updates to graph, etc.
+
+
+
+   .. py:method:: get_node(node: str) -> Node
+
+
+   .. py:method:: get_graph_metrics() -> GraphMetrics
+
+
+   .. py:method:: to_gml(out_gml: pathlib.Path) -> None
+
+
+   .. py:method:: to_csv(out_csv: pathlib.Path) -> None
+
+
+.. py:function:: dependency_analysis(repo: RepoGraphData) -> dict[str, Node]
+
+   Update repo based on a dependency analysis.
+
+

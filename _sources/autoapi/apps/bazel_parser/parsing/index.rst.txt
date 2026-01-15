@@ -1,0 +1,27 @@
+apps.bazel_parser.parsing
+=========================
+
+.. py:module:: apps.bazel_parser.parsing
+
+.. autoapi-nested-parse::
+
+   Handle converting raw types to the data structures that get used.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   apps.bazel_parser.parsing.get_dependency_digraph
+   apps.bazel_parser.parsing.get_repo_graph_data
+
+
+Module Contents
+---------------
+
+.. py:function:: get_dependency_digraph(rules: dict[str, third_party.bazel.src.main.protobuf.build_pb2.Rule], ignore_external: bool) -> networkx.DiGraph
+
+.. py:function:: get_repo_graph_data(query_result: third_party.bazel.src.main.protobuf.build_pb2.QueryResult, label_to_runtime: dict[str, datetime.timedelta], file_commit_map: tools.git_utils.FileCommitMap) -> apps.bazel_parser.repo_graph_data.RepoGraphData
+

@@ -1,0 +1,118 @@
+apps.bazel_parser.refinement
+============================
+
+.. py:module:: apps.bazel_parser.refinement
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   apps.bazel_parser.refinement.Verbosity
+   apps.bazel_parser.refinement.RefinementConfig
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   apps.bazel_parser.refinement.refine_dataframe
+   apps.bazel_parser.refinement.remove_node_from_repo
+   apps.bazel_parser.refinement.full_refinement
+
+
+Module Contents
+---------------
+
+.. py:class:: Verbosity(*args, **kwds)
+
+   Bases: :py:obj:`enum.Enum`
+
+
+   Create a collection of name/value pairs.
+
+   Example enumeration:
+
+   >>> class Color(Enum):
+   ...     RED = 1
+   ...     BLUE = 2
+   ...     GREEN = 3
+
+   Access them by:
+
+   - attribute access::
+
+   >>> Color.RED
+   <Color.RED: 1>
+
+   - value lookup:
+
+   >>> Color(1)
+   <Color.RED: 1>
+
+   - name lookup:
+
+   >>> Color['RED']
+   <Color.RED: 1>
+
+   Enumerations can be iterated over, and know how many members they have:
+
+   >>> len(Color)
+   3
+
+   >>> list(Color)
+   [<Color.RED: 1>, <Color.BLUE: 2>, <Color.GREEN: 3>]
+
+   Methods can be added to enumerations, and members can have their own
+   attributes -- see the documentation for details.
+
+
+   .. py:attribute:: SILENT
+      :value: 'SILENT'
+
+
+
+   .. py:attribute:: COUNT
+      :value: 'COUNT'
+
+
+
+   .. py:attribute:: LIST
+      :value: 'LIST'
+
+
+
+.. py:class:: RefinementConfig
+
+   This specifies how to refine a dataframe of nodes to a smaller set.
+
+   We expect node_name to be the index of the dataframe.
+
+   All of these fields are exclusionary.
+
+
+   .. py:attribute:: name_patterns
+      :type:  list[str]
+
+
+   .. py:attribute:: class_patterns
+      :type:  list[str]
+
+
+   .. py:attribute:: class_pattern_to_name_patterns
+      :type:  dict[str, list[str]]
+
+
+.. py:function:: refine_dataframe(df: pandas.DataFrame, refinement: RefinementConfig, verbosity: Verbosity) -> pandas.DataFrame
+
+.. py:function:: remove_node_from_repo(node: str, repo: apps.bazel_parser.repo_graph_data.RepoGraphData) -> None
+
+   Modify graph by removing node, but preserving edges.
+
+   XXX: How to handle probability / duration attributes of removed nodes?
+
+
+.. py:function:: full_refinement(repo: apps.bazel_parser.repo_graph_data.RepoGraphData, refinement: RefinementConfig, verbosity: Verbosity) -> pandas.DataFrame
+
