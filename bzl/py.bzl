@@ -1,6 +1,8 @@
 load("@aspect_bazel_lib//lib:tar.bzl", "mtree_spec", "tar")
 load("@aspect_bazel_lib//lib:transitions.bzl", "platform_transition_filegroup")
-load("@aspect_rules_py//py:defs.bzl", _py_binary = "py_binary", _py_library = "py_library")
+
+# XXX: Move to tools/rules/python defs.bzl
+load("@aspect_rules_py//py:defs.bzl", _py_binary = "py_binary", _py_library = "py_library", _py_pex_binary = "py_pex_binary")
 load("@build_stack_rules_proto//rules/py:grpc_py_library.bzl", _grpc_py_library = "grpc_py_library")
 load("@build_stack_rules_proto//rules/py:proto_py_library.bzl", _proto_py_library = "proto_py_library")
 load("@rules_oci//oci:defs.bzl", "oci_image", "oci_load")
@@ -10,6 +12,9 @@ load("@rules_python//python:defs.bzl", _py_test = "py_test")
 
 def py_binary(**kwargs):
     _py_binary(**kwargs)
+
+def py_pex_binary(**kwargs):
+    _py_pex_binary(**kwargs)
 
 def py_library(**kwargs):
     _py_library(**kwargs)

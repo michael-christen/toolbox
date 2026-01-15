@@ -1,5 +1,10 @@
 """Tools for working with bazel.
 
+XXX: Should --notool_deps be specified?
+
+Should we denote source files in some way? eg)
+- bazel query 'labels(srcs, //...) union labels(hdrs, //...)'
+
 ```
 bazel query //... --output proto > query_result.pb
 # Load then operate on it
@@ -15,6 +20,7 @@ import subprocess
 from third_party.bazel.src.main.protobuf import build_pb2
 
 
+# XXX: Move to utils/bep_reader ...
 def get_workspace_directory() -> pathlib.Path:
     workspace = os.environ.get("BUILD_WORKING_DIRECTORY")
     assert workspace is not None
