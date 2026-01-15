@@ -152,7 +152,7 @@ A       experiments/proto/hello/BUILD
 A       experiments/proto/hello/hello.proto
 A       experiments/proto/hello/hello_test.py
 A       experiments/rust/hello-rust/BUILD
-        """
+        """  # noqa
         # XXX: Maybe we have FileCommitMap just not show an entry for files
         # with empty lists? Probably not, if we want it to denote source file
         files = []

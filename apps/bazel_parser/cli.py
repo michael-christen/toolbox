@@ -98,12 +98,10 @@ import pathlib
 import subprocess
 import sys
 import tempfile
-import time
 
 import click
 import networkx
 import pydantic
-import tqdm
 import yaml
 
 from apps.bazel_parser import panel
@@ -305,10 +303,15 @@ def visualize(
 
 
 if __name__ == "__main__":
-    logging.basicConfig(stream=sys.stderr,
-                        format="%(asctime)s - %(levelname)s - %(name)s:%(lineno)d - %(message)s",
-                        datefmt="%Y-%m-%d %H:%M:%S",
-                        level=logging.DEBUG)
+    logging.basicConfig(
+        stream=sys.stderr,
+        format=(
+            "%(asctime)s - %(levelname)s - %(name)s:%(lineno)d -"
+            " %(message)s"
+        ),
+        datefmt="%Y-%m-%d %H:%M:%S",
+        level=logging.DEBUG,
+    )
     cli.add_command(git_capture)
     cli.add_command(process)
     cli.add_command(visualize)

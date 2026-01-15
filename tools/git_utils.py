@@ -133,7 +133,8 @@ def _parse_git_logs(logs: list[str], files: list[pathlib.Path]) -> FileCommitMap
     commit_map: dict[str, set[pathlib.Path]] = {}
     file_map: dict[pathlib.Path, list[str]] = {}
     pattern = re.compile(
-        r"^(?P<type>[AMD])\s+(.+?)(\s*->\s*(.+))?$|^(?P<replace>R)(\d+)\s+(.+?)\s*->\s*(.+)$|^(?P<commit>[0-9a-f]{40})$")
+        r"^(?P<type>[AMD])\s+(.+?)(\s*->\s*(.+))?$|^(?P<replace>R)(\d+)\s+(.+?)\s*->\s*(.+)$|^(?P<commit>[0-9a-f]{40})$"  # noqa
+    )
     # XXX: Get the commit sha, find files affected, append to sha for file
     # XXX: Ensure in right order
     for line in logs:
@@ -202,11 +203,11 @@ def get_file_commit_map_from_log(
             '--pretty=format:"%H"',
             # This will format with null characters rather than spacing
             "-z",
-        ] + _get_args_for_after(after),
-        text=True)
-    lines = output.strip('\x00').split('\x00')
-    commit_re = re.compile(r'^"([0-9a-f]{40})"')
-    typ_re = re.compile(r'^(?P<typ>[AMDR])(?P<similarity>\d+)?$')
+        ]
+        + _get_args_for_after(after),
+        text=True,
+    )
+    lines = output.strip("\x00").split("\x00")
 
     commit_map: dict[str, set[pathlib.Path]] = {}
     file_map: dict[pathlib.Path, list[str]] = collections.defaultdict(list)
@@ -242,7 +243,9 @@ def get_file_commit_map_from_log(
             # Only looking for commit
             if new_commit is None:
                 raise ValueError(
-                    f"Found no commit, when that was the only option: '{token}'")
+                    f"Found no commit, when that was the only option:"
+                    f" '{token}'"
+                )
             commit = new_commit
             commit_map[commit] = set()
             new_state = ParseState.PRE_TYPE_OR_COMMIT

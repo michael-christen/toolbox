@@ -6,7 +6,10 @@ py_library(
     name = "graph_algorithms",
     srcs = ["graph_algorithms.py"],
     visibility = ["//:__subpackages__"],
-    deps = ["@pip//networkx"],
+    deps = [
+        "@pip//networkx",
+        "@pip//tqdm",
+    ],
 )
 
 py_test(

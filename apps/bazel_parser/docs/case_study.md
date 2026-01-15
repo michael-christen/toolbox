@@ -52,8 +52,8 @@ Then run the tool to get the generated csv and gml
 Then "analyze" and refine the results, answering the questions above
 
 Side-quests:
-- how long are different parts of this taking / what are the pain points?
 
+- how long are different parts of this taking / what are the pain points?
 
 ## Overall Observations
 
@@ -68,28 +68,36 @@ Side-quests:
 
 ### [drake]
 
-A very large graph initially
-![[Pasted image 20250407224526.png]]
-Lots of peripheral points that are effectively disconnected
+A very large graph initially ![[Pasted image 20250407224526.png]] Lots of
+peripheral points that are effectively disconnected
+
 ### [monogon]
-This is a bit of a "wispy" graph
-![[Pasted image 20250407230112.png]]
+
+This is a bit of a "wispy" graph ![[Pasted image 20250407230112.png]]
+
 ### [bzd]
-SVG clusters
-![[Pasted image 20250407230522.png]]
+
+SVG clusters ![[Pasted image 20250407230522.png]]
+
 ### [tensorflow]
-Could only run on `//tensorflow/...` and even that took quite a long time to analyze. The different towers seem to be different histories / testdata and utilities. The right cluster is a bunch of python by the looks of it and the left cluster is more of the C++.
-![[Pasted image 20250408073536.png]]
+
+Could only run on `//tensorflow/...` and even that took quite a long time to
+analyze. The different towers seem to be different histories / testdata and
+utilities. The right cluster is a bunch of python by the looks of it and the
+left cluster is more of the C++. ![[Pasted image 20250408073536.png]]
 Partitioning by "Modularity Class" can be helpful
 ![[Pasted image 20250408074353.png]]
+
 ### [pigweed]
+
 We got a big boy, the 2 main clusters seem to be the JS and the C++?
-![[Pasted image 20250407230924.png]]
-The unknown is generated .dwp and .stripped. The npm_package_store_internal is also a large contributor
+![[Pasted image 20250407230924.png]] The unknown is generated .dwp and
+.stripped. The npm_package_store_internal is also a large contributor
+
 ### [abseil]
+
 A fair bit smaller and more focused on C++. The bottom (egg) is timezones.
 ![[Pasted image 20250407225531.png]]
-
 
 [abseil]: https://github.com/abseil/abseil-cpp
 [pigweed]: https://github.com/google/pigweed

@@ -30,7 +30,6 @@ py_library(
     visibility = ["//:__subpackages__"],
     deps = [
         ":repo_graph_data",
-        "@pip//networkx",
         "@pip//numpy",
         "@pip//pandas",
     ],
@@ -44,6 +43,7 @@ py_library(
         "//utils:graph_algorithms",
         "@pip//networkx",
         "@pip//pandas",
+        "@pip//tqdm",
     ],
 )
 
@@ -63,7 +63,6 @@ py_library(
     deps = [
         ":repo_graph_data",
         "//third_party/bazel/src/main/protobuf:build_py_library",
-        "//tools:git_py_library",
         "//tools:git_utils",
         "@pip//networkx",
     ],
@@ -87,7 +86,6 @@ py_binary(
         # XXX: Should associate with networkx
         "@pip//pygraphviz",  # keep
         "@pip//pyyaml",
-        "@pip//tqdm",
     ],
 )
 

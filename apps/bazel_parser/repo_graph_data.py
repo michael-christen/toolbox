@@ -314,8 +314,9 @@ def dependency_analysis(
     # Compute centrality metrics
     # XXX: Determine better mechanism to choose k
     # // 4
-    k = int(min(num_nodes, max(1_000, num_nodes ** 0.5)))
-    # Compare performance of igraph: https://python.igraph.org/en/stable/api/igraph.GraphBase.html#betweenness
+    k = int(min(num_nodes, max(1_000, num_nodes**0.5)))
+    # Compare performance of igraph:
+    # https://python.igraph.org/en/stable/api/igraph.GraphBase.html#betweenness
     # O(VE), use k to make it quicker
     # Only noticed any time during drake & pigweed trial
     betweenness = networkx.betweenness_centrality(repo.graph, k=k)

@@ -7,7 +7,6 @@ import networkx
 
 from apps.bazel_parser import repo_graph_data
 from third_party.bazel.src.main.protobuf import build_pb2
-from tools import git_pb2
 from tools import git_utils
 
 
