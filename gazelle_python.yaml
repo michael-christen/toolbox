@@ -250,6 +250,7 @@ manifest:
     xyzservices: xyzservices
     yaml: pyyaml
     zmq: pyzmq
+    zstandard: zstandard
   pip_repository:
     name: pip
-integrity: 025a5674619604a0ce639ed1515dfa8e5cf588bfa101ac1ccd7b736032e6794c
+integrity: d1fa5c87a0aa09dbb9162f26ebd2b9308055988aebe42139a9d7beb35b8ba2a3
