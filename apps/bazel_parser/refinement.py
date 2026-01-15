@@ -76,27 +76,43 @@ def refine_dataframe(
         for name_pattern in name_patterns:
             name_exclusions |= df.index.str.fullmatch(name_pattern)
         node_cls_match = (
-            df["node_class"].str.fullmatch(class_pattern) & name_exclusions)
+            df["node_class"].str.fullmatch(class_pattern) & name_exclusions
+        )
         exclude_by_class_then_name[class_pattern] = node_cls_match
         include &= ~node_cls_match
-    for pattern, pat_exclusion in zip(refinement.name_patterns, exclude_by_name):
+    for pattern, pat_exclusion in zip(
+        refinement.name_patterns, exclude_by_name
+    ):
         _show_exclusions(
-            pattern=pattern, exclusion=pat_exclusion, df=df, verbosity=verbosity
+            pattern=pattern,
+            exclusion=pat_exclusion,
+            df=df,
+            verbosity=verbosity,
         )
-    for pattern, pat_cls_exclusion in zip(refinement.class_patterns, exclude_by_class):
+    for pattern, pat_cls_exclusion in zip(
+        refinement.class_patterns, exclude_by_class
+    ):
         _show_exclusions(
-            pattern=pattern, exclusion=pat_cls_exclusion, df=df, verbosity=verbosity
+            pattern=pattern,
+            exclusion=pat_cls_exclusion,
+            df=df,
+            verbosity=verbosity,
         )
     for pattern, pat_cls_name_exclusion in exclude_by_class_then_name.items():
         # XXX: Maybe display more than just the top-level class pattern
         _show_exclusions(
-            pattern=pattern, exclusion=pat_cls_name_exclusion, df=df, verbosity=verbosity
+            pattern=pattern,
+            exclusion=pat_cls_name_exclusion,
+            df=df,
+            verbosity=verbosity,
         )
     # XXX: Log / return the individual exclusions
     return df.loc[include]
 
 
-def remove_node_from_repo(node: str, repo: repo_graph_data.RepoGraphData) -> None:
+def remove_node_from_repo(
+    node: str, repo: repo_graph_data.RepoGraphData
+) -> None:
     """Modify graph by removing node, but preserving edges.
 
     XXX: How to handle probability / duration attributes of removed nodes?

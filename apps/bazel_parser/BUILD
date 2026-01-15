@@ -1,4 +1,4 @@
-load("//bzl:py.bzl", "py_binary", "py_image", "py_library", "py_pex_binary", "py_test")
+load("//bzl:py.bzl", "py_binary", "py_image", "py_library", "py_test")
 
 package(default_visibility = ["//visibility:private"])
 
