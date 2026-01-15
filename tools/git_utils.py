@@ -129,7 +129,9 @@ def get_file_commit_map_from_follow(
     return FileCommitMap(commit_map=commit_map, file_map=file_map)
 
 
-def _parse_git_logs(logs: list[str], files: list[pathlib.Path]) -> FileCommitMap:
+def _parse_git_logs(
+    logs: list[str], files: list[pathlib.Path]
+) -> FileCommitMap:
     commit_map: dict[str, set[pathlib.Path]] = {}
     file_map: dict[pathlib.Path, list[str]] = {}
     pattern = re.compile(
@@ -143,31 +145,35 @@ def _parse_git_logs(logs: list[str], files: list[pathlib.Path]) -> FileCommitMap
             continue
         match = pattern.match(line)
         if match:
-            commit: str | None = match.group('commit')
-            typ: str | None = match.group('type')
-            replace: str | None = match.group('replace')
+            commit: str | None = match.group("commit")
+            typ: str | None = match.group("type")
+            replace: str | None = match.group("replace")
             if commit:
                 print(f'Commit: {match.group("commit")}')
             elif typ:
-                print(f'{typ=}')
+                print(f"{typ=}")
             elif replace:
-                print(f'{replace=}')
+                print(f"{replace=}")
             if match.group(1):  # For A, M, D statuses
                 change_type = match.group(1)
                 old_file = match.group(2)
                 # XXX: Named args
                 # XXX: Doesn't make sense
                 new_file = match.group(4) if match.group(4) else None
-                print(f"Change type: {change_type}, Old file: {old_file}, "
-                      f"New file: {new_file}")
+                print(
+                    f"Change type: {change_type}, Old file: {old_file}, "
+                    f"New file: {new_file}"
+                )
             elif match.group(5):  # For R status (renames)
-                change_type = 'R'
+                change_type = "R"
                 similarity_index = match.group(5)
                 old_file = match.group(6)
                 new_file = match.group(7)
-                print(f"Change type: {change_type}, Similarity index:"
-                      f" {similarity_index}, Old file: {old_file}, New file:"
-                      f" {new_file}")
+                print(
+                    f"Change type: {change_type}, Similarity index:"
+                    f" {similarity_index}, Old file: {old_file}, New file:"
+                    f" {new_file}"
+                )
         else:
             print(f"'{line}' did not match pattern")
     return FileCommitMap(commit_map=commit_map, file_map=file_map)
@@ -181,11 +187,11 @@ class ParseState(enum.Enum):
 
 
 class OperationType(enum.Enum):
-    ADD = 'A'
-    MODIFY = 'M'
-    DELETE = 'D'
-    REPLACE = 'R'
-    TYPE_CHANGE = 'T'
+    ADD = "A"
+    MODIFY = "M"
+    DELETE = "D"
+    REPLACE = "R"
+    TYPE_CHANGE = "T"
 
 
 def get_file_commit_map_from_log(
@@ -197,7 +203,8 @@ def get_file_commit_map_from_log(
             "git",
             "-C",
             git_directory,
-        ] + [
+        ]
+        + [
             "log",
             "--name-status",
             '--pretty=format:"%H"',
@@ -216,7 +223,7 @@ def get_file_commit_map_from_log(
 
     all_tokens = []
     for line in lines:
-        all_tokens.extend(line.split('\n'))
+        all_tokens.extend(line.split("\n"))
     state = ParseState.PRE_COMMIT
     commit: str | None = None
     files: list[str] = []
@@ -257,13 +264,17 @@ def get_file_commit_map_from_log(
                 new_state = ParseState.PRE_TYPE_OR_COMMIT
             else:
                 if len(token) < 1:
-                    raise ValueError('Empty token when expected type')
+                    raise ValueError("Empty token when expected type")
                 raw_type = token[0]
                 new_op_type = OperationType(raw_type)
-                if new_op_type in {OperationType.ADD, OperationType.MODIFY,
-                               OperationType.DELETE, OperationType.TYPE_CHANGE}:
+                if new_op_type in {
+                    OperationType.ADD,
+                    OperationType.MODIFY,
+                    OperationType.DELETE,
+                    OperationType.TYPE_CHANGE,
+                }:
                     if len(token) > 1:
-                        raise ValueError(f'Unexpected extra: {token}')
+                        raise ValueError(f"Unexpected extra: {token}")
                     op_type = new_op_type
                     new_state = ParseState.PRE_SINGLE_FILE
                 elif new_op_type == OperationType.REPLACE:
@@ -272,7 +283,7 @@ def get_file_commit_map_from_log(
                     op_type = new_op_type
                     new_state = ParseState.PRE_DOUBLE_FILE
                 else:
-                    raise ValueError(f'Unknown type: {new_op_type} {token}')
+                    raise ValueError(f"Unknown type: {new_op_type} {token}")
         elif state == ParseState.PRE_SINGLE_FILE:
             assert len(token) > 0
             assert commit is not None
@@ -319,7 +330,7 @@ def get_file_commit_map_from_log(
                     commit_map[commit].add(new_f)
                     file_map[new_f].append(commit)
             else:
-                raise ValueError(f'Unknown type: {op_type} {token}')
+                raise ValueError(f"Unknown type: {op_type} {token}")
 
             files.clear()
             op_type = None
@@ -330,7 +341,7 @@ def get_file_commit_map_from_log(
             files.append(token)
             new_state = ParseState.PRE_SINGLE_FILE
         else:
-            raise ValueError(f'Unhandled state: {state}')
+            raise ValueError(f"Unhandled state: {state}")
         state = new_state
     assert state in {ParseState.PRE_TYPE_OR_COMMIT, ParseState.PRE_COMMIT}
     return FileCommitMap(commit_map=commit_map, file_map=file_map)

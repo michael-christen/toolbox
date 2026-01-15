@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 import dataclasses
 import enum
 
@@ -115,7 +116,9 @@ def full_refinement(
         refinement=refinement,
         verbosity=verbosity,
     )
-    removed_nodes = set(repo.df.index.tolist()) - set(refined_df.index.tolist())
+    removed_nodes = set(repo.df.index.tolist()) - set(
+        refined_df.index.tolist()
+    )
     repo.df = refined_df
     for node in removed_nodes:
         remove_node_from_repo(node, repo)

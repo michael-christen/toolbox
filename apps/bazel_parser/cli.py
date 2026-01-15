@@ -120,7 +120,7 @@ OUT_PATH_TYPE = click.Path(exists=False, path_type=pathlib.Path)
 
 class Config(pydantic.BaseModel):
     # Error if extra arguments
-    model_config = pydantic.ConfigDict(extra='forbid')
+    model_config = pydantic.ConfigDict(extra="forbid")
 
     query_target: str
     test_target: str
@@ -129,7 +129,7 @@ class Config(pydantic.BaseModel):
 
 
 def load_config(config_yaml_path: pathlib.Path, overrides: dict) -> Config:
-    with open(config_yaml_path, 'r') as f:
+    with open(config_yaml_path, "r") as f:
         raw_data = yaml.safe_load(f)
     # Apply overrides
     raw_data.update(overrides)
@@ -137,7 +137,9 @@ def load_config(config_yaml_path: pathlib.Path, overrides: dict) -> Config:
     return Config(**raw_data)
 
 
-def get_config(config_file: pathlib.Path | None, days_ago: int | None) -> Config:
+def get_config(
+    config_file: pathlib.Path | None, days_ago: int | None
+) -> Config:
     if config_file:
         overrides = {}
         if days_ago is not None:
@@ -150,9 +152,9 @@ def get_config(config_file: pathlib.Path | None, days_ago: int | None) -> Config
             test_target="//...",
             days_ago=days_ago,
             refinement=refinement.RefinementConfig(
-                name_patterns = [],
-                class_patterns = [],
-                class_pattern_to_name_patterns = {},
+                name_patterns=[],
+                class_patterns=[],
+                class_pattern_to_name_patterns={},
             ),
         )
 
@@ -199,16 +201,16 @@ def process(
 ) -> None:
     # days_ago is unused here, but just placing to get a value
     config = get_config(config_file, days_ago=28)
-    logger.info('Query...')
+    logger.info("Query...")
     query_result = bazel_utils.parse_build_output(query_pb.read_bytes())
-    logger.info('Runtime...')
+    logger.info("Runtime...")
     with bep_pb.open("rb") as bep_buf:
         label_to_runtime = bep_reader.get_label_to_runtime(bep_buf)
-    logger.info('Probability...')
+    logger.info("Probability...")
     file_commit_proto = git_pb2.FileCommitMap()
     file_commit_proto.ParseFromString(file_commit_pb.read_bytes())
     file_commit_map = git_utils.FileCommitMap.from_proto(file_commit_proto)
-    logger.info('Get graph data')
+    logger.info("Get graph data")
     r = parsing.get_repo_graph_data(
         query_result=query_result,
         label_to_runtime=label_to_runtime,
@@ -216,7 +218,7 @@ def process(
     )
     # XXX: Probably should refresh afterwards too, right?
     # XXX: Probably want to refine before performing full refresh
-    logger.info('Refining...')
+    logger.info("Refining...")
     refinement.full_refinement(
         repo=r,
         refinement=config.refinement,
@@ -245,50 +247,56 @@ def full(
 ) -> None:
     config = get_config(config_file, days_ago=days_ago)
     # Query for graph
-    logger.info('Querying...')
+    logger.info("Querying...")
     query_pb = subprocess.check_output(
         ["bazel", "query", "--output", "proto", config.query_target],
-        cwd=repo_dir)
+        cwd=repo_dir,
+    )
     query_result = bazel_utils.parse_build_output(query_pb)
     # Test for timing
-    logger.info('Testing...')
+    logger.info("Testing...")
     with tempfile.NamedTemporaryFile() as tmpfile:
         bep_pb = tmpfile.name
         subprocess.check_call(
-            ["bazel", "test", f"--build_event_binary_file={bep_pb}",
-             config.test_target],
-            cwd=repo_dir)
+            [
+                "bazel",
+                "test",
+                f"--build_event_binary_file={bep_pb}",
+                config.test_target,
+            ],
+            cwd=repo_dir,
+        )
         with open(bep_pb, "rb") as bep_buf:
             label_to_runtime = bep_reader.get_label_to_runtime(bep_buf)
     # XXX: Optional build timing data ...
     # Capture git information
-    logger.info('History from git...')
+    logger.info("History from git...")
     git_query_after = datetime.datetime.now() - datetime.timedelta(
         days=config.days_ago
     )
     file_commit_map = git_utils.get_file_commit_map_from_follow(
         git_directory=repo_dir, after=git_query_after
     )
-    logger.info('Parsing...')
+    logger.info("Parsing...")
     r = parsing.get_repo_graph_data(
         query_result=query_result,
         label_to_runtime=label_to_runtime,
         file_commit_map=file_commit_map,
     )
-    logger.info('Refining...')
+    logger.info("Refining...")
     refinement.full_refinement(
         repo=r,
         refinement=config.refinement,
         verbosity=refinement.Verbosity.COUNT,
     )
-    logger.info('Outputting...')
+    logger.info("Outputting...")
     graph_metrics = r.get_graph_metrics()
     print(graph_metrics)
     if out_csv is not None:
         r.to_csv(out_csv)
     if out_gml is not None:
         r.to_gml(out_gml)
-    logger.info('Done...')
+    logger.info("Done...")
 
 
 @click.command()

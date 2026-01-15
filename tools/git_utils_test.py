@@ -159,7 +159,7 @@ A       experiments/rust/hello-rust/BUILD
         logs = example_logs.strip().splitlines()
         output = git_utils._parse_git_logs(logs=logs, files=files)
         print(output)
-        self.fail('hi')
+        self.fail("hi")
 
     # XXX: Test deleted, then added back
     # XXX: Show difference in copy?

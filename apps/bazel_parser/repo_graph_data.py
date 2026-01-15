@@ -2,7 +2,8 @@
 
 import logging
 import pathlib
-from typing import TypedDict, cast
+from typing import TypedDict
+from typing import cast
 
 import networkx
 import pandas
@@ -259,21 +260,20 @@ class RepoGraphData:
         self.df.to_csv(out_csv, index=False)
 
 
-def dependency_analysis(
-    repo: RepoGraphData) -> dict[str, Node]:
+def dependency_analysis(repo: RepoGraphData) -> dict[str, Node]:
     """Update repo based on a dependency analysis."""
     num_nodes = repo.graph.number_of_nodes()
-    logger.debug(f'a: {num_nodes}')
-    node_probability = repo.df['node_probability_cache_hit'].to_dict()
+    logger.debug(f"a: {num_nodes}")
+    node_probability = repo.df["node_probability_cache_hit"].to_dict()
     node_duration_s = repo.df["node_duration_s"].to_dict()
     group_probability = graph_algorithms.compute_group_probability(
         graph=repo.graph, node_probability=node_probability
     )
-    logger.debug(f'a: {repo.graph.number_of_edges()}')
+    logger.debug(f"a: {repo.graph.number_of_edges()}")
     group_duration = graph_algorithms.compute_group_duration(
         graph=repo.graph, node_duration_s=node_duration_s
     )
-    logger.debug('a')
+    logger.debug("a")
     pagerank = networkx.pagerank(repo.graph)
     hubs, authorities = networkx.hits(repo.graph)
     # XXX: Should we have a data structure that's just a big collection of
@@ -293,7 +293,7 @@ def dependency_analysis(
     assert not isinstance(out_degree, int)
 
     reversed_graph = repo.graph.reverse()
-    logger.debug('a')
+    logger.debug("a")
 
     # Compute depths
     forward_all_pairs_shortest_path_length = (
@@ -302,14 +302,18 @@ def dependency_analysis(
     reverse_all_pairs_shortest_path_length = (
         networkx.all_pairs_shortest_path_length(reversed_graph)
     )
-    logger.debug('a')
+    logger.debug("a")
     descendant_depth: dict[str, int] = {}
     ancestor_depth: dict[str, int] = {}
-    for node_name, pair_len_dict in tqdm.tqdm(forward_all_pairs_shortest_path_length):
+    for node_name, pair_len_dict in tqdm.tqdm(
+        forward_all_pairs_shortest_path_length
+    ):
         descendant_depth[node_name] = max(pair_len_dict.values())
-    for node_name, pair_len_dict in tqdm.tqdm(reverse_all_pairs_shortest_path_length):
+    for node_name, pair_len_dict in tqdm.tqdm(
+        reverse_all_pairs_shortest_path_length
+    ):
         ancestor_depth[node_name] = max(pair_len_dict.values())
-    logger.debug('a')
+    logger.debug("a")
 
     # Compute centrality metrics
     # XXX: Determine better mechanism to choose k
@@ -320,30 +324,32 @@ def dependency_analysis(
     # O(VE), use k to make it quicker
     # Only noticed any time during drake & pigweed trial
     betweenness = networkx.betweenness_centrality(repo.graph, k=k)
-    logger.debug('a')
+    logger.debug("a")
     closeness = networkx.closeness_centrality(repo.graph)
 
-    logger.debug('a')
+    logger.debug("a")
     nodes: dict[str, Node] = {}
     for node_name, cur_node in repo.df.iterrows():
         num_parents = in_degree[node_name]
         num_children = out_degree[node_name]
         ancestors = list(networkx.ancestors(repo.graph, node_name))
         num_ancestors = len(ancestors)
-        num_duration_ancestors = repo.df.loc[repo.df.index.intersection(
-            ancestors)]['has_duration'].sum()
+        num_duration_ancestors = repo.df.loc[
+            repo.df.index.intersection(ancestors)
+        ]["has_duration"].sum()
         descendants = list(networkx.descendants(repo.graph, node_name))
         num_descendants = len(descendants)
-        num_source_descendants = repo.df.loc[repo.df.index.intersection(
-            descendants)]['is_source'].sum()
+        num_source_descendants = repo.df.loc[
+            repo.df.index.intersection(descendants)
+        ]["is_source"].sum()
         np = node_probability.get(node_name, 1.0)
         gp = group_probability.get(node_name, 1.0)
         gd = group_duration.get(node_name, 0)
         row: Node = {
             "node_name": node_name,
-            "node_class": cur_node['node_class'],
-            "is_source": cur_node['is_source'],
-            "has_duration": cur_node['has_duration'],
+            "node_class": cur_node["node_class"],
+            "is_source": cur_node["is_source"],
+            "has_duration": cur_node["has_duration"],
             "num_parents": int(num_parents),
             "num_ancestors": num_ancestors,
             "num_duration_ancestors": num_duration_ancestors,
@@ -369,5 +375,5 @@ def dependency_analysis(
             "closeness_centrality": closeness[node_name],
         }
         nodes[node_name] = row
-    logger.debug('a')
+    logger.debug("a")
     return nodes
