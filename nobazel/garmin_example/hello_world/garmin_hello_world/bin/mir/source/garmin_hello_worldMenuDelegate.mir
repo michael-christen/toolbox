@@ -1,0 +1,76 @@
+[ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/source/garmin_hello_worldMenuDelegate.mc"; @line = 1; @symbol_importdef<0> = [Toybox,1,7,13]; @symbol_importdef<1> = [Lang,1,14,18]; ]
+import Toybox.Lang;
+[ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/source/garmin_hello_worldMenuDelegate.mc"; @line = 2; @symbol_importdef<0> = [Toybox,2,7,13]; @symbol_importdef<1> = [System,2,14,20]; ]
+import Toybox.System;
+[ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/source/garmin_hello_worldMenuDelegate.mc"; @line = 3; @symbol_importdef<0> = [Toybox,3,7,13]; @symbol_importdef<1> = [WatchUi,3,14,21]; ]
+import Toybox.WatchUi;
+[ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/source/garmin_hello_worldMenuDelegate.mc"; @line = 5; @symbol_classdef = [garmin_hello_worldMenuDelegate,5,6,36]; @symbol_extends<0> = [WatchUi,5,45,52]; @symbol_extends<1> = [MenuInputDelegate,5,53,70]; ]
+class garmin_hello_worldMenuDelegate extends WatchUi.MenuInputDelegate {
+    [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/source/garmin_hello_worldMenuDelegate.mc"; @line = 5; ]
+    <init> {
+    }
+    [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/source/garmin_hello_worldMenuDelegate.mc"; @line = 5; ]
+    static
+    <init> {
+    }
+    [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/source/garmin_hello_worldMenuDelegate.mc"; @line = 7; @symbol_functiondef = [initialize,7,13,23]; ]
+    function initialize() as Void {
+_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_source_garmin_hello_worldMenuDelegate_mc_7_26_9_4_start:
+[ "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/source/garmin_hello_worldMenuDelegate.mc" 8 8 ]
+        symbol [ MenuInputDelegate %tmp.2 8 8 25 ];
+        %tmp.2 = getv ? :MenuInputDelegate;
+        symbol [ initialize %tmp.3 8 26 36 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_source_garmin_hello_worldMenuDelegate_mc_7_26_9_4_stop:
+    }
+    [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/source/garmin_hello_worldMenuDelegate.mc"; @line = 11; @symbol_functiondef = [onMenuItem,11,13,23]; @symbol_param<0> = [item,11,24,28]; @symbol_param<0>_type<0> = [Symbol,11,32,38]; ]
+    function onMenuItem(item as Symbol) as Void {
+_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_source_garmin_hello_worldMenuDelegate_mc_11_48_17_4_start:
+[ "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/source/garmin_hello_worldMenuDelegate.mc" 12 8 ]
+_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_source_garmin_hello_worldMenuDelegate_mc_12_8_16_8_if_stmt:
+        %tmp.1 = lgetv %item;
+        symbol [ item %tmp.1 12 12 16 ];
+        %tmp.3 = const :item_1;
+        symbol [ item_1 %tmp.3 12 21 27 const ];
+        %tmp.4 = eq %tmp.1 %tmp.3;
+        bf %tmp.4 @_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_source_garmin_hello_worldMenuDelegate_mc_12_8_16_8_if_false;
+_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_source_garmin_hello_worldMenuDelegate_mc_12_8_16_8_if_true:
+_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_source_garmin_hello_worldMenuDelegate_mc_12_29_14_8_start:
+[ "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/source/garmin_hello_worldMenuDelegate.mc" 13 12 ]
+        symbol [ System %tmp.5 13 12 18 ];
+        %tmp.5 = getm $.Toybox.System;
+        symbol [ println %tmp.6 13 19 26 ];
+        %tmp.6 = getv function %tmp.5 :println;
+        %tmp.7 = "item 1";
+        invoke %tmp.5 %tmp.6(%tmp.7);
+_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_source_garmin_hello_worldMenuDelegate_mc_12_29_14_8_stop:
+        goto @_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_source_garmin_hello_worldMenuDelegate_mc_12_8_16_8_if_end;
+_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_source_garmin_hello_worldMenuDelegate_mc_12_8_16_8_if_false:
+[ "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/source/garmin_hello_worldMenuDelegate.mc" 14 15 ]
+_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_source_garmin_hello_worldMenuDelegate_mc_14_15_16_8_if_stmt:
+        %tmp.8 = lgetv %item;
+        symbol [ item %tmp.8 14 19 23 ];
+        %tmp.10 = const :item_2;
+        symbol [ item_2 %tmp.10 14 28 34 const ];
+        %tmp.11 = eq %tmp.8 %tmp.10;
+        bf %tmp.11 @_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_source_garmin_hello_worldMenuDelegate_mc_14_15_16_8_if_end;
+_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_source_garmin_hello_worldMenuDelegate_mc_14_15_16_8_if_true:
+_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_source_garmin_hello_worldMenuDelegate_mc_14_36_16_8_start:
+[ "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/source/garmin_hello_worldMenuDelegate.mc" 15 12 ]
+        symbol [ System %tmp.12 15 12 18 ];
+        %tmp.12 = getm $.Toybox.System;
+        symbol [ println %tmp.13 15 19 26 ];
+        %tmp.13 = getv function %tmp.12 :println;
+        %tmp.14 = "item 2";
+        invoke %tmp.12 %tmp.13(%tmp.14);
+_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_source_garmin_hello_worldMenuDelegate_mc_14_36_16_8_stop:
+        goto @_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_source_garmin_hello_worldMenuDelegate_mc_14_15_16_8_if_end;
+_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_source_garmin_hello_worldMenuDelegate_mc_14_15_16_8_if_end:
+_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_source_garmin_hello_worldMenuDelegate_mc_12_8_16_8_if_end:
+_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_source_garmin_hello_worldMenuDelegate_mc_11_48_17_4_stop:
+    }
+}
+[ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/source/garmin_hello_worldMenuDelegate.mc"; @line = 1; ]
+<init> {
+}

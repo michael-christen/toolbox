@@ -1,0 +1,10 @@
+app.name = HelloWorld
+app.id = com.example.helloworld
+app.type = watch-app
+
+app.version = 1.0.0
+
+device.file = manifest.xml
+
+source.dir = source
+resources.dir = resources
