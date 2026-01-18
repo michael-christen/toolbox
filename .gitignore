@@ -154,3 +154,6 @@ kicad_generated_output/
 
 # venv
 .main.venv
+
+# claude
+.claude/settings.local.json
