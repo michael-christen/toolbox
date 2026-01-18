@@ -173,9 +173,13 @@ proto_py_library(
 # Rerun `bazel run //tools:bazel_env` if you modify this target
 bazel_env(
     name = "bazel_env",
+    toolchains = {
+        "python": "@rules_python//python:current_py_toolchain",
+    },
     tools = {
-        # Tools can be specified as labels.
         "buildifier": "@buildifier_prebuilt//:buildifier",
         "buildozer": "@buildifier_prebuilt//:buildozer",
+        "format": "//tools/format:format",
+        "python": "$(PYTHON3)",
     } | MULTITOOL_TOOLS,
 )
