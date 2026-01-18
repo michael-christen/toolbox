@@ -128,6 +128,9 @@ build:quiet --noshow_progress
 
 # Performance per #85
 build --experimental_reuse_sandbox_directories
+# Local disk cache for faster builds when switching workspaces or when remote
+# cache is unavailable. Note that setup-bazel will override this in CI
+common --disk_cache=~/.cache/bazel-disk
 # Have rules_rust use the right hermetic toolchain sysroot, symlink folders
 # into execution directory
 build --@rules_rust//cargo/settings:experimental_symlink_execroot=True
