@@ -95,8 +95,9 @@ def cc_size(target, max_flash, max_ram, **kwargs):
     target_label = native.package_relative_label(target)
     name = "{}.size".format(target_label.name)
 
-    # TODO(#243): Do we always want this size tool?
-    size_tool = "@llvm_toolchain_llvm//:bin/llvm-size"
+    # Use Pigweed's LLVM toolchain (saves ~6GB vs toolchains_llvm). See #220.
+    # Note: Using canonical name since Pigweed's llvm_toolchain isn't directly visible.
+    size_tool = "@@pigweed++_repo_rules6+llvm_toolchain//:bin/llvm-size"
     native.genrule(
         name = name,
         outs = ["{}.json".format(name)],
