@@ -56,15 +56,13 @@ jobs:
       - name: Build
         run: |
           bazel build //...
-      - name: Test
-        run: |
-          bazel test //... --output_groups=-mypy
-          # Food for thought:
-          # - Should we test in addition / segregate some?
-          # - Should we test in different modes (-c opt / -c dbg)?
-          # - Should we add instrumentation_filter to .bazelrc to reduce
-          # analysis cache thrashing?
-          # Could leave the above to buildbuddy ...
+      # Note: Removed separate "bazel test" step - coverage already runs all tests
+      # Food for thought:
+      # - Should we test in addition / segregate some?
+      # - Should we test in different modes (-c opt / -c dbg)?
+      # - Should we add instrumentation_filter to .bazelrc to reduce
+      # analysis cache thrashing?
+      # Could leave the above to buildbuddy ...
       - name: Coverage
         run: |
           bazel coverage //... --combined_report=lcov --instrument_test_targets --instrumentation_filter="^//" --test_tag_filters=-skip-large-tests --output_groups=-mypy
