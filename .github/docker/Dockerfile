@@ -17,6 +17,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # - python3, python3-pip: Required for Python tooling
 # - lcov: Required for coverage report generation
 RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
     libncurses5 \
     graphviz \
     graphviz-dev \
