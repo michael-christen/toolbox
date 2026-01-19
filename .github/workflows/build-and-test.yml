@@ -9,6 +9,11 @@ on:
 jobs:
   build_and_test:
     runs-on: ubuntu-22.04
+    container:
+      image: ghcr.io/${{ github.repository }}/ci:latest
+      credentials:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - run: echo "The job was triggered by a ${{ github.event_name }} event, running on ${{ runner.os }}, ${{ github.ref }} @ ${{ github.repository }}."
       - uses: actions/checkout@v4
@@ -20,56 +25,30 @@ jobs:
           filter: 'tree:0'
       - run: |
           git fetch origin ${{ github.base_ref }}
-      - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@v1.3.1
-        with:
-          # this might remove tools that are actually needed,
-          # if set to "true" but frees about 6 GB
-          tool-cache: false
-          # Data on sizes from this run on 2025-04-25:
-          # https://github.com/michael-christen/toolbox/actions/runs/14666765877/job/41163363493
-          # 8.21 GB
-          # Required for rules_android
-          android: false
-          # 1.6 GB
-          dotnet: true
-          # 6.2 GB
-          haskell: true
-          # 4.9 GB
-          # But ... It takes about 120s to clean, so setting false
-          large-packages: false
-          # 2.5 GB
-          docker-images: true
-          # 4.0 GB
-          swap-storage: true
+      # Note: Free Disk Space step removed - not needed with custom minimal container
+      # The custom CI image is based on ubuntu:22.04 without the bloat of the default runner
+      # If disk space becomes an issue, consider pruning Bazel caches instead
       - uses: ./.github/actions/bazel-setup
         with:
           buildbuddy_api_key: ${{ secrets.BUILDBUDDY_API_KEY }}
-      - name: Install Lint Pre-requisites
-        run: |
-          # Needed for clang-format / llvm_toolchain, otherwise libtinfo.so.5
-          # is not found
-          sudo apt-get install -y libncurses5
+      # Note: libncurses5 is pre-installed in the custom CI image
       - name: Lint
         run: |
           ./lint.sh --mode check
       - name: Build
         run: |
           bazel build //...
-      - name: Test
-        run: |
-          bazel test //... --output_groups=-mypy
-          # Food for thought:
-          # - Should we test in addition / segregate some?
-          # - Should we test in different modes (-c opt / -c dbg)?
-          # - Should we add instrumentation_filter to .bazelrc to reduce
-          # analysis cache thrashing?
-          # Could leave the above to buildbuddy ...
+      # Note: Removed separate "bazel test" step - coverage already runs all tests
+      # Food for thought:
+      # - Should we test in addition / segregate some?
+      # - Should we test in different modes (-c opt / -c dbg)?
+      # - Should we add instrumentation_filter to .bazelrc to reduce
+      # analysis cache thrashing?
+      # Could leave the above to buildbuddy ...
       - name: Coverage
         run: |
           bazel coverage //... --combined_report=lcov --instrument_test_targets --instrumentation_filter="^//" --test_tag_filters=-skip-large-tests --output_groups=-mypy
-      - name: Setup LCOV
-        uses: hrishikesh-kadam/setup-lcov@v1
+      # Note: lcov is pre-installed in the custom CI image
       - name: Coverage Report Generation
         run: |
           # Generate baseline
