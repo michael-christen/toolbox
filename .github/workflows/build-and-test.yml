@@ -31,13 +31,22 @@ jobs:
       - uses: ./.github/actions/bazel-setup
         with:
           buildbuddy_api_key: ${{ secrets.BUILDBUDDY_API_KEY }}
+      - name: Check Disk Usage
+        run: |
+          df -h
       # Note: libncurses5 is pre-installed in the custom CI image
       - name: Lint
         run: |
           ./lint.sh --mode check
+      - name: Check Disk Usage
+        run: |
+          df -h
       - name: Build
         run: |
           bazel build //...
+      - name: Check Disk Usage
+        run: |
+          df -h
       # Note: Removed separate "bazel test" step - coverage already runs all tests
       # Food for thought:
       # - Should we test in addition / segregate some?
@@ -48,6 +57,9 @@ jobs:
       - name: Coverage
         run: |
           bazel coverage //... --combined_report=lcov --instrument_test_targets --instrumentation_filter="^//" --test_tag_filters=-skip-large-tests --output_groups=-mypy
+      - name: Check Disk Usage
+        run: |
+          df -h
       # Note: lcov is pre-installed in the custom CI image
       - name: Coverage Report Generation
         run: |
