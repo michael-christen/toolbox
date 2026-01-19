@@ -6,8 +6,9 @@ name: Build CI Image
 on:
   # Rebuild when Dockerfile changes
   push:
-    branches:
-      - master
+    # XXX: trigger on this PR
+    # branches:
+    #   - master
     paths:
       - '.github/docker/Dockerfile'
       - '.github/workflows/build-ci-image.yml'
