@@ -8,11 +8,30 @@ devDependencies:
   prettier:
     specifier: 3.2.5
     version: 3.2.5
+  pyright:
+    specifier: 1.1.364
+    version: 1.1.364
 
 packages:
+
+  /fsevents@2.3.3:
+    resolution: {integrity: sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==}
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+    requiresBuild: true
+    dev: true
+    optional: true
 
   /prettier@3.2.5:
     resolution: {integrity: sha512-3/GWa9aOC0YeD7LUfvOG2NiDyhOWRvt1k+rcKhOuYnMY24iiCphgneUfJDyFXd6rZCAnuLBv6UeAULtrhT/F4A==}
     engines: {node: '>=14'}
     hasBin: true
+    dev: true
+
+  /pyright@1.1.364:
+    resolution: {integrity: sha512-O0qJA4Lodihitl54RVKfdkLMD8A1h3oDIMmqT0xkCxIN/K3R93dhtS0cRaUHnQMHxD2o6feQ6bTzfiDW07XkiA==}
+    engines: {node: '>=14.0.0'}
+    hasBin: true
+    optionalDependencies:
+      fsevents: 2.3.3
     dev: true
