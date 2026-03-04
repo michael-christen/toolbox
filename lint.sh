@@ -109,7 +109,7 @@ CONFIG="--config quiet"
 # TODO(#205): Build and run hermetic python with query_generator
 # bazel build ${CONFIG} --output_groups=-mypy -- //packaging:query_generator
 # ./bazel-bin/packaging/query_generator --mode $mode
-python packaging/query_generator.py --mode $mode
+python3 packaging/query_generator.py --mode $mode
 
 echo $BAZEL_FILES | xargs bazel run ${CONFIG} -- //tools/buildifier ${BUILDIFIER_ARGS[@]}
 bazel run ${CONFIG} -- ${BAZEL_TOOL}
