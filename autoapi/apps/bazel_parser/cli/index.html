@@ -11,13 +11,13 @@
 <meta name="description" content="Parse bazel query outputs A larger system description: - inputs: bazel query //… –output proto &gt; query_result.pb - the full dependency tree, bazel test //… –build_event_binary_file=test_all.pb -..." />
 <link rel="index" title="Index" href="../../../../genindex.html"><link rel="search" title="Search" href="../../../../search.html"><link rel="next" title="apps.bazel_parser.panel" href="../panel/index.html"><link rel="prev" title="API Reference" href="../../../index.html">
 
-    <link rel="shortcut icon" href="../../../../_static/wrench.png"><!-- Generated with Sphinx 8.2.3 and Furo 2025.12.19 -->
+    <link rel="shortcut icon" href="../../../../_static/wrench.png"><!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
         <title>apps.bazel_parser.cli - toolbox documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css?v=9c3e77be" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/styles/furo-extensions.css?v=8dab3a3b" />
     
@@ -489,7 +489,7 @@ bazel run //apps/bazel_parser –output_groups=-mypy – process </p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="apps.bazel_parser.cli.Config">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">apps.bazel_parser.cli.</span></span><span class="sig-name descname"><span class="pre">Config</span></span><a class="reference internal" href="../../../../_modules/apps/bazel_parser/cli.html#Config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.cli.Config" title="Link to this definition"></a></dt>
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">apps.bazel_parser.cli.</span></span><span class="sig-name descname"><span class="pre">Config</span></span><a class="reference internal" href="../../../../_modules/apps/bazel_parser/cli.html#Config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.cli.Config" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">pydantic.BaseModel</span></code></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="apps.bazel_parser.cli.Config.model_config">
@@ -498,22 +498,22 @@ bazel run //apps/bazel_parser –output_groups=-mypy – process </p>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="apps.bazel_parser.cli.Config.query_target">
-<span class="sig-name descname"><span class="pre">query_target</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/cli.html#Config.query_target"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.cli.Config.query_target" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">query_target</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="reference internal" href="../../../../_modules/apps/bazel_parser/cli.html#Config.query_target"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.cli.Config.query_target" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="apps.bazel_parser.cli.Config.test_target">
-<span class="sig-name descname"><span class="pre">test_target</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/cli.html#Config.test_target"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.cli.Config.test_target" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">test_target</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">str</span></span><a class="reference internal" href="../../../../_modules/apps/bazel_parser/cli.html#Config.test_target"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.cli.Config.test_target" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="apps.bazel_parser.cli.Config.days_ago">
-<span class="sig-name descname"><span class="pre">days_ago</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/cli.html#Config.days_ago"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.cli.Config.days_ago" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">days_ago</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">int</span></span><a class="reference internal" href="../../../../_modules/apps/bazel_parser/cli.html#Config.days_ago"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.cli.Config.days_ago" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="apps.bazel_parser.cli.Config.refinement">
-<span class="sig-name descname"><span class="pre">refinement</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">Config.refinement</span></em><a class="reference internal" href="../../../../_modules/apps/bazel_parser/cli.html#Config.refinement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.cli.Config.refinement" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">refinement</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#apps.bazel_parser.cli.Config.refinement" title="apps.bazel_parser.cli.Config.refinement"><span class="pre">Config.refinement</span></a></span><a class="reference internal" href="../../../../_modules/apps/bazel_parser/cli.html#Config.refinement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.cli.Config.refinement" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -724,19 +724,19 @@ bazel run //apps/bazel_parser –output_groups=-mypy – process </p>
 </div><script src="../../../../_static/jquery.js?v=5d32c60e"></script>
     <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
     <script src="../../../../_static/documentation_options.js?v=5929fcd5"></script>
-    <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
-    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <script src="../../../../_static/scripts/furo.js?v=46bd48cc"></script>
     <script src="../../../../_static/clipboard.min.js?v=a7894cd8"></script>
     <script src="../../../../_static/copybutton.js?v=f281be69"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script src="../../../../_static/togglebutton.js?v=1ae7504c"></script>
     <script src="../../../../_static/design-tabs.js?v=f930bc37"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
     <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
-    <script defer="defer" src="../../../../_static/tippy/autoapi/apps/bazel_parser/cli/index.61162962-fba9-4af1-8b02-54209159be7d.js"></script>
+    <script defer="defer" src="../../../../_static/tippy/autoapi/apps/bazel_parser/cli/index.461b3c8b-65dd-449c-a5fa-b22e21e7b428.js"></script>
     </body>
 </html>
