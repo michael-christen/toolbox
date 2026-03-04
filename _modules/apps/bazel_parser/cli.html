@@ -266,7 +266,7 @@
 <span class="sd">  - bazel test //... --build_event_binary_file=test_all.pb</span>
 <span class="sd">    - bazel run //utils:bep_reader &lt; test_all.pb</span>
 <span class="sd">    - the execution time related to each test target</span>
-<span class="sd">  - git_utils.get_file_commit_map_from_follow</span>
+<span class="sd">  - git_utils.get_file_commit_map_from_log</span>
 <span class="sd">    - how files have changed over time, can be used to generate</span>
 <span class="sd">      probabilities of files changing in the future</span>
 <span class="sd">- intermediates:</span>
@@ -577,7 +577,7 @@
     <span class="n">git_query_after</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span>
         <span class="n">days</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">days_ago</span>
     <span class="p">)</span>
-    <span class="n">file_commit_map</span> <span class="o">=</span> <span class="n">git_utils</span><span class="o">.</span><span class="n">get_file_commit_map_from_follow</span><span class="p">(</span>
+    <span class="n">file_commit_map</span> <span class="o">=</span> <span class="n">git_utils</span><span class="o">.</span><span class="n">get_file_commit_map_from_log</span><span class="p">(</span>
         <span class="n">git_directory</span><span class="o">=</span><span class="n">repo_dir</span><span class="p">,</span> <span class="n">after</span><span class="o">=</span><span class="n">git_query_after</span>
     <span class="p">)</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Parsing...&quot;</span><span class="p">)</span>

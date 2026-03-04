@@ -14,7 +14,7 @@ apps.bazel_parser.cli
      - bazel test //... --build_event_binary_file=test_all.pb
        - bazel run //utils:bep_reader < test_all.pb
        - the execution time related to each test target
-     - git_utils.get_file_commit_map_from_follow
+     - git_utils.get_file_commit_map_from_log
        - how files have changed over time, can be used to generate
          probabilities of files changing in the future
    - intermediates:
