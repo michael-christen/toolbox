@@ -7,7 +7,7 @@ A larger system description:
   - bazel test //... --build_event_binary_file=test_all.pb
     - bazel run //utils:bep_reader < test_all.pb
     - the execution time related to each test target
-  - git_utils.get_file_commit_map_from_follow
+  - git_utils.get_file_commit_map_from_log
     - how files have changed over time, can be used to generate
       probabilities of files changing in the future
 - intermediates:
@@ -274,7 +274,7 @@ def full(
     git_query_after = datetime.datetime.now() - datetime.timedelta(
         days=config.days_ago
     )
-    file_commit_map = git_utils.get_file_commit_map_from_follow(
+    file_commit_map = git_utils.get_file_commit_map_from_log(
         git_directory=repo_dir, after=git_query_after
     )
     logger.info("Parsing...")

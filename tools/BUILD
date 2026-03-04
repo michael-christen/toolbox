@@ -118,10 +118,7 @@ py_library(
     name = "git_utils",
     srcs = ["git_utils.py"],
     visibility = ["//:__subpackages__"],
-    deps = [
-        "//tools:git_py_library",
-        "@pip//tqdm",
-    ],
+    deps = ["//tools:git_py_library"],
 )
 
 py_test(

@@ -3,11 +3,8 @@ import dataclasses
 import datetime
 import enum
 import pathlib
-import re
 import subprocess
 from typing import Sequence
-
-import tqdm
 
 from tools import git_pb2
 
@@ -99,84 +96,6 @@ def get_files_changed_at_commit(
     """List the files changed at a commit."""
     args = ["diff-tree", "--no-commit-id", "--name-only", "-r", commit]
     return [pathlib.Path(p) for p in _get_git_output(args, git_directory)]
-
-
-# Most likely want follow to preserve name
-# XXX: This has issues with copies / sees more than it should
-# XXX: Didn't find a few files too
-# - b2d98b30772ec8ec9de1b0025d77ae0ce81c3088
-# tensorflow/lite/g3doc/android/tutorials/text_classification.md
-# tensorflow/lite/g3doc/android/tutorials/object_detection.md
-# tensorflow/compiler/jit/compilability_check_util_test.cc
-def get_file_commit_map_from_follow(
-    git_directory: pathlib.Path | str,
-    after: datetime.datetime | None = None,
-) -> FileCommitMap:
-    commit_map: dict[str, set[pathlib.Path]] = {}
-    file_map: dict[pathlib.Path, list[str]] = {}
-    files = ls_files(git_directory)
-    commits = get_commits(git_directory=git_directory, after=after)
-    # Keep ordering
-    for c in commits:
-        commit_map[c] = set()
-    for f in tqdm.tqdm(files):
-        f_commits = list_file_commits(
-            f, git_directory=git_directory, after=after
-        )
-        file_map[f] = f_commits
-        for c in f_commits:
-            commit_map[c].add(f)
-    return FileCommitMap(commit_map=commit_map, file_map=file_map)
-
-
-def _parse_git_logs(
-    logs: list[str], files: list[pathlib.Path]
-) -> FileCommitMap:
-    commit_map: dict[str, set[pathlib.Path]] = {}
-    file_map: dict[pathlib.Path, list[str]] = {}
-    pattern = re.compile(
-        r"^(?P<type>[AMD])\s+(.+?)(\s*->\s*(.+))?$|^(?P<replace>R)(\d+)\s+(.+?)\s*->\s*(.+)$|^(?P<commit>[0-9a-f]{40})$"  # noqa
-    )
-    # XXX: Get the commit sha, find files affected, append to sha for file
-    # XXX: Ensure in right order
-    for line in logs:
-        line = line.strip()
-        if not line:
-            continue
-        match = pattern.match(line)
-        if match:
-            commit: str | None = match.group("commit")
-            typ: str | None = match.group("type")
-            replace: str | None = match.group("replace")
-            if commit:
-                print(f'Commit: {match.group("commit")}')
-            elif typ:
-                print(f"{typ=}")
-            elif replace:
-                print(f"{replace=}")
-            if match.group(1):  # For A, M, D statuses
-                change_type = match.group(1)
-                old_file = match.group(2)
-                # XXX: Named args
-                # XXX: Doesn't make sense
-                new_file = match.group(4) if match.group(4) else None
-                print(
-                    f"Change type: {change_type}, Old file: {old_file}, "
-                    f"New file: {new_file}"
-                )
-            elif match.group(5):  # For R status (renames)
-                change_type = "R"
-                similarity_index = match.group(5)
-                old_file = match.group(6)
-                new_file = match.group(7)
-                print(
-                    f"Change type: {change_type}, Similarity index:"
-                    f" {similarity_index}, Old file: {old_file}, New file:"
-                    f" {new_file}"
-                )
-        else:
-            print(f"'{line}' did not match pattern")
-    return FileCommitMap(commit_map=commit_map, file_map=file_map)
 
 
 class ParseState(enum.Enum):
