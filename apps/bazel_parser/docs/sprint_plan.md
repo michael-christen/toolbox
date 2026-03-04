@@ -18,12 +18,12 @@ repos, and give attendees a way to run it on their own repos afterward.
 
 A case study entry in `case_study.md` is complete when it contains:
 
-- **Graph-level health metrics**: density, max depth, num nodes/edges,
-  num connected components, total/expected duration
+- **Graph-level health metrics**: density, max depth, num nodes/edges, num
+  connected components, total/expected duration
 - **Top 3–5 bottleneck nodes** by the most informative metric(s), with a plain
   English explanation of why each is interesting
-- **At least one concrete suggested improvement**: e.g. "splitting `//x:y`
-  would reduce cache invalidations for N downstream targets"
+- **At least one concrete suggested improvement**: e.g. "splitting `//x:y` would
+  reduce cache invalidations for N downstream targets"
 - **1–2 gephi screenshots** illustrating the structure or a specific bottleneck
 - **Metric utility notes**: which metrics surfaced useful signal for this repo,
   which didn't — feeds into the triage on Mar 12
@@ -31,6 +31,7 @@ A case study entry in `case_study.md` is complete when it contains:
 ## Day-by-Day Plan
 
 ### Mar 3 — Planning
+
 - [x] Write sprint plan ✅ 2026-03-03
 
 ### Mar 4 — Off
@@ -38,16 +39,19 @@ A case study entry in `case_study.md` is complete when it contains:
 ### Mar 5 — Correctness Fixes + Data Collection
 
 - [x] Resolve `expected_duration_s` math ambiguity
-  - Current formula (`group_duration_s * (1 - group_probability_cache_hit)`)
-    is correct. Node-level and graph-level metrics answer different questions
-    and are both valid. Removed XXX comment.
+  - Current formula (`group_duration_s * (1 - group_probability_cache_hit)`) is
+    correct. Node-level and graph-level metrics answer different questions and
+    are both valid. Removed XXX comment.
 - [ ] Investigate `--notool_deps` question from PR #185
   - Run `bazel query` with and without the flag, compare graph sizes, decide
     whether to apply by default
 - [ ] Investigate all related XXXs
-- [ ] Fix `follow` vs `log` discrepancy
-  - `full` command uses `get_file_commit_map_from_follow`; `process` command
-    uses `get_file_commit_map_from_log`. Determine if intentional, reconcile.
+- [x] Fix `follow` vs `log` discrepancy
+  - `from_log` is the correct implementation (single git call, proper rename
+    tracking, no known bugs). Updated `full` to use it. Removed dead
+    `_parse_git_logs` function and unused `re` import. Removed
+    `get_file_commit_map_from_follow` entirely. Cleaned up remaining debug
+    `print` statements and stale `follow_map` references in test.
 - [ ] Restore `git_utils.py` test coverage
 - [ ] **Evening: kick off data collection for all repos overnight**
   - abseil, drake, pigweed, monogon, bzd (tensorflow only if feeling ambitious)
@@ -58,53 +62,62 @@ A case study entry in `case_study.md` is complete when it contains:
   - Invoke it for each repo and let run overnight
 
 ### Mar 6 — Abseil Analysis
+
 - [ ] Abseil case study (2,488 nodes — small, fast to iterate)
 - [ ] Complete to acceptance criteria
 
 ### Mar 7 — Drake Analysis
+
 - [ ] Drake case study (27,778 nodes)
 - [ ] Complete to acceptance criteria
 
 ### Mar 8 — Drake Complete + Pigweed Start
+
 - [ ] Finish drake if not complete
 - [ ] Begin pigweed case study (10,800 nodes)
 
 ### Mar 9 — Pigweed + Additional Repos
+
 - [ ] Complete pigweed case study
 - [ ] If time: monogon or bzd case study
 
 ### Mar 10 — Metric Triage
+
 - [ ] Review metric utility notes across all completed case studies
 - [ ] **Metric triage**: decide:
   - Which metrics consistently surface actionable signal → Tier 1 (always
     computed)
   - Which are slow and haven't provided unique value → Tier 2 (opt-in flag)
   - Expensive candidates: `ancestor_depth`, `descendant_depth`,
-    `betweenness_centrality`, `closeness_centrality` (all involve APSP or
-    O(VE) passes)
+    `betweenness_centrality`, `closeness_centrality` (all involve APSP or O(VE)
+    passes)
 - [ ] Implement `--full-metrics` flag (or equivalent) to gate tier 2 metrics
 
 ### Mar 13 — PyPI Packaging Start
-- [ ] Assess proto file situation: `build_pb2.py`, `git_pb2.py`, BEP protos
-  are Bazel-generated — decide whether to pre-generate and vendor or generate
-  at install time
+
+- [ ] Assess proto file situation: `build_pb2.py`, `git_pb2.py`, BEP protos are
+      Bazel-generated — decide whether to pre-generate and vendor or generate at
+      install time
 - [ ] Start `pyproject.toml` setup, entry points for CLI
 
 ### Mar 14 — PyPI Complete
+
 - [ ] Complete packaging (proto files, dependencies, entry point)
 - [ ] Publish to PyPI (even as `0.1.0-alpha` / pre-release)
 - [ ] End-to-end test: fresh install from PyPI → run workflow → open in gephi
 - [ ] Fix anything that breaks
 
 ### Mar 15 — Documentation
+
 - [ ] Getting-started guide: "run these N bazel commands to collect data, then
-  `pip install bazel-parser && bazel-parser process ...`"
+      `pip install bazel-parser && bazel-parser process ...`"
 - [ ] Fill `[ ] TODO` links in `README.md`
-- [ ] Add gephi recommendation for graph visualization (replace panel as
-  primary recommendation for large repos)
+- [ ] Add gephi recommendation for graph visualization (replace panel as primary
+      recommendation for large repos)
 - [ ] Note panel app is still available for small repos
 
 ### Mar 16 — Slides Draft
+
 - [ ] Write full slide deck in markdown
   - Suggested structure:
     1. The problem (build graph bottlenecks, hard to see at scale)
@@ -114,13 +127,15 @@ A case study entry in `case_study.md` is complete when it contains:
     5. What's next / call for contribution
 
 ### Mar 17 — Slides Polish
+
 - [ ] Polish markdown slides
 - [ ] Transition to Google Slides
 
 ### Stretch Goals
+
 - [ ] consider reversing direction here (X depends on Y; Y is the ancestor
-  instead of the descendant); would allow more standardization / make a bit
-  more sense (dependencies must come before their dependent)
+      instead of the descendant); would allow more standardization / make a bit
+      more sense (dependencies must come before their dependent)
 
 ---
 
@@ -130,10 +145,10 @@ A case study entry in `case_study.md` is complete when it contains:
 interesting findings by Mar 10, narrow scope rather than keep digging — the
 graph screenshots are a fallback but not a strong demo.
 
-**PyPI packaging with proto files may surprise you.** If this hits a wall on
-Mar 13, the Mar 14 block is the safety net. Hard fallback: `pip install
-git+https://github.com/michael-christen/toolbox` works for the presentation
-without full PyPI infrastructure.
+**PyPI packaging with proto files may surprise you.** If this hits a wall on Mar
+13, the Mar 14 block is the safety net. Hard fallback:
+`pip install git+https://github.com/michael-christen/toolbox` works for the
+presentation without full PyPI infrastructure.
 
 ## Distribution Approach
 
@@ -156,6 +171,6 @@ getting-started docs.
 - Issue #204 — Publish to PyPI/BCR (follow-up after presentation)
 - `apps/bazel_parser/docs/design.md` — core design decisions
 - `apps/bazel_parser/docs/case_study.md` — running case study notes
-- BazelCon 2022 talk: Driving Architectural Improvements with Dependency
-  Metrics ([video](https://www.youtube.com/watch?v=k4H20WxhbsA),
+- BazelCon 2022 talk: Driving Architectural Improvements with Dependency Metrics
+  ([video](https://www.youtube.com/watch?v=k4H20WxhbsA),
   [slides](https://docs.google.com/presentation/d/1McLw_yWbPuR1UqaoowHMsu5LskPJX7kWETkB-DkqNpo/edit))

@@ -21,7 +21,7 @@ class TestGitUtils(unittest.TestCase):
       - [ ] target
       - [ ] after
     - [ ] "get a commit map"
-      - [x] get_file_commit_map_from_follow
+      - [x] get_file_commit_map_from_log
       - [x] get_file_commit_map_from_list
       - [ ] try out "after"
       - [x] show renamed files
@@ -222,9 +222,7 @@ A       experiments/rust/hello-rust/BUILD
             [mv_commit_hash, test_file_commit_hash, first_hash],
         )
 
-        # Show follow map is behaving as expected
-        follow_map = git_utils.get_file_commit_map_from_follow(self.tmp_path)
-        expected_follow = git_utils.FileCommitMap(
+        expected = git_utils.FileCommitMap(
             commit_map={
                 first_hash: set(),
                 test_file_commit_hash: set([pathlib.Path("moved_file.txt")]),
@@ -237,11 +235,8 @@ A       experiments/rust/hello-rust/BUILD
                 ],
             },
         )
-        self.assertEqual(follow_map, expected_follow)
         log_map = git_utils.get_file_commit_map_from_log(self.tmp_path)
-        print(log_map)  # XXX
-        print(expected_follow)  # XXX
-        self.assertEqual(log_map, expected_follow)
+        self.assertEqual(log_map, expected)
 
         # Show how list misses out on tracking a file through history
         list_map = git_utils.get_file_commit_map_from_list(self.tmp_path)
@@ -269,9 +264,9 @@ A       experiments/rust/hello-rust/BUILD
         self.assertEqual(list_map, expected_list)
 
         # Check the proto is invertible w/ no data loss
-        proto = follow_map.to_proto()
+        proto = log_map.to_proto()
         inverted_proto = git_utils.FileCommitMap.from_proto(proto)
-        self.assertEqual(follow_map, inverted_proto)
+        self.assertEqual(log_map, inverted_proto)
 
     def test_extras(self) -> None:
         self.assertEqual([], git_utils._get_args_for_after(None))
