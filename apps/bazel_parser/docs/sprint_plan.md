@@ -31,19 +31,20 @@ A case study entry in `case_study.md` is complete when it contains:
 ## Day-by-Day Plan
 
 ### Mar 3 — Planning
-- [x] Write sprint plan
+- [x] Write sprint plan ✅ 2026-03-03
 
 ### Mar 4 — Off
 
 ### Mar 5 — Correctness Fixes + Data Collection
 
-- [ ] Resolve `expected_duration_s` math ambiguity
-  - In `cli.py:219` and `repo_graph_data.py:367`, the XXX comment questions
-    whether the formula should use `node_probability_cache_hit` vs
-    `group_probability_cache_hit`. Determine which is correct and fix.
+- [x] Resolve `expected_duration_s` math ambiguity
+  - Current formula (`group_duration_s * (1 - group_probability_cache_hit)`)
+    is correct. Node-level and graph-level metrics answer different questions
+    and are both valid. Removed XXX comment.
 - [ ] Investigate `--notool_deps` question from PR #185
   - Run `bazel query` with and without the flag, compare graph sizes, decide
     whether to apply by default
+- [ ] Investigate all related XXXs
 - [ ] Fix `follow` vs `log` discrepancy
   - `full` command uses `get_file_commit_map_from_follow`; `process` command
     uses `get_file_commit_map_from_log`. Determine if intentional, reconcile.
@@ -115,6 +116,11 @@ A case study entry in `case_study.md` is complete when it contains:
 ### Mar 17 — Slides Polish
 - [ ] Polish markdown slides
 - [ ] Transition to Google Slides
+
+### Stretch Goals
+- [ ] consider reversing direction here (X depends on Y; Y is the ancestor
+  instead of the descendant); would allow more standardization / make a bit
+  more sense (dependencies must come before their dependent)
 
 ---
 

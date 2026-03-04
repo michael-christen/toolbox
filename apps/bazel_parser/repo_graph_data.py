@@ -66,8 +66,6 @@ class Node(TypedDict):
     # of one another, which isn't true, but convenient.
     group_probability_cache_hit: float
     # group_duration_s * (1 - group_probability_cache_hit)
-    # XXX: Is that true / useful? Shouldn't it be (1 -
-    # node_probability_cache_hit)?
     expected_duration_s: float
 
     # XXX: Move these back and add them where necessarry
