@@ -32,7 +32,6 @@ manifest:
     blib2to3: black
     bokeh: bokeh
     bs4: beautifulsoup4
-    cachetools: cachetools
     certifi: certifi
     cffi: cffi
     charset_normalizer: charset_normalizer
@@ -52,6 +51,7 @@ manifest:
     examples: openhtf
     executing: executing
     fastjsonschema: fastjsonschema
+    fd7dcdb10166ebd4db98__mypyc: pytokens
     flake8: flake8
     fontTools: fonttools
     fqdn: fqdn
@@ -98,6 +98,8 @@ manifest:
     librt.base64: librt
     librt.internal: librt
     librt.strings: librt
+    librt.time: librt
+    librt.vecs: librt
     linkify_it: linkify_it_py
     markdown: markdown
     markdown_it: markdown_it_py
@@ -164,7 +166,6 @@ manifest:
     pytest: pytest
     pythonjsonlogger: python_json_logger
     pytokens: pytokens
-    pytz: pytz
     pyviz_comms: pyviz_comms
     referencing: referencing
     requests: requests
@@ -253,4 +254,4 @@ manifest:
     zstandard: zstandard
   pip_repository:
     name: pip
-integrity: d1fa5c87a0aa09dbb9162f26ebd2b9308055988aebe42139a9d7beb35b8ba2a3
+integrity: 0ea0e121a31a64f61661e3db696fc1727fe01fc9128cf099bdf976734777c63d
