@@ -164,6 +164,7 @@ A case study entry in `case_study.md` is complete when it contains:
       than a separate query phase. Downside: requires Bazel Starlark code,
       tightly coupled to the repo's rule set.
 - [ ] Consider need of cquery to handle selections in the graph ➕ 2026-03-05
+- [ ] why are type hint issues not caught in py_test artifacts ➕ 2026-03-05
 
 ---
 
