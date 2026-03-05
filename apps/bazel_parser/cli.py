@@ -23,9 +23,6 @@ A larger system description:
     describe cost
   - graph that we could identify overly depended upon things
 
-XXX:
- - bazel query --keep_going --noimplicit_deps --output proto "deps(//...)"
-   is much bigger than "//..." alone, compare what the differences are
 - git log --since="10 years ago" --name-only --pretty=format: | sort \
         | uniq -c | sort -nr
   - this is much faster
@@ -249,7 +246,14 @@ def full(
     # Query for graph
     logger.info("Querying...")
     query_pb = subprocess.check_output(
-        ["bazel", "query", "--output", "proto", config.query_target],
+        [
+            "bazel",
+            "query",
+            "--notool_deps",
+            "--output",
+            "proto",
+            config.query_target,
+        ],
         cwd=repo_dir,
     )
     query_result = bazel_utils.parse_build_output(query_pb)

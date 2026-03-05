@@ -42,9 +42,12 @@ A case study entry in `case_study.md` is complete when it contains:
   - Current formula (`group_duration_s * (1 - group_probability_cache_hit)`) is
     correct. Node-level and graph-level metrics answer different questions and
     are both valid. Removed XXX comment.
-- [ ] Investigate `--notool_deps` question from PR #185 ➕ 2026-03-03 📅 2026-03-05
-  - Run `bazel query` with and without the flag, compare graph sizes, decide
-    whether to apply by default
+- [x] Investigate `--notool_deps` question from PR #185 ➕ 2026-03-03 📅 2026-03-05 ✅ 2026-03-04
+  - `//...` returns same 376 nodes with or without flag; flag reduces edge set
+    (proto size 654KB→637KB). `deps(//...)` is 46x larger — confirmed `//...`
+    is correct default. `--notool_deps` removes exec-config dep edges (build
+    tool mechanics); added to default query. `ignore_external=True` in parsing
+    already handles `@` external labels. Removed XXX comment.
 - [ ] Investigate all related XXXs ➕ 2026-03-03 📅 2026-03-05
 - [x] Fix `follow` vs `log` discrepancy ➕ 2026-03-03 📅 2026-03-05 ✅ 2026-03-03
   - `from_log` is the correct implementation (single git call, proper rename
@@ -136,6 +139,13 @@ A case study entry in `case_study.md` is complete when it contains:
 - [ ] consider reversing direction here (X depends on Y; Y is the ancestor ➕ 2026-03-03
       instead of the descendant); would allow more standardization / make a bit
       more sense (dependencies must come before their dependent)
+- [ ] consider how bazel-diff creates their dependency graph instead of a full query ➕ 2026-03-04
+    - Bazel aspect that traverses deps and emits structured data (JSON, proto,
+      etc.) about each target. Advantages: you control exactly what's
+      collected, can attach custom metadata, runs as part of a build rather
+      than a separate query phase. Downside: requires Bazel Starlark code,
+      tightly coupled to the repo's rule set.
+- [ ] Consider need of cquery to handle selections in the graph ➕ 2026-03-05
 
 ---
 
