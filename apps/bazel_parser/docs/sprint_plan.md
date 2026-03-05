@@ -68,57 +68,57 @@ A case study entry in `case_study.md` is complete when it contains:
 
 ### Mar 7 — Drake Analysis
 
-- [ ] Drake case study (27,778 nodes)
-- [ ] Complete to acceptance criteria
+- [ ] Drake case study (27,778 nodes) ➕ 2026-03-03 📅 2026-03-07
+- [ ] Complete to acceptance criteria ➕ 2026-03-03 📅 2026-03-07
 
 ### Mar 8 — Drake Complete + Pigweed Start
 
-- [ ] Finish drake if not complete
-- [ ] Begin pigweed case study (10,800 nodes)
+- [ ] Finish drake if not complete ➕ 2026-03-03 📅 2026-03-08
+- [ ] Begin pigweed case study (10,800 nodes) ➕ 2026-03-03 📅 2026-03-08
 
 ### Mar 9 — Pigweed + Additional Repos
 
-- [ ] Complete pigweed case study
-- [ ] If time: monogon or bzd case study
+- [ ] Complete pigweed case study ➕ 2026-03-03 📅 2026-03-09
+- [ ] If time: monogon or bzd case study ➕ 2026-03-03 📅 2026-03-09
 
 ### Mar 10 — Metric Triage
 
-- [ ] Review metric utility notes across all completed case studies
-- [ ] **Metric triage**: decide:
+- [ ] Review metric utility notes across all completed case studies ➕ 2026-03-03 📅 2026-03-10
+- [ ] **Metric triage**: decide: ➕ 2026-03-03 📅 2026-03-10
   - Which metrics consistently surface actionable signal → Tier 1 (always
     computed)
   - Which are slow and haven't provided unique value → Tier 2 (opt-in flag)
   - Expensive candidates: `ancestor_depth`, `descendant_depth`,
     `betweenness_centrality`, `closeness_centrality` (all involve APSP or O(VE)
     passes)
-- [ ] Implement `--full-metrics` flag (or equivalent) to gate tier 2 metrics
+- [ ] Implement `--full-metrics` flag (or equivalent) to gate tier 2 metrics ➕ 2026-03-03 📅 2026-03-10
 
 ### Mar 13 — PyPI Packaging Start
 
-- [ ] Assess proto file situation: `build_pb2.py`, `git_pb2.py`, BEP protos are
+- [ ] Assess proto file situation: `build_pb2.py`, `git_pb2.py`, BEP protos are ➕ 2026-03-03 📅 2026-03-13
       Bazel-generated — decide whether to pre-generate and vendor or generate at
       install time
-- [ ] Start `pyproject.toml` setup, entry points for CLI
+- [ ] Start `pyproject.toml` setup, entry points for CLI ➕ 2026-03-03 📅 2026-03-13
 
 ### Mar 14 — PyPI Complete
 
-- [ ] Complete packaging (proto files, dependencies, entry point)
-- [ ] Publish to PyPI (even as `0.1.0-alpha` / pre-release)
-- [ ] End-to-end test: fresh install from PyPI → run workflow → open in gephi
-- [ ] Fix anything that breaks
+- [ ] Complete packaging (proto files, dependencies, entry point) ➕ 2026-03-03 📅 2026-03-14
+- [ ] Publish to PyPI (even as `0.1.0-alpha` / pre-release) ➕ 2026-03-03 📅 2026-03-14
+- [ ] End-to-end test: fresh install from PyPI → run workflow → open in gephi ➕ 2026-03-03 📅 2026-03-14
+- [ ] Fix anything that breaks ➕ 2026-03-03 📅 2026-03-14
 
 ### Mar 15 — Documentation
 
-- [ ] Getting-started guide: "run these N bazel commands to collect data, then
+- [ ] Getting-started guide: "run these N bazel commands to collect data, then ➕ 2026-03-03 📅 2026-03-15
       `pip install bazel-parser && bazel-parser process ...`"
-- [ ] Fill `[ ] TODO` links in `README.md`
-- [ ] Add gephi recommendation for graph visualization (replace panel as primary
+- [ ] Fill `[ ] TODO` links in `README.md` ➕ 2026-03-03 📅 2026-03-15
+- [ ] Add gephi recommendation for graph visualization (replace panel as primary ➕ 2026-03-03 📅 2026-03-15
       recommendation for large repos)
-- [ ] Note panel app is still available for small repos
+- [ ] Note panel app is still available for small repos ➕ 2026-03-03 📅 2026-03-15
 
 ### Mar 16 — Slides Draft
 
-- [ ] Write full slide deck in markdown
+- [ ] Write full slide deck in markdown ➕ 2026-03-03 📅 2026-03-16
   - Suggested structure:
     1. The problem (build graph bottlenecks, hard to see at scale)
     2. How the tool works (data collection → graph → metrics)
@@ -128,12 +128,12 @@ A case study entry in `case_study.md` is complete when it contains:
 
 ### Mar 17 — Slides Polish
 
-- [ ] Polish markdown slides
-- [ ] Transition to Google Slides
+- [ ] Polish markdown slides ➕ 2026-03-03 📅 2026-03-17
+- [ ] Transition to Google Slides ➕ 2026-03-03 📅 2026-03-17
 
 ### Stretch Goals
 
-- [ ] consider reversing direction here (X depends on Y; Y is the ancestor
+- [ ] consider reversing direction here (X depends on Y; Y is the ancestor ➕ 2026-03-03
       instead of the descendant); would allow more standardization / make a bit
       more sense (dependencies must come before their dependent)
 
