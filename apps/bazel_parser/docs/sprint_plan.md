@@ -59,8 +59,8 @@ A case study entry in `case_study.md` is complete when it contains:
     `_parse_git_logs` function and unused `re` import. Removed
     `get_file_commit_map_from_follow` entirely. Cleaned up remaining debug
     `print` statements and stale `follow_map` references in test.
-- [ ] Restore `git_utils.py` test coverage ➕ 2026-03-03 📅 2026-03-05
-- [ ] **Evening: kick off data collection for all repos overnight** ➕ 2026-03-03 📅 2026-03-05
+- [x] Restore `git_utils.py` test coverage ➕ 2026-03-03 📅 2026-03-05 ✅ 2026-03-05
+- [x] **Evening: kick off data collection for all repos overnight** ➕ 2026-03-03 📅 2026-03-05 ✅ 2026-03-05
   - abseil, drake, pigweed, monogon, bzd (tensorflow only if feeling ambitious)
   - Run after correctness fixes so outputs are based on fixed code
   - Write `apps/bazel_parser/collect.sh`: a script that takes a repo dir and
