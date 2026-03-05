@@ -32,28 +32,28 @@ A case study entry in `case_study.md` is complete when it contains:
 
 ### Mar 3 — Planning
 
-- [x] Write sprint plan ✅ 2026-03-03
+- [x] Write sprint plan ✅ 2026-03-03 ➕ 2026-03-03 📅 2026-03-03
 
 ### Mar 4 — Off
 
 ### Mar 5 — Correctness Fixes + Data Collection
 
-- [x] Resolve `expected_duration_s` math ambiguity
+- [x] Resolve `expected_duration_s` math ambiguity ➕ 2026-03-03 📅 2026-03-05 ✅ 2026-03-03
   - Current formula (`group_duration_s * (1 - group_probability_cache_hit)`) is
     correct. Node-level and graph-level metrics answer different questions and
     are both valid. Removed XXX comment.
-- [ ] Investigate `--notool_deps` question from PR #185
+- [ ] Investigate `--notool_deps` question from PR #185 ➕ 2026-03-03 📅 2026-03-05
   - Run `bazel query` with and without the flag, compare graph sizes, decide
     whether to apply by default
-- [ ] Investigate all related XXXs
-- [x] Fix `follow` vs `log` discrepancy
+- [ ] Investigate all related XXXs ➕ 2026-03-03 📅 2026-03-05
+- [x] Fix `follow` vs `log` discrepancy ➕ 2026-03-03 📅 2026-03-05 ✅ 2026-03-03
   - `from_log` is the correct implementation (single git call, proper rename
     tracking, no known bugs). Updated `full` to use it. Removed dead
     `_parse_git_logs` function and unused `re` import. Removed
     `get_file_commit_map_from_follow` entirely. Cleaned up remaining debug
     `print` statements and stale `follow_map` references in test.
-- [ ] Restore `git_utils.py` test coverage
-- [ ] **Evening: kick off data collection for all repos overnight**
+- [ ] Restore `git_utils.py` test coverage ➕ 2026-03-03 📅 2026-03-05
+- [ ] **Evening: kick off data collection for all repos overnight** ➕ 2026-03-03 📅 2026-03-05
   - abseil, drake, pigweed, monogon, bzd (tensorflow only if feeling ambitious)
   - Run after correctness fixes so outputs are based on fixed code
   - Write `apps/bazel_parser/collect.sh`: a script that takes a repo dir and
@@ -63,62 +63,62 @@ A case study entry in `case_study.md` is complete when it contains:
 
 ### Mar 6 — Abseil Analysis
 
-- [ ] Abseil case study (2,488 nodes — small, fast to iterate)
-- [ ] Complete to acceptance criteria
+- [ ] Abseil case study (2,488 nodes — small, fast to iterate) ➕ 2026-03-03 📅 2026-03-06
+- [ ] Complete to acceptance criteria ➕ 2026-03-03 📅 2026-03-06
 
 ### Mar 7 — Drake Analysis
 
-- [ ] Drake case study (27,778 nodes)
-- [ ] Complete to acceptance criteria
+- [ ] Drake case study (27,778 nodes) ➕ 2026-03-03 📅 2026-03-07
+- [ ] Complete to acceptance criteria ➕ 2026-03-03 📅 2026-03-07
 
 ### Mar 8 — Drake Complete + Pigweed Start
 
-- [ ] Finish drake if not complete
-- [ ] Begin pigweed case study (10,800 nodes)
+- [ ] Finish drake if not complete ➕ 2026-03-03 📅 2026-03-08
+- [ ] Begin pigweed case study (10,800 nodes) ➕ 2026-03-03 📅 2026-03-08
 
 ### Mar 9 — Pigweed + Additional Repos
 
-- [ ] Complete pigweed case study
-- [ ] If time: monogon or bzd case study
+- [ ] Complete pigweed case study ➕ 2026-03-03 📅 2026-03-09
+- [ ] If time: monogon or bzd case study ➕ 2026-03-03 📅 2026-03-09
 
 ### Mar 10 — Metric Triage
 
-- [ ] Review metric utility notes across all completed case studies
-- [ ] **Metric triage**: decide:
+- [ ] Review metric utility notes across all completed case studies ➕ 2026-03-03 📅 2026-03-10
+- [ ] **Metric triage**: decide: ➕ 2026-03-03 📅 2026-03-10
   - Which metrics consistently surface actionable signal → Tier 1 (always
     computed)
   - Which are slow and haven't provided unique value → Tier 2 (opt-in flag)
   - Expensive candidates: `ancestor_depth`, `descendant_depth`,
     `betweenness_centrality`, `closeness_centrality` (all involve APSP or O(VE)
     passes)
-- [ ] Implement `--full-metrics` flag (or equivalent) to gate tier 2 metrics
+- [ ] Implement `--full-metrics` flag (or equivalent) to gate tier 2 metrics ➕ 2026-03-03 📅 2026-03-10
 
 ### Mar 13 — PyPI Packaging Start
 
-- [ ] Assess proto file situation: `build_pb2.py`, `git_pb2.py`, BEP protos are
+- [ ] Assess proto file situation: `build_pb2.py`, `git_pb2.py`, BEP protos are ➕ 2026-03-03 📅 2026-03-13
       Bazel-generated — decide whether to pre-generate and vendor or generate at
       install time
-- [ ] Start `pyproject.toml` setup, entry points for CLI
+- [ ] Start `pyproject.toml` setup, entry points for CLI ➕ 2026-03-03 📅 2026-03-13
 
 ### Mar 14 — PyPI Complete
 
-- [ ] Complete packaging (proto files, dependencies, entry point)
-- [ ] Publish to PyPI (even as `0.1.0-alpha` / pre-release)
-- [ ] End-to-end test: fresh install from PyPI → run workflow → open in gephi
-- [ ] Fix anything that breaks
+- [ ] Complete packaging (proto files, dependencies, entry point) ➕ 2026-03-03 📅 2026-03-14
+- [ ] Publish to PyPI (even as `0.1.0-alpha` / pre-release) ➕ 2026-03-03 📅 2026-03-14
+- [ ] End-to-end test: fresh install from PyPI → run workflow → open in gephi ➕ 2026-03-03 📅 2026-03-14
+- [ ] Fix anything that breaks ➕ 2026-03-03 📅 2026-03-14
 
 ### Mar 15 — Documentation
 
-- [ ] Getting-started guide: "run these N bazel commands to collect data, then
+- [ ] Getting-started guide: "run these N bazel commands to collect data, then ➕ 2026-03-03 📅 2026-03-15
       `pip install bazel-parser && bazel-parser process ...`"
-- [ ] Fill `[ ] TODO` links in `README.md`
-- [ ] Add gephi recommendation for graph visualization (replace panel as primary
+- [ ] Fill `[ ] TODO` links in `README.md` ➕ 2026-03-03 📅 2026-03-15
+- [ ] Add gephi recommendation for graph visualization (replace panel as primary ➕ 2026-03-03 📅 2026-03-15
       recommendation for large repos)
-- [ ] Note panel app is still available for small repos
+- [ ] Note panel app is still available for small repos ➕ 2026-03-03 📅 2026-03-15
 
 ### Mar 16 — Slides Draft
 
-- [ ] Write full slide deck in markdown
+- [ ] Write full slide deck in markdown ➕ 2026-03-03 📅 2026-03-16
   - Suggested structure:
     1. The problem (build graph bottlenecks, hard to see at scale)
     2. How the tool works (data collection → graph → metrics)
@@ -128,12 +128,12 @@ A case study entry in `case_study.md` is complete when it contains:
 
 ### Mar 17 — Slides Polish
 
-- [ ] Polish markdown slides
-- [ ] Transition to Google Slides
+- [ ] Polish markdown slides ➕ 2026-03-03 📅 2026-03-17
+- [ ] Transition to Google Slides ➕ 2026-03-03 📅 2026-03-17
 
 ### Stretch Goals
 
-- [ ] consider reversing direction here (X depends on Y; Y is the ancestor
+- [ ] consider reversing direction here (X depends on Y; Y is the ancestor ➕ 2026-03-03
       instead of the descendant); would allow more standardization / make a bit
       more sense (dependencies must come before their dependent)
 
