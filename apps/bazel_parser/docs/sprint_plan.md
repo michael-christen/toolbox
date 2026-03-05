@@ -32,28 +32,28 @@ A case study entry in `case_study.md` is complete when it contains:
 
 ### Mar 3 — Planning
 
-- [x] Write sprint plan ✅ 2026-03-03
+- [x] Write sprint plan ✅ 2026-03-03 ➕ 2026-03-03 📅 2026-03-03
 
 ### Mar 4 — Off
 
 ### Mar 5 — Correctness Fixes + Data Collection
 
-- [x] Resolve `expected_duration_s` math ambiguity
+- [x] Resolve `expected_duration_s` math ambiguity ➕ 2026-03-03 📅 2026-03-05 ✅ 2026-03-03
   - Current formula (`group_duration_s * (1 - group_probability_cache_hit)`) is
     correct. Node-level and graph-level metrics answer different questions and
     are both valid. Removed XXX comment.
-- [ ] Investigate `--notool_deps` question from PR #185
+- [ ] Investigate `--notool_deps` question from PR #185 ➕ 2026-03-03 📅 2026-03-05
   - Run `bazel query` with and without the flag, compare graph sizes, decide
     whether to apply by default
-- [ ] Investigate all related XXXs
-- [x] Fix `follow` vs `log` discrepancy
+- [ ] Investigate all related XXXs ➕ 2026-03-03 📅 2026-03-05
+- [x] Fix `follow` vs `log` discrepancy ➕ 2026-03-03 📅 2026-03-05 ✅ 2026-03-03
   - `from_log` is the correct implementation (single git call, proper rename
     tracking, no known bugs). Updated `full` to use it. Removed dead
     `_parse_git_logs` function and unused `re` import. Removed
     `get_file_commit_map_from_follow` entirely. Cleaned up remaining debug
     `print` statements and stale `follow_map` references in test.
-- [ ] Restore `git_utils.py` test coverage
-- [ ] **Evening: kick off data collection for all repos overnight**
+- [ ] Restore `git_utils.py` test coverage ➕ 2026-03-03 📅 2026-03-05
+- [ ] **Evening: kick off data collection for all repos overnight** ➕ 2026-03-03 📅 2026-03-05
   - abseil, drake, pigweed, monogon, bzd (tensorflow only if feeling ambitious)
   - Run after correctness fixes so outputs are based on fixed code
   - Write `apps/bazel_parser/collect.sh`: a script that takes a repo dir and
@@ -63,8 +63,8 @@ A case study entry in `case_study.md` is complete when it contains:
 
 ### Mar 6 — Abseil Analysis
 
-- [ ] Abseil case study (2,488 nodes — small, fast to iterate)
-- [ ] Complete to acceptance criteria
+- [ ] Abseil case study (2,488 nodes — small, fast to iterate) ➕ 2026-03-03 📅 2026-03-06
+- [ ] Complete to acceptance criteria ➕ 2026-03-03 📅 2026-03-06
 
 ### Mar 7 — Drake Analysis
 
