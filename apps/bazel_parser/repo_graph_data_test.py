@@ -49,7 +49,6 @@ class TestRepoGraphData(unittest.TestCase):
             node_probability=node_probability,
             node_duration_s=node_duration_s,
         )
-        # XXX: Test the various computed values, etc.
         print(r.df)
         pprint.pprint(r.get_node("c"))
         self.assertEqual(r.get_node("c")["node_probability_cache_hit"], 0.5)
@@ -57,7 +56,6 @@ class TestRepoGraphData(unittest.TestCase):
         self.assertEqual(r.get_node("d")["num_duration_ancestors"], 0)
         self.assertEqual(r.get_node("i")["num_ancestors"], 1)
         self.assertEqual(r.get_node("i")["num_duration_ancestors"], 0)
-        # XXX: num_source_descendants
         with self.assertRaisesRegex(KeyError, "not there"):
             r.get_node("not there")
 
@@ -65,6 +63,5 @@ class TestRepoGraphData(unittest.TestCase):
         self.assertEqual(3, graph_metrics["longest_path"])
         self.assertEqual(2, graph_metrics["max_depth"])
         pprint.pprint(graph_metrics)
-        # XXX
         r.to_gml(pathlib.Path("/tmp/mchristen_now.gml"))
         r.to_csv(pathlib.Path("/tmp/mchristen_now.csv"))

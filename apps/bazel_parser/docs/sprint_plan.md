@@ -48,7 +48,11 @@ A case study entry in `case_study.md` is complete when it contains:
     is correct default. `--notool_deps` removes exec-config dep edges (build
     tool mechanics); added to default query. `ignore_external=True` in parsing
     already handles `@` external labels. Removed XXX comment.
-- [ ] Investigate all related XXXs ➕ 2026-03-03 📅 2026-03-05
+- [x] Investigate all related XXXs ➕ 2026-03-03 📅 2026-03-05 ✅ 2026-03-05
+  - Removed stale/answered XXXs in cli.py, repo_graph_data.py, refinement.py,
+    repo_graph_data_test.py, and git_utils.py. Converted `print(graph_metrics)`
+    to `logger.info` with a TODO. Deferred ~12 XXXs that need case study data or
+    are design questions for Mar 10+.
 - [x] Fix `follow` vs `log` discrepancy ➕ 2026-03-03 📅 2026-03-05 ✅ 2026-03-03
   - `from_log` is the correct implementation (single git call, proper rename
     tracking, no known bugs). Updated `full` to use it. Removed dead
@@ -95,6 +99,20 @@ A case study entry in `case_study.md` is complete when it contains:
     `betweenness_centrality`, `closeness_centrality` (all involve APSP or O(VE)
     passes)
 - [ ] Implement `--full-metrics` flag (or equivalent) to gate tier 2 metrics ➕ 2026-03-03 📅 2026-03-10
+- [ ] Revisit deferred XXXs after metric triage ➕ 2026-03-05 📅 2026-03-10
+  - Serialize graph_metrics to output file (cli.py)
+  - Resolve node-removal attribute handling (refinement.py)
+  - SOURCE_FILE inclusion decision (parsing.py)
+  - Decide whether tokens need stripping (git_utils.py:~155)
+  - `ancestors_by_node_p` usefulness (repo_graph_data.py)
+  - `get_node()` better checking (repo_graph_data.py)
+  - Remove small weakly-connected components (repo_graph_data.py)
+  - label/node_name/Node naming redundancy (repo_graph_data.py)
+  - Data structure design for node info (repo_graph_data.py)
+  - Better k for betweenness (repo_graph_data.py)
+  - determine_main group attribution (repo_graph_data.py)
+  - print vs log vs return in refinement (refinement.py)
+  - Log individual exclusions (refinement.py)
 
 ### Mar 13 — PyPI Packaging Start
 

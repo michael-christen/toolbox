@@ -68,8 +68,6 @@ class Node(TypedDict):
     # group_duration_s * (1 - group_probability_cache_hit)
     expected_duration_s: float
 
-    # XXX: Move these back and add them where necessarry
-    # ==== New =====
     # Max ancestor depth from this node
     # - The max shortest path of this node in a reversed graph
     ancestor_depth: int
@@ -142,7 +140,7 @@ class GraphMetrics(TypedDict):
     avg_nodes_affected_per_commit: float
 
     # Proposal for new attributes
-    # XXX: max/aggregation of most of the node attributes
+    # max/aggregation of most of the node attributes
     # - networkx.average_shortest_path_length
     # Not defining
     # unable to capture these since requires strongly connected components
@@ -251,8 +249,6 @@ class RepoGraphData:
         # Write the graph
         networkx.write_gml(graph, out_gml)
 
-    # XXX: Maybe don't even
-    # XXX: index column is empty
     def to_csv(self, out_csv: pathlib.Path) -> None:
         # node_name is preserved, so don't need to re-emit
         self.df.to_csv(out_csv, index=False)
@@ -280,11 +276,8 @@ def dependency_analysis(repo: RepoGraphData) -> dict[str, Node]:
     #  - dictionary of node-specific info for js callbacks
     #  - set of lists / DataFrame for csv or DataSource
 
-    # XXX: Setup cli arguments and overall workflow
-
     # logger.debug(f"nodes: {len(graph.nodes)}")
     # logger.debug(f"edges: {len(graph.edges)}")
-    # XXX: Show graph density
     in_degree = repo.graph.in_degree()
     assert not isinstance(in_degree, int)
     out_degree = repo.graph.out_degree()

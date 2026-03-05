@@ -213,8 +213,6 @@ def process(
         label_to_runtime=label_to_runtime,
         file_commit_map=file_commit_map,
     )
-    # XXX: Probably should refresh afterwards too, right?
-    # XXX: Probably want to refine before performing full refresh
     logger.info("Refining...")
     refinement.full_refinement(
         repo=r,
@@ -223,8 +221,8 @@ def process(
     )
     r.refresh()
     graph_metrics = r.get_graph_metrics()
-    # XXX: What to do with graph_metrics?
-    print(graph_metrics)
+    logger.info("Graph metrics: %s", graph_metrics)
+    # TODO: serialize graph_metrics to output file after case studies
     r.to_csv(out_csv)
     r.to_gml(out_gml)
 
@@ -272,7 +270,6 @@ def full(
         )
         with open(bep_pb, "rb") as bep_buf:
             label_to_runtime = bep_reader.get_label_to_runtime(bep_buf)
-    # XXX: Optional build timing data ...
     # Capture git information
     logger.info("History from git...")
     git_query_after = datetime.datetime.now() - datetime.timedelta(
@@ -295,7 +292,8 @@ def full(
     )
     logger.info("Outputting...")
     graph_metrics = r.get_graph_metrics()
-    print(graph_metrics)
+    logger.info("Graph metrics: %s", graph_metrics)
+    # TODO: serialize graph_metrics to output file after case studies
     if out_csv is not None:
         r.to_csv(out_csv)
     if out_gml is not None:
