@@ -118,6 +118,11 @@ class Node(TypedDict):
     # shortest path distance to u over all n-1 reachable nodes.
     closeness_centrality: float
 
+    # True if this node is an articulation point of the undirected graph —
+    # i.e. removing it would disconnect the graph. These are structural seams
+    # and natural refactor boundaries.
+    is_articulation_point: bool
+
     # Proposed new fields
     # - sum(num_ancestors + num_descendants), can get an idea of size of
     # sub-graph
@@ -192,6 +197,7 @@ class RepoGraphData:
                 "ancestors_by_descendants": 0,
                 "betweenness_centrality": 0,
                 "closeness_centrality": 0,
+                "is_articulation_point": False,
             }
         self.df = pandas.DataFrame.from_dict(data, orient="index")
         self.refresh()
@@ -325,6 +331,9 @@ def dependency_analysis(repo: RepoGraphData) -> dict[str, Node]:
     betweenness = networkx.betweenness_centrality(repo.graph, k=k)
     logger.debug("a")
     closeness = networkx.closeness_centrality(repo.graph)
+    articulation_pts = set(
+        networkx.articulation_points(repo.graph.to_undirected())
+    )
 
     logger.debug("a")
     nodes: dict[str, Node] = {}
@@ -373,6 +382,7 @@ def dependency_analysis(repo: RepoGraphData) -> dict[str, Node]:
             "ancestors_by_descendants": num_ancestors * num_descendants,
             "betweenness_centrality": betweenness[node_name],
             "closeness_centrality": closeness[node_name],
+            "is_articulation_point": node_name in articulation_pts,
         }
         nodes[node_name] = row
     logger.debug("a")
