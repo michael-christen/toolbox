@@ -63,7 +63,7 @@ echo "==> [2/4] bazel test ${TEST_TARGET}"
     cd "${REPO_DIR}"
     bazel test \
         "--build_event_binary_file=${BEP_PB}" \
-        "${TEST_TARGET}"
+        "${TEST_TARGET}" || true
 )
 
 # ---------------------------------------------------------------------------
@@ -72,7 +72,7 @@ echo "==> [2/4] bazel test ${TEST_TARGET}"
 echo "==> [3/4] git-capture (days-ago=${DAYS_AGO})"
 (
     cd "${TOOLBOX_DIR}"
-    bazel run //apps/bazel_parser --output_groups=-mypy -- \
+    bazel run //apps/bazel_parser:cli --output_groups=-mypy -- \
         git-capture \
         --repo-dir "${REPO_DIR}" \
         --days-ago "${DAYS_AGO}" \
@@ -85,7 +85,7 @@ echo "==> [3/4] git-capture (days-ago=${DAYS_AGO})"
 echo "==> [4/4] process"
 (
     cd "${TOOLBOX_DIR}"
-    bazel run //apps/bazel_parser --output_groups=-mypy -- \
+    bazel run //apps/bazel_parser:cli --output_groups=-mypy -- \
         process \
         --query-pb "${QUERY_PB}" \
         --bep-pb "${BEP_PB}" \

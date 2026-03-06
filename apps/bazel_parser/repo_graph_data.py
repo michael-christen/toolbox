@@ -212,10 +212,18 @@ class RepoGraphData:
             self.df["node_duration_s"]
             * (1 - self.df["group_probability_cache_hit"])
         ).sum()
+        try:
+            # XXX: let's ensure we've merged self references
+            cycle = networkx.find_cycle(self.graph)
+            logger.warning('Graph has cycle, cannot compute longest_path: %s',
+                           cycle)
+            longest_path = None
+        except networkx.exception.NetworkxNoCycle:
+            longest_path = networkx.dag_longest_path_length(self.graph)
 
         metrics: GraphMetrics = {
             # longest path can be more than max depth
-            "longest_path": networkx.dag_longest_path_length(self.graph),
+            "longest_path": longest_path,
             "max_depth":
             # Equivalent of max descendant_depth
             self.df["ancestor_depth"].max(),
