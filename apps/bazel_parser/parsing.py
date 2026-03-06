@@ -23,13 +23,14 @@ def _get_rules(
         if target.type == build_pb2.Target.RULE:
             pass
         elif target.type in {
+            # SOURCE_FILE nodes are included implicitly via rule_input edges;
+            # parsing them explicitly adds no value since classification
+            # already uses git history matching on rule labels.
             build_pb2.Target.SOURCE_FILE,
             build_pb2.Target.GENERATED_FILE,
             build_pb2.Target.PACKAGE_GROUP,
             build_pb2.Target.ENVIRONMENT_GROUP,
         }:
-            # logger.debug(f"{i}, {type_name}")
-            # XXX: Should we allow SOURCE_FILE?
             continue
         else:
             raise ValueError(
@@ -38,7 +39,6 @@ def _get_rules(
         # We are a rule type now
         rule = target.rule
 
-        # logger.debug(f"{rule.name}({rule.rule_class})")
         # Didn't see much use with these:
         # - rule.configured_rule_input
         # - rule.default_setting
@@ -90,7 +90,6 @@ def _get_node_probability(
     nodes: list[str],
     file_commit_map: git_utils.FileCommitMap,
 ) -> dict[str, float]:
-    # XXX: Test case with BUILD further up, ensure we still get the right match
     bazel_intermediates = _normalize_paths_to_bazel_intermediates(
         list(file_commit_map.file_map.keys())
     )

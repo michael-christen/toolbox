@@ -182,12 +182,9 @@ class RepoGraphData:
         self.df = pandas.DataFrame.from_dict(nodes, orient="index")
 
     def get_node(self, node: str) -> Node:
-        # XXX: Better checking
         return cast(Node, self.df.loc[node].to_dict())
 
     def get_graph_metrics(self) -> GraphMetrics:
-        # XXX: Maybe we should remove weakly connected components < some
-        # threshold size
         expected_duration_s = (
             self.df["node_duration_s"]
             * (1 - self.df["group_probability_cache_hit"])
@@ -225,9 +222,12 @@ class RepoGraphData:
         }
         return metrics
 
-    # XXX: label, node_name, Node are all doing the same thing
     def to_gml(self, out_gml: pathlib.Path) -> None:
-        # Add node attributes to copy of the graph
+        # Add node attributes to copy of the graph.
+        # node_name column duplicates the df index intentionally: to_csv uses
+        # index=False so node_name is the label in CSV output. "Node" attribute
+        # duplicates it again for gephi, which uses "Node" as the display
+        # label.
         graph = self.graph.copy()
         for name, row in self.df.iterrows():
             for k, v in row.items():
@@ -290,13 +290,10 @@ def dependency_analysis(repo: RepoGraphData) -> dict[str, Node]:
     logger.debug("a")
 
     # Compute centrality metrics
-    # XXX: Determine better mechanism to choose k
-    # // 4
+    # k: number of pivot nodes for betweenness approximation. Floored at 1000
+    # since sqrt(V) is too small for large graphs (~138 for V=19k). 1000 pivots
+    # gives adequate relative rankings for top-N analysis without exact values.
     k = int(min(num_nodes, max(1_000, num_nodes**0.5)))
-    # Compare performance of igraph:
-    # https://python.igraph.org/en/stable/api/igraph.GraphBase.html#betweenness
-    # O(VE), use k to make it quicker
-    # Only noticed any time during drake & pigweed trial
     betweenness = networkx.betweenness_centrality(repo.graph, k=k)
     logger.debug("a")
     closeness = networkx.closeness_centrality(repo.graph)
@@ -329,8 +326,6 @@ def dependency_analysis(repo: RepoGraphData) -> dict[str, Node]:
             "num_source_descendants": num_source_descendants,
             "pagerank": pagerank[node_name],
             "node_duration_s": node_duration_s.get(node_name, 0),
-            # XXX: determine_main is getting the attribution, but not the
-            # main library, etc. not sure
             "group_duration_s": gd,
             "expected_duration_s": gd * (1 - gp),
             "node_probability_cache_hit": np,

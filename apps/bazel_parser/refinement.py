@@ -2,11 +2,14 @@ from __future__ import annotations
 
 import dataclasses
 import enum
+import logging
 
 import numpy as np
 import pandas
 
 from apps.bazel_parser import repo_graph_data
+
+logger = logging.getLogger(__name__)
 
 
 class Verbosity(enum.Enum):
@@ -15,7 +18,6 @@ class Verbosity(enum.Enum):
     LIST = "LIST"
 
 
-# XXX: Maybe load from yaml or something other than json for comments?
 @dataclasses.dataclass
 class RefinementConfig:
     """This specifies how to refine a dataframe of nodes to a smaller set.
@@ -36,16 +38,15 @@ def _show_exclusions(
     df: pandas.DataFrame,
     verbosity: Verbosity,
 ) -> None:
-    # XXX: print/log/ or return string?
     if verbosity == Verbosity.SILENT:
         return
     elif verbosity == Verbosity.COUNT:
         count = len(np.where(exclusion)[0])
-        print(f"{pattern} = {count}")
+        logger.info(f"{pattern} = {count}")
     elif verbosity == Verbosity.LIST:
-        print(f"{pattern} ->")
+        logger.info(f"{pattern} ->")
         for node in sorted(df.loc[exclusion].index.tolist()):
-            print(f"- {node}")
+            logger.info(f"- {node}")
     else:
         raise ValueError(f"Unhandled verbosity: {verbosity}")
 
@@ -98,14 +99,12 @@ def refine_dataframe(
             verbosity=verbosity,
         )
     for pattern, pat_cls_name_exclusion in exclude_by_class_then_name.items():
-        # XXX: Maybe display more than just the top-level class pattern
         _show_exclusions(
             pattern=pattern,
             exclusion=pat_cls_name_exclusion,
             df=df,
             verbosity=verbosity,
         )
-    # XXX: Log / return the individual exclusions
     return df.loc[include]
 
 
@@ -114,7 +113,9 @@ def remove_node_from_repo(
 ) -> None:
     """Modify graph by removing node, but preserving edges.
 
-    XXX: How to handle probability / duration attributes of removed nodes?
+    Removed nodes are expected to be noise/artifact targets (probability=1.0,
+    duration=0), so dropping their attributes is correct. Callers should call
+    repo.refresh() afterward to recompute all metrics on the reduced graph.
     """
     for parent in repo.graph.predecessors(node):
         for child in repo.graph.successors(node):

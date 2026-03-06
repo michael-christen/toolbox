@@ -152,7 +152,6 @@ def get_file_commit_map_from_log(
     f_to_canonical: dict[pathlib.Path, pathlib.Path] = {}
     # XXX: Modularize this parsing
     for token in all_tokens:
-        # XXX: Need to strip?
         token = token.strip()
         if not token:
             continue
