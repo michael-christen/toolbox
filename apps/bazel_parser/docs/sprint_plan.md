@@ -176,6 +176,12 @@ A case study entry in `case_study.md` is complete when it contains:
 - [ ] Consider need of cquery to handle selections in the graph ➕ 2026-03-05
 - [ ] why are type hint issues not caught in py_test artifacts ➕ 2026-03-05
 - [ ] remove all of the `logger.debug('a')` statements in `repo_graph_data.py` ➕ 2026-03-05
+- [x] Establish drake refinement config filtering `_redirect_test` + `unknown` nodes ✅ 2026-03-05
+  - Config at `~/Documents/bazel_parser_data_collection/drake/config.yaml`
+  - Reduced graph from 26,716 → 16,987 nodes; Tier 1 results changed (pydrake binding
+    layer, not multibody, is the real bottleneck)
+  - Added `--config-file` passthrough to `collect.sh`
+  - **Lesson**: always establish a config before analysis on complex repos
 
 ---
 

@@ -12,13 +12,17 @@ Repos:
 
 | Metric | abseil-cpp | drake | pigweed |
 |---|---|---|---|
-| Total nodes | 2,608 | 26,716 | 19,199 |
+| Total nodes | 2,608 | 16,987 * | 19,199 |
 | Source files | 1,473 | 5,198 | 5,319 |
 | Tests (timed) | 245 | 8,291 | 782 |
-| Graph depth (max) | 13 | 18 | 21 |
+| Graph depth (max) | 13 | 17 | 21 |
 | Total test duration | 316.8s | 3,285.9s | 266.9s |
 | **Expected cost/commit** | **153.3s** | **503.1s** | **12.5s** |
-| **Avg nodes invalidated/commit** | **423** | **2,460** | **666** |
+| **Avg nodes invalidated/commit** | **423** | **1,533** | **666** |
+
+\* Drake filtered: 7,104 `_redirect_test` (auto-generated lint wrappers)
+and 2,625 `unknown` (`.dwp`/`.stripped` artifacts) removed via
+`refinement.class_patterns`. Raw query returns 26,716 nodes.
 
 Expected cost/commit and avg nodes invalidated/commit are the headline
 health metrics — they capture the combined effect of graph structure,
@@ -88,33 +92,46 @@ of the repo and invalidating these tests frequently.
 
 ### Graph character
 
-10x larger than abseil at 26,716 nodes. Extremely diverse rule taxonomy
-(50+ node classes) reflecting heavy bespoke build infrastructure. Graph
-depth of 18. The headline number is the expected cost/commit of **503s**
-— nearly 8.5 minutes of test time expected on every commit. Avg nodes
-invalidated per commit is 2,460, roughly 9% of the entire graph.
+After filtering noise nodes, 16,987 nodes (down from 26,716 raw). The
+7,104 `_redirect_test` nodes — auto-generated lint wrapper targets, each
+fully isolated with zero edges — inflated the count by 42% without
+contributing structural signal. Additionally, 2,625 `unknown` nodes
+(`.dwp` DWARF package files and `.stripped` binary artifacts from build
+rules) had no analytical value. Filtering these is now the recommended
+first step for drake analysis.
+
+Extremely diverse rule taxonomy (50+ node classes) reflecting heavy
+bespoke build infrastructure. Graph depth of 17, 38 weakly connected
+components. Expected cost/commit **503s** — nearly 8.5 minutes of test
+time expected on every commit. Avg nodes invalidated per commit is 1,533,
+roughly 9% of the filtered graph.
 
 ### Top split candidates (Tier 1)
 
-The entire top 10 is `//multibody/plant` and `//multibody/tree`. These
-are not incidental — `multibody_plant_core` has 2,023 ancestors and
-1,580 descendants (score 3.2M), with 360s expected duration. The
-`//multibody` package is a textbook monolith: a large domain library
-at the center of the graph that nearly everything flows through. The
-10th entry, `//tools/install/libdrake:drake_shared_library` (score 2.9M),
-is structurally different — it has only 783 ancestors but 3,707
-descendants, meaning it is the widest single aggregation point in the
-graph. This is an intentional shared-library build artifact but it
-contributes to coupling.
+After filtering, the entire top 10 is `//bindings/pydrake/*` — low-level
+pybind wrappers that form the base of the Python binding layer.
+`//tools/install/libdrake:drake_shared_library` leads at score 2.3M
+(636 ancestors, 3,659 descendants, 330s expected duration). The
+`//bindings/pydrake/common:wrap_pybind`, `cpp_param_pybind`,
+`cpp_template_pybind` cluster follows tightly (scores 2.1–2.2M). These
+all have nearly identical expected durations (~330s) because they share
+the same massive downstream test coverage. Splitting any of these would
+require restructuring the Python binding architecture.
+
+The unfiltered run (no config) surfaced `//multibody/plant` and
+`//multibody/tree` as the top Tier 1 targets because the `unknown`
+artifact nodes were present as descendants of multibody targets, inflating
+their `ancestors_x_descendants` scores. Post-filter, multibody remains
+important but the pydrake binding layer is the structural bottleneck.
 
 ### Hot source files (Tier 2)
 
-`multibody_plant.h` leads at 56.2 change cost with 537s of downstream
-tests. The `//common` headers (`drake_assert.h`, `fmt.h`) are the
-abseil-`config.h` equivalent: near-universal, covering 660s+ of tests.
-Notably, `//common/ad:internal/partials.cc` and `standard_operations.cc`
-both score 22.7 with 638s downstream — these are automatic
-differentiation internals that appear across the math stack.
+`//multibody/plant:multibody_plant.h` leads at change cost 36.1 (was
+56.2 before filtering, due to fewer total ancestors now counted). The
+`//common` headers (`drake_assert.h` at 22.2, `fmt.h` at 15.9) remain
+the near-universal dependency equivalents. `//common/ad:internal/partials.cc`
+and `standard_operations.cc` (12.7 each, 638s downstream) highlight the
+automatic differentiation internals as high-exposure implementation files.
 
 ### Expensive tests (Tier 3)
 
@@ -122,28 +139,30 @@ The tutorials tests dominate: `configuring_rendering_lighting_test`
 (66s, **8.3% cache hit**, 60.5s expected) and
 `hydroelastic_contact_basics_test` (21.2s, 8.3% cache hit, 19.5s
 expected). The ~8% cache hit rate across the tutorials cluster means
-these tests re-run on nearly every commit. They likely depend on the
-`multibody` monolith, so any `multibody` change — which is frequent —
-invalidates them. `//:py/install_test` (25.5s, 7.6% cache hit, 23.6s)
-is also notable: an install-validation test that runs on almost every
-commit.
+these tests re-run on nearly every commit. They depend on the pydrake
+binding layer and `multibody`, so any change in either triggers them.
+`//:py/install_test` (25.5s, 7.6% cache hit, 23.6s) is also notable:
+an install-validation test that runs on almost every commit.
 
-### Notable pattern: lint infrastructure has highest pagerank
+### Key lesson: always filter before analysis
 
-`//tools/cc_toolchain:error_severity` (a `string_flag`) and
-`//tools/lint:drakelint.py` rank above all domain libraries in pagerank.
-Almost every target flows through lint infrastructure. This is a common
-false positive for "importance" metrics — the nodes are structurally
-central but not actionable bottlenecks.
+The unfiltered graph's Tier 1 was misleading — `//multibody` appeared as
+the top bottleneck partly because `unknown` artifact nodes attached to it
+inflated its descendant count. After filtering, the actual architectural
+bottleneck (pydrake binding layer) becomes clear. Establishing a
+`config.yaml` with appropriate `class_patterns` is a prerequisite to
+meaningful analysis for complex repos.
 
 ### Metric utility notes
 
-- Tier 1 clearly identifies `//multibody` as the problem; the score
-  magnitudes (3M+ vs. abseil's 118k) communicate severity well
-- `pagerank` produced false positives (lint tools); less useful than
-  `num_ancestors` for identifying actionable bottlenecks
+- Tier 1 score magnitudes (2M+ vs. abseil's 118k) communicate severity
+  well; the pydrake binding cluster is the real bottleneck
+- `pagerank` produced false positives (lint tools rank above domain
+  libraries); less useful than `num_ancestors` for actionable findings
 - Tier 3 correctly surfaces the tutorials cluster as the highest-ROI
   CI optimization target
+- The filtering step changed Tier 1 results significantly; always
+  establish a config before drawing conclusions
 
 ---
 
@@ -222,7 +241,7 @@ The ratio of expected cost/commit to total test duration:
 | Repo | Expected/commit | Total tests | Ratio |
 |---|---|---|---|
 | abseil-cpp | 153.3s | 316.8s | 48% |
-| drake | 503.1s | 3,285.9s | 15% |
+| drake (filtered) | 503.1s | 3,285.9s | 15% |
 | pigweed | 12.5s | 266.9s | 5% |
 
 Pigweed is remarkably efficient: only 5% of total test capacity is

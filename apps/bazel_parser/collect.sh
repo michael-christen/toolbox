@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # collect.sh — collect Bazel analysis data for a single repo.
 #
-# Usage: ./collect.sh [--skip-tests] <repo-dir> <output-dir>
+# Usage: ./collect.sh [--skip-tests] [--config-file <path>] <repo-dir> <output-dir>
 #
 # Steps:
 #   1. bazel query  (in repo-dir)  → <output-dir>/query.pb
@@ -26,15 +26,17 @@ TOOLBOX_DIR="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 # Args
 # ---------------------------------------------------------------------------
 SKIP_TESTS=false
+CONFIG_FILE=""
 while [[ $# -gt 0 ]]; do
     case "$1" in
         --skip-tests) SKIP_TESTS=true; shift ;;
+        --config-file) CONFIG_FILE="$2"; shift 2 ;;
         *) break ;;
     esac
 done
 
 if [[ $# -ne 2 ]]; then
-    echo "Usage: $0 [--skip-tests] <repo-dir> <output-dir>" >&2
+    echo "Usage: $0 [--skip-tests] [--config-file <path>] <repo-dir> <output-dir>" >&2
     exit 1
 fi
 
@@ -99,13 +101,18 @@ echo "==> [3/5] git-capture (days-ago=${DAYS_AGO})"
 echo "==> [4/5] process"
 (
     cd "${TOOLBOX_DIR}"
-    bazel run //apps/bazel_parser:cli --output_groups=-mypy -- \
-        process \
-        --query-pb "${QUERY_PB}" \
-        --bep-pb "${BEP_PB}" \
-        --file-commit-pb "${FILE_COMMIT_PB}" \
-        --out-gml "${OUT_GML}" \
+    PROCESS_ARGS=(
+        process
+        --query-pb "${QUERY_PB}"
+        --bep-pb "${BEP_PB}"
+        --file-commit-pb "${FILE_COMMIT_PB}"
+        --out-gml "${OUT_GML}"
         --out-csv "${OUT_CSV}"
+    )
+    if [[ -n "${CONFIG_FILE}" ]]; then
+        PROCESS_ARGS+=(--config-file "${CONFIG_FILE}")
+    fi
+    bazel run //apps/bazel_parser:cli --output_groups=-mypy -- "${PROCESS_ARGS[@]}"
 )
 
 # ---------------------------------------------------------------------------
