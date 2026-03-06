@@ -302,15 +302,6 @@ def full(
     logger.info("Done...")
 
 
-_LIBRARY_CLASSES = {
-    "cc_library",
-    "py_library",
-    "java_library",
-    "go_library",
-    "rust_library",
-}
-
-
 @click.command()
 @click.option("--csv", "csv_path", type=PATH_TYPE, required=True)
 @click.option("--top-n", type=int, default=10, show_default=True)
@@ -338,19 +329,33 @@ def report(csv_path: pathlib.Path, top_n: int) -> None:
         f"Avg nodes invalidated/commit: {avg_nodes_per_commit:.0f}"
     )
 
-    click.echo(f"\n--- TIER 1: SPLIT CANDIDATES ---")
+    click.echo(f"\n--- TIER 1A: SPLIT CANDIDATES (structural) ---")
     click.echo(
-        "Libraries with many dependents AND many dependencies.\n"
-        "Splitting reduces rebuild cascades for their dependents."
+        "Nodes with both dependents and dependencies, ranked by structural\n"
+        "coupling (ancestors × descendants). Splitting reduces blast radius."
     )
-    libs = df[df["node_class"].isin(_LIBRARY_CLASSES)]
-    for _, row in libs.nlargest(top_n, "ancestors_by_descendants").iterrows():
+    mid = df[(df["num_ancestors"] > 0) & (df["num_descendants"] > 0)]
+    for _, row in mid.nlargest(top_n, "ancestors_by_descendants").iterrows():
         click.echo(
-            f"  {row['node_name']}\n"
+            f"  {row['node_name']}  [{row['node_class']}]\n"
             f"    ancestors={row['num_ancestors']}, "
             f"descendants={row['num_descendants']}, "
-            f"ancestors_x_descendants={int(row['ancestors_by_descendants']):,}, "
+            f"score={int(row['ancestors_by_descendants']):,}, "
             f"expected_duration={row['expected_duration_s']:.1f}s"
+        )
+
+    click.echo(f"\n--- TIER 1B: SPLIT CANDIDATES (weighted) ---")
+    click.echo(
+        "Same filter, ranked by expected duration: downstream test time\n"
+        "weighted by invalidation probability. Prioritizes CI cost."
+    )
+    for _, row in mid.nlargest(top_n, "expected_duration_s").iterrows():
+        cache_pct = row["group_probability_cache_hit"] * 100
+        click.echo(
+            f"  {row['node_name']}  [{row['node_class']}]\n"
+            f"    expected_duration={row['expected_duration_s']:.1f}s, "
+            f"cache_hit={cache_pct:.1f}%, "
+            f"score={int(row['ancestors_by_descendants']):,}"
         )
 
     click.echo(f"\n--- TIER 2: HOT SOURCE FILES ---")
@@ -368,9 +373,9 @@ def report(csv_path: pathlib.Path, top_n: int) -> None:
             f"downstream_tests={row['group_duration_s']:.1f}s"
         )
 
-    click.echo(f"\n--- TIER 3: EXPENSIVE NODES With Duration ---")
+    click.echo(f"\n--- TIER 3: EXPENSIVE TESTS ---")
     click.echo(
-        "Nodes with high expected rebuild/execute cost (slow and frequently "
+        "Test targets with high expected cost (slow and frequently "
         "invalidated).\nReducing their dependencies lowers CI cost per commit."
     )
     tests = df[df["has_duration"]]

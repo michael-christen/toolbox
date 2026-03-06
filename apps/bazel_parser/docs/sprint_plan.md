@@ -70,22 +70,22 @@ A case study entry in `case_study.md` is complete when it contains:
 
 ### Mar 6 — Abseil Analysis
 
-- [ ] Abseil case study (2,488 nodes — small, fast to iterate) ➕ 2026-03-03 📅 2026-03-06
-- [ ] Complete to acceptance criteria ➕ 2026-03-03 📅 2026-03-06
+- [x] Abseil case study (2,608 nodes) ➕ 2026-03-03 📅 2026-03-06 ✅ 2026-03-05
+- [x] Complete to acceptance criteria ➕ 2026-03-03 📅 2026-03-06 ✅ 2026-03-05
 
 ### Mar 7 — Drake Analysis
 
-- [ ] Drake case study (27,778 nodes) ➕ 2026-03-03 📅 2026-03-07
-- [ ] Complete to acceptance criteria ➕ 2026-03-03 📅 2026-03-07
+- [x] Drake case study (16,987 nodes filtered) ➕ 2026-03-03 📅 2026-03-07 ✅ 2026-03-05
+- [x] Complete to acceptance criteria ➕ 2026-03-03 📅 2026-03-07 ✅ 2026-03-05
 
 ### Mar 8 — Drake Complete + Pigweed Start
 
-- [ ] Finish drake if not complete ➕ 2026-03-03 📅 2026-03-08
-- [ ] Begin pigweed case study (10,800 nodes) ➕ 2026-03-03 📅 2026-03-08
+- [x] Finish drake ➕ 2026-03-03 📅 2026-03-08 ✅ 2026-03-05
+- [x] Begin pigweed case study (19,199 nodes) ➕ 2026-03-03 📅 2026-03-08 ✅ 2026-03-05
 
 ### Mar 9 — Pigweed + Additional Repos
 
-- [ ] Complete pigweed case study ➕ 2026-03-03 📅 2026-03-09
+- [x] Complete pigweed case study ➕ 2026-03-03 📅 2026-03-09 ✅ 2026-03-05
 - [ ] If time: monogon or bzd case study ➕ 2026-03-03 📅 2026-03-09
 
 ### Mar 10 — Metric Triage

@@ -73,6 +73,29 @@ The `random` subsystem tests (`poisson_distribution_test`,
 — the random library has 226 transitive dependencies, pulling in much
 of the repo and invalidating these tests frequently.
 
+### Suggested improvements
+
+**Tier 1A/1B: `//absl/synchronization:synchronization`** (tops both —
+score 118k, 90.6s expected, 56.1% cache hit). Splitting into focused
+sub-libraries (e.g. separating the mutex primitives from the higher-level
+synchronization abstractions) would mean changes to any of its 256
+transitive dependencies no longer invalidate all 461 downstream targets.
+At 90.6s expected cost per commit, even isolating one frequently-changed
+dependency cluster could reduce per-commit CI cost by 20–30s.
+
+**Tier 2: `//absl/base:config.h`** (change_cost 28.0, 316.8s downstream
+— the entire test suite). This file covers every test in abseil; it
+changes rarely (97.5% cache hit) so the blast radius is rarely triggered,
+but any regression in its change rate would be repo-wide. Moving
+platform-specific flags into narrower per-feature headers would reduce
+the 316.8s at risk on the ~2.5% of commits that touch it.
+
+**Tier 3: `//absl/hash:hash_test`** (15.1s, 28.3% cache hit, 10.8s
+expected — runs on ~72% of commits). Reducing its transitive dependency
+set, particularly the pull-in of the full `//absl/container` stack, is
+the most direct lever to raise the cache hit rate. A 10-point improvement
+in cache hit would save ~1.5s expected cost per commit.
+
 ### Metric utility notes
 
 - `ancestors_by_descendants` (Tier 1 score): strong signal, surfaces
@@ -153,6 +176,40 @@ bottleneck (pydrake binding layer) becomes clear. Establishing a
 `config.yaml` with appropriate `class_patterns` is a prerequisite to
 meaningful analysis for complex repos.
 
+### Suggested improvements
+
+**Tier 1A: `//tools/install/libdrake:drake_shared_library`** (score
+2,327,124, 636 ancestors, 3,659 descendants, 330s expected). This
+packaging target links the entire drake codebase into a single shared
+library, coupling all 636 downstream consumers to all 3,659 transitive
+dependencies. Splitting into domain-scoped shared libraries (e.g.
+`libdrake_multibody`, `libdrake_geometry`) would allow consumers to
+depend only on the subsystems they need, reducing the per-consumer
+blast radius proportionally.
+
+**Tier 1B: `//multibody/plant:multibody_plant_core`** (360.6s expected,
+31% cache hit, score 1,967,766). This library rebuilds on ~69% of
+commits, making it the single largest contributor to the 503s expected
+CI cost. Extracting a stable forward-declaration or interface header
+from `multibody_plant_core` — so that targets needing only the API
+don't rebuild when the implementation changes — would directly reduce
+the 69% invalidation rate and its downstream 360.6s rebuild cascade.
+
+**Tier 2: `//multibody/plant:multibody_plant.h`** (change_cost 36.1,
+97.6% cache hit, 537.8s downstream). On the ~2.4% of commits that
+touch this header, 537.8s of tests are triggered. Splitting the public
+API into a stable interface header and a separate implementation-detail
+header would reduce the set of dependents that need to rebuild on
+implementation-only changes.
+
+**Tier 3: `//tutorials:py/configuring_rendering_lighting_test`** (66s,
+8.3% cache hit, 60.5s expected — rebuilds on ~92% of commits). This
+single test contributes 60.5s of the 503s expected cost per commit,
+roughly 12%. It rebuilds so frequently because it transitively depends
+on the pydrake binding layer and `multibody`, which change on nearly
+every commit. Narrowing its dependencies to only the rendering subsystem
+would be the highest single-target ROI change available in drake.
+
 ### Metric utility notes
 
 - Tier 1 score magnitudes (2M+ vs. abseil's 118k) communicate severity
@@ -215,6 +272,41 @@ graph is well-managed. The bluetooth proxy tests
 the most volatile in the repo, consistent with active bluetooth
 development. `//pw_console/py:window_manager_test` (13.0s raw, 96.3%
 cache hit, 0.5s expected) is the slowest test but well-cached.
+
+### Suggested improvements
+
+**Tier 1A: `//pw_log:pw_log`** (score 494,250, 3,954 ancestors, 125
+descendants, 1.2s expected). Nearly every target in the repo depends
+on the logging library, but the expected cost is low (1.2s) because
+tests are fast and well-cached. The structural risk is latent: if
+`pw_log` gains a heavy dependency or its change rate increases, it
+would affect 3,954 targets simultaneously. Splitting into a thin facade
+header (logging API only) and a separate backend-configuration target
+would allow most dependents to depend only on the API, reducing the
+blast radius before it becomes a CI problem.
+
+**Tier 1B: `//pw_allocator:testing`** (2.3s expected, 90.1% cache hit,
+score 156,462). This test harness library is the most volatile
+non-trivial node in pigweed — 9.9% of commits invalidate it, which is
+high for infrastructure. Stabilizing the harness API (minimizing changes
+to `testing.h` and related headers) would raise the cache hit rate and
+reduce its downstream rebuild frequency across the 156k-score dependency
+sub-graph.
+
+**Tier 2: `//pw_allocator:public/pw_allocator/shared_ptr.h`**
+(change_cost 14.3, 99.4% cache hit, 26.6s downstream). This header
+changes on ~0.6% of commits, triggering 26.6s of tests each time.
+Separating the `shared_ptr` interface (types and signatures) from its
+implementation-coupling headers would reduce the set of targets that
+rebuild on allocator implementation changes.
+
+**Tier 3: `//pw_allocator/benchmarks:benchmark_test`** (6.1s, 88.5%
+cache hit, 0.7s expected). The most volatile test in pigweed at 11.5%
+invalidation rate. Narrowing its dependencies to allocator interfaces
+only (rather than the full implementation stack) would raise the cache
+hit rate. At 6.1s duration, a 5-point improvement in cache hit would
+save ~0.3s expected cost per commit — modest in absolute terms, but
+this pattern applied across the `pw_allocator` test cluster adds up.
 
 ### Metric utility notes
 
