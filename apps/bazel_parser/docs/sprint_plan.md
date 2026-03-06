@@ -73,22 +73,7 @@ A case study entry in `case_study.md` is complete when it contains:
 - [x] Abseil case study (2,608 nodes) ➕ 2026-03-03 📅 2026-03-06 ✅ 2026-03-05
 - [x] Complete to acceptance criteria ➕ 2026-03-03 📅 2026-03-06 ✅ 2026-03-05
 
-### Mar 7 — Drake Analysis
-
-- [x] Drake case study (16,987 nodes filtered) ➕ 2026-03-03 📅 2026-03-07 ✅ 2026-03-05
-- [x] Complete to acceptance criteria ➕ 2026-03-03 📅 2026-03-07 ✅ 2026-03-05
-
-### Mar 8 — Drake Complete + Pigweed Start
-
-- [x] Finish drake ➕ 2026-03-03 📅 2026-03-08 ✅ 2026-03-05
-- [x] Begin pigweed case study (19,199 nodes) ➕ 2026-03-03 📅 2026-03-08 ✅ 2026-03-05
-
-### Mar 9 — Pigweed + Additional Repos
-
-- [x] Complete pigweed case study ➕ 2026-03-03 📅 2026-03-09 ✅ 2026-03-05
-- [ ] If time: monogon or bzd case study ➕ 2026-03-03 📅 2026-03-09
-
-### Mar 10 — Metric Triage
+### Mar 7 — Drake Analysis & Metrics Triage & Cleanup
 
 - [ ] Review metric utility notes across all completed case studies ➕ 2026-03-03 📅 2026-03-10
 - [ ] **Metric triage**: decide: ➕ 2026-03-03 📅 2026-03-10
@@ -114,21 +99,30 @@ A case study entry in `case_study.md` is complete when it contains:
   - print vs log vs return in refinement (refinement.py)
   - Log individual exclusions (refinement.py)
 
-### Mar 13 — PyPI Packaging Start
+- [x] Drake case study (16,987 nodes filtered) ➕ 2026-03-03 📅 2026-03-07 ✅ 2026-03-05
+- [x] Complete to acceptance criteria ➕ 2026-03-03 📅 2026-03-07 ✅ 2026-03-05
+
+### Mar 8 — Drake Complete + Pigweed Start & Pypi
 
 - [ ] Assess proto file situation: `build_pb2.py`, `git_pb2.py`, BEP protos are ➕ 2026-03-03 📅 2026-03-13
       Bazel-generated — decide whether to pre-generate and vendor or generate at
       install time
 - [ ] Start `pyproject.toml` setup, entry points for CLI ➕ 2026-03-03 📅 2026-03-13
-
-### Mar 14 — PyPI Complete
-
 - [ ] Complete packaging (proto files, dependencies, entry point) ➕ 2026-03-03 📅 2026-03-14
 - [ ] Publish to PyPI (even as `0.1.0-alpha` / pre-release) ➕ 2026-03-03 📅 2026-03-14
 - [ ] End-to-end test: fresh install from PyPI → run workflow → open in gephi ➕ 2026-03-03 📅 2026-03-14
 - [ ] Fix anything that breaks ➕ 2026-03-03 📅 2026-03-14
 
-### Mar 15 — Documentation
+
+- [x] Finish drake ➕ 2026-03-03 📅 2026-03-08 ✅ 2026-03-05
+- [x] Begin pigweed case study (19,199 nodes) ➕ 2026-03-03 📅 2026-03-08 ✅ 2026-03-05
+
+### Mar 9 — Pigweed + Additional Repos
+
+- [x] Complete pigweed case study ➕ 2026-03-03 📅 2026-03-09 ✅ 2026-03-05
+- [ ] If time: monogon, bzd, maybe tensorflow case study ➕ 2026-03-03 📅 2026-03-09
+
+### Mar 10 — Documentation
 
 - [ ] Getting-started guide: "run these N bazel commands to collect data, then ➕ 2026-03-03 📅 2026-03-15
       `pip install bazel-parser && bazel-parser process ...`"
@@ -137,7 +131,8 @@ A case study entry in `case_study.md` is complete when it contains:
       recommendation for large repos)
 - [ ] Note panel app is still available for small repos ➕ 2026-03-03 📅 2026-03-15
 
-### Mar 16 — Slides Draft
+
+### Mar 13 — Slides Draft
 
 - [ ] Write full slide deck in markdown ➕ 2026-03-03 📅 2026-03-16
   - Suggested structure:
@@ -147,10 +142,16 @@ A case study entry in `case_study.md` is complete when it contains:
     4. How to run it yourself (PyPI + N bazel commands)
     5. What's next / call for contribution
 
-### Mar 17 — Slides Polish
+### Mar 14 — Slides Polish
 
 - [ ] Polish markdown slides ➕ 2026-03-03 📅 2026-03-17
 - [ ] Transition to Google Slides ➕ 2026-03-03 📅 2026-03-17
+
+### Mar 15 — Documentation
+
+### Mar 16 — Slides Draft
+
+### Mar 17 — Slides Polish
 
 ### Stretch Goals
 
