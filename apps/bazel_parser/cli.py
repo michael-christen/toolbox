@@ -319,6 +319,11 @@ def report(csv_path: pathlib.Path, top_n: int) -> None:
     num_nodes = len(df)
     num_sources = df["is_source"].sum()
     num_tests = df["has_duration"].sum()
+    total_duration_s = df["node_duration_s"].sum()
+    expected_duration_s = (
+        df["node_duration_s"] * (1 - df["group_probability_cache_hit"])
+    ).sum()
+    avg_nodes_per_commit = (1 - df["group_probability_cache_hit"]).sum()
 
     click.echo(f"=== BUILD GRAPH REPORT ===")
     click.echo(f"Source: {csv_path}")
@@ -326,6 +331,11 @@ def report(csv_path: pathlib.Path, top_n: int) -> None:
         f"Nodes: {num_nodes}  |  "
         f"Source files: {num_sources}  |  "
         f"Tests: {num_tests}"
+    )
+    click.echo(
+        f"Total test duration: {total_duration_s:.1f}s  |  "
+        f"Expected cost/commit: {expected_duration_s:.1f}s  |  "
+        f"Avg nodes invalidated/commit: {avg_nodes_per_commit:.0f}"
     )
 
     click.echo(f"\n--- TIER 1: SPLIT CANDIDATES ---")
