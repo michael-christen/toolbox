@@ -320,9 +320,9 @@ def _emit_refinement_suggestions(df: pandas.DataFrame) -> None:
         ).dropna()
         stats["pct"] = stats["count"] / stats["total"] * 100
         mask = (stats["pct"] > 50) & (stats["count"] >= 10)
-        candidates = pandas.DataFrame(
-            stats.loc[mask]
-        ).sort_values(by="count", ascending=False)
+        candidates = pandas.DataFrame(stats.loc[mask]).sort_values(
+            by="count", ascending=False
+        )
         for node_class, row in candidates.iterrows():
             seen.add(str(node_class))
             suggestions.append(
