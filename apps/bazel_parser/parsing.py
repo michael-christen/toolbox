@@ -90,7 +90,6 @@ def _get_node_probability(
     nodes: list[str],
     file_commit_map: git_utils.FileCommitMap,
 ) -> dict[str, float]:
-    # XXX: Test case with BUILD further up, ensure we still get the right match
     bazel_intermediates = _normalize_paths_to_bazel_intermediates(
         list(file_commit_map.file_map.keys())
     )
