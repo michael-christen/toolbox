@@ -165,6 +165,7 @@ A case study entry in `case_study.md` is complete when it contains:
       tightly coupled to the repo's rule set.
 - [ ] Consider need of cquery to handle selections in the graph ➕ 2026-03-05
 - [ ] why are type hint issues not caught in py_test artifacts ➕ 2026-03-05
+- [ ] remove all of the `logger.debug('a')` statements in `repo_graph_data.py` ➕ 2026-03-05
 
 ---
 
