@@ -7,8 +7,8 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="autoapi/apps/bazel_parser/refinement/index.html" />
 <meta property="og:site_name" content="toolbox" />
-<meta property="og:description" content="Classes: Functions: Module Contents:" />
-<meta name="description" content="Classes: Functions: Module Contents:" />
+<meta property="og:description" content="Attributes: Classes: Functions: Module Contents:" />
+<meta name="description" content="Attributes: Classes: Functions: Module Contents:" />
 <link rel="index" title="Index" href="../../../../genindex.html"><link rel="search" title="Search" href="../../../../search.html"><link rel="next" title="apps.bazel_parser.repo_graph_data" href="../repo_graph_data/index.html"><link rel="prev" title="apps.bazel_parser.parsing" href="../parsing/index.html">
 
     <link rel="shortcut icon" href="../../../../_static/wrench.png"><!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
@@ -271,6 +271,18 @@
         <article role="main" id="furo-main-content">
           <section id="module-apps.bazel_parser.refinement">
 <span id="apps-bazel-parser-refinement"></span><h1>apps.bazel_parser.refinement<a class="headerlink" href="#module-apps.bazel_parser.refinement" title="Link to this heading"></a></h1>
+<section id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading"></a></h2>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#apps.bazel_parser.refinement.logger" title="apps.bazel_parser.refinement.logger"><code class="xref py py-obj docutils literal notranslate"><span class="pre">logger</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
 <section id="classes">
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading"></a></h2>
 <div class="table-wrapper autosummary longtable docutils container">
@@ -306,6 +318,11 @@
 </section>
 <section id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py data">
+<dt class="sig sig-object py" id="apps.bazel_parser.refinement.logger">
+<span class="sig-prename descclassname"><span class="pre">apps.bazel_parser.refinement.</span></span><span class="sig-name descname"><span class="pre">logger</span></span><a class="reference internal" href="../../../../_modules/apps/bazel_parser/refinement.html#logger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.refinement.logger" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="apps.bazel_parser.refinement.Verbosity">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">apps.bazel_parser.refinement.</span></span><span class="sig-name descname"><span class="pre">Verbosity</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwds</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../../../_modules/apps/bazel_parser/refinement.html#Verbosity"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.refinement.Verbosity" title="Link to this definition"></a></dt>
@@ -412,7 +429,9 @@ attributes – see the documentation for details.</p>
 <dt class="sig sig-object py" id="apps.bazel_parser.refinement.remove_node_from_repo">
 <span class="sig-prename descclassname"><span class="pre">apps.bazel_parser.refinement.</span></span><span class="sig-name descname"><span class="pre">remove_node_from_repo</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">repo</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../repo_graph_data/index.html#apps.bazel_parser.repo_graph_data.RepoGraphData" title="apps.bazel_parser.repo_graph_data.RepoGraphData"><span class="pre">apps.bazel_parser.repo_graph_data.RepoGraphData</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../../_modules/apps/bazel_parser/refinement.html#remove_node_from_repo"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.refinement.remove_node_from_repo" title="Link to this definition"></a></dt>
 <dd><p>Modify graph by removing node, but preserving edges.</p>
-<p>XXX: How to handle probability / duration attributes of removed nodes?</p>
+<p>Removed nodes are expected to be noise/artifact targets (probability=1.0,
+duration=0), so dropping their attributes is correct. Callers should call
+repo.refresh() afterward to recompute all metrics on the reduced graph.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -502,9 +521,11 @@ attributes – see the documentation for details.</p>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">apps.bazel_parser.refinement</a><ul>
+<li><a class="reference internal" href="#attributes">Attributes</a></li>
 <li><a class="reference internal" href="#classes">Classes</a></li>
 <li><a class="reference internal" href="#functions">Functions</a></li>
 <li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li><a class="reference internal" href="#apps.bazel_parser.refinement.logger"><code class="docutils literal notranslate"><span class="pre">logger</span></code></a></li>
 <li><a class="reference internal" href="#apps.bazel_parser.refinement.Verbosity"><code class="docutils literal notranslate"><span class="pre">Verbosity</span></code></a><ul>
 <li><a class="reference internal" href="#apps.bazel_parser.refinement.Verbosity.SILENT"><code class="docutils literal notranslate"><span class="pre">Verbosity.SILENT</span></code></a></li>
 <li><a class="reference internal" href="#apps.bazel_parser.refinement.Verbosity.COUNT"><code class="docutils literal notranslate"><span class="pre">Verbosity.COUNT</span></code></a></li>
@@ -549,6 +570,6 @@ attributes – see the documentation for details.</p>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
     <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
-    <script defer="defer" src="../../../../_static/tippy/autoapi/apps/bazel_parser/refinement/index.fb8ee381-3212-4b7b-8653-8a8f1b645bb4.js"></script>
+    <script defer="defer" src="../../../../_static/tippy/autoapi/apps/bazel_parser/refinement/index.b4fbb190-b788-4914-ac42-225b149caab8.js"></script>
     </body>
 </html>

@@ -282,13 +282,14 @@
         <span class="k">if</span> <span class="n">target</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="n">build_pb2</span><span class="o">.</span><span class="n">Target</span><span class="o">.</span><span class="n">RULE</span><span class="p">:</span>
             <span class="k">pass</span>
         <span class="k">elif</span> <span class="n">target</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="p">{</span>
+            <span class="c1"># SOURCE_FILE nodes are included implicitly via rule_input edges;</span>
+            <span class="c1"># parsing them explicitly adds no value since classification</span>
+            <span class="c1"># already uses git history matching on rule labels.</span>
             <span class="n">build_pb2</span><span class="o">.</span><span class="n">Target</span><span class="o">.</span><span class="n">SOURCE_FILE</span><span class="p">,</span>
             <span class="n">build_pb2</span><span class="o">.</span><span class="n">Target</span><span class="o">.</span><span class="n">GENERATED_FILE</span><span class="p">,</span>
             <span class="n">build_pb2</span><span class="o">.</span><span class="n">Target</span><span class="o">.</span><span class="n">PACKAGE_GROUP</span><span class="p">,</span>
             <span class="n">build_pb2</span><span class="o">.</span><span class="n">Target</span><span class="o">.</span><span class="n">ENVIRONMENT_GROUP</span><span class="p">,</span>
         <span class="p">}:</span>
-            <span class="c1"># logger.debug(f&quot;{i}, {type_name}&quot;)</span>
-            <span class="c1"># XXX: Should we allow SOURCE_FILE?</span>
             <span class="k">continue</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
@@ -297,7 +298,6 @@
         <span class="c1"># We are a rule type now</span>
         <span class="n">rule</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">rule</span>
 
-        <span class="c1"># logger.debug(f&quot;{rule.name}({rule.rule_class})&quot;)</span>
         <span class="c1"># Didn&#39;t see much use with these:</span>
         <span class="c1"># - rule.configured_rule_input</span>
         <span class="c1"># - rule.default_setting</span>
@@ -352,7 +352,6 @@
     <span class="n">nodes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
     <span class="n">file_commit_map</span><span class="p">:</span> <span class="n">git_utils</span><span class="o">.</span><span class="n">FileCommitMap</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
-    <span class="c1"># XXX: Test case with BUILD further up, ensure we still get the right match</span>
     <span class="n">bazel_intermediates</span> <span class="o">=</span> <span class="n">_normalize_paths_to_bazel_intermediates</span><span class="p">(</span>
         <span class="nb">list</span><span class="p">(</span><span class="n">file_commit_map</span><span class="o">.</span><span class="n">file_map</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
     <span class="p">)</span>

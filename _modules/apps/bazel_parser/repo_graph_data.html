@@ -556,15 +556,12 @@
 <div class="viewcode-block" id="RepoGraphData.get_node">
 <a class="viewcode-back" href="../../../autoapi/apps/bazel_parser/repo_graph_data/index.html#apps.bazel_parser.repo_graph_data.RepoGraphData.get_node">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_node</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">node</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Node</span><span class="p">:</span>
-        <span class="c1"># XXX: Better checking</span>
         <span class="k">return</span> <span class="n">cast</span><span class="p">(</span><span class="n">Node</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">node</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span></div>
 
 
 <div class="viewcode-block" id="RepoGraphData.get_graph_metrics">
 <a class="viewcode-back" href="../../../autoapi/apps/bazel_parser/repo_graph_data/index.html#apps.bazel_parser.repo_graph_data.RepoGraphData.get_graph_metrics">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_graph_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GraphMetrics</span><span class="p">:</span>
-        <span class="c1"># XXX: Maybe we should remove weakly connected components &lt; some</span>
-        <span class="c1"># threshold size</span>
         <span class="n">expected_duration_s</span> <span class="o">=</span> <span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;node_duration_s&quot;</span><span class="p">]</span>
             <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;group_probability_cache_hit&quot;</span><span class="p">])</span>
@@ -603,11 +600,14 @@
         <span class="k">return</span> <span class="n">metrics</span></div>
 
 
-    <span class="c1"># XXX: label, node_name, Node are all doing the same thing</span>
 <div class="viewcode-block" id="RepoGraphData.to_gml">
 <a class="viewcode-back" href="../../../autoapi/apps/bazel_parser/repo_graph_data/index.html#apps.bazel_parser.repo_graph_data.RepoGraphData.to_gml">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_gml</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out_gml</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="c1"># Add node attributes to copy of the graph</span>
+        <span class="c1"># Add node attributes to copy of the graph.</span>
+        <span class="c1"># node_name column duplicates the df index intentionally: to_csv uses</span>
+        <span class="c1"># index=False so node_name is the label in CSV output. &quot;Node&quot; attribute</span>
+        <span class="c1"># duplicates it again for gephi, which uses &quot;Node&quot; as the display</span>
+        <span class="c1"># label.</span>
         <span class="n">graph</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
             <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">row</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -677,13 +677,10 @@
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
 
     <span class="c1"># Compute centrality metrics</span>
-    <span class="c1"># XXX: Determine better mechanism to choose k</span>
-    <span class="c1"># // 4</span>
+    <span class="c1"># k: number of pivot nodes for betweenness approximation. Floored at 1000</span>
+    <span class="c1"># since sqrt(V) is too small for large graphs (~138 for V=19k). 1000 pivots</span>
+    <span class="c1"># gives adequate relative rankings for top-N analysis without exact values.</span>
     <span class="n">k</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">num_nodes</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="mi">1_000</span><span class="p">,</span> <span class="n">num_nodes</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)))</span>
-    <span class="c1"># Compare performance of igraph:</span>
-    <span class="c1"># https://python.igraph.org/en/stable/api/igraph.GraphBase.html#betweenness</span>
-    <span class="c1"># O(VE), use k to make it quicker</span>
-    <span class="c1"># Only noticed any time during drake &amp; pigweed trial</span>
     <span class="n">betweenness</span> <span class="o">=</span> <span class="n">networkx</span><span class="o">.</span><span class="n">betweenness_centrality</span><span class="p">(</span><span class="n">repo</span><span class="o">.</span><span class="n">graph</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">)</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
     <span class="n">closeness</span> <span class="o">=</span> <span class="n">networkx</span><span class="o">.</span><span class="n">closeness_centrality</span><span class="p">(</span><span class="n">repo</span><span class="o">.</span><span class="n">graph</span><span class="p">)</span>
@@ -716,8 +713,6 @@
             <span class="s2">&quot;num_source_descendants&quot;</span><span class="p">:</span> <span class="n">num_source_descendants</span><span class="p">,</span>
             <span class="s2">&quot;pagerank&quot;</span><span class="p">:</span> <span class="n">pagerank</span><span class="p">[</span><span class="n">node_name</span><span class="p">],</span>
             <span class="s2">&quot;node_duration_s&quot;</span><span class="p">:</span> <span class="n">node_duration_s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">node_name</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
-            <span class="c1"># XXX: determine_main is getting the attribution, but not the</span>
-            <span class="c1"># main library, etc. not sure</span>
             <span class="s2">&quot;group_duration_s&quot;</span><span class="p">:</span> <span class="n">gd</span><span class="p">,</span>
             <span class="s2">&quot;expected_duration_s&quot;</span><span class="p">:</span> <span class="n">gd</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">gp</span><span class="p">),</span>
             <span class="s2">&quot;node_probability_cache_hit&quot;</span><span class="p">:</span> <span class="n">np</span><span class="p">,</span>
