@@ -52,10 +52,7 @@ class TestRepoGraphData(unittest.TestCase):
         print(r.df)
         pprint.pprint(r.get_node("c"))
         self.assertEqual(r.get_node("c")["node_probability_cache_hit"], 0.5)
-        self.assertEqual(r.get_node("c")["num_duration_ancestors"], 2)
-        self.assertEqual(r.get_node("d")["num_duration_ancestors"], 0)
         self.assertEqual(r.get_node("i")["num_ancestors"], 1)
-        self.assertEqual(r.get_node("i")["num_duration_ancestors"], 0)
         with self.assertRaisesRegex(KeyError, "not there"):
             r.get_node("not there")
 

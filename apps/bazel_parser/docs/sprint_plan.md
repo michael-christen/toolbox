@@ -154,6 +154,16 @@ A case study entry in `case_study.md` is complete when it contains:
 
 ### Stretch Goals
 
+- [ ] **Co-change analysis**: join `file_commit.pb` with the build graph to
+      surface two signals:
+  - *Same-target divergence*: files in the same library that rarely change
+    together (split candidate) — scored as avg pairwise co-change among active
+    files (≥ MIN_CHANGES commits in window)
+  - *Cross-target convergence*: library↔library file pairs with high co-change
+    score (merge candidate) — filter out lib↔test pairs which are expected
+  - Prototype exists; 100% file match rate on abseil-cpp confirmed. Main open
+    question is whether signal holds up at drake/pigweed scale.
+  - Would add a new `--file-commit-pb` input to the `report` command.
 - [ ] consider reversing direction here (X depends on Y; Y is the ancestor ➕ 2026-03-03
       instead of the descendant); would allow more standardization / make a bit
       more sense (dependencies must come before their dependent)

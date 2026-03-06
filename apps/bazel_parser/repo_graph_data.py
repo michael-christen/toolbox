@@ -29,9 +29,6 @@ class Node(TypedDict):
     num_parents: int
     # Total number of nodes that transitively depend on you
     num_ancestors: int
-    # Total number of nodes that transitively depend on you and have a defined
-    # execution time (such as tests)
-    num_duration_ancestors: int
     # Whether this has a computed duration. We find this more explicit than
     # simply checking > 0 for duration_s
     has_duration: bool
@@ -48,8 +45,6 @@ class Node(TypedDict):
 
     # ===== Link Analysis =====
     pagerank: float
-    hubs_metric: float
-    authorities_metric: float
 
     # ===== Node Specific =====
     # How long this node took to "execute"
@@ -74,17 +69,6 @@ class Node(TypedDict):
     # ancestor_depth, but descendant
     # - The max shortest path of this node in a graph
     descendant_depth: int
-
-    # A more node specific version of
-    # rebuilt_targets_by_transitive_dependencies
-    # XXX: May not be too helpful?
-    # (1 - node_probability_cache_hit) * num_ancestors
-    # > Score for how much changes to a single target affects others due to
-    # > cache invalidations
-    # > A high score means that you are a top cache invalidator in the graph.
-    # > E.g. “ios_pill” that we saw in the beginning.
-    # related to rebuilt_target
-    ancestors_by_node_p: float
 
     # An unweighted version of expected_duration_s wrt duration
     # (1 - group_probability_cache_hit) * num_ancestors
@@ -175,19 +159,15 @@ class RepoGraphData:
                 # Everything below is expected to be updated in refresh
                 "num_parents": 0,
                 "num_ancestors": 0,
-                "num_duration_ancestors": 0,
                 "num_children": 0,
                 "num_descendants": 0,
                 "num_source_descendants": 0,
                 "pagerank": 0,
-                "hubs_metric": 0,
-                "authorities_metric": 0,
                 "group_duration_s": 0,
                 "expected_duration_s": 0,
                 "group_probability_cache_hit": 0,
                 "ancestor_depth": 0,
                 "descendant_depth": 0,
-                "ancestors_by_node_p": 0,
                 "ancestors_by_group_p": 0,
                 "ancestors_by_descendants": 0,
                 "betweenness_centrality": 0,
@@ -279,12 +259,6 @@ def dependency_analysis(repo: RepoGraphData) -> dict[str, Node]:
     )
     logger.debug("a")
     pagerank = networkx.pagerank(repo.graph)
-    hubs, authorities = networkx.hits(repo.graph)
-    # XXX: Should we have a data structure that's just a big collection of
-    # components
-    # - use cases:
-    #  - dictionary of node-specific info for js callbacks
-    #  - set of lists / DataFrame for csv or DataSource
 
     # logger.debug(f"nodes: {len(graph.nodes)}")
     # logger.debug(f"edges: {len(graph.edges)}")
@@ -336,9 +310,6 @@ def dependency_analysis(repo: RepoGraphData) -> dict[str, Node]:
         num_children = out_degree[node_name]
         ancestors = list(networkx.ancestors(repo.graph, node_name))
         num_ancestors = len(ancestors)
-        num_duration_ancestors = repo.df.loc[
-            repo.df.index.intersection(ancestors)
-        ]["has_duration"].sum()
         descendants = list(networkx.descendants(repo.graph, node_name))
         num_descendants = len(descendants)
         num_source_descendants = repo.df.loc[
@@ -354,13 +325,10 @@ def dependency_analysis(repo: RepoGraphData) -> dict[str, Node]:
             "has_duration": cur_node["has_duration"],
             "num_parents": int(num_parents),
             "num_ancestors": num_ancestors,
-            "num_duration_ancestors": num_duration_ancestors,
             "num_children": int(num_children),
             "num_descendants": num_descendants,
             "num_source_descendants": num_source_descendants,
             "pagerank": pagerank[node_name],
-            "hubs_metric": hubs[node_name],
-            "authorities_metric": authorities[node_name],
             "node_duration_s": node_duration_s.get(node_name, 0),
             # XXX: determine_main is getting the attribution, but not the
             # main library, etc. not sure
@@ -370,7 +338,6 @@ def dependency_analysis(repo: RepoGraphData) -> dict[str, Node]:
             "group_probability_cache_hit": gp,
             "ancestor_depth": ancestor_depth[node_name],
             "descendant_depth": descendant_depth[node_name],
-            "ancestors_by_node_p": num_ancestors * (1 - np),
             "ancestors_by_group_p": num_ancestors * (1 - gp),
             "ancestors_by_descendants": num_ancestors * num_descendants,
             "betweenness_centrality": betweenness[node_name],
