@@ -30,9 +30,6 @@ apps.bazel_parser.cli
        describe cost
      - graph that we could identify overly depended upon things
 
-   XXX:
-    - bazel query --keep_going --noimplicit_deps --output proto "deps(//...)"
-      is much bigger than "//..." alone, compare what the differences are
    - git log --since="10 years ago" --name-only --pretty=format: | sort \
            | uniq -c | sort -nr
      - this is much faster
@@ -129,6 +126,7 @@ Functions
    apps.bazel_parser.cli.git_capture
    apps.bazel_parser.cli.process
    apps.bazel_parser.cli.full
+   apps.bazel_parser.cli.report
    apps.bazel_parser.cli.visualize
 
 
@@ -176,6 +174,8 @@ Module Contents
 .. py:function:: process(query_pb: pathlib.Path, bep_pb: pathlib.Path, file_commit_pb: pathlib.Path, out_gml: pathlib.Path, out_csv: pathlib.Path, config_file: pathlib.Path | None) -> None
 
 .. py:function:: full(repo_dir: pathlib.Path, days_ago: int | None, config_file: pathlib.Path | None, out_gml: pathlib.Path | None, out_csv: pathlib.Path | None) -> None
+
+.. py:function:: report(csv_path: pathlib.Path, top_n: int) -> None
 
 .. py:function:: visualize(gml: pathlib.Path, out_html: pathlib.Path | None) -> None
 

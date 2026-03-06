@@ -282,9 +282,6 @@
 <span class="sd">    describe cost</span>
 <span class="sd">  - graph that we could identify overly depended upon things</span>
 
-<span class="sd">XXX:</span>
-<span class="sd"> - bazel query --keep_going --noimplicit_deps --output proto &quot;deps(//...)&quot;</span>
-<span class="sd">   is much bigger than &quot;//...&quot; alone, compare what the differences are</span>
 <span class="sd">- git log --since=&quot;10 years ago&quot; --name-only --pretty=format: | sort \</span>
 <span class="sd">        | uniq -c | sort -nr</span>
 <span class="sd">  - this is much faster</span>
@@ -360,6 +357,7 @@
 
 <span class="kn">import</span><span class="w"> </span><span class="nn">click</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">networkx</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">pydantic</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
 
@@ -516,8 +514,6 @@
         <span class="n">label_to_runtime</span><span class="o">=</span><span class="n">label_to_runtime</span><span class="p">,</span>
         <span class="n">file_commit_map</span><span class="o">=</span><span class="n">file_commit_map</span><span class="p">,</span>
     <span class="p">)</span>
-    <span class="c1"># XXX: Probably should refresh afterwards too, right?</span>
-    <span class="c1"># XXX: Probably want to refine before performing full refresh</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Refining...&quot;</span><span class="p">)</span>
     <span class="n">refinement</span><span class="o">.</span><span class="n">full_refinement</span><span class="p">(</span>
         <span class="n">repo</span><span class="o">=</span><span class="n">r</span><span class="p">,</span>
@@ -526,8 +522,8 @@
     <span class="p">)</span>
     <span class="n">r</span><span class="o">.</span><span class="n">refresh</span><span class="p">()</span>
     <span class="n">graph_metrics</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">get_graph_metrics</span><span class="p">()</span>
-    <span class="c1"># XXX: What to do with graph_metrics?</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">graph_metrics</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Graph metrics: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">graph_metrics</span><span class="p">)</span>
+    <span class="c1"># TODO: serialize graph_metrics to output file after case studies</span>
     <span class="n">r</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">out_csv</span><span class="p">)</span>
     <span class="n">r</span><span class="o">.</span><span class="n">to_gml</span><span class="p">(</span><span class="n">out_gml</span><span class="p">)</span></div>
 
@@ -552,7 +548,14 @@
     <span class="c1"># Query for graph</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Querying...&quot;</span><span class="p">)</span>
     <span class="n">query_pb</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">check_output</span><span class="p">(</span>
-        <span class="p">[</span><span class="s2">&quot;bazel&quot;</span><span class="p">,</span> <span class="s2">&quot;query&quot;</span><span class="p">,</span> <span class="s2">&quot;--output&quot;</span><span class="p">,</span> <span class="s2">&quot;proto&quot;</span><span class="p">,</span> <span class="n">config</span><span class="o">.</span><span class="n">query_target</span><span class="p">],</span>
+        <span class="p">[</span>
+            <span class="s2">&quot;bazel&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;query&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;--notool_deps&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;--output&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;proto&quot;</span><span class="p">,</span>
+            <span class="n">config</span><span class="o">.</span><span class="n">query_target</span><span class="p">,</span>
+        <span class="p">],</span>
         <span class="n">cwd</span><span class="o">=</span><span class="n">repo_dir</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">query_result</span> <span class="o">=</span> <span class="n">bazel_utils</span><span class="o">.</span><span class="n">parse_build_output</span><span class="p">(</span><span class="n">query_pb</span><span class="p">)</span>
@@ -571,7 +574,6 @@
         <span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">bep_pb</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">bep_buf</span><span class="p">:</span>
             <span class="n">label_to_runtime</span> <span class="o">=</span> <span class="n">bep_reader</span><span class="o">.</span><span class="n">get_label_to_runtime</span><span class="p">(</span><span class="n">bep_buf</span><span class="p">)</span>
-    <span class="c1"># XXX: Optional build timing data ...</span>
     <span class="c1"># Capture git information</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;History from git...&quot;</span><span class="p">)</span>
     <span class="n">git_query_after</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span>
@@ -594,12 +596,175 @@
     <span class="p">)</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Outputting...&quot;</span><span class="p">)</span>
     <span class="n">graph_metrics</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">get_graph_metrics</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">graph_metrics</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Graph metrics: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">graph_metrics</span><span class="p">)</span>
+    <span class="c1"># TODO: serialize graph_metrics to output file after case studies</span>
     <span class="k">if</span> <span class="n">out_csv</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">r</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">out_csv</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">out_gml</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">r</span><span class="o">.</span><span class="n">to_gml</span><span class="p">(</span><span class="n">out_gml</span><span class="p">)</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Done...&quot;</span><span class="p">)</span></div>
+
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_emit_refinement_suggestions</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">total_by_class</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;node_class&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">&quot;total&quot;</span><span class="p">)</span>
+    <span class="n">seen</span><span class="p">:</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_check</span><span class="p">(</span>
+        <span class="n">mask</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">Series</span><span class="p">,</span>
+        <span class="n">description</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">suggestions</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">flagged</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">mask</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;node_class&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">seen</span><span class="p">)]</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">flagged</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">counts</span> <span class="o">=</span> <span class="n">flagged</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;node_class&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">&quot;count&quot;</span><span class="p">)</span>
+        <span class="n">stats</span><span class="p">:</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">total_by_class</span><span class="p">,</span> <span class="n">counts</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+        <span class="n">stats</span><span class="p">[</span><span class="s2">&quot;pct&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">stats</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">stats</span><span class="p">[</span><span class="s2">&quot;total&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="s2">&quot;pct&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">50</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">stats</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="n">candidates</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">stats</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">mask</span><span class="p">])</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span>
+            <span class="n">by</span><span class="o">=</span><span class="s2">&quot;count&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">node_class</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">candidates</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+            <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">node_class</span><span class="p">))</span>
+            <span class="n">suggestions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                <span class="p">(</span>
+                    <span class="nb">str</span><span class="p">(</span><span class="n">node_class</span><span class="p">),</span>
+                    <span class="n">description</span><span class="p">,</span>
+                    <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;count&quot;</span><span class="p">]),</span>
+                    <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&quot;total&quot;</span><span class="p">]),</span>
+                    <span class="n">row</span><span class="p">[</span><span class="s2">&quot;pct&quot;</span><span class="p">],</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+
+    <span class="n">suggestions</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">_check</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;num_ancestors&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;num_descendants&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">),</span>
+        <span class="s2">&quot;fully isolated (no edges)&quot;</span><span class="p">,</span>
+        <span class="n">suggestions</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">_check</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;num_descendants&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;is_source&quot;</span><span class="p">]</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;has_duration&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;non-source leaf (distorts ancestor scores of parents)&quot;</span><span class="p">,</span>
+        <span class="n">suggestions</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">_check</span><span class="p">(</span>
+        <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;num_ancestors&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;num_descendants&quot;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">2</span><span class="p">)</span>
+        <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;num_ancestors&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;num_descendants&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="o">&amp;</span> <span class="o">~</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;is_source&quot;</span><span class="p">]</span>
+        <span class="o">&amp;</span> <span class="o">~</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;has_duration&quot;</span><span class="p">],</span>
+        <span class="s2">&quot;very low connectivity — likely in a small disconnected component&quot;</span><span class="p">,</span>
+        <span class="n">suggestions</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">suggestions</span><span class="p">:</span>
+        <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- REFINEMENT SUGGESTIONS ---&quot;</span><span class="p">)</span>
+        <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span>
+            <span class="s2">&quot;Node classes that may distort analysis results.</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="s2">&quot;Consider adding to refinement.class_patterns in your config:&quot;</span>
+        <span class="p">)</span>
+        <span class="k">for</span> <span class="n">node_class</span><span class="p">,</span> <span class="n">reason</span><span class="p">,</span> <span class="n">count</span><span class="p">,</span> <span class="n">total</span><span class="p">,</span> <span class="n">pct</span> <span class="ow">in</span> <span class="n">suggestions</span><span class="p">:</span>
+            <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">node_class</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">count</span><span class="si">}</span><span class="s2"> of </span><span class="si">{</span><span class="n">total</span><span class="si">}</span><span class="s2"> nodes — </span><span class="si">{</span><span class="n">reason</span><span class="si">}</span><span class="s2"> &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;(</span><span class="si">{</span><span class="n">pct</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">%)&quot;</span>
+            <span class="p">)</span>
+
+
+<span class="nd">@click</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;--csv&quot;</span><span class="p">,</span> <span class="s2">&quot;csv_path&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">PATH_TYPE</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nd">@click</span><span class="o">.</span><span class="n">option</span><span class="p">(</span><span class="s2">&quot;--top-n&quot;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">show_default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="viewcode-block" id="report">
+<a class="viewcode-back" href="../../../autoapi/apps/bazel_parser/cli/index.html#apps.bazel_parser.cli.report">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">report</span><span class="p">(</span><span class="n">csv_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">top_n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">csv_path</span><span class="p">)</span>
+    <span class="n">num_nodes</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">num_sources</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;is_source&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">num_tests</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;has_duration&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">total_duration_s</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;node_duration_s&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">expected_duration_s</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">df</span><span class="p">[</span><span class="s2">&quot;node_duration_s&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;group_probability_cache_hit&quot;</span><span class="p">])</span>
+    <span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">avg_nodes_per_commit</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;group_probability_cache_hit&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+    <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s2">&quot;=== BUILD GRAPH REPORT ===&quot;</span><span class="p">)</span>
+    <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Source: </span><span class="si">{</span><span class="n">csv_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Nodes: </span><span class="si">{</span><span class="n">num_nodes</span><span class="si">}</span><span class="s2">  |  &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;Source files: </span><span class="si">{</span><span class="n">num_sources</span><span class="si">}</span><span class="s2">  |  &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;Tests: </span><span class="si">{</span><span class="n">num_tests</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+    <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;Total test duration: </span><span class="si">{</span><span class="n">total_duration_s</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">s  |  &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;Expected cost/commit: </span><span class="si">{</span><span class="n">expected_duration_s</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">s  |  &quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;Avg nodes invalidated/commit: </span><span class="si">{</span><span class="n">avg_nodes_per_commit</span><span class="si">:</span><span class="s2">.0f</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+
+    <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- STRUCTURAL BOTTLENECKS ---&quot;</span><span class="p">)</span>
+    <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span>
+        <span class="s2">&quot;Nodes with both dependents and dependencies, ranked by structural</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="s2">&quot;coupling (ancestors × descendants). Splitting reduces blast radius.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">mid</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;num_ancestors&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;num_descendants&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)]</span>
+    <span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">mid</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="n">top_n</span><span class="p">,</span> <span class="s2">&quot;ancestors_by_descendants&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;node_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">  [</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;node_class&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">]</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;    ancestors=</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;num_ancestors&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;descendants=</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;num_descendants&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;score=</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;ancestors_by_descendants&#39;</span><span class="p">])</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;expected_duration=</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;expected_duration_s&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">s&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- COSTLY BOTTLENECKS ---&quot;</span><span class="p">)</span>
+    <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span>
+        <span class="s2">&quot;Same filter, ranked by expected duration: downstream test time</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="s2">&quot;weighted by invalidation probability. Prioritizes CI cost.&quot;</span>
+    <span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">mid</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="n">top_n</span><span class="p">,</span> <span class="s2">&quot;expected_duration_s&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="n">cache_pct</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;group_probability_cache_hit&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
+        <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;node_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">  [</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;node_class&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">]</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;    expected_duration=</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;expected_duration_s&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">s, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;cache_hit=</span><span class="si">{</span><span class="n">cache_pct</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;score=</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;ancestors_by_descendants&#39;</span><span class="p">])</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- HOT SOURCE FILES ---&quot;</span><span class="p">)</span>
+    <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span>
+        <span class="s2">&quot;Source files that change and trigger many downstream rebuilds.</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="s2">&quot;Isolating into narrower targets reduces blast radius.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">src</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+        <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;is_source&quot;</span><span class="p">]</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;node_probability_cache_hit&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mf">1.0</span><span class="p">)]</span>
+    <span class="p">)</span>
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">src</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="n">top_n</span><span class="p">,</span> <span class="s2">&quot;ancestors_by_group_p&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="n">cache_pct</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;node_probability_cache_hit&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
+        <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;node_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;    change_cost=</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;ancestors_by_group_p&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;cache_hit=</span><span class="si">{</span><span class="n">cache_pct</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;downstream_tests=</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;group_duration_s&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">s&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- EXPENSIVE TESTS ---&quot;</span><span class="p">)</span>
+    <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span>
+        <span class="s2">&quot;Test targets with high expected cost (slow and frequently &quot;</span>
+        <span class="s2">&quot;invalidated).</span><span class="se">\n</span><span class="s2">Reducing their dependencies lowers CI cost per commit.&quot;</span>
+    <span class="p">)</span>
+    <span class="n">tests</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;has_duration&quot;</span><span class="p">]]</span>
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">tests</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="n">top_n</span><span class="p">,</span> <span class="s2">&quot;expected_duration_s&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="n">cache_pct</span> <span class="o">=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;group_probability_cache_hit&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span>
+        <span class="n">click</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;  </span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;node_name&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;    duration=</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;node_duration_s&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">s, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;cache_hit=</span><span class="si">{</span><span class="n">cache_pct</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%, &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;expected_duration=</span><span class="si">{</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;expected_duration_s&#39;</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">s&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">_emit_refinement_suggestions</span><span class="p">(</span><span class="n">df</span><span class="p">)</span></div>
 
 
 
@@ -629,6 +794,7 @@
     <span class="p">)</span>
     <span class="n">cli</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span><span class="n">git_capture</span><span class="p">)</span>
     <span class="n">cli</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span><span class="n">process</span><span class="p">)</span>
+    <span class="n">cli</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span><span class="n">report</span><span class="p">)</span>
     <span class="n">cli</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span><span class="n">visualize</span><span class="p">)</span>
     <span class="n">cli</span><span class="o">.</span><span class="n">add_command</span><span class="p">(</span><span class="n">full</span><span class="p">)</span>
     <span class="n">cli</span><span class="p">()</span>

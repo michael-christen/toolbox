@@ -66,10 +66,6 @@ Module Contents
       :type:  int
 
 
-   .. py:attribute:: num_duration_ancestors
-      :type:  int
-
-
    .. py:attribute:: has_duration
       :type:  bool
 
@@ -91,14 +87,6 @@ Module Contents
 
 
    .. py:attribute:: pagerank
-      :type:  float
-
-
-   .. py:attribute:: hubs_metric
-      :type:  float
-
-
-   .. py:attribute:: authorities_metric
       :type:  float
 
 
@@ -128,10 +116,6 @@ Module Contents
 
    .. py:attribute:: descendant_depth
       :type:  int
-
-
-   .. py:attribute:: ancestors_by_node_p
-      :type:  float
 
 
    .. py:attribute:: ancestors_by_group_p

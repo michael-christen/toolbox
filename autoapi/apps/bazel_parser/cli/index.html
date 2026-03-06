@@ -309,15 +309,6 @@ describe cost</p></li>
 <li><p>graph that we could identify overly depended upon things</p></li>
 </ul>
 </li>
-</ul>
-<dl class="simple">
-<dt>XXX:</dt><dd><ul class="simple">
-<li><p>bazel query –keep_going –noimplicit_deps –output proto “deps(//…)”
-is much bigger than “//…” alone, compare what the differences are</p></li>
-</ul>
-</dd>
-</dl>
-<ul>
 <li><dl>
 <dt>git log –since=”10 years ago” –name-only –pretty=format: | sort </dt><dd><div class="line-block">
 <div class="line">uniq -c | sort -nr</div>
@@ -463,7 +454,10 @@ bazel run //apps/bazel_parser –output_groups=-mypy – process </p>
 <tr class="row-even"><td><p><a class="reference internal" href="#apps.bazel_parser.cli.full" title="apps.bazel_parser.cli.full"><code class="xref py py-obj docutils literal notranslate"><span class="pre">full</span></code></a>(→ None)</p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#apps.bazel_parser.cli.visualize" title="apps.bazel_parser.cli.visualize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">visualize</span></code></a>(→ None)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#apps.bazel_parser.cli.report" title="apps.bazel_parser.cli.report"><code class="xref py py-obj docutils literal notranslate"><span class="pre">report</span></code></a>(→ None)</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#apps.bazel_parser.cli.visualize" title="apps.bazel_parser.cli.visualize"><code class="xref py py-obj docutils literal notranslate"><span class="pre">visualize</span></code></a>(→ None)</p></td>
 <td><p></p></td>
 </tr>
 </tbody>
@@ -612,6 +606,22 @@ bazel run //apps/bazel_parser –output_groups=-mypy – process </p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="apps.bazel_parser.cli.report">
+<span class="sig-prename descclassname"><span class="pre">apps.bazel_parser.cli.</span></span><span class="sig-name descname"><span class="pre">report</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">csv_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">top_n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../../_modules/apps/bazel_parser/cli.html#report"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.cli.report" title="Link to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>csv_path</strong> (<em>pathlib.Path</em>)</p></li>
+<li><p><strong>top_n</strong> (<em>int</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="apps.bazel_parser.cli.visualize">
 <span class="sig-prename descclassname"><span class="pre">apps.bazel_parser.cli.</span></span><span class="sig-name descname"><span class="pre">visualize</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">gml</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">out_html</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../../../_modules/apps/bazel_parser/cli.html#visualize"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#apps.bazel_parser.cli.visualize" title="Link to this definition"></a></dt>
 <dd><dl class="field-list simple">
@@ -707,6 +717,7 @@ bazel run //apps/bazel_parser –output_groups=-mypy – process </p>
 <li><a class="reference internal" href="#apps.bazel_parser.cli.git_capture"><code class="docutils literal notranslate"><span class="pre">git_capture()</span></code></a></li>
 <li><a class="reference internal" href="#apps.bazel_parser.cli.process"><code class="docutils literal notranslate"><span class="pre">process()</span></code></a></li>
 <li><a class="reference internal" href="#apps.bazel_parser.cli.full"><code class="docutils literal notranslate"><span class="pre">full()</span></code></a></li>
+<li><a class="reference internal" href="#apps.bazel_parser.cli.report"><code class="docutils literal notranslate"><span class="pre">report()</span></code></a></li>
 <li><a class="reference internal" href="#apps.bazel_parser.cli.visualize"><code class="docutils literal notranslate"><span class="pre">visualize()</span></code></a></li>
 </ul>
 </li>
@@ -737,6 +748,6 @@ bazel run //apps/bazel_parser –output_groups=-mypy – process </p>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
     <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
-    <script defer="defer" src="../../../../_static/tippy/autoapi/apps/bazel_parser/cli/index.92110c84-637e-42fe-b77d-e68f983c9e2e.js"></script>
+    <script defer="defer" src="../../../../_static/tippy/autoapi/apps/bazel_parser/cli/index.e97286ae-e326-43f6-a362-64f43ed04734.js"></script>
     </body>
 </html>

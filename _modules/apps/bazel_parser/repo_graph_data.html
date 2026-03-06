@@ -305,12 +305,6 @@
 <a class="viewcode-back" href="../../../autoapi/apps/bazel_parser/repo_graph_data/index.html#apps.bazel_parser.repo_graph_data.Node.num_ancestors">[docs]</a>
     <span class="n">num_ancestors</span><span class="p">:</span> <span class="nb">int</span></div>
 
-    <span class="c1"># Total number of nodes that transitively depend on you and have a defined</span>
-    <span class="c1"># execution time (such as tests)</span>
-<div class="viewcode-block" id="Node.num_duration_ancestors">
-<a class="viewcode-back" href="../../../autoapi/apps/bazel_parser/repo_graph_data/index.html#apps.bazel_parser.repo_graph_data.Node.num_duration_ancestors">[docs]</a>
-    <span class="n">num_duration_ancestors</span><span class="p">:</span> <span class="nb">int</span></div>
-
     <span class="c1"># Whether this has a computed duration. We find this more explicit than</span>
     <span class="c1"># simply checking &gt; 0 for duration_s</span>
 <div class="viewcode-block" id="Node.has_duration">
@@ -345,14 +339,6 @@
 <a class="viewcode-back" href="../../../autoapi/apps/bazel_parser/repo_graph_data/index.html#apps.bazel_parser.repo_graph_data.Node.pagerank">[docs]</a>
     <span class="n">pagerank</span><span class="p">:</span> <span class="nb">float</span></div>
 
-<div class="viewcode-block" id="Node.hubs_metric">
-<a class="viewcode-back" href="../../../autoapi/apps/bazel_parser/repo_graph_data/index.html#apps.bazel_parser.repo_graph_data.Node.hubs_metric">[docs]</a>
-    <span class="n">hubs_metric</span><span class="p">:</span> <span class="nb">float</span></div>
-
-<div class="viewcode-block" id="Node.authorities_metric">
-<a class="viewcode-back" href="../../../autoapi/apps/bazel_parser/repo_graph_data/index.html#apps.bazel_parser.repo_graph_data.Node.authorities_metric">[docs]</a>
-    <span class="n">authorities_metric</span><span class="p">:</span> <span class="nb">float</span></div>
-
 
     <span class="c1"># ===== Node Specific =====</span>
     <span class="c1"># How long this node took to &quot;execute&quot;</span>
@@ -386,8 +372,6 @@
     <span class="n">expected_duration_s</span><span class="p">:</span> <span class="nb">float</span></div>
 
 
-    <span class="c1"># XXX: Move these back and add them where necessarry</span>
-    <span class="c1"># ==== New =====</span>
     <span class="c1"># Max ancestor depth from this node</span>
     <span class="c1"># - The max shortest path of this node in a reversed graph</span>
 <div class="viewcode-block" id="Node.ancestor_depth">
@@ -399,20 +383,6 @@
 <div class="viewcode-block" id="Node.descendant_depth">
 <a class="viewcode-back" href="../../../autoapi/apps/bazel_parser/repo_graph_data/index.html#apps.bazel_parser.repo_graph_data.Node.descendant_depth">[docs]</a>
     <span class="n">descendant_depth</span><span class="p">:</span> <span class="nb">int</span></div>
-
-
-    <span class="c1"># A more node specific version of</span>
-    <span class="c1"># rebuilt_targets_by_transitive_dependencies</span>
-    <span class="c1"># XXX: May not be too helpful?</span>
-    <span class="c1"># (1 - node_probability_cache_hit) * num_ancestors</span>
-    <span class="c1"># &gt; Score for how much changes to a single target affects others due to</span>
-    <span class="c1"># &gt; cache invalidations</span>
-    <span class="c1"># &gt; A high score means that you are a top cache invalidator in the graph.</span>
-    <span class="c1"># &gt; E.g. “ios_pill” that we saw in the beginning.</span>
-    <span class="c1"># related to rebuilt_target</span>
-<div class="viewcode-block" id="Node.ancestors_by_node_p">
-<a class="viewcode-back" href="../../../autoapi/apps/bazel_parser/repo_graph_data/index.html#apps.bazel_parser.repo_graph_data.Node.ancestors_by_node_p">[docs]</a>
-    <span class="n">ancestors_by_node_p</span><span class="p">:</span> <span class="nb">float</span></div>
 
 
     <span class="c1"># An unweighted version of expected_duration_s wrt duration</span>
@@ -515,7 +485,7 @@
 
 
     <span class="c1"># Proposal for new attributes</span>
-    <span class="c1"># XXX: max/aggregation of most of the node attributes</span>
+    <span class="c1"># max/aggregation of most of the node attributes</span>
     <span class="c1"># - networkx.average_shortest_path_length</span>
     <span class="c1"># Not defining</span>
     <span class="c1"># unable to capture these since requires strongly connected components</span>
@@ -558,19 +528,15 @@
                 <span class="c1"># Everything below is expected to be updated in refresh</span>
                 <span class="s2">&quot;num_parents&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
                 <span class="s2">&quot;num_ancestors&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;num_duration_ancestors&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
                 <span class="s2">&quot;num_children&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
                 <span class="s2">&quot;num_descendants&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
                 <span class="s2">&quot;num_source_descendants&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
                 <span class="s2">&quot;pagerank&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;hubs_metric&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;authorities_metric&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
                 <span class="s2">&quot;group_duration_s&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
                 <span class="s2">&quot;expected_duration_s&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
                 <span class="s2">&quot;group_probability_cache_hit&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
                 <span class="s2">&quot;ancestor_depth&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
                 <span class="s2">&quot;descendant_depth&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-                <span class="s2">&quot;ancestors_by_node_p&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
                 <span class="s2">&quot;ancestors_by_group_p&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
                 <span class="s2">&quot;ancestors_by_descendants&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
                 <span class="s2">&quot;betweenness_centrality&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -603,10 +569,19 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;node_duration_s&quot;</span><span class="p">]</span>
             <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;group_probability_cache_hit&quot;</span><span class="p">])</span>
         <span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+        <span class="c1"># Ensure there are no cycles. Only affects computation of longest_path,</span>
+        <span class="c1"># but still if there&#39;s a cycle that indicates the build graph may not</span>
+        <span class="c1"># be computed properly. This was noticed when some build rules</span>
+        <span class="c1"># specified self-loops, which we now trim during graph creation.</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">cycle</span> <span class="o">=</span> <span class="n">networkx</span><span class="o">.</span><span class="n">find_cycle</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;INVALID: Graph has atleast one cycle: </span><span class="si">{</span><span class="n">cycle</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">networkx</span><span class="o">.</span><span class="n">exception</span><span class="o">.</span><span class="n">NetworkXNoCycle</span><span class="p">:</span>
+            <span class="n">longest_path</span> <span class="o">=</span> <span class="n">networkx</span><span class="o">.</span><span class="n">dag_longest_path_length</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">)</span>
 
         <span class="n">metrics</span><span class="p">:</span> <span class="n">GraphMetrics</span> <span class="o">=</span> <span class="p">{</span>
             <span class="c1"># longest path can be more than max depth</span>
-            <span class="s2">&quot;longest_path&quot;</span><span class="p">:</span> <span class="n">networkx</span><span class="o">.</span><span class="n">dag_longest_path_length</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">),</span>
+            <span class="s2">&quot;longest_path&quot;</span><span class="p">:</span> <span class="n">longest_path</span><span class="p">,</span>
             <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span>
             <span class="c1"># Equivalent of max descendant_depth</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;ancestor_depth&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span>
@@ -644,8 +619,6 @@
         <span class="n">networkx</span><span class="o">.</span><span class="n">write_gml</span><span class="p">(</span><span class="n">graph</span><span class="p">,</span> <span class="n">out_gml</span><span class="p">)</span></div>
 
 
-    <span class="c1"># XXX: Maybe don&#39;t even</span>
-    <span class="c1"># XXX: index column is empty</span>
 <div class="viewcode-block" id="RepoGraphData.to_csv">
 <a class="viewcode-back" href="../../../autoapi/apps/bazel_parser/repo_graph_data/index.html#apps.bazel_parser.repo_graph_data.RepoGraphData.to_csv">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_csv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">out_csv</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -672,18 +645,9 @@
     <span class="p">)</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">)</span>
     <span class="n">pagerank</span> <span class="o">=</span> <span class="n">networkx</span><span class="o">.</span><span class="n">pagerank</span><span class="p">(</span><span class="n">repo</span><span class="o">.</span><span class="n">graph</span><span class="p">)</span>
-    <span class="n">hubs</span><span class="p">,</span> <span class="n">authorities</span> <span class="o">=</span> <span class="n">networkx</span><span class="o">.</span><span class="n">hits</span><span class="p">(</span><span class="n">repo</span><span class="o">.</span><span class="n">graph</span><span class="p">)</span>
-    <span class="c1"># XXX: Should we have a data structure that&#39;s just a big collection of</span>
-    <span class="c1"># components</span>
-    <span class="c1"># - use cases:</span>
-    <span class="c1">#  - dictionary of node-specific info for js callbacks</span>
-    <span class="c1">#  - set of lists / DataFrame for csv or DataSource</span>
-
-    <span class="c1"># XXX: Setup cli arguments and overall workflow</span>
 
     <span class="c1"># logger.debug(f&quot;nodes: {len(graph.nodes)}&quot;)</span>
     <span class="c1"># logger.debug(f&quot;edges: {len(graph.edges)}&quot;)</span>
-    <span class="c1"># XXX: Show graph density</span>
     <span class="n">in_degree</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">in_degree</span><span class="p">()</span>
     <span class="k">assert</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">in_degree</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
     <span class="n">out_degree</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">out_degree</span><span class="p">()</span>
@@ -732,9 +696,6 @@
         <span class="n">num_children</span> <span class="o">=</span> <span class="n">out_degree</span><span class="p">[</span><span class="n">node_name</span><span class="p">]</span>
         <span class="n">ancestors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">networkx</span><span class="o">.</span><span class="n">ancestors</span><span class="p">(</span><span class="n">repo</span><span class="o">.</span><span class="n">graph</span><span class="p">,</span> <span class="n">node_name</span><span class="p">))</span>
         <span class="n">num_ancestors</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">ancestors</span><span class="p">)</span>
-        <span class="n">num_duration_ancestors</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
-            <span class="n">repo</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">intersection</span><span class="p">(</span><span class="n">ancestors</span><span class="p">)</span>
-        <span class="p">][</span><span class="s2">&quot;has_duration&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
         <span class="n">descendants</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">networkx</span><span class="o">.</span><span class="n">descendants</span><span class="p">(</span><span class="n">repo</span><span class="o">.</span><span class="n">graph</span><span class="p">,</span> <span class="n">node_name</span><span class="p">))</span>
         <span class="n">num_descendants</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">descendants</span><span class="p">)</span>
         <span class="n">num_source_descendants</span> <span class="o">=</span> <span class="n">repo</span><span class="o">.</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span>
@@ -750,13 +711,10 @@
             <span class="s2">&quot;has_duration&quot;</span><span class="p">:</span> <span class="n">cur_node</span><span class="p">[</span><span class="s2">&quot;has_duration&quot;</span><span class="p">],</span>
             <span class="s2">&quot;num_parents&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">num_parents</span><span class="p">),</span>
             <span class="s2">&quot;num_ancestors&quot;</span><span class="p">:</span> <span class="n">num_ancestors</span><span class="p">,</span>
-            <span class="s2">&quot;num_duration_ancestors&quot;</span><span class="p">:</span> <span class="n">num_duration_ancestors</span><span class="p">,</span>
             <span class="s2">&quot;num_children&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">num_children</span><span class="p">),</span>
             <span class="s2">&quot;num_descendants&quot;</span><span class="p">:</span> <span class="n">num_descendants</span><span class="p">,</span>
             <span class="s2">&quot;num_source_descendants&quot;</span><span class="p">:</span> <span class="n">num_source_descendants</span><span class="p">,</span>
             <span class="s2">&quot;pagerank&quot;</span><span class="p">:</span> <span class="n">pagerank</span><span class="p">[</span><span class="n">node_name</span><span class="p">],</span>
-            <span class="s2">&quot;hubs_metric&quot;</span><span class="p">:</span> <span class="n">hubs</span><span class="p">[</span><span class="n">node_name</span><span class="p">],</span>
-            <span class="s2">&quot;authorities_metric&quot;</span><span class="p">:</span> <span class="n">authorities</span><span class="p">[</span><span class="n">node_name</span><span class="p">],</span>
             <span class="s2">&quot;node_duration_s&quot;</span><span class="p">:</span> <span class="n">node_duration_s</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">node_name</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
             <span class="c1"># XXX: determine_main is getting the attribution, but not the</span>
             <span class="c1"># main library, etc. not sure</span>
@@ -766,7 +724,6 @@
             <span class="s2">&quot;group_probability_cache_hit&quot;</span><span class="p">:</span> <span class="n">gp</span><span class="p">,</span>
             <span class="s2">&quot;ancestor_depth&quot;</span><span class="p">:</span> <span class="n">ancestor_depth</span><span class="p">[</span><span class="n">node_name</span><span class="p">],</span>
             <span class="s2">&quot;descendant_depth&quot;</span><span class="p">:</span> <span class="n">descendant_depth</span><span class="p">[</span><span class="n">node_name</span><span class="p">],</span>
-            <span class="s2">&quot;ancestors_by_node_p&quot;</span><span class="p">:</span> <span class="n">num_ancestors</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="p">),</span>
             <span class="s2">&quot;ancestors_by_group_p&quot;</span><span class="p">:</span> <span class="n">num_ancestors</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">gp</span><span class="p">),</span>
             <span class="s2">&quot;ancestors_by_descendants&quot;</span><span class="p">:</span> <span class="n">num_ancestors</span> <span class="o">*</span> <span class="n">num_descendants</span><span class="p">,</span>
             <span class="s2">&quot;betweenness_centrality&quot;</span><span class="p">:</span> <span class="n">betweenness</span><span class="p">[</span><span class="n">node_name</span><span class="p">],</span>

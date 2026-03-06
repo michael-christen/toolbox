@@ -317,9 +317,13 @@
         <span class="k">for</span> <span class="n">rule_input</span> <span class="ow">in</span> <span class="n">rule</span><span class="o">.</span><span class="n">rule_input</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">ignore_external</span> <span class="ow">and</span> <span class="n">rule_input</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;@&quot;</span><span class="p">):</span>
                 <span class="k">continue</span>
-            <span class="n">graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">rule_input</span><span class="p">)</span>
+            <span class="c1"># Avoid self-cycles</span>
+            <span class="k">if</span> <span class="n">rule</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="n">rule_input</span><span class="p">:</span>
+                <span class="n">graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">rule_input</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="n">rule</span><span class="o">.</span><span class="n">rule_output</span><span class="p">:</span>
-            <span class="n">graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">rule</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="c1"># Avoid self-cycles</span>
+            <span class="k">if</span> <span class="n">output</span> <span class="o">!=</span> <span class="n">rule</span><span class="o">.</span><span class="n">name</span><span class="p">:</span>
+                <span class="n">graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">rule</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
         <span class="c1"># Still add this to the graph, even if no edges</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">graph</span><span class="o">.</span><span class="n">has_node</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">name</span><span class="p">):</span>
             <span class="n">graph</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">rule</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
