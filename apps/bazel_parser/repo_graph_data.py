@@ -198,8 +198,7 @@ class RepoGraphData:
         # specified self-loops, which we now trim during graph creation.
         try:
             cycle = networkx.find_cycle(self.graph)
-            raise ValueError(
-                f'INVALID: Graph has atleast one cycle: {cycle}')
+            raise ValueError(f"INVALID: Graph has atleast one cycle: {cycle}")
         except networkx.exception.NetworkXNoCycle:
             longest_path = networkx.dag_longest_path_length(self.graph)
 

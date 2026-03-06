@@ -323,8 +323,13 @@ def _emit_refinement_suggestions(df: pandas.DataFrame) -> None:
         for node_class, row in candidates.iterrows():
             seen.add(str(node_class))
             suggestions.append(
-                (str(node_class), description, int(row["count"]),
-                 int(row["total"]), row["pct"])
+                (
+                    str(node_class),
+                    description,
+                    int(row["count"]),
+                    int(row["total"]),
+                    row["pct"],
+                )
             )
 
     suggestions: list[tuple[str, str, int, int, float]] = []
@@ -348,7 +353,7 @@ def _emit_refinement_suggestions(df: pandas.DataFrame) -> None:
     )
 
     if suggestions:
-        click.echo(f"\n--- REFINEMENT SUGGESTIONS ---")
+        click.echo("\n--- REFINEMENT SUGGESTIONS ---")
         click.echo(
             "Node classes that may distort analysis results.\n"
             "Consider adding to refinement.class_patterns in your config:"
@@ -374,7 +379,7 @@ def report(csv_path: pathlib.Path, top_n: int) -> None:
     ).sum()
     avg_nodes_per_commit = (1 - df["group_probability_cache_hit"]).sum()
 
-    click.echo(f"=== BUILD GRAPH REPORT ===")
+    click.echo("=== BUILD GRAPH REPORT ===")
     click.echo(f"Source: {csv_path}")
     click.echo(
         f"Nodes: {num_nodes}  |  "
@@ -387,7 +392,7 @@ def report(csv_path: pathlib.Path, top_n: int) -> None:
         f"Avg nodes invalidated/commit: {avg_nodes_per_commit:.0f}"
     )
 
-    click.echo(f"\n--- STRUCTURAL BOTTLENECKS ---")
+    click.echo("\n--- STRUCTURAL BOTTLENECKS ---")
     click.echo(
         "Nodes with both dependents and dependencies, ranked by structural\n"
         "coupling (ancestors × descendants). Splitting reduces blast radius."
@@ -402,7 +407,7 @@ def report(csv_path: pathlib.Path, top_n: int) -> None:
             f"expected_duration={row['expected_duration_s']:.1f}s"
         )
 
-    click.echo(f"\n--- COSTLY BOTTLENECKS ---")
+    click.echo("\n--- COSTLY BOTTLENECKS ---")
     click.echo(
         "Same filter, ranked by expected duration: downstream test time\n"
         "weighted by invalidation probability. Prioritizes CI cost."
@@ -416,7 +421,7 @@ def report(csv_path: pathlib.Path, top_n: int) -> None:
             f"score={int(row['ancestors_by_descendants']):,}"
         )
 
-    click.echo(f"\n--- HOT SOURCE FILES ---")
+    click.echo("\n--- HOT SOURCE FILES ---")
     click.echo(
         "Source files that change and trigger many downstream rebuilds.\n"
         "Isolating into narrower targets reduces blast radius."
@@ -431,7 +436,7 @@ def report(csv_path: pathlib.Path, top_n: int) -> None:
             f"downstream_tests={row['group_duration_s']:.1f}s"
         )
 
-    click.echo(f"\n--- EXPENSIVE TESTS ---")
+    click.echo("\n--- EXPENSIVE TESTS ---")
     click.echo(
         "Test targets with high expected cost (slow and frequently "
         "invalidated).\nReducing their dependencies lowers CI cost per commit."
@@ -447,7 +452,6 @@ def report(csv_path: pathlib.Path, top_n: int) -> None:
         )
 
     _emit_refinement_suggestions(df)
-
 
 
 @click.command()
