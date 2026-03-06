@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # collect.sh — collect Bazel analysis data for a single repo.
 #
-# Usage: ./collect.sh <repo-dir> <output-dir>
+# Usage: ./collect.sh [--skip-tests] <repo-dir> <output-dir>
 #
 # Steps:
 #   1. bazel query  (in repo-dir)  → <output-dir>/query.pb
-#   2. bazel test   (in repo-dir)  → <output-dir>/bep.pb
+#   2. bazel test   (in repo-dir)  → <output-dir>/bep.pb  [skip with --skip-tests]
 #   3. git-capture  (toolbox)      → <output-dir>/file_commit.pb
 #   4. process      (toolbox)      → <output-dir>/graph.gml, graph.csv
 
@@ -24,8 +24,16 @@ TOOLBOX_DIR="$(cd "${SCRIPT_DIR}/../.." && pwd)"
 # ---------------------------------------------------------------------------
 # Args
 # ---------------------------------------------------------------------------
+SKIP_TESTS=false
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        --skip-tests) SKIP_TESTS=true; shift ;;
+        *) break ;;
+    esac
+done
+
 if [[ $# -ne 2 ]]; then
-    echo "Usage: $0 <repo-dir> <output-dir>" >&2
+    echo "Usage: $0 [--skip-tests] <repo-dir> <output-dir>" >&2
     exit 1
 fi
 
@@ -58,13 +66,17 @@ echo "==> [1/4] bazel query ${QUERY_TARGET}"
 # ---------------------------------------------------------------------------
 # 2. Bazel test (captures timing data via BEP)
 # ---------------------------------------------------------------------------
-echo "==> [2/4] bazel test ${TEST_TARGET}"
-(
-    cd "${REPO_DIR}"
-    bazel test \
-        "--build_event_binary_file=${BEP_PB}" \
-        "${TEST_TARGET}" || true
-)
+if [[ "${SKIP_TESTS}" == "true" ]]; then
+    echo "==> [2/4] bazel test skipped (--skip-tests)"
+else
+    echo "==> [2/4] bazel test ${TEST_TARGET}"
+    (
+        cd "${REPO_DIR}"
+        bazel test \
+            "--build_event_binary_file=${BEP_PB}" \
+            "${TEST_TARGET}" || true
+    )
+fi
 
 # ---------------------------------------------------------------------------
 # 3. git-capture
