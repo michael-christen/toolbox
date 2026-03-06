@@ -98,6 +98,7 @@ import tempfile
 
 import click
 import networkx
+import pandas
 import pydantic
 import yaml
 
@@ -301,6 +302,79 @@ def full(
     logger.info("Done...")
 
 
+_LIBRARY_CLASSES = {
+    "cc_library",
+    "py_library",
+    "java_library",
+    "go_library",
+    "rust_library",
+}
+
+
+@click.command()
+@click.option("--csv", "csv_path", type=PATH_TYPE, required=True)
+@click.option("--top-n", type=int, default=10, show_default=True)
+def report(csv_path: pathlib.Path, top_n: int) -> None:
+    df = pandas.read_csv(csv_path)
+    num_nodes = len(df)
+    num_sources = df["is_source"].sum()
+    num_tests = df["has_duration"].sum()
+
+    click.echo(f"=== BUILD GRAPH REPORT ===")
+    click.echo(f"Source: {csv_path}")
+    click.echo(
+        f"Nodes: {num_nodes}  |  "
+        f"Source files: {num_sources}  |  "
+        f"Tests: {num_tests}"
+    )
+
+    click.echo(f"\n--- TIER 1: SPLIT CANDIDATES ---")
+    click.echo(
+        "Libraries with many dependents AND many dependencies.\n"
+        "Splitting reduces rebuild cascades for their dependents."
+    )
+    libs = df[df["node_class"].isin(_LIBRARY_CLASSES)]
+    for _, row in libs.nlargest(top_n, "ancestors_by_descendants").iterrows():
+        click.echo(
+            f"  {row['node_name']}\n"
+            f"    ancestors={row['num_ancestors']}, "
+            f"descendants={row['num_descendants']}, "
+            f"ancestors_x_descendants={int(row['ancestors_by_descendants']):,}, "
+            f"expected_duration={row['expected_duration_s']:.1f}s"
+        )
+
+    click.echo(f"\n--- TIER 2: HOT SOURCE FILES ---")
+    click.echo(
+        "Source files that change and trigger many downstream rebuilds.\n"
+        "Isolating into narrower targets reduces blast radius."
+    )
+    src = df[df["is_source"] & (df["node_probability_cache_hit"] < 1.0)]
+    for _, row in src.nlargest(top_n, "ancestors_by_group_p").iterrows():
+        cache_pct = row["node_probability_cache_hit"] * 100
+        click.echo(
+            f"  {row['node_name']}\n"
+            f"    change_cost={row['ancestors_by_group_p']:.1f}, "
+            f"cache_hit={cache_pct:.1f}%, "
+            f"downstream_tests={row['group_duration_s']:.1f}s"
+        )
+
+    click.echo(f"\n--- TIER 3: EXPENSIVE NODES With Duration ---")
+    click.echo(
+        "Nodes with high expected rebuild/execute cost (slow and frequently "
+        "invalidated).\nReducing their dependencies lowers CI cost per commit."
+    )
+    tests = df[df["has_duration"]]
+    for _, row in tests.nlargest(top_n, "expected_duration_s").iterrows():
+        cache_pct = row["group_probability_cache_hit"] * 100
+        click.echo(
+            f"  {row['node_name']}\n"
+            f"    duration={row['node_duration_s']:.1f}s, "
+            f"cache_hit={cache_pct:.1f}%, "
+            f"expected_duration={row['expected_duration_s']:.1f}s"
+        )
+
+
+
 @click.command()
 @click.option("--gml", type=PATH_TYPE, required=True)
 @click.option("--out-html", type=OUT_PATH_TYPE, required=False)
@@ -324,6 +398,7 @@ if __name__ == "__main__":
     )
     cli.add_command(git_capture)
     cli.add_command(process)
+    cli.add_command(report)
     cli.add_command(visualize)
     cli.add_command(full)
     cli()
