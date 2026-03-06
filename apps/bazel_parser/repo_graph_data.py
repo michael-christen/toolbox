@@ -218,13 +218,15 @@ class RepoGraphData:
             self.df["node_duration_s"]
             * (1 - self.df["group_probability_cache_hit"])
         ).sum()
+        # Ensure there are no cycles. Only affects computation of longest_path,
+        # but still if there's a cycle that indicates the build graph may not
+        # be computed properly. This was noticed when some build rules
+        # specified self-loops, which we now trim during graph creation.
         try:
-            # XXX: let's ensure we've merged self references
             cycle = networkx.find_cycle(self.graph)
-            logger.warning('Graph has cycle, cannot compute longest_path: %s',
-                           cycle)
-            longest_path = None
-        except networkx.exception.NetworkxNoCycle:
+            raise ValueError(
+                f'INVALID: Graph has atleast one cycle: {cycle}')
+        except networkx.exception.NetworkXNoCycle:
             longest_path = networkx.dag_longest_path_length(self.graph)
 
         metrics: GraphMetrics = {

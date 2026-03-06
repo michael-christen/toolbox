@@ -56,9 +56,13 @@ def get_dependency_digraph(
         for rule_input in rule.rule_input:
             if ignore_external and rule_input.startswith("@"):
                 continue
-            graph.add_edge(rule.name, rule_input)
+            # Avoid self-cycles
+            if rule.name != rule_input:
+                graph.add_edge(rule.name, rule_input)
         for output in rule.rule_output:
-            graph.add_edge(output, rule.name)
+            # Avoid self-cycles
+            if output != rule.name:
+                graph.add_edge(output, rule.name)
         # Still add this to the graph, even if no edges
         if not graph.has_node(rule.name):
             graph.add_node(rule.name)
