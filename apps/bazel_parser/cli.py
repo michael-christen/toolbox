@@ -315,11 +315,14 @@ def _emit_refinement_suggestions(df: pandas.DataFrame) -> None:
         if len(flagged) == 0:
             return
         counts = flagged.groupby("node_class").size().rename("count")
-        stats = pandas.concat([total_by_class, counts], axis=1).dropna()
+        stats: pandas.DataFrame = pandas.concat(
+            [total_by_class, counts], axis=1
+        ).dropna()
         stats["pct"] = stats["count"] / stats["total"] * 100
-        candidates = stats[
-            (stats["pct"] > 50) & (stats["count"] >= 10)
-        ].sort_values("count", ascending=False)
+        mask = (stats["pct"] > 50) & (stats["count"] >= 10)
+        candidates = pandas.DataFrame(
+            stats.loc[mask]
+        ).sort_values(by="count", ascending=False)
         for node_class, row in candidates.iterrows():
             seen.add(str(node_class))
             suggestions.append(
@@ -397,7 +400,9 @@ def report(csv_path: pathlib.Path, top_n: int) -> None:
         "Nodes with both dependents and dependencies, ranked by structural\n"
         "coupling (ancestors × descendants). Splitting reduces blast radius."
     )
-    mid = df[(df["num_ancestors"] > 0) & (df["num_descendants"] > 0)]
+    mid = pandas.DataFrame(
+        df.loc[(df["num_ancestors"] > 0) & (df["num_descendants"] > 0)]
+    )
     for _, row in mid.nlargest(top_n, "ancestors_by_descendants").iterrows():
         click.echo(
             f"  {row['node_name']}  [{row['node_class']}]\n"
@@ -426,7 +431,9 @@ def report(csv_path: pathlib.Path, top_n: int) -> None:
         "Source files that change and trigger many downstream rebuilds.\n"
         "Isolating into narrower targets reduces blast radius."
     )
-    src = df[df["is_source"] & (df["node_probability_cache_hit"] < 1.0)]
+    src = pandas.DataFrame(
+        df.loc[df["is_source"] & (df["node_probability_cache_hit"] < 1.0)]
+    )
     for _, row in src.nlargest(top_n, "ancestors_by_group_p").iterrows():
         cache_pct = row["node_probability_cache_hit"] * 100
         click.echo(
