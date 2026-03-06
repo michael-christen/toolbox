@@ -75,16 +75,11 @@ A case study entry in `case_study.md` is complete when it contains:
 
 ### Mar 7 — Drake Analysis & Metrics Triage & Cleanup
 
-- [ ] Review metric utility notes across all completed case studies ➕ 2026-03-03 📅 2026-03-10
-- [ ] **Metric triage**: decide: ➕ 2026-03-03 📅 2026-03-10
-  - Which metrics consistently surface actionable signal → Tier 1 (always
-    computed)
-  - Which are slow and haven't provided unique value → Tier 2 (opt-in flag)
-  - Expensive candidates: `ancestor_depth`, `descendant_depth`,
-    `betweenness_centrality`, `closeness_centrality` (all involve APSP or O(VE)
-    passes)
-- [ ] Implement `--full-metrics` flag (or equivalent) to gate tier 2 metrics ➕ 2026-03-03 📅 2026-03-10
-- [ ] Revisit deferred XXXs after metric triage ➕ 2026-03-05 📅 2026-03-10
+- [x] Review metric utility notes across all completed case studies ➕ 2026-03-03 📅 2026-03-10 ✅ 2026-03-06
+- [x] **Metric triage**: keep all metrics, no `--full-metrics` flag needed ➕ 2026-03-03 📅 2026-03-10 ✅ 2026-03-06
+  - Centrality metrics are useful and worth computing; consolidation opportunity
+    exists (6 → 2 expensive passes) but deferred as not urgent for presentation
+- [x] Revisit deferred XXXs after metric triage ➕ 2026-03-05 📅 2026-03-10 ✅ 2026-03-06
   - Serialize graph_metrics to output file (cli.py)
   - Resolve node-removal attribute handling (refinement.py)
   - SOURCE_FILE inclusion decision (parsing.py)
