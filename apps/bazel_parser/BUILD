@@ -82,6 +82,7 @@ py_binary(
         "//utils:bep_reader",
         "@pip//click",
         "@pip//networkx",
+        "@pip//pandas",
         "@pip//pydantic",
         # XXX: Should associate with networkx
         "@pip//pygraphviz",  # keep

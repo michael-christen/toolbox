@@ -55,8 +55,6 @@ def ls_files(git_directory: pathlib.Path | str) -> list[pathlib.Path]:
 
 
 def _get_args_for_after(after: datetime.datetime | None) -> list[str]:
-    # XXX: ugh, testing equality with this is annoying
-    # return ['584a8baf3ff9a5cda9945b1ba97a6421154ca2ac^..HEAD']
     if after is not None:
         after_s = after.strftime("%Y-%m-%d")
         return [f'--after="{after_s}"']
@@ -219,8 +217,8 @@ def get_file_commit_map_from_log(
                 if f not in untracked_files:
                     commit_map[commit].add(f)
                     file_map[f].append(commit)
-                    # XXX: Should we note that we now expect to never see this
-                    # again? Nope, could've gotten deleted and added back
+                    # An ADD may reappear in older history if the file was
+                    # deleted then re-added; no special handling needed.
             elif op_type in {OperationType.MODIFY, OperationType.TYPE_CHANGE}:
                 # Same as add, but don't need to worry about not-tracking (if
                 # we decide to do that)

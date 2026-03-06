@@ -29,9 +29,6 @@ class Node(TypedDict):
     num_parents: int
     # Total number of nodes that transitively depend on you
     num_ancestors: int
-    # Total number of nodes that transitively depend on you and have a defined
-    # execution time (such as tests)
-    num_duration_ancestors: int
     # Whether this has a computed duration. We find this more explicit than
     # simply checking > 0 for duration_s
     has_duration: bool
@@ -48,8 +45,6 @@ class Node(TypedDict):
 
     # ===== Link Analysis =====
     pagerank: float
-    hubs_metric: float
-    authorities_metric: float
 
     # ===== Node Specific =====
     # How long this node took to "execute"
@@ -68,25 +63,12 @@ class Node(TypedDict):
     # group_duration_s * (1 - group_probability_cache_hit)
     expected_duration_s: float
 
-    # XXX: Move these back and add them where necessarry
-    # ==== New =====
     # Max ancestor depth from this node
     # - The max shortest path of this node in a reversed graph
     ancestor_depth: int
     # ancestor_depth, but descendant
     # - The max shortest path of this node in a graph
     descendant_depth: int
-
-    # A more node specific version of
-    # rebuilt_targets_by_transitive_dependencies
-    # XXX: May not be too helpful?
-    # (1 - node_probability_cache_hit) * num_ancestors
-    # > Score for how much changes to a single target affects others due to
-    # > cache invalidations
-    # > A high score means that you are a top cache invalidator in the graph.
-    # > E.g. “ios_pill” that we saw in the beginning.
-    # related to rebuilt_target
-    ancestors_by_node_p: float
 
     # An unweighted version of expected_duration_s wrt duration
     # (1 - group_probability_cache_hit) * num_ancestors
@@ -142,7 +124,7 @@ class GraphMetrics(TypedDict):
     avg_nodes_affected_per_commit: float
 
     # Proposal for new attributes
-    # XXX: max/aggregation of most of the node attributes
+    # max/aggregation of most of the node attributes
     # - networkx.average_shortest_path_length
     # Not defining
     # unable to capture these since requires strongly connected components
@@ -177,19 +159,15 @@ class RepoGraphData:
                 # Everything below is expected to be updated in refresh
                 "num_parents": 0,
                 "num_ancestors": 0,
-                "num_duration_ancestors": 0,
                 "num_children": 0,
                 "num_descendants": 0,
                 "num_source_descendants": 0,
                 "pagerank": 0,
-                "hubs_metric": 0,
-                "authorities_metric": 0,
                 "group_duration_s": 0,
                 "expected_duration_s": 0,
                 "group_probability_cache_hit": 0,
                 "ancestor_depth": 0,
                 "descendant_depth": 0,
-                "ancestors_by_node_p": 0,
                 "ancestors_by_group_p": 0,
                 "ancestors_by_descendants": 0,
                 "betweenness_centrality": 0,
@@ -214,10 +192,19 @@ class RepoGraphData:
             self.df["node_duration_s"]
             * (1 - self.df["group_probability_cache_hit"])
         ).sum()
+        # Ensure there are no cycles. Only affects computation of longest_path,
+        # but still if there's a cycle that indicates the build graph may not
+        # be computed properly. This was noticed when some build rules
+        # specified self-loops, which we now trim during graph creation.
+        try:
+            cycle = networkx.find_cycle(self.graph)
+            raise ValueError(f"INVALID: Graph has atleast one cycle: {cycle}")
+        except networkx.exception.NetworkXNoCycle:
+            longest_path = networkx.dag_longest_path_length(self.graph)
 
         metrics: GraphMetrics = {
             # longest path can be more than max depth
-            "longest_path": networkx.dag_longest_path_length(self.graph),
+            "longest_path": longest_path,
             "max_depth":
             # Equivalent of max descendant_depth
             self.df["ancestor_depth"].max(),
@@ -251,8 +238,6 @@ class RepoGraphData:
         # Write the graph
         networkx.write_gml(graph, out_gml)
 
-    # XXX: Maybe don't even
-    # XXX: index column is empty
     def to_csv(self, out_csv: pathlib.Path) -> None:
         # node_name is preserved, so don't need to re-emit
         self.df.to_csv(out_csv, index=False)
@@ -273,18 +258,9 @@ def dependency_analysis(repo: RepoGraphData) -> dict[str, Node]:
     )
     logger.debug("a")
     pagerank = networkx.pagerank(repo.graph)
-    hubs, authorities = networkx.hits(repo.graph)
-    # XXX: Should we have a data structure that's just a big collection of
-    # components
-    # - use cases:
-    #  - dictionary of node-specific info for js callbacks
-    #  - set of lists / DataFrame for csv or DataSource
-
-    # XXX: Setup cli arguments and overall workflow
 
     # logger.debug(f"nodes: {len(graph.nodes)}")
     # logger.debug(f"edges: {len(graph.edges)}")
-    # XXX: Show graph density
     in_degree = repo.graph.in_degree()
     assert not isinstance(in_degree, int)
     out_degree = repo.graph.out_degree()
@@ -333,9 +309,6 @@ def dependency_analysis(repo: RepoGraphData) -> dict[str, Node]:
         num_children = out_degree[node_name]
         ancestors = list(networkx.ancestors(repo.graph, node_name))
         num_ancestors = len(ancestors)
-        num_duration_ancestors = repo.df.loc[
-            repo.df.index.intersection(ancestors)
-        ]["has_duration"].sum()
         descendants = list(networkx.descendants(repo.graph, node_name))
         num_descendants = len(descendants)
         num_source_descendants = repo.df.loc[
@@ -351,13 +324,10 @@ def dependency_analysis(repo: RepoGraphData) -> dict[str, Node]:
             "has_duration": cur_node["has_duration"],
             "num_parents": int(num_parents),
             "num_ancestors": num_ancestors,
-            "num_duration_ancestors": num_duration_ancestors,
             "num_children": int(num_children),
             "num_descendants": num_descendants,
             "num_source_descendants": num_source_descendants,
             "pagerank": pagerank[node_name],
-            "hubs_metric": hubs[node_name],
-            "authorities_metric": authorities[node_name],
             "node_duration_s": node_duration_s.get(node_name, 0),
             # XXX: determine_main is getting the attribution, but not the
             # main library, etc. not sure
@@ -367,7 +337,6 @@ def dependency_analysis(repo: RepoGraphData) -> dict[str, Node]:
             "group_probability_cache_hit": gp,
             "ancestor_depth": ancestor_depth[node_name],
             "descendant_depth": descendant_depth[node_name],
-            "ancestors_by_node_p": num_ancestors * (1 - np),
             "ancestors_by_group_p": num_ancestors * (1 - gp),
             "ancestors_by_descendants": num_ancestors * num_descendants,
             "betweenness_centrality": betweenness[node_name],

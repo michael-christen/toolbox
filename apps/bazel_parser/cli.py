@@ -23,9 +23,6 @@ A larger system description:
     describe cost
   - graph that we could identify overly depended upon things
 
-XXX:
- - bazel query --keep_going --noimplicit_deps --output proto "deps(//...)"
-   is much bigger than "//..." alone, compare what the differences are
 - git log --since="10 years ago" --name-only --pretty=format: | sort \
         | uniq -c | sort -nr
   - this is much faster
@@ -101,6 +98,7 @@ import tempfile
 
 import click
 import networkx
+import pandas
 import pydantic
 import yaml
 
@@ -216,8 +214,6 @@ def process(
         label_to_runtime=label_to_runtime,
         file_commit_map=file_commit_map,
     )
-    # XXX: Probably should refresh afterwards too, right?
-    # XXX: Probably want to refine before performing full refresh
     logger.info("Refining...")
     refinement.full_refinement(
         repo=r,
@@ -226,8 +222,8 @@ def process(
     )
     r.refresh()
     graph_metrics = r.get_graph_metrics()
-    # XXX: What to do with graph_metrics?
-    print(graph_metrics)
+    logger.info("Graph metrics: %s", graph_metrics)
+    # TODO: serialize graph_metrics to output file after case studies
     r.to_csv(out_csv)
     r.to_gml(out_gml)
 
@@ -249,7 +245,14 @@ def full(
     # Query for graph
     logger.info("Querying...")
     query_pb = subprocess.check_output(
-        ["bazel", "query", "--output", "proto", config.query_target],
+        [
+            "bazel",
+            "query",
+            "--notool_deps",
+            "--output",
+            "proto",
+            config.query_target,
+        ],
         cwd=repo_dir,
     )
     query_result = bazel_utils.parse_build_output(query_pb)
@@ -268,7 +271,6 @@ def full(
         )
         with open(bep_pb, "rb") as bep_buf:
             label_to_runtime = bep_reader.get_label_to_runtime(bep_buf)
-    # XXX: Optional build timing data ...
     # Capture git information
     logger.info("History from git...")
     git_query_after = datetime.datetime.now() - datetime.timedelta(
@@ -291,12 +293,172 @@ def full(
     )
     logger.info("Outputting...")
     graph_metrics = r.get_graph_metrics()
-    print(graph_metrics)
+    logger.info("Graph metrics: %s", graph_metrics)
+    # TODO: serialize graph_metrics to output file after case studies
     if out_csv is not None:
         r.to_csv(out_csv)
     if out_gml is not None:
         r.to_gml(out_gml)
     logger.info("Done...")
+
+
+def _emit_refinement_suggestions(df: pandas.DataFrame) -> None:
+    total_by_class = df.groupby("node_class").size().rename("total")
+    seen: set[str] = set()
+
+    def _check(
+        mask: pandas.Series,
+        description: str,
+        suggestions: list[tuple[str, str, int, int, float]],
+    ) -> None:
+        flagged = df[mask & ~df["node_class"].isin(seen)]
+        if len(flagged) == 0:
+            return
+        counts = flagged.groupby("node_class").size().rename("count")
+        stats: pandas.DataFrame = pandas.concat(
+            [total_by_class, counts], axis=1
+        ).dropna()
+        stats["pct"] = stats["count"] / stats["total"] * 100
+        mask = (stats["pct"] > 50) & (stats["count"] >= 10)
+        candidates = pandas.DataFrame(stats.loc[mask]).sort_values(
+            by="count", ascending=False
+        )
+        for node_class, row in candidates.iterrows():
+            seen.add(str(node_class))
+            suggestions.append(
+                (
+                    str(node_class),
+                    description,
+                    int(row["count"]),
+                    int(row["total"]),
+                    row["pct"],
+                )
+            )
+
+    suggestions: list[tuple[str, str, int, int, float]] = []
+    _check(
+        (df["num_ancestors"] == 0) & (df["num_descendants"] == 0),
+        "fully isolated (no edges)",
+        suggestions,
+    )
+    _check(
+        (df["num_descendants"] == 0) & ~df["is_source"] & ~df["has_duration"],
+        "non-source leaf (distorts ancestor scores of parents)",
+        suggestions,
+    )
+    _check(
+        (df["num_ancestors"] + df["num_descendants"] <= 2)
+        & (df["num_ancestors"] + df["num_descendants"] > 0)
+        & ~df["is_source"]
+        & ~df["has_duration"],
+        "very low connectivity — likely in a small disconnected component",
+        suggestions,
+    )
+
+    if suggestions:
+        click.echo("\n--- REFINEMENT SUGGESTIONS ---")
+        click.echo(
+            "Node classes that may distort analysis results.\n"
+            "Consider adding to refinement.class_patterns in your config:"
+        )
+        for node_class, reason, count, total, pct in suggestions:
+            click.echo(
+                f"  {node_class}: {count} of {total} nodes — {reason} "
+                f"({pct:.0f}%)"
+            )
+
+
+@click.command()
+@click.option("--csv", "csv_path", type=PATH_TYPE, required=True)
+@click.option("--top-n", type=int, default=10, show_default=True)
+def report(csv_path: pathlib.Path, top_n: int) -> None:
+    df = pandas.read_csv(csv_path)
+    num_nodes = len(df)
+    num_sources = df["is_source"].sum()
+    num_tests = df["has_duration"].sum()
+    total_duration_s = df["node_duration_s"].sum()
+    expected_duration_s = (
+        df["node_duration_s"] * (1 - df["group_probability_cache_hit"])
+    ).sum()
+    avg_nodes_per_commit = (1 - df["group_probability_cache_hit"]).sum()
+
+    click.echo("=== BUILD GRAPH REPORT ===")
+    click.echo(f"Source: {csv_path}")
+    click.echo(
+        f"Nodes: {num_nodes}  |  "
+        f"Source files: {num_sources}  |  "
+        f"Tests: {num_tests}"
+    )
+    click.echo(
+        f"Total test duration: {total_duration_s:.1f}s  |  "
+        f"Expected cost/commit: {expected_duration_s:.1f}s  |  "
+        f"Avg nodes invalidated/commit: {avg_nodes_per_commit:.0f}"
+    )
+
+    click.echo("\n--- STRUCTURAL BOTTLENECKS ---")
+    click.echo(
+        "Nodes with both dependents and dependencies, ranked by structural\n"
+        "coupling (ancestors × descendants). Splitting reduces blast radius."
+    )
+    mid = pandas.DataFrame(
+        df.loc[(df["num_ancestors"] > 0) & (df["num_descendants"] > 0)]
+    )
+    for _, row in mid.nlargest(top_n, "ancestors_by_descendants").iterrows():
+        click.echo(
+            f"  {row['node_name']}  [{row['node_class']}]\n"
+            f"    ancestors={row['num_ancestors']}, "
+            f"descendants={row['num_descendants']}, "
+            f"score={int(row['ancestors_by_descendants']):,}, "
+            f"expected_duration={row['expected_duration_s']:.1f}s"
+        )
+
+    click.echo("\n--- COSTLY BOTTLENECKS ---")
+    click.echo(
+        "Same filter, ranked by expected duration: downstream test time\n"
+        "weighted by invalidation probability. Prioritizes CI cost."
+    )
+    for _, row in mid.nlargest(top_n, "expected_duration_s").iterrows():
+        cache_pct = row["group_probability_cache_hit"] * 100
+        click.echo(
+            f"  {row['node_name']}  [{row['node_class']}]\n"
+            f"    expected_duration={row['expected_duration_s']:.1f}s, "
+            f"cache_hit={cache_pct:.1f}%, "
+            f"score={int(row['ancestors_by_descendants']):,}"
+        )
+
+    click.echo("\n--- HOT SOURCE FILES ---")
+    click.echo(
+        "Source files that change and trigger many downstream rebuilds.\n"
+        "Isolating into narrower targets reduces blast radius."
+    )
+    src = pandas.DataFrame(
+        df.loc[df["is_source"] & (df["node_probability_cache_hit"] < 1.0)]
+    )
+    for _, row in src.nlargest(top_n, "ancestors_by_group_p").iterrows():
+        cache_pct = row["node_probability_cache_hit"] * 100
+        click.echo(
+            f"  {row['node_name']}\n"
+            f"    change_cost={row['ancestors_by_group_p']:.1f}, "
+            f"cache_hit={cache_pct:.1f}%, "
+            f"downstream_tests={row['group_duration_s']:.1f}s"
+        )
+
+    click.echo("\n--- EXPENSIVE TESTS ---")
+    click.echo(
+        "Test targets with high expected cost (slow and frequently "
+        "invalidated).\nReducing their dependencies lowers CI cost per commit."
+    )
+    tests = df[df["has_duration"]]
+    for _, row in tests.nlargest(top_n, "expected_duration_s").iterrows():
+        cache_pct = row["group_probability_cache_hit"] * 100
+        click.echo(
+            f"  {row['node_name']}\n"
+            f"    duration={row['node_duration_s']:.1f}s, "
+            f"cache_hit={cache_pct:.1f}%, "
+            f"expected_duration={row['expected_duration_s']:.1f}s"
+        )
+
+    _emit_refinement_suggestions(df)
 
 
 @click.command()
@@ -322,6 +484,7 @@ if __name__ == "__main__":
     )
     cli.add_command(git_capture)
     cli.add_command(process)
+    cli.add_command(report)
     cli.add_command(visualize)
     cli.add_command(full)
     cli()

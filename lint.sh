@@ -80,13 +80,13 @@ if [ -z "$mode" ]; then
   print_usage
 elif [ "$mode" = "check" ]; then
   BUILDIFIER_ARGS=("-lint=off" "-mode=check" "-v=false")
-  PRETTIER_ARGS=("--check" "--config ${REPO_ROOT}/.prettierrc --ignore-path ${REPO_ROOT}/.prettierignore --ignore-path  ${REPO_ROOT}/.gitignore]")
+  PRETTIER_ARGS=("--check" "--config" "${REPO_ROOT}/.prettierrc" "--ignore-path" "${REPO_ROOT}/.prettierignore" "--ignore-path" "${REPO_ROOT}/.gitignore")
   BAZEL_TOOL="//tools:check"
   GAZELLE_ARGS=("-mode" "diff")
   RULES_LINT_CMD="//tools/format:format.check"
 elif [ "$mode" = "format" ]; then
   BUILDIFIER_ARGS=("-lint=fix" "-mode=fix" "-v=false")
-  PRETTIER_ARGS=("--write" "--config ${REPO_ROOT}/.prettierrc --ignore-path ${REPO_ROOT}/.prettierignore --ignore-path  ${REPO_ROOT}/.gitignore]")
+  PRETTIER_ARGS=("--write" "--config" "${REPO_ROOT}/.prettierrc" "--ignore-path" "${REPO_ROOT}/.prettierignore" "--ignore-path" "${REPO_ROOT}/.gitignore")
   BAZEL_TOOL="//tools:format"
   GAZELLE_ARGS=("-mode" "fix")
   RULES_LINT_CMD="//tools/format:format"
