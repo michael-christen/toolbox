@@ -226,7 +226,8 @@ class RepoGraphData:
         # Add node attributes to copy of the graph.
         # node_name column duplicates the df index intentionally: to_csv uses
         # index=False so node_name is the label in CSV output. "Node" attribute
-        # duplicates it again for gephi, which uses "Node" as the display label.
+        # duplicates it again for gephi, which uses "Node" as the display
+        # label.
         graph = self.graph.copy()
         for name, row in self.df.iterrows():
             for k, v in row.items():
