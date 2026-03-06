@@ -8,6 +8,7 @@
 #   2. bazel test   (in repo-dir)  → <output-dir>/bep.pb  [skip with --skip-tests]
 #   3. git-capture  (toolbox)      → <output-dir>/file_commit.pb
 #   4. process      (toolbox)      → <output-dir>/graph.gml, graph.csv
+#   5. report       (toolbox)      → <output-dir>/report.txt
 
 set -euo pipefail
 
@@ -46,6 +47,7 @@ BEP_PB="${OUTPUT_DIR}/bep.pb"
 FILE_COMMIT_PB="${OUTPUT_DIR}/file_commit.pb"
 OUT_GML="${OUTPUT_DIR}/graph.gml"
 OUT_CSV="${OUTPUT_DIR}/graph.csv"
+OUT_REPORT="${OUTPUT_DIR}/report.txt"
 
 echo "==> Collecting data for: ${REPO_DIR}"
 echo "    Output:               ${OUTPUT_DIR}"
@@ -53,7 +55,7 @@ echo "    Output:               ${OUTPUT_DIR}"
 # ---------------------------------------------------------------------------
 # 1. Bazel query
 # ---------------------------------------------------------------------------
-echo "==> [1/4] bazel query ${QUERY_TARGET}"
+echo "==> [1/5] bazel query ${QUERY_TARGET}"
 (
     cd "${REPO_DIR}"
     bazel query \
@@ -67,9 +69,9 @@ echo "==> [1/4] bazel query ${QUERY_TARGET}"
 # 2. Bazel test (captures timing data via BEP)
 # ---------------------------------------------------------------------------
 if [[ "${SKIP_TESTS}" == "true" ]]; then
-    echo "==> [2/4] bazel test skipped (--skip-tests)"
+    echo "==> [2/5] bazel test skipped (--skip-tests)"
 else
-    echo "==> [2/4] bazel test ${TEST_TARGET}"
+    echo "==> [2/5] bazel test ${TEST_TARGET}"
     (
         cd "${REPO_DIR}"
         bazel test \
@@ -81,7 +83,7 @@ fi
 # ---------------------------------------------------------------------------
 # 3. git-capture
 # ---------------------------------------------------------------------------
-echo "==> [3/4] git-capture (days-ago=${DAYS_AGO})"
+echo "==> [3/5] git-capture (days-ago=${DAYS_AGO})"
 (
     cd "${TOOLBOX_DIR}"
     bazel run //apps/bazel_parser:cli --output_groups=-mypy -- \
@@ -94,7 +96,7 @@ echo "==> [3/4] git-capture (days-ago=${DAYS_AGO})"
 # ---------------------------------------------------------------------------
 # 4. process
 # ---------------------------------------------------------------------------
-echo "==> [4/4] process"
+echo "==> [4/5] process"
 (
     cd "${TOOLBOX_DIR}"
     bazel run //apps/bazel_parser:cli --output_groups=-mypy -- \
@@ -106,6 +108,19 @@ echo "==> [4/4] process"
         --out-csv "${OUT_CSV}"
 )
 
+# ---------------------------------------------------------------------------
+# 5. report
+# ---------------------------------------------------------------------------
+echo "==> [5/5] report"
+(
+    cd "${TOOLBOX_DIR}"
+    bazel run //apps/bazel_parser:cli --output_groups=-mypy -- \
+        report \
+        --csv "${OUT_CSV}" \
+        > "${OUT_REPORT}"
+)
+
 echo "==> Done."
 echo "    ${OUT_GML}"
 echo "    ${OUT_CSV}"
+echo "    ${OUT_REPORT}"
