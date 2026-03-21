@@ -99,14 +99,14 @@ A case study entry in `case_study.md` is complete when it contains:
 
 ### Mar 8 — Drake Complete + Pigweed Start & Pypi
 
-- [ ] Assess proto file situation: `build_pb2.py`, `git_pb2.py`, BEP protos are ➕ 2026-03-03 📅 2026-03-13
+- [-] Assess proto file situation: `build_pb2.py`, `git_pb2.py`, BEP protos are ➕ 2026-03-03 📅 2026-03-15 ❌ 2026-03-16
       Bazel-generated — decide whether to pre-generate and vendor or generate at
       install time
-- [ ] Start `pyproject.toml` setup, entry points for CLI ➕ 2026-03-03 📅 2026-03-13
-- [ ] Complete packaging (proto files, dependencies, entry point) ➕ 2026-03-03 📅 2026-03-14
-- [ ] Publish to PyPI (even as `0.1.0-alpha` / pre-release) ➕ 2026-03-03 📅 2026-03-14
-- [ ] End-to-end test: fresh install from PyPI → run workflow → open in gephi ➕ 2026-03-03 📅 2026-03-14
-- [ ] Fix anything that breaks ➕ 2026-03-03 📅 2026-03-14
+- [-] Start `pyproject.toml` setup, entry points for CLI ➕ 2026-03-03 📅 2026-03-15 ❌ 2026-03-16
+- [-] Complete packaging (proto files, dependencies, entry point) ➕ 2026-03-03 📅 2026-03-15 ❌ 2026-03-16
+- [-] Publish to PyPI (even as `0.1.0-alpha` / pre-release) ➕ 2026-03-03 📅 2026-03-15 ❌ 2026-03-16
+- [-] End-to-end test: fresh install from PyPI → run workflow → open in gephi ➕ 2026-03-03 📅 2026-03-15 ❌ 2026-03-16
+- [-] Fix anything that breaks ➕ 2026-03-03 📅 2026-03-15 ❌ 2026-03-16
 
 
 - [x] Finish drake ➕ 2026-03-03 📅 2026-03-08 ✅ 2026-03-05
@@ -115,20 +115,22 @@ A case study entry in `case_study.md` is complete when it contains:
 ### Mar 9 — Pigweed + Additional Repos
 
 - [x] Complete pigweed case study ➕ 2026-03-03 📅 2026-03-09 ✅ 2026-03-05
-- [ ] If time: monogon, bzd, maybe tensorflow case study ➕ 2026-03-03 📅 2026-03-09
 
 ### Mar 10 — Documentation
 
-- [ ] Getting-started guide: "run these N bazel commands to collect data, then ➕ 2026-03-03 📅 2026-03-15
-      `pip install bazel-parser && bazel-parser process ...`"
-- [ ] Fill `[ ] TODO` links in `README.md` ➕ 2026-03-03 📅 2026-03-15
-- [ ] Add gephi recommendation for graph visualization (replace panel as primary ➕ 2026-03-03 📅 2026-03-15
-      recommendation for large repos)
-- [ ] Note panel app is still available for small repos ➕ 2026-03-03 📅 2026-03-15
-
-
 ### Mar 13 — Slides Draft
+### Mar 14 — Slides Polish
+### Mar 15 — Documentation
 
+### Mar 16 — Slides Draft
+- [ ] Ensure folks have a path to run this if they'd like ➕ 2026-03-16 📅 2026-03-16
+- [ ] If time: monogon, bzd, maybe tensorflow case study ➕ 2026-03-03 📅 2026-03-16
+- [ ] Getting-started guide: "run these N bazel commands to collect data, then ➕ 2026-03-03 📅 2026-03-16
+      `pip install bazel-parser && bazel-parser process ...`"
+- [ ] Fill `[ ] TODO` links in `README.md` ➕ 2026-03-03 📅 2026-03-16
+- [ ] Add gephi recommendation for graph visualization (replace panel as primary ➕ 2026-03-03 📅 2026-03-16
+      recommendation for large repos)
+- [ ] Note panel app is still available for small repos ➕ 2026-03-03 📅 2026-03-16
 - [ ] Write full slide deck in markdown ➕ 2026-03-03 📅 2026-03-16
   - Suggested structure:
     1. The problem (build graph bottlenecks, hard to see at scale)
@@ -137,16 +139,9 @@ A case study entry in `case_study.md` is complete when it contains:
     4. How to run it yourself (PyPI + N bazel commands)
     5. What's next / call for contribution
 
-### Mar 14 — Slides Polish
-
+### Mar 17 — Slides Polish
 - [ ] Polish markdown slides ➕ 2026-03-03 📅 2026-03-17
 - [ ] Transition to Google Slides ➕ 2026-03-03 📅 2026-03-17
-
-### Mar 15 — Documentation
-
-### Mar 16 — Slides Draft
-
-### Mar 17 — Slides Polish
 
 ### Stretch Goals
 
