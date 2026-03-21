@@ -15,6 +15,7 @@
 
 load("//bzl:cc.bzl", "cc_library")
 
+# gazelle:exclude config
 package(default_visibility = ["//visibility:public"])
 
 # This is an incomplete platform, do NOT try to pass this
