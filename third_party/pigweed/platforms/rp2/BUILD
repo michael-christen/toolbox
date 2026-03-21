@@ -15,7 +15,6 @@
 
 load("//bzl:cc.bzl", "cc_library")
 
-# gazelle:exclude config
 package(default_visibility = ["//visibility:public"])
 
 # This is an incomplete platform, do NOT try to pass this
@@ -70,6 +69,8 @@ cc_library(
     alwayslink = 1,
 )
 
+# gazelle:exclude config
+# We reference it directly
 cc_library(
     name = "freertos_config",
     hdrs = [

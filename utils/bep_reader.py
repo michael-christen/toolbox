@@ -45,7 +45,7 @@ def get_label_to_runtime(buf: BinaryIO) -> dict[str, datetime.timedelta]:
             dt = msg.test_result.test_attempt_duration.ToTimedelta()
             # Accumulate multiple
             label_to_runtime[label].append(dt)
-            # Could capure cache state with cached_locally
+            # Could capture cache state with cached_locally
     label_to_avg_runtime = {}
     for label, runtimes in label_to_runtime.items():
         total_runtime = datetime.timedelta(0)
