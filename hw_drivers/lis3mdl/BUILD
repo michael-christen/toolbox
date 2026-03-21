@@ -1,7 +1,6 @@
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
 load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_library")
 load("@com_google_emboss//:build_defs.bzl", "emboss_cc_library")
-load("@com_google_protobuf//bazel:cc_proto_library.bzl", "cc_proto_library")
 load(
     "@pigweed//pw_protobuf_compiler:pw_proto_library.bzl",
     "nanopb_proto_library",
@@ -32,7 +31,6 @@ cc_library(
         "//hw_services/sbr:__subpackages__",
     ],
     deps = [
-        ":lis3mdl_cc_proto",
         ":lis3mdl_emb",  # keep
         ":lis3mdl_nanopb",  # keep
         "@pigweed//pw_i2c:register_device",  # keep
@@ -61,7 +59,6 @@ cc_test(
     srcs = ["lis3mdl_test.cc"],  # keep
     deps = [
         ":lis3mdl",
-        ":lis3mdl_cc_proto",
         ":lis3mdl_emb",  # keep
         ":lis3mdl_nanopb",  # keep
         "//testing:catch_main",  # keep
@@ -129,9 +126,4 @@ proto_py_library(
     srcs = ["lis3mdl_pb2.py"],
     visibility = ["//visibility:public"],
     deps = ["@com_google_protobuf//:protobuf_python"],
-)
-
-cc_proto_library(
-    name = "lis3mdl_cc_proto",
-    deps = [":lis3mdl_proto"],
 )

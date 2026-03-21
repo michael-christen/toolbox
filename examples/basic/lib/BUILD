@@ -12,5 +12,5 @@ cc_library(
 cc_test(
     name = "hello_test",
     srcs = ["hello_test.cc"],
-    deps = ["@catch2"],
+    deps = ["//testing:catch_main"],  # keep
 )

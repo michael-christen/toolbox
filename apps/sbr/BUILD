@@ -11,6 +11,8 @@ cc_binary(
     name = "sbr",
     srcs = ["main.cc"],
     deps = [
+        "//apps/sbr/system",  # keep
+        "//hw_services/sbr:service",
         "@pigweed//pw_log",  # keep
         "@pigweed//pw_system:async",  # keep
 
@@ -19,8 +21,6 @@ cc_binary(
         "@pigweed//pw_assert:check_backend_impl",  # keep
         "@pigweed//pw_log:backend_impl",  # keep
         "@pigweed//pw_system:extra_platform_libs",  # keep
-        "//apps/sbr/system:headers",
-        "//hw_services/sbr:service",
     ],
 )
 
