@@ -1,6 +1,7 @@
 load("@pigweed//pw_build:compatibility.bzl", "host_backend_alias", "incompatible_with_mcu")
 load("//bzl:cc.bzl", "cc_library")
 
+# gazelle:cc_group_unit_cycles warn
 # gazelle:default_visibility //visibility:public
 package(default_visibility = ["//visibility:public"])
 
@@ -21,7 +22,7 @@ cc_library(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        "@pigweed//pw_digital_io",
+        "@pigweed//pw_digital_io",  # keep
     ],
 )
 

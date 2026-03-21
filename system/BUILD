@@ -3,6 +3,7 @@ load("//bzl:cc.bzl", "cc_library")
 # gazelle:default_visibility //visibility:public
 package(default_visibility = ["//visibility:public"])
 
+# keep: no srcs/hdrs/deps, gazelle_cc would otherwise delete it
 cc_library(
     name = "module_config",
     defines = [

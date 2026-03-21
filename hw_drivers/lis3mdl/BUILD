@@ -1,6 +1,7 @@
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
 load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_library")
 load("@com_google_emboss//:build_defs.bzl", "emboss_cc_library")
+load("@com_google_protobuf//bazel:cc_proto_library.bzl", "cc_proto_library")
 load(
     "@pigweed//pw_protobuf_compiler:pw_proto_library.bzl",
     "nanopb_proto_library",
@@ -31,41 +32,44 @@ cc_library(
         "//hw_services/sbr:__subpackages__",
     ],
     deps = [
-        ":lis3mdl_emb",
-        ":lis3mdl_nanopb",
-        "@pigweed//pw_i2c:register_device",
+        ":lis3mdl_cc_proto",
+        ":lis3mdl_emb",  # keep
+        ":lis3mdl_nanopb",  # keep
+        "@pigweed//pw_i2c:register_device",  # keep
     ],
 )
 
 pw_cc_test(
     name = "lis3mdl_pw_test",
-    srcs = ["lis3mdl_pw_test.cc"],
+    srcs = ["lis3mdl_pw_test.cc"],  # keep
     deps = [
         ":lis3mdl",
-        ":lis3mdl_emb",
-        ":lis3mdl_nanopb",
-        "@pigweed//pw_bytes",
-        "@pigweed//pw_i2c:address",
-        "@pigweed//pw_i2c:device",
-        "@pigweed//pw_i2c:initiator_mock",
-        "@pigweed//pw_i2c:register_device",
-        "@pigweed//pw_result",
-        "@pigweed//pw_unit_test",
+        ":lis3mdl_emb",  # keep
+        ":lis3mdl_nanopb",  # keep
+        "@pigweed//pw_bytes",  # keep
+        "@pigweed//pw_i2c:address",  # keep
+        "@pigweed//pw_i2c:device",  # keep
+        "@pigweed//pw_i2c:initiator_mock",  # keep
+        "@pigweed//pw_i2c:register_device",  # keep
+        "@pigweed//pw_result",  # keep
+        "@pigweed//pw_unit_test",  # keep
     ],
 )
 
 cc_test(
     name = "lis3mdl_test",
-    srcs = ["lis3mdl_test.cc"],
+    srcs = ["lis3mdl_test.cc"],  # keep
     deps = [
         ":lis3mdl",
-        ":lis3mdl_emb",
-        ":lis3mdl_nanopb",
-        "//testing:catch_main",
-        "@pigweed//pw_bytes",
-        "@pigweed//pw_i2c:address",
-        "@pigweed//pw_i2c:initiator_mock",
-        "@pigweed//pw_result",
+        ":lis3mdl_cc_proto",
+        ":lis3mdl_emb",  # keep
+        ":lis3mdl_nanopb",  # keep
+        "//testing:catch_main",  # keep
+        "@catch2",
+        "@pigweed//pw_bytes",  # keep
+        "@pigweed//pw_i2c:address",  # keep
+        "@pigweed//pw_i2c:initiator_mock",  # keep
+        "@pigweed//pw_result",  # keep
     ],
 )
 
@@ -125,4 +129,9 @@ proto_py_library(
     srcs = ["lis3mdl_pb2.py"],
     visibility = ["//visibility:public"],
     deps = ["@com_google_protobuf//:protobuf_python"],
+)
+
+cc_proto_library(
+    name = "lis3mdl_cc_proto",
+    deps = [":lis3mdl_proto"],
 )

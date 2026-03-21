@@ -2,6 +2,7 @@ load("@pigweed//pw_build:compatibility.bzl", "host_backend_alias", "incompatible
 load("@rules_cc//cc:cc_library.bzl", "cc_library")
 
 # gazelle:default_visibility //visibility:public
+# gazelle:cc_group_unit_cycles warn
 package(default_visibility = ["//visibility:public"])
 
 label_flag(
@@ -21,7 +22,7 @@ cc_library(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        "@pigweed//pw_i2c:register_device",
+        "@pigweed//pw_i2c:register_device",  # keep
     ],
 )
 
@@ -33,9 +34,9 @@ cc_library(
     implementation_deps = [
         "//platforms/host:initiator_host",
         "//third_party/pigweed/system:common_host_system",
-        "@pigweed//pw_i2c:address",
-        "@pigweed//pw_i2c:register_device",
-        "@pigweed//pw_system:async",
+        "@pigweed//pw_i2c:address",  # keep
+        "@pigweed//pw_i2c:register_device",  # keep
+        "@pigweed//pw_system:async",  # keep
     ],
     target_compatible_with = incompatible_with_mcu(),
     deps = ["//apps/sbr/system:headers"],
@@ -47,9 +48,9 @@ cc_library(
         "rp2_system.cc",
     ],
     implementation_deps = [
-        "@pigweed//pw_i2c:address",
-        "@pigweed//pw_i2c:register_device",
-        "@pigweed//pw_i2c_rp2040",
+        "@pigweed//pw_i2c:address",  # keep
+        "@pigweed//pw_i2c:register_device",  # keep
+        "@pigweed//pw_i2c_rp2040",  # keep
     ],
     deps = [
         "//apps/sbr/system:headers",

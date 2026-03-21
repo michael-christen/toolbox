@@ -1,5 +1,6 @@
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
 load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_library")
+load("@com_google_protobuf//bazel:cc_proto_library.bzl", "cc_proto_library")
 load("@rules_proto//proto:defs.bzl", "proto_library")
 load("//bzl:py.bzl", "proto_py_library")
 
@@ -459,4 +460,49 @@ proto_py_library(
     srcs = ["spawn_pb2.py"],
     visibility = ["//visibility:public"],
     deps = ["@com_google_protobuf//:protobuf_python"],
+)
+
+cc_proto_library(
+    name = "action_cache_cc_proto",
+    deps = [":action_cache_proto"],
+)
+
+cc_proto_library(
+    name = "build_event_stream_cc_proto",
+    deps = [":build_event_stream_proto"],
+)
+
+cc_proto_library(
+    name = "command_line_cc_proto",
+    deps = [":command_line_proto"],
+)
+
+cc_proto_library(
+    name = "failure_details_cc_proto",
+    deps = [":failure_details_proto"],
+)
+
+cc_proto_library(
+    name = "invocation_policy_cc_proto",
+    deps = [":invocation_policy_proto"],
+)
+
+cc_proto_library(
+    name = "option_filters_cc_proto",
+    deps = [":option_filters_proto"],
+)
+
+cc_proto_library(
+    name = "package_load_metrics_cc_proto",
+    deps = [":package_load_metrics_proto"],
+)
+
+cc_proto_library(
+    name = "spawn_cc_proto",
+    deps = [":spawn_proto"],
+)
+
+cc_proto_library(
+    name = "strategy_policy_cc_proto",
+    deps = [":strategy_policy_proto"],
 )
