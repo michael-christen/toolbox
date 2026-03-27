@@ -153,6 +153,8 @@ gazelle(
 
 # Don't use go
 # gazelle:go_generate_proto false
+# Don't generate cc_proto_library; packages use proto_compile + proto_cc_library (see #255)
+# gazelle:cc_generate_proto false
 
 # Generate 1 proto rule per file
 # gazelle:proto file
@@ -162,6 +164,8 @@ gazelle(
 
 # Tell gazelle where to find imports
 # gazelle:resolve py google.protobuf.message @com_google_protobuf//:protobuf_python
+# catch_main provides catch2 headers + main(); map the header so gazelle doesn't replace it with bare @catch2
+# gazelle:resolve cc catch2/catch_test_macros.hpp //testing:catch_main
 
 # Use our own rules
 # gazelle:map_kind py_binary py_binary //bzl:py.bzl

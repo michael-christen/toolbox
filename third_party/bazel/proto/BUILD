@@ -460,4 +460,3 @@ proto_py_library(
     visibility = ["//visibility:public"],
     deps = ["@com_google_protobuf//:protobuf_python"],
 )
-

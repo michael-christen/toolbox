@@ -61,8 +61,7 @@ cc_test(
         ":lis3mdl",
         ":lis3mdl_emb",  # keep
         ":lis3mdl_nanopb",  # keep
-        "//testing:catch_main",  # keep
-        "@catch2",
+        "//testing:catch_main",
         "@pigweed//pw_bytes",  # keep
         "@pigweed//pw_i2c:address",  # keep
         "@pigweed//pw_i2c:initiator_mock",  # keep

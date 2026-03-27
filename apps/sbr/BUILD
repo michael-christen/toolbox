@@ -5,14 +5,15 @@ load("//bzl:cc.bzl", "cc_size")
 load("//third_party/pigweed/tools:tools.bzl", "device_console", "host_console")
 load(":binary.bzl", "rp2040_binary", "rp2350_binary")
 
+# Map system.h to the label_flag (which selects the implementation), not just :headers
+# gazelle:resolve cc apps/sbr/system/system.h //apps/sbr/system
 package(default_visibility = ["//visibility:private"])
 
 cc_binary(
     name = "sbr",
     srcs = ["main.cc"],
     deps = [
-        "//apps/sbr/system",  # keep
-        "//hw_services/sbr:service",
+        "//hw_services/sbr:service",  # keep
         "@pigweed//pw_log",  # keep
         "@pigweed//pw_system:async",  # keep
 
@@ -21,6 +22,7 @@ cc_binary(
         "@pigweed//pw_assert:check_backend_impl",  # keep
         "@pigweed//pw_log:backend_impl",  # keep
         "@pigweed//pw_system:extra_platform_libs",  # keep
+        "//apps/sbr/system",
     ],
 )
 
