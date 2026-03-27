@@ -8,8 +8,8 @@ ensure_newline_before_comments = true
 line_length = 79
 skip_gitignore = true
 default_section = 'THIRDPARTY'
-known_mchristen = 'mchristen'
-sections = ['FUTURE','STDLIB','THIRDPARTY', 'MCHRISTEN', 'FIRSTPARTY','LOCALFOLDER']
+known_tlbox = 'tlbox'
+sections = ['FUTURE','STDLIB','THIRDPARTY', 'TLBOX', 'FIRSTPARTY','LOCALFOLDER']
 force_single_line = true
 # known_third_party
 

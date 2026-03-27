@@ -4,7 +4,7 @@ import subprocess
 import tempfile
 import unittest
 
-from tools import git_utils
+from tlbox.utils import git_utils
 
 
 class TestGitUtils(unittest.TestCase):

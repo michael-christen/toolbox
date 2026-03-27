@@ -32,7 +32,7 @@ extensions = [
 ]
 autoapi_dirs = [
     "../examples",
-    "../apps",
+    "../tlbox",
 ]
 autoapi_type = "python"
 autoapi_template_dir = "_templates/autoapi"

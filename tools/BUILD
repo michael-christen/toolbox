@@ -6,7 +6,7 @@ load("@pip//:requirements.bzl", "requirement")  # '@pip' must match configured p
 load("@rules_multirun//:defs.bzl", "command", "multirun")
 load("@rules_mypy//mypy:mypy.bzl", "mypy_cli")
 load("@rules_proto//proto:defs.bzl", "proto_library")
-load("//bzl:py.bzl", "proto_py_library", "py_binary", "py_library", "py_test")
+load("//bzl:py.bzl", "proto_py_library", "py_library", "py_test")
 
 package(default_visibility = ["//visibility:private"])
 
@@ -84,13 +84,13 @@ py_library(
     visibility = ["//:__subpackages__"],
 )
 
-py_library(
+alias(
     name = "bazel_utils",
-    srcs = ["bazel_utils.py"],
+    actual = "//tlbox/utils:bazel_utils",
     visibility = ["//:__subpackages__"],
-    deps = ["//third_party/bazel/src/main/protobuf:build_py_library"],
 )
 
+# XXX: Move?
 py_binary(
     name = "generate_ccindex",
     srcs = ["generate_ccindex.py"],
@@ -98,9 +98,9 @@ py_binary(
     deps = ["//third_party/bazel/src/main/protobuf:build_py_library"],
 )
 
-py_binary(
+alias(
     name = "coverage_baseline",
-    srcs = ["coverage_baseline.py"],
+    actual = "//tlbox/utils:coverage_baseline",
     visibility = ["//:__subpackages__"],
 )
 
@@ -121,17 +121,16 @@ proto_library(
     deps = ["@com_google_protobuf//:timestamp_proto"],
 )
 
-py_library(
+alias(
     name = "git_utils",
-    srcs = ["git_utils.py"],
+    actual = "//tlbox/utils:git_utils",
     visibility = ["//:__subpackages__"],
-    deps = ["//tools:git_py_library"],
 )
 
 py_test(
     name = "git_utils_test",
     srcs = ["git_utils_test.py"],
-    deps = [":git_utils"],
+    deps = ["//tlbox/utils:git_utils"],
 )
 
 proto_cc_library(

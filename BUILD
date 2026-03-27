@@ -146,10 +146,10 @@ gazelle(
 # Exclude these folders from gazelle generation
 # gazelle:exclude venv
 # Avoid gazelle on these directories
-# gazelle:exclude apps/csv-to-sheets
-# gazelle:exclude apps/ical
+# gazelle:exclude tlbox/apps/csv-to-sheets
+# gazelle:exclude tlbox/apps/ical
 # gazelle:exclude examples/pyglet
-# gazelle:exclude notebooks/.ipynb_checkpoints
+# gazelle:exclude tlbox/notebooks/.ipynb_checkpoints
 
 # Don't use go
 # gazelle:go_generate_proto false
@@ -165,6 +165,7 @@ gazelle(
 # Tell gazelle where to find imports
 # gazelle:resolve py google.protobuf.message @com_google_protobuf//:protobuf_python
 # catch_main provides catch2 headers + main(); map the header so gazelle doesn't replace it with bare @catch2
+# gazelle:resolve cc catch2/catch_test_macros.hpp //tlbox/testing:catch_main
 # gazelle:resolve cc catch2/catch_test_macros.hpp //testing:catch_main
 # Pigweed facade headers: resolve to the concrete target, not the .facade alias
 # gazelle:resolve cc pw_log/log.h @pigweed//pw_log:pw_log
@@ -186,7 +187,8 @@ gazelle(
 # gazelle:map_kind proto_py_library proto_py_library //bzl:py.bzl
 
 # TODO: Figure out a way to not need these
-# gazelle:resolve py hw_services.sbr.sbr_pb2 //hw_services/sbr:sbr_py_library
+# gazelle:resolve py hw_services.sbr.sbr_pb2 //tlbox/hw/services/sbr:sbr_py_library
+# gazelle:resolve py tlbox.hw.services.sbr.sbr_pb2 //tlbox/hw/services/sbr:sbr_py_library
 # gazelle:resolve py examples.basic.hello_pb2 //examples/basic:hello_py_library
 # gazelle:resolve py examples.basic.hello_pb2_grpc //examples/basic:hello_grpc_py_library
 # gazelle:resolve py third_party.bazel.src.main.protobuf.build_pb2 //third_party/bazel/src/main/protobuf:build_py_library
@@ -208,11 +210,11 @@ filegroup(
         ["*.py"],
         allow_empty = True,
     ) + [
-        "//apps/bazel_parser:python_source",
         "//examples/basic:python_source",
         "//examples/bazel:python_source",
         "//examples/pigweed/modules/blinky:python_source",
         "//third_party/pigweed/tools:python_source",
+        "//tlbox/apps/bazel_parser:python_source",
     ],
     visibility = ["//visibility:public"],
 )
