@@ -111,6 +111,10 @@ CONFIG="--config quiet"
 # ./bazel-bin/packaging/query_generator --mode $mode
 python packaging/query_generator.py --mode $mode
 
+# Regenerate/verify gazelle_cc index files
+bazel build ${CONFIG} --output_groups=-mypy -- //tools:generate_ccindex
+./bazel-bin/tools/generate_ccindex --mode $mode
+
 echo $BAZEL_FILES | xargs bazel run ${CONFIG} -- //tools/buildifier ${BUILDIFIER_ARGS[@]}
 bazel run ${CONFIG} -- ${BAZEL_TOOL}
 echo $MARKDOWN_FILES | xargs bazel run ${CONFIG} -- //tools/prettier ${PRETTIER_ARGS[@]}

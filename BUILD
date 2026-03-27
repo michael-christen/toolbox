@@ -167,6 +167,10 @@ gazelle(
 # catch_main provides catch2 headers + main(); map the header so gazelle doesn't replace it with bare @catch2
 # gazelle:resolve cc catch2/catch_test_macros.hpp //testing:catch_main
 
+# C++ header -> target index files for gazelle_cc resolution
+# gazelle:cc_indexfile tools/pigweed.ccindex
+# gazelle:cc_indexfile tools/emboss.ccindex
+
 # Use our own rules
 # gazelle:map_kind py_binary py_binary //bzl:py.bzl
 # gazelle:map_kind py_library py_library //bzl:py.bzl

@@ -92,6 +92,11 @@ py_library(
 )
 
 py_binary(
+    name = "generate_ccindex",
+    srcs = ["generate_ccindex.py"],
+)
+
+py_binary(
     name = "coverage_baseline",
     srcs = ["coverage_baseline.py"],
     visibility = ["//:__subpackages__"],
