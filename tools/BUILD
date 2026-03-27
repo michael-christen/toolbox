@@ -94,6 +94,7 @@ py_library(
 py_binary(
     name = "generate_ccindex",
     srcs = ["generate_ccindex.py"],
+    visibility = ["//:__subpackages__"],
 )
 
 py_binary(

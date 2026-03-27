@@ -13,9 +13,6 @@ cc_binary(
     name = "sbr",
     srcs = ["main.cc"],
     deps = [
-        "//hw_services/sbr:service",
-        "@pigweed//pw_log",  # keep: ambiguous (pw_log vs pw_log.facade)
-        "@pigweed//pw_system:async",
 
         # These should be provided by pw_system:async.
         "@pigweed//pw_assert:assert_backend_impl",  # keep
@@ -23,6 +20,9 @@ cc_binary(
         "@pigweed//pw_log:backend_impl",  # keep
         "@pigweed//pw_system:extra_platform_libs",  # keep
         "//apps/sbr/system",
+        "//hw_services/sbr:service",
+        "@pigweed//pw_log",
+        "@pigweed//pw_system:async",
     ],
 )
 

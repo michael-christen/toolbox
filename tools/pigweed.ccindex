@@ -17,10 +17,6 @@
   "public_overrides/pw_sync_backend/thread_notification_inline.h": "@pigweed//pw_sync:binary_semaphore_thread_notification_backend",
   "public_overrides/pw_sync_backend/thread_notification_native.h": "@pigweed//pw_sync:binary_semaphore_thread_notification_backend",
   "public_overrides/pw_sync_backend/timed_thread_notification_inline.h": "@pigweed//pw_sync:binary_semaphore_timed_thread_notification_backend",
-  "public_overrides/pw_trace_backend/trace_backend.h": [
-    "@pigweed//pw_trace:null",
-    "@pigweed//pw_trace_tokenized:pw_trace_tokenized"
-  ],
   "pw_allocator/allocator.h": "@pigweed//pw_allocator:pw_allocator",
   "pw_allocator/best_fit.h": "@pigweed//pw_allocator:best_fit",
   "pw_allocator/best_fit_block_allocator.h": "@pigweed//pw_allocator:best_fit_block_allocator",
@@ -63,10 +59,6 @@
   "pw_assert/internal/check_impl.h": "@pigweed//pw_assert:check",
   "pw_assert/internal/print_and_abort.h": "@pigweed//pw_assert:print_and_abort",
   "pw_assert/short.h": "@pigweed//pw_assert:check",
-  "pw_assert_backend/assert_backend.h": [
-    "@pigweed//pw_assert:assert_compatibility_backend",
-    "@pigweed//pw_assert:print_and_abort_assert_backend"
-  ],
   "pw_assert_backend/check_backend.h": "@pigweed//pw_assert:print_and_abort_check_backend",
   "pw_assert_trap/message.h": "@pigweed//pw_assert_trap:message",
   "pw_async2/allocate_task.h": "@pigweed//pw_async2:allocate_task",
@@ -91,10 +83,6 @@
   "pw_async2/time_provider.h": "@pigweed//pw_async2:time_provider",
   "pw_async2/try.h": "@pigweed//pw_async2:poll",
   "pw_async2/waker.h": "@pigweed//pw_async2:dispatcher",
-  "pw_async2_backend/native_dispatcher_for_test.h": [
-    "@pigweed//pw_async2:basic_dispatcher_for_test",
-    "@pigweed//pw_async2:epoll_dispatcher_for_test"
-  ],
   "pw_base64/base64.h": "@pigweed//pw_base64:pw_base64",
   "pw_bytes/alignment.h": "@pigweed//pw_bytes:alignment",
   "pw_bytes/array.h": "@pigweed//pw_bytes:pw_bytes",
@@ -115,18 +103,6 @@
   "pw_checksum/crc32.h": "@pigweed//pw_checksum:pw_checksum",
   "pw_checksum/internal/config.h": "@pigweed//pw_checksum:pw_checksum",
   "pw_chrono/epoch.h": "@pigweed//pw_chrono:epoch",
-  "pw_chrono/internal/system_clock_macros.h": [
-    "@pigweed//pw_chrono:system_clock",
-    "@pigweed//pw_chrono:system_clock.facade"
-  ],
-  "pw_chrono/system_clock.h": [
-    "@pigweed//pw_chrono:system_clock",
-    "@pigweed//pw_chrono:system_clock.facade"
-  ],
-  "pw_chrono/system_timer.h": [
-    "@pigweed//pw_chrono:system_timer",
-    "@pigweed//pw_chrono:system_timer.facade"
-  ],
   "pw_chrono/virtual_clock.h": "@pigweed//pw_chrono:virtual_clock",
   "pw_containers/algorithm.h": "@pigweed//pw_containers:algorithm",
   "pw_containers/config.h": "@pigweed//pw_containers:config",
@@ -187,31 +163,7 @@
   "pw_i2c/message.h": "@pigweed//pw_i2c:message",
   "pw_i2c/register_device.h": "@pigweed//pw_i2c:register_device",
   "pw_i2c_rp2040/initiator.h": "@pigweed//pw_i2c_rp2040:pw_i2c_rp2040",
-  "pw_log/config.h": [
-    "@pigweed//pw_log:pw_log",
-    "@pigweed//pw_log:pw_log.facade"
-  ],
-  "pw_log/levels.h": [
-    "@pigweed//pw_log:pw_log",
-    "@pigweed//pw_log:pw_log.facade"
-  ],
-  "pw_log/log.h": [
-    "@pigweed//pw_log:pw_log",
-    "@pigweed//pw_log:pw_log.facade"
-  ],
-  "pw_log/options.h": [
-    "@pigweed//pw_log:pw_log",
-    "@pigweed//pw_log:pw_log.facade"
-  ],
   "pw_log/rate_limited.h": "@pigweed//pw_log:rate_limited",
-  "pw_log/short.h": [
-    "@pigweed//pw_log:pw_log",
-    "@pigweed//pw_log:pw_log.facade"
-  ],
-  "pw_log/shorter.h": [
-    "@pigweed//pw_log:pw_log",
-    "@pigweed//pw_log:pw_log.facade"
-  ],
   "pw_log/tokenized_args.h": "@pigweed//pw_log:args",
   "pw_log_backend/log_backend.h": "@pigweed//pw_log_basic:pw_log_basic",
   "pw_log_basic/log_basic.h": "@pigweed//pw_log_basic:extension",
@@ -301,10 +253,6 @@
   "pw_rpc/nanopb/internal/common.h": "@pigweed//pw_rpc/nanopb:common",
   "pw_rpc/nanopb/internal/method.h": "@pigweed//pw_rpc/nanopb:server_api",
   "pw_rpc/nanopb/internal/method_union.h": "@pigweed//pw_rpc/nanopb:server_api",
-  "pw_rpc/nanopb/server_reader_writer.h": [
-    "@pigweed//pw_rpc/nanopb:common",
-    "@pigweed//pw_rpc/nanopb:server_api"
-  ],
   "pw_rpc/packet_meta.h": "@pigweed//pw_rpc:pw_rpc",
   "pw_rpc/pwpb/client_reader_writer.h": "@pigweed//pw_rpc/pwpb:client_api",
   "pw_rpc/pwpb/internal/common.h": "@pigweed//pw_rpc/pwpb:common",
@@ -345,30 +293,10 @@
   "pw_string/to_string.h": "@pigweed//pw_string:to_string",
   "pw_string/type_to_string.h": "@pigweed//pw_string:to_string",
   "pw_string/util.h": "@pigweed//pw_string:util",
-  "pw_sync/binary_semaphore.h": [
-    "@pigweed//pw_sync:binary_semaphore",
-    "@pigweed//pw_sync:binary_semaphore.facade"
-  ],
   "pw_sync/borrow.h": "@pigweed//pw_sync:borrow",
-  "pw_sync/interrupt_spin_lock.h": [
-    "@pigweed//pw_sync:interrupt_spin_lock",
-    "@pigweed//pw_sync:interrupt_spin_lock.facade"
-  ],
   "pw_sync/lock_annotations.h": "@pigweed//pw_sync:lock_annotations",
   "pw_sync/lock_traits.h": "@pigweed//pw_sync:lock_traits",
-  "pw_sync/mutex.h": [
-    "@pigweed//pw_sync:mutex",
-    "@pigweed//pw_sync:mutex.facade"
-  ],
   "pw_sync/no_lock.h": "@pigweed//pw_sync:no_lock",
-  "pw_sync/thread_notification.h": [
-    "@pigweed//pw_sync:thread_notification",
-    "@pigweed//pw_sync:thread_notification.facade"
-  ],
-  "pw_sync/timed_thread_notification.h": [
-    "@pigweed//pw_sync:timed_thread_notification",
-    "@pigweed//pw_sync:timed_thread_notification.facade"
-  ],
   "pw_sync/virtual_basic_lockable.h": "@pigweed//pw_sync:virtual_basic_lockable",
   "pw_sync/yield_core.h": "@pigweed//pw_sync:yield_core",
   "pw_sync_backend/binary_semaphore_inline.h": "@pigweed//pw_sync_stl:binary_semaphore",
@@ -383,33 +311,17 @@
   "pw_sync_stl/interrupt_spin_lock_native.h": "@pigweed//pw_sync_stl:interrupt_spin_lock_private",
   "pw_sync_stl/mutex_inline.h": "@pigweed//pw_sync_stl:mutex_private",
   "pw_sync_stl/mutex_native.h": "@pigweed//pw_sync_stl:mutex_private",
-  "pw_sys_io/sys_io.h": [
-    "@pigweed//pw_sys_io:pw_sys_io",
-    "@pigweed//pw_sys_io:pw_sys_io.facade"
-  ],
   "pw_system/benchmark_service.h": "@pigweed//pw_system:benchmark_service",
   "pw_system/config.h": "@pigweed//pw_system:config",
   "pw_system/crash_handler.h": "@pigweed//pw_system:crash_handler",
   "pw_system/crash_snapshot.h": "@pigweed//pw_system:crash_snapshot",
-  "pw_system/device_handler.h": [
-    "@pigweed//pw_system:device_handler",
-    "@pigweed//pw_system:device_handler.facade"
-  ],
   "pw_system/device_service.h": "@pigweed//pw_system:device_service",
   "pw_system/device_service_pwpb.h": "@pigweed//pw_system:device_service_pwpb",
   "pw_system/file_manager.h": "@pigweed//pw_system:file_manager",
   "pw_system/file_service.h": "@pigweed//pw_system:file_service",
   "pw_system/init.h": "@pigweed//pw_system:init",
   "pw_system/internal/async_packet_io.h": "@pigweed//pw_system:async_packet_io",
-  "pw_system/io.h": [
-    "@pigweed//pw_system:io",
-    "@pigweed//pw_system:io.facade"
-  ],
   "pw_system/log.h": "@pigweed//pw_system:log",
-  "pw_system/rpc_server.h": [
-    "@pigweed//pw_system:rpc_server",
-    "@pigweed//pw_system:rpc_server.facade"
-  ],
   "pw_system/system.h": "@pigweed//pw_system:async",
   "pw_system/target_hooks.h": "@pigweed//pw_system:target_hooks",
   "pw_system/thread_snapshot_service.h": "@pigweed//pw_system:thread_snapshot_service",
@@ -418,79 +330,15 @@
   "pw_system/transfer_service.h": "@pigweed//pw_system:transfer_service",
   "pw_system/work_queue.h": "@pigweed//pw_system:work_queue",
   "pw_third_party/freertos/config_assert.h": "@pigweed//third_party/freertos:config_assert",
-  "pw_thread/attrs.h": [
-    "@pigweed//pw_thread:thread",
-    "@pigweed//pw_thread:thread.facade"
-  ],
   "pw_thread/config.h": "@pigweed//pw_thread:config",
-  "pw_thread/context.h": [
-    "@pigweed//pw_thread:thread",
-    "@pigweed//pw_thread:thread.facade"
-  ],
-  "pw_thread/detached_thread.h": [
-    "@pigweed//pw_thread:thread",
-    "@pigweed//pw_thread:thread.facade"
-  ],
-  "pw_thread/id.h": [
-    "@pigweed//pw_thread:id",
-    "@pigweed//pw_thread:id.facade"
-  ],
   "pw_thread/internal/priority.h": "@pigweed//pw_thread:generic_priority",
-  "pw_thread/native_options.h": [
-    "@pigweed//pw_thread:thread",
-    "@pigweed//pw_thread:thread.facade"
-  ],
   "pw_thread/options.h": "@pigweed//pw_thread:options",
-  "pw_thread/priority.h": [
-    "@pigweed//pw_thread:thread",
-    "@pigweed//pw_thread:thread.facade"
-  ],
-  "pw_thread/sleep.h": [
-    "@pigweed//pw_thread:sleep",
-    "@pigweed//pw_thread:sleep.facade"
-  ],
-  "pw_thread/stack.h": [
-    "@pigweed//pw_thread:thread",
-    "@pigweed//pw_thread:thread.facade"
-  ],
-  "pw_thread/stack_not_supported.h": [
-    "@pigweed//pw_thread:thread",
-    "@pigweed//pw_thread:thread.facade"
-  ],
-  "pw_thread/thread.h": [
-    "@pigweed//pw_thread:thread",
-    "@pigweed//pw_thread:thread.facade"
-  ],
   "pw_thread/thread_core.h": "@pigweed//pw_thread:thread_core",
   "pw_thread/thread_info.h": "@pigweed//pw_thread:thread_info",
-  "pw_thread/thread_iteration.h": [
-    "@pigweed//pw_thread:thread_iteration",
-    "@pigweed//pw_thread:thread_iteration.facade"
-  ],
   "pw_thread/thread_snapshot_service.h": "@pigweed//pw_thread:thread_snapshot_service",
-  "pw_thread/yield.h": [
-    "@pigweed//pw_thread:yield",
-    "@pigweed//pw_thread:yield.facade"
-  ],
-  "pw_thread_backend/context.h": [
-    "@pigweed//pw_thread:generic_thread_creation_unsupported",
-    "@pigweed//pw_thread_stl:thread_creation"
-  ],
   "pw_thread_backend/id_inline.h": "@pigweed//pw_thread_stl:id",
   "pw_thread_backend/id_native.h": "@pigweed//pw_thread_stl:id",
-  "pw_thread_backend/options.h": [
-    "@pigweed//pw_thread:generic_thread_creation_unsupported",
-    "@pigweed//pw_thread_stl:thread_creation"
-  ],
-  "pw_thread_backend/priority.h": [
-    "@pigweed//pw_thread:generic_thread_creation_unsupported",
-    "@pigweed//pw_thread_stl:thread_creation"
-  ],
   "pw_thread_backend/sleep_inline.h": "@pigweed//pw_thread_stl:sleep",
-  "pw_thread_backend/stack.h": [
-    "@pigweed//pw_thread:generic_thread_creation_unsupported",
-    "@pigweed//pw_thread_stl:thread_creation"
-  ],
   "pw_thread_backend/thread_inline.h": "@pigweed//pw_thread_stl:thread",
   "pw_thread_backend/thread_native.h": "@pigweed//pw_thread_stl:thread",
   "pw_thread_backend/yield_inline.h": "@pigweed//pw_thread_stl:yield",
@@ -520,14 +368,6 @@
   "pw_toolchain/constexpr_tag.h": "@pigweed//pw_toolchain:constexpr_tag",
   "pw_toolchain/internal/sibling_cast.h": "@pigweed//pw_toolchain:sibling_cast",
   "pw_toolchain/no_destructor.h": "@pigweed//pw_toolchain:no_destructor",
-  "pw_trace/internal/trace_internal.h": [
-    "@pigweed//pw_trace:pw_trace",
-    "@pigweed//pw_trace:pw_trace.facade"
-  ],
-  "pw_trace/trace.h": [
-    "@pigweed//pw_trace:pw_trace",
-    "@pigweed//pw_trace:pw_trace.facade"
-  ],
   "pw_trace_tokenized/base_trace_service.h": "@pigweed//pw_trace_tokenized:base_trace_service",
   "pw_trace_tokenized/config.h": "@pigweed//pw_trace_tokenized:config",
   "pw_trace_tokenized/internal/interrupt_spin_lock_native.h": "@pigweed//pw_trace_tokenized:interrupt_spin_lock_native",
@@ -548,10 +388,6 @@
   "pw_transfer/transfer_thread.h": "@pigweed//pw_transfer:core",
   "pw_unit_test/config.h": "@pigweed//pw_unit_test:config",
   "pw_unit_test/event_handler.h": "@pigweed//pw_unit_test:event_handler",
-  "pw_unit_test/framework.h": [
-    "@pigweed//pw_unit_test:pw_unit_test",
-    "@pigweed//pw_unit_test:pw_unit_test.facade"
-  ],
   "pw_unit_test/framework_backend.h": "@pigweed//pw_unit_test:light_private",
   "pw_unit_test/googletest_style_event_handler.h": "@pigweed//pw_unit_test:googletest_style_event_handler",
   "pw_unit_test/simple_printing_event_handler.h": "@pigweed//pw_unit_test:simple_printing_event_handler",

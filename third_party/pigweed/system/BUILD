@@ -21,7 +21,7 @@ cc_library(
         "@pigweed//pw_digital_io:digital_io_mock",
         "@pigweed//pw_multibuf:simple_allocator",
         "@pigweed//pw_system:async",
-        "@pigweed//pw_system:io",  # keep: ambiguous (io vs io.facade)
+        "@pigweed//pw_system:io",
     ],
 )
 
@@ -50,6 +50,6 @@ cc_library(
         "@pigweed//pw_channel:rp2_stdio_channel",
         "@pigweed//pw_multibuf:simple_allocator",
         "@pigweed//pw_system:async",
-        "@pigweed//pw_system:io",  # keep: ambiguous (io vs io.facade)
+        "@pigweed//pw_system:io",
     ],
 )

@@ -129,8 +129,9 @@ def generate_pigweed_index() -> dict[str, str | list[str]]:
                 index[include_path].append(label)
 
     return {
-        k: (v[0] if len(v) == 1 else sorted(v))
+        k: v[0]
         for k, v in sorted(index.items())
+        if len(v) == 1
     }
 
 
