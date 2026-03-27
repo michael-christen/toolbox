@@ -22,7 +22,7 @@ cc_library(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        "@pigweed//pw_digital_io",  # keep
+        "@pigweed//pw_digital_io",
     ],
 )
 

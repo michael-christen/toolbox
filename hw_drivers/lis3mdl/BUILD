@@ -31,9 +31,9 @@ cc_library(
         "//hw_services/sbr:__subpackages__",
     ],
     deps = [
-        ":lis3mdl_emb",  # keep
+        ":lis3mdl_emb",
         ":lis3mdl_nanopb",  # keep
-        "@pigweed//pw_i2c:register_device",  # keep
+        "@pigweed//pw_i2c:register_device",
     ],
 )
 
@@ -42,15 +42,15 @@ pw_cc_test(
     srcs = ["lis3mdl_pw_test.cc"],  # keep
     deps = [
         ":lis3mdl",
-        ":lis3mdl_emb",  # keep
+        ":lis3mdl_emb",
         ":lis3mdl_nanopb",  # keep
-        "@pigweed//pw_bytes",  # keep
-        "@pigweed//pw_i2c:address",  # keep
-        "@pigweed//pw_i2c:device",  # keep
-        "@pigweed//pw_i2c:initiator_mock",  # keep
-        "@pigweed//pw_i2c:register_device",  # keep
-        "@pigweed//pw_result",  # keep
-        "@pigweed//pw_unit_test",  # keep
+        "@pigweed//pw_bytes",
+        "@pigweed//pw_i2c:address",
+        "@pigweed//pw_i2c:device",
+        "@pigweed//pw_i2c:initiator_mock",
+        "@pigweed//pw_i2c:register_device",
+        "@pigweed//pw_result",
+        "@pigweed//pw_unit_test",  # keep: ambiguous (pw_unit_test vs pw_unit_test.facade)
     ],
 )
 
@@ -59,13 +59,13 @@ cc_test(
     srcs = ["lis3mdl_test.cc"],  # keep
     deps = [
         ":lis3mdl",
-        ":lis3mdl_emb",  # keep
+        ":lis3mdl_emb",
         ":lis3mdl_nanopb",  # keep
         "//testing:catch_main",
-        "@pigweed//pw_bytes",  # keep
-        "@pigweed//pw_i2c:address",  # keep
-        "@pigweed//pw_i2c:initiator_mock",  # keep
-        "@pigweed//pw_result",  # keep
+        "@pigweed//pw_bytes",
+        "@pigweed//pw_i2c:address",
+        "@pigweed//pw_i2c:initiator_mock",
+        "@pigweed//pw_result",
     ],
 )
 

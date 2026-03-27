@@ -22,7 +22,7 @@ cc_library(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        "@pigweed//pw_i2c:register_device",  # keep
+        "@pigweed//pw_i2c:register_device",
     ],
 )
 
@@ -34,9 +34,9 @@ cc_library(
     implementation_deps = [
         "//platforms/host:initiator_host",
         "//third_party/pigweed/system:common_host_system",
-        "@pigweed//pw_i2c:address",  # keep
-        "@pigweed//pw_i2c:register_device",  # keep
-        "@pigweed//pw_system:async",  # keep
+        "@pigweed//pw_i2c:address",
+        "@pigweed//pw_i2c:register_device",
+        "@pigweed//pw_system:async",
     ],
     target_compatible_with = incompatible_with_mcu(),
     deps = ["//apps/sbr/system:headers"],
@@ -48,9 +48,9 @@ cc_library(
         "rp2_system.cc",
     ],
     implementation_deps = [
-        "@pigweed//pw_i2c:address",  # keep
-        "@pigweed//pw_i2c:register_device",  # keep
-        "@pigweed//pw_i2c_rp2040",  # keep
+        "@pigweed//pw_i2c:address",
+        "@pigweed//pw_i2c:register_device",
+        "@pigweed//pw_i2c_rp2040",
     ],
     deps = [
         "//apps/sbr/system:headers",

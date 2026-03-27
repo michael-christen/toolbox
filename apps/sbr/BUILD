@@ -13,9 +13,9 @@ cc_binary(
     name = "sbr",
     srcs = ["main.cc"],
     deps = [
-        "//hw_services/sbr:service",  # keep
-        "@pigweed//pw_log",  # keep
-        "@pigweed//pw_system:async",  # keep
+        "//hw_services/sbr:service",
+        "@pigweed//pw_log",  # keep: ambiguous (pw_log vs pw_log.facade)
+        "@pigweed//pw_system:async",
 
         # These should be provided by pw_system:async.
         "@pigweed//pw_assert:assert_backend_impl",  # keep

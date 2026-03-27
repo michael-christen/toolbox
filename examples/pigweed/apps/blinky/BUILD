@@ -8,9 +8,9 @@ cc_binary(
     name = "blinky",
     srcs = ["main.cc"],
     deps = [
-        "@pigweed//pw_log",  # keep
-        "@pigweed//pw_system:async",  # keep
-        "@pigweed//pw_async2:system_time_provider",  # keep
+        "@pigweed//pw_log",  # keep: ambiguous (pw_log vs pw_log.facade)
+        "@pigweed//pw_system:async",
+        "@pigweed//pw_async2:system_time_provider",
 
         # These should be provided by pw_system:async.
         "@pigweed//pw_assert:assert_backend_impl",  # keep

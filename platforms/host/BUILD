@@ -8,7 +8,7 @@ cc_library(
     hdrs = ["initiator_host.h"],
     visibility = ["//apps/sbr/system:__pkg__"],
     deps = [
-        "@pigweed//pw_i2c:address",  # keep
-        "@pigweed//pw_i2c:initiator",  # keep
+        "@pigweed//pw_i2c:address",
+        "@pigweed//pw_i2c:initiator",
     ],
 )
