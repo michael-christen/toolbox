@@ -16,7 +16,7 @@ isort
 # https://jupytext.readthedocs.io/en/stable/index.html
 # Source control jupyter notebooks by pairing with an ingnored .ipynb file.
 jupytext
-# XXX: jupyterlab explicitly / jupyterlab-vim
+# TODO(#262): jupyterlab explicitly / jupyterlab-vim
 # - generates links with raw urls, eg) www.example.com
 linkify-it-py
 mypy

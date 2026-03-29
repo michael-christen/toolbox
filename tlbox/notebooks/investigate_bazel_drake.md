@@ -143,8 +143,8 @@ From the above query, we can see a few things:
   probably got a predominately C++ repo, with some py_test tooling
 
 ```{code-cell} ipython3
-# XXX: This should be empty at start, and likely revisited / refined as we go
-# XXX: Could likely refine this a lot easier with tag filtering in the initial bazel query
+# This should be empty at start, and likely revisited / refined as we go
+# Could likely refine this a lot easier with tag filtering in the initial bazel query
 refined_df_nodes = df_nodes.loc[
     ~(
         (df_nodes["node_class"] == "unknown")
@@ -196,7 +196,7 @@ print(f"We have {df_nodes['node_class'].nunique()} node classes")
 # So, let's take a look at some of these and figure out how to refine them a bit
 
 
-# XXX: Just use .index.tolist()
+# Just use .index.tolist()
 def show_indices(df: pandas.DataFrame, node_class: str) -> None:
     for k in df.loc[df["node_class"] == node_class].index:
         print(k)
@@ -216,7 +216,7 @@ for k in df_nodes.loc[df_nodes['node_class'] == '_redirect_test'].index:
 ```{code-cell} ipython3
 # Start with 6,815
 # Refine to 227
-# XXX: More useful later if we use inverse
+# More useful later if we use inverse
 len(
     df_nodes.loc[
         (df_nodes["node_class"] == "_redirect_test")
@@ -230,7 +230,7 @@ len(
 # Another abundance of lint, codestyle
 # show_indices(df_nodes, 'py_test')
 # 7,239 to 247
-# XXX: Should check if this overlaps with _redirect_test at all ...
+# Should check if this overlaps with _redirect_test at all ...
 len(
     df_nodes.loc[
         (df_nodes["node_class"] == "py_test")
@@ -444,7 +444,7 @@ Chatting w/ Ben:
 
 ```{code-cell} ipython3
 # 5 nodes that take time, sorted by largest number of source_descendants
-# XXX: How to select based on this weighted by node_duration_s
+# How to select based on this weighted by node_duration_s
 df_nodes.loc[df_nodes["node_duration_s"] > 0].sort_values(
     ["num_source_descendants", "node_duration_s"], ascending=False
 )[:5]

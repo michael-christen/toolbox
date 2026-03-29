@@ -62,7 +62,7 @@ proto_cc_library(
     deps = ["@com_google_protobuf//:protobuf"],
 )
 
-# XXX: clang toolchain from pigweed is breaking rust
+# TODO(#90): clang toolchain from pigweed is breaking rust
 # rust_library(
 #     name = "lib",
 #     srcs = ["src/lib.rs"],
@@ -152,7 +152,7 @@ py_test(
         ":server",
         "//examples/basic:hello_py_library",
     ],
-    # XXX: How to expect_failure
+    # TODO(#259): How to expect_failure
 )
 
 grpc_py_library(

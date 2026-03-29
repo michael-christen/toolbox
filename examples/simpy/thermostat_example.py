@@ -21,7 +21,7 @@ class ThermalObject:
         dt = now_t - self.last_change_in_power_t
         thermal_energy = dt * self.current_thermal_power_in_w
         temperature_change_c = thermal_energy / self.thermal_mass
-        # TODO(XXX): As you get colder or hotter, it will be harder and harder
+        # TODO(#260): As you get colder or hotter, it will be harder and harder
         # to actually apply this power into the system (eg, there are no
         # perfect transducers of energy into temperature)
         self.temperature_c += temperature_change_c

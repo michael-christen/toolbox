@@ -50,9 +50,9 @@ bazel query \
   - in & out (same as upstream & downstream from what I can tell)
     - degree
     - eccentricity
-      - XXX: not doing this, unclear what it is
+      - not doing this, unclear what it is
         > The eccentricity of a node v is the maximum distance from v to all
-        > other nodes in G. XXX: How is this different than depth?
+        > other nodes in G. How is this different than depth?
         # - [ ] eccentricity
         > - F this, I have no idea, let's just do depth ...
   - rebuilt targets
@@ -63,7 +63,7 @@ bazel query \
     - betweenness
     - betweenness (longest)
       - what's this? Not implementing
-        > XXX: betweennes_longest doesn't quite make sense
+        > betweennes_longest doesn't quite make sense
     - closeness
   - (link analysis)
     - pagerank
