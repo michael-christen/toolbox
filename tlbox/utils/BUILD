@@ -59,6 +59,13 @@ py_binary(
     visibility = ["//:__subpackages__"],
 )
 
+py_binary(
+    name = "generate_ccindex",
+    srcs = ["generate_ccindex.py"],
+    visibility = ["//:__subpackages__"],
+    deps = ["//third_party/bazel/src/main/protobuf:build_py_library"],
+)
+
 py_library(
     name = "git_utils",
     srcs = ["git_utils.py"],

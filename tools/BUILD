@@ -90,12 +90,10 @@ alias(
     visibility = ["//:__subpackages__"],
 )
 
-# XXX: Move?
-py_binary(
+alias(
     name = "generate_ccindex",
-    srcs = ["generate_ccindex.py"],
+    actual = "//tlbox/utils:generate_ccindex",
     visibility = ["//:__subpackages__"],
-    deps = ["//third_party/bazel/src/main/protobuf:build_py_library"],
 )
 
 alias(
