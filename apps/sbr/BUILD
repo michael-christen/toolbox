@@ -15,8 +15,8 @@ cc_binary(
     deps = [
         "//apps/sbr/system",
         "//hw_services/sbr:service",
-        "@pigweed//pw_log",
         "//third_party/pigweed:pw_system_async_alias",
+        "@pigweed//pw_log",
     ],
 )
 

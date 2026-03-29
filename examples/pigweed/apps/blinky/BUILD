@@ -8,17 +8,11 @@ cc_binary(
     name = "blinky",
     srcs = ["main.cc"],
     deps = [
-
-        # These should be provided by pw_system:async.
-        "@pigweed//pw_assert:assert_backend_impl",  # keep
-        "@pigweed//pw_assert:check_backend_impl",  # keep
-        "@pigweed//pw_log:backend_impl",  # keep
-        "@pigweed//pw_system:extra_platform_libs",  # keep
         "//examples/pigweed/apps/blinky/system:headers",
         "//examples/pigweed/modules/blinky:service",
+        "//third_party/pigweed:pw_system_async_alias",
         "@pigweed//pw_async2:system_time_provider",
         "@pigweed//pw_log",
-        "@pigweed//pw_system:async",
     ],
 )
 

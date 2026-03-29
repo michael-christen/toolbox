@@ -12,15 +12,15 @@ filegroup(
     visibility = ["//visibility:public"],
 )
 
-
 # Work around gazelle limitations
+# keep
 cc_library(
     name = "pw_system_async_alias",
     deps = [
         "@pigweed//pw_assert:assert_backend_impl",
         "@pigweed//pw_assert:check_backend_impl",
         "@pigweed//pw_log:backend_impl",
-        "@pigweed//pw_system:extra_platform_libs",
         "@pigweed//pw_system:async",
+        "@pigweed//pw_system:extra_platform_libs",
     ],
 )

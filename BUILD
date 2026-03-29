@@ -171,7 +171,7 @@ gazelle(
 # gazelle:resolve cc pw_system/io.h @pigweed//pw_system:io
 # gazelle:resolve cc pw_unit_test/framework.h @pigweed//pw_unit_test:pw_unit_test
 # Handle aliases for common dependencies that gazelle isn't picking up
-# gazelle:resolve cc pw_system/async.h //third_party/pigweed:pw_system_async_alias
+# gazelle:resolve cc pw_system/system.h //third_party/pigweed:pw_system_async_alias
 
 # C++ header -> target index files for gazelle_cc resolution
 # gazelle:cc_indexfile tools/pigweed.ccindex
