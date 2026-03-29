@@ -35,8 +35,6 @@ PYTHON_TARGETS = [
     "//examples/simpy:car_tutorial",
     "//examples/simpy:thermostat_example",
     "//examples/tofupilot:tofupilot_example",
-    "//notebooks/.ipynb_checkpoints:investigate_bazel-checkpoint",
-    "//notebooks/.ipynb_checkpoints:investigate_bazel_drake-checkpoint",
     "//packaging:query_generator",
     "//third_party/bazel/proto:action_cache_py_library",
     "//third_party/bazel/proto:build_event_stream_py_library",
