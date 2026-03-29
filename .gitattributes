@@ -5,3 +5,4 @@ MODULE.bazel.lock linguist-generated=true -diff
 packaging/generated.bzl linguist-generated=true
 tools/pigweed.ccindex linguist-generated=true -diff
 tools/emboss.ccindex linguist-generated=true -diff
+tools/nanopb.ccindex linguist-generated=true -diff

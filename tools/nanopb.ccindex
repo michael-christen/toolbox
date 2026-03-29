@@ -1,0 +1,5 @@
+{
+  "examples/pigweed/modules/blinky/blinky.pb.h": "//examples/pigweed/modules/blinky:nanopb",
+  "hw_drivers/lis3mdl/lis3mdl.pb.h": "//hw_drivers/lis3mdl:lis3mdl_nanopb",
+  "hw_services/sbr/sbr.pb.h": "//hw_services/sbr:sbr_nanopb"
+}

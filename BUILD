@@ -174,6 +174,7 @@ gazelle(
 # C++ header -> target index files for gazelle_cc resolution
 # gazelle:cc_indexfile tools/pigweed.ccindex
 # gazelle:cc_indexfile tools/emboss.ccindex
+# gazelle:cc_indexfile tools/nanopb.ccindex
 
 # Use our own rules
 # gazelle:map_kind py_binary py_binary //bzl:py.bzl
