@@ -13,16 +13,10 @@ cc_binary(
     name = "sbr",
     srcs = ["main.cc"],
     deps = [
-
-        # These should be provided by pw_system:async.
-        "@pigweed//pw_assert:assert_backend_impl",  # keep
-        "@pigweed//pw_assert:check_backend_impl",  # keep
-        "@pigweed//pw_log:backend_impl",  # keep
-        "@pigweed//pw_system:extra_platform_libs",  # keep
         "//apps/sbr/system",
         "//hw_services/sbr:service",
         "@pigweed//pw_log",
-        "@pigweed//pw_system:async",
+        "//third_party/pigweed:pw_system_async_alias",
     ],
 )
 
