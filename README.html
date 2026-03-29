@@ -216,12 +216,6 @@
 <p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
 <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="autoapi/index.html">API Reference</a><input aria-label="Toggle navigation of API Reference" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="autoapi/apps/bazel_parser/cli/index.html">apps.bazel_parser.cli</a></li>
-<li class="toctree-l2"><a class="reference internal" href="autoapi/apps/bazel_parser/panel/index.html">apps.bazel_parser.panel</a></li>
-<li class="toctree-l2"><a class="reference internal" href="autoapi/apps/bazel_parser/parsing/index.html">apps.bazel_parser.parsing</a></li>
-<li class="toctree-l2"><a class="reference internal" href="autoapi/apps/bazel_parser/refinement/index.html">apps.bazel_parser.refinement</a></li>
-<li class="toctree-l2"><a class="reference internal" href="autoapi/apps/bazel_parser/repo_graph_data/index.html">apps.bazel_parser.repo_graph_data</a></li>
-<li class="toctree-l2"><a class="reference internal" href="autoapi/apps/bazel_parser/repo_graph_data_test/index.html">apps.bazel_parser.repo_graph_data_test</a></li>
 <li class="toctree-l2"><a class="reference internal" href="autoapi/examples/basic/client/index.html">examples.basic.client</a></li>
 <li class="toctree-l2"><a class="reference internal" href="autoapi/examples/basic/grpc_test/index.html">examples.basic.grpc_test</a></li>
 <li class="toctree-l2"><a class="reference internal" href="autoapi/examples/basic/hello_pb2/index.html">examples.basic.hello_pb2</a></li>
@@ -286,11 +280,31 @@ fix that at some point, for now be aware of it.</p>
 </section>
 <section id="layout">
 <h2>Layout<a class="headerlink" href="#layout" title="Link to this heading"></a></h2>
-<ul class="simple">
-<li><p>docs: various writings and documentation of the repo and tools used</p></li>
-<li><p>tools: directory of various tools</p></li>
-<li><p>experiments: miscellaneous experiments I’m trying out</p></li>
-</ul>
+<p>All project code lives under <code class="docutils literal notranslate"><span class="pre">tlbox/</span></code> — a language-agnostic namespace for
+Python, C++, Rust, and hardware code alike. See
+<a class="reference internal" href="#docs/structure.md"><span class="xref myst">docs/structure.md</span></a> for the full rationale and rules of
+thumb.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tlbox</span><span class="o">/</span>             <span class="c1"># all project code</span>
+  <span class="n">algorithms</span><span class="o">/</span>      <span class="c1"># standalone algorithm implementations</span>
+  <span class="n">apps</span><span class="o">/</span>            <span class="c1"># runnable applications (bazel_parser, code_metrics, etc.)</span>
+  <span class="n">hw</span><span class="o">/</span>
+    <span class="n">drivers</span><span class="o">/</span>       <span class="c1"># hardware drivers (C++)</span>
+    <span class="n">services</span><span class="o">/</span>      <span class="c1"># hardware services (C++)</span>
+    <span class="n">ee</span><span class="o">/</span>            <span class="c1"># electronics schematics (KiCad)</span>
+  <span class="n">notebooks</span><span class="o">/</span>       <span class="c1"># Jupyter notebooks</span>
+  <span class="n">ansible_playbooks</span><span class="o">/</span>
+  <span class="n">scripts</span><span class="o">/</span>         <span class="c1"># one-off scripts</span>
+  <span class="n">testing</span><span class="o">/</span>         <span class="c1"># shared C++ test infrastructure (Catch2)</span>
+  <span class="n">utils</span><span class="o">/</span>           <span class="c1"># shared libraries and utilities</span>
+<span class="n">bzl</span><span class="o">/</span>               <span class="c1"># custom Bazel rules</span>
+<span class="n">tools</span><span class="o">/</span>             <span class="c1"># build tooling (formatters, linters, Bazel wrappers)</span>
+<span class="n">platforms</span><span class="o">/</span>         <span class="c1"># Bazel platform and toolchain definitions</span>
+<span class="n">third_party</span><span class="o">/</span>       <span class="c1"># vendored dependencies</span>
+<span class="n">examples</span><span class="o">/</span>          <span class="c1"># reference implementations and demos</span>
+<span class="n">nobazel</span><span class="o">/</span>           <span class="c1"># experiments outside the build system</span>
+<span class="n">docs</span><span class="o">/</span>              <span class="c1"># documentation (Sphinx)</span>
+</pre></div>
+</div>
 </section>
 <section id="configuration-tools-used">
 <h2>Configuration / Tools Used<a class="headerlink" href="#configuration-tools-used" title="Link to this heading"></a></h2>
@@ -311,7 +325,7 @@ fix that at some point, for now be aware of it.</p>
 <section id="todo">
 <h2>TODO<a class="headerlink" href="#todo" title="Link to this heading"></a></h2>
 <ul class="contains-task-list simple">
-<li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> decide on rough rules for directory structure, likely don’t separate by
+<li class="task-list-item"><p><input class="task-list-item-checkbox" checked="checked" disabled="disabled" type="checkbox"> decide on rough rules for directory structure, likely don’t separate by
 language</p></li>
 <li class="task-list-item"><p><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> handle security issues &amp; re-enable dependabot:
 <a class="reference external" href="https://github.com/michael-christen/toolbox/security/dependabot">https://github.com/michael-christen/toolbox/security/dependabot</a></p></li>
@@ -565,6 +579,6 @@ bazel run -- @pnpm//:pnpm --dir $PWD install --lockfile-only
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
     <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
-    <script defer="defer" src="_static/tippy/README.b9a81d7c-7b98-4ce9-a7b7-4fa5acdf0d83.js"></script>
+    <script defer="defer" src="_static/tippy/README.bdc42b98-6622-47ca-bad1-6c3a9fb70189.js"></script>
     </body>
 </html>
