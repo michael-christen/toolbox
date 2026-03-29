@@ -87,7 +87,7 @@ jobs:
         env:
           DB_PASSWORD: ${{ secrets.METRICS_DB_PASSWORD }}
         run: |
-          bazel run //apps/code_metrics:main -- --pr_comment=/tmp/collect_stats_pr_diff.md --archive=/tmp/collect_stats_archive.json
+          bazel run //tlbox/apps/code_metrics:main -- --pr_comment=/tmp/collect_stats_pr_diff.md --archive=/tmp/collect_stats_archive.json
       # See https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/storing-workflow-data-as-artifacts
       - name: Archive Dev Products
         uses: actions/upload-artifact@v4
