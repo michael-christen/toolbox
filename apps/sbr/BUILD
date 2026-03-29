@@ -5,6 +5,8 @@ load("//bzl:cc.bzl", "cc_size")
 load("//third_party/pigweed/tools:tools.bzl", "device_console", "host_console")
 load(":binary.bzl", "rp2040_binary", "rp2350_binary")
 
+# Map system.h to the label_flag (which selects the implementation), not just :headers
+# gazelle:resolve cc apps/sbr/system/system.h //apps/sbr/system
 package(default_visibility = ["//visibility:private"])
 
 cc_binary(
@@ -13,14 +15,8 @@ cc_binary(
     deps = [
         "//apps/sbr/system",
         "//hw_services/sbr:service",
+        "//third_party/pigweed:pw_system_async_alias",
         "@pigweed//pw_log",
-        "@pigweed//pw_system:async",
-
-        # These should be provided by pw_system:async.
-        "@pigweed//pw_assert:assert_backend_impl",
-        "@pigweed//pw_assert:check_backend_impl",
-        "@pigweed//pw_log:backend_impl",
-        "@pigweed//pw_system:extra_platform_libs",
     ],
 )
 

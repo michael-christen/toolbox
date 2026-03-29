@@ -63,6 +63,7 @@ PYTHON_TARGETS = [
     "//third_party/pigweed/tools:console",
     "//tools:bazel_utils",
     "//tools:coverage_baseline",
+    "//tools:generate_ccindex",
     "//tools:git_py_library",
     "//tools:git_utils",
     "//tools:mypy_cli",

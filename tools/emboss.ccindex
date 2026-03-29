@@ -1,0 +1,3 @@
+{
+  "hw_drivers/lis3mdl/lis3mdl.emb.h": "//hw_drivers/lis3mdl:lis3mdl_emb"
+}

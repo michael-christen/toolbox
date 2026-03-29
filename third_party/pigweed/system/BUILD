@@ -1,6 +1,7 @@
 load("@pigweed//pw_build:compatibility.bzl", "incompatible_with_mcu")
 load("//bzl:cc.bzl", "cc_library")
 
+# gazelle:cc_group_unit_cycles warn
 package(default_visibility = ["//visibility:public"])
 
 cc_library(
@@ -38,11 +39,11 @@ cc_library(
         "@pico-sdk//src/rp2_common/hardware_exception:hardware_exception",
         "@pico-sdk//src/rp2_common/pico_stdlib:pico_stdlib",
         "@pigweed//pw_channel",
-        "@pigweed//pw_cpu_exception:entry_backend_impl",
+        "@pigweed//pw_cpu_exception:entry_backend_impl",  # keep
         "@pigweed//pw_digital_io",
         "@pigweed//pw_digital_io:digital_io_mock",
         "@pigweed//pw_digital_io_rp2040",
-        "@pigweed//third_party/freertos:support",
+        "@pigweed//third_party/freertos:support",  # keep
     ],
     visibility = ["//visibility:public"],
     deps = [

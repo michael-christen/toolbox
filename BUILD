@@ -107,6 +107,7 @@ gazelle_binary(
         # compilepkg: error running subcommand external/pigweed++_repo_rules6+llvm_toolchain/bin/clang: exit status 1
         "@rules_python_gazelle_plugin//python:python",
         "@build_stack_rules_proto//language/protobuf",  # Protobuf language generation
+        "@gazelle_cc//language/cc",  # C++ language generation
         # TODO: Add buf suppport
         # "@rules_buf//gazelle/buf:buf",  # Generates buf lint and buf breaking detection rules
     ],
@@ -152,6 +153,8 @@ gazelle(
 
 # Don't use go
 # gazelle:go_generate_proto false
+# Don't generate cc_proto_library; packages use proto_compile + proto_cc_library (see #255)
+# gazelle:cc_generate_proto false
 
 # Generate 1 proto rule per file
 # gazelle:proto file
@@ -161,6 +164,19 @@ gazelle(
 
 # Tell gazelle where to find imports
 # gazelle:resolve py google.protobuf.message @com_google_protobuf//:protobuf_python
+# catch_main provides catch2 headers + main(); map the header so gazelle doesn't replace it with bare @catch2
+# gazelle:resolve cc catch2/catch_test_macros.hpp //testing:catch_main
+# Pigweed facade headers: resolve to the concrete target, not the .facade alias
+# gazelle:resolve cc pw_log/log.h @pigweed//pw_log:pw_log
+# gazelle:resolve cc pw_system/io.h @pigweed//pw_system:io
+# gazelle:resolve cc pw_unit_test/framework.h @pigweed//pw_unit_test:pw_unit_test
+# Handle aliases for common dependencies that gazelle isn't picking up
+# gazelle:resolve cc pw_system/system.h //third_party/pigweed:pw_system_async_alias
+
+# C++ header -> target index files for gazelle_cc resolution
+# gazelle:cc_indexfile tools/pigweed.ccindex
+# gazelle:cc_indexfile tools/emboss.ccindex
+# gazelle:cc_indexfile tools/nanopb.ccindex
 
 # Use our own rules
 # gazelle:map_kind py_binary py_binary //bzl:py.bzl

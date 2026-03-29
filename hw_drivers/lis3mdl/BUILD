@@ -31,19 +31,20 @@ cc_library(
         "//hw_services/sbr:__subpackages__",
     ],
     deps = [
-        ":lis3mdl_emb",
-        ":lis3mdl_nanopb",
+        "//hw_drivers/lis3mdl:lis3mdl_emb",
+        "//hw_drivers/lis3mdl:lis3mdl_nanopb",
+        "@pigweed//pw_i2c:address",
         "@pigweed//pw_i2c:register_device",
     ],
 )
 
 pw_cc_test(
     name = "lis3mdl_pw_test",
-    srcs = ["lis3mdl_pw_test.cc"],
+    srcs = ["lis3mdl_pw_test.cc"],  # keep
     deps = [
         ":lis3mdl",
         ":lis3mdl_emb",
-        ":lis3mdl_nanopb",
+        "//hw_drivers/lis3mdl:lis3mdl_nanopb",
         "@pigweed//pw_bytes",
         "@pigweed//pw_i2c:address",
         "@pigweed//pw_i2c:device",
@@ -56,16 +57,20 @@ pw_cc_test(
 
 cc_test(
     name = "lis3mdl_test",
-    srcs = ["lis3mdl_test.cc"],
+    srcs = ["lis3mdl_test.cc"],  # keep
     deps = [
         ":lis3mdl",
-        ":lis3mdl_emb",
-        ":lis3mdl_nanopb",
+        "//hw_drivers/lis3mdl:lis3mdl_emb",
+        "//hw_drivers/lis3mdl:lis3mdl_nanopb",
         "//testing:catch_main",
         "@pigweed//pw_bytes",
+        "@pigweed//pw_bytes:bit",
         "@pigweed//pw_i2c:address",
         "@pigweed//pw_i2c:initiator_mock",
+        "@pigweed//pw_i2c:register_device",
+        "@pigweed//pw_log",
         "@pigweed//pw_result",
+        "@pigweed//pw_unit_test",
     ],
 )
 
