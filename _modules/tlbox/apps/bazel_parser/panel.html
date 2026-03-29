@@ -458,7 +458,7 @@
     <span class="p">)</span>
 
     <span class="c1"># Create a DataTable to view source</span>
-    <span class="c1"># XXX: How to keep this in sync with Node?</span>
+    <span class="c1"># How to keep this in sync with Node?</span>
     <span class="n">fields</span> <span class="o">=</span> <span class="p">[</span>
         <span class="s2">&quot;Node&quot;</span><span class="p">,</span>
         <span class="s2">&quot;Highlight&quot;</span><span class="p">,</span>
@@ -533,7 +533,7 @@
 <span class="s2">        const label = labels[active];</span>
 <span class="s2">        console.log(label);</span>
 <span class="s2">        if (label === &quot;NONE&quot;) {</span>
-<span class="s2">          // XXX: Need to de-select all and when unselected, go back to this</span>
+<span class="s2">          // Need to de-select all and when unselected, go back to this</span>
 <span class="s2">          return;</span>
 <span class="s2">        }</span>
 
@@ -627,7 +627,7 @@
     <span class="p">}</span>
 
     <span class="c1"># JavaScript callback for interactivity</span>
-    <span class="c1"># XXX: Likely define the type of the input graph a little better, TypedDict</span>
+    <span class="c1"># Likely define the type of the input graph a little better, TypedDict</span>
     <span class="n">callback</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CustomJS</span><span class="p">(</span>
         <span class="n">args</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
             <span class="n">graph_renderer</span><span class="o">=</span><span class="n">network_graph</span><span class="p">,</span>
