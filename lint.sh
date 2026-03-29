@@ -12,10 +12,16 @@ function grep_xxx {
   # Don't show up in the search
   X="X"
   BAD_STRING="$X$X$X"
-  # Raise and re-report if found
-  if git grep --quiet ${BAD_STRING}; then
+  # Collect matches with line numbers
+  MATCHES=$(git grep -n ${BAD_STRING} || true)
+  if [ -n "$MATCHES" ]; then
     echo "${BAD_STRING} found in source"
-    git grep ${BAD_STRING}
+    while IFS= read -r line; do
+      echo "$line"
+      file=$(echo "$line" | cut -d: -f1)
+      linenum=$(echo "$line" | cut -d: -f2)
+      echo "::error file=${file},line=${linenum}::${BAD_STRING} comment found"
+    done <<< "$MATCHES"
     exit 1
   fi
 }
@@ -118,8 +124,7 @@ bazel run ${CONFIG} -- //:gazelle ${GAZELLE_ARGS[@]}
 
 bazel run $RULES_LINT_CMD
 
-# Add back in when fixed
-# grep_xxx
+grep_xxx
 
 # TODO(#139)
 # Add this back in (conflicts with emboss at the moment)
