@@ -1,12 +1,9 @@
-"""Utility for generating source files based on bazel queries.
-
-Cannot depend on any of our other sources, as this is one of a very small
-amount of things that won't run with bazel.
-"""
+"""Utility for generating source files based on bazel queries."""
 
 import argparse
 import dataclasses
 import difflib
+import os
 import pathlib
 import subprocess
 
@@ -105,6 +102,10 @@ def main(compare: bool) -> None:
 
 
 if __name__ == "__main__":
+    # bazel run sets BUILD_WORKING_DIRECTORY; cd there so relative paths
+    # (generated files, bazel query) resolve against the workspace root.
+    if workspace := os.environ.get("BUILD_WORKING_DIRECTORY"):
+        os.chdir(workspace)
     parser = argparse.ArgumentParser(description="Process some choices.")
     parser.add_argument(
         "--mode",

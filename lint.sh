@@ -106,10 +106,7 @@ CONFIG="--config quiet"
 # CONFIG=""
 
 # Run query generator
-# TODO(#205): Build and run hermetic python with query_generator
-# bazel build ${CONFIG} --output_groups=-mypy -- //packaging:query_generator
-# ./bazel-bin/packaging/query_generator --mode $mode
-python packaging/query_generator.py --mode $mode
+bazel run ${CONFIG} --output_groups=-mypy //packaging:query_generator -- --mode $mode
 
 # Regenerate/verify gazelle_cc index files
 bazel run ${CONFIG} --output_groups=-mypy //tools:generate_ccindex -- --mode $mode
