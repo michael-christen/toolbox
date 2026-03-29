@@ -44,7 +44,7 @@ pw_cc_test(
     deps = [
         ":lis3mdl",
         ":lis3mdl_emb",
-        "//hw_drivers/lis3mdl:lis3mdl_nanopb",
+        "//tlbox/hw/drivers/lis3mdl:lis3mdl_nanopb",
         "@pigweed//pw_bytes",
         "@pigweed//pw_i2c:address",
         "@pigweed//pw_i2c:device",
@@ -60,7 +60,7 @@ cc_test(
     srcs = ["lis3mdl_test.cc"],  # keep
     deps = [
         ":lis3mdl",
-        "//testing:catch_main",
+        "//tlbox/testing:catch_main",
         "//tlbox/hw/drivers/lis3mdl:lis3mdl_emb",
         "//tlbox/hw/drivers/lis3mdl:lis3mdl_nanopb",
         "@pigweed//pw_bytes",

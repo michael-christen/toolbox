@@ -166,7 +166,6 @@ gazelle(
 # gazelle:resolve py google.protobuf.message @com_google_protobuf//:protobuf_python
 # catch_main provides catch2 headers + main(); map the header so gazelle doesn't replace it with bare @catch2
 # gazelle:resolve cc catch2/catch_test_macros.hpp //tlbox/testing:catch_main
-# gazelle:resolve cc catch2/catch_test_macros.hpp //testing:catch_main
 # Pigweed facade headers: resolve to the concrete target, not the .facade alias
 # gazelle:resolve cc pw_log/log.h @pigweed//pw_log:pw_log
 # gazelle:resolve cc pw_system/io.h @pigweed//pw_system:io
