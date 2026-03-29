@@ -12,5 +12,5 @@ cc_library(
 cc_test(
     name = "hello_test",
     srcs = ["hello_test.cc"],
-    deps = ["//testing:catch_main"],
+    deps = ["//tlbox/testing:catch_main"],
 )

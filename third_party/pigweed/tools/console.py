@@ -26,8 +26,9 @@ from pw_system.device_connection import (
     create_device_serial_or_socket_connection,
 )
 
+from tlbox.hw.services.sbr import sbr_pb2
+
 from examples.pigweed.modules.blinky import blinky_pb2
-from hw_services.sbr import sbr_pb2
 
 COMPILED_PROTOS = [
     blinky_pb2,
