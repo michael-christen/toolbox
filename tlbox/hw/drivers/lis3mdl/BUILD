@@ -60,9 +60,9 @@ cc_test(
     srcs = ["lis3mdl_test.cc"],  # keep
     deps = [
         ":lis3mdl",
-        "//tlbox/testing:catch_main",
         "//tlbox/hw/drivers/lis3mdl:lis3mdl_emb",
         "//tlbox/hw/drivers/lis3mdl:lis3mdl_nanopb",
+        "//tlbox/testing:catch_main",
         "@pigweed//pw_bytes",
         "@pigweed//pw_bytes:bit",
         "@pigweed//pw_i2c:address",
