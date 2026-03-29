@@ -1,4 +1,4 @@
-load("//bzl:py.bzl", "py_binary", "py_image", "py_library", "py_test")
+load("//bzl:py.bzl", "py_binary", "py_library", "py_test")
 
 package(default_visibility = ["//visibility:private"])
 
@@ -88,10 +88,4 @@ py_binary(
         "@pip//pygraphviz",  # keep
         "@pip//pyyaml",
     ],
-)
-
-py_image(
-    name = "bazel_parser_img",
-    binary = ":cli",
-    image_tags = ["bazel_parser:latest"],
 )
