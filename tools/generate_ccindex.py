@@ -5,8 +5,7 @@ Generates:
   tools/emboss.ccindex   - Local emboss_cc_library header -> target mappings
   tools/nanopb.ccindex   - Local nanopb_proto_library header -> target mappings
 
-Must be run from the repo root (cannot use bazel run due to nested
-invocation constraints -- see TODO(#205) in lint.sh for context).
+Must be run from the repo root.
 
 Usage:
     python tools/generate_ccindex.py --mode format  # regenerate
@@ -18,6 +17,7 @@ lint.sh calls this automatically.
 import argparse
 import difflib
 import json
+import os
 import pathlib
 import subprocess
 
@@ -242,6 +242,10 @@ def main(mode: str) -> None:
 
 
 if __name__ == "__main__":
+    # bazel run sets BUILD_WORKING_DIRECTORY; cd there so relative paths
+    # (ccindex files, bazel query) resolve against the workspace root.
+    if workspace := os.environ.get("BUILD_WORKING_DIRECTORY"):
+        os.chdir(workspace)
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--mode", choices=["check", "format"], required=True)
     args = parser.parse_args()
