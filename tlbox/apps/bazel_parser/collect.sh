@@ -20,7 +20,7 @@ QUERY_TARGET="//..."
 TEST_TARGET="//..."
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-TOOLBOX_DIR="$(cd "${SCRIPT_DIR}/../.." && pwd)"
+TOOLBOX_DIR="$(cd "${SCRIPT_DIR}/../../.." && pwd)"
 
 # ---------------------------------------------------------------------------
 # Args
@@ -88,7 +88,7 @@ fi
 echo "==> [3/5] git-capture (days-ago=${DAYS_AGO})"
 (
     cd "${TOOLBOX_DIR}"
-    bazel run //apps/bazel_parser:cli --output_groups=-mypy -- \
+    bazel run //tlbox/apps/bazel_parser:cli --output_groups=-mypy -- \
         git-capture \
         --repo-dir "${REPO_DIR}" \
         --days-ago "${DAYS_AGO}" \
@@ -112,7 +112,7 @@ echo "==> [4/5] process"
     if [[ -n "${CONFIG_FILE}" ]]; then
         PROCESS_ARGS+=(--config-file "${CONFIG_FILE}")
     fi
-    bazel run //apps/bazel_parser:cli --output_groups=-mypy -- "${PROCESS_ARGS[@]}"
+    bazel run //tlbox/apps/bazel_parser:cli --output_groups=-mypy -- "${PROCESS_ARGS[@]}"
 )
 
 # ---------------------------------------------------------------------------
@@ -121,7 +121,7 @@ echo "==> [4/5] process"
 echo "==> [5/5] report"
 (
     cd "${TOOLBOX_DIR}"
-    bazel run //apps/bazel_parser:cli --output_groups=-mypy -- \
+    bazel run //tlbox/apps/bazel_parser:cli --output_groups=-mypy -- \
         report \
         --csv "${OUT_CSV}" \
         > "${OUT_REPORT}"
