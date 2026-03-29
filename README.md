@@ -21,8 +21,9 @@ fix that at some point, for now be aware of it.
 ## Layout
 
 All project code lives under `tlbox/` — a language-agnostic namespace for
-Python, C++, Rust, and hardware code alike. See [docs/structure.md](docs/structure.md)
-for the full rationale and rules of thumb.
+Python, C++, Rust, and hardware code alike. See
+[docs/structure.md](docs/structure.md) for the full rationale and rules of
+thumb.
 
 ```
 tlbox/             # all project code

@@ -6,8 +6,9 @@ import pathlib
 import networkx
 
 from tlbox.apps.bazel_parser import repo_graph_data
-from third_party.bazel.src.main.protobuf import build_pb2
 from tlbox.utils import git_utils
+
+from third_party.bazel.src.main.protobuf import build_pb2
 
 
 def _get_rules(

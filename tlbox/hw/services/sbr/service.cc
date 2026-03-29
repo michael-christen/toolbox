@@ -3,10 +3,10 @@
 
 #include "tlbox/hw/services/sbr/service.h"
 
-#include "tlbox/hw/drivers/lis3mdl/lis3mdl.emb.h"
-#include "tlbox/hw/drivers/lis3mdl/lis3mdl.h"
 #include "pw_assert/check.h"
 #include "pw_log/log.h"
+#include "tlbox/hw/drivers/lis3mdl/lis3mdl.emb.h"
+#include "tlbox/hw/drivers/lis3mdl/lis3mdl.h"
 
 namespace hw_services {
 namespace sbr {

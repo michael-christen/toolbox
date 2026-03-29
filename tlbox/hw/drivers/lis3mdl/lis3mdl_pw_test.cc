@@ -3,9 +3,6 @@
 #include <iostream>
 #include <vector>
 
-#include "tlbox/hw/drivers/lis3mdl/lis3mdl.emb.h"
-#include "tlbox/hw/drivers/lis3mdl/lis3mdl.h"
-#include "tlbox/hw/drivers/lis3mdl/lis3mdl.pb.h"
 #include "pw_bytes/array.h"
 #include "pw_bytes/bit.h"
 #include "pw_i2c/address.h"
@@ -14,6 +11,9 @@
 #include "pw_log/log.h"
 #include "pw_result/result.h"
 #include "pw_unit_test/framework.h"
+#include "tlbox/hw/drivers/lis3mdl/lis3mdl.emb.h"
+#include "tlbox/hw/drivers/lis3mdl/lis3mdl.h"
+#include "tlbox/hw/drivers/lis3mdl/lis3mdl.pb.h"
 
 namespace hw_drivers {
 namespace lis3mdl {

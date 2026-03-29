@@ -1,10 +1,10 @@
 #pragma once
 
 // #include "examples/pigweed/modules/blinky/blinky.h"
-#include "tlbox/hw/services/sbr/sbr.rpc.pb.h"
 #include "pw_allocator/allocator.h"
 #include "pw_async2/dispatcher.h"
 #include "pw_i2c/register_device.h"
+#include "tlbox/hw/services/sbr/sbr.rpc.pb.h"
 
 namespace hw_services {
 namespace sbr {

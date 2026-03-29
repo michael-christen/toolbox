@@ -1,7 +1,7 @@
-#include "tlbox/apps/sbr/system/system.h"
 #include "platforms/host/initiator_host.h"
 #include "pw_i2c/address.h"
 #include "third_party/pigweed/system/common_host_system.h"
+#include "tlbox/apps/sbr/system/system.h"
 
 namespace apps {
 namespace sbr {

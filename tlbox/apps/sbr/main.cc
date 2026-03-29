@@ -1,9 +1,9 @@
 #define PW_LOG_MODULE_NAME "MAIN"
 
-#include "tlbox/apps/sbr/system/system.h"
-#include "tlbox/hw/services/sbr/service.h"
 #include "pw_log/log.h"
 #include "pw_system/system.h"
+#include "tlbox/apps/sbr/system/system.h"
+#include "tlbox/hw/services/sbr/service.h"
 
 int main() {
   apps::sbr::system::Init();

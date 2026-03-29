@@ -106,9 +106,10 @@ from tlbox.apps.bazel_parser import panel
 from tlbox.apps.bazel_parser import parsing
 from tlbox.apps.bazel_parser import refinement
 from tlbox.utils import bazel_utils
-from tools import git_pb2
-from tlbox.utils import git_utils
 from tlbox.utils import bep_reader
+from tlbox.utils import git_utils
+
+from tools import git_pb2
 
 logger = logging.getLogger(__name__)
 

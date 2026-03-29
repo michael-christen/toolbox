@@ -13,9 +13,9 @@ cc_binary(
     name = "sbr",
     srcs = ["main.cc"],
     deps = [
-        "//tlbox/apps/sbr/system",
-        "//tlbox/hw_services/sbr:service",
         "//third_party/pigweed:pw_system_async_alias",
+        "//tlbox/apps/sbr/system",
+        "//tlbox/hw/services/sbr:service",
         "@pigweed//pw_log",
     ],
 )

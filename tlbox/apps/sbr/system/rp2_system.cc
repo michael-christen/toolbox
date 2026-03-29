@@ -1,6 +1,6 @@
+#include "pw_i2c_rp2040/initiator.h"
 #include "tlbox/apps/sbr/system/system.h"
 #include "tlbox/hw/drivers/lis3mdl/lis3mdl.h"
-#include "pw_i2c_rp2040/initiator.h"
 
 namespace {
 
