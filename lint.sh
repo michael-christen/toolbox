@@ -113,6 +113,9 @@ python packaging/query_generator.py --mode $mode
 
 # Regenerate/verify gazelle_cc index files
 bazel build ${CONFIG} --output_groups=-mypy -- //tools:generate_ccindex
+# The aspect_rules_py launcher creates a venv inside the runfiles dir; make
+# it writable in case Bazel left it read-only (e.g. after a cache restore).
+chmod u+w bazel-bin/tools/generate_ccindex.runfiles
 ./bazel-bin/tools/generate_ccindex --mode $mode
 
 echo $BAZEL_FILES | xargs bazel run ${CONFIG} -- //tools/buildifier ${BUILDIFIER_ARGS[@]}
