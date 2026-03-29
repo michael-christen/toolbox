@@ -84,22 +84,12 @@ py_binary(
         "@pip//networkx",
         "@pip//pandas",
         "@pip//pydantic",
-        # XXX: Should associate with networkx
+        # TODO(#263): Should associate with networkx
         "@pip//pygraphviz",  # keep
         "@pip//pyyaml",
     ],
 )
 
-# XXX: This still requires that folks bring their own python runtime
-# py_pex_binary(
-#     name = "cli_pex",
-#     binary = ":cli",
-# )
-
-# XXX: Need to mount volume and bazel is not found, etc
-# Build and run this image with
-#     bazel run //apps/bazel_parser:bazel_parser_img_load_docker
-#     docker run --rm bazel_parser:latest
 py_image(
     name = "bazel_parser_img",
     binary = ":cli",

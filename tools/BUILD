@@ -60,7 +60,7 @@ multirun(
         "flake8",
     ],
     # Set to 0 to run in parallel, defaults to sequential
-    # XXX: Maybe formatting needs to be sequential to prevent data races?
+    # Maybe formatting needs to be sequential to prevent data races?
     jobs = 0,
 )
 

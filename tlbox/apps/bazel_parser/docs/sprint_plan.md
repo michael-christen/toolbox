@@ -41,17 +41,17 @@ A case study entry in `case_study.md` is complete when it contains:
 - [x] Resolve `expected_duration_s` math ambiguity ➕ 2026-03-03 📅 2026-03-05 ✅ 2026-03-03
   - Current formula (`group_duration_s * (1 - group_probability_cache_hit)`) is
     correct. Node-level and graph-level metrics answer different questions and
-    are both valid. Removed XXX comment.
+    are both valid. Removed stale comment.
 - [x] Investigate `--notool_deps` question from PR #185 ➕ 2026-03-03 📅 2026-03-05 ✅ 2026-03-04
   - `//...` returns same 376 nodes with or without flag; flag reduces edge set
     (proto size 654KB→637KB). `deps(//...)` is 46x larger — confirmed `//...`
     is correct default. `--notool_deps` removes exec-config dep edges (build
     tool mechanics); added to default query. `ignore_external=True` in parsing
-    already handles `@` external labels. Removed XXX comment.
-- [x] Investigate all related XXXs ➕ 2026-03-03 📅 2026-03-05 ✅ 2026-03-05
-  - Removed stale/answered XXXs in cli.py, repo_graph_data.py, refinement.py,
+    already handles `@` external labels. Removed stale comment.
+- [x] Investigate all related fixme comments ➕ 2026-03-03 📅 2026-03-05 ✅ 2026-03-05
+  - Removed stale/answered fixme comments in cli.py, repo_graph_data.py, refinement.py,
     repo_graph_data_test.py, and git_utils.py. Converted `print(graph_metrics)`
-    to `logger.info` with a TODO. Deferred ~12 XXXs that need case study data or
+    to `logger.info` with a TODO. Deferred ~12 fixme comments that need case study data or
     are design questions for Mar 10+.
 - [x] Fix `follow` vs `log` discrepancy ➕ 2026-03-03 📅 2026-03-05 ✅ 2026-03-03
   - `from_log` is the correct implementation (single git call, proper rename
@@ -79,7 +79,7 @@ A case study entry in `case_study.md` is complete when it contains:
 - [x] **Metric triage**: keep all metrics, no `--full-metrics` flag needed ➕ 2026-03-03 📅 2026-03-10 ✅ 2026-03-06
   - Centrality metrics are useful and worth computing; consolidation opportunity
     exists (6 → 2 expensive passes) but deferred as not urgent for presentation
-- [x] Revisit deferred XXXs after metric triage ➕ 2026-03-05 📅 2026-03-10 ✅ 2026-03-06
+- [x] Revisit deferred fixme comments after metric triage ➕ 2026-03-05 📅 2026-03-10 ✅ 2026-03-06
   - Serialize graph_metrics to output file (cli.py)
   - Resolve node-removal attribute handling (refinement.py)
   - SOURCE_FILE inclusion decision (parsing.py)

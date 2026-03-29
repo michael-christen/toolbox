@@ -70,7 +70,7 @@ df_nodes.nlargest(50, "num_source_descendants")
 
 ```{code-cell} ipython3
 # 5 nodes that take time, sorted by largest number of source_descendants
-# XXX: How to select based on this weighted by node_duration_s
+# How to select based on this weighted by node_duration_s
 df_nodes.loc[df_nodes["node_duration_s"] > 0].sort_values(
     ["num_source_descendants", "node_duration_s"], ascending=False
 )[:5]
@@ -150,7 +150,7 @@ def show_subgraph(whole_graph: networkx.DiGraph, node_label: str, include_labels
         a.layout("dot")
         display(a)
     elif show_numbers:
-        # XXX: Print adjacency list
+        # Print adjacency list
         idx = 0
         number_labels = {
             node_label: idx,
@@ -162,7 +162,7 @@ def show_subgraph(whole_graph: networkx.DiGraph, node_label: str, include_labels
                 print(f'- {node}')
                 if node in number_labels:
                     continue
-                # XXX: Print adjacency list as well
+                # Print adjacency list as well
                 number_labels[node] = idx
                 idx += 1
 
@@ -176,7 +176,7 @@ def show_subgraph(whole_graph: networkx.DiGraph, node_label: str, include_labels
                 idx += 1
         print()
         # number_labels = {name: idx for idx, name in enumerate(graph.nodes)}
-        # XXX: Doesn't look great w/ 3-digit node numbers and greater
+        # Doesn't look great w/ 3-digit node numbers and greater
         networkx.draw(graph, pos=nx_agraph.graphviz_layout(graph, prog="dot"), labels=number_labels)
         for name, idx in sorted(number_labels.items(), key=lambda x: x[1]):
             print(f'- {idx}: {name}')

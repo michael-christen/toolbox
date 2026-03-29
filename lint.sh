@@ -124,7 +124,6 @@ bazel run ${CONFIG} -- //:gazelle ${GAZELLE_ARGS[@]}
 
 bazel run $RULES_LINT_CMD
 
-# XXX: test annotation
 grep_xxx
 
 # TODO(#139)

@@ -62,7 +62,7 @@ def device_console(name, binary, extra_args = []):
         ] + extra_args,
         data = [
             binary,
-            # XXX: May want to make this a bit more configurable
+            # May want to make this a bit more configurable
             "//third_party/pigweed:pw_console_config",
         ],
     )

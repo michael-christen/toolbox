@@ -194,7 +194,7 @@ def get_panel_layout(graph: networkx.DiGraph) -> pn.layout.base.Panel:
     )
 
     # Create a DataTable to view source
-    # XXX: How to keep this in sync with Node?
+    # How to keep this in sync with Node?
     fields = [
         "Node",
         "Highlight",
@@ -269,7 +269,7 @@ def get_panel_layout(graph: networkx.DiGraph) -> pn.layout.base.Panel:
         const label = labels[active];
         console.log(label);
         if (label === "NONE") {
-          // XXX: Need to de-select all and when unselected, go back to this
+          // Need to de-select all and when unselected, go back to this
           return;
         }
 
@@ -363,7 +363,7 @@ def get_panel_layout(graph: networkx.DiGraph) -> pn.layout.base.Panel:
     }
 
     # JavaScript callback for interactivity
-    # XXX: Likely define the type of the input graph a little better, TypedDict
+    # Likely define the type of the input graph a little better, TypedDict
     callback = models.CustomJS(
         args=dict(
             graph_renderer=network_graph,
