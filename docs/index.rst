@@ -20,6 +20,7 @@ documentation for details.
    :caption: Contents:
 
    README
+   structure
    myst
    examples
    myst_extensions

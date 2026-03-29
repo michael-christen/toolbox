@@ -20,9 +20,31 @@ fix that at some point, for now be aware of it.
 
 ## Layout
 
-- docs: various writings and documentation of the repo and tools used
-- tools: directory of various tools
-- experiments: miscellaneous experiments I'm trying out
+All project code lives under `tlbox/` — a language-agnostic namespace for
+Python, C++, Rust, and hardware code alike. See [docs/structure.md](docs/structure.md)
+for the full rationale and rules of thumb.
+
+```
+tlbox/             # all project code
+  algorithms/      # standalone algorithm implementations
+  apps/            # runnable applications (bazel_parser, code_metrics, etc.)
+  hw/
+    drivers/       # hardware drivers (C++)
+    services/      # hardware services (C++)
+    ee/            # electronics schematics (KiCad)
+  notebooks/       # Jupyter notebooks
+  ansible_playbooks/
+  scripts/         # one-off scripts
+  testing/         # shared C++ test infrastructure (Catch2)
+  utils/           # shared libraries and utilities
+bzl/               # custom Bazel rules
+tools/             # build tooling (formatters, linters, Bazel wrappers)
+platforms/         # Bazel platform and toolchain definitions
+third_party/       # vendored dependencies
+examples/          # reference implementations and demos
+nobazel/           # experiments outside the build system
+docs/              # documentation (Sphinx)
+```
 
 ## Configuration / Tools Used
 
@@ -41,7 +63,7 @@ chmod +x ~/tools/bazel
 
 ## TODO
 
-- [ ] decide on rough rules for directory structure, likely don't separate by
+- [x] decide on rough rules for directory structure, likely don't separate by
       language
 - [ ] handle security issues & re-enable dependabot:
       https://github.com/michael-christen/toolbox/security/dependabot
