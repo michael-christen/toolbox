@@ -48,6 +48,7 @@ bazel_dep(name = "emboss", repo_name = "com_google_emboss")
 bazel_dep(name = "freertos", version = "10.5.1.bcr.2")
 bazel_dep(name = "gazelle", version = "0.47.0", repo_name = "bazel_gazelle")
 bazel_dep(name = "gazelle_cc", version = "0.5.0")
+bazel_dep(name = "grpc", version = "1.74.1", repo_name = "com_github_grpc_grpc")
 bazel_dep(name = "hedron_compile_commands")
 bazel_dep(name = "nanopb", version = "0.4.9.1", repo_name = "com_github_nanopb_nanopb")
 bazel_dep(name = "pico-sdk", version = "2.0.0")
@@ -115,6 +116,10 @@ bazel_dep(name = "toolchains_llvm", version = "1.5.0")
 # - freertos
 # - gazelle: https://github.com/bazel-contrib/bazel-gazelle
 # - gazelle_cc: https://github.com/EngFlow/gazelle_cc
+# - grpc: https://registry.bazel.build/modules/grpc
+#   - repo_name = "com_github_grpc_grpc" to match what build_stack_rules_proto
+#     uses internally, so generated grpc_cc_library targets resolve from root
+#   - See https://github.com/michael-christen/toolbox/issues/40
 # - hedron_compile_commands
 # - nanopb
 # - pico-sdk

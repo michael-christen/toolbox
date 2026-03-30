@@ -1,4 +1,5 @@
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
+load("@build_stack_rules_proto//rules/cc:grpc_cc_library.bzl", "grpc_cc_library")
 load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_library")
 load("@rules_proto//proto:defs.bzl", "proto_library")
 load("//bzl:py.bzl", "grpc_py_library", "proto_py_library", "py_binary", "py_image", "py_test")
@@ -167,4 +168,16 @@ proto_py_library(
     srcs = ["hello_pb2.py"],
     visibility = ["//visibility:public"],
     deps = ["@com_google_protobuf//:protobuf_python"],
+)
+
+grpc_cc_library(
+    name = "hello_grpc_cc_library",
+    srcs = ["hello.grpc.pb.cc"],
+    hdrs = ["hello.grpc.pb.h"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":hello_cc_library",
+        "@com_github_grpc_grpc//:grpc++",
+        "@com_github_grpc_grpc//:grpc++_reflection",
+    ],
 )
