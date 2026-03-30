@@ -16,8 +16,3 @@ labels: bug
 
 1.
 2.
-
-## Environment
-
-- OS:
-- Bazel version (`bazel --version`):
