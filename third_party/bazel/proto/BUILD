@@ -1,5 +1,4 @@
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
-load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_library")
 load("@rules_proto//proto:defs.bzl", "proto_library")
 load("//bzl:py.bzl", "proto_py_library")
 
@@ -61,149 +60,71 @@ proto_library(
     deps = ["@com_google_protobuf//:duration_proto"],
 )
 
-proto_cc_library(
-    name = "action_cache_cc_library",
-    srcs = ["action_cache.pb.cc"],
-    hdrs = ["action_cache.pb.h"],
-    visibility = ["//visibility:public"],
-    deps = ["@com_google_protobuf//:protobuf"],
+proto_library(
+    name = "strategy_policy_proto",
+    srcs = ["strategy_policy.proto"],
 )
 
-proto_compile(
-    name = "action_cache_cpp_compile",
-    outputs = [
-        "action_cache.pb.cc",
-        "action_cache.pb.h",
-    ],
-    plugins = ["@build_stack_rules_proto//plugin/builtin:cpp"],
-    proto = "action_cache_proto",
-    visibility = ["//visibility:public"],
-)
-
-proto_cc_library(
-    name = "build_event_stream_cc_library",
-    srcs = ["build_event_stream.pb.cc"],
-    hdrs = ["build_event_stream.pb.h"],
-    visibility = ["//visibility:public"],
+proto_library(
+    name = "spawn_proto",
+    srcs = ["spawn.proto"],
     deps = [
-        ":action_cache_cc_library",
-        ":command_line_cc_library",
-        ":failure_details_cc_library",
-        ":invocation_policy_cc_library",
-        ":package_load_metrics_cc_library",
-        "@com_google_protobuf//:protobuf",
+        "@com_google_protobuf//:duration_proto",
+        "@com_google_protobuf//:timestamp_proto",
     ],
 )
 
-proto_compile(
-    name = "build_event_stream_cpp_compile",
-    outputs = [
-        "build_event_stream.pb.cc",
-        "build_event_stream.pb.h",
-    ],
-    plugins = ["@build_stack_rules_proto//plugin/builtin:cpp"],
-    proto = "build_event_stream_proto",
+cc_proto_library(
+    name = "action_cache_cc_proto",
+    deps = [":action_cache_proto"],
     visibility = ["//visibility:public"],
 )
 
-proto_cc_library(
-    name = "command_line_cc_library",
-    srcs = ["command_line.pb.cc"],
-    hdrs = ["command_line.pb.h"],
-    visibility = ["//visibility:public"],
-    deps = [
-        ":option_filters_cc_library",
-        "@com_google_protobuf//:protobuf",
-    ],
-)
-
-proto_compile(
-    name = "command_line_cpp_compile",
-    outputs = [
-        "command_line.pb.cc",
-        "command_line.pb.h",
-    ],
-    plugins = ["@build_stack_rules_proto//plugin/builtin:cpp"],
-    proto = "command_line_proto",
+cc_proto_library(
+    name = "build_event_stream_cc_proto",
+    deps = [":build_event_stream_proto"],
     visibility = ["//visibility:public"],
 )
 
-proto_cc_library(
-    name = "failure_details_cc_library",
-    srcs = ["failure_details.pb.cc"],
-    hdrs = ["failure_details.pb.h"],
-    visibility = ["//visibility:public"],
-    deps = ["@com_google_protobuf//:protobuf"],
-)
-
-proto_compile(
-    name = "failure_details_cpp_compile",
-    outputs = [
-        "failure_details.pb.cc",
-        "failure_details.pb.h",
-    ],
-    plugins = ["@build_stack_rules_proto//plugin/builtin:cpp"],
-    proto = "failure_details_proto",
+cc_proto_library(
+    name = "command_line_cc_proto",
+    deps = [":command_line_proto"],
     visibility = ["//visibility:public"],
 )
 
-proto_cc_library(
-    name = "invocation_policy_cc_library",
-    srcs = ["invocation_policy.pb.cc"],
-    hdrs = ["invocation_policy.pb.h"],
-    visibility = ["//visibility:public"],
-    deps = [
-        ":strategy_policy_cc_library",
-        "@com_google_protobuf//:protobuf",
-    ],
-)
-
-proto_compile(
-    name = "invocation_policy_cpp_compile",
-    outputs = [
-        "invocation_policy.pb.cc",
-        "invocation_policy.pb.h",
-    ],
-    plugins = ["@build_stack_rules_proto//plugin/builtin:cpp"],
-    proto = "invocation_policy_proto",
+cc_proto_library(
+    name = "failure_details_cc_proto",
+    deps = [":failure_details_proto"],
     visibility = ["//visibility:public"],
 )
 
-proto_cc_library(
-    name = "option_filters_cc_library",
-    srcs = ["option_filters.pb.cc"],
-    hdrs = ["option_filters.pb.h"],
-    visibility = ["//visibility:public"],
-    deps = ["@com_google_protobuf//:protobuf"],
-)
-
-proto_compile(
-    name = "option_filters_cpp_compile",
-    outputs = [
-        "option_filters.pb.cc",
-        "option_filters.pb.h",
-    ],
-    plugins = ["@build_stack_rules_proto//plugin/builtin:cpp"],
-    proto = "option_filters_proto",
+cc_proto_library(
+    name = "invocation_policy_cc_proto",
+    deps = [":invocation_policy_proto"],
     visibility = ["//visibility:public"],
 )
 
-proto_cc_library(
-    name = "package_load_metrics_cc_library",
-    srcs = ["package_load_metrics.pb.cc"],
-    hdrs = ["package_load_metrics.pb.h"],
+cc_proto_library(
+    name = "option_filters_cc_proto",
+    deps = [":option_filters_proto"],
     visibility = ["//visibility:public"],
-    deps = ["@com_google_protobuf//:protobuf"],
 )
 
-proto_compile(
-    name = "package_load_metrics_cpp_compile",
-    outputs = [
-        "package_load_metrics.pb.cc",
-        "package_load_metrics.pb.h",
-    ],
-    plugins = ["@build_stack_rules_proto//plugin/builtin:cpp"],
-    proto = "package_load_metrics_proto",
+cc_proto_library(
+    name = "package_load_metrics_cc_proto",
+    deps = [":package_load_metrics_proto"],
+    visibility = ["//visibility:public"],
+)
+
+cc_proto_library(
+    name = "strategy_policy_cc_proto",
+    deps = [":strategy_policy_proto"],
+    visibility = ["//visibility:public"],
+)
+
+cc_proto_library(
+    name = "spawn_cc_proto",
+    deps = [":spawn_proto"],
     visibility = ["//visibility:public"],
 )
 
@@ -367,30 +288,6 @@ proto_py_library(
     deps = ["@com_google_protobuf//:protobuf_python"],
 )
 
-proto_library(
-    name = "strategy_policy_proto",
-    srcs = ["strategy_policy.proto"],
-)
-
-proto_cc_library(
-    name = "strategy_policy_cc_library",
-    srcs = ["strategy_policy.pb.cc"],
-    hdrs = ["strategy_policy.pb.h"],
-    visibility = ["//visibility:public"],
-    deps = ["@com_google_protobuf//:protobuf"],
-)
-
-proto_compile(
-    name = "strategy_policy_cpp_compile",
-    outputs = [
-        "strategy_policy.pb.cc",
-        "strategy_policy.pb.h",
-    ],
-    plugins = ["@build_stack_rules_proto//plugin/builtin:cpp"],
-    proto = "strategy_policy_proto",
-    visibility = ["//visibility:public"],
-)
-
 proto_compile(
     name = "strategy_policy_python_compile",
     outputs = [
@@ -410,34 +307,6 @@ proto_py_library(
     srcs = ["strategy_policy_pb2.py"],
     visibility = ["//visibility:public"],
     deps = ["@com_google_protobuf//:protobuf_python"],
-)
-
-proto_library(
-    name = "spawn_proto",
-    srcs = ["spawn.proto"],
-    deps = [
-        "@com_google_protobuf//:duration_proto",
-        "@com_google_protobuf//:timestamp_proto",
-    ],
-)
-
-proto_cc_library(
-    name = "spawn_cc_library",
-    srcs = ["spawn.pb.cc"],
-    hdrs = ["spawn.pb.h"],
-    visibility = ["//visibility:public"],
-    deps = ["@com_google_protobuf//:protobuf"],
-)
-
-proto_compile(
-    name = "spawn_cpp_compile",
-    outputs = [
-        "spawn.pb.cc",
-        "spawn.pb.h",
-    ],
-    plugins = ["@build_stack_rules_proto//plugin/builtin:cpp"],
-    proto = "spawn_proto",
-    visibility = ["//visibility:public"],
 )
 
 proto_compile(
