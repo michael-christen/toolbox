@@ -1,8 +1,12 @@
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
+load("@com_google_protobuf//bazel:cc_proto_library.bzl", "cc_proto_library")
 load("@rules_proto//proto:defs.bzl", "proto_library")
 load("//bzl:py.bzl", "proto_py_library")
 
 package(default_visibility = ["//visibility:private"])
+
+# Use cc_proto_library (managed by gazelle_cc) instead of proto_cc_library
+# gazelle:proto_language cpp enable false
 
 proto_library(
     name = "action_cache_proto",
@@ -76,56 +80,56 @@ proto_library(
 
 cc_proto_library(
     name = "action_cache_cc_proto",
-    deps = [":action_cache_proto"],
     visibility = ["//visibility:public"],
+    deps = [":action_cache_proto"],
 )
 
 cc_proto_library(
     name = "build_event_stream_cc_proto",
-    deps = [":build_event_stream_proto"],
     visibility = ["//visibility:public"],
+    deps = [":build_event_stream_proto"],
 )
 
 cc_proto_library(
     name = "command_line_cc_proto",
-    deps = [":command_line_proto"],
     visibility = ["//visibility:public"],
+    deps = [":command_line_proto"],
 )
 
 cc_proto_library(
     name = "failure_details_cc_proto",
-    deps = [":failure_details_proto"],
     visibility = ["//visibility:public"],
+    deps = [":failure_details_proto"],
 )
 
 cc_proto_library(
     name = "invocation_policy_cc_proto",
-    deps = [":invocation_policy_proto"],
     visibility = ["//visibility:public"],
+    deps = [":invocation_policy_proto"],
 )
 
 cc_proto_library(
     name = "option_filters_cc_proto",
-    deps = [":option_filters_proto"],
     visibility = ["//visibility:public"],
+    deps = [":option_filters_proto"],
 )
 
 cc_proto_library(
     name = "package_load_metrics_cc_proto",
-    deps = [":package_load_metrics_proto"],
     visibility = ["//visibility:public"],
+    deps = [":package_load_metrics_proto"],
 )
 
 cc_proto_library(
     name = "strategy_policy_cc_proto",
-    deps = [":strategy_policy_proto"],
     visibility = ["//visibility:public"],
+    deps = [":strategy_policy_proto"],
 )
 
 cc_proto_library(
     name = "spawn_cc_proto",
-    deps = [":spawn_proto"],
     visibility = ["//visibility:public"],
+    deps = [":spawn_proto"],
 )
 
 proto_compile(

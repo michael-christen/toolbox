@@ -1,5 +1,6 @@
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
 load("@com_google_emboss//:build_defs.bzl", "emboss_cc_library")
+load("@com_google_protobuf//bazel:cc_proto_library.bzl", "cc_proto_library")
 load(
     "@pigweed//pw_protobuf_compiler:pw_proto_library.bzl",
     "nanopb_proto_library",
@@ -10,6 +11,11 @@ load("//bzl:cc.bzl", "cc_library", "cc_test", "pw_cc_test")
 load("//bzl:py.bzl", "proto_py_library")
 
 package(default_visibility = ["//visibility:private"])
+
+# Use cc_proto_library (managed by gazelle_cc) instead of proto_cc_library
+# gazelle:proto_language cpp enable false
+# lis3mdl.pb.h is nanopb-generated (C structs); map to nanopb target not cc_proto_library
+# gazelle:resolve cc tlbox/hw/drivers/lis3mdl/lis3mdl.pb.h //tlbox/hw/drivers/lis3mdl:lis3mdl_nanopb
 
 emboss_cc_library(
     name = "lis3mdl_emb",
@@ -93,8 +99,8 @@ nanopb_rpc_proto_library(
 
 cc_proto_library(
     name = "lis3mdl_cc_proto",
-    deps = [":lis3mdl_proto"],
     visibility = ["//visibility:public"],
+    deps = [":lis3mdl_proto"],
 )
 
 proto_compile(

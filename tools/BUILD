@@ -1,5 +1,6 @@
 load("@bazel_env.bzl", "bazel_env")
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
+load("@com_google_protobuf//bazel:cc_proto_library.bzl", "cc_proto_library")
 load("@multitool//:tools.bzl", MULTITOOL_TOOLS = "TOOLS")
 load("@pip//:requirements.bzl", "requirement")  # '@pip' must match configured pip hub_name
 load("@rules_multirun//:defs.bzl", "command", "multirun")
@@ -8,6 +9,9 @@ load("@rules_proto//proto:defs.bzl", "proto_library")
 load("//bzl:py.bzl", "proto_py_library", "py_library", "py_test")
 
 package(default_visibility = ["//visibility:private"])
+
+# Use cc_proto_library (managed by gazelle_cc) instead of proto_cc_library
+# gazelle:proto_language cpp enable false
 
 command(
     name = "isort_format",
@@ -132,8 +136,8 @@ py_test(
 
 cc_proto_library(
     name = "git_cc_proto",
-    deps = [":git_proto"],
     visibility = ["//visibility:public"],
+    deps = [":git_proto"],
 )
 
 proto_compile(

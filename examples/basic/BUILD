@@ -8,6 +8,9 @@ load("//bzl:py.bzl", "grpc_py_library", "proto_py_library", "py_binary", "py_ima
 
 package(default_visibility = ["//visibility:private"])
 
+# gRPC package: keep proto_compile + proto_cc_library pattern; migrate separately (see #255)
+# gazelle:cc_generate_proto false
+
 filegroup(
     name = "python_source",
     srcs = glob(["*.py"]) + [

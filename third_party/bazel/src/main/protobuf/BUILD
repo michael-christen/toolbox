@@ -1,8 +1,12 @@
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
+load("@com_google_protobuf//bazel:cc_proto_library.bzl", "cc_proto_library")
 load("@rules_proto//proto:defs.bzl", "proto_library")
 load("//bzl:py.bzl", "proto_py_library")
 
 package(default_visibility = ["//visibility:private"])
+
+# Use cc_proto_library (managed by gazelle_cc) instead of proto_cc_library
+# gazelle:proto_language cpp enable false
 
 proto_library(
     name = "build_proto",
@@ -12,8 +16,8 @@ proto_library(
 
 cc_proto_library(
     name = "build_cc_proto",
-    deps = [":build_proto"],
     visibility = ["//visibility:public"],
+    deps = [":build_proto"],
 )
 
 proto_compile(
