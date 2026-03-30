@@ -1,6 +1,6 @@
 load("@bazel_env.bzl", "bazel_env")
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
-load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_library")
+load("@com_google_protobuf//bazel:cc_proto_library.bzl", "cc_proto_library")
 load("@multitool//:tools.bzl", MULTITOOL_TOOLS = "TOOLS")
 load("@pip//:requirements.bzl", "requirement")  # '@pip' must match configured pip hub_name
 load("@rules_multirun//:defs.bzl", "command", "multirun")
@@ -131,23 +131,10 @@ py_test(
     deps = ["//tlbox/utils:git_utils"],
 )
 
-proto_cc_library(
-    name = "git_cc_library",
-    srcs = ["git.pb.cc"],
-    hdrs = ["git.pb.h"],
+cc_proto_library(
+    name = "git_cc_proto",
     visibility = ["//visibility:public"],
-    deps = ["@com_google_protobuf//:protobuf"],
-)
-
-proto_compile(
-    name = "git_cpp_compile",
-    outputs = [
-        "git.pb.cc",
-        "git.pb.h",
-    ],
-    plugins = ["@build_stack_rules_proto//plugin/builtin:cpp"],
-    proto = "git_proto",
-    visibility = ["//visibility:public"],
+    deps = [":git_proto"],
 )
 
 proto_compile(
