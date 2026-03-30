@@ -12,8 +12,6 @@ load("//bzl:py.bzl", "proto_py_library")
 
 package(default_visibility = ["//visibility:private"])
 
-# Use cc_proto_library (managed by gazelle_cc) instead of proto_cc_library
-# gazelle:proto_language cpp enable false
 # lis3mdl.pb.h is nanopb-generated (C structs); map to nanopb target not cc_proto_library
 # gazelle:resolve cc tlbox/hw/drivers/lis3mdl/lis3mdl.pb.h //tlbox/hw/drivers/lis3mdl:lis3mdl_nanopb
 

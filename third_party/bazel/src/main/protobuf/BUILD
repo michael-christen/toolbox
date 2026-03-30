@@ -5,9 +5,6 @@ load("//bzl:py.bzl", "proto_py_library")
 
 package(default_visibility = ["//visibility:private"])
 
-# Use cc_proto_library (managed by gazelle_cc) instead of proto_cc_library
-# gazelle:proto_language cpp enable false
-
 proto_library(
     name = "build_proto",
     srcs = ["build.proto"],

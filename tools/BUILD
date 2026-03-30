@@ -10,9 +10,6 @@ load("//bzl:py.bzl", "proto_py_library", "py_library", "py_test")
 
 package(default_visibility = ["//visibility:private"])
 
-# Use cc_proto_library (managed by gazelle_cc) instead of proto_cc_library
-# gazelle:proto_language cpp enable false
-
 command(
     name = "isort_format",
     args = ["--dont-follow-links"],

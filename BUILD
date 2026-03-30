@@ -153,6 +153,8 @@ gazelle(
 
 # Don't use go
 # gazelle:go_generate_proto false
+# Don't generate proto_cc_library; use cc_proto_library via gazelle_cc instead
+# gazelle:proto_language cpp enable false
 # Generate 1 proto rule per file
 # gazelle:proto file
 
