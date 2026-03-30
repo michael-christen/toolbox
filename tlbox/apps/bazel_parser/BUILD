@@ -77,15 +77,13 @@ py_binary(
         ":parsing",
         ":refinement",
         "//tlbox/utils:bazel_utils",
-        "//tools:git_py_library",
-        "//tlbox/utils:git_utils",
         "//tlbox/utils:bep_reader",
+        "//tlbox/utils:git_utils",
+        "//tools:git_py_library",
         "@pip//click",
         "@pip//networkx",
         "@pip//pandas",
         "@pip//pydantic",
-        # TODO(#263): Should associate with networkx
-        "@pip//pygraphviz",  # keep
         "@pip//pyyaml",
     ],
 )
