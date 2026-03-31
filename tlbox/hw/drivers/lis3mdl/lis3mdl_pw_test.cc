@@ -23,7 +23,6 @@ using namespace std::chrono_literals;
 
 constexpr auto kI2cTimeout = 100ms;
 
-// TODO(#147): How to prevent bifurcation of pw_cc_test and cc_test?
 TEST(I2CTestSuite, I2CTransactions) {
   constexpr pw::i2c::Address kAddress = pw::i2c::Address::SevenBit<0x01>();
   constexpr auto kExpectedWrite = pw::bytes::Array<1, 2, 3, 4, 5, 6>();
@@ -87,7 +86,6 @@ TEST(I2CTestSuite, I2CTransactions) {
     sb << std::format("{:02X} ", static_cast<uint8_t>(c));
   }
   std::cout << "Control Bytes: " << sb.c_str() << std::endl;
-  // TODO(#147): How to show LOG in test?
   PW_LOG_INFO("Control bytes: %s", sb.c_str());
 
   status = ApplyControlToDevice(control, &reg_device);

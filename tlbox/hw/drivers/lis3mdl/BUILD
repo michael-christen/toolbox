@@ -50,6 +50,7 @@ pw_cc_test(
         "@pigweed//pw_i2c:device",
         "@pigweed//pw_i2c:initiator_mock",
         "@pigweed//pw_i2c:register_device",
+        "@pigweed//pw_log",
         "@pigweed//pw_result",
         "@pigweed//pw_unit_test",
     ],
