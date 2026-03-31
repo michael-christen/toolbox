@@ -153,7 +153,8 @@ py_test(
         ":server",
         "//examples/basic:hello_py_library",
     ],
-    # TODO(#259): How to expect_failure
+    # For analysis-time failures, see examples/bazel/my_rules_test.bzl (expect_failure=True).
+    # For pytest-level expected failures, use @pytest.mark.xfail on individual test methods.
 )
 
 grpc_py_library(
