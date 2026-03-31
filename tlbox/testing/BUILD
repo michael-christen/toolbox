@@ -1,14 +1,15 @@
 load("//bzl:cc.bzl", "cc_library")
 
+# gazelle:ignore
 package(default_visibility = ["//visibility:private"])
 
-# Alternatively, we could just use @catch2//:catch_main
+# Wraps @googletest//:gtest_main so tests depend on //tlbox/testing:gtest_main,
+# giving us a place to add custom setup/teardown hooks if needed.
 cc_library(
-    name = "catch_main",
+    name = "gtest_main",
     testonly = True,
-    srcs = ["catch_main.cc"],
     visibility = ["//visibility:public"],
     deps = [
-        "@catch2",
+        "@googletest//:gtest_main",
     ],
 )

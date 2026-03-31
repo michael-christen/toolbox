@@ -62,7 +62,7 @@ cc_test(
         ":lis3mdl",
         "//tlbox/hw/drivers/lis3mdl:lis3mdl_emb",
         "//tlbox/hw/drivers/lis3mdl:lis3mdl_nanopb",
-        "//tlbox/testing:catch_main",
+        "//tlbox/testing:gtest_main",
         "@pigweed//pw_bytes",
         "@pigweed//pw_bytes:bit",
         "@pigweed//pw_i2c:address",
