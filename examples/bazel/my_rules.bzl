@@ -10,6 +10,9 @@ FooInfo = provider(
 
 # ctx fields: https://bazel.build/rules/lib/builtins/ctx
 def _foo_binary_impl(ctx):
+    if not ctx.attr.username:
+        fail("username must not be empty")
+
     # Get toolchain specifics into the rule
     info = ctx.toolchains[":toolchain_type"].fooinfo
     out = ctx.actions.declare_file(ctx.label.name)
