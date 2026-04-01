@@ -166,13 +166,10 @@ gazelle(
 
 # Tell gazelle where to find imports
 # gazelle:resolve py google.protobuf.message @com_google_protobuf//:protobuf_python
-# catch_main provides catch2 headers + main(); map the header so gazelle doesn't replace it with bare @catch2
-# gazelle:resolve cc catch2/catch_test_macros.hpp //tlbox/testing:catch_main
-# Pigweed facade headers: resolve to the concrete target, not the .facade alias
-# gazelle:resolve cc pw_log/log.h @pigweed//pw_log:pw_log
-# gazelle:resolve cc pw_system/io.h @pigweed//pw_system:io
-# gazelle:resolve cc pw_unit_test/framework.h @pigweed//pw_unit_test:pw_unit_test
-# Handle aliases for common dependencies that gazelle isn't picking up
+# gtest/gtest.h would otherwise resolve to @pigweed//pw_unit_test:light (from ccindex);
+# map to our wrapper which also provides main().
+# gazelle:resolve cc gtest/gtest.h //tlbox/testing:gtest_main
+# pw_system/system.h maps to a local alias that bundles the backend impls needed at link time.
 # gazelle:resolve cc pw_system/system.h //third_party/pigweed:pw_system_async_alias
 
 # C++ header -> target index files for gazelle_cc resolution
@@ -181,6 +178,9 @@ gazelle(
 # gazelle:cc_indexfile tools/nanopb.ccindex
 
 # Use our own rules
+# gazelle:map_kind cc_binary cc_binary //bzl:cc.bzl
+# gazelle:map_kind cc_library cc_library //bzl:cc.bzl
+# gazelle:map_kind cc_test cc_test //bzl:cc.bzl
 # gazelle:map_kind py_binary py_binary //bzl:py.bzl
 # gazelle:map_kind py_library py_library //bzl:py.bzl
 # gazelle:map_kind py_test py_test //bzl:py.bzl

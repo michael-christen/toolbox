@@ -43,11 +43,11 @@ bazel_dep(name = "bazel_skylib_gazelle_plugin", version = "1.8.2")
 bazel_dep(name = "bazel_skylib", version = "1.8.2")
 bazel_dep(name = "buildifier_prebuilt", version = "8.2.1")
 bazel_dep(name = "build_stack_rules_proto", version = "4.1.2")
-bazel_dep(name = "catch2", version = "3.11.0")
 bazel_dep(name = "emboss", repo_name = "com_google_emboss")
 bazel_dep(name = "freertos", version = "10.5.1.bcr.2")
 bazel_dep(name = "gazelle", version = "0.47.0", repo_name = "bazel_gazelle")
 bazel_dep(name = "gazelle_cc", version = "0.5.0")
+bazel_dep(name = "googletest", version = "1.15.2")
 bazel_dep(name = "grpc", version = "1.74.1", repo_name = "com_github_grpc_grpc")
 bazel_dep(name = "hedron_compile_commands")
 bazel_dep(name = "nanopb", version = "0.4.9.1", repo_name = "com_github_nanopb_nanopb")
@@ -106,16 +106,15 @@ bazel_dep(name = "toolchains_llvm", version = "1.5.0")
 #     WORKSPACE, but it is incompatible with bzlmod Go toolchains. Instead let's just use
 #     a prebuilt version.
 # - build_stack_rules_proto: https://registry.bazel.build/modules/build_stack_rules_proto
-# - catch2: https://registry.bazel.build/modules/catch2
-#   - C++ Test framework
-#   - https://github.com/catchorg/Catch2
-#   - Consider adding listeners via https://github.com/catchorg/Catch2/blob/devel/docs/event-listeners.md
-#   - Consider the googletest alternative: https://google.github.io/googletest/
-#     - bazel_dep(name = "googletest", version = "1.15.2")
 # - emboss: https://pigweed.googlesource.com/third_party/github/google/emboss
 # - freertos
 # - gazelle: https://github.com/bazel-contrib/bazel-gazelle
 # - gazelle_cc: https://github.com/EngFlow/gazelle_cc
+# - googletest: https://registry.bazel.build/modules/googletest
+#   - C++ test framework (Google Test + Google Mock)
+#   - https://google.github.io/googletest/
+#   - Use @googletest//:gtest_main for test binaries (provides main())
+#   - pw_unit_test uses the same gtest API, so syntax is uniform across host and embedded tests
 # - grpc: https://registry.bazel.build/modules/grpc
 #   - repo_name = "com_github_grpc_grpc" to match what build_stack_rules_proto
 #     uses internally, so generated grpc_cc_library targets resolve from root

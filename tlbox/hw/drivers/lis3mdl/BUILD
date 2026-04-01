@@ -7,9 +7,10 @@ load(
     "nanopb_rpc_proto_library",
 )
 load("@rules_proto//proto:defs.bzl", "proto_library")
-load("//bzl:cc.bzl", "cc_library", "cc_test", "pw_cc_test")
+load("//bzl:cc.bzl", "cc_library", "pw_cc_test")
 load("//bzl:py.bzl", "proto_py_library")
 
+# gazelle:map_kind cc_test pw_cc_test //bzl:cc.bzl
 package(default_visibility = ["//visibility:private"])
 
 # lis3mdl.pb.h is nanopb-generated (C structs); map to nanopb target not cc_proto_library
@@ -43,29 +44,11 @@ cc_library(
 
 pw_cc_test(
     name = "lis3mdl_pw_test",
-    srcs = ["lis3mdl_pw_test.cc"],  # keep
-    deps = [
-        ":lis3mdl",
-        ":lis3mdl_emb",
-        "//tlbox/hw/drivers/lis3mdl:lis3mdl_nanopb",
-        "@pigweed//pw_bytes",
-        "@pigweed//pw_i2c:address",
-        "@pigweed//pw_i2c:device",
-        "@pigweed//pw_i2c:initiator_mock",
-        "@pigweed//pw_i2c:register_device",
-        "@pigweed//pw_result",
-        "@pigweed//pw_unit_test",
-    ],
-)
-
-cc_test(
-    name = "lis3mdl_test",
-    srcs = ["lis3mdl_test.cc"],  # keep
+    srcs = ["lis3mdl_pw_test.cc"],
     deps = [
         ":lis3mdl",
         "//tlbox/hw/drivers/lis3mdl:lis3mdl_emb",
         "//tlbox/hw/drivers/lis3mdl:lis3mdl_nanopb",
-        "//tlbox/testing:catch_main",
         "@pigweed//pw_bytes",
         "@pigweed//pw_bytes:bit",
         "@pigweed//pw_i2c:address",

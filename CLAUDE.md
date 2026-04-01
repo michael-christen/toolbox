@@ -87,7 +87,8 @@ bazel run //:create_venv  # Creates venv/ directory with dependencies
 ### Testing
 
 - Python: Uses pytest via custom `py_test` rule in `//bzl:py.bzl`
-- C++: Uses Catch2 framework
+- C++: Uses Google Test (`cc_test` + `//tlbox/testing:gtest_main` for host
+  tests, `pw_cc_test` for Pigweed-integrated tests)
 - Coverage exclusion: `# pragma: no cover`
 
 ### CI/CD

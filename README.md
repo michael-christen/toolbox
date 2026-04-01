@@ -36,7 +36,7 @@ tlbox/             # all project code
   notebooks/       # Jupyter notebooks
   ansible_playbooks/
   scripts/         # one-off scripts
-  testing/         # shared C++ test infrastructure (Catch2)
+  testing/         # shared C++ test infrastructure (gtest_main, pw_log handler)
   utils/           # shared libraries and utilities
 bzl/               # custom Bazel rules
 tools/             # build tooling (formatters, linters, Bazel wrappers)
@@ -148,7 +148,10 @@ have been run (or CI will fail)
 
 ### C++
 
-Testing utilizes [catch2](https://github.com/catchorg/Catch2)
+Use `cc_test` (from `//bzl:cc.bzl`) with `//tlbox/testing:gtest_main` for host
+unit tests, or `pw_cc_test` for tests that need Pigweed backends (I2C mocks,
+async, etc.). Both use the [Google Test](https://google.github.io/googletest/)
+API (`TEST`, `EXPECT_*`, `ASSERT_*`). See `docs/cpp_testing.md` for details.
 
 ### Miscellaneous
 

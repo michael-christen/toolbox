@@ -21,6 +21,7 @@ documentation for details.
 
    README
    structure
+   cpp_testing
    issue_management
    myst
    examples

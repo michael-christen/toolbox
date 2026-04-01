@@ -26,7 +26,7 @@ tlbox/                  # all project code
   notebooks/            # Jupyter notebooks
   ansible_playbooks/    # system configuration and provisioning
   scripts/              # one-off scripts
-  testing/              # shared C++ test infrastructure (Catch2)
+  testing/              # shared C++ test infrastructure (gtest_main, pw_log handler)
   utils/                # shared libraries and utilities (Python + C++)
 bzl/                    # custom Bazel rules
 tools/                  # build tooling (formatters, linters, Bazel wrappers)
