@@ -1,6 +1,6 @@
 # Development Guide
 
-See [structure.md](structure.md) for the full directory map.
+See [structure](structure.md) for the full directory map.
 
 ## Installation
 
@@ -92,7 +92,7 @@ CARGO_BAZEL_REPIN=1 bazel sync --only=crate_index
 **Style:** C++23, clang-format (`.clang-format`)
 
 Use `cc_test` (from `//bzl:cc.bzl`) for all tests — see
-[C++ Testing](cpp_testing.md) for details.
+[cpp_testing](cpp_testing.md) for details.
 
 ```bash
 # Run buildozer / buildifier manually
