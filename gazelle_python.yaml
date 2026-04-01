@@ -6,8 +6,9 @@
 ---
 manifest:
   modules_mapping:
+    0aca9ce3d91742c5b361__mypyc: mypy
     30fcd23745efe32ce681__mypyc: black
-    4c842c94c09923bae9e4__mypyc: mypy
+    81d243bd2c585b0f4821__mypyc: charset_normalizer
     IPython: ipython
     OpenSSL: pyopenssl
     PIL: pillow
@@ -174,7 +175,6 @@ manifest:
     rfc3987_syntax: rfc3987_syntax
     roman_numerals: roman_numerals
     rpds: rpds_py
-    rsa: rsa
     scipy: scipy
     send2trash: send2trash
     setuptools: setuptools
@@ -254,4 +254,4 @@ manifest:
     zstandard: zstandard
   pip_repository:
     name: pip
-integrity: 0ea0e121a31a64f61661e3db696fc1727fe01fc9128cf099bdf976734777c63d
+integrity: fc110052483cafd9d96729a74fd7ca622ddebb6544ae12b8774e8dcc8c3bfabc
