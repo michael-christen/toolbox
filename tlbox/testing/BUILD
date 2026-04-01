@@ -25,9 +25,9 @@ cc_library(
 cc_library(
     name = "log_string_handler",
     srcs = ["log_string_handler.cc"],
-    implementation_deps = ["@pigweed//pw_string:builder"],
-    visibility = ["//visibility:public"],
-    deps = [
-        "@pigweed//pw_sys_io",  # keep
+    implementation_deps = [
+        "@pigweed//pw_string:builder",
+        "@pigweed//pw_sys_io",
     ],
+    visibility = ["//visibility:public"],
 )

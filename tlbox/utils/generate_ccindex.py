@@ -110,6 +110,12 @@ def generate_pigweed_index() -> dict[str, str]:
         if rule.rule_class != "cc_library":
             continue
 
+        # Skip Pigweed-internal facade rules (e.g. pw_sys_io.facade).
+        # Including them as providers produces duplicate-provider conflicts;
+        # users should depend on the main target instead.
+        if rule.name.rsplit(":", 1)[-1].endswith(".facade"):
+            continue
+
         hdrs = _attr_list(rule, "hdrs")
         if not hdrs:
             continue
