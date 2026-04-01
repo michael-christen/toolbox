@@ -10,5 +10,5 @@ setup, language guides, and command references.
 
 All project code lives under [`tlbox/`](tlbox/) — a language-agnostic namespace
 for Python, C++, Rust, and hardware code alike. See
-[`docs/structure.md`](docs/structure.md) for the full directory map, or the
+[`docs/development.md`](docs/development.md) to get started, or the
 [docs site](https://michael-christen.github.io/toolbox) for everything else.

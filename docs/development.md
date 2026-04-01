@@ -1,5 +1,7 @@
 # Development Guide
 
+See [structure.md](structure.md) for the full directory map.
+
 ## Installation
 
 Install [bazelisk](https://github.com/bazelbuild/bazelisk) as your `bazel`
