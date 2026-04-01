@@ -1,12 +1,12 @@
 # C++ Testing
 
 `cc_test` (from `//bzl:cc.bzl`) is the single rule for all C++ tests. It
-auto-selects the right underlying framework based on deps:
+auto-selects the right underlying framework based on your includes:
 
-- **`@pigweed//pw_unit_test` in `deps`** → delegates to `pw_cc_test`, pulling in
-  Pigweed build-system integration (facade backends, I2C mocks, async
+- **`#include "pw_unit_test/framework.h"`** → delegates to `pw_cc_test`, pulling
+  in Pigweed build-system integration (facade backends, I2C mocks, async
   dispatchers, etc.)
-- **otherwise** → standard `cc_test` with shared copts
+- **`#include <gtest/gtest.h>`** → standard `cc_test` with shared copts
 
 The test syntax is identical in both cases (Google Test API: `TEST`, `EXPECT_*`,
 `ASSERT_*`). Gazelle generates the BUILD target automatically.
@@ -29,7 +29,8 @@ TEST(MyTest, BasicBehaviour) {
 
 ## Pigweed-integrated tests
 
-Add `@pigweed//pw_unit_test` to `deps` to opt in to Pigweed integration:
+Include `pw_unit_test/framework.h` to opt in to Pigweed integration (gazelle
+adds `@pigweed//pw_unit_test` to deps automatically):
 
 ```cpp
 #include "pw_unit_test/framework.h"
