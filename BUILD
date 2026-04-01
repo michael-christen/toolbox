@@ -164,13 +164,10 @@ gazelle(
 
 # Tell gazelle where to find imports
 # gazelle:resolve py google.protobuf.message @com_google_protobuf//:protobuf_python
-# gtest_main provides gtest headers + main(); map the header so gazelle resolves to our wrapper
+# gtest/gtest.h would otherwise resolve to @pigweed//pw_unit_test:light (from ccindex);
+# map to our wrapper which also provides main().
 # gazelle:resolve cc gtest/gtest.h //tlbox/testing:gtest_main
-# Pigweed facade headers: resolve to the concrete target, not the .facade alias
-# gazelle:resolve cc pw_log/log.h @pigweed//pw_log:pw_log
-# gazelle:resolve cc pw_system/io.h @pigweed//pw_system:io
-# gazelle:resolve cc pw_unit_test/framework.h @pigweed//pw_unit_test:pw_unit_test
-# Handle aliases for common dependencies that gazelle isn't picking up
+# pw_system/system.h maps to a local alias that bundles the backend impls needed at link time.
 # gazelle:resolve cc pw_system/system.h //third_party/pigweed:pw_system_async_alias
 
 # C++ header -> target index files for gazelle_cc resolution
