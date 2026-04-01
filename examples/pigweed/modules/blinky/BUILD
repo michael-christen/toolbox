@@ -22,7 +22,7 @@ load(
     "nanopb_rpc_proto_library",
 )
 load("@rules_python//python:proto.bzl", "py_proto_library")
-load("//bzl:cc.bzl", "cc_library", "pw_cc_test")
+load("//bzl:cc.bzl", "cc_library", "cc_test")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -58,7 +58,7 @@ cc_library(
     ],
 )
 
-pw_cc_test(
+cc_test(
     name = "blinky_test",
     srcs = ["blinky_test.cc"],
     deps = [

@@ -7,10 +7,9 @@ load(
     "nanopb_rpc_proto_library",
 )
 load("@rules_proto//proto:defs.bzl", "proto_library")
-load("//bzl:cc.bzl", "cc_library", "pw_cc_test")
+load("//bzl:cc.bzl", "cc_library", "cc_test")
 load("//bzl:py.bzl", "proto_py_library")
 
-# gazelle:map_kind cc_test pw_cc_test //bzl:cc.bzl
 package(default_visibility = ["//visibility:private"])
 
 # lis3mdl.pb.h is nanopb-generated (C structs); map to nanopb target not cc_proto_library
@@ -42,7 +41,7 @@ cc_library(
     ],
 )
 
-pw_cc_test(
+cc_test(
     name = "lis3mdl_pw_test",
     srcs = ["lis3mdl_pw_test.cc"],
     deps = [
