@@ -20,6 +20,7 @@ documentation for details.
    :caption: Contents:
 
    README
+   development
    structure
    cpp_testing
    issue_management
