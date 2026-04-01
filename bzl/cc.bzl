@@ -97,9 +97,6 @@ def c_binary(**kwargs):
 def c_library(**kwargs):
     _cc_library(copts = COPTS + CONLY_OPTS, **kwargs)
 
-def pw_cc_test(timeout = "short", **kwargs):
-    _pw_cc_test(timeout = timeout, **kwargs)
-
 def cc_size(target, max_flash, max_ram, **kwargs):
     """Calculate size metrics of binary."""
     target_label = native.package_relative_label(target)
