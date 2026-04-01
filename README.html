@@ -9,7 +9,7 @@
 <meta property="og:site_name" content="toolbox" />
 <meta property="og:description" content="My personal monorepo. Find docs here This will include everything from one-off scripts and experiments to libraries and applications. I’ll likely mostly use Python, C++, and Rust (fingers crossed) ..." />
 <meta name="description" content="My personal monorepo. Find docs here This will include everything from one-off scripts and experiments to libraries and applications. I’ll likely mostly use Python, C++, and Rust (fingers crossed) ..." />
-<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="MyST" href="myst.html"><link rel="prev" title="toolbox documentation" href="index.html">
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Repository Structure" href="structure.html"><link rel="prev" title="toolbox documentation" href="index.html">
 
     <link rel="shortcut icon" href="_static/wrench.png"><!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
         <title>toolbox - toolbox documentation</title>
@@ -203,6 +203,9 @@
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current current-page"><a class="current reference internal" href="#">toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structure.html">Repository Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cpp_testing.html">C++ Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="issue_management.html">Issue Management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="myst.html">MyST</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">My nifty title</a></li>
 <li class="toctree-l1"><a class="reference internal" href="myst_extensions.html">Syntax Extensions</a></li>
@@ -294,7 +297,7 @@ thumb.</p>
   <span class="n">notebooks</span><span class="o">/</span>       <span class="c1"># Jupyter notebooks</span>
   <span class="n">ansible_playbooks</span><span class="o">/</span>
   <span class="n">scripts</span><span class="o">/</span>         <span class="c1"># one-off scripts</span>
-  <span class="n">testing</span><span class="o">/</span>         <span class="c1"># shared C++ test infrastructure (Catch2)</span>
+  <span class="n">testing</span><span class="o">/</span>         <span class="c1"># shared C++ test infrastructure (gtest_main, pw_log handler)</span>
   <span class="n">utils</span><span class="o">/</span>           <span class="c1"># shared libraries and utilities</span>
 <span class="n">bzl</span><span class="o">/</span>               <span class="c1"># custom Bazel rules</span>
 <span class="n">tools</span><span class="o">/</span>             <span class="c1"># build tooling (formatters, linters, Bazel wrappers)</span>
@@ -424,7 +427,10 @@ have been run (or CI will fail)</p>
 </section>
 <section id="c">
 <h3>C++<a class="headerlink" href="#c" title="Link to this heading"></a></h3>
-<p>Testing utilizes <a class="reference external" href="https://github.com/catchorg/Catch2">catch2</a></p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">cc_test</span></code> (from <code class="docutils literal notranslate"><span class="pre">//bzl:cc.bzl</span></code>) with <code class="docutils literal notranslate"><span class="pre">//tlbox/testing:gtest_main</span></code> for host
+unit tests, or <code class="docutils literal notranslate"><span class="pre">pw_cc_test</span></code> for tests that need Pigweed backends (I2C mocks,
+async, etc.). Both use the <a class="reference external" href="https://google.github.io/googletest/">Google Test</a>
+API (<code class="docutils literal notranslate"><span class="pre">TEST</span></code>, <code class="docutils literal notranslate"><span class="pre">EXPECT_*</span></code>, <code class="docutils literal notranslate"><span class="pre">ASSERT_*</span></code>). See <code class="docutils literal notranslate"><span class="pre">docs/cpp_testing.md</span></code> for details.</p>
 </section>
 <section id="miscellaneous">
 <h3>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Link to this heading"></a></h3>
@@ -463,12 +469,12 @@ bazel run -- @pnpm//:pnpm --dir $PWD install --lockfile-only
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="myst.html">
+          <a class="next-page" href="structure.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">MyST</div>
+                <div class="title">Repository Structure</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -579,6 +585,6 @@ bazel run -- @pnpm//:pnpm --dir $PWD install --lockfile-only
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
     <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
-    <script defer="defer" src="_static/tippy/README.b5efb8e3-1e58-4321-9545-e3e66dc45744.js"></script>
+    <script defer="defer" src="_static/tippy/README.8af44f80-5695-4794-bf71-1b10eef33fb5.js"></script>
     </body>
 </html>
