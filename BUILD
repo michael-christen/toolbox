@@ -179,6 +179,9 @@ gazelle(
 # gazelle:cc_indexfile tools/nanopb.ccindex
 
 # Use our own rules
+# gazelle:map_kind cc_binary cc_binary //bzl:cc.bzl
+# gazelle:map_kind cc_library cc_library //bzl:cc.bzl
+# gazelle:map_kind cc_test cc_test //bzl:cc.bzl
 # gazelle:map_kind py_binary py_binary //bzl:py.bzl
 # gazelle:map_kind py_library py_library //bzl:py.bzl
 # gazelle:map_kind py_test py_test //bzl:py.bzl

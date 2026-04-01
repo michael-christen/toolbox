@@ -10,7 +10,6 @@ load("@rules_proto//proto:defs.bzl", "proto_library")
 load("//bzl:cc.bzl", "cc_library", "pw_cc_test")
 load("//bzl:py.bzl", "proto_py_library")
 
-# gazelle:map_kind cc_library cc_library //bzl:cc.bzl
 # gazelle:map_kind cc_test pw_cc_test //bzl:cc.bzl
 package(default_visibility = ["//visibility:private"])
 

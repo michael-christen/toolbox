@@ -1,10 +1,10 @@
 load("//bzl:cc.bzl", "cc_library")
 
-# gazelle:ignore
 package(default_visibility = ["//visibility:private"])
 
 # Wraps @googletest//:gtest_main so tests depend on //tlbox/testing:gtest_main,
 # giving us a place to add custom setup/teardown hooks if needed.
+# keep: no source files; gazelle_cc would otherwise delete this wrapper rule
 cc_library(
     name = "gtest_main",
     testonly = True,
@@ -25,9 +25,9 @@ cc_library(
 cc_library(
     name = "log_string_handler",
     srcs = ["log_string_handler.cc"],
+    implementation_deps = ["@pigweed//pw_string:builder"],
     visibility = ["//visibility:public"],
     deps = [
-        "@pigweed//pw_string:builder",
-        "@pigweed//pw_sys_io",
+        "@pigweed//pw_sys_io",  # keep
     ],
 )

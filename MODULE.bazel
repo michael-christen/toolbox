@@ -106,15 +106,15 @@ bazel_dep(name = "toolchains_llvm", version = "1.5.0")
 #     WORKSPACE, but it is incompatible with bzlmod Go toolchains. Instead let's just use
 #     a prebuilt version.
 # - build_stack_rules_proto: https://registry.bazel.build/modules/build_stack_rules_proto
+# - emboss: https://pigweed.googlesource.com/third_party/github/google/emboss
+# - freertos
+# - gazelle: https://github.com/bazel-contrib/bazel-gazelle
+# - gazelle_cc: https://github.com/EngFlow/gazelle_cc
 # - googletest: https://registry.bazel.build/modules/googletest
 #   - C++ test framework (Google Test + Google Mock)
 #   - https://google.github.io/googletest/
 #   - Use @googletest//:gtest_main for test binaries (provides main())
 #   - pw_unit_test uses the same gtest API, so syntax is uniform across host and embedded tests
-# - emboss: https://pigweed.googlesource.com/third_party/github/google/emboss
-# - freertos
-# - gazelle: https://github.com/bazel-contrib/bazel-gazelle
-# - gazelle_cc: https://github.com/EngFlow/gazelle_cc
 # - grpc: https://registry.bazel.build/modules/grpc
 #   - repo_name = "com_github_grpc_grpc" to match what build_stack_rules_proto
 #     uses internally, so generated grpc_cc_library targets resolve from root

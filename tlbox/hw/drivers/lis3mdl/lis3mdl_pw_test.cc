@@ -1,6 +1,5 @@
 #include <chrono>
 #include <cstdint>
-#include <iostream>
 #include <vector>
 
 #include "pw_bytes/array.h"
@@ -193,7 +192,6 @@ TEST(Lis3mdlTest, I2CTransactions) {
   for (const auto c : control.bytes) {
     sb << std::format("{:02X} ", static_cast<uint8_t>(c));
   }
-  std::cout << "Control Bytes: " << sb.c_str() << std::endl;
   PW_LOG_INFO("Control bytes: %s", sb.c_str());
 
   status = ApplyControlToDevice(control, &reg_device);
