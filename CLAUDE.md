@@ -87,8 +87,8 @@ bazel run //:create_venv  # Creates venv/ directory with dependencies
 ### Testing
 
 - Python: Uses pytest via custom `py_test` rule in `//bzl:py.bzl`
-- C++: Uses Google Test (`cc_test` + `//tlbox/testing:gtest_main` for host
-  tests, `pw_cc_test` for Pigweed-integrated tests)
+- C++: Uses Google Test via `cc_test` (from `//bzl:cc.bzl`) for all tests;
+  auto-delegates to `pw_cc_test` when `@pigweed//pw_unit_test` is in `deps`
 - Coverage exclusion: `# pragma: no cover`
 
 ### CI/CD

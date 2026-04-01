@@ -1,13 +1,17 @@
 # C++ Testing
 
-Two build rules are used for C++ tests, depending on whether Pigweed integration
-is required.
+`cc_test` (from `//bzl:cc.bzl`) is the single rule for all C++ tests. It
+auto-selects the right underlying framework based on deps:
 
-## `cc_test` — host unit tests
+- **`@pigweed//pw_unit_test` in `deps`** → delegates to `pw_cc_test`, pulling in
+  Pigweed build-system integration (facade backends, I2C mocks, async
+  dispatchers, etc.)
+- **otherwise** → standard `cc_test` with shared copts
 
-Use `cc_test` (from `//bzl:cc.bzl`) for tests that run purely on the host with
-no Pigweed backends. Gazelle auto-generates the BUILD target and wires in
-`//tlbox/testing:gtest_main`.
+The test syntax is identical in both cases (Google Test API: `TEST`, `EXPECT_*`,
+`ASSERT_*`). Gazelle generates the BUILD target automatically.
+
+## Host-only tests
 
 ```cpp
 #include <gtest/gtest.h>
@@ -23,11 +27,9 @@ TEST(MyTest, BasicBehaviour) {
 - [Google Test Advanced Topics](https://google.github.io/googletest/advanced.html)
   (fixtures, parametrized tests, death tests)
 
-## `pw_cc_test` — Pigweed-integrated tests
+## Pigweed-integrated tests
 
-Use `pw_cc_test` (from `//bzl:cc.bzl`) for tests that need Pigweed backends —
-I2C mocks, async dispatchers, allocator testing, etc. These use the same Google
-Test API (`TEST`, `EXPECT_*`, `ASSERT_*`) as `cc_test`.
+Add `@pigweed//pw_unit_test` to `deps` to opt in to Pigweed integration:
 
 ```cpp
 #include "pw_unit_test/framework.h"
@@ -41,17 +43,10 @@ TEST(MyPwTest, BasicBehaviour) {
 
 - [pw_unit_test documentation](https://pigweed.dev/pw_unit_test/)
 
-## Why two rules?
+## `PW_LOG_*` in Pigweed tests
 
-`pw_cc_test` pulls in Pigweed's build system integration: facade backends,
-linker scripts, and the `pw_unit_test` framework. `cc_test` doesn't need any of
-that for pure host tests. The test _syntax_ is identical (both use the Google
-Test API); only the build rule differs.
-
-## `PW_LOG_*` in `pw_cc_test`
-
-`PW_LOG_INFO`, `PW_LOG_DEBUG`, etc. are visible in `pw_cc_test` output. The log
-backend chain is:
+`PW_LOG_INFO`, `PW_LOG_DEBUG`, etc. are visible in test output. The log backend
+chain is:
 
 ```
 pw_log → pw_log_string → //tlbox/testing:log_string_handler → pw_sys_io (stdio)
