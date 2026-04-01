@@ -148,10 +148,11 @@ have been run (or CI will fail)
 
 ### C++
 
-Use `cc_test` (from `//bzl:cc.bzl`) with `//tlbox/testing:gtest_main` for host
-unit tests, or `pw_cc_test` for tests that need Pigweed backends (I2C mocks,
-async, etc.). Both use the [Google Test](https://google.github.io/googletest/)
-API (`TEST`, `EXPECT_*`, `ASSERT_*`). See `docs/cpp_testing.md` for details.
+Use `cc_test` (from `//bzl:cc.bzl`) for all tests. It automatically delegates to
+`pw_cc_test` when `@pigweed//pw_unit_test` is in `deps`, enabling Pigweed
+backends (I2C mocks, async, etc.). Both paths use the
+[Google Test](https://google.github.io/googletest/) API (`TEST`, `EXPECT_*`,
+`ASSERT_*`). See `docs/cpp_testing.md` for details.
 
 ### Miscellaneous
 

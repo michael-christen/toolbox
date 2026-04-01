@@ -427,10 +427,11 @@ have been run (or CI will fail)</p>
 </section>
 <section id="c">
 <h3>C++<a class="headerlink" href="#c" title="Link to this heading"></a></h3>
-<p>Use <code class="docutils literal notranslate"><span class="pre">cc_test</span></code> (from <code class="docutils literal notranslate"><span class="pre">//bzl:cc.bzl</span></code>) with <code class="docutils literal notranslate"><span class="pre">//tlbox/testing:gtest_main</span></code> for host
-unit tests, or <code class="docutils literal notranslate"><span class="pre">pw_cc_test</span></code> for tests that need Pigweed backends (I2C mocks,
-async, etc.). Both use the <a class="reference external" href="https://google.github.io/googletest/">Google Test</a>
-API (<code class="docutils literal notranslate"><span class="pre">TEST</span></code>, <code class="docutils literal notranslate"><span class="pre">EXPECT_*</span></code>, <code class="docutils literal notranslate"><span class="pre">ASSERT_*</span></code>). See <code class="docutils literal notranslate"><span class="pre">docs/cpp_testing.md</span></code> for details.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">cc_test</span></code> (from <code class="docutils literal notranslate"><span class="pre">//bzl:cc.bzl</span></code>) for all tests. It automatically delegates to
+<code class="docutils literal notranslate"><span class="pre">pw_cc_test</span></code> when <code class="docutils literal notranslate"><span class="pre">&#64;pigweed//pw_unit_test</span></code> is in <code class="docutils literal notranslate"><span class="pre">deps</span></code>, enabling Pigweed
+backends (I2C mocks, async, etc.). Both paths use the
+<a class="reference external" href="https://google.github.io/googletest/">Google Test</a> API (<code class="docutils literal notranslate"><span class="pre">TEST</span></code>, <code class="docutils literal notranslate"><span class="pre">EXPECT_*</span></code>,
+<code class="docutils literal notranslate"><span class="pre">ASSERT_*</span></code>). See <code class="docutils literal notranslate"><span class="pre">docs/cpp_testing.md</span></code> for details.</p>
 </section>
 <section id="miscellaneous">
 <h3>Miscellaneous<a class="headerlink" href="#miscellaneous" title="Link to this heading"></a></h3>
@@ -585,6 +586,6 @@ bazel run -- @pnpm//:pnpm --dir $PWD install --lockfile-only
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
     <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
-    <script defer="defer" src="_static/tippy/README.8af44f80-5695-4794-bf71-1b10eef33fb5.js"></script>
+    <script defer="defer" src="_static/tippy/README.14f24a75-de12-4621-a915-1c83cf38ef7b.js"></script>
     </body>
 </html>

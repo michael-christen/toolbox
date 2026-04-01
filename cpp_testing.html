@@ -7,8 +7,8 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="cpp_testing.html" />
 <meta property="og:site_name" content="toolbox" />
-<meta property="og:description" content="Two build rules are used for C++ tests, depending on whether Pigweed integration is required. cc_test — host unit tests: Use cc_test(from//bzl:cc.bzl) for tests that run purely on the host with no ..." />
-<meta name="description" content="Two build rules are used for C++ tests, depending on whether Pigweed integration is required. cc_test — host unit tests: Use cc_test(from//bzl:cc.bzl) for tests that run purely on the host with no ..." />
+<meta property="og:description" content="cc_test(from//bzl:cc.bzl) is the single rule for all C++ tests. It auto-selects the right underlying framework based on your includes:#include &quot;pw_unit_test/framework.h&quot; → delegates to pw..." />
+<meta name="description" content="cc_test(from//bzl:cc.bzl) is the single rule for all C++ tests. It auto-selects the right underlying framework based on your includes:#include &quot;pw_unit_test/framework.h&quot; → delegates to pw..." />
 <link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Issue Management" href="issue_management.html"><link rel="prev" title="Repository Structure" href="structure.html">
 
     <link rel="shortcut icon" href="_static/wrench.png"><!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
@@ -268,13 +268,18 @@
         <article role="main" id="furo-main-content">
           <section class="tex2jax_ignore mathjax_ignore" id="c-testing">
 <h1>C++ Testing<a class="headerlink" href="#c-testing" title="Link to this heading"></a></h1>
-<p>Two build rules are used for C++ tests, depending on whether Pigweed integration
-is required.</p>
-<section id="cc-test-host-unit-tests">
-<h2><code class="docutils literal notranslate"><span class="pre">cc_test</span></code> — host unit tests<a class="headerlink" href="#cc-test-host-unit-tests" title="Link to this heading"></a></h2>
-<p>Use <code class="docutils literal notranslate"><span class="pre">cc_test</span></code> (from <code class="docutils literal notranslate"><span class="pre">//bzl:cc.bzl</span></code>) for tests that run purely on the host with
-no Pigweed backends. Gazelle auto-generates the BUILD target and wires in
-<code class="docutils literal notranslate"><span class="pre">//tlbox/testing:gtest_main</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">cc_test</span></code> (from <code class="docutils literal notranslate"><span class="pre">//bzl:cc.bzl</span></code>) is the single rule for all C++ tests. It
+auto-selects the right underlying framework based on your includes:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&quot;pw_unit_test/framework.h&quot;</span></code></strong> → delegates to <code class="docutils literal notranslate"><span class="pre">pw_cc_test</span></code>, pulling
+in Pigweed build-system integration (facade backends, I2C mocks, async
+dispatchers, etc.)</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&lt;gtest/gtest.h&gt;</span></code></strong> → standard <code class="docutils literal notranslate"><span class="pre">cc_test</span></code> with shared copts</p></li>
+</ul>
+<p>The test syntax is identical in both cases (Google Test API: <code class="docutils literal notranslate"><span class="pre">TEST</span></code>, <code class="docutils literal notranslate"><span class="pre">EXPECT_*</span></code>,
+<code class="docutils literal notranslate"><span class="pre">ASSERT_*</span></code>). Gazelle generates the BUILD target automatically.</p>
+<section id="host-only-tests">
+<h2>Host-only tests<a class="headerlink" href="#host-only-tests" title="Link to this heading"></a></h2>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;gtest/gtest.h&gt;</span>
 
 <span class="n">TEST</span><span class="p">(</span><span class="n">MyTest</span><span class="p">,</span><span class="w"> </span><span class="n">BasicBehaviour</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -289,11 +294,10 @@ no Pigweed backends. Gazelle auto-generates the BUILD target and wires in
 (fixtures, parametrized tests, death tests)</p></li>
 </ul>
 </section>
-<section id="pw-cc-test-pigweed-integrated-tests">
-<h2><code class="docutils literal notranslate"><span class="pre">pw_cc_test</span></code> — Pigweed-integrated tests<a class="headerlink" href="#pw-cc-test-pigweed-integrated-tests" title="Link to this heading"></a></h2>
-<p>Use <code class="docutils literal notranslate"><span class="pre">pw_cc_test</span></code> (from <code class="docutils literal notranslate"><span class="pre">//bzl:cc.bzl</span></code>) for tests that need Pigweed backends —
-I2C mocks, async dispatchers, allocator testing, etc. These use the same Google
-Test API (<code class="docutils literal notranslate"><span class="pre">TEST</span></code>, <code class="docutils literal notranslate"><span class="pre">EXPECT_*</span></code>, <code class="docutils literal notranslate"><span class="pre">ASSERT_*</span></code>) as <code class="docutils literal notranslate"><span class="pre">cc_test</span></code>.</p>
+<section id="pigweed-integrated-tests">
+<h2>Pigweed-integrated tests<a class="headerlink" href="#pigweed-integrated-tests" title="Link to this heading"></a></h2>
+<p>Include <code class="docutils literal notranslate"><span class="pre">pw_unit_test/framework.h</span></code> to opt in to Pigweed integration (gazelle
+adds <code class="docutils literal notranslate"><span class="pre">&#64;pigweed//pw_unit_test</span></code> to deps automatically):</p>
 <div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&quot;pw_unit_test/framework.h&quot;</span>
 
 <span class="n">TEST</span><span class="p">(</span><span class="n">MyPwTest</span><span class="p">,</span><span class="w"> </span><span class="n">BasicBehaviour</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -306,17 +310,10 @@ Test API (<code class="docutils literal notranslate"><span class="pre">TEST</spa
 <li><p><a class="reference external" href="https://pigweed.dev/pw_unit_test/">pw_unit_test documentation</a></p></li>
 </ul>
 </section>
-<section id="why-two-rules">
-<h2>Why two rules?<a class="headerlink" href="#why-two-rules" title="Link to this heading"></a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">pw_cc_test</span></code> pulls in Pigweed’s build system integration: facade backends,
-linker scripts, and the <code class="docutils literal notranslate"><span class="pre">pw_unit_test</span></code> framework. <code class="docutils literal notranslate"><span class="pre">cc_test</span></code> doesn’t need any of
-that for pure host tests. The test <em>syntax</em> is identical (both use the Google
-Test API); only the build rule differs.</p>
-</section>
-<section id="pw-log-in-pw-cc-test">
-<h2><code class="docutils literal notranslate"><span class="pre">PW_LOG_*</span></code> in <code class="docutils literal notranslate"><span class="pre">pw_cc_test</span></code><a class="headerlink" href="#pw-log-in-pw-cc-test" title="Link to this heading"></a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">PW_LOG_INFO</span></code>, <code class="docutils literal notranslate"><span class="pre">PW_LOG_DEBUG</span></code>, etc. are visible in <code class="docutils literal notranslate"><span class="pre">pw_cc_test</span></code> output. The log
-backend chain is:</p>
+<section id="pw-log-in-pigweed-tests">
+<h2><code class="docutils literal notranslate"><span class="pre">PW_LOG_*</span></code> in Pigweed tests<a class="headerlink" href="#pw-log-in-pigweed-tests" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">PW_LOG_INFO</span></code>, <code class="docutils literal notranslate"><span class="pre">PW_LOG_DEBUG</span></code>, etc. are visible in test output. The log backend
+chain is:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>pw_log → pw_log_string → //tlbox/testing:log_string_handler → pw_sys_io (stdio)
 </pre></div>
 </div>
@@ -393,10 +390,9 @@ initialization (RTOS threads, socket I/O), which is impractical for unit tests.<
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">C++ Testing</a><ul>
-<li><a class="reference internal" href="#cc-test-host-unit-tests"><code class="docutils literal notranslate"><span class="pre">cc_test</span></code> — host unit tests</a></li>
-<li><a class="reference internal" href="#pw-cc-test-pigweed-integrated-tests"><code class="docutils literal notranslate"><span class="pre">pw_cc_test</span></code> — Pigweed-integrated tests</a></li>
-<li><a class="reference internal" href="#why-two-rules">Why two rules?</a></li>
-<li><a class="reference internal" href="#pw-log-in-pw-cc-test"><code class="docutils literal notranslate"><span class="pre">PW_LOG_*</span></code> in <code class="docutils literal notranslate"><span class="pre">pw_cc_test</span></code></a></li>
+<li><a class="reference internal" href="#host-only-tests">Host-only tests</a></li>
+<li><a class="reference internal" href="#pigweed-integrated-tests">Pigweed-integrated tests</a></li>
+<li><a class="reference internal" href="#pw-log-in-pigweed-tests"><code class="docutils literal notranslate"><span class="pre">PW_LOG_*</span></code> in Pigweed tests</a></li>
 </ul>
 </li>
 </ul>
@@ -424,6 +420,6 @@ initialization (RTOS threads, socket I/O), which is impractical for unit tests.<
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
     <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
-    <script defer="defer" src="_static/tippy/cpp_testing.9be648c7-438c-4abb-a728-8c074b68d1a5.js"></script>
+    <script defer="defer" src="_static/tippy/cpp_testing.22c20716-5ed5-4a22-832b-209772b54771.js"></script>
     </body>
 </html>
