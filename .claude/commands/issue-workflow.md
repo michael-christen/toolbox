@@ -70,6 +70,7 @@ The target repository is **michael-christen/toolbox**. The working directory is
 ## Stage 4 — Create Pull Request
 
 1. Use `mcp__github__create_pull_request` with:
+
    - **title**: concise, imperative, ≤70 chars
    - **body** (use the PR template from `.github/pull_request_template.md` as a
      base):
