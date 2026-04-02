@@ -2,9 +2,8 @@ You are running the **issue-workflow** — a guided, end-to-end flow for taking 
 GitHub issue from selection through landing and context reset. Work through each
 stage in order, pausing at the explicit checkpoints listed below.
 
-The target repository is **michael-christen/toolbox**.
-The working directory is `/home/user/toolbox`.
-The development branch prefix is `claude/`.
+The target repository is **michael-christen/toolbox**. The working directory is
+`/home/user/toolbox`. The development branch prefix is `claude/`.
 
 ---
 
@@ -49,7 +48,8 @@ The development branch prefix is `claude/`.
 ## Stage 3 — Commit and Push
 
 1. Stage specific files (avoid `git add -A` if sensitive files might exist).
-2. Write a commit message that explains *why*, not just *what*. Format:
+2. Write a commit message that explains _why_, not just _what_. Format:
+
    ```
    <short imperative summary>
 
@@ -57,6 +57,7 @@ The development branch prefix is `claude/`.
 
    https://claude.ai/code/session_013eKgR1WYFB6zvYaCg11DBT
    ```
+
 3. Commit and push:
    ```
    git push -u origin <branch-name>
@@ -70,8 +71,9 @@ The development branch prefix is `claude/`.
 
 1. Use `mcp__github__create_pull_request` with:
    - **title**: concise, imperative, ≤70 chars
-   - **body** (use the PR template from `.github/pull_request_template.md` as
-     a base):
+   - **body** (use the PR template from `.github/pull_request_template.md` as a
+     base):
+
      ```
      ## Summary
      - <bullet points of what changed and why>
@@ -85,8 +87,10 @@ The development branch prefix is `claude/`.
 
      https://claude.ai/code/session_013eKgR1WYFB6zvYaCg11DBT
      ```
+
    - **base**: `master`
    - **head**: `<branch-name>`
+
 2. Report the PR URL to the user.
 
 ---
@@ -117,8 +121,8 @@ Perform a thorough self-review of the PR before human reviewers see it:
    subscribe_pr_activity(pr_number=<N>, repo="michael-christen/toolbox")
    ```
 2. As `<github-webhook-activity>` events arrive, for each one:
-   - **CI failure**: diagnose the failure, push a fix, explain the root cause
-     to the user.
+   - **CI failure**: diagnose the failure, push a fix, explain the root cause to
+     the user.
    - **Review comment / change request**: understand the intent. If the fix is
      clear and non-controversial, implement it and reply explaining the change.
      If ambiguous, use `AskUserQuestion` to clarify before acting.
