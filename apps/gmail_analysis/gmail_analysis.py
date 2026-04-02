@@ -3,33 +3,39 @@ import os.path
 import pickle
 from datetime import datetime, timedelta
 
+import google.auth.transport.requests
+import google_auth_oauthlib.flow
+import googleapiclient.discovery
 import matplotlib.pyplot as plt
 import pandas as pd
-from google.auth.transport.requests import Request
-from google_auth_oauthlib.flow import InstalledAppFlow
-from googleapiclient.discovery import build
+
 
 SCOPES = ['https://www.googleapis.com/auth/gmail.readonly']
 
 
-def get_gmail_service(credentials_file: str, token_pickle: str):
+def get_gmail_service(
+        credentials_file: str,
+        token_pickle: str) -> googleapiclient.discovery.Resource:
     creds = None
     if os.path.exists(token_pickle):
         with open(token_pickle, 'rb') as token:
             creds = pickle.load(token)
     if not creds or not creds.valid:
         if creds and creds.expired and creds.refresh_token:
-            creds.refresh(Request())
+            creds.refresh(google.auth.transport.requests.Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file(
+            flow = google_auth_oauthlib.flow.InstalledAppFlow.from_client_secrets_file(
                 credentials_file, SCOPES)
             creds = flow.run_local_server(port=0)
         with open(token_pickle, 'wb') as token:
             pickle.dump(creds, token)
-    return build('gmail', 'v1', credentials=creds)
+    return googleapiclient.discovery.build('gmail', 'v1', credentials=creds)
 
 
-def get_email_count(service, start, end) -> int:
+def get_email_count(
+        service: googleapiclient.discovery.Resource,
+        start: datetime,
+        end: datetime) -> int:
     """Count emails between start and end dates."""
     query = (f"after:{start.strftime('%Y/%m/%d')} "
              f"before:{end.strftime('%Y/%m/%d')}")
@@ -47,7 +53,7 @@ def get_email_count(service, start, end) -> int:
     return count
 
 
-def update_log(date, count, filename):
+def update_log(date: datetime, count: int, filename: str) -> pd.DataFrame:
     row = {"date": date.strftime("%Y-%m-%d"), "count": count}
     df = pd.DataFrame([row])
     if os.path.exists(filename):
@@ -59,7 +65,7 @@ def update_log(date, count, filename):
     return df
 
 
-def plot_counts(df, plot_location):
+def plot_counts(df: pd.DataFrame, plot_location: str) -> None:
     df["date"] = pd.to_datetime(df["date"])
     df.set_index("date").plot(kind="line", y="count", marker="o", figsize=(10, 5))
     plt.title("Emails Received Per Day")
@@ -70,7 +76,7 @@ def plot_counts(df, plot_location):
     plt.savefig(plot_location)
 
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(
         description="Analyze daily email counts via Gmail API.")
     parser.add_argument('--credentials', required=True,
