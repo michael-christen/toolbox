@@ -7,8 +7,9 @@ import sphinx.cmd.build
 def main():
     # In Bazel's linux-sandbox, the srcdir directory itself is real/writable,
     # but its files are symlinks into the read-only execroot. MyST resolves
-    # relative .md links via os.path.realpath on those symlinks, giving execroot
-    # paths. Sphinx's env.srcdir must match those paths for env.path2doc() to
+    # relative .md links via os.path.realpath on those symlinks, giving
+    # execroot paths. Sphinx's env.srcdir must match those paths for
+    # env.path2doc() to
     # convert them to docnames, so we derive the execroot-based srcdir from a
     # file symlink.
     #
@@ -28,7 +29,10 @@ def main():
             outdir = sys.argv[-1]
             sys.argv = (
                 sys.argv[:-2]
-                + ["-D", f"autoapi_root={os.path.join(sandbox_srcdir, 'autoapi')}"]
+                + [
+                    "-D",
+                    "autoapi_root=" + os.path.join(sandbox_srcdir, "autoapi"),
+                ]
                 + [execroot_srcdir, outdir]
             )
     return sphinx.cmd.build.main()
