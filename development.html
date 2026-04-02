@@ -3,16 +3,16 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta property="og:title" content="MyST" />
+<meta property="og:title" content="Development Guide" />
 <meta property="og:type" content="website" />
-<meta property="og:url" content="myst.html" />
+<meta property="og:url" content="development.html" />
 <meta property="og:site_name" content="toolbox" />
-<meta property="og:description" content="Great news, we don’t have to use .rst, we can leverage MyST to write markdown. MyST makes Markdown more extensible&amp; powerful to support an ecosystem of tools for computational narratives, techn..." />
-<meta name="description" content="Great news, we don’t have to use .rst, we can leverage MyST to write markdown. MyST makes Markdown more extensible&amp; powerful to support an ecosystem of tools for computational narratives, techn..." />
-<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="My nifty title" href="examples.html"><link rel="prev" title="Issue Management" href="issue_management.html">
+<meta property="og:description" content="See structure for the full directory map. Installation: Install bazelisk as your bazel binary: Build and Test: Linting and Formatting: CI: GitHub Actions:.github/workflows/, Bazel remote caching vi..." />
+<meta name="description" content="See structure for the full directory map. Installation: Install bazelisk as your bazel binary: Build and Test: Linting and Formatting: CI: GitHub Actions:.github/workflows/, Bazel remote caching vi..." />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Repository Structure" href="structure.html"><link rel="prev" title="toolbox documentation" href="index.html">
 
     <link rel="shortcut icon" href="_static/wrench.png"><!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
-        <title>MyST - toolbox documentation</title>
+        <title>Development Guide - toolbox documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
     <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
@@ -182,7 +182,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
       </label>
     </div>
@@ -202,11 +202,11 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="development.html">Development Guide</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Development Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="structure.html">Repository Structure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cpp_testing.html">C++ Testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="issue_management.html">Issue Management</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">MyST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="myst.html">MyST</a></li>
 <li class="toctree-l1"><a class="reference internal" href="examples.html">My nifty title</a></li>
 <li class="toctree-l1"><a class="reference internal" href="myst_extensions.html">Syntax Extensions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bringup.html">Log for How I am Bringing up This Repo and My New Server</a></li>
@@ -235,7 +235,7 @@
         </a>
         <div class="content-icon-container">
           <div class="view-this-page">
-  <a class="muted-link" href="_sources/myst.md.txt" title="View this page">
+  <a class="muted-link" href="_sources/development.md.txt" title="View this page">
     <svg><use href="#svg-eye"></use></svg>
     <span class="visually-hidden">View this page</span>
   </a>
@@ -248,25 +248,124 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <section class="tex2jax_ignore mathjax_ignore" id="myst">
-<h1>MyST<a class="headerlink" href="#myst" title="Link to this heading"></a></h1>
-<p>Great news, we don’t have to use .rst, we can leverage
-<a class="reference external" href="https://mystmd.org/">MyST</a> to write markdown.</p>
-<p>MyST makes Markdown more <em>extensible</em> &amp; <strong>powerful</strong> to support an ecosystem of
-tools for computational narratives, technical documentation, and open scientific
-communication.</p>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Our Values We believe in a community-driven approach of
-open-source tools that are composable and extensible. :::</p>
-<p>This is the
-<a class="reference external" href="https://myst-parser.readthedocs.io/en/v0.13.3/using/syntax.html">Syntax guide</a></p>
+          <section class="tex2jax_ignore mathjax_ignore" id="development-guide">
+<h1>Development Guide<a class="headerlink" href="#development-guide" title="Link to this heading"></a></h1>
+<p>See <a class="reference internal" href="structure.html"><span class="std std-doc">structure</span></a> for the full directory map.</p>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
+<p>Install <a class="reference external" href="https://github.com/bazelbuild/bazelisk">bazelisk</a> as your <code class="docutils literal notranslate"><span class="pre">bazel</span></code>
+binary:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>-O<span class="w"> </span>~/tools/bazel<span class="w"> </span>https://github.com/bazelbuild/bazelisk/releases/download/v1.18.0/bazelisk-linux-amd64
+chmod<span class="w"> </span>+x<span class="w"> </span>~/tools/bazel
+<span class="c1"># Add ~/tools to PATH</span>
+</pre></div>
 </div>
+</section>
+<section id="build-and-test">
+<h2>Build and Test<a class="headerlink" href="#build-and-test" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bazel<span class="w"> </span>build<span class="w"> </span>//...<span class="w">                          </span><span class="c1"># build everything</span>
+bazel<span class="w"> </span><span class="nb">test</span><span class="w"> </span>//...<span class="w">                           </span><span class="c1"># run all tests</span>
+bazel<span class="w"> </span><span class="nb">test</span><span class="w"> </span>//path/to:target<span class="w">                </span><span class="c1"># run a single test</span>
+bazel<span class="w"> </span><span class="nb">test</span><span class="w"> </span>//...<span class="w"> </span>--test_output<span class="o">=</span>all<span class="w">         </span><span class="c1"># show test output</span>
+bazel<span class="w"> </span>coverage<span class="w"> </span>//...<span class="w"> </span>--combined_report<span class="o">=</span>lcov<span class="w">  </span><span class="c1"># generate coverage</span>
+</pre></div>
+</div>
+</section>
+<section id="linting-and-formatting">
+<h2>Linting and Formatting<a class="headerlink" href="#linting-and-formatting" title="Link to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./lint.sh<span class="w"> </span>--mode<span class="w"> </span>check<span class="w">   </span><span class="c1"># check formatting (CI runs this)</span>
+./lint.sh<span class="w"> </span>--mode<span class="w"> </span>format<span class="w">  </span><span class="c1"># auto-format code</span>
+</pre></div>
+</div>
+</section>
+<section id="ci">
+<h2>CI<a class="headerlink" href="#ci" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>GitHub Actions: <a class="reference internal" href="#.github/workflows/"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">.github/workflows/</span></code></span></a></p></li>
+<li><p>Bazel remote caching via <a class="reference external" href="https://app.buildbuddy.io/">BuildBuddy</a> (requires
+API key in <code class="docutils literal notranslate"><span class="pre">user.bazelrc</span></code>)</p></li>
+<li><p>Disk caching via GitHub’s cache action</p></li>
+<li><p>Remote caching also available via <a class="reference external" href="https://www.nativelink.com/">nativelink</a></p></li>
+</ul>
+</section>
+<section id="language-faqs">
+<h2>Language FAQs<a class="headerlink" href="#language-faqs" title="Link to this heading"></a></h2>
+<p>Each language answers: how to lint/format, build, test, run, add dependencies,
+package, and release.</p>
+<section id="bazel">
+<h3>Bazel<a class="headerlink" href="#bazel" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Regenerate BUILD files</span>
+bazel<span class="w"> </span>run<span class="w"> </span>//:gazelle
+
+<span class="c1"># Completely clean</span>
+bazel<span class="w"> </span>clean<span class="w"> </span>--expunge
+
+<span class="c1"># Avoid networked backends / remote caches (helpful on slow networks)</span>
+bazel<span class="w"> </span>build<span class="w"> </span>//...<span class="w"> </span>--config<span class="w"> </span><span class="nb">local</span>
+</pre></div>
+</div>
+<p><strong>References:</strong> <a class="reference external" href="https://bazel.build/query/language">Bazel query language</a>,
+<a class="reference external" href="https://bazel.build/external/migration">bzlmod migration</a></p>
+</section>
+<section id="python">
+<h3>Python<a class="headerlink" href="#python" title="Link to this heading"></a></h3>
+<p><strong>Style:</strong> 79-char line length (black + isort via <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create virtualenv with all dependencies</span>
+bazel<span class="w"> </span>run<span class="w"> </span>//:create_venv
+</pre></div>
+</div>
+<p><strong>Adding / modifying external dependencies:</strong></p>
+<ol class="arabic simple">
+<li><p>Update <code class="docutils literal notranslate"><span class="pre">requirements.in</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bazel</span> <span class="pre">run</span> <span class="pre">//:requirements.update</span></code> — updates <code class="docutils literal notranslate"><span class="pre">requirements_lock.txt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bazel</span> <span class="pre">run</span> <span class="pre">//:gazelle_python_manifest.update</span></code> — updates <code class="docutils literal notranslate"><span class="pre">gazelle_python.yaml</span></code></p></li>
+</ol>
+<p>Tests enforce that both update commands have been run after any change to
+<code class="docutils literal notranslate"><span class="pre">requirements.in</span></code>.</p>
+<p><strong>Excluding lines from coverage:</strong> <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">pragma:</span> <span class="pre">no</span> <span class="pre">cover</span></code>
+(<a class="reference external" href="https://coverage.readthedocs.io/en/latest/excluding.html">docs</a>)</p>
+</section>
+<section id="rust">
+<h3>Rust<a class="headerlink" href="#rust" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Update cargo dependencies</span>
+<span class="nv">CARGO_BAZEL_REPIN</span><span class="o">=</span><span class="m">1</span><span class="w"> </span>bazel<span class="w"> </span>sync<span class="w"> </span>--only<span class="o">=</span>crate_index
+</pre></div>
+</div>
+</section>
+<section id="c">
+<h3>C++<a class="headerlink" href="#c" title="Link to this heading"></a></h3>
+<p><strong>Style:</strong> C++23, clang-format (<code class="docutils literal notranslate"><span class="pre">.clang-format</span></code>)</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">cc_test</span></code> (from <code class="docutils literal notranslate"><span class="pre">//bzl:cc.bzl</span></code>) for all tests — see
+<a class="reference internal" href="cpp_testing.html"><span class="std std-doc">cpp_testing</span></a> for details.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run buildozer / buildifier manually</span>
+bazel<span class="w"> </span>run<span class="w"> </span>//tools/buildozer<span class="w"> </span>--<span class="w"> </span>&lt;args&gt;
+bazel<span class="w"> </span>run<span class="w"> </span>//tools/buildifier<span class="w"> </span>--<span class="w"> </span>&lt;args&gt;
+</pre></div>
+</div>
+<p><strong>ThreadSanitizer on Ubuntu 24.04:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>sysctl<span class="w"> </span>vm.mmap_rnd_bits<span class="o">=</span><span class="m">30</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="https://stackoverflow.com/a/77856955">reference</a>)</p>
+</section>
+<section id="javascript-node">
+<h3>JavaScript / Node<a class="headerlink" href="#javascript-node" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bazel<span class="w"> </span>run<span class="w"> </span>--<span class="w"> </span>@pnpm//:pnpm<span class="w"> </span>--dir<span class="w"> </span><span class="nv">$PWD</span><span class="w"> </span>install<span class="w"> </span>--lockfile-only
+</pre></div>
+</div>
+</section>
+</section>
+<section id="inspiration">
+<h2>Inspiration<a class="headerlink" href="#inspiration" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/jessecureton/python_bazel_template">jessecureton/python_bazel_template</a></p></li>
+</ul>
+</section>
 </section>
 
         </article>
@@ -274,23 +373,23 @@ open-source tools that are composable and extensible. :::</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="examples.html">
+          <a class="next-page" href="structure.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">My nifty title</div>
+                <div class="title">Repository Structure</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="issue_management.html">
+          <a class="prev-page" href="index.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Issue Management</div>
+                <div class="title">Home</div>
                 
               </div>
             </a>
@@ -312,8 +411,39 @@ open-source tools that are composable and extensible. :::</p>
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Development Guide</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#build-and-test">Build and Test</a></li>
+<li><a class="reference internal" href="#linting-and-formatting">Linting and Formatting</a></li>
+<li><a class="reference internal" href="#ci">CI</a></li>
+<li><a class="reference internal" href="#language-faqs">Language FAQs</a><ul>
+<li><a class="reference internal" href="#bazel">Bazel</a></li>
+<li><a class="reference internal" href="#python">Python</a></li>
+<li><a class="reference internal" href="#rust">Rust</a></li>
+<li><a class="reference internal" href="#c">C++</a></li>
+<li><a class="reference internal" href="#javascript-node">JavaScript / Node</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#inspiration">Inspiration</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
@@ -334,6 +464,6 @@ open-source tools that are composable and extensible. :::</p>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
     <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
-    <script defer="defer" src="_static/tippy/myst.feaa45af-0214-440a-a1d0-6419746573e4.js"></script>
+    <script defer="defer" src="_static/tippy/development.0209dcea-cb22-40c8-9bc8-f92db8748282.js"></script>
     </body>
 </html>

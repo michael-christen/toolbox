@@ -7,9 +7,9 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="index.html" />
 <meta property="og:site_name" content="toolbox" />
-<meta property="og:description" content="Add your content using reStructuredText syntax. See the reStructuredText documentation for details. Contents:: toolbox- Badges, Layout, Configuration / Tools Used- Installation Instructions, Gettin..." />
-<meta name="description" content="Add your content using reStructuredText syntax. See the reStructuredText documentation for details. Contents:: toolbox- Badges, Layout, Configuration / Tools Used- Installation Instructions, Gettin..." />
-<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="toolbox" href="README.html">
+<meta property="og:description" content="Add your content using reStructuredText syntax. See the reStructuredText documentation for details. Contents:: Development Guide- Installation, Build and Test, Linting and Formatting, CI, Language ..." />
+<meta name="description" content="Add your content using reStructuredText syntax. See the reStructuredText documentation for details. Contents:: Development Guide- Installation, Build and Test, Linting and Formatting, CI, Language ..." />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Development Guide" href="development.html">
 
     <link rel="shortcut icon" href="_static/wrench.png"><!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
         <title>toolbox documentation</title>
@@ -202,7 +202,7 @@
 <div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
   <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="README.html">toolbox</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="structure.html">Repository Structure</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cpp_testing.html">C++ Testing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="issue_management.html">Issue Management</a></li>
@@ -213,19 +213,6 @@
 <li class="toctree-l1"><a class="reference internal" href="useful_commands.html">Useful Commands</a></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="common_references.html">Common References</a><input aria-label="Toggle navigation of Common References" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="common/python_references.html">Python References</a></li>
-</ul>
-</li>
-</ul>
-<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
-<ul>
-<li class="toctree-l1 has-children"><a class="reference internal" href="autoapi/index.html">API Reference</a><input aria-label="Toggle navigation of API Reference" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
-<li class="toctree-l2"><a class="reference internal" href="autoapi/examples/basic/client/index.html">examples.basic.client</a></li>
-<li class="toctree-l2"><a class="reference internal" href="autoapi/examples/basic/grpc_test/index.html">examples.basic.grpc_test</a></li>
-<li class="toctree-l2"><a class="reference internal" href="autoapi/examples/basic/hello_pb2/index.html">examples.basic.hello_pb2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="autoapi/examples/basic/hello_pb2_grpc/index.html">examples.basic.hello_pb2_grpc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="autoapi/examples/basic/hello_test/index.html">examples.basic.hello_test</a></li>
-<li class="toctree-l2"><a class="reference internal" href="autoapi/examples/basic/main/index.html">examples.basic.main</a></li>
-<li class="toctree-l2"><a class="reference internal" href="autoapi/examples/basic/server/index.html">examples.basic.server</a></li>
 </ul>
 </li>
 </ul>
@@ -278,45 +265,20 @@ documentation for details.</p>
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="README.html">toolbox</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="README.html#badges">Badges</a></li>
-<li class="toctree-l2"><a class="reference internal" href="README.html#layout">Layout</a></li>
-<li class="toctree-l2"><a class="reference internal" href="README.html#configuration-tools-used">Configuration / Tools Used</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="README.html#installation-instructions">Installation Instructions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="README.html#getting-started">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="development.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development.html#build-and-test">Build and Test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development.html#linting-and-formatting">Linting and Formatting</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development.html#ci">CI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="development.html#language-faqs">Language FAQs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="development.html#bazel">Bazel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="development.html#python">Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="development.html#rust">Rust</a></li>
+<li class="toctree-l3"><a class="reference internal" href="development.html#c">C++</a></li>
+<li class="toctree-l3"><a class="reference internal" href="development.html#javascript-node">JavaScript / Node</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="README.html#todo">TODO</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="README.html#ci">CI</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="README.html#references">References</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="README.html#bazel">Bazel</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="README.html#command-quick-reference">Command Quick Reference</a></li>
-<li class="toctree-l4"><a class="reference internal" href="README.html#notes">Notes</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="README.html#language-faqs">Language FAQs</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="README.html#rust">Rust</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="README.html#id1">Command Quick Reference</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="README.html#python">Python</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="README.html#excluding-coverage">Excluding coverage</a></li>
-<li class="toctree-l4"><a class="reference internal" href="README.html#adding-modifying-external-dependencies">Adding / Modifying External Dependencies</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="README.html#c">C++</a></li>
-<li class="toctree-l3"><a class="reference internal" href="README.html#miscellaneous">Miscellaneous</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="README.html#bazel-options">Bazel Options</a></li>
-<li class="toctree-l4"><a class="reference internal" href="README.html#get-tsan-to-work-on-ubuntu-24-04">Get tsan to work on Ubuntu 24.04</a></li>
-<li class="toctree-l4"><a class="reference internal" href="README.html#inspiration">Inspiration</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="development.html#inspiration">Inspiration</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="structure.html">Repository Structure</a><ul>
@@ -409,10 +371,6 @@ documentation for details.</p>
 </ul>
 </div>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a></li>
-</ul>
 </div>
 <div class="toctree-wrapper compound">
 </div>
@@ -423,12 +381,12 @@ documentation for details.</p>
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="README.html">
+          <a class="next-page" href="development.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">toolbox</div>
+                <div class="title">Development Guide</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
@@ -473,6 +431,6 @@ documentation for details.</p>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
     <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
-    <script defer="defer" src="_static/tippy/index.57e28ddd-d2c9-4dc5-b51e-dae53fa914b4.js"></script>
+    <script defer="defer" src="_static/tippy/index.564345fb-c42a-4a5e-85a3-2ef1d3c46930.js"></script>
     </body>
 </html>
