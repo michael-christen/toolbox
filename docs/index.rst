@@ -19,7 +19,7 @@ documentation for details.
    :maxdepth: 4
    :caption: Contents:
 
-   README
+   development
    structure
    cpp_testing
    issue_management
