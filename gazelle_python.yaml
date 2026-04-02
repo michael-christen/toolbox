@@ -59,10 +59,36 @@ manifest:
     google.auth: google_auth
     google.oauth2: google_auth
     google.protobuf: protobuf
+    google_auth_httplib2: google_auth_httplib2
+    google_auth_oauthlib: google_auth_oauthlib
+    google_auth_oauthlib.flow: google_auth_oauthlib
+    google_auth_oauthlib.helpers: google_auth_oauthlib
+    google_auth_oauthlib.interactive: google_auth_oauthlib
+    google_auth_oauthlib.tool: google_auth_oauthlib
+    googleapiclient: google_api_python_client
+    googleapiclient.channel: google_api_python_client
+    googleapiclient.discovery: google_api_python_client
+    googleapiclient.discovery_cache: google_api_python_client
+    googleapiclient.discovery_cache.appengine_memcache: google_api_python_client
+    googleapiclient.discovery_cache.base: google_api_python_client
+    googleapiclient.discovery_cache.file_cache: google_api_python_client
+    googleapiclient.errors: google_api_python_client
+    googleapiclient.http: google_api_python_client
+    googleapiclient.mimeparse: google_api_python_client
+    googleapiclient.model: google_api_python_client
+    googleapiclient.sample_tools: google_api_python_client
+    googleapiclient.schema: google_api_python_client
+    googleapiclient.version: google_api_python_client
     greenlet: greenlet
     grpc: grpcio
     h11: h11
     httpcore: httpcore
+    httplib2: httplib2
+    httplib2.auth: httplib2
+    httplib2.certs: httplib2
+    httplib2.error: httplib2
+    httplib2.iri2uri: httplib2
+    httplib2.socks: httplib2
     httpx: httpx
     idna: idna
     imagesize: imagesize
@@ -128,6 +154,81 @@ manifest:
     notebook_shim: notebook_shim
     numbergen: param
     numpy: numpy
+    oauthlib: oauthlib
+    oauthlib.common: oauthlib
+    oauthlib.oauth1: oauthlib
+    oauthlib.oauth1.rfc5849: oauthlib
+    oauthlib.oauth1.rfc5849.endpoints: oauthlib
+    oauthlib.oauth1.rfc5849.endpoints.access_token: oauthlib
+    oauthlib.oauth1.rfc5849.endpoints.authorization: oauthlib
+    oauthlib.oauth1.rfc5849.endpoints.base: oauthlib
+    oauthlib.oauth1.rfc5849.endpoints.pre_configured: oauthlib
+    oauthlib.oauth1.rfc5849.endpoints.request_token: oauthlib
+    oauthlib.oauth1.rfc5849.endpoints.resource: oauthlib
+    oauthlib.oauth1.rfc5849.endpoints.signature_only: oauthlib
+    oauthlib.oauth1.rfc5849.errors: oauthlib
+    oauthlib.oauth1.rfc5849.parameters: oauthlib
+    oauthlib.oauth1.rfc5849.request_validator: oauthlib
+    oauthlib.oauth1.rfc5849.signature: oauthlib
+    oauthlib.oauth1.rfc5849.utils: oauthlib
+    oauthlib.oauth2: oauthlib
+    oauthlib.oauth2.rfc6749: oauthlib
+    oauthlib.oauth2.rfc6749.clients: oauthlib
+    oauthlib.oauth2.rfc6749.clients.backend_application: oauthlib
+    oauthlib.oauth2.rfc6749.clients.base: oauthlib
+    oauthlib.oauth2.rfc6749.clients.legacy_application: oauthlib
+    oauthlib.oauth2.rfc6749.clients.mobile_application: oauthlib
+    oauthlib.oauth2.rfc6749.clients.service_application: oauthlib
+    oauthlib.oauth2.rfc6749.clients.web_application: oauthlib
+    oauthlib.oauth2.rfc6749.endpoints: oauthlib
+    oauthlib.oauth2.rfc6749.endpoints.authorization: oauthlib
+    oauthlib.oauth2.rfc6749.endpoints.base: oauthlib
+    oauthlib.oauth2.rfc6749.endpoints.introspect: oauthlib
+    oauthlib.oauth2.rfc6749.endpoints.metadata: oauthlib
+    oauthlib.oauth2.rfc6749.endpoints.pre_configured: oauthlib
+    oauthlib.oauth2.rfc6749.endpoints.resource: oauthlib
+    oauthlib.oauth2.rfc6749.endpoints.revocation: oauthlib
+    oauthlib.oauth2.rfc6749.endpoints.token: oauthlib
+    oauthlib.oauth2.rfc6749.errors: oauthlib
+    oauthlib.oauth2.rfc6749.grant_types: oauthlib
+    oauthlib.oauth2.rfc6749.grant_types.authorization_code: oauthlib
+    oauthlib.oauth2.rfc6749.grant_types.base: oauthlib
+    oauthlib.oauth2.rfc6749.grant_types.client_credentials: oauthlib
+    oauthlib.oauth2.rfc6749.grant_types.implicit: oauthlib
+    oauthlib.oauth2.rfc6749.grant_types.refresh_token: oauthlib
+    oauthlib.oauth2.rfc6749.grant_types.resource_owner_password_credentials: oauthlib
+    oauthlib.oauth2.rfc6749.parameters: oauthlib
+    oauthlib.oauth2.rfc6749.request_validator: oauthlib
+    oauthlib.oauth2.rfc6749.tokens: oauthlib
+    oauthlib.oauth2.rfc6749.utils: oauthlib
+    oauthlib.oauth2.rfc8628: oauthlib
+    oauthlib.oauth2.rfc8628.clients: oauthlib
+    oauthlib.oauth2.rfc8628.clients.device: oauthlib
+    oauthlib.oauth2.rfc8628.endpoints: oauthlib
+    oauthlib.oauth2.rfc8628.endpoints.device_authorization: oauthlib
+    oauthlib.oauth2.rfc8628.endpoints.pre_configured: oauthlib
+    oauthlib.oauth2.rfc8628.errors: oauthlib
+    oauthlib.oauth2.rfc8628.grant_types: oauthlib
+    oauthlib.oauth2.rfc8628.grant_types.device_code: oauthlib
+    oauthlib.oauth2.rfc8628.request_validator: oauthlib
+    oauthlib.openid: oauthlib
+    oauthlib.openid.connect: oauthlib
+    oauthlib.openid.connect.core: oauthlib
+    oauthlib.openid.connect.core.endpoints: oauthlib
+    oauthlib.openid.connect.core.endpoints.pre_configured: oauthlib
+    oauthlib.openid.connect.core.endpoints.userinfo: oauthlib
+    oauthlib.openid.connect.core.exceptions: oauthlib
+    oauthlib.openid.connect.core.grant_types: oauthlib
+    oauthlib.openid.connect.core.grant_types.authorization_code: oauthlib
+    oauthlib.openid.connect.core.grant_types.base: oauthlib
+    oauthlib.openid.connect.core.grant_types.dispatchers: oauthlib
+    oauthlib.openid.connect.core.grant_types.hybrid: oauthlib
+    oauthlib.openid.connect.core.grant_types.implicit: oauthlib
+    oauthlib.openid.connect.core.grant_types.refresh_token: oauthlib
+    oauthlib.openid.connect.core.request_validator: oauthlib
+    oauthlib.openid.connect.core.tokens: oauthlib
+    oauthlib.signals: oauthlib
+    oauthlib.uri_validate: oauthlib
     openhtf: openhtf
     overrides: overrides
     packaging: packaging
@@ -242,6 +343,11 @@ manifest:
     tzdata: tzdata
     uc_micro: uc_micro_py
     uri_template: uri_template
+    uritemplate: uritemplate
+    uritemplate.api: uritemplate
+    uritemplate.orderedset: uritemplate
+    uritemplate.template: uritemplate
+    uritemplate.variable: uritemplate
     urllib3: urllib3
     wcwidth: wcwidth
     webcolors: webcolors
