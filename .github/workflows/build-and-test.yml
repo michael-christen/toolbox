@@ -22,7 +22,9 @@ jobs:
           fetch-depth: 0
           # Minimize clone traffic while still getting history
           # - https://stackoverflow.com/a/75966904
-          filter: 'tree:0'
+          # NOTE: blob:none instead of tree:0 — tree:0 breaks git-lfs because
+          # LFS needs tree objects to scan for pointer files.
+          filter: 'blob:none'
           lfs: true
       - run: |
           git fetch origin ${{ github.base_ref }}
@@ -119,7 +121,9 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          filter: 'tree:0'
+          # NOTE: blob:none instead of tree:0 — tree:0 breaks git-lfs because
+          # LFS needs tree objects to scan for pointer files.
+          filter: 'blob:none'
           lfs: true
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@v1.3.1
