@@ -1,2 +1,0 @@
-# Could do ansible-core
-ansible
