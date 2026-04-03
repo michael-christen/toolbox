@@ -146,8 +146,6 @@ gazelle(
 # Exclude these folders from gazelle generation
 # gazelle:exclude venv
 # Avoid gazelle on these directories
-# gazelle:exclude tlbox/apps/csv-to-sheets
-# gazelle:exclude tlbox/apps/ical
 # gazelle:exclude examples/pyglet
 # gazelle:exclude tlbox/notebooks/.ipynb_checkpoints
 

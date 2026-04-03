@@ -134,10 +134,12 @@ manifest:
     googleapiclient: google_api_python_client
     greenlet: greenlet
     grpc: grpcio
+    gspread: gspread
     h11: h11
     httpcore: httpcore
     httplib2: httplib2
     httpx: httpx
+    icalendar: icalendar
     idna: idna
     imagesize: imagesize
     inflection: inflection
@@ -202,6 +204,7 @@ manifest:
     notebook_shim: notebook_shim
     numbergen: param
     numpy: numpy
+    oauth2client: oauth2client
     oauthlib: oauthlib
     openhtf: openhtf
     overrides: overrides
@@ -332,4 +335,4 @@ manifest:
     zstandard: zstandard
   pip_repository:
     name: pip
-integrity: 9f6fca0305f8e5fb707bbfbdfcbd9def4390914d517821184ee4b6f9d66c5bda
+integrity: 976070f71b0df74f468c6485f6cc481ef9b6215d955f9fc5088c1c4d19cd63a1
