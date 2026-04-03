@@ -9,11 +9,11 @@ The target repository is **michael-christen/toolbox**. The working directory is
 
 ## Stage 1 — Select an Issue
 
-1. Use `mcp__github__list_issues` to fetch open issues (state: open).
+1. Use `mcp__github__list_issues` or `gh api` to fetch open issues (state: open).
 2. Present the list concisely: number, title, labels, assignee.
 3. If `$ARGUMENTS` contains an issue number, use that directly; otherwise ask
    the user which issue to work on.
-4. Fetch the full issue body with `mcp__github__get_issue` and display a brief
+4. Fetch the full issue body with `mcp__github__get_issue` or `gh api` and display a brief
    summary of what needs to be done.
 
 **Checkpoint**: Confirm the selected issue with the user before proceeding.
@@ -24,22 +24,27 @@ The target repository is **michael-christen/toolbox**. The working directory is
 
 1. Derive a branch name: `claude/<issue-number>-<short-slug>` (kebab-case, ≤40
    chars total). Example: `claude/42-fix-bazel-cache`.
-2. Create and check out the branch:
+2. Create a worktree for the branch so the main working directory stays clean:
    ```
-   git checkout -b <branch-name>
+   git worktree add ../toolbox-<issue-number> -b <branch-name>
    ```
+   All subsequent work happens inside that worktree directory.
 3. Read relevant files before making changes — never modify code you haven't
    read.
 4. Implement the fix. Follow all conventions in `CLAUDE.md`:
    - Python: 79-char line length, black + isort
    - C++: C++23, clang-format
    - Bazel: buildifier formatting
-5. After changes, run the appropriate checks:
+5. After changes, run the appropriate checks from inside the worktree:
    ```
    ./lint.sh --mode check
    bazel test //...          # or a targeted subset if the full suite is slow
    ```
 6. Fix any lint/test failures before continuing.
+   ```
+   ./lint.sh --mode format
+   ```
+   may help fix some of the lint failures
 
 **Checkpoint**: Show the diff (`git diff`) and confirm readiness to commit.
 
@@ -69,7 +74,7 @@ The target repository is **michael-christen/toolbox**. The working directory is
 
 ## Stage 4 — Create Pull Request
 
-1. Use `mcp__github__create_pull_request` with:
+1. Use `mcp__github__create_pull_request` or `gh api` with:
 
    - **title**: concise, imperative, ≤70 chars
    - **body** (use the PR template from `.github/pull_request_template.md` as a
@@ -108,7 +113,7 @@ Perform a thorough self-review of the PR before human reviewers see it:
    - Code style violations
    - Overly complex logic that could be simplified
 3. If issues are found, push a fix commit before requesting review.
-4. Comment on the PR (`mcp__github__create_issue_comment`) with a brief
+4. Comment on the PR (`mcp__github__create_issue_comment` or `gh api`) with a brief
    self-review note summarising what was checked and any known limitations.
 
 **Checkpoint**: Tell the user the PR is ready for review and provide the URL.
@@ -127,7 +132,8 @@ Perform a thorough self-review of the PR before human reviewers see it:
    - **Review comment / change request**: understand the intent. If the fix is
      clear and non-controversial, implement it and reply explaining the change.
      If ambiguous, use `AskUserQuestion` to clarify before acting.
-   - **Approval**: proceed to Stage 7.
+   - **Approval**: (as mentioned in comment, such as LGTM for the whole PR),
+     there is no way to "Approve" PRs for myself; proceed to Stage 7.
    - **Duplicate / informational**: acknowledge and skip.
 3. After each round of fixes, push to the same branch (no force-push unless
    explicitly requested). Re-request review when ready.
@@ -140,15 +146,16 @@ Repeat until the PR receives the required approvals.
 
 **Checkpoint**: Confirm with the user before merging.
 
-1. Merge using `mcp__github__merge_pull_request` (squash or merge commit per
+1. Merge using `mcp__github__merge_pull_request` or `gh api` (squash or merge commit per
    user preference; default: squash).
 2. Delete the remote branch:
    ```
    git push origin --delete <branch-name>
    ```
-3. Delete the local branch:
+3. Remove the worktree and delete the local branch:
    ```
-   git checkout master && git pull origin master
+   git worktree remove ../toolbox-<issue-number>
+   git pull origin master
    git branch -d <branch-name>
    ```
 4. Confirm the issue is closed (GitHub auto-closes it via `Closes #N`).
