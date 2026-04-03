@@ -6,6 +6,8 @@ on:
   push:
     branches:
       - master
+permissions:
+  contents: read
 jobs:
   # Coverage and code metrics are the required checks for this workflow.
   # Lint, build, and test run in BuildBuddy (buildbuddy.yaml) which is faster.
