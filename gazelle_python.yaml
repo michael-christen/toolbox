@@ -15,6 +15,7 @@ manifest:
     alabaster: alabaster
     annotated_types: annotated_types
     anyio: anyio
+    apiclient: google_api_python_client
     argon2: argon2_cffi
     arrow: arrow
     astroid: astroid
@@ -56,13 +57,86 @@ manifest:
     fontTools: fonttools
     fqdn: fqdn
     furo: furo
+    google.api.annotations_pb2: googleapis_common_protos
+    google.api.auth_pb2: googleapis_common_protos
+    google.api.backend_pb2: googleapis_common_protos
+    google.api.billing_pb2: googleapis_common_protos
+    google.api.client_pb2: googleapis_common_protos
+    google.api.config_change_pb2: googleapis_common_protos
+    google.api.consumer_pb2: googleapis_common_protos
+    google.api.context_pb2: googleapis_common_protos
+    google.api.control_pb2: googleapis_common_protos
+    google.api.distribution_pb2: googleapis_common_protos
+    google.api.documentation_pb2: googleapis_common_protos
+    google.api.endpoint_pb2: googleapis_common_protos
+    google.api.error_reason_pb2: googleapis_common_protos
+    google.api.field_behavior_pb2: googleapis_common_protos
+    google.api.field_info_pb2: googleapis_common_protos
+    google.api.http_pb2: googleapis_common_protos
+    google.api.httpbody_pb2: googleapis_common_protos
+    google.api.label_pb2: googleapis_common_protos
+    google.api.launch_stage_pb2: googleapis_common_protos
+    google.api.log_pb2: googleapis_common_protos
+    google.api.logging_pb2: googleapis_common_protos
+    google.api.metric_pb2: googleapis_common_protos
+    google.api.monitored_resource_pb2: googleapis_common_protos
+    google.api.monitoring_pb2: googleapis_common_protos
+    google.api.policy_pb2: googleapis_common_protos
+    google.api.quota_pb2: googleapis_common_protos
+    google.api.resource_pb2: googleapis_common_protos
+    google.api.routing_pb2: googleapis_common_protos
+    google.api.service_pb2: googleapis_common_protos
+    google.api.source_info_pb2: googleapis_common_protos
+    google.api.system_parameter_pb2: googleapis_common_protos
+    google.api.usage_pb2: googleapis_common_protos
+    google.api.visibility_pb2: googleapis_common_protos
+    google.api_core: google_api_core
     google.auth: google_auth
+    google.cloud.common_resources_pb2: googleapis_common_protos
+    google.cloud.extended_operations_pb2: googleapis_common_protos
+    google.cloud.location.locations_pb2: googleapis_common_protos
+    google.gapic.metadata.gapic_metadata_pb2: googleapis_common_protos
+    google.logging.type.http_request_pb2: googleapis_common_protos
+    google.logging.type.log_severity_pb2: googleapis_common_protos
+    google.longrunning.operations_grpc: googleapis_common_protos
+    google.longrunning.operations_grpc_pb2: googleapis_common_protos
+    google.longrunning.operations_pb2: googleapis_common_protos
+    google.longrunning.operations_pb2_grpc: googleapis_common_protos
+    google.longrunning.operations_proto: googleapis_common_protos
+    google.longrunning.operations_proto_pb2: googleapis_common_protos
     google.oauth2: google_auth
     google.protobuf: protobuf
+    google.rpc.code_pb2: googleapis_common_protos
+    google.rpc.context.attribute_context_pb2: googleapis_common_protos
+    google.rpc.context.audit_context_pb2: googleapis_common_protos
+    google.rpc.error_details_pb2: googleapis_common_protos
+    google.rpc.http_pb2: googleapis_common_protos
+    google.rpc.status_pb2: googleapis_common_protos
+    google.type.calendar_period_pb2: googleapis_common_protos
+    google.type.color_pb2: googleapis_common_protos
+    google.type.date_pb2: googleapis_common_protos
+    google.type.datetime_pb2: googleapis_common_protos
+    google.type.dayofweek_pb2: googleapis_common_protos
+    google.type.decimal_pb2: googleapis_common_protos
+    google.type.expr_pb2: googleapis_common_protos
+    google.type.fraction_pb2: googleapis_common_protos
+    google.type.interval_pb2: googleapis_common_protos
+    google.type.latlng_pb2: googleapis_common_protos
+    google.type.localized_text_pb2: googleapis_common_protos
+    google.type.money_pb2: googleapis_common_protos
+    google.type.month_pb2: googleapis_common_protos
+    google.type.phone_number_pb2: googleapis_common_protos
+    google.type.postal_address_pb2: googleapis_common_protos
+    google.type.quaternion_pb2: googleapis_common_protos
+    google.type.timeofday_pb2: googleapis_common_protos
+    google_auth_httplib2: google_auth_httplib2
+    google_auth_oauthlib: google_auth_oauthlib
+    googleapiclient: google_api_python_client
     greenlet: greenlet
     grpc: grpcio
     h11: h11
     httpcore: httpcore
+    httplib2: httplib2
     httpx: httpx
     idna: idna
     imagesize: imagesize
@@ -128,6 +202,7 @@ manifest:
     notebook_shim: notebook_shim
     numbergen: param
     numpy: numpy
+    oauthlib: oauthlib
     openhtf: openhtf
     overrides: overrides
     packaging: packaging
@@ -146,6 +221,7 @@ manifest:
     posthog: posthog
     prometheus_client: prometheus_client
     prompt_toolkit: prompt_toolkit
+    proto: proto_plus
     psutil: psutil
     psycopg2: psycopg2_binary
     ptyprocess: ptyprocess
@@ -169,6 +245,7 @@ manifest:
     pyviz_comms: pyviz_comms
     referencing: referencing
     requests: requests
+    requests_oauthlib: requests_oauthlib
     rfc3339_validator: rfc3339_validator
     rfc3986_validator: rfc3986_validator
     rfc3987_syntax: rfc3987_syntax
@@ -242,6 +319,7 @@ manifest:
     tzdata: tzdata
     uc_micro: uc_micro_py
     uri_template: uri_template
+    uritemplate: uritemplate
     urllib3: urllib3
     wcwidth: wcwidth
     webcolors: webcolors
@@ -254,4 +332,4 @@ manifest:
     zstandard: zstandard
   pip_repository:
     name: pip
-integrity: 0ea0e121a31a64f61661e3db696fc1727fe01fc9128cf099bdf976734777c63d
+integrity: 9f6fca0305f8e5fb707bbfbdfcbd9def4390914d517821184ee4b6f9d66c5bda
