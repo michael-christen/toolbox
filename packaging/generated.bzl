@@ -57,6 +57,8 @@ PYTHON_TARGETS = [
     "//tlbox/apps/bazel_parser:repo_graph_data",
     "//tlbox/apps/code_metrics:main",
     "//tlbox/apps/code_metrics:models",
+    "//tlbox/apps/csv-to-sheets:csv2sheets",
+    "//tlbox/apps/ical:read_ical_rrules",
     "//tlbox/hw/drivers/lis3mdl:lis3mdl_py_library",
     "//tlbox/hw/services/sbr:sbr_grpc_py_library",
     "//tlbox/hw/services/sbr:sbr_py_library",
