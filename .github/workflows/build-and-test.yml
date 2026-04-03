@@ -136,4 +136,7 @@ jobs:
       - name: Test
         run: |
           bazel test //... --output_groups=-mypy
+      - name: Check Disk Usage
+        run: |
+          df -h
       - run: echo "Status is ${{ job.status }}."
