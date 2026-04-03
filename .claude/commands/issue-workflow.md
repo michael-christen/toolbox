@@ -9,12 +9,13 @@ The target repository is **michael-christen/toolbox**. The working directory is
 
 ## Stage 1 — Select an Issue
 
-1. Use `mcp__github__list_issues` or `gh api` to fetch open issues (state: open).
+1. Use `mcp__github__list_issues` or `gh api` to fetch open issues (state:
+   open).
 2. Present the list concisely: number, title, labels, assignee.
 3. If `$ARGUMENTS` contains an issue number, use that directly; otherwise ask
    the user which issue to work on.
-4. Fetch the full issue body with `mcp__github__get_issue` or `gh api` and display a brief
-   summary of what needs to be done.
+4. Fetch the full issue body with `mcp__github__get_issue` or `gh api` and
+   display a brief summary of what needs to be done.
 
 **Checkpoint**: Confirm the selected issue with the user before proceeding.
 
@@ -113,8 +114,9 @@ Perform a thorough self-review of the PR before human reviewers see it:
    - Code style violations
    - Overly complex logic that could be simplified
 3. If issues are found, push a fix commit before requesting review.
-4. Comment on the PR (`mcp__github__create_issue_comment` or `gh api`) with a brief
-   self-review note summarising what was checked and any known limitations.
+4. Comment on the PR (`mcp__github__create_issue_comment` or `gh api`) with a
+   brief self-review note summarising what was checked and any known
+   limitations.
 
 **Checkpoint**: Tell the user the PR is ready for review and provide the URL.
 
@@ -146,8 +148,8 @@ Repeat until the PR receives the required approvals.
 
 **Checkpoint**: Confirm with the user before merging.
 
-1. Merge using `mcp__github__merge_pull_request` or `gh api` (squash or merge commit per
-   user preference; default: squash).
+1. Merge using `mcp__github__merge_pull_request` or `gh api` (squash or merge
+   commit per user preference; default: squash).
 2. Delete the remote branch:
    ```
    git push origin --delete <branch-name>
