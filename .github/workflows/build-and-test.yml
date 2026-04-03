@@ -7,8 +7,13 @@ on:
     branches:
       - master
 jobs:
-  build_and_test:
+  # Coverage and code metrics are the required checks for this workflow.
+  # Lint, build, and test run in BuildBuddy (buildbuddy.yaml) which is faster.
+  coverage_and_metrics:
     runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+      pull-requests: write
     steps:
       - run: echo "The job was triggered by a ${{ github.event_name }} event, running on ${{ runner.os }}, ${{ github.ref }} @ ${{ github.repository }}."
       - uses: actions/checkout@v4
@@ -45,26 +50,11 @@ jobs:
       - uses: ./.github/actions/bazel-setup
         with:
           buildbuddy_api_key: ${{ secrets.BUILDBUDDY_API_KEY }}
-      - name: Install Lint Pre-requisites
+      - name: Install LLVM Pre-requisites
         run: |
-          # Needed for clang-format / llvm_toolchain, otherwise libtinfo.so.5
+          # Needed for llvm_toolchain (C++ builds), otherwise libtinfo.so.5
           # is not found
           sudo apt-get install -y libncurses5
-      - name: Lint
-        run: |
-          ./lint.sh --mode check
-      - name: Build
-        run: |
-          bazel build //...
-      - name: Test
-        run: |
-          bazel test //... --output_groups=-mypy
-          # Food for thought:
-          # - Should we test in addition / segregate some?
-          # - Should we test in different modes (-c opt / -c dbg)?
-          # - Should we add instrumentation_filter to .bazelrc to reduce
-          # analysis cache thrashing?
-          # Could leave the above to buildbuddy ...
       - name: Coverage
         run: |
           bazel coverage //... --combined_report=lcov --instrument_test_targets --instrumentation_filter="^//" --test_tag_filters=-skip-large-tests --output_groups=-mypy
@@ -112,6 +102,50 @@ jobs:
           verbose: true
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage.dat
+      - name: Check Disk Usage
+        run: |
+          df -h
+      - run: echo "Status is ${{ job.status }}."
+
+  # Non-required: lint, build, and test also run in BuildBuddy (buildbuddy.yaml).
+  # This job exists for visibility but should not be a required branch protection check.
+  build_and_test:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+    steps:
+      - run: echo "The job was triggered by a ${{ github.event_name }} event, running on ${{ runner.os }}, ${{ github.ref }} @ ${{ github.repository }}."
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          filter: 'tree:0'
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@v1.3.1
+        with:
+          tool-cache: false
+          android: false
+          dotnet: true
+          haskell: true
+          large-packages: false
+          docker-images: true
+          swap-storage: true
+      - uses: ./.github/actions/bazel-setup
+        with:
+          buildbuddy_api_key: ${{ secrets.BUILDBUDDY_API_KEY }}
+      - name: Install Lint Pre-requisites
+        run: |
+          # Needed for clang-format / llvm_toolchain, otherwise libtinfo.so.5
+          # is not found
+          sudo apt-get install -y libncurses5
+      - name: Lint
+        run: |
+          ./lint.sh --mode check
+      - name: Build
+        run: |
+          bazel build //...
+      - name: Test
+        run: |
+          bazel test //... --output_groups=-mypy
       - name: Check Disk Usage
         run: |
           df -h

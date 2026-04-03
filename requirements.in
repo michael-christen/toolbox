@@ -10,7 +10,13 @@ bokeh
 flake8
 # A more modern sphinx theme
 furo
+# gmail analysis
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib
 grpcio
+gspread
+icalendar
 ipdb
 isort
 # https://jupytext.readthedocs.io/en/stable/index.html
@@ -19,6 +25,7 @@ jupytext
 # TODO(#262): jupyterlab explicitly / jupyterlab-vim
 # - generates links with raw urls, eg) www.example.com
 linkify-it-py
+matplotlib
 mypy
 myst-parser
 # Analyze graphs easily https://networkx.org/documentation/stable/index.html
@@ -28,6 +35,7 @@ types-networkx
 notebook
 # Needed for pandas, etc.
 numpy
+oauth2client
 # Tool for running hardware-style tests; https://www.openhtf.com/
 openhtf
 panel>=1.6.1
