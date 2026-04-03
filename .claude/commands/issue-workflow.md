@@ -29,6 +29,8 @@ The target repository is **michael-christen/toolbox**. The working directory is
    ```
    git worktree add ../toolbox-<issue-number> -b <branch-name>
    ```
+   Don't try to cd, then git worktree add (you need to execute from the repo
+   workspace)
    All subsequent work happens inside that worktree directory.
 3. Read relevant files before making changes — never modify code you haven't
    read.
@@ -124,23 +126,20 @@ Perform a thorough self-review of the PR before human reviewers see it:
 
 ## Stage 6 — Watch for Feedback (Review Loop)
 
-1. Subscribe to PR activity:
-   ```
-   subscribe_pr_activity(pr_number=<N>, repo="michael-christen/toolbox")
-   ```
-2. As `<github-webhook-activity>` events arrive, for each one:
-   - **CI failure**: diagnose the failure, push a fix, explain the root cause to
-     the user.
-   - **Review comment / change request**: understand the intent. If the fix is
-     clear and non-controversial, implement it and reply explaining the change.
-     If ambiguous, use `AskUserQuestion` to clarify before acting.
-   - **Approval**: (as mentioned in comment, such as LGTM for the whole PR),
-     there is no way to "Approve" PRs for myself; proceed to Stage 7.
-   - **Duplicate / informational**: acknowledge and skip.
-3. After each round of fixes, push to the same branch (no force-push unless
-   explicitly requested). Re-request review when ready.
+Check PR status on demand using `gh pr checks` and `gh api` to fetch review
+comments. When the user asks to check or respond to feedback:
 
-Repeat until the PR receives the required approvals.
+- **CI failure**: diagnose the failure, push a fix, explain the root cause to
+  the user.
+- **Review comment / change request**: understand the intent. If the fix is
+  clear and non-controversial, implement it and reply explaining the change.
+  If ambiguous, use `AskUserQuestion` to clarify before acting.
+- **Approval**: (as mentioned in comment, such as LGTM for the whole PR),
+  there is no way to "Approve" PRs for myself; proceed to Stage 7.
+- **Duplicate / informational**: acknowledge and skip.
+
+After each round of fixes, push to the same branch (no force-push unless
+explicitly requested).
 
 ---
 
@@ -148,17 +147,11 @@ Repeat until the PR receives the required approvals.
 
 **Checkpoint**: Confirm with the user before merging.
 
-1. Merge using `mcp__github__merge_pull_request` or `gh api` (squash or merge
-   commit per user preference; default: squash).
-2. Delete the remote branch:
-   ```
-   git push origin --delete <branch-name>
-   ```
+1. Merge using `gh pr merge <pr #> --squash --delete-branch`
 3. Remove the worktree and delete the local branch:
    ```
    git worktree remove ../toolbox-<issue-number>
    git pull origin master
-   git branch -d <branch-name>
    ```
 4. Confirm the issue is closed (GitHub auto-closes it via `Closes #N`).
 
