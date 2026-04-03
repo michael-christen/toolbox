@@ -48,8 +48,9 @@ def get_email_count(
         if page_token:
             kwargs["pageToken"] = page_token
         results = (
-            service.users().messages().list(**kwargs).execute()
-        )  # type: ignore[attr-defined]
+            service.users()  # type: ignore[attr-defined]
+            .messages().list(**kwargs).execute()
+        )
         count += len(results.get("messages", []))
         page_token = results.get("nextPageToken")
         if not page_token:
