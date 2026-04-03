@@ -12,11 +12,32 @@ sudo udevadm trigger
 
 ## Bash
 
+### Common Operations
+
+```
+# If
+
+if [ CONDITIONAL ]; then
+  ...
+fi
+
+# Conditionals
+'-z "${variable}"'   is this variable set
+```
+
+### Parameters
+
+https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html
+```
+${v-unset}  # if v is unset will read as "unset"
+```
+
 ### Argument shortcuts
 
 https://stackoverflow.com/questions/4009412/how-to-use-arguments-from-previous-command
 
 ```
+$@      all arguments
 !^      first argument
 !$      last argument
 !*      all arguments
