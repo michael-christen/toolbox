@@ -6,8 +6,9 @@
 ---
 manifest:
   modules_mapping:
+    0aca9ce3d91742c5b361__mypyc: mypy
     30fcd23745efe32ce681__mypyc: black
-    4c842c94c09923bae9e4__mypyc: mypy
+    81d243bd2c585b0f4821__mypyc: charset_normalizer
     IPython: ipython
     OpenSSL: pyopenssl
     PIL: pillow
@@ -335,4 +336,4 @@ manifest:
     zstandard: zstandard
   pip_repository:
     name: pip
-integrity: 976070f71b0df74f468c6485f6cc481ef9b6215d955f9fc5088c1c4d19cd63a1
+integrity: e98da6f1ff0c5c7bd1eaebdceabcfcc808e6fe710829a18fb8f5417de7a5bea5
