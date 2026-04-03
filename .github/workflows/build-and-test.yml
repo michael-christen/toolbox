@@ -23,6 +23,7 @@ jobs:
           # Minimize clone traffic while still getting history
           # - https://stackoverflow.com/a/75966904
           filter: 'tree:0'
+          lfs: true
       - run: |
           git fetch origin ${{ github.base_ref }}
       - name: Free Disk Space (Ubuntu)
@@ -119,6 +120,7 @@ jobs:
         with:
           fetch-depth: 0
           filter: 'tree:0'
+          lfs: true
       - name: Free Disk Space (Ubuntu)
         uses: jlumbroso/free-disk-space@v1.3.1
         with:
