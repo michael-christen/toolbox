@@ -61,7 +61,7 @@ pytest<8.3.4
 # Yaml input/output (I hate it, but ...)
 pyyaml
 # https://github.com/bazelbuild/bazel/issues/4327
-setuptools<71
+setuptools<79
 # Process-based Discrete Event Simulation
 simpy>=4.1.1,<5
 # Documentation
