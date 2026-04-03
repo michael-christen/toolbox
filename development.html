@@ -373,6 +373,43 @@ bazel<span class="w"> </span>run<span class="w"> </span>//tools/buildifier<span 
 </div>
 </section>
 </section>
+<section id="git-lfs">
+<h2>Git LFS<a class="headerlink" href="#git-lfs" title="Link to this heading"></a></h2>
+<p>Large binary files (firmware images, photos, archives) are tracked via
+<a class="reference external" href="https://git-lfs.com/">Git LFS</a>. The patterns are configured in
+<a class="reference internal" href="#../.gitattributes"><span class="xref myst"><code class="docutils literal notranslate"><span class="pre">.gitattributes</span></code></span></a>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">git-lfs</span></code> binary is managed via
+<a class="reference external" href="https://github.com/theoremlp/rules_multitool">rules_multitool</a> and can be run
+directly from the repo root:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tools/git-lfs<span class="w"> </span>&lt;args&gt;
+<span class="c1"># or via bazel</span>
+bazel<span class="w"> </span>run<span class="w"> </span>@multitool//tools/git-lfs<span class="w"> </span>--<span class="w"> </span>&lt;args&gt;
+</pre></div>
+</div>
+<section id="first-time-setup">
+<h3>First-time setup<a class="headerlink" href="#first-time-setup" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tools/git-lfs<span class="w"> </span>install<span class="w">   </span><span class="c1"># installs LFS hooks into .git/</span>
+</pre></div>
+</div>
+</section>
+<section id="common-operations">
+<h3>Common operations<a class="headerlink" href="#common-operations" title="Link to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tools/git-lfs<span class="w"> </span>track<span class="w"> </span><span class="s2">&quot;*.bin&quot;</span><span class="w">   </span><span class="c1"># start tracking a new pattern (updates .gitattributes)</span>
+tools/git-lfs<span class="w"> </span>ls-files<span class="w">        </span><span class="c1"># list LFS-tracked files in the current commit</span>
+tools/git-lfs<span class="w"> </span>status<span class="w">          </span><span class="c1"># show LFS file status</span>
+tools/git-lfs<span class="w"> </span>pull<span class="w">            </span><span class="c1"># download LFS files after a clone/fetch</span>
+</pre></div>
+</div>
+</section>
+<section id="adding-a-new-file-type">
+<h3>Adding a new file type<a class="headerlink" href="#adding-a-new-file-type" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Add a pattern to <code class="docutils literal notranslate"><span class="pre">.gitattributes</span></code> (or use <code class="docutils literal notranslate"><span class="pre">tools/git-lfs</span> <span class="pre">track</span> <span class="pre">&quot;*.ext&quot;</span></code>)</p></li>
+<li><p>Commit the updated <code class="docutils literal notranslate"><span class="pre">.gitattributes</span></code></p></li>
+<li><p>Migrate any existing files: <code class="docutils literal notranslate"><span class="pre">tools/git-lfs</span> <span class="pre">migrate</span> <span class="pre">import</span> <span class="pre">--include=&quot;*.ext&quot;</span></code></p></li>
+</ol>
+</section>
+</section>
 <section id="inspiration">
 <h2>Inspiration<a class="headerlink" href="#inspiration" title="Link to this heading"></a></h2>
 <ul class="simple">
@@ -449,6 +486,12 @@ bazel<span class="w"> </span>run<span class="w"> </span>//tools/buildifier<span 
 <li><a class="reference internal" href="#javascript-node">JavaScript / Node</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#git-lfs">Git LFS</a><ul>
+<li><a class="reference internal" href="#first-time-setup">First-time setup</a></li>
+<li><a class="reference internal" href="#common-operations">Common operations</a></li>
+<li><a class="reference internal" href="#adding-a-new-file-type">Adding a new file type</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#inspiration">Inspiration</a></li>
 </ul>
 </li>
@@ -477,6 +520,6 @@ bazel<span class="w"> </span>run<span class="w"> </span>//tools/buildifier<span 
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
     <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
-    <script defer="defer" src="_static/tippy/development.8733ef85-9ee7-47e8-9545-546ec371215e.js"></script>
+    <script defer="defer" src="_static/tippy/development.fe1e60f8-17f3-4a7b-8e07-c5276fff8f9e.js"></script>
     </body>
 </html>

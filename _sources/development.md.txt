@@ -114,6 +114,43 @@ sudo sysctl vm.mmap_rnd_bits=30
 bazel run -- @pnpm//:pnpm --dir $PWD install --lockfile-only
 ```
 
+## Git LFS
+
+Large binary files (firmware images, photos, archives) are tracked via
+[Git LFS](https://git-lfs.com/). The patterns are configured in
+[`.gitattributes`](../.gitattributes).
+
+The `git-lfs` binary is managed via
+[rules_multitool](https://github.com/theoremlp/rules_multitool) and can be run
+directly from the repo root:
+
+```bash
+tools/git-lfs <args>
+# or via bazel
+bazel run @multitool//tools/git-lfs -- <args>
+```
+
+### First-time setup
+
+```bash
+tools/git-lfs install   # installs LFS hooks into .git/
+```
+
+### Common operations
+
+```bash
+tools/git-lfs track "*.bin"   # start tracking a new pattern (updates .gitattributes)
+tools/git-lfs ls-files        # list LFS-tracked files in the current commit
+tools/git-lfs status          # show LFS file status
+tools/git-lfs pull            # download LFS files after a clone/fetch
+```
+
+### Adding a new file type
+
+1. Add a pattern to `.gitattributes` (or use `tools/git-lfs track "*.ext"`)
+2. Commit the updated `.gitattributes`
+3. Migrate any existing files: `tools/git-lfs migrate import --include="*.ext"`
+
 ## Inspiration
 
 - [jessecureton/python_bazel_template](https://github.com/jessecureton/python_bazel_template)

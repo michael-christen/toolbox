@@ -7,8 +7,8 @@
 <meta property="og:type" content="website" />
 <meta property="og:url" content="useful_commands.html" />
 <meta property="og:site_name" content="toolbox" />
-<meta property="og:description" content="This is just a place for me to put small commands that I find myself looking up frequently. Reload udev rules:: Bash: Argument shortcuts: https://stackoverflow.com/questions/4009412/how-to-use-argu..." />
-<meta name="description" content="This is just a place for me to put small commands that I find myself looking up frequently. Reload udev rules:: Bash: Argument shortcuts: https://stackoverflow.com/questions/4009412/how-to-use-argu..." />
+<meta property="og:description" content="This is just a place for me to put small commands that I find myself looking up frequently. Reload udev rules:: Bash: Common Operations: Parameters: https://www.gnu.org/software/bash/manual/html_no..." />
+<meta name="description" content="This is just a place for me to put small commands that I find myself looking up frequently. Reload udev rules:: Bash: Common Operations: Parameters: https://www.gnu.org/software/bash/manual/html_no..." />
 <link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="Common References" href="common_references.html"><link rel="prev" title="Log for How I am Bringing up This Repo and My New Server" href="bringup.html">
 
     <link rel="shortcut icon" href="_static/wrench.png"><!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
@@ -279,10 +279,31 @@ frequently.</p>
 </section>
 <section id="bash">
 <h2>Bash<a class="headerlink" href="#bash" title="Link to this heading"></a></h2>
+<section id="common-operations">
+<h3>Common Operations<a class="headerlink" href="#common-operations" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># If</span>
+
+<span class="k">if</span> <span class="p">[</span> <span class="n">CONDITIONAL</span> <span class="p">];</span> <span class="n">then</span>
+  <span class="o">...</span>
+<span class="n">fi</span>
+
+<span class="c1"># Conditionals</span>
+<span class="s1">&#39;-z &quot;$</span><span class="si">{variable}</span><span class="s1">&quot;&#39;</span>   <span class="ow">is</span> <span class="n">this</span> <span class="n">variable</span> <span class="nb">set</span>
+</pre></div>
+</div>
+</section>
+<section id="parameters">
+<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading"></a></h3>
+<p><a class="reference external" href="https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html">https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>${v-unset}  # if v is unset will read as &quot;unset&quot;
+</pre></div>
+</div>
+</section>
 <section id="argument-shortcuts">
 <h3>Argument shortcuts<a class="headerlink" href="#argument-shortcuts" title="Link to this heading"></a></h3>
 <p><a class="reference external" href="https://stackoverflow.com/questions/4009412/how-to-use-arguments-from-previous-command">https://stackoverflow.com/questions/4009412/how-to-use-arguments-from-previous-command</a></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>!^      first argument
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$@      all arguments
+!^      first argument
 !$      last argument
 !*      all arguments
 !:2     second argument
@@ -365,6 +386,8 @@ frequently.</p>
 <li><a class="reference internal" href="#">Useful Commands</a><ul>
 <li><a class="reference internal" href="#reload-udev-rules">Reload udev rules:</a></li>
 <li><a class="reference internal" href="#bash">Bash</a><ul>
+<li><a class="reference internal" href="#common-operations">Common Operations</a></li>
+<li><a class="reference internal" href="#parameters">Parameters</a></li>
 <li><a class="reference internal" href="#argument-shortcuts">Argument shortcuts</a></li>
 <li><a class="reference internal" href="#package-commands">Package Commands</a></li>
 </ul>
@@ -396,6 +419,6 @@ frequently.</p>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
     <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
-    <script defer="defer" src="_static/tippy/useful_commands.89f8b010-c8ec-49fa-8dee-2b3d68f1867c.js"></script>
+    <script defer="defer" src="_static/tippy/useful_commands.32b2875d-412b-4b4b-b61d-4bb5540487fa.js"></script>
     </body>
 </html>
