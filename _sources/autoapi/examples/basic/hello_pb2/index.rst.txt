@@ -1,0 +1,24 @@
+examples.basic.hello_pb2
+========================
+
+.. py:module:: examples.basic.hello_pb2
+
+.. autoapi-nested-parse::
+
+   Generated protocol buffer code.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   examples.basic.hello_pb2.DESCRIPTOR
+
+
+Module Contents
+---------------
+
+.. py:data:: DESCRIPTOR
+

@@ -1,0 +1,100 @@
+examples.basic.hello_pb2_grpc
+=============================
+
+.. py:module:: examples.basic.hello_pb2_grpc
+
+.. autoapi-nested-parse::
+
+   Client and server classes corresponding to protobuf-defined services.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   examples.basic.hello_pb2_grpc.GreeterStub
+   examples.basic.hello_pb2_grpc.GreeterServicer
+   examples.basic.hello_pb2_grpc.Greeter
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   examples.basic.hello_pb2_grpc.add_GreeterServicer_to_server
+
+
+Module Contents
+---------------
+
+.. py:class:: GreeterStub(channel)
+
+   Bases: :py:obj:`object`
+
+
+   Missing associated documentation comment in .proto file.
+
+
+   .. py:attribute:: SayHello
+
+
+   .. py:attribute:: SayHelloStreamReply
+
+
+   .. py:attribute:: SayHelloBidiStream
+
+
+.. py:class:: GreeterServicer
+
+   Bases: :py:obj:`object`
+
+
+   Missing associated documentation comment in .proto file.
+
+
+   .. py:method:: SayHello(request, context)
+
+      Missing associated documentation comment in .proto file.
+
+
+
+   .. py:method:: SayHelloStreamReply(request, context)
+
+      Missing associated documentation comment in .proto file.
+
+
+
+   .. py:method:: SayHelloBidiStream(request_iterator, context)
+
+      Missing associated documentation comment in .proto file.
+
+
+
+.. py:function:: add_GreeterServicer_to_server(servicer, server)
+
+.. py:class:: Greeter
+
+   Bases: :py:obj:`object`
+
+
+   Missing associated documentation comment in .proto file.
+
+
+   .. py:method:: SayHello(request, target, options=(), channel_credentials=None, call_credentials=None, insecure=False, compression=None, wait_for_ready=None, timeout=None, metadata=None)
+      :staticmethod:
+
+
+
+   .. py:method:: SayHelloStreamReply(request, target, options=(), channel_credentials=None, call_credentials=None, insecure=False, compression=None, wait_for_ready=None, timeout=None, metadata=None)
+      :staticmethod:
+
+
+
+   .. py:method:: SayHelloBidiStream(request_iterator, target, options=(), channel_credentials=None, call_credentials=None, insecure=False, compression=None, wait_for_ready=None, timeout=None, metadata=None)
+      :staticmethod:
+
+
+
