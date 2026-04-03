@@ -57,8 +57,7 @@ pydantic
 pytest>=9,<10
 # Yaml input/output (I hate it, but ...)
 pyyaml
-# https://github.com/bazelbuild/bazel/issues/4327
-setuptools<71
+setuptools>=78.1.1
 # Process-based Discrete Event Simulation
 simpy>=4.1.1,<5
 # Documentation
