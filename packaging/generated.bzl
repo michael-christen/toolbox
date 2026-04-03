@@ -24,7 +24,6 @@ PROTO_PYTHON_TARGETS = [
 # PYTHON_TARGETS generated via:
 # `bazel query 'kind("py_binary", //...) + kind("py_library", //...) - //:gazelle_python_manifest.update'`
 PYTHON_TARGETS = [
-    "//apps/gmail_analysis:gmail_analysis",
     "//bzl:pytest_main",
     "//docs:conf",
     "//examples/basic:client",
@@ -58,6 +57,7 @@ PYTHON_TARGETS = [
     "//tlbox/apps/code_metrics:main",
     "//tlbox/apps/code_metrics:models",
     "//tlbox/apps/csv-to-sheets:csv2sheets",
+    "//tlbox/apps/gmail_analysis:gmail_analysis",
     "//tlbox/apps/ical:read_ical_rrules",
     "//tlbox/hw/drivers/lis3mdl:lis3mdl_py_library",
     "//tlbox/hw/services/sbr:sbr_grpc_py_library",
