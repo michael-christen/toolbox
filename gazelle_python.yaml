@@ -219,7 +219,6 @@ manifest:
     pathspec: pathspec
     pexpect: pexpect
     pip: pip
-    pkg_resources: setuptools
     platformdirs: platformdirs
     pluggy: pluggy
     posthog: posthog
@@ -336,4 +335,4 @@ manifest:
     zstandard: zstandard
   pip_repository:
     name: pip
-integrity: e98da6f1ff0c5c7bd1eaebdceabcfcc808e6fe710829a18fb8f5417de7a5bea5
+integrity: ea362b426e7ed8b07004c720cb88481d9d075fbdbe691206c3ba98793c22ad7e
