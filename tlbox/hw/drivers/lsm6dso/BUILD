@@ -7,7 +7,7 @@ load(
     "nanopb_rpc_proto_library",
 )
 load("@rules_proto//proto:defs.bzl", "proto_library")
-load("//bzl:cc.bzl", "cc_library")
+load("//bzl:cc.bzl", "cc_library", "cc_test")
 load("//bzl:py.bzl", "proto_py_library")
 
 package(default_visibility = ["//visibility:private"])
@@ -26,10 +26,28 @@ cc_library(
 )
 
 cc_library(
-    name = "example",
-    srcs = ["example.cc"],
-    hdrs = ["example.h"],
-    deps = [":lsm6dso_emb"],
+    name = "lsm6dso",
+    srcs = ["sim_lsm6dso.cc"],
+    hdrs = [
+        "lsm6dso_emb_helper.h",
+        "sim_lsm6dso.h",
+    ],
+    deps = [
+        "//tlbox/hw/drivers/lsm6dso:lsm6dso_emb",
+        "@pigweed//pw_bytes",
+        "@pigweed//pw_i2c:address",
+        "@pigweed//pw_i2c:initiator",
+        "@pigweed//pw_status",
+    ],
+)
+
+cc_test(
+    name = "lsm6dso_pw_test",
+    srcs = ["lsm6dso_pw_test.cc"],
+    deps = [
+        "//tlbox/hw/drivers/lsm6dso:lsm6dso_emb",
+        "@pigweed//pw_unit_test",
+    ],
 )
 
 proto_library(
@@ -74,22 +92,4 @@ proto_py_library(
     srcs = ["lsm6dso_pb2.py"],
     visibility = ["//visibility:public"],
     deps = ["@com_google_protobuf//:protobuf_python"],
-)
-
-cc_library(
-    name = "lsm6dso",
-    srcs = [
-        "example.cc",
-        "sim_lsm6dso.cc",
-    ],
-    hdrs = [
-        "example.h",
-        "lsm6dso_emb_helper.h",
-        "sim_lsm6dso.h",
-    ],
-    deps = [
-        "//tlbox/hw/drivers/lsm6dso:lsm6dso_emb",
-        "@pigweed//pw_bytes",
-        "@pigweed//pw_i2c:address",
-    ],
 )

@@ -13,5 +13,5 @@ struct Lsm6dsoEmbHelper {
   std::array<std::byte, Data::MaxSizeInBytes()> bytes{std::byte{0}};
 };
 
-}
-}
+}  // namespace lsm6dso
+}  // namespace hw_drivers

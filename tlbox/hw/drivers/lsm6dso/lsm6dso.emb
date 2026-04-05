@@ -1,7 +1,6 @@
 [$default byte_order: "LittleEndian"]
 [(cpp) namespace: "hw_drivers::lsm6dso"]
-
-# XXX: Check byte_order
+# Register map uses little-endian byte order (datasheet section 4.1)
 
 enum RegisterAddress:
   -- Register names to their i2c address
@@ -9,15 +8,11 @@ enum RegisterAddress:
   FUNC_CFG_ACCESS      = 0x01
 
 struct FuncCfgAccess:
-  -- FUNC_CFG_ACCESS
+  -- FUNC_CFG_ACCESS (register 0x01)
 
-  # XXX: Probably am defining backwards
   0 [+1] bits:
-    0 [+1] Flag func_cfg_access
-      -- ?
+    7 [+1] Flag shub_reg_access
+      -- Enable access to the sensor hub registers. Default: 0
 
-    1 [+1] Flag shub_reg_access
-      -- ?
-
-    2 [+6] UInt reserved
-      [requires: this == 0x00]
+    6 [+1] Flag func_cfg_access
+      -- Enable access to embedded functions registers. Default: 0
