@@ -75,3 +75,21 @@ proto_py_library(
     visibility = ["//visibility:public"],
     deps = ["@com_google_protobuf//:protobuf_python"],
 )
+
+cc_library(
+    name = "lsm6dso",
+    srcs = [
+        "example.cc",
+        "sim_lsm6dso.cc",
+    ],
+    hdrs = [
+        "example.h",
+        "lsm6dso_emb_helper.h",
+        "sim_lsm6dso.h",
+    ],
+    deps = [
+        "//tlbox/hw/drivers/lsm6dso:lsm6dso_emb",
+        "@pigweed//pw_bytes",
+        "@pigweed//pw_i2c:address",
+    ],
+)
