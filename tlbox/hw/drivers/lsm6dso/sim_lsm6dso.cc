@@ -5,8 +5,7 @@ namespace lsm6dso {
 
 pw::Status SimLsm6dso::DoWriteReadFor(
     pw::i2c::Address device_address, pw::ConstByteSpan tx_buffer,
-    pw::ByteSpan rx_buffer, pw::chrono::SystemClock::duration timeout,
-    pw::chrono::SystemClock::time_point current_time) {
+    pw::ByteSpan rx_buffer, pw::chrono::SystemClock::duration timeout) {
   // TODO: Implement register map simulation.
   // - Handle write (sub-address) then read behavior
   // - Route to correct register bank based on FUNC_CFG_ACCESS bits
@@ -14,7 +13,6 @@ pw::Status SimLsm6dso::DoWriteReadFor(
   (void)tx_buffer;
   (void)rx_buffer;
   (void)timeout;
-  (void)current_time;
   return pw::Status::Unimplemented();
 }
 
