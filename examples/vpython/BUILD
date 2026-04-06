@@ -27,13 +27,6 @@ py_binary(
     deps = ["//examples/vpython:vpython_stub"],
 )
 
-py_library(
-    name = "group",
-    srcs = ["group.py"],
-    visibility = ["//:__subpackages__"],
-    deps = ["//examples/vpython:vpython_stub"],
-)
-
 py_binary(
     name = "hello_world",
     srcs = ["hello_world.py"],
@@ -49,11 +42,4 @@ py_binary(
         "//examples/vpython:vpython_stub",
         "@pip//numpy",
     ],
-)
-
-py_binary(
-    name = "sliding_pendulum",
-    srcs = ["sliding_pendulum.py"],
-    visibility = ["//:__subpackages__"],
-    deps = ["//examples/vpython:vpython_stub"],
 )
