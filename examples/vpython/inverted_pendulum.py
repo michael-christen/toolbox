@@ -88,7 +88,7 @@ def compute_derivative_state(
     A = np.vstack([_A_top, _A_bot])
 
     B = np.vstack([np.matrix([[0], [0]]), n_i_E * H])
-    # XXX: Could optimize by pre-computing ^
+    # Could optimize by pre-computing ^
 
     x = np.matrix(
         [
@@ -141,7 +141,7 @@ def main() -> None:
     constants = get_constants()
     state = State(
         phi_d0=0,
-        # XXX: Gets out of wack fairly quickly
+        # NOTE: Gets out of wack fairly quickly
         theta_d0=0.001,
         phi_d1=0,
         theta_d1=0,
@@ -225,7 +225,7 @@ def main() -> None:
         # Step
         t += dt
 
-    # XXX: Next steps:
+    # Next steps:
     # - [x] define reasonable constants
     # - [x] setup a visualization
     #   - [x] plot the miscellaneous things

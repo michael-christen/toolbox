@@ -10,8 +10,6 @@ import vpython
 - [ ] add key input
 """
 
-# XXX: suffix fields with units?
-
 
 @dataclasses.dataclass
 class DriveConstants:
@@ -103,7 +101,7 @@ def main() -> None:
         color=vpython.color.red,
         # texure=vpython.textures.stucco,
     )
-    # XXX: We can't rotate parts of a compound after they are bound together
+    # NOTE: We can't rotate parts of a compound after they are bound together
     vehicle = vpython.compound(
         [l_wheel, r_wheel, body],
         make_trail=True,
@@ -115,7 +113,6 @@ def main() -> None:
         vehicle, "axis", scale=1.0, shaftwidth=0.2
     )
 
-    # XXX: Make the plane actually a set of curves
     PLANE_HEIGHT = 0.5
     plane = vpython.box(  # noqa: F841
         pos=(
@@ -185,7 +182,7 @@ def main() -> None:
         drive_state.angle += drive_change.angle * dt
 
         # Apply to animation
-        # XXX: Could be nice to set this explicitly
+        # Could be nice to set this explicitly
         vehicle.rotate(
             axis=vpython.vec(0, 1, 0), angle=drive_change.angle * dt
         )
