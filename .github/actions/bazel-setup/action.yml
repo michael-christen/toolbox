@@ -1,0 +1,33 @@
+name: Shared Setup
+description: Shared setup steps
+inputs:
+  buildbuddy_api_key:
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - name: Setup Bazel
+      uses: bazel-contrib/setup-bazel@0.14.0
+      with:
+        # Avoid downloading Bazel every time.
+        bazelisk-cache: true
+        # Store build cache per workflow.
+        disk-cache: true
+        # Share repository cache between workflows.
+        repository-cache: true
+        # Enable external repositories cache
+        external-cache: true
+    - name: Specify user.bazelrc for CI only settings
+      env:
+        BUILDBUDDY_API_KEY: ${{ inputs.buildbuddy_api_key }}
+      shell: bash
+      run: |
+        cat <<EOF > user.bazelrc
+        build --remote_header=x-buildbuddy-api-key="$BUILDBUDDY_API_KEY"
+        import %workspace%/.aspect/bazelrc/ci.bazelrc
+        EOF
+    - name: Install System Pre-requisites
+      shell: bash
+      run: |
+        # TODO(#209): Don't require installing this
+        sudo apt-get install -y graphviz graphviz-dev

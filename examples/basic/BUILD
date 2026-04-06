@@ -1,13 +1,21 @@
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
-load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_library")
+load("@build_stack_rules_proto//rules/cc:grpc_cc_library.bzl", "grpc_cc_library")
+load("@com_google_protobuf//bazel:cc_proto_library.bzl", "cc_proto_library")
 load("@rules_proto//proto:defs.bzl", "proto_library")
-
-# load("@crate_index//:defs.bzl", "aliases", "all_crate_deps")
-load("@rules_rust//rust:defs.bzl", "rust_binary", "rust_doc")
-# load("@rules_python//python:defs.bzl", old_py_binary = "py_binary")
 load("//bzl:py.bzl", "grpc_py_library", "proto_py_library", "py_binary", "py_image", "py_test")
+# load("@crate_index//:defs.bzl", "aliases", "all_crate_deps")
+# load("@rules_rust//rust:defs.bzl", "rust_binary", "rust_doc", "rust_library", "rust_test")
 
 package(default_visibility = ["//visibility:private"])
+
+filegroup(
+    name = "python_source",
+    srcs = glob(["*.py"]) + [
+        "hello_pb2.py",
+        "hello_pb2_grpc.py",
+    ],
+    visibility = ["//visibility:public"],
+)
 
 proto_library(
     name = "hello_proto",
@@ -15,16 +23,19 @@ proto_library(
     visibility = ["//visibility:public"],
 )
 
+cc_proto_library(
+    name = "hello_cc_proto",
+    visibility = ["//visibility:public"],
+    deps = [":hello_proto"],
+)
+
 proto_compile(
-    name = "hello_cpp_compile",
+    name = "hello_grpc_cpp_compile",
     outputs = [
-        "hello.pb.cc",
-        "hello.pb.h",
         "hello.grpc.pb.cc",
         "hello.grpc.pb.h",
     ],
     plugins = [
-        "@build_stack_rules_proto//plugin/builtin:cpp",
         "@build_stack_rules_proto//plugin/grpc/grpc:protoc-gen-grpc-cpp",
     ],
     proto = "hello_proto",
@@ -47,32 +58,35 @@ proto_compile(
     visibility = ["//visibility:public"],
 )
 
-proto_cc_library(
-    name = "hello_cc_library",
-    srcs = ["hello.pb.cc"],
-    hdrs = ["hello.pb.h"],
-    visibility = ["//visibility:public"],
-    deps = ["@com_google_protobuf//:protobuf"],
-)
-
-rust_binary(
-    name = "hello_world",
-    srcs = ["src/main.rs"],
-    deps = [
-        "@crate_index//:ferris-says",
-    ],
-    # TODO: Get rust dependencies working
-    # aliases = aliases(),
-    # deps = all_crate_deps(),
-    # proc_macro_deps = all_crate_deps(
-    #     proc_macro = True,
-    # ),
-)
-
-rust_doc(
-    name = "hello_world_doc",
-    crate = ":hello_world",
-)
+# TODO(#90): clang toolchain from pigweed is breaking rust
+# rust_library(
+#     name = "lib",
+#     srcs = ["src/lib.rs"],
+# )
+#
+# rust_test(
+#     name = "lib_test",
+#     crate = ":lib",
+# )
+#
+# rust_binary(
+#     name = "hello_world",
+#     srcs = ["src/main.rs"],
+#     deps = [
+#         "@crate_index//:ferris-says",
+#     ],
+#     # TODO: Get rust dependencies working
+#     # aliases = aliases(),
+#     # deps = all_crate_deps(),
+#     # proc_macro_deps = all_crate_deps(
+#     #     proc_macro = True,
+#     # ),
+# )
+#
+# rust_doc(
+#     name = "hello_world_doc",
+#     crate = ":hello_world",
+# )
 
 py_test(
     name = "hello_test",
@@ -96,13 +110,6 @@ py_binary(
         "@pip//grpcio",
     ],
 )
-
-# Package a old_py_binary like a pex for distribution
-# filegroup(
-#     name = "server_zip",
-#     srcs = [":server"],
-#     output_group = "python_zip_file",
-# )
 
 # Build and run this image with
 #     bazel run //examples/basic:sever_img_load_docker
@@ -141,7 +148,8 @@ py_test(
         ":server",
         "//examples/basic:hello_py_library",
     ],
-    # XXX: How to expect_failure
+    # For analysis-time failures, see examples/bazel/my_rules_test.bzl (expect_failure=True).
+    # For pytest-level expected failures, use @pytest.mark.xfail on individual test methods.
 )
 
 grpc_py_library(
@@ -156,4 +164,16 @@ proto_py_library(
     srcs = ["hello_pb2.py"],
     visibility = ["//visibility:public"],
     deps = ["@com_google_protobuf//:protobuf_python"],
+)
+
+grpc_cc_library(
+    name = "hello_grpc_cc_library",
+    srcs = ["hello.grpc.pb.cc"],
+    hdrs = ["hello.grpc.pb.h"],
+    visibility = ["//visibility:public"],
+    deps = [
+        ":hello_cc_proto",
+        "@com_github_grpc_grpc//:grpc++",
+        "@com_github_grpc_grpc//:grpc++_reflection",
+    ],
 )

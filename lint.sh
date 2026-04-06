@@ -12,10 +12,16 @@ function grep_xxx {
   # Don't show up in the search
   X="X"
   BAD_STRING="$X$X$X"
-  # Raise and re-report if found
-  if git grep --quiet ${BAD_STRING}; then
+  # Collect matches with line numbers
+  MATCHES=$(git grep -In ${BAD_STRING} || true)
+  if [ -n "$MATCHES" ]; then
     echo "${BAD_STRING} found in source"
-    git grep ${BAD_STRING}
+    while IFS= read -r line; do
+      echo "$line"
+      file=$(echo "$line" | cut -d: -f1)
+      linenum=$(echo "$line" | cut -d: -f2)
+      echo "::error file=${file},line=${linenum}::${BAD_STRING} comment found"
+    done <<< "$MATCHES"
     exit 1
   fi
 }
@@ -80,14 +86,16 @@ if [ -z "$mode" ]; then
   print_usage
 elif [ "$mode" = "check" ]; then
   BUILDIFIER_ARGS=("-lint=off" "-mode=check" "-v=false")
-  PRETTIER_ARGS=("--check" "--config ${REPO_ROOT}/.prettierrc")
+  PRETTIER_ARGS=("--check" "--config" "${REPO_ROOT}/.prettierrc" "--ignore-path" "${REPO_ROOT}/.prettierignore" "--ignore-path" "${REPO_ROOT}/.gitignore")
   BAZEL_TOOL="//tools:check"
   GAZELLE_ARGS=("-mode" "diff")
+  RULES_LINT_CMD="//tools/format:format.check"
 elif [ "$mode" = "format" ]; then
   BUILDIFIER_ARGS=("-lint=fix" "-mode=fix" "-v=false")
-  PRETTIER_ARGS=("--write" "--config ${REPO_ROOT}/.prettierrc")
+  PRETTIER_ARGS=("--write" "--config" "${REPO_ROOT}/.prettierrc" "--ignore-path" "${REPO_ROOT}/.prettierignore" "--ignore-path" "${REPO_ROOT}/.gitignore")
   BAZEL_TOOL="//tools:format"
   GAZELLE_ARGS=("-mode" "fix")
+  RULES_LINT_CMD="//tools/format:format"
 fi
 PRETTIER_INVOCATION=""
 
@@ -102,13 +110,26 @@ trap print_error ERR
 CONFIG="--config quiet"
 # Can uncomment to get more verbose
 # CONFIG=""
+
+# Run query generator
+bazel run ${CONFIG} --output_groups=-mypy //packaging:query_generator -- --mode $mode
+
+# Regenerate/verify gazelle_cc index files
+bazel run ${CONFIG} --output_groups=-mypy //tools:generate_ccindex -- --mode $mode
+
 echo $BAZEL_FILES | xargs bazel run ${CONFIG} -- //tools/buildifier ${BUILDIFIER_ARGS[@]}
 bazel run ${CONFIG} -- ${BAZEL_TOOL}
 echo $MARKDOWN_FILES | xargs bazel run ${CONFIG} -- //tools/prettier ${PRETTIER_ARGS[@]}
 bazel run ${CONFIG} -- //:gazelle ${GAZELLE_ARGS[@]}
 
-# Add back in when fixed
-# grep_xxx
+bazel run $RULES_LINT_CMD
+
+grep_xxx
+
+# TODO(#139)
+# Add this back in (conflicts with emboss at the moment)
+# See https://github.com/aspect-build/rules_lint/blob/main/example/lint.sh
+# --aspects=//tools/lint:linters.bzl%clang_tidy
 
 
 # TODO(#57): Re-enable this check when we fix the false errors

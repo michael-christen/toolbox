@@ -16,7 +16,7 @@ class Greeter(hello_pb2_grpc.GreeterServicer):
         return hello_pb2.HelloReply(message="Hello, %s!" % request.name)
 
 
-def get_server() -> grpc.aio.server:
+def get_server() -> grpc.aio.Server:
     server = grpc.aio.server()
     hello_pb2_grpc.add_GreeterServicer_to_server(Greeter(), server)
     listen_addr = "[::]:50051"
@@ -25,12 +25,12 @@ def get_server() -> grpc.aio.server:
     return server
 
 
-async def serve() -> None:
+async def serve() -> None:  # pragma no cover
     server = get_server()
     await server.start()
     await server.wait_for_termination()
 
 
-if __name__ == "__main__":
+if __name__ == "__main__":  # pragma no cover
     logging.basicConfig(level=logging.INFO)
     asyncio.run(serve())

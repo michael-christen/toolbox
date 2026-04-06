@@ -1,4 +1,4 @@
-load("@rules_cc//cc:defs.bzl", "cc_binary", "cc_library")
+load("//bzl:cc.bzl", "cc_binary", "cc_library")
 
 package(default_visibility = ["//visibility:private"])
 
@@ -13,7 +13,7 @@ cc_binary(
     srcs = ["hello-world.cc"],
     deps = [
         ":hello-greet",
-        "//examples/basic:hello_cc_library",
+        "//examples/basic:hello_cc_proto",
         "//examples/basic/lib:hello-time",
     ],
 )

@@ -1,0 +1,7 @@
+query_target: "//... - //docs/... - //third_party/bazel/..."
+test_target: "//..."
+days_ago: 400
+refinement:
+  name_patterns: []
+  class_patterns: []
+  class_pattern_to_name_patterns: {}

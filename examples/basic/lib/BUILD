@@ -1,4 +1,4 @@
-load("@rules_cc//cc:defs.bzl", "cc_library")
+load("//bzl:cc.bzl", "cc_library", "cc_test")
 
 package(default_visibility = ["//visibility:private"])
 
@@ -7,4 +7,10 @@ cc_library(
     srcs = ["hello-time.cc"],
     hdrs = ["hello-time.h"],
     visibility = ["//examples/basic/app:__pkg__"],
+)
+
+cc_test(
+    name = "hello_test",
+    srcs = ["hello_test.cc"],
+    deps = ["//tlbox/testing:gtest_main"],
 )

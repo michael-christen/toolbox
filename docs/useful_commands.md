@@ -3,20 +3,42 @@
 This is just a place for me to put small commands that I find myself looking up
 frequently.
 
-### Reload udev rules:
+## Reload udev rules:
 
 ```
 sudo udevadm control --reload-rules
 sudo udevadm trigger
 ```
 
-### Bash
+## Bash
 
-#### Argument shortcuts
+### Common Operations
+
+```
+# If
+
+if [ CONDITIONAL ]; then
+  ...
+fi
+
+# Conditionals
+'-z "${variable}"'   is this variable set
+```
+
+### Parameters
+
+https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html
+
+```
+${v-unset}  # if v is unset will read as "unset"
+```
+
+### Argument shortcuts
 
 https://stackoverflow.com/questions/4009412/how-to-use-arguments-from-previous-command
 
 ```
+$@      all arguments
 !^      first argument
 !$      last argument
 !*      all arguments
@@ -31,7 +53,7 @@ https://stackoverflow.com/questions/4009412/how-to-use-arguments-from-previous-c
 !!      repeat the previous line
 ```
 
-#### Package Commands
+### Package Commands
 
 Get package dependencies:
 

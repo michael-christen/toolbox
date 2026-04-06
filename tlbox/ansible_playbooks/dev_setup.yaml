@@ -1,0 +1,121 @@
+# See https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_intro.html
+# Run remotely to configure a new machine in a minimalist manner.
+# Main Purposes:
+#   - Installing core packages
+#   - Bootstrapping shared config (git directory that sets up links)
+# Thoughts?
+# -
+#  remote_user: "{{ lookup('env', 'USER') }}"
+#  become_flags: "--preserve-env=SSH_AUTH_SOCK"
+#  vars:
+#    ansible_python_interpreter: /usr/bin/python3
+# - how do we bootstrap the first little bit, eg) setup a ssh server?
+# - how to keep these separate? maybe different roles that are linked here?
+#
+# Run as is:
+# ./venv/bin/ansible-playbook -i localhost, --connection=local ansible_playbooks/dev_setup.yaml --ask-become-pass
+#
+# Notes from setup.md:
+# - Document installation
+# - Get monorepo going
+#
+# Other stuff to do?
+# - ssh-keygen
+# - Download and install chrome
+# sudo dpkg -i google-chrome-stable_current_amd64.deb
+# - See https://www.one-tab.com/page/mlxlfXwBR0Wvji536ANM7w too
+# - Need instructions as well, to setup router as well
+# - Configure bazelisk
+# wget -O ~/tools/bazel https://github.com/bazelbuild/bazelisk/releases/download/v1.18.0/bazelisk-linux-amd64
+# chmod +x ~/tools/bazel
+# ~/tools/bazel
+# Add to path
+#
+# sensors command to check hardware
+# - lm-sensors
+#
+# - check versions of packages?
+---
+# - name: Gather facts
+#   hosts: all
+#   tasks:
+#     - name: Gather the package facts
+#       ansible.builtin.package_facts:
+#         manager: auto
+#
+#     - name: Print the package facts
+#       ansible.builtin.debug:
+#         var: ansible_facts.packages
+# TODO:
+# - register users with dialout
+# - passwordless sudo?
+- name: Configure Dynamic DNS
+  hosts: all
+  tasks:
+    # TODO: Modify /etc/ddclient.conf
+    # TODO: configure as part of `service`
+    - become: true
+      block:
+        - name: Install Packages
+          ansible.builtin.package:
+            name:
+              - ddclient
+# TODO: Configure ssh server
+# - modify /etc/ssh/sshd_config
+# - systemctl status & reload
+# - Setup firewall via ufw
+# PasswordAuthentication no
+# ChallengeResponseAuthentication no
+# UsePAM no
+# - https://github.com/willshersystems/ansible-sshd
+#
+# sudo ufw allow 22
+# sudo ufw status
+# sudo ufw default deny incoming
+# sudo ufw default allow outgoing
+# sudo ufw enable
+# sudo ufw status
+#
+- name: Configure SSH Server
+  hosts: all
+  tasks:
+    # TODO: Modify /etc/ddclient.conf
+    # TODO: configure as part of `service`
+    - become: true
+      block:
+        - name: Install Packages
+          ansible.builtin.package:
+            name:
+              - openssh-server
+        # - name: Configure Keys
+        #   ansible.posix.authorized_key:
+        #     # TODO: don't hardcode
+        #     user: mchristen
+        #     state: present
+        #     key: '{{ item }}'
+        #   with_file:
+        #     - ssh_keys/mchristen_work
+        #     - ssh_keys/mchristen_phone
+# TODO: This doesn't seem to properly be setting us up
+# Instead, we are simply linked to input/event..
+- name: Configure udev rules
+  hosts: all
+  tasks:
+    - become: true
+      block:
+        - name: "Set dev-hardware rules"
+          ansible.builtin.copy:
+            src: udev/99-dev-hardware.rules
+            dest: /etc/udev/rules.d/99-dev-hardware.rules
+            mode: 0644
+          notify: Reload udev
+          # TODO: Do this, iterating over all the files
+        - name: "Set pico rules"
+          ansible.builtin.copy:
+            src: udev/49-pico.rules
+            dest: /etc/udev/rules.d/49-pico.rules
+            mode: 0644
+          notify: Reload udev
+  handlers:
+    - name: Reload udev
+      include_tasks: tasks/reload_udev.yaml

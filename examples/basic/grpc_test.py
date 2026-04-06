@@ -6,11 +6,14 @@ from examples.basic import server
 
 
 class TestHello(unittest.IsolatedAsyncioTestCase):
+    """Test asyncio client and server with gRPC."""
+
     async def asyncSetUp(self):
         self.server = server.get_server()
         await self.server.start()
 
-    async def asyncTearDown(self):
+    # Why does coverage not see wait_for_termination as ran?
+    async def asyncTearDown(self):  # pragma: no cover
         await self.server.stop(grace=None)
         await self.server.wait_for_termination()
 

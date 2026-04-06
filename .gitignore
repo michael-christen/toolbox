@@ -9,7 +9,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
-build/
+/build/
 develop-eggs/
 dist/
 downloads/
@@ -64,12 +64,16 @@ instance/
 
 # Sphinx documentation
 docs/_build/
+# Obsidian
+docs/.obsidian/workspace.json
 
 # PyBuilder
 target/
 
 # Jupyter Notebook
 .ipynb_checkpoints
+# jupytext preserves these with their paired .py notebooks
+*.ipynb
 
 # pyenv
 .python-version
@@ -150,3 +154,6 @@ kicad_generated_output/
 
 # venv
 .main.venv
+
+# claude
+.claude/settings.local.json
