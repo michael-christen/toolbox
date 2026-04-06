@@ -13,6 +13,9 @@ manifest:
     OpenSSL: pyopenssl
     PIL: pillow
     a11y_pygments: accessible_pygments
+    aiohappyeyeballs: aiohappyeyeballs
+    aiohttp: aiohttp
+    aiosignal: aiosignal
     alabaster: alabaster
     annotated_types: annotated_types
     anyio: anyio
@@ -25,6 +28,7 @@ manifest:
     attr: attrs
     attrs: attrs
     autoapi: sphinx_autoapi
+    autobahn: autobahn
     babel: babel
     backoff: backoff
     bin.units_from_xls: openhtf
@@ -34,6 +38,7 @@ manifest:
     blib2to3: black
     bokeh: bokeh
     bs4: beautifulsoup4
+    cbor2: cbor2
     certifi: certifi
     cffi: cffi
     charset_normalizer: charset_normalizer
@@ -57,6 +62,7 @@ manifest:
     flake8: flake8
     fontTools: fonttools
     fqdn: fqdn
+    frozenlist: frozenlist
     furo: furo
     google.api.annotations_pb2: googleapis_common_protos
     google.api.auth_pb2: googleapis_common_protos
@@ -140,6 +146,7 @@ manifest:
     httpcore: httpcore
     httplib2: httplib2
     httpx: httpx
+    hyperlink: hyperlink
     icalendar: icalendar
     idna: idna
     imagesize: imagesize
@@ -149,6 +156,7 @@ manifest:
     ipykernel: ipykernel
     ipykernel_launcher: ipykernel
     ipython_pygments_lexers: ipython_pygments_lexers
+    ipywidgets: ipywidgets
     isoduration: isoduration
     isort: isort
     jedi: jedi
@@ -159,15 +167,19 @@ manifest:
     jsonschema_specifications: jsonschema_specifications
     jupyter: jupyter_core
     jupyter_client: jupyter_client
+    jupyter_console: jupyter_console
     jupyter_core: jupyter_core
     jupyter_events: jupyter_events
     jupyter_lsp: jupyter_lsp
     jupyter_server: jupyter_server
+    jupyter_server_proxy: jupyter_server_proxy
     jupyter_server_terminals: jupyter_server_terminals
     jupyterlab: jupyterlab
     jupyterlab_jupytext: jupytext
     jupyterlab_pygments: jupyterlab_pygments
     jupyterlab_server: jupyterlab_server
+    jupyterlab_vpython: jupyterlab_vpython
+    jupyterlab_widgets: jupyterlab_widgets
     jupytext: jupytext
     jupytext_config: jupytext
     kiwisolver: kiwisolver
@@ -190,6 +202,8 @@ manifest:
     mpl_toolkits.axes_grid1: matplotlib
     mpl_toolkits.axisartist: matplotlib
     mpl_toolkits.mplot3d: matplotlib
+    msgpack: msgpack
+    multidict: multidict
     mutablerecords: mutablerecords
     mypy: mypy
     mypy_extensions: mypy_extensions
@@ -224,6 +238,7 @@ manifest:
     posthog: posthog
     prometheus_client: prometheus_client
     prompt_toolkit: prompt_toolkit
+    propcache: propcache
     proto: proto_plus
     psutil: psutil
     psycopg2: psycopg2_binary
@@ -258,6 +273,7 @@ manifest:
     scipy: scipy
     send2trash: send2trash
     setuptools: setuptools
+    simpervisor: simpervisor
     simpy: simpy
     six: six
     snowballstemmer: snowballstemmer
@@ -317,22 +333,30 @@ manifest:
     tornado: tornado
     tqdm: tqdm
     traitlets: traitlets
+    twisted.plugins.autobahn_endpoints: autobahn
+    twisted.plugins.autobahn_twistd: autobahn
+    txaio: txaio
     typing_extensions: typing_extensions
     typing_inspection: typing_inspection
     tzdata: tzdata
+    ubjson: py_ubjson
     uc_micro: uc_micro_py
+    ujson: ujson
     uri_template: uri_template
     uritemplate: uritemplate
     urllib3: urllib3
+    vpython: vpython
     wcwidth: wcwidth
     webcolors: webcolors
     webencodings: webencodings
     websocket: websocket_client
     wheel: wheel
+    widgetsnbextension: widgetsnbextension
     xyzservices: xyzservices
     yaml: pyyaml
+    yarl: yarl
     zmq: pyzmq
     zstandard: zstandard
   pip_repository:
     name: pip
-integrity: ea362b426e7ed8b07004c720cb88481d9d075fbdbe691206c3ba98793c22ad7e
+integrity: 43d294994b734ee52062c94994593247d13a40ab8af2358a02caf0ed677c33a5
