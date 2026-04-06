@@ -42,6 +42,7 @@ PYTHON_TARGETS = [
     "//examples/vpython:inverted_pendulum",
     "//examples/vpython:pkg_resources",
     "//examples/vpython:sliding_pendulum",
+    "//examples/vpython:vpython_stub",
     "//packaging:query_generator",
     "//third_party/bazel/proto:action_cache_py_library",
     "//third_party/bazel/proto:build_event_stream_py_library",
