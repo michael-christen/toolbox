@@ -118,4 +118,3 @@ def cc_size(target, max_flash, max_ram, **kwargs):
         tags = ["cc_size"],
         **kwargs
     )
->>>>>>> master
