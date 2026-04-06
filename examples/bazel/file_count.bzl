@@ -1,18 +1,20 @@
 FileCountInfo = provider(
     fields = {
-        'count' : 'number of files'
-    }
+        "count": "number of files",
+    },
 )
 
 def _file_count_aspect_impl(target, ctx):
     count = 0
+
     # Make sure the rule has a srcs attribute.
-    if hasattr(ctx.rule.attr, 'srcs'):
+    if hasattr(ctx.rule.attr, "srcs"):
         # Iterate through the sources counting files
         for src in ctx.rule.attr.srcs:
             for f in src.files.to_list():
-                if ctx.attr.extension == '*' or ctx.attr.extension == f.extension:
+                if ctx.attr.extension == "*" or ctx.attr.extension == f.extension:
                     count = count + 1
+
     # Get the counts from our dependencies.
     for dep in ctx.rule.attr.deps:
         count = count + dep[FileCountInfo].count
@@ -20,10 +22,10 @@ def _file_count_aspect_impl(target, ctx):
 
 file_count_aspect = aspect(
     implementation = _file_count_aspect_impl,
-    attr_aspects = ['deps'],
+    attr_aspects = ["deps"],
     attrs = {
-        'extension' : attr.string(values = ['*', 'h', 'cc']),
-    }
+        "extension": attr.string(values = ["*", "h", "cc"]),
+    },
 )
 
 def _file_count_rule_impl(ctx):
@@ -33,7 +35,7 @@ def _file_count_rule_impl(ctx):
 file_count_rule = rule(
     implementation = _file_count_rule_impl,
     attrs = {
-        'deps' : attr.label_list(aspects = [file_count_aspect]),
-        'extension' : attr.string(default = '*'),
+        "deps": attr.label_list(aspects = [file_count_aspect]),
+        "extension": attr.string(default = "*"),
     },
 )

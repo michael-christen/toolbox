@@ -1,3 +1,5 @@
+load("@rules_cc//cc:cc_binary.bzl", "cc_binary")
+load("@rules_cc//cc:cc_library.bzl", "cc_library")
 load("@rules_platform//platform_data:defs.bzl", "platform_data")
 load("@rules_shell//shell:sh_binary.bzl", "sh_binary")
 load("@rules_shell//shell:sh_test.bzl", "sh_test")
@@ -155,38 +157,43 @@ sh_test(
 
 hello_world(
     name = "hello",
-    username = "Alice",
     template = "file.cc.tpl",
-)
-
-cc_binary(
-    name = "hello_bin",
-    srcs = [":hello"],
+    username = "Alice",
 )
 
 # Make it visible and accessible
 exports_files(["file.cc.tpl"])
 
 cc_library(
-    name = 'lib',
+    name = "lib",
     srcs = [
-        'lib.h',
-        'lib.cc',
+        "app.cc",
+        "lib.cc",
     ],
+    hdrs = [
+        "app.h",
+        "lib.h",
+    ],
+    deps = ["lib"],
 )
 
 cc_binary(
-    name = 'app',
+    name = "app",
     srcs = [
-        'app.h',
-        'app.cc',
-        'main.cc',
+        "app.cc",
+        "app.h",
+        "main.cc",
     ],
-    deps = ['lib'],
+    deps = ["lib"],
 )
 
 file_count_rule(
-    name = 'file_count',
-    deps = ['app'],
-    extension = 'h',
+    name = "file_count",
+    extension = "h",
+    deps = ["app"],
+)
+
+cc_binary(
+    name = "main",
+    srcs = ["main.cc"],
 )
