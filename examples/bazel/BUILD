@@ -9,6 +9,8 @@ load(":my_rules_test.bzl", "my_rules_test_suite")
 
 package(default_visibility = ["//visibility:private"])
 
+# gazelle:cc_group_unit_cycles warn
+
 filegroup(
     name = "python_source",
     srcs = glob(
