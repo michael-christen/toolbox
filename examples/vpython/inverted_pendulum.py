@@ -114,16 +114,14 @@ l2 = 60e-3
 
 def get_constants() -> Constants:
     m = 513.3e-3  # kg
-    # XXX: Was 0 earlier
     m2 = 50e-3
     m1 = m - m2
-    # XXX: Why 12?
+    # /12: moment of inertia of uniform rod (m*L^2/12) about its center
     i = m1 * (l1 / 2 + l2) ** 2 + m2 * l2 * l2 / 12
     # position of center of mass
     length = l2 / 2 + (l1 + l2) * m1 / (2 * m)
     return Constants(
-        # XXX: Why x 2?
-        i_w=389.6e-9 * 2,
+        i_w=389.6e-9 * 2,  # two wheels
         m_w=7.2e-3,
         m=m,
         r=16e-3,

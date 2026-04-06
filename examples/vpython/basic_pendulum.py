@@ -94,10 +94,9 @@ def main() -> None:
         d_state = compute_derivative_state(
             constants=constants, input_val=input_val, state=state
         )
-        # XXX: Doing all at the same time is likely best (use same value, see
-        # elsewhere)
-        state.theta_d1 += d_state.theta_d1 * dt
+        new_theta_d1 = state.theta_d1 + d_state.theta_d1 * dt
         state.theta_d0 += state.theta_d1 * dt
+        state.theta_d1 = new_theta_d1
 
         # Animate
         staff.rotate(angle=-d_state.theta_d0 * dt, axis=vpython.vec(0, 0, 1))
@@ -107,13 +106,11 @@ def main() -> None:
         )
         v = state.theta_d1 * constants.l
         kinetic_energy = constants.m1 * (v**2) / 2
-        # XXX: Not growing unbounded anymore, but still oscillating ~ 0.02,
-        # though it changes based on the dt used, so perhaps it's ok?
-        # NOTE: This is not factoring in heat loss of friction, so if that's
-        # non-zero, you'll see this dropping
+        # Total energy oscillates slightly (~0.02) due to Euler integration
+        # error; magnitude depends on dt. Friction heat loss not included.
         total_energy = potential_energy + kinetic_energy
 
-        # Graph (XXX: Maybe before)
+        # Graph
         graph_theta_d0.plot(t, state.theta_d0)
         graph_theta_d1.plot(t, state.theta_d1)
         graph_theta_d2.plot(t, d_state.theta_d1)
