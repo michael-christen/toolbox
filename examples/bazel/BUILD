@@ -1,9 +1,8 @@
 load("@rules_platform//platform_data:defs.bzl", "platform_data")
 load("@rules_shell//shell:sh_binary.bzl", "sh_binary")
 load("@rules_shell//shell:sh_test.bzl", "sh_test")
-load(":foo.bzl", "foo_binary", "hello_world")
 load(":file_count.bzl", "file_count_rule")
-load(":my_rules.bzl", "foo_binary", "foo_toolchain")
+load(":my_rules.bzl", "foo_binary", "foo_toolchain", "hello_world")
 load(":my_rules_test.bzl", "my_rules_test_suite")
 
 package(default_visibility = ["//visibility:private"])
@@ -153,9 +152,6 @@ sh_test(
     ],
     data = [":cat_bin1_evil"],
 )
-
-foo_binary(name = "bin1", username = "Alice")
-foo_binary(name = "bin2", username = "Bob")
 
 hello_world(
     name = "hello",
