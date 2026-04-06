@@ -174,7 +174,6 @@ cc_library(
         "app.h",
         "lib.h",
     ],
-    deps = ["lib"],
 )
 
 cc_binary(
