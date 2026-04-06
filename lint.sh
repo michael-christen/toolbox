@@ -13,7 +13,7 @@ function grep_xxx {
   X="X"
   BAD_STRING="$X$X$X"
   # Collect matches with line numbers
-  MATCHES=$(git grep -n ${BAD_STRING} || true)
+  MATCHES=$(git grep -In ${BAD_STRING} || true)
   if [ -n "$MATCHES" ]; then
     echo "${BAD_STRING} found in source"
     while IFS= read -r line; do
