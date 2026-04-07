@@ -1,12 +1,17 @@
 """Bazel rules for KiCad EDA tooling via kicad-cli."""
 
+# kicad-cli requires a writable HOME for its cache (~/.cache/kicad/).
+# In the Bazel sandbox HOME is unset and the real home is read-only, so
+# we create a throwaway temp dir before every invocation.
+_KICAD_PREAMBLE = "export HOME=$(mktemp -d) && "
+
 def _kicad_schematic_svgs_impl(ctx):
     """Export all schematic sheets as SVGs into a directory tree artifact."""
     output_dir = ctx.actions.declare_directory(ctx.label.name)
     ctx.actions.run_shell(
         inputs = ctx.files.srcs,
         outputs = [output_dir],
-        command = "kicad-cli sch export svg -o {out} {top}".format(
+        command = _KICAD_PREAMBLE + "kicad-cli sch export svg -o {out} {top}".format(
             out = output_dir.path,
             top = ctx.file.top.path,
         ),
@@ -38,7 +43,7 @@ def _kicad_schematic_pdf_impl(ctx):
     ctx.actions.run_shell(
         inputs = ctx.files.srcs,
         outputs = [output],
-        command = "kicad-cli sch export pdf -o {out} {top}".format(
+        command = _KICAD_PREAMBLE + "kicad-cli sch export pdf -o {out} {top}".format(
             out = output.path,
             top = ctx.file.top.path,
         ),
@@ -70,7 +75,8 @@ def _kicad_pcb_svg_impl(ctx):
     ctx.actions.run_shell(
         inputs = [ctx.file.src],
         outputs = [output],
-        command = "kicad-cli pcb export svg -o {out} {src}".format(
+        command = _KICAD_PREAMBLE + "kicad-cli pcb export svg -l {layers} -o {out} {src}".format(
+            layers = ctx.attr.layers,
             out = output.path,
             src = ctx.file.src.path,
         ),
@@ -88,6 +94,10 @@ kicad_pcb_svg = rule(
             allow_single_file = [".kicad_pcb"],
             mandatory = True,
         ),
+        "layers": attr.string(
+            doc = "Comma-separated list of PCB layers to export.",
+            default = "F.Cu,B.Cu,F.Silkscreen,B.Silkscreen,Edge.Cuts,F.Fab,B.Fab",
+        ),
     },
 )
 
@@ -97,7 +107,7 @@ def _kicad_gerbers_impl(ctx):
     ctx.actions.run_shell(
         inputs = [ctx.file.src],
         outputs = [output_dir],
-        command = "kicad-cli pcb export gerbers -o {out} {src}".format(
+        command = _KICAD_PREAMBLE + "kicad-cli pcb export gerbers -o {out} {src}".format(
             out = output_dir.path,
             src = ctx.file.src.path,
         ),
@@ -124,7 +134,7 @@ def _kicad_drc_impl(ctx):
     ctx.actions.run_shell(
         inputs = [ctx.file.src],
         outputs = [output],
-        command = "kicad-cli pcb drc --format json -o {out} {src}".format(
+        command = _KICAD_PREAMBLE + "kicad-cli pcb drc --format json -o {out} {src}".format(
             out = output.path,
             src = ctx.file.src.path,
         ),
