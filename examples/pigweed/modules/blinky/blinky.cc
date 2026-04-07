@@ -51,8 +51,7 @@ void ToggleIo(DigitalInOut& io) {
 
 }  // namespace
 
-Coro<Status> Blinky::BlinkLoop(CoroContext&,
-                               uint32_t blink_count,
+Coro<Status> Blinky::BlinkLoop(CoroContext&, uint32_t blink_count,
                                pw::chrono::SystemClock::duration interval) {
   for (uint32_t blinked = 0; blinked < blink_count || blink_count == 0;
        ++blinked) {
@@ -61,13 +60,13 @@ Coro<Status> Blinky::BlinkLoop(CoroContext&,
       std::lock_guard lock(lock_);
       TurnOff(*monochrome_led_);
     }
-    co_await timer_.WaitFor(interval);
+    co_await time_->WaitFor(interval);
     {
       PW_LOG_INFO("LED blinking: ON");
       std::lock_guard lock(lock_);
       TurnOn(*monochrome_led_);
     }
-    co_await timer_.WaitFor(interval);
+    co_await time_->WaitFor(interval);
   }
   {
     std::lock_guard lock(lock_);
@@ -83,9 +82,11 @@ Blinky::Blinky()
       }) {}
 
 void Blinky::Init(Dispatcher& dispatcher,
+                  pw::async2::TimeProvider<pw::chrono::SystemClock>& time,
                   Allocator& allocator,
                   pw::digital_io::DigitalInOut& monochrome_led) {
   dispatcher_ = &dispatcher;
+  time_ = &time;
   allocator_ = &allocator;
 
   std::lock_guard lock(lock_);
@@ -119,8 +120,8 @@ pw::Status Blinky::Blink(uint32_t blink_count, uint32_t interval_ms) {
   if (blink_count == 0) {
     PW_LOG_INFO("Blinking forever at a %ums interval", interval_ms);
   } else {
-    PW_LOG_INFO(
-        "Blinking %u times at a %ums interval", blink_count, interval_ms);
+    PW_LOG_INFO("Blinking %u times at a %ums interval", blink_count,
+                interval_ms);
   }
 
   pw::chrono::SystemClock::duration interval =

@@ -1,12 +1,22 @@
+load("@rules_cc//cc:cc_binary.bzl", "cc_binary")
+load("@rules_cc//cc:cc_library.bzl", "cc_library")
 load("@rules_platform//platform_data:defs.bzl", "platform_data")
-load(":my_rules.bzl", "foo_binary", "foo_toolchain")
+load("@rules_shell//shell:sh_binary.bzl", "sh_binary")
+load("@rules_shell//shell:sh_test.bzl", "sh_test")
+load(":file_count.bzl", "file_count_rule")
+load(":my_rules.bzl", "foo_binary", "foo_toolchain", "hello_world")
 load(":my_rules_test.bzl", "my_rules_test_suite")
 
 package(default_visibility = ["//visibility:private"])
 
+# gazelle:cc_group_unit_cycles warn
+
 filegroup(
     name = "python_source",
-    srcs = glob(["*.py"]) + [
+    srcs = glob(
+        ["*.py"],
+        allow_empty = True,
+    ) + [
     ],
     visibility = ["//visibility:public"],
 )
@@ -127,6 +137,7 @@ platform_data(
 # Prove this is working as expected (changing prefix)
 sh_test(
     name = "cat_bin1_pure_test",
+    timeout = "short",
     srcs = ["check_equality.sh"],
     args = [
         "$(location :cat_bin1_pure)",
@@ -137,10 +148,53 @@ sh_test(
 
 sh_test(
     name = "cat_bin1_evil_test",
+    timeout = "short",
     srcs = ["check_equality.sh"],
     args = [
         "$(location :cat_bin1_evil)",
         "'Hello from rude_guy to Bob!'",
     ],
     data = [":cat_bin1_evil"],
+)
+
+hello_world(
+    name = "hello",
+    template = "file.cc.tpl",
+    username = "Alice",
+)
+
+# Make it visible and accessible
+exports_files(["file.cc.tpl"])
+
+cc_library(
+    name = "lib",
+    srcs = [
+        "app.cc",
+        "lib.cc",
+    ],
+    hdrs = [
+        "app.h",
+        "lib.h",
+    ],
+)
+
+cc_binary(
+    name = "app",
+    srcs = [
+        "app.cc",
+        "app.h",
+        "main.cc",
+    ],
+    deps = ["lib"],
+)
+
+file_count_rule(
+    name = "file_count",
+    extension = "h",
+    deps = ["app"],
+)
+
+cc_binary(
+    name = "main",
+    srcs = ["main.cc"],
 )

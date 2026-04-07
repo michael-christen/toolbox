@@ -5,9 +5,11 @@
 load("@bazel_gazelle//:def.bzl", "gazelle", "gazelle_binary")
 load("@npm//:defs.bzl", "npm_link_all_packages")
 load("@pip//:requirements.bzl", "all_whl_requirements")
-load("@rules_python//python:pip.bzl", "compile_pip_requirements")
 load("@rules_python_gazelle_plugin//manifest:defs.bzl", "gazelle_python_manifest")
 load("@rules_python_gazelle_plugin//modules_mapping:def.bzl", "modules_mapping")
+load("@rules_uv//uv:pip.bzl", "pip_compile")
+load("@rules_uv//uv:venv.bzl", "create_venv")
+load("//:copts_transition.bzl", "executable_with_copts")
 
 package(default_visibility = ["//visibility:private"])
 
@@ -15,6 +17,9 @@ exports_files(
     [
         ".flake8",
         ".prettierrc",
+        ".clang-format",
+        ".clang-tidy",
+        "multitool.lock.json",
         "mypy.ini",
         "pytest.ini",
         "pyproject.toml",
@@ -22,15 +27,28 @@ exports_files(
     visibility = ["//visibility:public"],
 )
 
-compile_pip_requirements(
+pip_compile(
     name = "requirements",
     # https://bazel.build/reference/be/common-definitions
-    size = "enormous",
-    timeout = "eternal",  # 60m
     requirements_in = "requirements.in",
     requirements_txt = "requirements_lock.txt",
-    # Don't want to type-check requirements building
-    tags = ["no-mypy"],
+    tags = [
+        # Don't want to type-check requirements building
+        "no-mypy",
+        # Avoid in flake detection
+        "skip-large-tests",
+    ],
+)
+
+# bazel run //:create_venv
+# venv/bin/<cmd>
+#
+# Note that you should likely be able to modify non-generated source and see
+# this reflected by venv binary references, etc.
+create_venv(
+    name = "create_venv",
+    destination_folder = "venv",
+    requirements_txt = "//:requirements_lock.txt",
 )
 
 # This repository rule fetches the metadata for python packages we
@@ -63,17 +81,44 @@ gazelle_python_manifest(
 )
 
 gazelle_binary(
-    name = "gazelle_bin",
+    name = "og_gazelle_bin",
     languages = [
         "@bazel_gazelle//language/bazel/visibility",  # bazel visibility rules
         "@bazel_gazelle//language/go",  # Built-in rule from gazelle for Golang
         "@bazel_gazelle//language/proto",  # Built-in rule from gazelle for Protos
         # Any languages that depend on the proto plugin must come after it
-        "@rules_python_gazelle_plugin//python:python",  # Use gazelle from rules_python
+        # NOTE: This is failing to compile without copt=["-w"]
+        # See  the failure below:
+        #
+        # Use --sandbox_debug to see verbose messages from the sandbox and retain the sandbox build root for debugging
+        # external/gazelle++go_deps+com_github_smacker_go_tree_sitter/get_changed_ranges.c:220:31: error: cast from 'const SubtreeHeapData *' to 'Subtree *' drops const qualifier [-Werror,-Wcast-qual]
+        #   220 |       const Subtree *child = &ts_subtree_children(*entry.subtree)[i];
+        #       |                               ^
+        # external/gazelle++go_deps+com_github_smacker_go_tree_sitter/./././subtree.h:238:46: note: expanded from macro 'ts_subtree_children'
+        #   238 |   ((self).data.is_inline ? NULL : (Subtree *)((self).ptr) - (self).ptr->child_count)
+        #       |                                              ^
+        # external/gazelle++go_deps+com_github_smacker_go_tree_sitter/get_changed_ranges.c:275:36: error: cast from 'const SubtreeHeapData *' to 'Subtree *' drops const qualifier [-Werror,-Wcast-qual]
+        #   275 |       const Subtree *next_child = &ts_subtree_children(*parent)[child_index];
+        #       |                                    ^
+        # external/gazelle++go_deps+com_github_smacker_go_tree_sitter/./././subtree.h:238:46: note: expanded from macro 'ts_subtree_children'
+        #   238 |   ((self).data.is_inline ? NULL : (Subtree *)((self).ptr) - (self).ptr->child_count)
+        #       |                                              ^
+        # 2 errors generated.
+        # compilepkg: error running subcommand external/pigweed++_repo_rules6+llvm_toolchain/bin/clang: exit status 1
+        "@rules_python_gazelle_plugin//python:python",
         "@build_stack_rules_proto//language/protobuf",  # Protobuf language generation
+        "@gazelle_cc//language/cc",  # C++ language generation
         # TODO: Add buf suppport
         # "@rules_buf//gazelle/buf:buf",  # Generates buf lint and buf breaking detection rules
     ],
+    # Don't create this w/ `//...`, as it won't have the copt used below
+    tags = ["manual"],
+)
+
+executable_with_copts(
+    name = "gazelle_bin",
+    extra_copts = ["-w"],
+    wrapped = ":og_gazelle_bin",
 )
 
 # Our gazelle target points to the python gazelle binary.
@@ -100,10 +145,17 @@ gazelle(
 
 # Exclude these folders from gazelle generation
 # gazelle:exclude venv
+# Avoid gazelle on these directories
+# gazelle:exclude examples/pyglet
+# gazelle:exclude tlbox/notebooks/.ipynb_checkpoints
 
 # Don't use go
 # gazelle:go_generate_proto false
-
+# Don't generate proto_cc_library/proto_compile for C++; use cc_proto_library via gazelle_cc instead
+# Manually maintain grpc_cc_library so deps can reference cc_proto_library targets
+# gazelle:proto_language cpp -rule proto_compile
+# gazelle:proto_language cpp -rule proto_cc_library
+# gazelle:proto_language cpp -rule grpc_cc_library
 # Generate 1 proto rule per file
 # gazelle:proto file
 
@@ -112,8 +164,21 @@ gazelle(
 
 # Tell gazelle where to find imports
 # gazelle:resolve py google.protobuf.message @com_google_protobuf//:protobuf_python
+# gtest/gtest.h would otherwise resolve to @pigweed//pw_unit_test:light (from ccindex);
+# map to our wrapper which also provides main().
+# gazelle:resolve cc gtest/gtest.h //tlbox/testing:gtest_main
+# pw_system/system.h maps to a local alias that bundles the backend impls needed at link time.
+# gazelle:resolve cc pw_system/system.h //third_party/pigweed:pw_system_async_alias
+
+# C++ header -> target index files for gazelle_cc resolution
+# gazelle:cc_indexfile tools/pigweed.ccindex
+# gazelle:cc_indexfile tools/emboss.ccindex
+# gazelle:cc_indexfile tools/nanopb.ccindex
 
 # Use our own rules
+# gazelle:map_kind cc_binary cc_binary //bzl:cc.bzl
+# gazelle:map_kind cc_library cc_library //bzl:cc.bzl
+# gazelle:map_kind cc_test cc_test //bzl:cc.bzl
 # gazelle:map_kind py_binary py_binary //bzl:py.bzl
 # gazelle:map_kind py_library py_library //bzl:py.bzl
 # gazelle:map_kind py_test py_test //bzl:py.bzl
@@ -121,11 +186,16 @@ gazelle(
 # gazelle:map_kind proto_py_library proto_py_library //bzl:py.bzl
 
 # TODO: Figure out a way to not need these
+# gazelle:resolve py hw_services.sbr.sbr_pb2 //tlbox/hw/services/sbr:sbr_py_library
+# gazelle:resolve py tlbox.hw.services.sbr.sbr_pb2 //tlbox/hw/services/sbr:sbr_py_library
 # gazelle:resolve py examples.basic.hello_pb2 //examples/basic:hello_py_library
 # gazelle:resolve py examples.basic.hello_pb2_grpc //examples/basic:hello_grpc_py_library
 # gazelle:resolve py third_party.bazel.src.main.protobuf.build_pb2 //third_party/bazel/src/main/protobuf:build_py_library
+# gazelle:resolve py third_party.bazel.proto.build_event_stream_pb2 //third_party/bazel/proto:build_event_stream_py_library
+# gazelle:resolve py third_party.bazel.proto.spawn_pb2 //third_party/bazel/proto:spawn_py_library
 # gazelle:resolve proto pw_protobuf_protos/common.proto @pigweed//pw_protobuf:common_proto
 # gazelle:resolve py examples.pigweed.modules.blinky.blinky_pb2 //examples/pigweed/modules/blinky:blinky_pb2
+# gazelle:resolve py tools.git_pb2 //tools:git_py_library
 # gazelle:resolve py pw_cli @pigweed//pw_system/py:pw_system_lib
 # gazelle:resolve py pw_system.console @pigweed//pw_system/py:pw_system_lib
 # gazelle:resolve py pw_system.device @pigweed//pw_system/py:pw_system_lib
@@ -135,12 +205,20 @@ npm_link_all_packages(name = "node_modules")
 
 filegroup(
     name = "python_source",
-    srcs = glob(["*.py"]) + [
-        "//apps:python_source",
+    srcs = glob(
+        ["*.py"],
+        allow_empty = True,
+    ) + [
         "//examples/basic:python_source",
         "//examples/bazel:python_source",
         "//examples/pigweed/modules/blinky:python_source",
-        "//examples/pigweed/tools:python_source",
+        "//third_party/pigweed/tools:python_source",
+        "//tlbox/apps/bazel_parser:python_source",
     ],
     visibility = ["//visibility:public"],
+)
+
+alias(
+    name = "format",
+    actual = "//tools/format",
 )

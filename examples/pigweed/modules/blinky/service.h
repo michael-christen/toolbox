@@ -17,6 +17,7 @@
 #include "examples/pigweed/modules/blinky/blinky.rpc.pb.h"
 #include "pw_allocator/allocator.h"
 #include "pw_async2/dispatcher.h"
+#include "pw_async2/time_provider.h"
 
 namespace demo {
 
@@ -24,6 +25,7 @@ class BlinkyService final
     : public ::blinky::pw_rpc::nanopb::Blinky::Service<BlinkyService> {
  public:
   void Init(pw::async2::Dispatcher& dispatcher,
+            pw::async2::TimeProvider<pw::chrono::SystemClock>& time,
             pw::Allocator& allocator,
             pw::digital_io::DigitalInOut& monochrome_led);
 

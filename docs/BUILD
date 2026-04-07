@@ -21,12 +21,15 @@ filegroup(
 sphinx_html(
     name = "docs",
     srcs = [
-        "README.md",
         "bringup.md",
         "common_references.md",
+        "cpp_testing.md",
+        "development.md",
         "examples.md",
+        "issue_management.md",
         "myst.md",
         "myst_extensions.md",
+        "structure.md",
         "useful_commands.md",
         ":img",
         ":static",

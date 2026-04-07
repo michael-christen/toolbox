@@ -32,12 +32,15 @@ extensions = [
 ]
 autoapi_dirs = [
     "../examples",
-    "../apps",
+    "../tlbox",
 ]
 autoapi_type = "python"
 autoapi_template_dir = "_templates/autoapi"
 # https://sphinx-autoapi.readthedocs.io/en/latest/reference/config.html#confval-autoapi_python_use_implicit_namespaces
 autoapi_python_use_implicit_namespaces = True
+# Bazel sandbox sources are symlinks; follow them to find Python files.
+# https://sphinx-autoapi.readthedocs.io/en/latest/reference/config.html#confval-autoapi_follow_symlinks
+autoapi_follow_symlinks = True
 # https://sphinx-autoapi.readthedocs.io/en/latest/reference/config.html#confval-autoapi_options
 autoapi_options = [
     "members",

@@ -1,4 +1,21 @@
+# Git LFS tracking for binary and large files
+*.bin filter=lfs diff=lfs merge=lfs -text
+*.elf filter=lfs diff=lfs merge=lfs -text
+*.hex filter=lfs diff=lfs merge=lfs -text
+*.png filter=lfs diff=lfs merge=lfs -text
+*.jpg filter=lfs diff=lfs merge=lfs -text
+*.jpeg filter=lfs diff=lfs merge=lfs -text
+*.gif filter=lfs diff=lfs merge=lfs -text
+*.ico filter=lfs diff=lfs merge=lfs -text
+*.zip filter=lfs diff=lfs merge=lfs -text
+*.tar.gz filter=lfs diff=lfs merge=lfs -text
+*.pdf filter=lfs diff=lfs merge=lfs -text
+
 # https://docs.github.com/en/repositories/working-with-files/managing-files/customizing-how-changed-files-appear-on-github
 gazelle_python.yaml linguist-generated=true -diff
 requirements_lock.txt linguist-generated=true -diff
 MODULE.bazel.lock linguist-generated=true -diff
+packaging/generated.bzl linguist-generated=true
+tools/pigweed.ccindex linguist-generated=true -diff
+tools/emboss.ccindex linguist-generated=true -diff
+tools/nanopb.ccindex linguist-generated=true -diff

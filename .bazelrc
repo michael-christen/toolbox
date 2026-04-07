@@ -1,3 +1,37 @@
+# Import Apsect bazelrc presets
+# From https://docs.aspect.build/guides/bazelrc/
+# & https://github.com/bazel-contrib/bazel-lib/tree/5853e2e441df850dc332910a0808e9dee2ed9e27/.aspect/bazelrc
+import %workspace%/.aspect/bazelrc/bazel7.bazelrc
+import %workspace%/.aspect/bazelrc/convenience.bazelrc
+import %workspace%/.aspect/bazelrc/correctness.bazelrc
+import %workspace%/.aspect/bazelrc/debug.bazelrc
+import %workspace%/.aspect/bazelrc/java.bazelrc
+import %workspace%/.aspect/bazelrc/javascript.bazelrc
+import %workspace%/.aspect/bazelrc/performance.bazelrc
+#
+# NOTE for:
+# build --incompatible_default_to_explicit_init_py
+#
+# This also prevents spurious package name collisions at import time, and
+# should be the default (https://github.com/bazelbuild/bazel/issues/7386). It's
+# particularly helpful for Pigweed, because we have many potential package name
+# collisions due to a profusion of stuttering paths like
+# pw_transfer/py/pw_transfer.
+#
+# NOTE for:
+# build --incompatible_strict_action_env
+#
+# Don't inherit system PATH. Improves hermeticity and cache hit rates. Should
+# be true by default one day (https://github.com/bazelbuild/bazel/issues/7026).
+
+# My overrides of the above imports
+# TODO(#172): Update these
+#
+# pw_protobuf/BUILD.bazel, llvm_toolchain
+common --noincompatible_disallow_empty_glob
+# No module named 'pw_protobuf_codegen_protos' in pw_protobuf options
+build --legacy_external_runfiles
+
 # See https://bazel.build/docs/user-manual for option definitions
 #
 # Standard Pigweed flags
@@ -19,19 +53,6 @@ build --incompatible_enable_cc_toolchain_resolution
 # cache invalidated when your host C++ config changes.
 common --experimental_exclude_defines_from_exec_config
 common --experimental_exclude_starlark_flags_from_exec_config
-
-# Don't automatically create __init__.py files.
-#
-# This prevents spurious package name collisions at import time, and should be
-# the default (https://github.com/bazelbuild/bazel/issues/7386). It's
-# particularly helpful for Pigweed, because we have many potential package name
-# collisions due to a profusion of stuttering paths like
-# pw_transfer/py/pw_transfer.
-common --incompatible_default_to_explicit_init_py
-
-# Don't inherit system PATH. Improves hermeticity and cache hit rates. Should
-# be true by default one day (https://github.com/bazelbuild/bazel/issues/7026).
-common --incompatible_strict_action_env
 
 # Expose exec toolchains for Python. We use these toolchains in some rule
 # implementations (git grep for
@@ -59,8 +80,6 @@ build --@pico-sdk//bazel/config:PICO_STDIO_UART=True
 # ===========
 # Error output settings.
 common --verbose_failures
-# View failed test output
-test --test_output=errors
 
 # Platform configuration
 # ======================
@@ -70,7 +89,7 @@ build --@pigweed//pw_build:default_module_config=//system:module_config
 # Host platform default backends.
 common --@pigweed//pw_log:backend=@pigweed//pw_log_string
 common --@pigweed//pw_log:backend_impl=@pigweed//pw_log_string:impl
-common --@pigweed//pw_log_string:handler_backend=@pigweed//pw_system:log_backend
+common --@pigweed//pw_log_string:handler_backend=//tlbox/testing:log_string_handler
 common --@pigweed//pw_sys_io:backend=@pigweed//pw_sys_io_stdio
 common --@pigweed//pw_system:io_backend=@pigweed//pw_system:socket_target_io
 
@@ -109,13 +128,13 @@ build:quiet --noshow_progress
 
 # Performance per #85
 build --experimental_reuse_sandbox_directories
+# Local disk cache for faster builds when switching workspaces or when remote
+# cache is unavailable. Note that setup-bazel will override this in CI
+common --disk_cache=~/.cache/bazel-disk
 # Have rules_rust use the right hermetic toolchain sysroot, symlink folders
 # into execution directory
 build --@rules_rust//cargo/settings:experimental_symlink_execroot=True
 
-# Must match PYTHON_VERSION in MODULE.bazel
-# LINK(7e463bc3_e4d9_4464_ba39_3217c4a86004)
-common --@aspect_rules_py//py:interpreter_version=3.11.9
 
 # Reduce payload size of uploaded build event stream by eliminating duplicate
 # file references
@@ -129,13 +148,18 @@ common --experimental_profile_include_primary_output
 # ==================
 # TODO(#95): Reconsider nativelink remote caching
 # TODO(#96): Consider only enabling BES for github jobs
-build --bes_results_url=https://app.buildbuddy.io/invocation/
-build --bes_backend=grpcs://remote.buildbuddy.io
-build --remote_cache=grpcs://remote.buildbuddy.io
-build --remote_download_toplevel # Helps remove network bottleneck if caching is enabled
-build --remote_timeout=3600
+common --bes_results_url=https://app.buildbuddy.io/invocation/
+common --bes_backend=grpcs://remote.buildbuddy.io
+common --remote_cache=grpcs://remote.buildbuddy.io
+common --remote_download_toplevel # Helps remove network bottleneck if caching is enabled
+common --remote_timeout=3600
 # Specify this in your user.bazelrc
 # build --remote_header=x-buildbuddy-api-key="$BUILDBUDDY_API_KEY"
+
+# When my network is slow, I can build with --config local instead of
+# commenting on/off
+build:local --bes_backend=
+build:local --remote_cache=
 
 
 # Python Type Checking - mypy
@@ -146,6 +170,7 @@ build --aspects //tools:aspects.bzl%mypy_aspect
 
 # optionally, default enable the mypy checks
 build --output_groups=+mypy
+build:local --output_groups=-mypy
 
 # Allow user to extend .bazelrc
 # https://bazel.build/configure/best-practices#bazelrc-file
@@ -153,4 +178,6 @@ build --output_groups=+mypy
 # note: this should be at the bottom of the file, so that user-specified
 # options override anything in this file
 # (https://bazel.build/run/bazelrc#imports)
+#
+# Note that ci configures this file to specify ci overrides, etc.
 try-import %workspace%/user.bazelrc

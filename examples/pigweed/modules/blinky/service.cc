@@ -19,10 +19,11 @@
 
 namespace demo {
 
-void BlinkyService::Init(pw::async2::Dispatcher& dispatcher,
-                         pw::Allocator& allocator,
-                         pw::digital_io::DigitalInOut& monochrome_led) {
-  blinky_.Init(dispatcher, allocator, monochrome_led);
+void BlinkyService::Init(
+    pw::async2::Dispatcher& dispatcher,
+    pw::async2::TimeProvider<pw::chrono::SystemClock>& time,
+    pw::Allocator& allocator, pw::digital_io::DigitalInOut& monochrome_led) {
+  blinky_.Init(dispatcher, time, allocator, monochrome_led);
   // Start binking once every 1000ms.
   PW_CHECK_OK(blinky_.Blink(/*blink_count=*/0, /*interval_ms=*/1000));
 }
