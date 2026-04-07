@@ -29,6 +29,7 @@ documentation for details.
    bringup
    useful_commands
    common_references
+   hardware
 
 .. toctree::
    :maxdepth: 1
