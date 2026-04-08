@@ -60,6 +60,12 @@ jobs:
           # Needed for llvm_toolchain (C++ builds), otherwise libtinfo.so.5
           # is not found
           sudo apt-get install -y libncurses5
+      # TODO(#305): Don't require kicad system installation
+      - name: Install KiCad
+        run: |
+          sudo add-apt-repository ppa:kicad/kicad-10.0-releases
+          sudo apt-get update
+          sudo apt-get install -y kicad
       - name: Coverage
         run: |
           bazel coverage //... --combined_report=lcov --instrument_test_targets --instrumentation_filter="^//" --test_tag_filters=-skip-large-tests --output_groups=-mypy
@@ -146,6 +152,12 @@ jobs:
           # Needed for clang-format / llvm_toolchain, otherwise libtinfo.so.5
           # is not found
           sudo apt-get install -y libncurses5
+      # TODO(#305): Don't require kicad system installation
+      - name: Install KiCad
+        run: |
+          sudo add-apt-repository ppa:kicad/kicad-10.0-releases
+          sudo apt-get update
+          sudo apt-get install -y kicad
       - name: Lint
         run: |
           ./lint.sh --mode check
