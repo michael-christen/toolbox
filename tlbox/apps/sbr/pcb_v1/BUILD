@@ -16,17 +16,20 @@ kicad_schematic_svgs(
     name = "schematic_svgs",
     srcs = _SCHEMATIC_SRCS,
     top = "self_balancing_robot_v1.kicad_sch",
+    visibility = ["//docs:__pkg__"],
 )
 
 kicad_schematic_pdf(
     name = "schematic_pdf",
     srcs = _SCHEMATIC_SRCS,
     top = "self_balancing_robot_v1.kicad_sch",
+    visibility = ["//docs:__pkg__"],
 )
 
 kicad_pcb_svg(
     name = "pcb_svg",
     src = "self_balancing_robot_v1.kicad_pcb",
+    visibility = ["//docs:__pkg__"],
 )
 
 kicad_gerbers(
