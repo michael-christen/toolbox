@@ -63,7 +63,7 @@ jobs:
       # TODO(#305): Don't require kicad system installation
       - name: Install KiCad
         run: |
-          sudo add-apt-repository ppa:kicad/kicad-10.0-releases
+          sudo add-apt-repository -y ppa:kicad/kicad-10.0-releases
           sudo apt-get update
           sudo apt-get install -y kicad
       - name: Coverage
@@ -155,7 +155,7 @@ jobs:
       # TODO(#305): Don't require kicad system installation
       - name: Install KiCad
         run: |
-          sudo add-apt-repository ppa:kicad/kicad-10.0-releases
+          sudo add-apt-repository -y ppa:kicad/kicad-10.0-releases
           sudo apt-get update
           sudo apt-get install -y kicad
       - name: Lint
