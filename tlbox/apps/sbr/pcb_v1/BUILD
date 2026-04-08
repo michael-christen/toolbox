@@ -1,6 +1,6 @@
 load("//bzl:kicad.bzl", "kicad_drc", "kicad_gerbers", "kicad_pcb_svg", "kicad_schematic_pdf", "kicad_schematic_svgs")
 
-package(default_visibility = ["//visibility:public"])
+package(default_visibility = ["//visibility:private"])
 
 _SCHEMATIC_SRCS = [
     "self_balancing_robot_v1.kicad_sch",
@@ -14,14 +14,14 @@ _SCHEMATIC_SRCS = [
 
 kicad_schematic_svgs(
     name = "schematic_svgs",
-    top = "self_balancing_robot_v1.kicad_sch",
     srcs = _SCHEMATIC_SRCS,
+    top = "self_balancing_robot_v1.kicad_sch",
 )
 
 kicad_schematic_pdf(
     name = "schematic_pdf",
-    top = "self_balancing_robot_v1.kicad_sch",
     srcs = _SCHEMATIC_SRCS,
+    top = "self_balancing_robot_v1.kicad_sch",
 )
 
 kicad_pcb_svg(
