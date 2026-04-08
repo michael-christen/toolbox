@@ -65,7 +65,10 @@ jobs:
         run: |
           sudo add-apt-repository -y ppa:kicad/kicad-10.0-releases
           sudo apt-get update
-          sudo apt-get install -y kicad
+          # --no-install-recommends skips kicad-demos, kicad-packages3d,
+          # kicad-doc-en etc. (~4GB). Project files are self-contained for
+          # CLI export so those libraries aren't needed.
+          sudo apt-get install -y --no-install-recommends kicad
       - name: Coverage
         run: |
           bazel coverage //... --combined_report=lcov --instrument_test_targets --instrumentation_filter="^//" --test_tag_filters=-skip-large-tests --output_groups=-mypy
@@ -157,7 +160,10 @@ jobs:
         run: |
           sudo add-apt-repository -y ppa:kicad/kicad-10.0-releases
           sudo apt-get update
-          sudo apt-get install -y kicad
+          # --no-install-recommends skips kicad-demos, kicad-packages3d,
+          # kicad-doc-en etc. (~4GB). Project files are self-contained for
+          # CLI export so those libraries aren't needed.
+          sudo apt-get install -y --no-install-recommends kicad
       - name: Lint
         run: |
           ./lint.sh --mode check

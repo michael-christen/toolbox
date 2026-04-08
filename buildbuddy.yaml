@@ -12,7 +12,7 @@ actions:
       # TODO(#305): Don't require kicad system installation
       - run: 'sudo add-apt-repository -y ppa:kicad/kicad-10.0-releases'
       # TODO(#209): Don't require installing graphviz
-      - run: 'sudo apt-get update && sudo apt-get install -y graphviz graphviz-dev libtinfo5 kicad'
+      - run: 'sudo apt-get update && sudo apt-get install -y --no-install-recommends graphviz graphviz-dev libtinfo5 kicad'
       - run: './lint.sh --mode check'
       - run: 'bazel build //...'
       - run: 'bazel test //... --output_groups=-mypy'
