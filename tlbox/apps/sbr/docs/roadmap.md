@@ -3,9 +3,13 @@
 A self-balancing two-wheeled robot built on the Raspberry Pi Pico W with
 closed-loop balance control, WiFi telemetry, and Bluetooth gamepad support.
 
+**Target date**: 2026-06-01
+
 ## Phase 1: Hardware Bringup, Drivers, and Simulation
 
 Build out the v1 schematic, breadboard, and configure drivers.
+
+**Start date**: 2026-04-07
 
 Each peripheral needs a C++ driver and a software simulator so the control
 stack can be tested on a host without hardware.
