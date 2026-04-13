@@ -30,6 +30,7 @@ documentation for details.
    useful_commands
    common_references
    hardware
+   sbr_components
 
 .. toctree::
    :maxdepth: 1

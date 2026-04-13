@@ -4,11 +4,12 @@ package(default_visibility = ["//visibility:private"])
 
 _SCHEMATIC_SRCS = [
     "self_balancing_robot_v1.kicad_sch",
-    "imu.kicad_sch",
-    "inner_piece.kicad_sch",
-    "processor.kicad_sch",
+    "battery.kicad_sch",
+    "microcontroller.kicad_sch",
+    "minimu-9_equiv.kicad_sch",
+    "motors.kicad_sch",
+    "power.kicad_sch",
     "pwm_controller.kicad_sch",
-    "stepper_motor.kicad_sch",
     "uart_radio.kicad_sch",
 ]
 
