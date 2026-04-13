@@ -29,6 +29,7 @@ documentation for details.
    bringup
    useful_commands
    common_references
+   sbr_components
 
 .. toctree::
    :maxdepth: 1
