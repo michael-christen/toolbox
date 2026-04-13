@@ -1,0 +1,1345 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "432f5330-96ed-47e6-8aa3-2dc78e27194c")
+	(paper "A4")
+	(lib_symbols
+		(symbol "Sensor_Magnetic:LIS3MDL"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "U"
+				(at -8.89 11.43 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "LIS3MDL"
+				(at 7.62 11.43 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" "Package_LGA:LGA-12_2x2mm_P0.5mm"
+				(at 30.48 -7.62 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" "https://www.st.com/resource/en/datasheet/lis3mdl.pdf"
+				(at 38.1 -10.16 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Ultra-low-power, 3-axis digital output magnetometer, LGA-12"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "digital magnetometer"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "LGA*2x2mm*P0.5mm*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "LIS3MDL_0_1"
+				(rectangle
+					(start -10.16 10.16)
+					(end 10.16 -10.16)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "LIS3MDL_1_1"
+				(pin input line
+					(at -12.7 2.54 0)
+					(length 2.54)
+					(name "SCL/SPC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -12.7 90)
+					(length 2.54)
+					(hide yes)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -12.7 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at 12.7 -2.54 180)
+					(length 2.54)
+					(name "C1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 12.7 270)
+					(length 2.54)
+					(name "Vdd"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 2.54 12.7 270)
+					(length 2.54)
+					(name "Vdd_IO"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 12.7 2.54 180)
+					(length 2.54)
+					(name "INT"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 12.7 5.08 180)
+					(length 2.54)
+					(name "DRDY"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -12.7 -2.54 0)
+					(length 2.54)
+					(name "SDO/SA1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -12.7 5.08 0)
+					(length 2.54)
+					(name "~{CS}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -12.7 0 0)
+					(length 2.54)
+					(name "SDA/SDI/SDO"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -12.7 90)
+					(length 2.54)
+					(hide yes)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Sensor_Motion:LSM6DSL"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "U"
+				(at -11.43 15.24 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "LSM6DSL"
+				(at -11.43 12.7 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left bottom)
+				)
+			)
+			(property "Footprint" "Package_LGA:LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y"
+				(at -10.16 -17.78 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Datasheet" "https://www.st.com/resource/en/datasheet/lsm6dsl.pdf"
+				(at 2.54 -16.51 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "I2C/SPI, iNEMO inertial module: always-on 3D accelerometer and 3D gyroscope, 1.71V to 3.6V VCC"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "Accelerometer Gyroscope MEMS"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "LGA*3x2.5mm*P0.5mm*LayoutBorder3x4y*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "LSM6DSL_0_1"
+				(rectangle
+					(start -12.7 12.7)
+					(end 12.7 -12.7)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+			)
+			(symbol "LSM6DSL_1_1"
+				(pin bidirectional line
+					(at -15.24 7.62 0)
+					(length 2.54)
+					(name "SDO/SA0"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -15.24 5.08 0)
+					(length 2.54)
+					(name "SDX"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -15.24 2.54 0)
+					(length 2.54)
+					(name "SCX"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 15.24 7.62 180)
+					(length 2.54)
+					(name "INT1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 15.24 270)
+					(length 2.54)
+					(name "VDDIO"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 0 -15.24 90)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -15.24 90)
+					(length 2.54)
+					(hide yes)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 2.54 15.24 270)
+					(length 2.54)
+					(name "VDD"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 15.24 5.08 180)
+					(length 2.54)
+					(name "INT2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at 12.7 -5.08 180)
+					(length 3.81)
+					(hide yes)
+					(name "NC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin no_connect line
+					(at 12.7 -2.54 180)
+					(length 3.81)
+					(hide yes)
+					(name "NC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -15.24 -7.62 0)
+					(length 2.54)
+					(name "CS"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -15.24 -5.08 0)
+					(length 2.54)
+					(name "SCL"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -15.24 -2.54 0)
+					(length 2.54)
+					(name "SDA"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+	)
+	(text "Default (SA0 pull-up)\n\nLSM6DS0 Address: 0b1101011\nLIS3MDL Address: 0b0011110\n\nSA0 driven low\n\nLSM6DS0 Address: 0b1101010\nLIS3MDL Address: 0b0011100"
+		(exclude_from_sim no)
+		(at 62.23 98.806 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "0b0e86b8-f270-4ecd-90af-1767e63af756")
+	)
+	(text "Accelerometer + Gyroscope\nActually LSM6DSO"
+		(exclude_from_sim no)
+		(at 214.376 72.898 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "d572f02b-c08a-40c3-bf88-f774ebfbd7a8")
+	)
+	(text "Magnetometer"
+		(exclude_from_sim no)
+		(at 143.256 70.866 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "d9f0c632-dd91-49cd-b031-3f37056b37d6")
+	)
+	(junction
+		(at 124.46 96.52)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0604fdb9-8fde-4d2a-8b7e-a29315673dac")
+	)
+	(junction
+		(at 93.98 113.03)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1dc6091e-0eda-4e8e-a4f7-3345c2a47bb1")
+	)
+	(junction
+		(at 142.24 83.82)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "350af77b-88ca-458f-9ecb-4df0f9d70477")
+	)
+	(junction
+		(at 214.63 83.82)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "4571b241-c33f-43bf-a57b-47b6b90c5083")
+	)
+	(junction
+		(at 120.65 93.98)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "9d913398-151e-447e-b683-73bcbdc02524")
+	)
+	(junction
+		(at 144.78 83.82)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "de87fc45-ea3d-4365-bdc2-6b3e513cdfcf")
+	)
+	(junction
+		(at 101.6 99.06)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "f5e32457-2326-4d70-8cb4-32aa9d20a75b")
+	)
+	(no_connect
+		(at 199.39 96.52)
+		(uuid "3d7bd937-fff5-44de-aef2-05fcec54f80c")
+	)
+	(no_connect
+		(at 199.39 93.98)
+		(uuid "3e1ac7c8-013b-4fab-af56-2aa6719e5afd")
+	)
+	(no_connect
+		(at 154.94 93.98)
+		(uuid "43408c67-a965-4d3a-aa88-2a48bbf5da00")
+	)
+	(no_connect
+		(at 199.39 106.68)
+		(uuid "5d0c5fe9-f28c-42f7-923e-e2acb93291e9")
+	)
+	(no_connect
+		(at 229.87 93.98)
+		(uuid "6f7336b6-85cd-482f-ba2e-4973fbecb0e4")
+	)
+	(no_connect
+		(at 154.94 99.06)
+		(uuid "7470ffd9-0c15-4c7f-9200-3ca15c4a1e49")
+	)
+	(no_connect
+		(at 154.94 91.44)
+		(uuid "9eede6f0-1cd6-4252-a3ba-1f84651b3eeb")
+	)
+	(no_connect
+		(at 129.54 91.44)
+		(uuid "bb220fa3-8905-4d5a-a2bd-bfd38ef54d76")
+	)
+	(no_connect
+		(at 229.87 91.44)
+		(uuid "e04b3147-6c5c-47a7-a833-631c69a6e7ab")
+	)
+	(wire
+		(pts
+			(xy 87.63 93.98) (xy 120.65 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0064c54f-16bb-4b06-93df-adc7d3a97aab")
+	)
+	(wire
+		(pts
+			(xy 93.98 113.03) (xy 142.24 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "00f3f2e9-4098-4e33-bd29-1c8283e2872f")
+	)
+	(wire
+		(pts
+			(xy 199.39 104.14) (xy 196.85 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0d37208e-16e0-4cb6-adfd-51e9508465fc")
+	)
+	(wire
+		(pts
+			(xy 144.78 83.82) (xy 214.63 83.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "12107412-0101-4c4e-bb41-b902a7f17cc9")
+	)
+	(wire
+		(pts
+			(xy 93.98 114.3) (xy 93.98 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2156ef53-93e4-4452-b09f-80cbf4ec1b5f")
+	)
+	(wire
+		(pts
+			(xy 120.65 93.98) (xy 129.54 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2b32390d-0653-466e-91b7-6e02e427eac6")
+	)
+	(wire
+		(pts
+			(xy 86.36 83.82) (xy 142.24 83.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "349dcc4a-7f85-4db3-ae07-8f85827b57b4")
+	)
+	(wire
+		(pts
+			(xy 214.63 114.3) (xy 93.98 114.3)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "34aec3c9-d76f-43b2-a2b8-b033f427f30d")
+	)
+	(wire
+		(pts
+			(xy 87.63 99.06) (xy 101.6 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "35010f7e-2764-4f3d-8e34-3a0b471a5800")
+	)
+	(wire
+		(pts
+			(xy 175.26 110.49) (xy 101.6 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "369a1c15-65a8-44bd-90d5-857b95d0cbe0")
+	)
+	(wire
+		(pts
+			(xy 196.85 104.14) (xy 196.85 76.2)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "453d5911-5583-40da-bd1b-1c2c19ee191d")
+	)
+	(wire
+		(pts
+			(xy 101.6 99.06) (xy 129.54 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "491bd8dc-911d-4cf3-9b42-222c820c412e")
+	)
+	(wire
+		(pts
+			(xy 142.24 83.82) (xy 144.78 83.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4e0a1a48-d806-4e10-86d1-d662fcc7dd9b")
+	)
+	(wire
+		(pts
+			(xy 120.65 76.2) (xy 120.65 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5937cf1e-9ac6-47fb-b5cf-9e8777c095f0")
+	)
+	(wire
+		(pts
+			(xy 93.98 113.03) (xy 87.63 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5ef66df9-2f91-4d04-a8fc-d50f518098b7")
+	)
+	(wire
+		(pts
+			(xy 190.5 77.47) (xy 124.46 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6319553a-85da-4571-82ab-c724b3f228a9")
+	)
+	(wire
+		(pts
+			(xy 87.63 96.52) (xy 124.46 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "67596bc6-255d-4f9d-aa3c-be271d0b2938")
+	)
+	(wire
+		(pts
+			(xy 214.63 83.82) (xy 217.17 83.82)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7007bce1-6832-4eef-94c7-9e2ec6b87b80")
+	)
+	(wire
+		(pts
+			(xy 101.6 110.49) (xy 101.6 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "704c28e0-58ee-468d-9f63-1e23c54091fc")
+	)
+	(wire
+		(pts
+			(xy 190.5 101.6) (xy 190.5 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "78dac051-150e-425a-9972-acd42f11a6cf")
+	)
+	(wire
+		(pts
+			(xy 124.46 96.52) (xy 129.54 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "99e289df-15c8-4308-b069-e29240266ef5")
+	)
+	(wire
+		(pts
+			(xy 124.46 77.47) (xy 124.46 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b5a550c0-d08d-4160-89ef-0a9bc78abfc6")
+	)
+	(wire
+		(pts
+			(xy 196.85 76.2) (xy 120.65 76.2)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c1f5fc51-6df8-4ff1-9131-be6aa72bf5ff")
+	)
+	(wire
+		(pts
+			(xy 199.39 91.44) (xy 175.26 91.44)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c5ad2265-b205-43b1-8438-54e42d97ff1e")
+	)
+	(wire
+		(pts
+			(xy 142.24 113.03) (xy 142.24 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ca41de94-5c91-4250-aa63-f6d950f79b98")
+	)
+	(wire
+		(pts
+			(xy 175.26 91.44) (xy 175.26 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e4b1fb4d-7271-44d1-a2cd-a2116d0e429a")
+	)
+	(wire
+		(pts
+			(xy 199.39 101.6) (xy 190.5 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fad2254b-c31c-483e-b05c-008a475e81e0")
+	)
+	(hierarchical_label "SA"
+		(shape input)
+		(at 87.63 99.06 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "45804d11-017a-4ab3-8236-1d31012e5aef")
+	)
+	(hierarchical_label "SCL"
+		(shape input)
+		(at 87.63 93.98 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "80761c73-5894-4827-a7cd-9159ae271db3")
+	)
+	(hierarchical_label "VIN"
+		(shape input)
+		(at 86.36 83.82 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "8e8becc2-2c1c-4bca-b8f4-8552025a247f")
+	)
+	(hierarchical_label "GND"
+		(shape input)
+		(at 87.63 113.03 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "c87ce658-84c5-46b6-9269-2154b59c5f19")
+	)
+	(hierarchical_label "SDA"
+		(shape bidirectional)
+		(at 87.63 96.52 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "e157572c-9af2-490e-9013-a53a1e2ec505")
+	)
+	(symbol
+		(lib_id "Sensor_Magnetic:LIS3MDL")
+		(at 142.24 96.52 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "700495e2-f594-4743-9559-f7af0e63524e")
+		(property "Reference" "U3"
+			(at 144.3833 109.22 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "LIS3MDL"
+			(at 144.3833 111.76 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_LGA:LGA-12_2x2mm_P0.5mm"
+			(at 172.72 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.st.com/resource/en/datasheet/lis3mdl.pdf"
+			(at 180.34 106.68 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Ultra-low-power, 3-axis digital output magnetometer, LGA-12"
+			(at 142.24 96.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "4"
+			(uuid "a8effc3b-d15e-4564-ad88-5aed4f63f99a")
+		)
+		(pin "11"
+			(uuid "2e4cc559-7b7c-4710-b44f-eafc826d63c6")
+		)
+		(pin "9"
+			(uuid "bd1172c0-7fed-4547-9835-f1e52af46597")
+		)
+		(pin "8"
+			(uuid "d841922f-ee25-4211-bfc8-0ccda025f94b")
+		)
+		(pin "5"
+			(uuid "b4ef1183-3569-4eaa-81fe-f445d97e9739")
+		)
+		(pin "3"
+			(uuid "9f854002-d2a5-4bc5-b6f5-9e38b5711c77")
+		)
+		(pin "2"
+			(uuid "0b73ca61-a382-49e6-890a-8e565fa7cb4f")
+		)
+		(pin "1"
+			(uuid "ab8393b7-7ef1-412a-b73a-4a8d3061daf3")
+		)
+		(pin "10"
+			(uuid "a7711156-b922-4d15-af5e-7942a5f36c7e")
+		)
+		(pin "12"
+			(uuid "64062190-13f6-4971-b9dd-ee29cbe8fc24")
+		)
+		(pin "6"
+			(uuid "8925f797-7155-4deb-8447-bf26da84be6c")
+		)
+		(pin "7"
+			(uuid "2d47c1b7-2818-40ad-a03a-7d6aa88a2611")
+		)
+		(instances
+			(project "self_balancing_robot_v1"
+				(path "/f1bc52c2-82b2-44ac-a8ec-1286ff19a550/255c3cf0-0b9d-4ef4-b397-b865b3fb1e83"
+					(reference "U3")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Sensor_Motion:LSM6DSL")
+		(at 214.63 99.06 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "ec659e8c-7464-4fa4-b4f1-aa38ffdc274b")
+		(property "Reference" "U4"
+			(at 216.7733 114.3 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "LSM6DSL"
+			(at 216.7733 116.84 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Package_LGA:LGA-14_3x2.5mm_P0.5mm_LayoutBorder3x4y"
+			(at 204.47 116.84 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Datasheet" "https://www.st.com/resource/en/datasheet/lsm6dsl.pdf"
+			(at 217.17 115.57 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "I2C/SPI, iNEMO inertial module: always-on 3D accelerometer and 3D gyroscope, 1.71V to 3.6V VCC"
+			(at 214.63 99.06 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "9"
+			(uuid "6d18cb65-94e0-4d17-a8ff-5b394a6e01b5")
+		)
+		(pin "13"
+			(uuid "524e603c-fa94-4254-b802-b79a24a5ce9e")
+		)
+		(pin "12"
+			(uuid "f8fe9762-afdf-4424-bda2-a7896111a6de")
+		)
+		(pin "3"
+			(uuid "ba38737f-c5a6-484c-832c-78fcf1502376")
+		)
+		(pin "11"
+			(uuid "e90acfa3-4a64-4f34-9bd8-2f927e9c9697")
+		)
+		(pin "14"
+			(uuid "5b7e60b3-710a-45a2-8fb4-c57fe973906f")
+		)
+		(pin "8"
+			(uuid "3599098f-fa59-4dad-977c-4c304f33b405")
+		)
+		(pin "2"
+			(uuid "2d227fe3-15fa-4261-85c3-84d7bb455990")
+		)
+		(pin "4"
+			(uuid "f29751f4-7064-4340-ba39-0c0e6b8391dc")
+		)
+		(pin "1"
+			(uuid "e6bdbf46-bec6-4da8-8e0a-663f92ac7664")
+		)
+		(pin "7"
+			(uuid "989f0930-4289-4ad1-bf72-ae88860027dd")
+		)
+		(pin "6"
+			(uuid "a9ad3347-4fc0-4ba0-a810-39574481b786")
+		)
+		(pin "5"
+			(uuid "b7b87d51-84be-4ad7-baf5-bc08502af96f")
+		)
+		(pin "10"
+			(uuid "b28aeb96-b4e1-4cf3-bc61-a175b23a0919")
+		)
+		(instances
+			(project "self_balancing_robot_v1"
+				(path "/f1bc52c2-82b2-44ac-a8ec-1286ff19a550/255c3cf0-0b9d-4ef4-b397-b865b3fb1e83"
+					(reference "U4")
+					(unit 1)
+				)
+			)
+		)
+	)
+)
