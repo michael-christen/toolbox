@@ -245,7 +245,16 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [],
+    "erc_exclusions": [
+      [
+        "lib_symbol_mismatch|977900|660400|d2329042-1168-4348-b448-1dd64cd474b5|00000000-0000-0000-0000-000000000000|||",
+        "custom for type"
+      ],
+      [
+        "power_pin_not_driven|1371600|1016000|e01d25b5-b432-4667-a69a-b71d7aa6baed|00000000-0000-0000-0000-000000000000|/f1bc52c2-82b2-44ac-a8ec-1286ff19a550/75173ffb-b169-441c-baf6-7b56ca62c518|/f1bc52c2-82b2-44ac-a8ec-1286ff19a550/75173ffb-b169-441c-baf6-7b56ca62c518|",
+        "connector is from a battery"
+      ]
+    ],
     "meta": {
       "version": 0
     },
@@ -660,20 +669,8 @@
       "self_balancing_robot_v1"
     ],
     [
-      "2d8cd1a5-1c64-4382-8f31-94a319a26064",
-      "processor"
-    ],
-    [
-      "81f12680-0a23-457e-8d3b-44171bc48c94",
-      "imu"
-    ],
-    [
-      "4a911fd5-e9af-45d9-a5d5-5b96716a4cac",
-      "stepper_motor_left"
-    ],
-    [
-      "61fb5e03-463c-4282-ac62-f1b47ccfe6fb",
-      "stepper_motor_right"
+      "0d34e55b-0466-47cb-b0fd-659a211075df",
+      "microcontroller"
     ],
     [
       "7849255e-dc2a-45a5-ad4e-6c6d20980213",
@@ -682,6 +679,22 @@
     [
       "c1d07036-7bde-4d71-93e9-99c260776c4c",
       "pwm_controller"
+    ],
+    [
+      "255c3cf0-0b9d-4ef4-b397-b865b3fb1e83",
+      "IMU"
+    ],
+    [
+      "5db01380-95c5-43e0-ba87-69b4238a1e0d",
+      "Power Supply"
+    ],
+    [
+      "75173ffb-b169-441c-baf6-7b56ca62c518",
+      "motors"
+    ],
+    [
+      "94992c47-cb2c-4482-85ea-a7222cb63fbb",
+      "Battery"
     ]
   ],
   "text_variables": {},

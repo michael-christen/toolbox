@@ -1,0 +1,1408 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "9d1de0ae-8c77-4859-b208-d7c37ed51a02")
+	(paper "A4")
+	(lib_symbols
+		(symbol "global_library:pololu_hpcb_motor_w_encoder"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "U"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "pololu_hpcb"
+				(at 1.016 5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" "https://www.pololu.com/file/0J1487/pololu-micro-metal-gearmotors-rev-6-2.pdf"
+				(at 1.524 -7.366 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Motor Connector"
+				(at -0.508 7.62 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "VCC_USAGE" "For the Encoder"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "pololu_hpcb_motor_w_encoder_0_1"
+				(rectangle
+					(start -6.35 6.35)
+					(end 7.62 -6.35)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "pololu_hpcb_motor_w_encoder_1_1"
+				(pin input line
+					(at -8.89 2.54 0)
+					(length 2.54)
+					(name "MA"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -8.89 0 0)
+					(length 2.54)
+					(name "MB"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -8.89 -2.54 0)
+					(length 2.54)
+					(name "VCC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 10.16 1.27 180)
+					(length 2.54)
+					(name "ENC_A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 10.16 -1.27 180)
+					(length 2.54)
+					(name "ENC_B"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -8.89 -5.08 0)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "global_library:pololu_m2t550"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "U"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "M2T550"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" "https://www.pololu.com/product/5079"
+				(at 1.27 -23.622 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "DC Motor Controller"
+				(at -1.016 13.97 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "pololu_m2t550_0_1"
+				(rectangle
+					(start -11.43 12.7)
+					(end 12.7 -12.7)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "pololu_m2t550_1_1"
+				(pin power_out line
+					(at -13.97 10.16 0)
+					(length 2.54)
+					(name "VM"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -13.97 7.62 0)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at -13.97 5.08 0)
+					(length 2.54)
+					(name "ERR"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -13.97 2.54 0)
+					(length 2.54)
+					(name "~{RST}"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -13.97 0 0)
+					(length 2.54)
+					(name "SCL"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin bidirectional line
+					(at -13.97 -2.54 0)
+					(length 2.54)
+					(name "SDA"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -13.97 -5.08 0)
+					(length 2.54)
+					(name "VDD"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at -13.97 -7.62 0)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 15.24 10.16 180)
+					(length 2.54)
+					(name "M1A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 15.24 7.62 180)
+					(length 2.54)
+					(name "M1B"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "10"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 15.24 2.54 180)
+					(length 2.54)
+					(name "VIN"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "11"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 15.24 0 180)
+					(length 2.54)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "12"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 15.24 -3.81 180)
+					(length 2.54)
+					(name "M2A"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "13"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 15.24 -6.35 180)
+					(length 2.54)
+					(name "M2B"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "14"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -5.08 -15.24 90)
+					(length 2.54)
+					(name "JMP1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "15"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+	)
+	(no_connect
+		(at 116.84 119.38)
+		(uuid "1cf428d2-cb5b-482a-a43a-8a0d519f166c")
+	)
+	(wire
+		(pts
+			(xy 90.17 80.01) (xy 143.51 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "015b376c-94d9-4484-9670-677bf53afeb2")
+	)
+	(wire
+		(pts
+			(xy 148.59 99.06) (xy 153.67 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0acf3b6e-0f15-42bd-b087-f38ddc7bc9b4")
+	)
+	(wire
+		(pts
+			(xy 137.16 110.49) (xy 153.67 110.49)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "15ae495a-9378-4c8c-b36d-a70334f05a9a")
+	)
+	(wire
+		(pts
+			(xy 143.51 80.01) (xy 143.51 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "17f2b9ce-fc85-43a0-ab01-d32735fbb061")
+	)
+	(wire
+		(pts
+			(xy 137.16 96.52) (xy 153.67 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "23c253f5-60ca-4a8c-be20-49205fdba8c1")
+	)
+	(wire
+		(pts
+			(xy 137.16 101.6) (xy 143.51 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "248dbc5a-738a-4db5-8a12-24d8b76a6d59")
+	)
+	(wire
+		(pts
+			(xy 102.87 85.09) (xy 177.8 85.09)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "396c5b3d-32d5-4007-ae94-a22f1155f3dc")
+	)
+	(wire
+		(pts
+			(xy 172.72 109.22) (xy 177.8 109.22)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3b0de8e0-0410-4d30-b08c-d2f0dac9a158")
+	)
+	(wire
+		(pts
+			(xy 105.41 96.52) (xy 107.95 96.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "47b1411b-bb21-4e7b-98dd-ebfb55ec55c8")
+	)
+	(wire
+		(pts
+			(xy 172.72 97.79) (xy 177.8 97.79)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "55c4d691-947a-4ea4-817b-dc31e9c07b95")
+	)
+	(wire
+		(pts
+			(xy 100.33 99.06) (xy 100.33 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6393fd75-b1ea-4ca8-bf27-0c8d5752aef4")
+	)
+	(wire
+		(pts
+			(xy 90.17 92.71) (xy 95.25 92.71)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "65d5ba84-1101-4bc1-8ef6-ea74c4e6f568")
+	)
+	(wire
+		(pts
+			(xy 100.33 129.54) (xy 184.15 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7758c0af-aad3-4641-a5e4-5065f99e4e20")
+	)
+	(wire
+		(pts
+			(xy 90.17 106.68) (xy 107.95 106.68)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "79afb7d1-518b-47d5-850e-dd446993d257")
+	)
+	(wire
+		(pts
+			(xy 90.17 95.25) (xy 95.25 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8e5e2d77-1177-440e-a904-be47254d211c")
+	)
+	(wire
+		(pts
+			(xy 137.16 104.14) (xy 143.51 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "91c433a1-2362-4f1c-9df3-721882a648e7")
+	)
+	(wire
+		(pts
+			(xy 149.86 113.03) (xy 153.67 113.03)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "967977d4-acba-490c-b184-23336428df29")
+	)
+	(wire
+		(pts
+			(xy 102.87 93.98) (xy 102.87 85.09)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9804b641-a4d5-44fd-b5dd-f7e51fc6173b")
+	)
+	(wire
+		(pts
+			(xy 152.4 101.6) (xy 153.67 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a93c9b9e-c4df-49ee-a1d6-aafa178ce0a2")
+	)
+	(wire
+		(pts
+			(xy 90.17 104.14) (xy 107.95 104.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bc8259c1-c18f-4c6f-85d5-663fe13b5483")
+	)
+	(wire
+		(pts
+			(xy 137.16 93.98) (xy 153.67 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bd61581f-77fd-4492-8238-b15daa1e8f56")
+	)
+	(wire
+		(pts
+			(xy 105.41 111.76) (xy 107.95 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bfb5e352-3233-44b6-90ed-531ed538f26b")
+	)
+	(wire
+		(pts
+			(xy 151.13 115.57) (xy 153.67 115.57)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e113a455-8c61-43c1-8632-23efaa2e6b09")
+	)
+	(wire
+		(pts
+			(xy 172.72 95.25) (xy 177.8 95.25)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e279348b-e982-4971-b5bc-17223588433b")
+	)
+	(wire
+		(pts
+			(xy 107.95 99.06) (xy 100.33 99.06)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e4596339-baf6-40d3-92bd-94740436c518")
+	)
+	(wire
+		(pts
+			(xy 107.95 93.98) (xy 102.87 93.98)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e5dc10d9-b2ce-4ac2-a059-e57e32c8875c")
+	)
+	(wire
+		(pts
+			(xy 90.17 101.6) (xy 107.95 101.6)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f48a243a-de1f-4933-892e-0c3b47718945")
+	)
+	(wire
+		(pts
+			(xy 137.16 107.95) (xy 153.67 107.95)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f805980d-886a-4bb5-b0da-00c96bc1be85")
+	)
+	(wire
+		(pts
+			(xy 172.72 111.76) (xy 177.8 111.76)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fceaaffe-ac1c-4c6f-941c-b76fe5b4d2c6")
+	)
+	(label "GND"
+		(at 95.25 95.25 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "010ef85b-8bc5-4ce9-99c7-98b10a81989f")
+	)
+	(label "GND"
+		(at 105.41 96.52 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "09dd6d46-a9f3-4233-b143-e96425ec2925")
+	)
+	(label "GND"
+		(at 105.41 111.76 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "270826c0-78c9-4b40-a6b6-cce83b46c6df")
+	)
+	(label "GND"
+		(at 151.13 115.57 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "3c047028-0eb0-4c34-9427-b8100449efd9")
+	)
+	(label "GND"
+		(at 143.51 104.14 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "4de16b1c-a0ea-43df-a9ea-2dc023906907")
+	)
+	(label "VCC"
+		(at 95.25 92.71 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "53afbe0b-3893-4a53-99ac-a272c913cc65")
+	)
+	(label "VCC"
+		(at 148.59 99.06 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "65501dba-89f0-447c-940e-b631669608e1")
+	)
+	(label "GND"
+		(at 152.4 101.6 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "915e71c1-6554-42e5-a987-9428d5bdaa0f")
+	)
+	(label "VCC"
+		(at 107.95 109.22 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d6962eed-6763-4dd5-ad88-cde9369c2347")
+	)
+	(label "VCC"
+		(at 149.86 113.03 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right bottom)
+		)
+		(uuid "d7f71086-9a2b-4e1b-852b-d13304e58b42")
+	)
+	(hierarchical_label "M1_ENC_A"
+		(shape output)
+		(at 177.8 95.25 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "27fda4d0-e910-40e5-8946-719b26f602f1")
+	)
+	(hierarchical_label "SDA"
+		(shape bidirectional)
+		(at 90.17 106.68 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "386599d3-4c99-4eb0-a163-6f1f4c0573a8")
+	)
+	(hierarchical_label "M1_ENC_B"
+		(shape output)
+		(at 177.8 97.79 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "63ae7f9f-72d5-4488-a26f-84d0d42dca3b")
+	)
+	(hierarchical_label "SCL"
+		(shape input)
+		(at 90.17 104.14 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "6a0d3a09-7d57-4c08-a933-98d52cb65a8f")
+	)
+	(hierarchical_label "M2_ENC_A"
+		(shape output)
+		(at 177.8 109.22 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "735b48c6-e2cb-48b4-8158-09cf20c4d36f")
+	)
+	(hierarchical_label "GND"
+		(shape input)
+		(at 90.17 95.25 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "97cc3658-75b5-4c57-8bde-5455f0479a42")
+	)
+	(hierarchical_label "V_M_SUPPLY"
+		(shape output)
+		(at 177.8 85.09 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c41fd357-3e3a-498e-9489-876af87f3384")
+	)
+	(hierarchical_label "M2_ENC_B"
+		(shape output)
+		(at 177.8 111.76 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "d1ded525-32e3-48f7-9a0e-bf2906e6c271")
+	)
+	(hierarchical_label "VCC"
+		(shape input)
+		(at 90.17 92.71 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "d5b0a4f8-88e4-4a52-9b64-39c16bb015f9")
+	)
+	(hierarchical_label "ERR"
+		(shape output)
+		(at 184.15 129.54 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "dc903765-3473-40a1-88f9-01feaab9386f")
+	)
+	(hierarchical_label "~{RST}"
+		(shape input)
+		(at 90.17 101.6 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "edb9d98a-30ac-4983-a153-0d76f72da061")
+	)
+	(hierarchical_label "V_BATT"
+		(shape input)
+		(at 90.17 80.01 180)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "fe978064-77b7-49b4-8854-5a66f8e3d1da")
+	)
+	(symbol
+		(lib_id "global_library:pololu_hpcb_motor_w_encoder")
+		(at 162.56 96.52 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "b164d166-450a-4be6-a6f1-5bf29c2a9d4e")
+		(property "Reference" "U6"
+			(at 162.56 96.52 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "pololu_hpcb"
+			(at 162.814 91.948 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 162.56 96.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.pololu.com/file/0J1487/pololu-micro-metal-gearmotors-rev-6-2.pdf"
+			(at 164.084 103.886 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Motor Connector"
+			(at 162.052 88.9 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "VCC_USAGE" "For the Encoder"
+			(at 162.56 96.52 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "6"
+			(uuid "0ac85c0f-c23a-4179-9926-0f0368453df9")
+		)
+		(pin "4"
+			(uuid "13ebe913-e104-42a8-ba13-aa43fb161e6f")
+		)
+		(pin "3"
+			(uuid "ca357f29-f6ab-472a-b572-1a2a06144484")
+		)
+		(pin "2"
+			(uuid "26deabe6-2e36-457e-aa82-825ed27c3827")
+		)
+		(pin "5"
+			(uuid "709a4513-774c-4a04-a452-fc1f7b4a0b93")
+		)
+		(pin "1"
+			(uuid "a0a2057b-06a3-474f-8c27-90dd1c0877cb")
+		)
+		(instances
+			(project "self_balancing_robot_v1"
+				(path "/f1bc52c2-82b2-44ac-a8ec-1286ff19a550/75173ffb-b169-441c-baf6-7b56ca62c518"
+					(reference "U6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "global_library:pololu_hpcb_motor_w_encoder")
+		(at 162.56 110.49 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "ce047fa8-1277-4c1f-814f-dcb39572c407")
+		(property "Reference" "U7"
+			(at 163.068 108.458 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "pololu_hpcb"
+			(at 163.576 106.426 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 162.56 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.pololu.com/file/0J1487/pololu-micro-metal-gearmotors-rev-6-2.pdf"
+			(at 164.084 117.856 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Motor Connector"
+			(at 162.052 102.87 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "VCC_USAGE" "For the Encoder"
+			(at 162.56 110.49 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "ace4d3ab-b280-4744-96f2-7ae893040f45")
+		)
+		(pin "5"
+			(uuid "61cc8b08-661c-4e9b-baf8-f405f40601df")
+		)
+		(pin "4"
+			(uuid "62bba996-3791-4154-8b9b-8a223aff35d4")
+		)
+		(pin "6"
+			(uuid "9bf7b654-d1ce-4905-85ba-45a5cac39d7f")
+		)
+		(pin "3"
+			(uuid "c9a23394-6f32-4d73-a742-dda586915ed9")
+		)
+		(pin "1"
+			(uuid "b84ad220-46e5-4532-a373-a3502a3d1995")
+		)
+		(instances
+			(project "self_balancing_robot_v1"
+				(path "/f1bc52c2-82b2-44ac-a8ec-1286ff19a550/75173ffb-b169-441c-baf6-7b56ca62c518"
+					(reference "U7")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "global_library:pololu_m2t550")
+		(at 121.92 104.14 0)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "e5428b77-ed1c-4de7-a7d8-b1a76573f8f1")
+		(property "Reference" "U5"
+			(at 121.92 106.172 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "M2T550"
+			(at 121.92 104.14 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 121.92 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.pololu.com/product/5079"
+			(at 121.92 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "DC Motor Controller"
+			(at 121.92 104.14 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "More Docs" "https://www.pololu.com/docs/0J84/all"
+			(at 122.174 123.698 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "700bd1f0-9bf3-47d5-81eb-5a1fad0904ed")
+		)
+		(pin "3"
+			(uuid "d67fb23f-6086-4544-bb51-7ab8550c7ad5")
+		)
+		(pin "2"
+			(uuid "35af13a3-304d-4d2f-a5e9-94a505b62997")
+		)
+		(pin "8"
+			(uuid "04eb7ba7-3af1-442e-b384-ffe24584d5c1")
+		)
+		(pin "11"
+			(uuid "e01d25b5-b432-4667-a69a-b71d7aa6baed")
+		)
+		(pin "15"
+			(uuid "066321e3-cd80-4733-a1ce-7fbfbe8d37c3")
+		)
+		(pin "13"
+			(uuid "6f6fd09b-fa1b-45e6-ac23-318de4e9cb76")
+		)
+		(pin "7"
+			(uuid "4144cb8f-25ec-47a8-ae70-e6d52137ba2d")
+		)
+		(pin "12"
+			(uuid "ad7b56f9-c01a-4c1d-ad1b-77908ba86d1c")
+		)
+		(pin "9"
+			(uuid "6844e678-8894-4452-ac0e-75349b54d68e")
+		)
+		(pin "14"
+			(uuid "678a6762-fc5f-4b4d-ad7b-faa70b9fd3cd")
+		)
+		(pin "6"
+			(uuid "f7c8db45-633f-4c5a-b99f-6297f83ecbb4")
+		)
+		(pin "4"
+			(uuid "d3c4c263-9bd3-4309-9bd8-513704ab2053")
+		)
+		(pin "5"
+			(uuid "addf1081-a058-4bd8-a1c2-0f1a4a428d20")
+		)
+		(pin "10"
+			(uuid "afbccb54-7d6d-4b51-8599-d8dcf0b85fc7")
+		)
+		(instances
+			(project "self_balancing_robot_v1"
+				(path "/f1bc52c2-82b2-44ac-a8ec-1286ff19a550/75173ffb-b169-441c-baf6-7b56ca62c518"
+					(reference "U5")
+					(unit 1)
+				)
+			)
+		)
+	)
+)

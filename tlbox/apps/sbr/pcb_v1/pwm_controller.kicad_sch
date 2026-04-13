@@ -371,6 +371,22 @@
 		)
 		(uuid "4963234c-7b9b-4110-9bf8-35f696ffff26")
 	)
+	(no_connect
+		(at 111.76 63.5)
+		(uuid "387c1674-a42d-42b9-9262-b395c242a07f")
+	)
+	(no_connect
+		(at 111.76 73.66)
+		(uuid "4d2c79a5-c3f9-4f45-94ae-6054bea1a441")
+	)
+	(no_connect
+		(at 111.76 71.12)
+		(uuid "a4de7efc-b8a7-487c-aec7-b61a8b911849")
+	)
+	(no_connect
+		(at 111.76 60.96)
+		(uuid "fe99fea6-a109-4a30-9cac-1554d9b32dfd")
+	)
 	(hierarchical_label "pwm_throttle"
 		(shape output)
 		(at 111.76 68.58 0)
@@ -403,7 +419,6 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "d58f144f-cbb4-4412-9561-66ff7c449092")
 		(property "Reference" "J1"
 			(at 107.315 55.88 0)
@@ -447,8 +462,8 @@
 				)
 			)
 		)
-		(property "Description" ""
-			(at 106.68 66.04 0)
+		(property "Description" "Generic connector, single row, 01x06, script generated"
+			(at 105.664 51.054 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects

@@ -2,7 +2,7 @@
 	(version 20260306)
 	(generator "eeschema")
 	(generator_version "10.0")
-	(uuid "f262eb57-53f2-4c6d-9662-57c57f8f1444")
+	(uuid "39c99d56-fdcb-4480-a74b-a42bbbb6c021")
 	(paper "A4")
 	(lib_symbols
 		(symbol "Connector:Conn_01x02_Pin"
@@ -187,31 +187,51 @@
 			(embedded_fonts no)
 		)
 	)
-	(hierarchical_label "uart_from_radio"
-		(shape output)
-		(at 115.57 62.23 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
+	(wire
+		(pts
+			(xy 102.87 68.58) (xy 113.03 68.58)
 		)
-		(uuid "0d966d44-0166-4450-ab04-bebe1c2d0421")
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1002ebfb-4665-4d98-ace2-1c8c78951a3b")
 	)
-	(hierarchical_label "uart_to_radio"
-		(shape input)
-		(at 115.57 64.77 0)
+	(wire
+		(pts
+			(xy 102.87 66.04) (xy 113.03 66.04)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4a953acc-c560-4947-bd70-aa82b1c6cbb9")
+	)
+	(hierarchical_label "V_BATT"
+		(shape output)
+		(at 113.03 66.04 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left)
 		)
-		(uuid "41f2c1c2-fac9-4550-845a-86872b47b130")
+		(uuid "98606b80-1a99-4ab9-bca0-79ebc56f2d0a")
+	)
+	(hierarchical_label "GND"
+		(shape input)
+		(at 113.03 68.58 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "aba6df3b-7f77-41b5-915f-525dd7c602ac")
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x02_Pin")
-		(at 110.49 62.23 0)
+		(at 97.79 66.04 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -219,9 +239,10 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "0c6d7f8e-07b1-450d-ab75-99999ac506f5")
-		(property "Reference" "J2"
-			(at 111.125 57.15 0)
+		(fields_autoplaced yes)
+		(uuid "d2329042-1168-4348-b448-1dd64cd474b5")
+		(property "Reference" "J3"
+			(at 98.425 60.96 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -231,7 +252,7 @@
 			)
 		)
 		(property "Value" "Conn_01x02_Pin"
-			(at 111.125 59.69 0)
+			(at 98.425 63.5 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -241,7 +262,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 110.49 62.23 0)
+			(at 97.79 66.04 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -252,7 +273,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 110.49 62.23 0)
+			(at 97.79 66.04 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -263,7 +284,8 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x02, script generated"
-			(at 109.728 53.086 0)
+			(at 97.79 66.04 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -272,16 +294,16 @@
 				)
 			)
 		)
-		(pin "2"
-			(uuid "f69749cd-8c9b-4e2c-876d-75827c5aaec5")
-		)
 		(pin "1"
-			(uuid "cd9adc2e-ec71-4282-acb7-921d0c091b39")
+			(uuid "88c6d311-f640-40dd-9531-811c31f1822b")
+		)
+		(pin "2"
+			(uuid "1101e3d4-905a-4bd9-ab4f-5f08ddc8729f")
 		)
 		(instances
 			(project "self_balancing_robot_v1"
-				(path "/f1bc52c2-82b2-44ac-a8ec-1286ff19a550/7849255e-dc2a-45a5-ad4e-6c6d20980213"
-					(reference "J2")
+				(path "/f1bc52c2-82b2-44ac-a8ec-1286ff19a550/94992c47-cb2c-4482-85ea-a7222cb63fbb"
+					(reference "J3")
 					(unit 1)
 				)
 			)
