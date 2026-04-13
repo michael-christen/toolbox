@@ -38,7 +38,7 @@ sphinx_html(
         ":templates",
         "//:python_source",
         "//docs/common:docs",
-        "//tlbox/apps/sbr/docs:docs",
+        "//tlbox/apps/sbr/docs",
         "//tlbox/apps/sbr/pcb_v1:pcb_svg",
         "//tlbox/apps/sbr/pcb_v1:schematic_pdf",
         "//tlbox/apps/sbr/pcb_v1:schematic_svgs",
