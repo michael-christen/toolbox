@@ -4,6 +4,13 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: 'Publish docs to GitHub Pages'
+        required: false
+        default: true
+        type: boolean
 jobs:
   build_and_publish_docs:
     runs-on: ubuntu-22.04
@@ -17,8 +24,32 @@ jobs:
       - name: Build Docs
         run: |
           bazel build //docs:docs
+      - name: Install KiCad CLI
+        run: |
+          sudo add-apt-repository --yes ppa:kicad/kicad-7.0-releases
+          sudo apt-get update
+          sudo apt-get install -y kicad
+      - name: Collect Docs
+        run: |
+          mkdir -p docs_site
+          cp -rL bazel-bin/docs/docs_html/. docs_site/
+          mkdir -p docs_site/hw/sbr_pcb_v1
+          kicad-cli sch export pdf \
+            --output docs_site/hw/sbr_pcb_v1/sbr_schematic.pdf \
+            tlbox/apps/sbr/pcb_v1/self_balancing_robot_v1.kicad_sch
+          kicad-cli pcb export pdf \
+            --output docs_site/hw/sbr_pcb_v1/sbr_pcb.pdf \
+            tlbox/apps/sbr/pcb_v1/self_balancing_robot_v1.kicad_pcb
+          mkdir -p docs_site/hw/getting_started
+          kicad-cli sch export pdf \
+            --output docs_site/hw/getting_started/getting_started_schematic.pdf \
+            tlbox/hw/ee/getting_started/getting_started.kicad_sch
+          kicad-cli pcb export pdf \
+            --output docs_site/hw/getting_started/getting_started_pcb.pdf \
+            tlbox/hw/ee/getting_started/getting_started.kicad_pcb
       - name: Upload Docs
+        if: ${{ github.event_name == 'push' || inputs.publish }}
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: bazel-bin/docs/docs_html
+          publish_dir: docs_site
