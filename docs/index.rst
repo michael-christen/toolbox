@@ -29,7 +29,6 @@ documentation for details.
    bringup
    useful_commands
    common_references
-   hardware
    sbr_components
 
 .. toctree::
