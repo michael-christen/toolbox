@@ -11,4 +11,5 @@ filegroup(
         "sbr_components.md",
         ":component_images",
     ],
+    visibility = ["//docs:__pkg__"],
 )
