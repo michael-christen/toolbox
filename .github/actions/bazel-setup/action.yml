@@ -26,8 +26,25 @@ runs:
         build --remote_header=x-buildbuddy-api-key="$BUILDBUDDY_API_KEY"
         import %workspace%/.aspect/bazelrc/ci.bazelrc
         EOF
+    # TODO(#322): Replace with pre-built CI container image (rules_oci)
+    - name: Cache apt packages
+      uses: actions/cache@v4
+      with:
+        path: /var/cache/apt/archives
+        key: apt-ubuntu22
+    - name: Install KiCad
+      shell: bash
+      run: |
+        sudo add-apt-repository -y ppa:kicad/kicad-10.0-releases
+        sudo apt-get update
+        # --no-install-recommends skips kicad-demos, kicad-packages3d,
+        # kicad-doc-en etc. (~4GB). Project files are self-contained for
+        # CLI export so those libraries aren't needed.
+        sudo apt-get install -y --no-install-recommends kicad
     - name: Install System Pre-requisites
       shell: bash
       run: |
-        # TODO(#209): Don't require installing this
-        sudo apt-get install -y graphviz graphviz-dev
+        # libncurses5: Needed for llvm_toolchain (C++ builds), otherwise
+        # libtinfo.so.5 is not found
+        # TODO(#209): Don't require installing graphviz
+        sudo apt-get install -y graphviz graphviz-dev libncurses5
