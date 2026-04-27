@@ -25,7 +25,11 @@ py_wheel(
     name = "py_wheel_all",
     distribution = "mchristen_toolbox",
     python_tag = "py3",
-    version = "0.0.0",
+    # Version comes from tools/workspace_status.sh when built with --stamp.
+    # Dev builds (no --stamp) get the literal placeholder in the filename;
+    # use the .dist target to get a wheel with the real stamped name.
+    version = "{STABLE_GIT_VERSION}",
+    stamp = -1,
     deps = [":py_package_all"],
 )
 
