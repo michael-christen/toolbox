@@ -1,0 +1,33 @@
+name: Publish Python Wheel
+# Triggered by pushing a version tag, e.g. `git tag v1.2.3 && git push --tags`
+# The tag becomes the wheel version via tools/workspace_status.sh.
+on:
+  push:
+    tags:
+      - 'v[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  publish:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write  # needed to create GitHub Releases
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Full history so workspace_status.sh can count commits and find tags
+          fetch-depth: 0
+      - uses: ./.github/actions/bazel-setup
+        with:
+          buildbuddy_api_key: ${{ secrets.BUILDBUDDY_API_KEY }}
+      - name: Build stamped wheel dist
+        run: |
+          bazel build --stamp --output_groups=-mypy //packaging:py_wheel_all.dist
+      - name: Create GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          BAZEL_BIN=$(bazel info bazel-bin)
+          WHEEL=$(find "$BAZEL_BIN/packaging/py_wheel_all_dist" -name "*.whl" | head -1)
+          gh release create "${{ github.ref_name }}" "$WHEEL" \
+            --title "Release ${{ github.ref_name }}" \
+            --generate-notes
