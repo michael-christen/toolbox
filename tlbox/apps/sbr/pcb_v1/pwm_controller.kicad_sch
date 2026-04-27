@@ -351,6 +351,26 @@
 			(embedded_fonts no)
 		)
 	)
+	(text "https://hobbyking.com/en_us/hobby-king-2-4ghz-receiver-6ch-v2.html"
+		(exclude_from_sim no)
+		(at 111.506 42.418 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "1e027380-dc9f-41d5-908d-c558d3ee7772")
+	)
+	(text "Even though they say the lower voltage limit is 4.8 volts, I have successfully operated it off of 3.3 volts, though obviously there's no\nguarantee of reliable, flawless behavior beyond the official specs. "
+		(exclude_from_sim no)
+		(at 113.792 84.582 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "523c78fa-4ee9-4a70-a747-3bb5e9ec12fc")
+	)
 	(text_box "TODO: How to add these external modules best here?"
 		(exclude_from_sim no)
 		(at 152.4 99.06 0)
@@ -376,16 +396,19 @@
 		(uuid "387c1674-a42d-42b9-9262-b395c242a07f")
 	)
 	(no_connect
-		(at 111.76 73.66)
-		(uuid "4d2c79a5-c3f9-4f45-94ae-6054bea1a441")
-	)
-	(no_connect
-		(at 111.76 71.12)
-		(uuid "a4de7efc-b8a7-487c-aec7-b61a8b911849")
-	)
-	(no_connect
 		(at 111.76 60.96)
 		(uuid "fe99fea6-a109-4a30-9cac-1554d9b32dfd")
+	)
+	(hierarchical_label "GND"
+		(shape input)
+		(at 111.76 73.66 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "0561916f-c19d-47d0-8a12-dc167e339863")
 	)
 	(hierarchical_label "pwm_throttle"
 		(shape output)
@@ -408,6 +431,17 @@
 			(justify left)
 		)
 		(uuid "9d2cae78-ccfd-42dc-a394-da3a2b7e47f0")
+	)
+	(hierarchical_label "VCC"
+		(shape input)
+		(at 111.76 71.12 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "c5b59956-d9e8-4637-849d-efe1664ebce1")
 	)
 	(symbol
 		(lib_id "Connector:Conn_01x06_Pin")
