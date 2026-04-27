@@ -18,6 +18,7 @@ manifest:
     aiosignal: aiosignal
     alabaster: alabaster
     annotated_types: annotated_types
+    anthropic: anthropic
     anyio: anyio
     apiclient: google_api_python_client
     argon2: argon2_cffi
@@ -54,6 +55,7 @@ manifest:
     decorator: decorator
     defusedxml: defusedxml
     distro: distro
+    docstring_parser: docstring_parser
     docutils: docutils
     examples: openhtf
     executing: executing
@@ -161,6 +163,7 @@ manifest:
     isort: isort
     jedi: jedi
     jinja2: jinja2
+    jiter: jiter
     json5: json5
     jsonpointer: jsonpointer
     jsonschema: jsonschema
@@ -276,6 +279,7 @@ manifest:
     simpervisor: simpervisor
     simpy: simpy
     six: six
+    sniffio: sniffio
     snowballstemmer: snowballstemmer
     sockjs.tornado: sockjs_tornado
     soupsieve: soupsieve
@@ -359,4 +363,4 @@ manifest:
     zstandard: zstandard
   pip_repository:
     name: pip
-integrity: 24106a1360a5ab5ef2fe643fec163d1ca102f30c777a238641242689f7f69346
+integrity: f1f0a6a51919b66bf7722e549eb0e4aecfadf9816140985dfeca293e41af9d4c

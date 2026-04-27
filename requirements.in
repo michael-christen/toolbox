@@ -5,6 +5,7 @@
 # Upgrade by
 # bazel run //:requirements.update -- --upgrade && bazel run //:gazelle_python_manifest.update
 
+anthropic
 black[jupyter]
 bokeh
 flake8
