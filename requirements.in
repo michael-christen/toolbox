@@ -87,3 +87,5 @@ types-protobuf
 vpython
 # zstd compression
 zstandard
+# OCI Registry As Storage - firmware artifact management
+oras

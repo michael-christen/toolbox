@@ -1248,6 +1248,7 @@ jsonschema[format-nongpl]==4.26.0 \
     #   jupyter-events
     #   jupyterlab-server
     #   nbformat
+    #   oras
 jsonschema-specifications==2025.9.1 \
     --hash=sha256:98802fee3a11ee76ecaca44429fda8a41bff98b00a0f2838151b113f210cc6fe \
     --hash=sha256:b540987f239e745613c7a9176f3edb72b832a4ac465cf02712288397832b5e8d
@@ -2160,6 +2161,10 @@ openhtf==1.6.1 \
     # via
     #   -r requirements.in
     #   tofupilot
+oras==0.2.42 \
+    --hash=sha256:51d17088e5dffdeb585dd930bdccb4329762bef4af3f18600392ebae525a9231 \
+    --hash=sha256:d1e2184d42ce99258bd0ad56d932b0f4fce289bccf1b5094436a29579f385728
+    # via -r requirements.in
 overrides==7.7.0 \
     --hash=sha256:55158fa3d93b98cc75299b1e67078ad9003ca27945c76162c1c0766d6f91820a \
     --hash=sha256:c7ed9d062f78b8e4c1a7b70bd8796b35ead4d9f510227ef9c5dc7626c60d7e49
@@ -3087,6 +3092,7 @@ requests==2.33.1 \
     #   google-api-core
     #   jupyterlab-server
     #   openhtf
+    #   oras
     #   panel
     #   posthog
     #   requests-oauthlib

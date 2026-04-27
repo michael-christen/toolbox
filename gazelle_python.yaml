@@ -222,6 +222,7 @@ manifest:
     oauth2client: oauth2client
     oauthlib: oauthlib
     openhtf: openhtf
+    oras: oras
     overrides: overrides
     packaging: packaging
     paho: paho_mqtt
@@ -359,4 +360,4 @@ manifest:
     zstandard: zstandard
   pip_repository:
     name: pip
-integrity: 24106a1360a5ab5ef2fe643fec163d1ca102f30c777a238641242689f7f69346
+integrity: 772a57ca363170157a648fedf3f720d17e683d0ce8cd8a247a11b88669de94bb

@@ -32,6 +32,7 @@ PYTHON_TARGETS = [
     "//examples/basic:hello_py_library",
     "//examples/basic:main",
     "//examples/basic:server",
+    "//examples/oras:oras_example",
     "//examples/python:hello",
     "//examples/simpy:car_tutorial",
     "//examples/simpy:thermostat_example",
