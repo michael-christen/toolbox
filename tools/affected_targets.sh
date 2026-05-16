@@ -65,12 +65,25 @@ for file in $changed_files; do
   done
 done
 
-# Resolve each changed file to a Bazel target label
+# Resolve each changed file to a Bazel target label.
+# BUILD / BUILD.bazel files are not deps of other targets, so expand them to
+# all targets in their package — everything in that package is potentially affected.
 targets=()
 for file in $changed_files; do
-  label=$(bazel query "$file" 2>/dev/null || true)
-  if [[ -n "$label" ]]; then
-    targets+=("$label")
+  basename="${file##*/}"
+  if [[ "$basename" == "BUILD" || "$basename" == "BUILD.bazel" ]]; then
+    package="${file%/$basename}"
+    # Root BUILD file has no directory component
+    [[ "$file" == "$basename" ]] && package="."
+    pkg_targets=$(bazel query "//${package}/..." --noshow_progress 2>/dev/null || true)
+    for t in $pkg_targets; do
+      targets+=("$t")
+    done
+  else
+    label=$(bazel query "$file" 2>/dev/null || true)
+    if [[ -n "$label" ]]; then
+      targets+=("$label")
+    fi
   fi
 done
 
