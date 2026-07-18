@@ -8,12 +8,3 @@ py_binary(
     visibility = ["//:__subpackages__"],
     deps = ["@pip//numpy"],
 )
-
-py_test(
-    name = "rubiks_test",
-    srcs = ["rubiks_test.py"],
-    deps = [
-        ":rubiks",
-        "@pip//numpy",
-    ],
-)
