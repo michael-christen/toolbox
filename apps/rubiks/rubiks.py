@@ -51,12 +51,12 @@ along each eaxis.
 We have 3 operations: F,U,R that both change the position and orientation of a
 cube.
 """
+
 import copy
 import dataclasses
 import enum
 
 import numpy as np
-
 
 RAD_TO_DEG = 180 / np.pi
 
@@ -70,28 +70,25 @@ NUM_ORIENTATIONS = 4
 # https://en.wikipedia.org/wiki/Rotation_matrix
 # Rotation matrices for F/U/R (X/Y/Z)
 # R_x
-R_f = np.array([[1, 0, 0],
-                [0, 0, -1],
-                [0, 1, 0]])
+R_f = np.array([[1, 0, 0], [0, 0, -1], [0, 1, 0]])
 # R_y
-R_u = np.array([[0, 0, 1],
-                [0, 1, 0],
-                [-1, 0, 0],
-                ])
+R_u = np.array(
+    [
+        [0, 0, 1],
+        [0, 1, 0],
+        [-1, 0, 0],
+    ]
+)
 # R_z
-R_r = np.array([[0, -1, 0],
-                [1, 0, 0],
-                [0, 0, 1]])
+R_r = np.array([[0, -1, 0], [1, 0, 0], [0, 0, 1]])
 
-IDENTITY_ROTATION = np.array([[1, 0, 0],
-                              [0, 1, 0],
-                              [0, 0, 1]])
+IDENTITY_ROTATION = np.array([[1, 0, 0], [0, 1, 0], [0, 0, 1]])
 
 
 class RotationType(enum.Enum):
-    F = 'F'
-    U = 'U'
-    R = 'R'
+    F = "F"
+    U = "U"
+    R = "R"
 
     def np_index(self) -> int:
         TYP_TO_INDEX = {
@@ -112,21 +109,21 @@ class RotationType(enum.Enum):
 
 def rot2eul(R: np.ndarray) -> np.ndarray:
     """
-    Converts a 3x3 rotation matrix to Euler angles (roll, pitch, yaw) in radians.
+    Converts a 3x3 rotation matrix to Euler angles (roll, pitch, yaw) - radians
     Assumes ZYX extrinsic rotation (or XYZ intrinsic rotation).
     """
-    sy = np.sqrt(R[0,0] * R[0,0] + R[1,0] * R[1,0])
+    sy = np.sqrt(R[0, 0] * R[0, 0] + R[1, 0] * R[1, 0])
 
-    singular = sy < 1e-6 # Check for gimbal lock
+    singular = sy < 1e-6  # Check for gimbal lock
 
     if not singular:
-        x = np.arctan2(R[2,1], R[2,2]) # Roll
-        y = np.arctan2(-R[2,0], sy)    # Pitch
-        z = np.arctan2(R[1,0], R[0,0]) # Yaw
+        x = np.arctan2(R[2, 1], R[2, 2])  # Roll
+        y = np.arctan2(-R[2, 0], sy)  # Pitch
+        z = np.arctan2(R[1, 0], R[0, 0])  # Yaw
     else:
-        x = np.arctan2(-R[1,2], R[1,1]) # Roll
-        y = np.arctan2(-R[2,0], sy)    # Pitch
-        z = 0                          # Yaw
+        x = np.arctan2(-R[1, 2], R[1, 1])  # Roll
+        y = np.arctan2(-R[2, 0], sy)  # Pitch
+        z = 0  # Yaw
 
     return np.array([x, y, z])
 
@@ -166,15 +163,18 @@ class LinearInnerCube:
 
     def __str__(self) -> str:
         f_deg, u_deg, r_deg = self.get_degrees()
-        return f'{self.identifier}: {self.position} (F: {f_deg}°, U: {u_deg}°, R: {r_deg}°)'
+        return (
+            f"{self.identifier}: {self.position}"
+            f" (F: {f_deg}°, U: {u_deg}°, R: {r_deg}°)"
+        )
 
     def get_degrees(self) -> tuple[float, float, float]:
         return _get_degrees(self.orientation)
 
-    def compare_str(self, other: 'LinearInnerCube') -> str:
+    def compare_str(self, other: "LinearInnerCube") -> str:
         assert self.identifier == other.identifier
         if self == other:
-            return(f'{self.identifier} MATCH')
+            return f"{self.identifier} MATCH"
         else:
             pos_change = other.position - self.position
             sf_deg, su_deg, sr_deg = self.get_degrees()
@@ -182,19 +182,24 @@ class LinearInnerCube:
             f_deg = of_deg - sf_deg
             u_deg = ou_deg - su_deg
             r_deg = or_deg - sr_deg
-            return(f'{self.identifier} MISMATCH {pos_change} (F: {f_deg}°, U: {u_deg}°, R: {r_deg}°)')
+            return (
+                f"{self.identifier} MISMATCH {pos_change}"
+                f" (F: {f_deg}°, U: {u_deg}°, R: {r_deg}°)"
+            )
 
     def __eq__(self, other) -> bool:
         if not isinstance(other, LinearInnerCube):
-            raise ValueError('Must compare with LinearInnerCube')
+            raise ValueError("Must compare with LinearInnerCube")
         return (
-            self.identifier == other.identifier and
-            (self.position == other.position).all() and
-            (self.orientation == other.orientation).all()
+            self.identifier == other.identifier
+            and (self.position == other.position).all()
+            and (self.orientation == other.orientation).all()
         )
 
 
-def run_linear_algorithm(rubiks: dict[int, LinearInnerCube], algorithm: str) -> list[dict[int, LinearInnerCube]]:
+def run_linear_algorithm(
+    rubiks: dict[int, LinearInnerCube], algorithm: str
+) -> list[dict[int, LinearInnerCube]]:
     """Returns each state of a cube after applying steps of algorithm.
 
     algorithm is a string, such as "r,ri,u,f"
@@ -202,16 +207,16 @@ def run_linear_algorithm(rubiks: dict[int, LinearInnerCube], algorithm: str) -> 
     NOTE: as of 2025-11-22, a single operation takes ~ 45 us
     """
     result = []
-    for operation in algorithm.split(','):
+    for operation in algorithm.split(","):
         rubiks = copy.deepcopy(rubiks)
         operation = operation.lower()
         operation_to_typ_and_num = {
-            'f': (RotationType.F, 1),
-            'fi': (RotationType.F, -1),
-            'u': (RotationType.U, 1),
-            'ui': (RotationType.U, -1),
-            'r': (RotationType.R, 1),
-            'ri': (RotationType.R, -1),
+            "f": (RotationType.F, 1),
+            "fi": (RotationType.F, -1),
+            "u": (RotationType.U, 1),
+            "ui": (RotationType.U, -1),
+            "r": (RotationType.R, 1),
+            "ri": (RotationType.R, -1),
         }
         typ_num = operation_to_typ_and_num.get(operation)
         if typ_num is None:
@@ -223,7 +228,9 @@ def run_linear_algorithm(rubiks: dict[int, LinearInnerCube], algorithm: str) -> 
     return result
 
 
-def run_and_display_linear_algorithm(rubiks: dict[int, LinearInnerCube], algorithm: str) -> list[dict[int, LinearInnerCube]]:
+def run_and_display_linear_algorithm(
+    rubiks: dict[int, LinearInnerCube], algorithm: str
+) -> list[dict[int, LinearInnerCube]]:
     result = run_linear_algorithm(rubiks, algorithm)
     operations = algorithm.split(",")
     assert len(operations) == len(result)
@@ -236,26 +243,44 @@ def run_and_display_linear_algorithm(rubiks: dict[int, LinearInnerCube], algorit
 def linear_algebra_cube(rubiks: dict[int, LinearInnerCube]):
     # 4/7 swap place; 4: F 90, R -90; 7: F -90, R 90
     # 5/6 swap place; 5: F -90, U -90; 6: F 180, R 180
-    result = run_and_display_linear_algorithm(rubiks, "r,u,ri,u,r,u,u,ri")
+    _ = run_and_display_linear_algorithm(rubiks, "r,u,ri,u,r,u,u,ri")
     print("new")
     # 4/5 swap pos; 4 U 90°, 5: F -90°
     # 6/7 swap pos; 6 U -90°, 7: F -90°
-    result = run_and_display_linear_algorithm(rubiks, "f,u,r,ui,ri,fi")
+    _ = run_and_display_linear_algorithm(rubiks, "f,u,r,ui,ri,fi")
     print("experiment")
-    result = run_and_display_linear_algorithm(rubiks, "f,ui,r,u,ri,fi")
+    _ = run_and_display_linear_algorithm(rubiks, "f,ui,r,u,ri,fi")
+
+
+def get_example_rubiks() -> dict[int, LinearInnerCube]:
+    return {
+        0: LinearInnerCube("0", np.array([1, 1, 1]), IDENTITY_ROTATION.copy()),
+        1: LinearInnerCube(
+            "1", np.array([1, 1, -1]), IDENTITY_ROTATION.copy()
+        ),
+        2: LinearInnerCube(
+            "2", np.array([-1, 1, 1]), IDENTITY_ROTATION.copy()
+        ),
+        3: LinearInnerCube(
+            "3", np.array([-1, 1, -1]), IDENTITY_ROTATION.copy()
+        ),
+        4: LinearInnerCube(
+            "4", np.array([1, -1, 1]), IDENTITY_ROTATION.copy()
+        ),
+        5: LinearInnerCube(
+            "5", np.array([1, -1, -1]), IDENTITY_ROTATION.copy()
+        ),
+        6: LinearInnerCube(
+            "6", np.array([-1, -1, 1]), IDENTITY_ROTATION.copy()
+        ),
+        7: LinearInnerCube(
+            "7", np.array([-1, -1, -1]), IDENTITY_ROTATION.copy()
+        ),
+    }
 
 
 def main():
-    rubiks = {
-        0: LinearInnerCube('0', np.array([1, 1, 1]), IDENTITY_ROTATION.copy()),
-        1: LinearInnerCube('1', np.array([1, 1, -1]), IDENTITY_ROTATION.copy()),
-        2: LinearInnerCube('2', np.array([-1, 1, 1]), IDENTITY_ROTATION.copy()),
-        3: LinearInnerCube('3', np.array([-1, 1, -1]), IDENTITY_ROTATION.copy()),
-        4: LinearInnerCube('4', np.array([1, -1, 1]), IDENTITY_ROTATION.copy()),
-        5: LinearInnerCube('5', np.array([1, -1, -1]), IDENTITY_ROTATION.copy()),
-        6: LinearInnerCube('6', np.array([-1, -1, 1]), IDENTITY_ROTATION.copy()),
-        7: LinearInnerCube('7', np.array([-1, -1, -1]), IDENTITY_ROTATION.copy()),
-    }
+    rubiks = get_example_rubiks()
     linear_algebra_cube(rubiks)
 
     # TODO: Cool visualization

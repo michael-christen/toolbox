@@ -1,4 +1,4 @@
-load("//bzl:py.bzl", "py_binary")
+load("//bzl:py.bzl", "py_binary", "py_test")
 
 package(default_visibility = ["//visibility:private"])
 
@@ -7,4 +7,13 @@ py_binary(
     srcs = ["rubiks.py"],
     visibility = ["//:__subpackages__"],
     deps = ["@pip//numpy"],
+)
+
+py_test(
+    name = "rubiks_test",
+    srcs = ["rubiks_test.py"],
+    deps = [
+        ":rubiks",
+        "@pip//numpy",
+    ],
 )
