@@ -134,10 +134,10 @@ def rot2eul(R: np.ndarray) -> np.ndarray:
 def _get_degrees(orientation: np.ndarray) -> tuple[float, float, float]:
     euler = rot2eul(orientation)
     deg = euler * RAD_TO_DEG
-    f_deg = deg[RotationType.F.np_index()]
-    u_deg = deg[RotationType.U.np_index()]
-    r_deg = deg[RotationType.R.np_index()]
-    return [f_deg, u_deg, r_deg]
+    f_deg = float(deg[RotationType.F.np_index()])
+    u_deg = float(deg[RotationType.U.np_index()])
+    r_deg = float(deg[RotationType.R.np_index()])
+    return (f_deg, u_deg, r_deg)
 
 
 @dataclasses.dataclass
