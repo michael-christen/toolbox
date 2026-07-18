@@ -8,7 +8,6 @@ py_library(
     visibility = ["//:__subpackages__"],
     deps = [
         "@com_google_protobuf//:protobuf_python",
-        "@pip//protobuf",
     ],
 )
 

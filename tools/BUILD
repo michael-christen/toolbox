@@ -1,10 +1,12 @@
+load("@bazel_env.bzl", "bazel_env")
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
-load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_library")
+load("@com_google_protobuf//bazel:cc_proto_library.bzl", "cc_proto_library")
+load("@multitool//:tools.bzl", MULTITOOL_TOOLS = "TOOLS")
 load("@pip//:requirements.bzl", "requirement")  # '@pip' must match configured pip hub_name
 load("@rules_multirun//:defs.bzl", "command", "multirun")
 load("@rules_mypy//mypy:mypy.bzl", "mypy_cli")
 load("@rules_proto//proto:defs.bzl", "proto_library")
-load("//bzl:py.bzl", "proto_py_library", "py_binary", "py_library", "py_test")
+load("//bzl:py.bzl", "proto_py_library", "py_library", "py_test")
 
 package(default_visibility = ["//visibility:private"])
 
@@ -58,7 +60,7 @@ multirun(
         "flake8",
     ],
     # Set to 0 to run in parallel, defaults to sequential
-    # XXX: Maybe formatting needs to be sequential to prevent data races?
+    # Maybe formatting needs to be sequential to prevent data races?
     jobs = 0,
 )
 
@@ -82,22 +84,30 @@ py_library(
     visibility = ["//:__subpackages__"],
 )
 
-py_library(
+alias(
     name = "bazel_utils",
-    srcs = ["bazel_utils.py"],
+    actual = "//tlbox/utils:bazel_utils",
     visibility = ["//:__subpackages__"],
-    deps = ["//third_party/bazel/src/main/protobuf:build_py_library"],
 )
 
-py_binary(
+alias(
+    name = "generate_ccindex",
+    actual = "//tlbox/utils:generate_ccindex",
+    visibility = ["//:__subpackages__"],
+)
+
+alias(
     name = "coverage_baseline",
-    srcs = ["coverage_baseline.py"],
+    actual = "//tlbox/utils:coverage_baseline",
     visibility = ["//:__subpackages__"],
 )
 
 mypy_cli(
     name = "mypy_cli",
     mypy_requirement = requirement("mypy"),
+    # Must match PYTHON_VERSION in MODULE.bazel
+    # LINK(7e463bc3_e4d9_4464_ba39_3217c4a86004)
+    python_version = "3.11.9",
     deps = [
         "@pip//types_protobuf",
     ],
@@ -109,36 +119,22 @@ proto_library(
     deps = ["@com_google_protobuf//:timestamp_proto"],
 )
 
-py_library(
+alias(
     name = "git_utils",
-    srcs = ["git_utils.py"],
+    actual = "//tlbox/utils:git_utils",
     visibility = ["//:__subpackages__"],
-    deps = ["//tools:git_py_library"],
 )
 
 py_test(
     name = "git_utils_test",
     srcs = ["git_utils_test.py"],
-    deps = [":git_utils"],
+    deps = ["//tlbox/utils:git_utils"],
 )
 
-proto_cc_library(
-    name = "git_cc_library",
-    srcs = ["git.pb.cc"],
-    hdrs = ["git.pb.h"],
+cc_proto_library(
+    name = "git_cc_proto",
     visibility = ["//visibility:public"],
-    deps = ["@com_google_protobuf//:protobuf"],
-)
-
-proto_compile(
-    name = "git_cpp_compile",
-    outputs = [
-        "git.pb.cc",
-        "git.pb.h",
-    ],
-    plugins = ["@build_stack_rules_proto//plugin/builtin:cpp"],
-    proto = "git_proto",
-    visibility = ["//visibility:public"],
+    deps = [":git_proto"],
 )
 
 proto_compile(
@@ -160,4 +156,18 @@ proto_py_library(
     srcs = ["git_pb2.py"],
     visibility = ["//visibility:public"],
     deps = ["@com_google_protobuf//:protobuf_python"],
+)
+
+# Rerun `bazel run //tools:bazel_env` if you modify this target
+bazel_env(
+    name = "bazel_env",
+    toolchains = {
+        "python": "@rules_python//python:current_py_toolchain",
+    },
+    tools = {
+        "buildifier": "@buildifier_prebuilt//:buildifier",
+        "buildozer": "@buildifier_prebuilt//:buildozer",
+        "format": "//tools/format:format",
+        "python": "$(PYTHON3)",
+    } | MULTITOOL_TOOLS,
 )

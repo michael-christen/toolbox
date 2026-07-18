@@ -1,0 +1,4 @@
+{
+  "tlbox/hw/drivers/lis3mdl/lis3mdl.emb.h": "//tlbox/hw/drivers/lis3mdl:lis3mdl_emb",
+  "tlbox/hw/drivers/lsm6dso/lsm6dso.emb.h": "//tlbox/hw/drivers/lsm6dso:lsm6dso_emb"
+}

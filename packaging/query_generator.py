@@ -1,12 +1,9 @@
-"""Utility for generating source files based on bazel queries.
-
-Cannot depend on any of our other sources, as this is one of a very small
-amount of things that won't run with bazel.
-"""
+"""Utility for generating source files based on bazel queries."""
 
 import argparse
 import dataclasses
 import difflib
+import os
 import pathlib
 import subprocess
 
@@ -87,10 +84,9 @@ def main(compare: bool) -> None:
         QueryFile(
             out_file=pathlib.Path("packaging/generated.bzl"),
             variable_to_query={
-                # target '//tools:_mypy_cli' is not visible, but gets included
                 "PYTHON_TARGETS": (
                     'kind("py_binary", //...) + kind("py_library", //...)'
-                    " - //tools:_mypy_cli"
+                    " - //:gazelle_python_manifest.update"
                 ),
                 # Finds all proto_py_library (note that if someone decided to
                 # name their python target similarly, we'd catch it too)
@@ -106,6 +102,10 @@ def main(compare: bool) -> None:
 
 
 if __name__ == "__main__":
+    # bazel run sets BUILD_WORKING_DIRECTORY; cd there so relative paths
+    # (generated files, bazel query) resolve against the workspace root.
+    if workspace := os.environ.get("BUILD_WORKING_DIRECTORY"):
+        os.chdir(workspace)
     parser = argparse.ArgumentParser(description="Process some choices.")
     parser.add_argument(
         "--mode",

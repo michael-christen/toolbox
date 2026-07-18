@@ -1,5 +1,8 @@
 # Have bazel ignore this directory
 nobazel
+# Jupyter checkpoint files
+notebooks/.ipynb_checkpoints
+tlbox/notebooks/.ipynb_checkpoints
 # Don't want node_modules
 node_modules
 # Bazel directories

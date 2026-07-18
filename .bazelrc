@@ -89,7 +89,7 @@ build --@pigweed//pw_build:default_module_config=//system:module_config
 # Host platform default backends.
 common --@pigweed//pw_log:backend=@pigweed//pw_log_string
 common --@pigweed//pw_log:backend_impl=@pigweed//pw_log_string:impl
-common --@pigweed//pw_log_string:handler_backend=@pigweed//pw_system:log_backend
+common --@pigweed//pw_log_string:handler_backend=//tlbox/testing:log_string_handler
 common --@pigweed//pw_sys_io:backend=@pigweed//pw_sys_io_stdio
 common --@pigweed//pw_system:io_backend=@pigweed//pw_system:socket_target_io
 
@@ -128,13 +128,13 @@ build:quiet --noshow_progress
 
 # Performance per #85
 build --experimental_reuse_sandbox_directories
+# Local disk cache for faster builds when switching workspaces or when remote
+# cache is unavailable. Note that setup-bazel will override this in CI
+common --disk_cache=~/.cache/bazel-disk
 # Have rules_rust use the right hermetic toolchain sysroot, symlink folders
 # into execution directory
 build --@rules_rust//cargo/settings:experimental_symlink_execroot=True
 
-# Must match PYTHON_VERSION in MODULE.bazel
-# LINK(7e463bc3_e4d9_4464_ba39_3217c4a86004)
-common --@aspect_rules_py//py:interpreter_version=3.11.9
 
 # Reduce payload size of uploaded build event stream by eliminating duplicate
 # file references

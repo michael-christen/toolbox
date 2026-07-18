@@ -78,8 +78,18 @@ def cc_binary(**kwargs):
 def cc_library(**kwargs):
     _cc_library(copts = COPTS + CXX_OPTS, **kwargs)
 
-def cc_test(timeout = "short", **kwargs):
-    _cc_test(copts = COPTS + CXX_OPTS, timeout = timeout, **kwargs)
+def cc_test(timeout = "short", deps = [], **kwargs):
+    """cc_test that auto-selects pw_cc_test when @pigweed//pw_unit_test is a dep.
+
+    Including @pigweed//pw_unit_test signals that the test needs Pigweed
+    build-system integration (facade backends, pw_unit_test framework, I2C
+    mocks, etc.). In that case pw_cc_test is used transparently; otherwise
+    the standard cc_test rule runs with our shared copts.
+    """
+    if "@pigweed//pw_unit_test" in deps:
+        _pw_cc_test(timeout = timeout, deps = deps, **kwargs)
+    else:
+        _cc_test(copts = COPTS + CXX_OPTS, timeout = timeout, deps = deps, **kwargs)
 
 def c_binary(**kwargs):
     _cc_binary(copts = COPTS + CONLY_OPTS, **kwargs)
@@ -87,5 +97,24 @@ def c_binary(**kwargs):
 def c_library(**kwargs):
     _cc_library(copts = COPTS + CONLY_OPTS, **kwargs)
 
-def pw_cc_test(timeout = "short", **kwargs):
-    _pw_cc_test(timeout = timeout, **kwargs)
+def cc_size(target, max_flash, max_ram, **kwargs):
+    """Calculate size metrics of binary."""
+    target_label = native.package_relative_label(target)
+    name = "{}.size".format(target_label.name)
+
+    # TODO(#243): Do we always want this size tool?
+    size_tool = "@llvm_toolchain_llvm//:bin/llvm-size"
+    native.genrule(
+        name = name,
+        outs = ["{}.json".format(name)],
+        cmd = "$(location //bzl:bin_size) $(location {}) $(location {}) {} {} {} > $@".format(size_tool, target, target_label, max_flash, max_ram),
+        srcs = [
+            target,
+        ],
+        tools = [
+            "//bzl:bin_size",
+            size_tool,
+        ],
+        tags = ["cc_size"],
+        **kwargs
+    )

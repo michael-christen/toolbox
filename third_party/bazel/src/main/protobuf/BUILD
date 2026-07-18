@@ -1,5 +1,5 @@
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
-load("@build_stack_rules_proto//rules/cc:proto_cc_library.bzl", "proto_cc_library")
+load("@com_google_protobuf//bazel:cc_proto_library.bzl", "cc_proto_library")
 load("@rules_proto//proto:defs.bzl", "proto_library")
 load("//bzl:py.bzl", "proto_py_library")
 
@@ -11,23 +11,10 @@ proto_library(
     visibility = ["//visibility:public"],
 )
 
-proto_cc_library(
-    name = "build_cc_library",
-    srcs = ["build.pb.cc"],
-    hdrs = ["build.pb.h"],
+cc_proto_library(
+    name = "build_cc_proto",
     visibility = ["//visibility:public"],
-    deps = ["@com_google_protobuf//:protobuf"],
-)
-
-proto_compile(
-    name = "build_cpp_compile",
-    outputs = [
-        "build.pb.cc",
-        "build.pb.h",
-    ],
-    plugins = ["@build_stack_rules_proto//plugin/builtin:cpp"],
-    proto = "build_proto",
-    visibility = ["//visibility:public"],
+    deps = [":build_proto"],
 )
 
 proto_compile(

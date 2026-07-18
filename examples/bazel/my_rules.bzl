@@ -10,6 +10,9 @@ FooInfo = provider(
 
 # ctx fields: https://bazel.build/rules/lib/builtins/ctx
 def _foo_binary_impl(ctx):
+    if not ctx.attr.username:
+        fail("username must not be empty")
+
     # Get toolchain specifics into the rule
     info = ctx.toolchains[":toolchain_type"].fooinfo
     out = ctx.actions.declare_file(ctx.label.name)
@@ -49,4 +52,48 @@ foo_toolchain = rule(
     attrs = {
         "prefix": attr.string(),
     },
+)
+
+def _hello_world_impl(ctx):
+    out = ctx.actions.declare_file(ctx.label.name + ".cc")
+    ctx.actions.expand_template(
+        output = out,
+        template = ctx.file.template,
+        substitutions = {"{NAME}": ctx.attr.username},
+    )
+    return [DefaultInfo(files = depset([out]))]
+
+hello_world = rule(
+    implementation = _hello_world_impl,
+    attrs = {
+        "username": attr.string(default = "unknown person"),
+        "template": attr.label(
+            allow_single_file = [".cc.tpl"],
+            mandatory = True,
+        ),
+        # If we wanted private default
+        # "_template": attr.label(
+        #     allow_single_file = True,
+        #     default = "file.cc.tpl",
+        # ),
+    },
+)
+
+# aspect
+def _print_aspect_impl(target, ctx):
+    # Make sure the rule has a srcs attribute.
+    if hasattr(ctx.rule.attr, "srcs"):
+        # Iterate through the files that make up the sources and
+        # print their paths.
+        for src in ctx.rule.attr.srcs:
+            for f in src.files.to_list():
+                print(f.path)
+    return []
+
+# Invoke as
+# bazel build //... --aspects examples/bazel/my_rules.bzl%print_aspect
+
+print_aspect = aspect(
+    implementation = _print_aspect_impl,
+    attr_aspects = ["deps"],
 )

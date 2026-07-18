@@ -19,13 +19,17 @@ documentation for details.
    :maxdepth: 4
    :caption: Contents:
 
-   README
+   development
+   structure
+   cpp_testing
+   issue_management
    myst
    examples
    myst_extensions
    bringup
    useful_commands
    common_references
+   sbr_components
 
 .. toctree::
    :maxdepth: 1

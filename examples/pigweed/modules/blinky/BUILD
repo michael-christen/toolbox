@@ -12,6 +12,8 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
+load("@com_google_protobuf//bazel:proto_library.bzl", "proto_library")
+
 # Don't autogenerate any protos here
 # gazelle:ignore
 load(
@@ -20,7 +22,7 @@ load(
     "nanopb_rpc_proto_library",
 )
 load("@rules_python//python:proto.bzl", "py_proto_library")
-load("//bzl:cc.bzl", "cc_library", "pw_cc_test")
+load("//bzl:cc.bzl", "cc_library", "cc_test")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -44,10 +46,10 @@ cc_library(
     ],
     deps = [
         "//examples/pigweed/apps/blinky/system",
-        "//examples/pigweed/modules/timer_future",
         "@pigweed//pw_async2:coro",
         "@pigweed//pw_async2:coro_or_else_task",
         "@pigweed//pw_async2:dispatcher",
+        "@pigweed//pw_async2:time_provider",
         "@pigweed//pw_chrono:system_clock",
         "@pigweed//pw_function",
         "@pigweed//pw_sync:interrupt_spin_lock",
@@ -56,15 +58,15 @@ cc_library(
     ],
 )
 
-pw_cc_test(
+cc_test(
     name = "blinky_test",
     srcs = ["blinky_test.cc"],
     deps = [
         ":blinky",
         "@pigweed//pw_allocator:testing",
-        "@pigweed//pw_async2:dispatcher",
+        "@pigweed//pw_async2:simulated_time_provider",
+        "@pigweed//pw_async2:testing",
         "@pigweed//pw_digital_io:digital_io_mock",
-        "@pigweed//pw_thread:sleep",
         "@pigweed//pw_unit_test",
     ],
 )

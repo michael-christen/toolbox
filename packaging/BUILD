@@ -11,7 +11,10 @@ py_package(
     packages = [
         "apps",
         "examples",
+        "hw_drivers",
+        "hw_services",
         "mchristen",
+        "third_party",
         "tools",
         "utils",
     ],

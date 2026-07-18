@@ -60,13 +60,13 @@ Coro<Status> Blinky::BlinkLoop(CoroContext&, uint32_t blink_count,
       std::lock_guard lock(lock_);
       TurnOff(*monochrome_led_);
     }
-    co_await timer_.WaitFor(interval);
+    co_await time_->WaitFor(interval);
     {
       PW_LOG_INFO("LED blinking: ON");
       std::lock_guard lock(lock_);
       TurnOn(*monochrome_led_);
     }
-    co_await timer_.WaitFor(interval);
+    co_await time_->WaitFor(interval);
   }
   {
     std::lock_guard lock(lock_);
@@ -81,9 +81,12 @@ Blinky::Blinky()
         PW_LOG_ERROR("Failed to allocate blink loop coroutine.");
       }) {}
 
-void Blinky::Init(Dispatcher& dispatcher, Allocator& allocator,
+void Blinky::Init(Dispatcher& dispatcher,
+                  pw::async2::TimeProvider<pw::chrono::SystemClock>& time,
+                  Allocator& allocator,
                   pw::digital_io::DigitalInOut& monochrome_led) {
   dispatcher_ = &dispatcher;
+  time_ = &time;
   allocator_ = &allocator;
 
   std::lock_guard lock(lock_);

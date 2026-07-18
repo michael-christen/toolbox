@@ -4,7 +4,7 @@ import subprocess
 import tempfile
 import unittest
 
-from tools import git_utils
+from tlbox.utils import git_utils
 
 
 class TestGitUtils(unittest.TestCase):
@@ -21,12 +21,12 @@ class TestGitUtils(unittest.TestCase):
       - [ ] target
       - [ ] after
     - [ ] "get a commit map"
-      - [x] get_file_commit_map_from_follow
+      - [x] get_file_commit_map_from_log
       - [x] get_file_commit_map_from_list
       - [ ] try out "after"
       - [x] show renamed files
       - [ ] possibly get a benchmark, by making a super long history
-    - [ ] FileCommitMap
+    - [x] FileCommitMap (proto round-trip; DELETE op covered)
 
     NOTE: We're checking the above, feel free to test more when time is
     available.
@@ -62,12 +62,15 @@ class TestGitUtils(unittest.TestCase):
             .strip()
         )
 
+    # TODO: test deleted-then-re-added
+    # TODO: test TYPE_CHANGE op
     def test_git_utils(self):
 
         # diff-tree doesn't work on the first commit (and we accept that)
         # so let's just make an empty first commit
         self._cmd(["git", "commit", "--allow-empty", "-m", "initial"])
         first_hash = self._cmd(["git", "rev-parse", "HEAD"])
+        self.assertEqual(git_utils.get_num_files(self.tmp_path), 0)
 
         # Create a test file and commit it
         test_file = self.tmp_path / "test_file.txt"
@@ -84,6 +87,7 @@ class TestGitUtils(unittest.TestCase):
                 test_file.relative_to(self.tmp_path),
             ],
         )
+        self.assertEqual(git_utils.get_num_files(self.tmp_path), 1)
         self.assertEqual(
             git_utils.get_files_changed_at_commit(
                 commit=test_file_commit_hash, git_directory=self.tmp_path
@@ -97,6 +101,16 @@ class TestGitUtils(unittest.TestCase):
         mv_commit_hash = self._cmd(["git", "rev-parse", "HEAD"])
 
         self.assertEqual(
+            git_utils.get_head_commit(self.tmp_path, num_prev_commits=0),
+            mv_commit_hash,
+        )
+        self.assertEqual(
+            git_utils.get_head_commit(self.tmp_path, num_prev_commits=1),
+            test_file_commit_hash,
+        )
+        self.assertEqual(git_utils.get_num_files(self.tmp_path), 1)
+
+        self.assertEqual(
             git_utils.list_file_commits("moved_file.txt", self.tmp_path),
             # We're picking up its original
             [mv_commit_hash, test_file_commit_hash],
@@ -107,9 +121,7 @@ class TestGitUtils(unittest.TestCase):
             [mv_commit_hash, test_file_commit_hash, first_hash],
         )
 
-        # Show follow map is behaving as expected
-        follow_map = git_utils.get_file_commit_map_from_follow(self.tmp_path)
-        expected_follow = git_utils.FileCommitMap(
+        expected = git_utils.FileCommitMap(
             commit_map={
                 first_hash: set(),
                 test_file_commit_hash: set([pathlib.Path("moved_file.txt")]),
@@ -122,7 +134,8 @@ class TestGitUtils(unittest.TestCase):
                 ],
             },
         )
-        self.assertEqual(follow_map, expected_follow)
+        log_map = git_utils.get_file_commit_map_from_log(self.tmp_path)
+        self.assertEqual(log_map, expected)
 
         # Show how list misses out on tracking a file through history
         list_map = git_utils.get_file_commit_map_from_list(self.tmp_path)
@@ -150,9 +163,30 @@ class TestGitUtils(unittest.TestCase):
         self.assertEqual(list_map, expected_list)
 
         # Check the proto is invertible w/ no data loss
-        proto = follow_map.to_proto()
+        proto = log_map.to_proto()
         inverted_proto = git_utils.FileCommitMap.from_proto(proto)
-        self.assertEqual(follow_map, inverted_proto)
+        self.assertEqual(log_map, inverted_proto)
+
+        # Delete the file and verify DELETE op handling + untracked_files logic
+        self._cmd(["git", "rm", "moved_file.txt"])
+        self._cmd(["git", "commit", "-m", "delete_file"])
+        delete_commit_hash = self._cmd(["git", "rev-parse", "HEAD"])
+
+        # After deletion, moved_file.txt is not in ls_files, so it won't be
+        # pre-populated in file_map.  The DELETE op therefore marks it as
+        # untracked, and neither the delete commit nor any prior commit for
+        # that file should appear in the result.
+        post_delete_map = git_utils.get_file_commit_map_from_log(self.tmp_path)
+        expected_post_delete = git_utils.FileCommitMap(
+            commit_map={
+                first_hash: set(),
+                test_file_commit_hash: set(),
+                mv_commit_hash: set(),
+                delete_commit_hash: set(),
+            },
+            file_map={},
+        )
+        self.assertEqual(post_delete_map, expected_post_delete)
 
     def test_extras(self) -> None:
         self.assertEqual([], git_utils._get_args_for_after(None))
