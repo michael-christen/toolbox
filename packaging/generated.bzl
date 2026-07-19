@@ -25,6 +25,7 @@ PROTO_PYTHON_TARGETS = [
 # PYTHON_TARGETS generated via:
 # `bazel query 'kind("py_binary", //...) + kind("py_library", //...) - //:gazelle_python_manifest.update'`
 PYTHON_TARGETS = [
+    "//apps/rubiks:rubiks",
     "//bzl:pytest_main",
     "//docs:conf",
     "//examples/basic:client",
