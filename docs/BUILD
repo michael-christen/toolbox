@@ -29,7 +29,6 @@ sphinx_html(
         "issue_management.md",
         "myst.md",
         "myst_extensions.md",
-        "sbr_components.md",
         "structure.md",
         "useful_commands.md",
         ":img",
@@ -37,7 +36,6 @@ sphinx_html(
         ":templates",
         "//:python_source",
         "//docs/common:docs",
-        "//tlbox/apps/sbr/docs",
     ],
     config = "conf.py",
     index = "index.rst",  # Test non-canonical naming.
