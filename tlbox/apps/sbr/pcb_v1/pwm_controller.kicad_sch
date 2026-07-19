@@ -410,6 +410,18 @@
 		)
 		(uuid "0561916f-c19d-47d0-8a12-dc167e339863")
 	)
+	(no_connect
+		(at 111.76 73.66)
+		(uuid "4d2c79a5-c3f9-4f45-94ae-6054bea1a441")
+	)
+	(no_connect
+		(at 111.76 71.12)
+		(uuid "a4de7efc-b8a7-487c-aec7-b61a8b911849")
+	)
+	(no_connect
+		(at 111.76 60.96)
+		(uuid "fe99fea6-a109-4a30-9cac-1554d9b32dfd")
+	)
 	(hierarchical_label "pwm_throttle"
 		(shape output)
 		(at 111.76 68.58 0)
