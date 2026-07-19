@@ -26,6 +26,7 @@ sphinx_html(
         "cpp_testing.md",
         "development.md",
         "examples.md",
+        "hardware.md",
         "issue_management.md",
         "myst.md",
         "myst_extensions.md",
@@ -38,6 +39,9 @@ sphinx_html(
         "//:python_source",
         "//docs/common:docs",
         "//tlbox/apps/sbr/docs",
+        "//tlbox/apps/sbr/pcb_v1:pcb_svg",
+        "//tlbox/apps/sbr/pcb_v1:schematic_pdf",
+        "//tlbox/apps/sbr/pcb_v1:schematic_svgs",
     ],
     config = "conf.py",
     index = "index.rst",  # Test non-canonical naming.
