@@ -5,7 +5,7 @@
 	(uuid "f262eb57-53f2-4c6d-9662-57c57f8f1444")
 	(paper "A4")
 	(lib_symbols
-		(symbol "Connector:Conn_01x02_Pin"
+		(symbol "Connector:Conn_01x04_Pin"
 			(pin_names
 				(offset 1.016)
 				(hide yes)
@@ -16,7 +16,7 @@
 			(in_pos_files yes)
 			(duplicate_pin_numbers_are_jumpers no)
 			(property "Reference" "J"
-				(at 0 2.54 0)
+				(at 0 5.08 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
@@ -25,8 +25,8 @@
 					)
 				)
 			)
-			(property "Value" "Conn_01x02_Pin"
-				(at 0 -5.08 0)
+			(property "Value" "Conn_01x04_Pin"
+				(at 0 -7.62 0)
 				(show_name no)
 				(do_not_autoplace no)
 				(effects
@@ -57,7 +57,7 @@
 					)
 				)
 			)
-			(property "Description" "Generic connector, single row, 01x02, script generated"
+			(property "Description" "Generic connector, single row, 01x04, script generated"
 				(at 0 0 0)
 				(show_name no)
 				(do_not_autoplace no)
@@ -100,7 +100,18 @@
 					)
 				)
 			)
-			(symbol "Conn_01x02_Pin_1_1"
+			(symbol "Conn_01x04_Pin_1_1"
+				(rectangle
+					(start 0.8636 2.667)
+					(end 0 2.413)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
 				(rectangle
 					(start 0.8636 0.127)
 					(end 0 -0.127)
@@ -121,6 +132,29 @@
 					)
 					(fill
 						(type outline)
+					)
+				)
+				(rectangle
+					(start 0.8636 -4.953)
+					(end 0 -5.207)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 2.54) (xy 0.8636 2.54)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
 					)
 				)
 				(polyline
@@ -147,8 +181,20 @@
 						(type none)
 					)
 				)
+				(polyline
+					(pts
+						(xy 1.27 -5.08) (xy 0.8636 -5.08)
+					)
+					(stroke
+						(width 0.1524)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
 				(pin passive line
-					(at 5.08 0 180)
+					(at 5.08 2.54 180)
 					(length 3.81)
 					(name "Pin_1"
 						(effects
@@ -166,7 +212,7 @@
 					)
 				)
 				(pin passive line
-					(at 5.08 -2.54 180)
+					(at 5.08 0 180)
 					(length 3.81)
 					(name "Pin_2"
 						(effects
@@ -183,13 +229,99 @@
 						)
 					)
 				)
+				(pin passive line
+					(at 5.08 -2.54 180)
+					(length 3.81)
+					(name "Pin_3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -5.08 180)
+					(length 3.81)
+					(name "Pin_4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
 			)
 			(embedded_fonts no)
 		)
 	)
+	(text "Labeled as 5V"
+		(exclude_from_sim no)
+		(at 139.954 78.994 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "e402c49d-c08d-43b0-b784-0feac6238c49")
+	)
+	(wire
+		(pts
+			(xy 115.57 78.74) (xy 119.38 78.74)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "132c0ca0-6658-4074-9b2d-87d773e8f56c")
+	)
+	(wire
+		(pts
+			(xy 115.57 81.28) (xy 119.38 81.28)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6dd6d743-66b2-41dd-aa60-703ce25187f8")
+	)
+	(wire
+		(pts
+			(xy 119.38 73.66) (xy 115.57 73.66)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a452b45e-6f13-4048-ac81-f7ab9c202583")
+	)
+	(wire
+		(pts
+			(xy 119.38 76.2) (xy 115.57 76.2)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c3a1afb7-ba67-40f2-8b79-934b69c1f8db")
+	)
 	(hierarchical_label "uart_from_radio"
 		(shape output)
-		(at 115.57 62.23 0)
+		(at 119.38 73.66 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -200,7 +332,7 @@
 	)
 	(hierarchical_label "uart_to_radio"
 		(shape input)
-		(at 115.57 64.77 0)
+		(at 119.38 76.2 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -209,9 +341,31 @@
 		)
 		(uuid "41f2c1c2-fac9-4550-845a-86872b47b130")
 	)
+	(hierarchical_label "VCC"
+		(shape input)
+		(at 119.38 78.74 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "873c7f79-c17c-4122-aebb-066cbd76cfa4")
+	)
+	(hierarchical_label "GND"
+		(shape input)
+		(at 119.38 81.28 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "e40781ca-a00c-4d35-a4d0-9d8e95ff3eac")
+	)
 	(symbol
-		(lib_id "Connector:Conn_01x02_Pin")
-		(at 110.49 62.23 0)
+		(lib_id "Connector:Conn_01x04_Pin")
+		(at 110.49 76.2 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -219,9 +373,10 @@
 		(on_board yes)
 		(in_pos_files yes)
 		(dnp no)
-		(uuid "0c6d7f8e-07b1-450d-ab75-99999ac506f5")
-		(property "Reference" "J2"
-			(at 111.125 57.15 0)
+		(fields_autoplaced yes)
+		(uuid "eb875129-3c08-4950-bc4d-94e2583ae2c1")
+		(property "Reference" "J4"
+			(at 111.125 68.58 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -230,8 +385,8 @@
 				)
 			)
 		)
-		(property "Value" "Conn_01x02_Pin"
-			(at 111.125 59.69 0)
+		(property "Value" "Conn_01x04_Pin"
+			(at 111.125 71.12 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -241,7 +396,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 110.49 62.23 0)
+			(at 110.49 76.2 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -252,7 +407,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 110.49 62.23 0)
+			(at 110.49 76.2 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -262,8 +417,9 @@
 				)
 			)
 		)
-		(property "Description" "Generic connector, single row, 01x02, script generated"
-			(at 109.728 53.086 0)
+		(property "Description" "Generic connector, single row, 01x04, script generated"
+			(at 110.49 76.2 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -272,16 +428,22 @@
 				)
 			)
 		)
+		(pin "4"
+			(uuid "8939ce36-47aa-44af-8944-359f0a0532f4")
+		)
 		(pin "2"
-			(uuid "f69749cd-8c9b-4e2c-876d-75827c5aaec5")
+			(uuid "4521678f-c4b2-48cb-9e6a-9c065387c8d8")
+		)
+		(pin "3"
+			(uuid "af70f134-a56a-4edd-84d9-bbe5a42809e5")
 		)
 		(pin "1"
-			(uuid "cd9adc2e-ec71-4282-acb7-921d0c091b39")
+			(uuid "52b68989-18c5-482a-abe4-bb0043285bf8")
 		)
 		(instances
 			(project "self_balancing_robot_v1"
 				(path "/f1bc52c2-82b2-44ac-a8ec-1286ff19a550/7849255e-dc2a-45a5-ad4e-6c6d20980213"
-					(reference "J2")
+					(reference "J4")
 					(unit 1)
 				)
 			)
