@@ -1,0 +1,259 @@
+[ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen"; @line = 1; @symbol_importdef<0> = [Toybox,1,7,13]; @symbol_importdef<1> = [Lang,1,14,18]; ]
+import Toybox.Lang;
+[ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen"; @line = 2; @symbol_usingdef<0> = [Toybox,2,6,12]; @symbol_usingdef<1> = [WatchUi,2,13,20]; ]
+using Toybox.WatchUi;
+[ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen"; @line = 3; @symbol_usingdef<0> = [Toybox,3,6,12]; @symbol_usingdef<1> = [WatchUi,3,13,20]; @symbol_usingAlias = [Ui,3,24,26]; ]
+using Toybox.WatchUi as :Ui;
+[ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen"; @line = 4; @symbol_usingdef<0> = [Toybox,4,6,12]; @symbol_usingdef<1> = [Graphics,4,13,21]; ]
+using Toybox.Graphics;
+[ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen"; @line = 5; @symbol_usingdef<0> = [Toybox,5,6,12]; @symbol_usingdef<1> = [Graphics,5,13,21]; @symbol_usingAlias = [Gfx,5,25,28]; ]
+using Toybox.Graphics as :Gfx;
+[ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen"; @line = 7; @symbol_moduledef = [Rez,7,7,10]; ]
+module Rez {
+    [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen"; @line = 7; ]
+    <init> {
+    }
+    [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen"; @line = 8; @symbol_moduledef = [Drawables,8,11,20]; ]
+    module Drawables {
+        [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen"; @line = 8; ]
+        <init> {
+        }
+        [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen"; @line = 9; @position = 27; initialized = true; @symbol_vardef = [id_monkey,9,27,36]; @symbol_type<0> = [ResourceId,9,40,50]; ]
+        var id_monkey as ResourceId;
+        [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen"; @line = 10; @position = 27; initialized = true; @symbol_vardef = [LauncherIcon,10,27,39]; @symbol_type<0> = [ResourceId,10,43,53]; ]
+        var LauncherIcon as ResourceId;
+    }
+    [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen"; @line = 13; @symbol_moduledef = [Layouts,13,11,18]; ]
+    module Layouts {
+        [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen"; @line = 13; ]
+        <init> {
+        }
+        [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen"; @line = 14; @symbol_functiondef = [MainLayout,14,17,27]; @symbol_param<0> = [dc,14,28,30]; @symbol_param<0>_type<0> = [Graphics,14,34,42]; @symbol_param<0>_type<1> = [Dc,14,43,45]; @symbol_return<0> = [Array,14,50,55]; @symbol_return<1> = [WatchUi,14,56,63]; @symbol_return<2> = [Drawable,14,64,72]; ]
+        function MainLayout(dc as Graphics.Dc) as Array<WatchUi.Drawable> {
+_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_bin_gen_006_B3113_00_source_Rez_mcgen_14_74_21_8_start:
+[ "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen" 15 12 ]
+            [ "_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_bin_gen_006_B3113_00_source_Rez_mcgen_14_74_21_8_start" "_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_bin_gen_006_B3113_00_source_Rez_mcgen_14_74_21_8_stop" ]
+            %rez_cmp_local_text_1193959466.1 = local;
+            symbol [ rez_cmp_local_text_1193959466 %rez_cmp_local_text_1193959466.1 15 16 45 ];
+            symbol [ WatchUi %tmp.3 15 52 59 ];
+            %tmp.3 = getm $.Toybox.WatchUi;
+            symbol [ Text %tmp.4 15 60 64 ];
+            %tmp.4 = getv function ? %tmp.3 :Text;
+            %tmp.5 = newd 6;
+            %tmp.7 = const :color;
+            symbol [ color %tmp.7 15 67 72 const ];
+            symbol [ Graphics %tmp.8 15 74 82 ];
+            %tmp.8 = getm $.Toybox.Graphics;
+            symbol [ COLOR_WHITE %tmp.9 15 83 94 ];
+            %tmp.9 = getv %tmp.8 :COLOR_WHITE;
+            %tmp.10 = dup %tmp.5;
+            %tmp.11 = aputv %tmp.10 %tmp.7 %tmp.9;
+            %tmp.13 = const :locX;
+            symbol [ locX %tmp.13 15 97 101 const ];
+            %tmp.14 = 240;
+            %tmp.15 = 0.5;
+            %tmp.16 = mul %tmp.14 %tmp.15;
+            %tmp.17 = dup %tmp.11;
+            %tmp.18 = aputv %tmp.17 %tmp.13 %tmp.16;
+            %tmp.20 = const :locY;
+            symbol [ locY %tmp.20 15 117 121 const ];
+            %tmp.21 = 5;
+            %tmp.22 = dup %tmp.18;
+            %tmp.23 = aputv %tmp.22 %tmp.20 %tmp.21;
+            %tmp.25 = const :text;
+            symbol [ text %tmp.25 15 127 131 const ];
+            symbol [ $ %tmp.26 15 133 134 ];
+            %tmp.26 = getm $;
+            symbol [ Rez %tmp.27 15 135 138 ];
+            %tmp.27 = getv %tmp.26 :Rez;
+            symbol [ Strings %tmp.28 15 139 146 ];
+            %tmp.28 = getv %tmp.27 :Strings;
+            symbol [ prompt %tmp.29 15 147 153 ];
+            %tmp.29 = getv %tmp.28 :prompt;
+            %tmp.30 = dup %tmp.23;
+            %tmp.31 = aputv %tmp.30 %tmp.25 %tmp.29;
+            %tmp.33 = const :justification;
+            symbol [ justification %tmp.33 15 156 169 const ];
+            symbol [ Graphics %tmp.34 15 171 179 ];
+            %tmp.34 = getm $.Toybox.Graphics;
+            symbol [ TEXT_JUSTIFY_CENTER %tmp.35 15 180 199 ];
+            %tmp.35 = getv %tmp.34 :TEXT_JUSTIFY_CENTER;
+            %tmp.36 = dup %tmp.31;
+            %tmp.37 = aputv %tmp.36 %tmp.33 %tmp.35;
+            %tmp.39 = const :font;
+            symbol [ font %tmp.39 15 202 206 const ];
+            symbol [ Graphics %tmp.40 15 208 216 ];
+            %tmp.40 = getm $.Toybox.Graphics;
+            symbol [ FONT_MEDIUM %tmp.41 15 217 228 ];
+            %tmp.41 = getv %tmp.40 :FONT_MEDIUM;
+            %tmp.42 = dup %tmp.37;
+            %tmp.43 = aputv %tmp.42 %tmp.39 %tmp.41;
+            %tmp.1 = newc %tmp.4 (%tmp.43);
+            lputv %rez_cmp_local_text_1193959466.1 %tmp.1;
+            symbol [ rez_cmp_local_text_1193959466 %rez_cmp_local_text_1193959466.1 15 16 45 ];
+[ "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen" 17 12 ]
+            [ "_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_bin_gen_006_B3113_00_source_Rez_mcgen_14_74_21_8_start" "_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_bin_gen_006_B3113_00_source_Rez_mcgen_14_74_21_8_stop" ]
+            %rez_cmp_local_bitmap_id_monkey.2 = local;
+            symbol [ rez_cmp_local_bitmap_id_monkey %rez_cmp_local_bitmap_id_monkey.2 17 16 46 ];
+            symbol [ WatchUi %tmp.46 17 53 60 ];
+            %tmp.46 = getm $.Toybox.WatchUi;
+            symbol [ Bitmap %tmp.47 17 61 67 ];
+            %tmp.47 = getv function ? %tmp.46 :Bitmap;
+            %tmp.48 = newd 4;
+            %tmp.50 = const :identifier;
+            symbol [ identifier %tmp.50 17 70 80 const ];
+            %tmp.51 = "id_monkey";
+            %tmp.52 = dup %tmp.48;
+            %tmp.53 = aputv %tmp.52 %tmp.50 %tmp.51;
+            %tmp.55 = const :rezId;
+            symbol [ rezId %tmp.55 17 96 101 const ];
+            symbol [ $ %tmp.56 17 103 104 ];
+            %tmp.56 = getm $;
+            symbol [ Rez %tmp.57 17 105 108 ];
+            %tmp.57 = getv %tmp.56 :Rez;
+            symbol [ Drawables %tmp.58 17 109 118 ];
+            %tmp.58 = getv %tmp.57 :Drawables;
+            symbol [ id_monkey %tmp.59 17 119 128 ];
+            %tmp.59 = getv %tmp.58 :id_monkey;
+            %tmp.60 = dup %tmp.53;
+            %tmp.61 = aputv %tmp.60 %tmp.55 %tmp.59;
+            %tmp.63 = const :locX;
+            symbol [ locX %tmp.63 17 131 135 const ];
+            symbol [ WatchUi %tmp.64 17 137 144 ];
+            %tmp.64 = getm $.Toybox.WatchUi;
+            symbol [ LAYOUT_HALIGN_CENTER %tmp.65 17 145 165 ];
+            %tmp.65 = getv %tmp.64 :LAYOUT_HALIGN_CENTER;
+            %tmp.66 = dup %tmp.61;
+            %tmp.67 = aputv %tmp.66 %tmp.63 %tmp.65;
+            %tmp.69 = const :locY;
+            symbol [ locY %tmp.69 17 168 172 const ];
+            %tmp.70 = 30;
+            %tmp.71 = dup %tmp.67;
+            %tmp.72 = aputv %tmp.71 %tmp.69 %tmp.70;
+            %tmp.44 = newc %tmp.47 (%tmp.72);
+            lputv %rez_cmp_local_bitmap_id_monkey.2 %tmp.44;
+            symbol [ rez_cmp_local_bitmap_id_monkey %rez_cmp_local_bitmap_id_monkey.2 17 16 46 ];
+[ "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen" 18 12 ]
+            %tmp.73 = lgetv %rez_cmp_local_bitmap_id_monkey.2;
+            symbol [ rez_cmp_local_bitmap_id_monkey %tmp.73 18 12 42 ];
+            symbol [ setLocation %tmp.74 18 43 54 ];
+            %tmp.74 = getv function %tmp.73 :setLocation;
+            %tmp.75 = 240;
+            %tmp.76 = lgetv %rez_cmp_local_bitmap_id_monkey.2;
+            symbol [ rez_cmp_local_bitmap_id_monkey %tmp.76 18 63 93 ];
+            symbol [ width %tmp.77 18 94 99 ];
+            %tmp.77 = getv %tmp.76 :width;
+            %tmp.78 = sub %tmp.75 %tmp.77;
+            %tmp.79 = 0.5;
+            %tmp.80 = mul %tmp.78 %tmp.79;
+            %tmp.81 = lgetv %rez_cmp_local_bitmap_id_monkey.2;
+            symbol [ rez_cmp_local_bitmap_id_monkey %tmp.81 18 109 139 ];
+            symbol [ locY %tmp.82 18 140 144 ];
+            %tmp.82 = getv %tmp.81 :locY;
+            invoke %tmp.73 %tmp.74(%tmp.80, %tmp.82);
+[ "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen" 20 12 ]
+            %tmp.83 = newa 2 Array<WatchUi.Drawable>;
+            symbol [ Array %tmp.83 20 86 91 ];
+            symbol [ WatchUi %tmp.83 20 92 99 ];
+            symbol [ Drawable %tmp.83 20 100 108 ];
+            %tmp.84 = lgetv %rez_cmp_local_text_1193959466.1;
+            symbol [ rez_cmp_local_text_1193959466 %tmp.84 20 20 49 ];
+            %tmp.85 = dup %tmp.83;
+            %tmp.86 = aputv %tmp.85 0 %tmp.84;
+            %tmp.87 = lgetv %rez_cmp_local_bitmap_id_monkey.2;
+            symbol [ rez_cmp_local_bitmap_id_monkey %tmp.87 20 51 81 ];
+            %tmp.88 = dup %tmp.86;
+            %tmp.89 = aputv %tmp.88 1 %tmp.87;
+            ret %tmp.89;
+_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_bin_gen_006_B3113_00_source_Rez_mcgen_14_74_21_8_stop:
+        }
+    }
+    [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen"; @line = 24; @symbol_moduledef = [Menus,24,11,16]; ]
+    module Menus {
+        [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen"; @line = 24; ]
+        <init> {
+        }
+        [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen"; @line = 25; @symbol_classdef = [MainMenu,25,14,22]; @symbol_extends<0> = [WatchUi,25,31,38]; @symbol_extends<1> = [Menu,25,39,43]; ]
+        class MainMenu extends WatchUi.Menu {
+            [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen"; @line = 25; ]
+            <init> {
+            }
+            [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen"; @line = 25; ]
+            static
+            <init> {
+            }
+            [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen"; @line = 26; @symbol_functiondef = [initialize,26,21,31]; ]
+            function initialize() as Void {
+_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_bin_gen_006_B3113_00_source_Rez_mcgen_26_34_30_12_start:
+[ "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen" 27 16 ]
+                symbol [ Menu %tmp.2 27 16 20 ];
+                %tmp.2 = getv ? :Menu;
+                symbol [ initialize %tmp.3 27 21 31 ];
+                %tmp.3 = getv function %tmp.2 :initialize;
+                invoke %tmp.2 %tmp.3();
+[ "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen" 28 16 ]
+                %tmp.4 = self;
+                symbol [ addItem %tmp.5 28 16 23 ];
+                %tmp.5 = getv function %tmp.4 :addItem;
+                symbol [ WatchUi %tmp.6 28 25 32 ];
+                %tmp.6 = getm $.Toybox.WatchUi;
+                symbol [ loadResource %tmp.7 28 33 45 ];
+                %tmp.7 = getv function %tmp.6 :loadResource;
+                symbol [ $ %tmp.8 28 46 47 ];
+                %tmp.8 = getm $;
+                symbol [ Rez %tmp.9 28 48 51 ];
+                %tmp.9 = getv %tmp.8 :Rez;
+                symbol [ Strings %tmp.10 28 52 59 ];
+                %tmp.10 = getv %tmp.9 :Strings;
+                symbol [ menu_label_1 %tmp.11 28 60 72 ];
+                %tmp.11 = getv %tmp.10 :menu_label_1;
+                %tmp.12 = invoke %tmp.6 %tmp.7(%tmp.11);
+                %tmp.13 = as %tmp.12 String;
+                symbol [ String %tmp.13 28 77 83 ];
+                %tmp.15 = const :item_1;
+                symbol [ item_1 %tmp.15 28 87 93 const ];
+                invoke %tmp.4 %tmp.5(%tmp.13, %tmp.15);
+[ "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen" 29 16 ]
+                %tmp.16 = self;
+                symbol [ addItem %tmp.17 29 16 23 ];
+                %tmp.17 = getv function %tmp.16 :addItem;
+                symbol [ WatchUi %tmp.18 29 25 32 ];
+                %tmp.18 = getm $.Toybox.WatchUi;
+                symbol [ loadResource %tmp.19 29 33 45 ];
+                %tmp.19 = getv function %tmp.18 :loadResource;
+                symbol [ $ %tmp.20 29 46 47 ];
+                %tmp.20 = getm $;
+                symbol [ Rez %tmp.21 29 48 51 ];
+                %tmp.21 = getv %tmp.20 :Rez;
+                symbol [ Strings %tmp.22 29 52 59 ];
+                %tmp.22 = getv %tmp.21 :Strings;
+                symbol [ menu_label_2 %tmp.23 29 60 72 ];
+                %tmp.23 = getv %tmp.22 :menu_label_2;
+                %tmp.24 = invoke %tmp.18 %tmp.19(%tmp.23);
+                %tmp.25 = as %tmp.24 String;
+                symbol [ String %tmp.25 29 77 83 ];
+                %tmp.27 = const :item_2;
+                symbol [ item_2 %tmp.27 29 87 93 const ];
+                invoke %tmp.16 %tmp.17(%tmp.25, %tmp.27);
+_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_bin_gen_006_B3113_00_source_Rez_mcgen_26_34_30_12_stop:
+            }
+        }
+    }
+    [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen"; @line = 34; @symbol_moduledef = [Strings,34,11,18]; ]
+    module Strings {
+        [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen"; @line = 34; ]
+        <init> {
+        }
+        [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen"; @line = 35; @position = 27; initialized = true; @symbol_vardef = [menu_label_1,35,27,39]; @symbol_type<0> = [ResourceId,35,43,53]; ]
+        var menu_label_1 as ResourceId;
+        [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen"; @line = 36; @position = 27; initialized = true; @symbol_vardef = [menu_label_2,36,27,39]; @symbol_type<0> = [ResourceId,36,43,53]; ]
+        var menu_label_2 as ResourceId;
+        [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen"; @line = 37; @position = 27; initialized = true; @symbol_vardef = [prompt,37,27,33]; @symbol_type<0> = [ResourceId,37,37,47]; ]
+        var prompt as ResourceId;
+        [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen"; @line = 38; @position = 27; initialized = true; @symbol_vardef = [AppName,38,27,34]; @symbol_type<0> = [ResourceId,38,38,48]; ]
+        var AppName as ResourceId;
+    }
+}
+[ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/bin/gen/006-B3113-00/source/Rez.mcgen"; @line = 1; ]
+<init> {
+}
