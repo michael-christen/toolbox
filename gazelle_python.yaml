@@ -222,6 +222,7 @@ manifest:
     oauth2client: oauth2client
     oauthlib: oauthlib
     openhtf: openhtf
+    oras: oras
     overrides: overrides
     packaging: packaging
     paho: paho_mqtt
