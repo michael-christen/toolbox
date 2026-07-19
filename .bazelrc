@@ -162,6 +162,12 @@ build:local --bes_backend=
 build:local --remote_cache=
 
 
+# Versioning / Stamping
+# =====================
+# workspace_status_command runs on every build; its output is only injected
+# into actions when --stamp is passed (or stamp = 1 on a target).
+build --workspace_status_command=tools/workspace_status.sh
+
 # Python Type Checking - mypy
 #############################
 
