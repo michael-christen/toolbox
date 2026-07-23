@@ -1,0 +1,23 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "packageRules": [
+    {
+      "matchManagers": ["pip-compile"],
+      "groupName": "python dependencies",
+      "postUpgradeTasks": {
+        "commands": ["bazel run //:gazelle_python_manifest.update"],
+        "executionMode": "branch",
+        "fileFilters": ["gazelle_python.yaml"]
+      }
+    },
+    {
+      "matchManagers": ["bazel-module"],
+      "groupName": "bazel modules"
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "groupName": "github actions"
+    }
+  ]
+}
