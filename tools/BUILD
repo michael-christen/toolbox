@@ -6,7 +6,7 @@ load("@pip//:requirements.bzl", "requirement")  # '@pip' must match configured p
 load("@rules_multirun//:defs.bzl", "command", "multirun")
 load("@rules_mypy//mypy:mypy.bzl", "mypy_cli")
 load("@rules_proto//proto:defs.bzl", "proto_library")
-load("//bzl:py.bzl", "proto_py_library", "py_library", "py_test")
+load("//bzl:py.bzl", "proto_py_library", "py_binary", "py_library", "py_test")
 
 package(default_visibility = ["//visibility:private"])
 
@@ -81,6 +81,12 @@ multirun(
 py_library(
     name = "utils",
     srcs = ["utils.py"],
+    visibility = ["//:__subpackages__"],
+)
+
+py_binary(
+    name = "bazel_executable_hash",
+    srcs = ["bazel_executable_hash.py"],
     visibility = ["//:__subpackages__"],
 )
 
