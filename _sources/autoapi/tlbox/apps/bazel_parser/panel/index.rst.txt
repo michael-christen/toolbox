@@ -37,15 +37,6 @@ Module Contents
 
    Get Panel Layout
 
-   References
-
-   # network_graph = from_networkx(graph, networkx.spring_layout,
-   #                               scale=1, center=(0, 0))
-   # neato
-   # dot
-   # twopi
-   # fdp
-   # sfdp
-   # circo
+   Graphviz layout programs: neato, dot, twopi, fdp, sfdp, circo
 
 
