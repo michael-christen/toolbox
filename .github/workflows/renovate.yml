@@ -1,0 +1,28 @@
+name: Renovate
+run-name: Self-hosted Renovate dependency scan
+on:
+  workflow_dispatch:
+  schedule:
+    # Every Monday at 08:00 UTC
+    - cron: "0 8 * * 1"
+
+jobs:
+  renovate:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - uses: ./.github/actions/bazel-setup
+        with:
+          buildbuddy_api_key: ${{ secrets.BUILDBUDDY_API_KEY }}
+      - name: Self-hosted Renovate
+        uses: renovatebot/github-action@v46.1.20
+        env:
+          RENOVATE_TOKEN: ${{ secrets.RENOVATE_TOKEN }}
+          RENOVATE_REPOSITORIES: ${{ github.repository }}
+          # bazel-module manager needs this to run `bazel mod deps` and
+          # refresh MODULE.bazel.lock itself.
+          RENOVATE_ALLOWED_UNSAFE_EXECUTIONS: '["bazelModDeps"]'
+          # postUpgradeTasks needs each runnable command explicitly allowed.
+          RENOVATE_ALLOWED_COMMANDS: '["^bazel run //:gazelle_python_manifest\\.update$"]'
