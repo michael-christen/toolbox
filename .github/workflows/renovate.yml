@@ -16,6 +16,9 @@ jobs:
       - uses: ./.github/actions/bazel-setup
         with:
           buildbuddy_api_key: ${{ secrets.BUILDBUDDY_API_KEY }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
       - name: Self-hosted Renovate
         # Run via npx directly rather than renovatebot/github-action: that
         # action executes Renovate inside its own nested Docker container,
