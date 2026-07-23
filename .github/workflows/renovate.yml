@@ -19,6 +19,14 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
+      - name: Install hashin
+        # Renovate's pip hash-patching (used for vulnerability-alert fixes
+        # regardless of pip-compile/pip_requirements config) shells out to
+        # this separate tool. Renovate's own docker image bundles it via
+        # containerbase; running via bare npx does not.
+        run: |
+          pip install --user hashin
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
       - name: Self-hosted Renovate
         # Run via npx directly rather than renovatebot/github-action: that
         # action executes Renovate inside its own nested Docker container,
