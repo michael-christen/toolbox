@@ -25,7 +25,7 @@ jobs:
         # this separate tool. Renovate's own docker image bundles it via
         # containerbase; running via bare npx does not.
         run: |
-          pip install --user hashin
+          pip install --user hashin==1.0.5
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
       - name: Self-hosted Renovate
         # Run via npx directly rather than renovatebot/github-action: that
