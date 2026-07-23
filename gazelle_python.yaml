@@ -18,6 +18,7 @@ manifest:
     aiosignal: aiosignal
     alabaster: alabaster
     annotated_types: annotated_types
+    antlr4: antlr4_python3_runtime
     anyio: anyio
     apiclient: google_api_python_client
     argon2: argon2_cffi
@@ -37,6 +38,7 @@ manifest:
     bleach: bleach
     blib2to3: black
     bokeh: bokeh
+    braceexpand: braceexpand
     bs4: beautifulsoup4
     cbor2: cbor2
     certifi: certifi
@@ -64,6 +66,9 @@ manifest:
     fqdn: fqdn
     frozenlist: frozenlist
     furo: furo
+    git: gitpython
+    gitdb: gitdb
+    gitmetheurl: git_me_the_url
     google.api.annotations_pb2: googleapis_common_protos
     google.api.auth_pb2: googleapis_common_protos
     google.api.backend_pb2: googleapis_common_protos
@@ -190,6 +195,7 @@ manifest:
     librt.time: librt
     librt.vecs: librt
     linkify_it: linkify_it_py
+    lxml: lxml
     markdown: markdown
     markdown_it: markdown_it_py
     markupsafe: markupsafe
@@ -198,6 +204,7 @@ manifest:
     mccabe: mccabe
     mdit_py_plugins: mdit_py_plugins
     mdurl: mdurl
+    mdx_math: python_markdown_math
     mistune: mistune
     mpl_toolkits.axes_grid1: matplotlib
     mpl_toolkits.axisartist: matplotlib
@@ -231,6 +238,14 @@ manifest:
     param: param
     parso: parso
     pathspec: pathspec
+    peakrdl: peakrdl_cli
+    peakrdl_cheader: peakrdl_cheader
+    peakrdl_html: peakrdl_html
+    peakrdl_ipxact: peakrdl_ipxact
+    peakrdl_regblock: peakrdl_regblock
+    peakrdl_systemrdl: peakrdl_systemrdl
+    peakrdl_toolchain: peakrdl
+    peakrdl_uvm: peakrdl_uvm
     pexpect: pexpect
     pip: pip
     platformdirs: platformdirs
@@ -276,6 +291,7 @@ manifest:
     simpervisor: simpervisor
     simpy: simpy
     six: six
+    smmap: smmap
     snowballstemmer: snowballstemmer
     sockjs.tornado: sockjs_tornado
     soupsieve: soupsieve
@@ -299,6 +315,8 @@ manifest:
     sphinxext.rediraffe: sphinxext_rediraffe
     sqlalchemy: sqlalchemy
     stack_data: stack_data
+    svdtools: svdtools
+    systemrdl: systemrdl_compiler
     tabulate: tabulate
     terminado: terminado
     test.capture_source_test: openhtf
@@ -359,4 +377,4 @@ manifest:
     zstandard: zstandard
   pip_repository:
     name: pip
-integrity: 24106a1360a5ab5ef2fe643fec163d1ca102f30c777a238641242689f7f69346
+integrity: 7e5545083e5765117d12acaf2276b37c116276497d767588d1ac51760800986e

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- SVD description of a representative subset of LSM6DSO registers.
+     Same coverage as lsm6dso_subset.rdl: WHO_AM_I, CTRL1_XL, CTRL2_G,
+     STATUS_REG, gyro output, accel output.
+     Reference: CMSIS SVD schema 1.3 -->
+<device xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+        xs:noNamespaceSchemaLocation="CMSIS-SVD.xsd"
+        schemaVersion="1.3">
+
+  <name>LSM6DSO_SUBSET</name>
+  <version>1.0</version>
+  <description>Accelerometer and gyroscope registers for the SBR IMU (I2C addr 0x6A/0x6B)</description>
+
+  <!-- SVD requires a CPU element; for an I2C peripheral viewed from the host
+       we use a placeholder. Real use: describe the RP2350 host CPU here. -->
+  <cpu>
+    <name>CM33</name>
+    <revision>r0p0</revision>
+    <endian>little</endian>
+    <mpuPresent>true</mpuPresent>
+    <fpuPresent>true</fpuPresent>
+    <nvicPrioBits>3</nvicPrioBits>
+    <vendorSystickConfig>false</vendorSystickConfig>
+  </cpu>
+
+  <addressUnitBits>8</addressUnitBits>
+  <width>8</width>
+  <size>8</size>
+  <access>read-write</access>
+  <resetValue>0x00</resetValue>
+  <resetMask>0xFF</resetMask>
+
+  <peripherals>
+    <peripheral>
+      <name>LSM6DSO</name>
+      <description>iNEMO inertial module: always-on 3D accelerometer and 3D gyroscope</description>
+      <!-- I2C peripherals don't have a single MMIO base; 0x0 is a placeholder.
+           In practice you'd omit the SVD and just use the datasheet,
+           or offset all addresses relative to the first register. -->
+      <baseAddress>0x00000000</baseAddress>
+
+      <registers>
+
+        <!-- WHO_AM_I (0x0F) -->
+        <register>
+          <name>WHO_AM_I</name>
+          <description>Device identification register. Always reads 0x6C.</description>
+          <addressOffset>0x0F</addressOffset>
+          <size>8</size>
+          <access>read-only</access>
+          <resetValue>0x6C</resetValue>
+          <fields>
+            <field>
+              <name>ID</name>
+              <description>Fixed device ID.</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>8</bitWidth>
+              <access>read-only</access>
+            </field>
+          </fields>
+        </register>
+
+        <!-- CTRL1_XL (0x10) -->
+        <register>
+          <name>CTRL1_XL</name>
+          <description>Accelerometer control register 1.</description>
+          <addressOffset>0x10</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0x40</resetValue>
+          <fields>
+            <field>
+              <name>ODR_XL</name>
+              <description>Output data rate / power mode selection.</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>4</bitWidth>
+              <enumeratedValues>
+                <enumeratedValue><name>POWER_DOWN</name><description>Power down</description><value>0x0</value></enumeratedValue>
+                <enumeratedValue><name>ODR_12_5Hz</name><description>12.5 Hz (low-power)</description><value>0x1</value></enumeratedValue>
+                <enumeratedValue><name>ODR_26Hz</name><description>26 Hz</description><value>0x2</value></enumeratedValue>
+                <enumeratedValue><name>ODR_52Hz</name><description>52 Hz</description><value>0x3</value></enumeratedValue>
+                <enumeratedValue><name>ODR_104Hz</name><description>104 Hz (normal)</description><value>0x4</value></enumeratedValue>
+                <enumeratedValue><name>ODR_208Hz</name><description>208 Hz (normal)</description><value>0x5</value></enumeratedValue>
+                <enumeratedValue><name>ODR_416Hz</name><description>416 Hz (high-perf)</description><value>0x6</value></enumeratedValue>
+                <enumeratedValue><name>ODR_833Hz</name><description>833 Hz (high-perf)</description><value>0x7</value></enumeratedValue>
+                <enumeratedValue><name>ODR_1666Hz</name><description>1666 Hz (high-perf)</description><value>0x8</value></enumeratedValue>
+                <enumeratedValue><name>ODR_3332Hz</name><description>3332 Hz (high-perf)</description><value>0x9</value></enumeratedValue>
+                <enumeratedValue><name>ODR_6664Hz</name><description>6664 Hz (high-perf)</description><value>0xA</value></enumeratedValue>
+                <enumeratedValue><name>ODR_1_6Hz</name><description>1.6 Hz (low-power only)</description><value>0xB</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>FS_XL</name>
+              <description>Full-scale selection.</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>2</bitWidth>
+              <enumeratedValues>
+                <enumeratedValue><name>FS_2G</name><description>±2 g</description><value>0x0</value></enumeratedValue>
+                <enumeratedValue><name>FS_16G</name><description>±16 g</description><value>0x1</value></enumeratedValue>
+                <enumeratedValue><name>FS_4G</name><description>±4 g</description><value>0x2</value></enumeratedValue>
+                <enumeratedValue><name>FS_8G</name><description>±8 g</description><value>0x3</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>LPF2_XL_EN</name>
+              <description>Second filter selection on output.</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- CTRL2_G (0x11) -->
+        <register>
+          <name>CTRL2_G</name>
+          <description>Gyroscope control register 2.</description>
+          <addressOffset>0x11</addressOffset>
+          <size>8</size>
+          <access>read-write</access>
+          <resetValue>0x40</resetValue>
+          <fields>
+            <field>
+              <name>ODR_G</name>
+              <description>Output data rate selection.</description>
+              <bitOffset>4</bitOffset>
+              <bitWidth>4</bitWidth>
+              <enumeratedValues>
+                <enumeratedValue><name>POWER_DOWN</name><description>Power down</description><value>0x0</value></enumeratedValue>
+                <enumeratedValue><name>ODR_12_5Hz</name><description>12.5 Hz</description><value>0x1</value></enumeratedValue>
+                <enumeratedValue><name>ODR_26Hz</name><description>26 Hz</description><value>0x2</value></enumeratedValue>
+                <enumeratedValue><name>ODR_52Hz</name><description>52 Hz</description><value>0x3</value></enumeratedValue>
+                <enumeratedValue><name>ODR_104Hz</name><description>104 Hz (normal)</description><value>0x4</value></enumeratedValue>
+                <enumeratedValue><name>ODR_208Hz</name><description>208 Hz</description><value>0x5</value></enumeratedValue>
+                <enumeratedValue><name>ODR_416Hz</name><description>416 Hz</description><value>0x6</value></enumeratedValue>
+                <enumeratedValue><name>ODR_833Hz</name><description>833 Hz</description><value>0x7</value></enumeratedValue>
+                <enumeratedValue><name>ODR_1666Hz</name><description>1666 Hz</description><value>0x8</value></enumeratedValue>
+                <enumeratedValue><name>ODR_3332Hz</name><description>3332 Hz</description><value>0x9</value></enumeratedValue>
+                <enumeratedValue><name>ODR_6664Hz</name><description>6664 Hz</description><value>0xA</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>FS_G</name>
+              <description>Full-scale selection.</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>2</bitWidth>
+              <enumeratedValues>
+                <enumeratedValue><name>FS_250DPS</name><description>±250 dps</description><value>0x0</value></enumeratedValue>
+                <enumeratedValue><name>FS_500DPS</name><description>±500 dps</description><value>0x1</value></enumeratedValue>
+                <enumeratedValue><name>FS_1000DPS</name><description>±1000 dps</description><value>0x2</value></enumeratedValue>
+                <enumeratedValue><name>FS_2000DPS</name><description>±2000 dps</description><value>0x3</value></enumeratedValue>
+              </enumeratedValues>
+            </field>
+            <field>
+              <name>FS_125</name>
+              <description>Select gyroscope 125 dps full-scale.</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- STATUS_REG (0x1E) -->
+        <register>
+          <name>STATUS_REG</name>
+          <description>Status register. Flags cleared on reading output data.</description>
+          <addressOffset>0x1E</addressOffset>
+          <size>8</size>
+          <access>read-only</access>
+          <resetValue>0x00</resetValue>
+          <fields>
+            <field>
+              <name>TDA</name>
+              <description>Temperature new data available.</description>
+              <bitOffset>2</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>GDA</name>
+              <description>Gyroscope new data available.</description>
+              <bitOffset>1</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+            <field>
+              <name>XLDA</name>
+              <description>Accelerometer new data available.</description>
+              <bitOffset>0</bitOffset>
+              <bitWidth>1</bitWidth>
+            </field>
+          </fields>
+        </register>
+
+        <!-- Gyroscope output registers (0x22–0x27) -->
+        <register><name>OUTX_L_G</name><description>Gyroscope X-axis low byte.</description><addressOffset>0x22</addressOffset><size>8</size><access>read-only</access><resetValue>0x00</resetValue></register>
+        <register><name>OUTX_H_G</name><description>Gyroscope X-axis high byte.</description><addressOffset>0x23</addressOffset><size>8</size><access>read-only</access><resetValue>0x00</resetValue></register>
+        <register><name>OUTY_L_G</name><description>Gyroscope Y-axis low byte.</description><addressOffset>0x24</addressOffset><size>8</size><access>read-only</access><resetValue>0x00</resetValue></register>
+        <register><name>OUTY_H_G</name><description>Gyroscope Y-axis high byte.</description><addressOffset>0x25</addressOffset><size>8</size><access>read-only</access><resetValue>0x00</resetValue></register>
+        <register><name>OUTZ_L_G</name><description>Gyroscope Z-axis low byte.</description><addressOffset>0x26</addressOffset><size>8</size><access>read-only</access><resetValue>0x00</resetValue></register>
+        <register><name>OUTZ_H_G</name><description>Gyroscope Z-axis high byte.</description><addressOffset>0x27</addressOffset><size>8</size><access>read-only</access><resetValue>0x00</resetValue></register>
+
+        <!-- Accelerometer output registers (0x28–0x2D) -->
+        <register><name>OUTX_L_A</name><description>Accelerometer X-axis low byte.</description><addressOffset>0x28</addressOffset><size>8</size><access>read-only</access><resetValue>0x00</resetValue></register>
+        <register><name>OUTX_H_A</name><description>Accelerometer X-axis high byte.</description><addressOffset>0x29</addressOffset><size>8</size><access>read-only</access><resetValue>0x00</resetValue></register>
+        <register><name>OUTY_L_A</name><description>Accelerometer Y-axis low byte.</description><addressOffset>0x2A</addressOffset><size>8</size><access>read-only</access><resetValue>0x00</resetValue></register>
+        <register><name>OUTY_H_A</name><description>Accelerometer Y-axis high byte.</description><addressOffset>0x2B</addressOffset><size>8</size><access>read-only</access><resetValue>0x00</resetValue></register>
+        <register><name>OUTZ_L_A</name><description>Accelerometer Z-axis low byte.</description><addressOffset>0x2C</addressOffset><size>8</size><access>read-only</access><resetValue>0x00</resetValue></register>
+        <register><name>OUTZ_H_A</name><description>Accelerometer Z-axis high byte.</description><addressOffset>0x2D</addressOffset><size>8</size><access>read-only</access><resetValue>0x00</resetValue></register>
+
+      </registers>
+    </peripheral>
+  </peripherals>
+
+</device>

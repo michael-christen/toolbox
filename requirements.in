@@ -58,6 +58,9 @@ pytest>=9,<10
 # Yaml input/output (I hate it, but ...)
 pyyaml
 setuptools>=78.1.1
+# Register description / peripheral CSR toolchain (issue #330)
+peakrdl
+svdtools
 # Process-based Discrete Event Simulation
 simpy>=4.1.1,<5
 # Documentation

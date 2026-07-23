@@ -1,0 +1,156 @@
+// SystemRDL description of a representative subset of LSM6DSO registers.
+// Covers WHO_AM_I, accelerometer/gyro control, status, and output data.
+// Reference: LSM6DSO datasheet, section 9 (register map).
+
+addrmap lsm6dso_subset {
+    name = "LSM6DSO Subset";
+    desc = "Accelerometer + gyroscope registers for the SBR IMU (I2C addr 0x6A/0x6B)";
+
+    default hw = r;
+    default sw = rw;
+    default regwidth = 8;
+    default addressing = compact;
+
+    // -----------------------------------------------------------------------
+    // WHO_AM_I (0x0F) — fixed device ID, read-only
+    // -----------------------------------------------------------------------
+    reg who_am_i_r {
+        name = "WHO_AM_I";
+        desc = "Device identification register. Always reads 0x6C.";
+        default sw = r;
+
+        field {} ID[8] = 8'h6C;
+    };
+
+    // -----------------------------------------------------------------------
+    // CTRL1_XL (0x10) — accelerometer control
+    // -----------------------------------------------------------------------
+    reg ctrl1_xl_r {
+        name = "CTRL1_XL";
+        desc = "Accelerometer control register 1.";
+
+        enum odr_xl_e {
+            POWER_DOWN = 4'h0 { desc = "Power down"; };
+            ODR_12_5Hz = 4'h1 { desc = "12.5 Hz (low-power)"; };
+            ODR_26Hz   = 4'h2 { desc = "26 Hz"; };
+            ODR_52Hz   = 4'h3 { desc = "52 Hz"; };
+            ODR_104Hz  = 4'h4 { desc = "104 Hz (normal)"; };
+            ODR_208Hz  = 4'h5 { desc = "208 Hz (normal)"; };
+            ODR_416Hz  = 4'h6 { desc = "416 Hz (high-perf)"; };
+            ODR_833Hz  = 4'h7 { desc = "833 Hz (high-perf)"; };
+            ODR_1666Hz = 4'h8 { desc = "1666 Hz (high-perf)"; };
+            ODR_3332Hz = 4'h9 { desc = "3332 Hz (high-perf)"; };
+            ODR_6664Hz = 4'ha { desc = "6664 Hz (high-perf)"; };
+            ODR_1_6Hz  = 4'hb { desc = "1.6 Hz (low-power only)"; };
+        };
+
+        enum fs_xl_e {
+            FS_2G  = 2'h0 { desc = "±2 g"; };
+            FS_16G = 2'h1 { desc = "±16 g"; };
+            FS_4G  = 2'h2 { desc = "±4 g"; };
+            FS_8G  = 2'h3 { desc = "±8 g"; };
+        };
+
+        // Declare LSB→MSB so auto-packing produces the correct hardware layout.
+        field {} rsvd0[1] = 1'b0;                     // bit [0]
+        field {} LPF2_XL_EN[1] = 1'b0;               // bit [1]
+        field {encode = fs_xl_e;}  FS_XL[2]  = 2'h2; // bits [3:2], default ±4 g
+        field {encode = odr_xl_e;} ODR_XL[4] = 4'h4; // bits [7:4], default 104 Hz
+    };
+
+    // -----------------------------------------------------------------------
+    // CTRL2_G (0x11) — gyroscope control
+    // -----------------------------------------------------------------------
+    reg ctrl2_g_r {
+        name = "CTRL2_G";
+        desc = "Gyroscope control register 2.";
+
+        enum odr_g_e {
+            POWER_DOWN = 4'h0 { desc = "Power down"; };
+            ODR_12_5Hz = 4'h1 { desc = "12.5 Hz"; };
+            ODR_26Hz   = 4'h2 { desc = "26 Hz"; };
+            ODR_52Hz   = 4'h3 { desc = "52 Hz"; };
+            ODR_104Hz  = 4'h4 { desc = "104 Hz (normal)"; };
+            ODR_208Hz  = 4'h5 { desc = "208 Hz"; };
+            ODR_416Hz  = 4'h6 { desc = "416 Hz"; };
+            ODR_833Hz  = 4'h7 { desc = "833 Hz"; };
+            ODR_1666Hz = 4'h8 { desc = "1666 Hz"; };
+            ODR_3332Hz = 4'h9 { desc = "3332 Hz"; };
+            ODR_6664Hz = 4'ha { desc = "6664 Hz"; };
+        };
+
+        enum fs_g_e {
+            FS_250DPS  = 2'h0 { desc = "±250 dps"; };
+            FS_500DPS  = 2'h1 { desc = "±500 dps"; };
+            FS_1000DPS = 2'h2 { desc = "±1000 dps"; };
+            FS_2000DPS = 2'h3 { desc = "±2000 dps"; };
+        };
+
+        field {} rsvd0[1] = 1'b0;                   // bit [0]
+        field {} FS_125[1] = 1'b0;                  // bit [1] select 125 dps range
+        field {encode = fs_g_e;}  FS_G[2]  = 2'h1; // bits [3:2], default ±500 dps
+        field {encode = odr_g_e;} ODR_G[4] = 4'h4; // bits [7:4], default 104 Hz
+    };
+
+    // -----------------------------------------------------------------------
+    // STATUS_REG (0x1E) — data-ready flags, read-only
+    // -----------------------------------------------------------------------
+    reg status_reg_r {
+        name = "STATUS_REG";
+        desc = "Status register. Flags are cleared on reading the output data.";
+        default sw = r;
+
+        field {} XLDA[1] = 1'b0; // bit [0] accelerometer data available
+        field {} GDA[1]  = 1'b0; // bit [1] gyroscope data available
+        field {} TDA[1]  = 1'b0; // bit [2] temperature data available
+        field {} rsvd[5] = 5'h0; // bits [7:3]
+    };
+
+    // -----------------------------------------------------------------------
+    // Gyroscope output (0x22–0x27) — six signed 8-bit halves, read-only
+    // -----------------------------------------------------------------------
+    reg gyro_axis_r {
+        name = "GYRO_OUT";
+        desc = "Gyroscope output data (one byte of a 16-bit signed sample).";
+        default sw = r;
+        field {} DATA[8] = 8'h0;
+    };
+
+    // -----------------------------------------------------------------------
+    // Accelerometer output (0x28–0x2D) — six signed 8-bit halves, read-only
+    // -----------------------------------------------------------------------
+    reg accel_axis_r {
+        name = "ACCEL_OUT";
+        desc = "Accelerometer output data (one byte of a 16-bit signed sample).";
+        default sw = r;
+        field {} DATA[8] = 8'h0;
+    };
+
+    // -----------------------------------------------------------------------
+    // Register map layout (byte-addressed, compact)
+    // -----------------------------------------------------------------------
+    who_am_i_r WHO_AM_I @ 0x0F;
+
+    ctrl1_xl_r CTRL1_XL @ 0x10;
+    ctrl2_g_r  CTRL2_G  @ 0x11;
+
+    // Gap 0x12–0x1D (other control regs, not modeled here)
+
+    status_reg_r STATUS_REG @ 0x1E;
+
+    // Gap 0x1F–0x21
+
+    gyro_axis_r OUTX_L_G @ 0x22;
+    gyro_axis_r OUTX_H_G @ 0x23;
+    gyro_axis_r OUTY_L_G @ 0x24;
+    gyro_axis_r OUTY_H_G @ 0x25;
+    gyro_axis_r OUTZ_L_G @ 0x26;
+    gyro_axis_r OUTZ_H_G @ 0x27;
+
+    accel_axis_r OUTX_L_A @ 0x28;
+    accel_axis_r OUTX_H_A @ 0x29;
+    accel_axis_r OUTY_L_A @ 0x2A;
+    accel_axis_r OUTY_H_A @ 0x2B;
+    accel_axis_r OUTZ_L_A @ 0x2C;
+    accel_axis_r OUTZ_H_A @ 0x2D;
+};
