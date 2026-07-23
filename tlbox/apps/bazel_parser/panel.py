@@ -147,7 +147,7 @@ def get_subgraph_layout(
 def get_panel_layout(graph: networkx.DiGraph) -> pn.layout.base.Panel:
     """Get Panel Layout
 
-    References for graphviz layout programs: neato, dot, twopi, fdp, sfdp, circo
+    Graphviz layout programs: neato, dot, twopi, fdp, sfdp, circo
     """
     # Prepare Bokeh graph layout
     plot = plotting.figure(
