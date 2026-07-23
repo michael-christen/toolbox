@@ -7,6 +7,9 @@
   "pip-compile": {
     "managerFilePatterns": ["/(^|/)requirements_lock\\.txt$/"]
   },
+  "vulnerabilityAlerts": {
+    "groupName": "security updates"
+  },
   "packageRules": [
     {
       "matchManagers": ["pip-compile"],
