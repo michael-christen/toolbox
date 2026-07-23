@@ -125,12 +125,6 @@ alias(
     visibility = ["//:__subpackages__"],
 )
 
-py_test(
-    name = "git_utils_test",
-    srcs = ["git_utils_test.py"],
-    deps = ["//tlbox/utils:git_utils"],
-)
-
 cc_proto_library(
     name = "git_cc_proto",
     visibility = ["//visibility:public"],

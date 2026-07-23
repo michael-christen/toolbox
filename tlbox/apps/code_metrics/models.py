@@ -59,7 +59,7 @@ class TargetMetrics(Base):
         return {
             "target_label": self.target_label,
             "sha_sum": self.sha_sum,
-            "parent_sha_sum": self.sha_sum,
+            "parent_sha_sum": self.parent_sha_sum,
             "branch_name": self.branch_name,
             "run_created_at": self.run_created_at.isoformat(),
             "run_url": self.run_url,
@@ -88,7 +88,7 @@ class RepoMetrics(Base):
     def to_dict(self) -> dict[str, Any]:
         return {
             "sha_sum": self.sha_sum,
-            "parent_sha_sum": self.sha_sum,
+            "parent_sha_sum": self.parent_sha_sum,
             "branch_name": self.branch_name,
             "run_created_at": self.run_created_at.isoformat(),
             "run_url": self.run_url,

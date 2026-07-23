@@ -72,3 +72,9 @@ py_library(
     visibility = ["//:__subpackages__"],
     deps = ["//tools:git_py_library"],
 )
+
+py_test(
+    name = "git_utils_test",
+    srcs = ["git_utils_test.py"],
+    deps = [":git_utils"],
+)
