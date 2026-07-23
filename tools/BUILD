@@ -6,7 +6,7 @@ load("@pip//:requirements.bzl", "requirement")  # '@pip' must match configured p
 load("@rules_multirun//:defs.bzl", "command", "multirun")
 load("@rules_mypy//mypy:mypy.bzl", "mypy_cli")
 load("@rules_proto//proto:defs.bzl", "proto_library")
-load("//bzl:py.bzl", "proto_py_library", "py_library", "py_test")
+load("//bzl:py.bzl", "proto_py_library", "py_library")
 
 package(default_visibility = ["//visibility:private"])
 
