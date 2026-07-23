@@ -9,14 +9,10 @@ py_package(
     name = "py_package_all",
     # TODO(#203): Restructure repo so we don't need to update this
     packages = [
-        "apps",
         "examples",
-        "hw_drivers",
-        "hw_services",
-        "mchristen",
         "third_party",
+        "tlbox",
         "tools",
-        "utils",
     ],
     deps = PYTHON_TARGETS,
 )

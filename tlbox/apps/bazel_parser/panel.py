@@ -40,9 +40,6 @@ def get_subgraph_layout(
     plot.axis.visible = False
     pos = nx_agraph.graphviz_layout(graph, prog="dot")
     network_graph = plotting.from_networkx(graph, pos)  # type: ignore
-    # network_graph = plotting.from_networkx(
-    #     graph, networkx.spring_layout
-    # )  # type: ignore
     # Node
     network_graph.node_renderer.data_source.data["color"] = ["skyblue"] * len(
         graph.nodes
@@ -128,8 +125,6 @@ def get_subgraph_layout(
 
     def node_selection_callback(attr, old, new) -> None:
         node_data = network_graph.node_renderer.data_source.data
-        print(f"got selection: {new}")
-        print(f"Total: {len(node_data['Highlight'])}")
         selected_index = label_to_index[new]
         for i in range(len(node_data["Highlight"])):
             if i == selected_index:
@@ -152,16 +147,7 @@ def get_subgraph_layout(
 def get_panel_layout(graph: networkx.DiGraph) -> pn.layout.base.Panel:
     """Get Panel Layout
 
-    References
-
-    # network_graph = from_networkx(graph, networkx.spring_layout,
-    #                               scale=1, center=(0, 0))
-    # neato
-    # dot
-    # twopi
-    # fdp
-    # sfdp
-    # circo
+    Graphviz layout programs: neato, dot, twopi, fdp, sfdp, circo
     """
     # Prepare Bokeh graph layout
     plot = plotting.figure(
@@ -175,9 +161,6 @@ def get_panel_layout(graph: networkx.DiGraph) -> pn.layout.base.Panel:
     plot.axis.visible = False
     pos = nx_agraph.graphviz_layout(graph, prog="dot")
     network_graph = plotting.from_networkx(graph, pos)  # type: ignore
-    # network_graph = plotting.from_networkx(
-    #     graph, networkx.spring_layout
-    # )  # type: ignore
     # Node
     network_graph.node_renderer.data_source.data["color"] = ["skyblue"] * len(
         graph.nodes

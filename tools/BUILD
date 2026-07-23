@@ -6,7 +6,7 @@ load("@pip//:requirements.bzl", "requirement")  # '@pip' must match configured p
 load("@rules_multirun//:defs.bzl", "command", "multirun")
 load("@rules_mypy//mypy:mypy.bzl", "mypy_cli")
 load("@rules_proto//proto:defs.bzl", "proto_library")
-load("//bzl:py.bzl", "proto_py_library", "py_library", "py_test")
+load("//bzl:py.bzl", "proto_py_library", "py_library")
 
 package(default_visibility = ["//visibility:private"])
 
@@ -123,12 +123,6 @@ alias(
     name = "git_utils",
     actual = "//tlbox/utils:git_utils",
     visibility = ["//:__subpackages__"],
-)
-
-py_test(
-    name = "git_utils_test",
-    srcs = ["git_utils_test.py"],
-    deps = ["//tlbox/utils:git_utils"],
 )
 
 cc_proto_library(
