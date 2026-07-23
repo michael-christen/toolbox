@@ -1,0 +1,216 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Force publish even if content hash matches'
+        type: boolean
+        default: false
+
+jobs:
+  compute-hash:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+      packages: read
+    outputs:
+      should_publish: ${{ steps.gate.outputs.should_publish }}
+      content_hash: ${{ steps.hash.outputs.content_hash }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          filter: 'tree:0'
+          lfs: false
+
+      - run: git lfs pull
+
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@v1.3.1
+        with:
+          tool-cache: false
+          android: false
+          dotnet: true
+          haskell: true
+          large-packages: false
+          docker-images: true
+          swap-storage: true
+
+      - uses: ./.github/actions/bazel-setup
+        with:
+          buildbuddy_api_key: ${{ secrets.BUILDBUDDY_API_KEY }}
+
+      - name: Build wheel (--nostamp for content hash)
+        run: |
+          bazel build //packaging:py_wheel_all --nostamp
+
+      - name: Compute content hash
+        id: hash
+        run: |
+          whl_path=$(bazel cquery --output=files //packaging:py_wheel_all --nostamp 2>/dev/null | grep '\.whl$' | head -1)
+          if [ -z "$whl_path" ]; then
+            echo "ERROR: could not locate .whl output" >&2
+            exit 1
+          fi
+          echo "Wheel path: $whl_path" >&2
+          content_hash=$(python3 -c "
+          import hashlib, base64, sys
+          data = open(sys.argv[1], 'rb').read()
+          digest = hashlib.sha256(data).digest()
+          encoded = base64.urlsafe_b64encode(digest).decode().rstrip('=')
+          print('h1:' + encoded)
+          " "$whl_path")
+          echo "Computed content hash: $content_hash" >&2
+          echo "content_hash=$content_hash" >> "$GITHUB_OUTPUT"
+
+      - name: Install oras
+        run: |
+          curl -LO https://github.com/oras-project/oras/releases/download/v1.2.0/oras_1.2.0_linux_amd64.tar.gz
+          tar -xf oras_1.2.0_linux_amd64.tar.gz oras
+          sudo mv oras /usr/local/bin/oras
+
+      - name: Fetch existing annotation from registry
+        id: registry
+        env:
+          REGISTRY_IMAGE: ghcr.io/${{ github.repository_owner }}/toolbox
+        run: |
+          # Attempt to read the current build.content-hash annotation from :latest.
+          # Fail open: if the registry is unreachable or the tag does not exist yet,
+          # treat the existing hash as empty so we proceed with publish.
+          existing_hash=$(
+            oras manifest fetch "${REGISTRY_IMAGE}:latest" 2>/dev/null \
+            | python3 -c "
+          import json, sys
+          try:
+              d = json.load(sys.stdin)
+              print(d.get('annotations', {}).get('build.content-hash', ''))
+          except Exception:
+              print('')
+          " || echo ""
+          )
+          echo "Existing registry hash: '$existing_hash'" >&2
+          echo "existing_hash=$existing_hash" >> "$GITHUB_OUTPUT"
+
+      - name: Determine whether to publish
+        id: gate
+        env:
+          CONTENT_HASH: ${{ steps.hash.outputs.content_hash }}
+          EXISTING_HASH: ${{ steps.registry.outputs.existing_hash }}
+          FORCE: ${{ github.event.inputs.force }}
+        run: |
+          if [ "$FORCE" = "true" ]; then
+            echo "Force flag set — publishing unconditionally." >&2
+            echo "should_publish=true" >> "$GITHUB_OUTPUT"
+          elif [ -z "$EXISTING_HASH" ]; then
+            echo "No existing annotation found — proceeding with publish." >&2
+            echo "should_publish=true" >> "$GITHUB_OUTPUT"
+          elif [ "$CONTENT_HASH" = "$EXISTING_HASH" ]; then
+            echo "Content hash matches existing annotation ($CONTENT_HASH) — skipping publish." >&2
+            echo "should_publish=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Content hash differs (new=$CONTENT_HASH, existing=$EXISTING_HASH) — publishing." >&2
+            echo "should_publish=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  publish:
+    needs: compute-hash
+    if: needs.compute-hash.outputs.should_publish == 'true'
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+      packages: write
+    env:
+      REGISTRY_IMAGE: ghcr.io/${{ github.repository_owner }}/toolbox
+      CONTENT_HASH: ${{ needs.compute-hash.outputs.content_hash }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          filter: 'tree:0'
+          lfs: false
+
+      - run: git lfs pull
+
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@v1.3.1
+        with:
+          tool-cache: false
+          android: false
+          dotnet: true
+          haskell: true
+          large-packages: false
+          docker-images: true
+          swap-storage: true
+
+      - uses: ./.github/actions/bazel-setup
+        with:
+          buildbuddy_api_key: ${{ secrets.BUILDBUDDY_API_KEY }}
+
+      - name: Build wheel (--stamp for release)
+        run: |
+          bazel build //packaging:py_wheel_all --stamp
+
+      - name: Collect wheel artifact
+        id: wheel
+        run: |
+          whl_path=$(bazel cquery --output=files //packaging:py_wheel_all --stamp 2>/dev/null | grep '\.whl$' | head -1)
+          if [ -z "$whl_path" ]; then
+            echo "ERROR: could not locate .whl output" >&2
+            exit 1
+          fi
+          echo "whl_path=$whl_path" >> "$GITHUB_OUTPUT"
+          # Copy to dist/ for twine
+          mkdir -p dist
+          cp "$whl_path" dist/
+
+      - name: Install twine
+        run: pip install twine
+
+      - name: Publish to PyPI
+        env:
+          TWINE_USERNAME: __token__
+          TWINE_PASSWORD: ${{ secrets.PYPI_TOKEN }}
+        run: |
+          twine upload dist/*.whl
+
+      - name: Install oras
+        run: |
+          curl -LO https://github.com/oras-project/oras/releases/download/v1.2.0/oras_1.2.0_linux_amd64.tar.gz
+          tar -xf oras_1.2.0_linux_amd64.tar.gz oras
+          sudo mv oras /usr/local/bin/oras
+
+      - name: Log in to GitHub Container Registry
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | oras login ghcr.io \
+            --username "${{ github.actor }}" \
+            --password-stdin
+
+      - name: Push wheel to OCI registry with content-hash annotation
+        run: |
+          whl_file="${{ steps.wheel.outputs.whl_path }}"
+          whl_basename=$(basename "$whl_file")
+          oras push \
+            "${REGISTRY_IMAGE}:latest" \
+            --annotation "build.content-hash=${CONTENT_HASH}" \
+            --annotation "org.opencontainers.image.revision=${{ github.sha }}" \
+            --annotation "org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}" \
+            "${whl_file}:application/zip"
+          echo "Pushed ${whl_basename} to ${REGISTRY_IMAGE}:latest" >&2
+          echo "Annotated with build.content-hash=${CONTENT_HASH}" >&2
+
+      - name: Tag release in OCI registry
+        if: startsWith(github.ref, 'refs/tags/')
+        run: |
+          ref_tag="${{ github.ref_name }}"
+          whl_file="${{ steps.wheel.outputs.whl_path }}"
+          oras push \
+            "${REGISTRY_IMAGE}:${ref_tag}" \
+            --annotation "build.content-hash=${CONTENT_HASH}" \
+            --annotation "org.opencontainers.image.revision=${{ github.sha }}" \
+            --annotation "org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}" \
+            "${whl_file}:application/zip"
+          echo "Also tagged as ${REGISTRY_IMAGE}:${ref_tag}" >&2
