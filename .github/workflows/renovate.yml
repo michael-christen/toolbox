@@ -17,9 +17,15 @@ jobs:
         with:
           buildbuddy_api_key: ${{ secrets.BUILDBUDDY_API_KEY }}
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v46.1.20
+        # Run via npx directly rather than renovatebot/github-action: that
+        # action executes Renovate inside its own nested Docker container,
+        # which can't see the bazel/bazelisk set up on the runner above -
+        # breaking the pip-compile, bazel-module, and postUpgradeTasks steps
+        # that all shell out to `bazel`.
+        run: npx --yes renovate@43.278.5
         env:
-          RENOVATE_TOKEN: ${{ secrets.RENOVATE_TOKEN }}
+          RENOVATE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RENOVATE_PLATFORM: github
           RENOVATE_REPOSITORIES: ${{ github.repository }}
           # bazel-module manager needs this to run `bazel mod deps` and
           # refresh MODULE.bazel.lock itself.
