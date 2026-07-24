@@ -246,17 +246,18 @@ class RepoGraphData:
 def dependency_analysis(repo: RepoGraphData) -> dict[str, Node]:
     """Update repo based on a dependency analysis."""
     num_nodes = repo.graph.number_of_nodes()
-    logger.debug(f"a: {num_nodes}")
+    logger.debug("dependency_analysis: num_nodes=%d", num_nodes)
     node_probability = repo.df["node_probability_cache_hit"].to_dict()
     node_duration_s = repo.df["node_duration_s"].to_dict()
     group_probability = graph_algorithms.compute_group_probability(
         graph=repo.graph, node_probability=node_probability
     )
-    logger.debug(f"a: {repo.graph.number_of_edges()}")
+    logger.debug(
+        "dependency_analysis: num_edges=%d", repo.graph.number_of_edges()
+    )
     group_duration = graph_algorithms.compute_group_duration(
         graph=repo.graph, node_duration_s=node_duration_s
     )
-    logger.debug("a")
     pagerank = networkx.pagerank(repo.graph)
 
     # logger.debug(f"nodes: {len(graph.nodes)}")
@@ -267,7 +268,6 @@ def dependency_analysis(repo: RepoGraphData) -> dict[str, Node]:
     assert not isinstance(out_degree, int)
 
     reversed_graph = repo.graph.reverse()
-    logger.debug("a")
 
     # Compute depths
     forward_all_pairs_shortest_path_length = (
@@ -276,7 +276,6 @@ def dependency_analysis(repo: RepoGraphData) -> dict[str, Node]:
     reverse_all_pairs_shortest_path_length = (
         networkx.all_pairs_shortest_path_length(reversed_graph)
     )
-    logger.debug("a")
     descendant_depth: dict[str, int] = {}
     ancestor_depth: dict[str, int] = {}
     for node_name, pair_len_dict in tqdm.tqdm(
@@ -287,7 +286,6 @@ def dependency_analysis(repo: RepoGraphData) -> dict[str, Node]:
         reverse_all_pairs_shortest_path_length
     ):
         ancestor_depth[node_name] = max(pair_len_dict.values())
-    logger.debug("a")
 
     # Compute centrality metrics
     # k: number of pivot nodes for betweenness approximation. Floored at 1000
@@ -295,10 +293,8 @@ def dependency_analysis(repo: RepoGraphData) -> dict[str, Node]:
     # gives adequate relative rankings for top-N analysis without exact values.
     k = int(min(num_nodes, max(1_000, num_nodes**0.5)))
     betweenness = networkx.betweenness_centrality(repo.graph, k=k)
-    logger.debug("a")
     closeness = networkx.closeness_centrality(repo.graph)
 
-    logger.debug("a")
     nodes: dict[str, Node] = {}
     for node_name, cur_node in repo.df.iterrows():
         node_name = str(node_name)
@@ -338,5 +334,4 @@ def dependency_analysis(repo: RepoGraphData) -> dict[str, Node]:
             "closeness_centrality": closeness[node_name],
         }
         nodes[node_name] = row
-    logger.debug("a")
     return nodes
