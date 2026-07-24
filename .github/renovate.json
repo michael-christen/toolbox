@@ -2,8 +2,17 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
   "prHourlyLimit": 10,
+  "labels": ["dependencies"],
   "vulnerabilityAlerts": {
-    "groupName": "security updates"
+    "groupName": "security updates",
+    "postUpgradeTasks": {
+      "commands": [
+        "bazel run //:requirements.update",
+        "bazel run //:gazelle_python_manifest.update"
+      ],
+      "executionMode": "branch",
+      "fileFilters": ["requirements_lock.txt", "gazelle_python.yaml"]
+    }
   },
   "packageRules": [
     {
@@ -21,6 +30,11 @@
     {
       "matchManagers": ["bazel-module"],
       "groupName": "bazel modules"
+    },
+    {
+      "matchManagers": ["bazel-module"],
+      "matchPackageNames": ["rules_rust"],
+      "allowedVersions": "<0.71.0"
     },
     {
       "matchManagers": ["github-actions"],
