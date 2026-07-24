@@ -114,7 +114,7 @@ suppress_warnings = [
 ]
 
 intersphinx_mapping = {
-    "python": ("https://docs.python.org/3.10", None),
+    "python": ("https://docs.python.org/3.13", None),
     "sphinx": ("https://www.sphinx-doc.org/en/master", None),
     "markdown_it": ("https://markdown-it-py.readthedocs.io/en/latest", None),
 }

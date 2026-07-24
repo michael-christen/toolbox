@@ -3,6 +3,9 @@
   "extends": ["config:recommended"],
   "prHourlyLimit": 10,
   "labels": ["dependencies"],
+  "constraints": {
+    "python": "3.13.9"
+  },
   "vulnerabilityAlerts": {
     "groupName": "security updates",
     "postUpgradeTasks": {
