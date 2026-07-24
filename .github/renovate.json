@@ -1,23 +1,20 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
-  "pip_requirements": {
-    "enabled": false
-  },
-  "pip-compile": {
-    "managerFilePatterns": ["/(^|/)requirements_lock\\.txt$/"]
-  },
   "vulnerabilityAlerts": {
     "groupName": "security updates"
   },
   "packageRules": [
     {
-      "matchManagers": ["pip-compile"],
+      "matchManagers": ["pip_requirements"],
       "groupName": "python dependencies",
       "postUpgradeTasks": {
-        "commands": ["bazel run //:gazelle_python_manifest.update"],
+        "commands": [
+          "bazel run //:requirements.update",
+          "bazel run //:gazelle_python_manifest.update"
+        ],
         "executionMode": "branch",
-        "fileFilters": ["gazelle_python.yaml"]
+        "fileFilters": ["requirements_lock.txt", "gazelle_python.yaml"]
       }
     },
     {
