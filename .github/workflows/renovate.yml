@@ -31,8 +31,8 @@ jobs:
         # Run via npx directly rather than renovatebot/github-action: that
         # action executes Renovate inside its own nested Docker container,
         # which can't see the bazel/bazelisk set up on the runner above -
-        # breaking the pip-compile, bazel-module, and postUpgradeTasks steps
-        # that all shell out to `bazel`.
+        # breaking the bazel-module and postUpgradeTasks steps that shell
+        # out to `bazel`.
         run: npx --yes renovate@43.278.5
         env:
           RENOVATE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -42,4 +42,9 @@ jobs:
           # refresh MODULE.bazel.lock itself.
           RENOVATE_ALLOWED_UNSAFE_EXECUTIONS: '["bazelModDeps"]'
           # postUpgradeTasks needs each runnable command explicitly allowed.
-          RENOVATE_ALLOWED_COMMANDS: '["^bazel run //:gazelle_python_manifest\\.update$"]'
+          # The pip_requirements group's postUpgradeTasks fully regenerates
+          # requirements_lock.txt (pip-compile manager can't be used here -
+          # it only recognizes headers whose command is literally
+          # "pip-compile" or "uv", and ours records the bazel-wrapped
+          # invocation instead) and syncs the gazelle manifest.
+          RENOVATE_ALLOWED_COMMANDS: '["^bazel run //:requirements\\.update$", "^bazel run //:gazelle_python_manifest\\.update$"]'
