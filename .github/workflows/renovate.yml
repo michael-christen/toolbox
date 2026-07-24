@@ -16,10 +16,27 @@ jobs:
       - uses: ./.github/actions/bazel-setup
         with:
           buildbuddy_api_key: ${{ secrets.BUILDBUDDY_API_KEY }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Install hashin
+        # Renovate's pip hash-patching (used for vulnerability-alert fixes
+        # regardless of pip-compile/pip_requirements config) shells out to
+        # this separate tool. Renovate's own docker image bundles it via
+        # containerbase; running via bare npx does not.
+        run: |
+          pip install --user hashin==1.0.5
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v46.1.20
+        # Run via npx directly rather than renovatebot/github-action: that
+        # action executes Renovate inside its own nested Docker container,
+        # which can't see the bazel/bazelisk set up on the runner above -
+        # breaking the pip-compile, bazel-module, and postUpgradeTasks steps
+        # that all shell out to `bazel`.
+        run: npx --yes renovate@43.278.5
         env:
-          RENOVATE_TOKEN: ${{ secrets.RENOVATE_TOKEN }}
+          RENOVATE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RENOVATE_PLATFORM: github
           RENOVATE_REPOSITORIES: ${{ github.repository }}
           # bazel-module manager needs this to run `bazel mod deps` and
           # refresh MODULE.bazel.lock itself.
