@@ -60,6 +60,7 @@ bazel_dep(name = "rules_multirun", version = "0.13.0")
 bazel_dep(name = "rules_multitool", version = "1.11.1")
 bazel_dep(name = "rules_mypy", version = "0.40.0")
 bazel_dep(name = "rules_oci", version = "2.2.6")
+bazel_dep(name = "rules_jvm_external", version = "6.8")
 bazel_dep(name = "rules_platform", version = "0.1.0")
 bazel_dep(name = "rules_proto", version = "7.1.0")
 bazel_dep(name = "rules_python_gazelle_plugin", version = "1.7.0-rc4")
@@ -242,6 +243,36 @@ register_toolchains(
     "@pigweed//pw_toolchain/host_clang:host_cc_toolchain_macos",
     dev_dependency = True,
 )
+
+#########
+# maven
+#########
+# build_stack_rules_proto, grpc-java, protobuf, and bazel_worker_java all
+# contribute their own maven.install() to the shared "maven" repo name,
+# each with a different lock_file - this crashes `bazel mod deps`/`bazel
+# mod tidy` (rules_jvm_external#issue: "There can only be one lock file
+# for the repo maven"). Per rules_jvm_external's maven.bzl, "the root
+# module always wins", so declaring our own here (matching
+# build_stack_rules_proto's disambiguation-only artifact list) resolves
+# the ambiguity. See #398.
+maven = use_extension("@rules_jvm_external//:extensions.bzl", "maven")
+maven.install(
+    name = "maven",
+    artifacts = [
+        "com.google.code.findbugs:jsr305:3.0.2",
+        "com.google.code.gson:gson:2.11.0",
+        "com.google.errorprone:error_prone_annotations:2.30.0",
+        "com.google.guava:guava:32.0.1-jre",
+    ],
+    known_contributing_modules = [
+        "bazel_worker_java",
+        "build_stack_rules_proto",
+        "grpc-java",
+        "protobuf",
+    ],
+    lock_file = "//:maven_install.json",
+)
+use_repo(maven, "maven")
 
 ###########
 # rules_js
