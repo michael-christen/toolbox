@@ -64,7 +64,7 @@ bazel_dep(name = "rules_platform", version = "0.1.0")
 bazel_dep(name = "rules_proto", version = "7.1.0")
 bazel_dep(name = "rules_python_gazelle_plugin", version = "1.7.0-rc4")
 bazel_dep(name = "rules_python", version = "1.7.0")
-bazel_dep(name = "rules_rust")
+bazel_dep(name = "rules_rust", version = "0.70.0")
 bazel_dep(name = "rules_shell", version = "0.6.1")
 bazel_dep(name = "rules_uv", version = "0.88.0")
 bazel_dep(name = "toolchains_llvm", version = "1.5.0")
@@ -226,27 +226,6 @@ git_override(
     remote = "https://pigweed.googlesource.com/pigweed/pigweed",
 )
 
-archive_override(
-    module_name = "rules_rust",
-    integrity = "sha256-+bWb47wg0VchIADaHt6L5Dma2Gn+Q589nz/MKcTi+lo=",
-    # Can only apply patches from local workspace
-    # patch_strip = 1,
-    # patches = [
-    #     # Fix rustdoc test w/ proc macros
-    #     # https://github.com/bazelbuild/rules_rust/pull/1952
-    #     "@pigweed//pw_rust/bazel_patches:0001-rustdoc_test-Apply-prefix-stripping-to-proc_macro-de.patch",
-    #     # Adds prototype functionality for documenting multiple crates in one
-    #     # HTML output directory.  While the approach in this patch may have
-    #     # issues scaling to giant mono-repos, it is appropriate for embedded
-    #     # projects and minimally invasive and should be easy to maintain.  Once
-    #     # the `rules_rust` community decides on a way to propperly support this,
-    #     # we will migrate to that solution.
-    #     # https://github.com/konkers/rules_rust/tree/wip/rustdoc
-    #     "@pigweed//pw_rust/bazel_patches:0002-PROTOTYPE-Add-ability-to-document-multiple-crates-at.patch",
-    # ],
-    urls = ["https://github.com/bazelbuild/rules_rust/releases/download/0.45.1/rules_rust-v0.45.1.tar.gz"],
-)
-
 ##########################################
 # bazel_dep Configuration
 ##########################################
@@ -402,7 +381,6 @@ use_repo(rust, "rust_toolchains")
 
 register_toolchains("@rust_toolchains//:all")
 
-# TODO(#236): bazel mod tidy fails, likely related to this
 crate = use_extension(
     "@rules_rust//crate_universe:extension.bzl",
     "crate",
