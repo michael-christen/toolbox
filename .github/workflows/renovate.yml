@@ -35,6 +35,7 @@ jobs:
         # that all shell out to `bazel`.
         run: npx --yes renovate@43.278.5
         env:
+          LOG_LEVEL: debug
           RENOVATE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RENOVATE_PLATFORM: github
           RENOVATE_REPOSITORIES: ${{ github.repository }}
