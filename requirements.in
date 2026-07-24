@@ -4,6 +4,8 @@
 # bazel test //:gazelle_python_manifest.test //:requirements_test
 # Upgrade by
 # bazel run //:requirements.update -- --upgrade && bazel run //:gazelle_python_manifest.update
+# Upgrade individual package by
+# bazel run //:requirements.update -- --upgrade-package <package>==<package_version> && ...
 
 black[jupyter]
 bokeh
