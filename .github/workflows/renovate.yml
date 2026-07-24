@@ -35,15 +35,9 @@ jobs:
         # that all shell out to `bazel`.
         run: npx --yes renovate@43.278.5
         env:
-          LOG_LEVEL: debug
           RENOVATE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RENOVATE_PLATFORM: github
           RENOVATE_REPOSITORIES: ${{ github.repository }}
-          # XXX: Renovate reads renovate.json from the default branch, not
-          # from whatever ref triggered workflow_dispatch. Point it at this
-          # branch so we can test config changes before merging to master.
-          # Remove once #362 lands.
-          RENOVATE_BASE_BRANCHES: '["update_renovate"]'
           # bazel-module manager needs this to run `bazel mod deps` and
           # refresh MODULE.bazel.lock itself.
           RENOVATE_ALLOWED_UNSAFE_EXECUTIONS: '["bazelModDeps"]'
