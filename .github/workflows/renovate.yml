@@ -41,6 +41,11 @@ jobs:
         # out to `bazel`.
         run: npx --yes renovate@43.278.5
         env:
+          # TODO(#424): temporary, to catch postUpgradeTasks silently not
+          # running for single-item vulnerabilityAlerts groups
+          # (#393/#394/#422). Remove once we've captured a debug log
+          # showing why.
+          LOG_LEVEL: debug
           RENOVATE_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RENOVATE_PLATFORM: github
           RENOVATE_REPOSITORIES: ${{ github.repository }}
