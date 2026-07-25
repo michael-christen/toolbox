@@ -389,6 +389,11 @@ pip.parse(
             "networkx",
             "pygraphviz",
         ],
+        # panel 1.9.3 added panel-material-ui, which depends back on panel.
+        "panel": [
+            "panel",
+            "panel-material-ui",
+        ],
     },
     hub_name = "pip",
     python_version = PYTHON_VERSION,

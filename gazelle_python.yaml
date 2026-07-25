@@ -219,6 +219,7 @@ manifest:
     nbformat: nbformat
     nest_asyncio2: nest_asyncio2
     networkx: networkx
+    nh3: nh3
     notebook: notebook
     notebook_shim: notebook_shim
     numbergen: param
@@ -232,6 +233,7 @@ manifest:
     pandas: pandas
     pandocfilters: pandocfilters
     panel: panel
+    panel_material_ui: panel_material_ui
     param: param
     parso: parso
     pathspec: pathspec
@@ -362,4 +364,4 @@ manifest:
     zstandard: zstandard
   pip_repository:
     name: pip
-integrity: 3ede2ad78b07384ea207166323c073227e4a7971c85238bea0461f71a11bdefb
+integrity: 991c697c34ab544791553ddf7827f616cd7bbcff40cd6c9b52c86be59f94cd60
