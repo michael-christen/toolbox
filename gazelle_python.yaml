@@ -8,11 +8,11 @@ manifest:
   modules_mapping:
     08ae81f72d5a2b5fa9e0__mypyc: mypy
     30fcd23745efe32ce681__mypyc: black
-    81d243bd2c585b0f4821__mypyc: charset_normalizer
     IPython: ipython
     OpenSSL: pyopenssl
     PIL: pillow
     a11y_pygments: accessible_pygments
+    ada92cb5d92a588d1b93__mypyc: charset_normalizer
     aiohappyeyeballs: aiohappyeyeballs
     aiohttp: aiohttp
     aiosignal: aiosignal
@@ -167,6 +167,7 @@ manifest:
     jsonschema: jsonschema
     jsonschema_specifications: jsonschema_specifications
     jupyter: jupyter_core
+    jupyter_builder: jupyter_builder
     jupyter_client: jupyter_client
     jupyter_console: jupyter_console
     jupyter_core: jupyter_core
@@ -216,7 +217,7 @@ manifest:
     nbclient: nbclient
     nbconvert: nbconvert
     nbformat: nbformat
-    nest_asyncio: nest_asyncio
+    nest_asyncio2: nest_asyncio2
     networkx: networkx
     notebook: notebook
     notebook_shim: notebook_shim
@@ -361,4 +362,4 @@ manifest:
     zstandard: zstandard
   pip_repository:
     name: pip
-integrity: 43be25c7b594777774f39e8af6ab5b0b0b8faba113833128f15f2bdd907551dd
+integrity: 208b313e007ead98b50ac03bd8398f878f7246bd020ed4860ac89e2ff737950a
