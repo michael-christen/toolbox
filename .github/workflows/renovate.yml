@@ -27,6 +27,12 @@ jobs:
         run: |
           pip install --user hashin==1.0.5
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: Install pnpm
+        # Renovate's npm manager artifact updater shells out to pnpm to
+        # regenerate pnpm-lock.yaml - not present on the runner otherwise.
+        # Pinned to match the version our own MODULE.bazel/aspect_rules_js
+        # setup uses (see #421).
+        run: corepack enable && corepack prepare pnpm@10.34.5 --activate
       - name: Self-hosted Renovate
         # Run via npx directly rather than renovatebot/github-action: that
         # action executes Renovate inside its own nested Docker container,
