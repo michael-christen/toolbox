@@ -7,6 +7,20 @@
     "python": "3.11.9"
   },
   "constraintsFiltering": "strict",
+  "customManagers": [
+    {
+      "customType": "regex",
+      "managerFilePatterns": ["/^MODULE\\.bazel$/", "/^tools/BUILD$/"],
+      "matchStringsStrategy": "any",
+      "matchStrings": [
+        "PYTHON_VERSION = \"(?<currentValue>3\\.\\d+\\.\\d+)\"",
+        "python_version = \"(?<currentValue>3\\.\\d+\\.\\d+)\","
+      ],
+      "depNameTemplate": "python",
+      "datasourceTemplate": "python-version",
+      "versioningTemplate": "python"
+    }
+  ],
   "vulnerabilityAlerts": {
     "groupName": "security updates",
     "postUpgradeTasks": {
@@ -53,6 +67,17 @@
     {
       "matchManagers": ["github-actions"],
       "groupName": "github actions"
+    },
+    {
+      "matchManagers": ["custom.regex"],
+      "matchDepNames": ["python"],
+      "groupName": "python toolchain version",
+      "commitMessageTopic": "Python toolchain version (MODULE.bazel / tools/BUILD)",
+      "allowedVersions": "/^(3\\.8\\.20|3\\.9\\.10|3\\.9\\.12|3\\.9\\.13|3\\.9\\.15|3\\.9\\.16|3\\.9\\.17|3\\.9\\.18|3\\.9\\.19|3\\.9\\.20|3\\.9\\.21|3\\.9\\.23|3\\.9\\.24|3\\.10\\.2|3\\.10\\.4|3\\.10\\.6|3\\.10\\.8|3\\.10\\.9|3\\.10\\.11|3\\.10\\.12|3\\.10\\.13|3\\.10\\.14|3\\.10\\.15|3\\.10\\.16|3\\.10\\.18|3\\.10\\.19|3\\.11\\.1|3\\.11\\.3|3\\.11\\.4|3\\.11\\.5|3\\.11\\.6|3\\.11\\.7|3\\.11\\.8|3\\.11\\.9|3\\.11\\.10|3\\.11\\.13|3\\.11\\.14|3\\.12\\.0|3\\.12\\.1|3\\.12\\.2|3\\.12\\.3|3\\.12\\.4|3\\.12\\.7|3\\.12\\.8|3\\.12\\.9|3\\.12\\.11|3\\.12\\.12|3\\.13\\.0|3\\.13\\.1|3\\.13\\.2|3\\.13\\.4|3\\.13\\.6|3\\.13\\.9|3\\.14\\.0)$/"
+    },
+    {
+      "matchDepTypes": ["tool-constraint"],
+      "enabled": false
     }
   ]
 }
