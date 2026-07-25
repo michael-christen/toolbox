@@ -85,5 +85,6 @@ PYTHON_TARGETS = [
     "//tools/black:black",
     "//tools/flake8:flake8",
     "//tools/isort:isort",
+    "//tools/renovate:sync_python_toolchain_versions",
     "//tools/sphinx:sphinx_build_wrapper",
 ]
