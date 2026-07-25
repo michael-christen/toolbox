@@ -43,6 +43,10 @@ build --legacy_external_runfiles
 # our toolchains, and CI VMs may not have any local toolchain to detect.
 common --repo_env=BAZEL_DO_NOT_DETECT_CPP_TOOLCHAIN=1
 
+# Opt out of aspect_rules_js's bundled telemetry (aspect_tools_telemetry).
+# https://github.com/aspect-build/tools_telemetry#controlling-reporting
+common --repo_env=DO_NOT_TRACK=1
+
 # Required for new toolchain resolution API.
 build --incompatible_enable_cc_toolchain_resolution
 
