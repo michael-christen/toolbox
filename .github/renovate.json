@@ -41,6 +41,11 @@
       "allowedVersions": "<0.71.0"
     },
     {
+      "matchManagers": ["bazel-module"],
+      "matchPackageNames": ["grpc"],
+      "allowedVersions": "<1.76.0"
+    },
+    {
       "matchManagers": ["github-actions"],
       "groupName": "github actions"
     }
