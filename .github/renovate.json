@@ -4,7 +4,7 @@
   "prHourlyLimit": 10,
   "labels": ["dependencies"],
   "constraints": {
-    "python": "3.11.9"
+    "python": "3.14.6"
   },
   "constraintsFiltering": "strict",
   "vulnerabilityAlerts": {
