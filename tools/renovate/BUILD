@@ -5,3 +5,5 @@ py_binary(
     srcs = ["sync_python_toolchain_versions.py"],
     visibility = ["//:__subpackages__"],
 )
+
+package(default_visibility = ["//visibility:private"])
