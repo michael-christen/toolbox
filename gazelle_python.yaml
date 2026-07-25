@@ -6,7 +6,7 @@
 ---
 manifest:
   modules_mapping:
-    0aca9ce3d91742c5b361__mypyc: mypy
+    08ae81f72d5a2b5fa9e0__mypyc: mypy
     30fcd23745efe32ce681__mypyc: black
     81d243bd2c585b0f4821__mypyc: charset_normalizer
     IPython: ipython
@@ -22,6 +22,7 @@ manifest:
     apiclient: google_api_python_client
     argon2: argon2_cffi
     arrow: arrow
+    ast_serialize: ast_serialize
     astroid: astroid
     asttokens: asttokens
     async_lru: async_lru
@@ -186,7 +187,9 @@ manifest:
     lark: lark
     librt.base64: librt
     librt.internal: librt
+    librt.random: librt
     librt.strings: librt
+    librt.threading: librt
     librt.time: librt
     librt.vecs: librt
     linkify_it: linkify_it_py
@@ -359,4 +362,4 @@ manifest:
     zstandard: zstandard
   pip_repository:
     name: pip
-integrity: 35eabd50dd6aefeebf24ecda9f6057fda67c7fa4168764cdacb249cfe8ecde29
+integrity: 186bbe324e18dd8460a5d68f25bbfc7ef3130956231f6d2b9c81c59637228012
