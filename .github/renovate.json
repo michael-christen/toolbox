@@ -71,11 +71,6 @@
       }
     },
     {
-      "matchManagers": ["pip_requirements"],
-      "matchPackageNames": ["panel"],
-      "allowedVersions": "<1.9.0"
-    },
-    {
       "matchManagers": ["github-actions"],
       "groupName": "github actions"
     },

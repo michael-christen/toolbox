@@ -31,6 +31,7 @@ pip_compile(
     name = "requirements",
     # https://bazel.build/reference/be/common-definitions
     requirements_in = "requirements.in",
+    requirements_overrides = "requirements_overrides.txt",
     requirements_txt = "requirements_lock.txt",
     tags = [
         # Don't want to type-check requirements building

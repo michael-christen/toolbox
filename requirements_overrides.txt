@@ -1,0 +1,7 @@
+# Force tornado past openhtf's declared `tornado<6.5,>=6` upper bound.
+# openhtf (1.5.2/1.6.1, the only PyPI releases with wheels) caps tornado at
+# <6.5; without this override, `--upgrade` tries a newer tornado, can't
+# satisfy openhtf's wheel releases, and backtracks to ancient sdist-only
+# openhtf versions whose vintage setup.py fails to build. We track tornado
+# security fixes separately from openhtf's stale pin.
+tornado>=6.5
