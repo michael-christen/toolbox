@@ -342,7 +342,6 @@ manifest:
     typing_extensions: typing_extensions
     typing_inspection: typing_inspection
     tzdata: tzdata
-    ubjson: py_ubjson
     uc_micro: uc_micro_py
     ujson: ujson
     uri_template: uri_template
@@ -362,4 +361,5 @@ manifest:
     zstandard: zstandard
   pip_repository:
     name: pip
+
 integrity: bb9bd35e27e7ee44ff88ed566ff8a95076d8f52a32de40d7bd42d3d38e30fe9f
