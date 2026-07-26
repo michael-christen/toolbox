@@ -259,6 +259,36 @@ git_override(
     remote = "https://pigweed.googlesource.com/pigweed/pigweed",
 )
 
+# `python.toolchain(python_version = "3.12.12", configure_coverage_tool = True)`
+# below silently loses that coverage config: multiple deps (grpc, pigweed)
+# also register unpinned `python_version = "3.12"` toolchains, which
+# rules_python's MINOR_MAPPING resolves to the same "3.12.12", and
+# rules_python keeps only the *first*-registered module's
+# configure_coverage_tool value for a given resolved version (grpc's, which
+# is False) -- see python/private/python.bzl's "first in the dependency
+# graph wins" comment. The documented workaround,
+# `single_version_platform_override(coverage_tool = ...)`, bypasses that
+# precedence fight entirely, but it has its own bug: the tag's
+# `coverage_tool` attr is typed `attr.label`, while `python_repository`'s
+# `coverage_tool` attr expects a plain string, so passing the label through
+# unconverted fails with a "expected value of type 'string'" error. Patch
+# the one line that's missing str(...).
+#
+# `version` here must match whatever MVS actually resolves rules_python to
+# (currently 2.0.2, pulled up by pigweed's own bazel_dep) -- a
+# single_version_override pins to an exact version, so if some other dep
+# bump raises that resolved version again, this needs to move with it or
+# it'll silently force a *downgrade* instead (which is what broke pigweed's
+# newer pip.parse(requirements_by_platform = ...) API the first time this
+# was tried at "1.7.0"). Check `bazel mod graph | grep rules_python@` if
+# this needs updating.
+single_version_override(
+    module_name = "rules_python",
+    patch_strip = 1,
+    patches = ["//third_party/patches:rules_python_coverage_tool_override_str.patch"],
+    version = "2.0.2",
+)
+
 ##########################################
 # bazel_dep Configuration
 ##########################################
@@ -395,10 +425,43 @@ python = use_extension("@rules_python//python/extensions:python.bzl", "python")
 # Must match interpreter_version in .bazelrc
 # & mypy_cli in //:BUILD
 # LINK(7e463bc3_e4d9_4464_ba39_3217c4a86004)
-PYTHON_VERSION = "3.11.9"
+PYTHON_VERSION = "3.12.12"
 
 python.toolchain(
     configure_coverage_tool = True,
+    python_version = PYTHON_VERSION,
+)
+
+# See the `single_version_override(module_name = "rules_python", ...)` comment
+# above for why this is needed: grpc's own unpinned `python_version = "3.12"`
+# toolchain registration resolves to this same "3.12.12" and otherwise wins
+# the race for which module's configure_coverage_tool value applies, so
+# coverage silently never gets wired up for our toolchain. Explicitly
+# providing coverage_tool here bypasses that precedence fight. This is the
+# same coverage.py wheel rules_python's own coverage_deps.bzl would have
+# used for cp312/x86_64-unknown-linux-gnu.
+http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+http_archive(
+    name = "toolbox_py312_linux_x86_64_coverage",
+    build_file_content = """
+filegroup(
+    name = "coverage",
+    srcs = ["coverage/__main__.py"],
+    data = glob(["coverage/*.py", "coverage/**/*.py", "coverage/*.so"]),
+    visibility = ["//visibility:public"],
+)
+""",
+    patch_args = ["-p1"],
+    patches = ["@rules_python//python/private:coverage.patch"],
+    sha256 = "c44fee9975f04b33331cb8eb272827111efc8930cfd582e0320613263ca849ca",
+    type = "zip",
+    urls = ["https://files.pythonhosted.org/packages/1f/0f/c890339dd605f3ebc269543247bdd43b703cce6825b5ed42ff5f2d6122c7/coverage-7.6.1-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl"],
+)
+
+python.single_version_platform_override(
+    coverage_tool = "@toolbox_py312_linux_x86_64_coverage//:coverage",
+    platform = "x86_64-unknown-linux-gnu",
     python_version = PYTHON_VERSION,
 )
 

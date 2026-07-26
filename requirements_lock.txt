@@ -2238,10 +2238,6 @@ openhtf==1.6.1 \
     # via
     #   -r requirements.in
     #   tofupilot
-overrides==7.7.0 \
-    --hash=sha256:55158fa3d93b98cc75299b1e67078ad9003ca27945c76162c1c0766d6f91820a \
-    --hash=sha256:c7ed9d062f78b8e4c1a7b70bd8796b35ead4d9f510227ef9c5dc7626c60d7e49
-    # via jupyter-server
 packaging==26.2 \
     --hash=sha256:5fc45236b9446107ff2415ce77c807cee2862cb6fac22b8a73826d0693b0980e \
     --hash=sha256:ff452ff5a3e828ce110190feff1178bb1f2ea2281fa2075aadb987c2fb221661
@@ -3682,9 +3678,7 @@ typing-extensions==4.16.0 \
     #   beautifulsoup4
     #   grpcio
     #   icalendar
-    #   ipython
     #   jupyter-client
-    #   jupyterlab
     #   mypy
     #   openhtf
     #   panel
