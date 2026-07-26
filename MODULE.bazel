@@ -210,7 +210,7 @@ bazel_dep(name = "toolchains_llvm", version = "1.5.0")
 single_version_override(
     module_name = "flatbuffers",
     version = "25.12.19",
-    patches = ["//:patches/flatbuffers_root_package.patch"],
+    patches = ["//third_party/flatbuffers:flatbuffers_root_package.patch"],
     patch_strip = 1,
 )
 
