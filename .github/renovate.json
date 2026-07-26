@@ -46,6 +46,22 @@
       }
     },
     {
+      "matchManagers": ["pip_requirements"],
+      "matchPackageNames": ["pydantic-core"],
+      "description": [
+        "pydantic-core is always exact-pinned by whichever pydantic release is installed (see pydantic's own `Requires-Dist: pydantic-core==...`), so a standalone bump here is never valid on its own - hashin patches it directly without checking that pin, producing an inconsistent lockfile our full recompile then reverts (see #424 investigation, PR #426). It should only ever move as a side effect of a pydantic bump, which the full recompile resolves correctly - so disable it permanently rather than capping a version."
+      ],
+      "enabled": false
+    },
+    {
+      "matchManagers": ["pip_requirements"],
+      "matchPackageNames": ["docutils"],
+      "description": [
+        "Capped below 0.23: sphinx==9.0.4 and myst-parser==5.1.0 both require docutils>=0.20,<0.23, and sphinx-rtd-theme==3.1.0 requires docutils<0.23,>0.18 (checked against locally fetched wheel METADATA). Same failure mode as pydantic-core - hashin bumped past this ceiling without checking sibling pins (PR #426). Revisit once those packages adopt a newer docutils."
+      ],
+      "allowedVersions": "<0.23"
+    },
+    {
       "matchManagers": ["bazel-module"],
       "groupName": "bazel modules"
     },
