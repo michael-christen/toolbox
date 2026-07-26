@@ -61,25 +61,27 @@ done
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)"
 
-# Find all Bazel-ish files - these templates come from Buildifier's default search list
-BAZEL_FILES=$(find ${REPO_ROOT} -type f \
-            \(   -name "*.bzl" \
-              -o -name "*.sky" \
-              -o -name "BUILD.bazel" \
-              -o -name "BUILD" \
-              -o -name "*.BUILD" \
-              -o -name "BUILD.*.bazel" \
-              -o -name "BUILD.*.oss" \
-              -o -name "MODULE.bazel" \
-              -o -name "WORKSPACE" \
-              -o -name "WORKSPACE.bazel" \
-              -o -name "WORKSPACE.oss" \
-              -o -name "WORKSPACE.*.bazel" \
-              -o -name "WORKSPACE.*.oss" \) \
-              -print)
+# Find all git-tracked Bazel-ish files - these templates come from Buildifier's
+# default search list. Literal (non-glob) names need both the bare and "**/"
+# forms since git pathspec only matches wildcard patterns at any depth.
+BAZEL_FILES=$(git -C "${REPO_ROOT}" ls-files -- \
+              '*.bzl' \
+              '*.sky' \
+              'BUILD.bazel' '**/BUILD.bazel' \
+              'BUILD' '**/BUILD' \
+              '*.BUILD' \
+              'BUILD.*.bazel' \
+              'BUILD.*.oss' \
+              'MODULE.bazel' '**/MODULE.bazel' \
+              'WORKSPACE' '**/WORKSPACE' \
+              'WORKSPACE.bazel' '**/WORKSPACE.bazel' \
+              'WORKSPACE.oss' '**/WORKSPACE.oss' \
+              'WORKSPACE.*.bazel' \
+              'WORKSPACE.*.oss' \
+            | sed "s|^|${REPO_ROOT}/|")
 
-# Find all Markdown-ish files
-MARKDOWN_FILES=$(find ${REPO_ROOT} -type f -name "*.md" -print)
+# Find all git-tracked Markdown-ish files
+MARKDOWN_FILES=$(git -C "${REPO_ROOT}" ls-files -- '*.md' | sed "s|^|${REPO_ROOT}/|")
 
 # Check if the flag was set
 if [ -z "$mode" ]; then
@@ -132,10 +134,8 @@ grep_xxx
 # --aspects=//tools/lint:linters.bzl%clang_tidy
 
 
-# TODO(#57): Re-enable this check when we fix the false errors
-# - name: bzlmod lockfile
-#   run: |
-#     bazel mod deps --lockfile_mode=error
+# Verify MODULE.bazel.lock is up to date (fixed by rules_rust upgrade, #57, #392)
+bazel mod deps --lockfile_mode=error
 
 
 printf "\n✨ Linting completed successfully! ✨\n"

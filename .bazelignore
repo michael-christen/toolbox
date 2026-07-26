@@ -9,3 +9,5 @@ node_modules
 bazel-bin
 bazel-out
 bazel-testlogs
+# Claude Code worktrees (separate checkouts, shouldn't be part of //...)
+.claude/worktrees
