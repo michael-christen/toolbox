@@ -15,5 +15,7 @@ actions:
       - run: 'bazel build //...'
       - run: 'bazel test //... --output_groups=-mypy'
     resource_requests:
-      # The default 20GB was too small
-      disk: 40GB
+      # The default 20GB was too small; bumped to 40GB, then to 80GB once
+      # the pigweed roll (#431) pushed bazel's own output-base/external past
+      # 16GB on its own, before OS/container/git-checkout overhead.
+      disk: 80GB
