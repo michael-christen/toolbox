@@ -1,6 +1,6 @@
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
 load("@com_google_protobuf//bazel:cc_proto_library.bzl", "cc_proto_library")
-load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@com_google_protobuf//bazel:proto_library.bzl", "proto_library")
 load("//bzl:py.bzl", "proto_py_library")
 
 package(default_visibility = ["//visibility:private"])

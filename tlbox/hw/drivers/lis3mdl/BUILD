@@ -1,12 +1,12 @@
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
 load("@com_google_emboss//:build_defs.bzl", "emboss_cc_library")
 load("@com_google_protobuf//bazel:cc_proto_library.bzl", "cc_proto_library")
+load("@com_google_protobuf//bazel:proto_library.bzl", "proto_library")
 load(
     "@pigweed//pw_protobuf_compiler:pw_proto_library.bzl",
     "nanopb_proto_library",
     "nanopb_rpc_proto_library",
 )
-load("@rules_proto//proto:defs.bzl", "proto_library")
 load("//bzl:cc.bzl", "cc_library", "cc_test")
 load("//bzl:py.bzl", "proto_py_library")
 
@@ -34,8 +34,8 @@ cc_library(
         "//tlbox/hw/services/sbr:__subpackages__",
     ],
     deps = [
+        ":lis3mdl_nanopb",
         "//tlbox/hw/drivers/lis3mdl:lis3mdl_emb",
-        "//tlbox/hw/drivers/lis3mdl:lis3mdl_nanopb",
         "@pigweed//pw_i2c:address",
         "@pigweed//pw_i2c:register_device",
     ],
@@ -46,8 +46,8 @@ cc_test(
     srcs = ["lis3mdl_pw_test.cc"],
     deps = [
         ":lis3mdl",
+        ":lis3mdl_nanopb",
         "//tlbox/hw/drivers/lis3mdl:lis3mdl_emb",
-        "//tlbox/hw/drivers/lis3mdl:lis3mdl_nanopb",
         "@pigweed//pw_bytes",
         "@pigweed//pw_bytes:bit",
         "@pigweed//pw_i2c:address",

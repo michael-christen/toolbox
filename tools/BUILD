@@ -1,11 +1,11 @@
 load("@bazel_env.bzl", "bazel_env")
 load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
 load("@com_google_protobuf//bazel:cc_proto_library.bzl", "cc_proto_library")
+load("@com_google_protobuf//bazel:proto_library.bzl", "proto_library")
 load("@multitool//:tools.bzl", MULTITOOL_TOOLS = "TOOLS")
 load("@pip//:requirements.bzl", "requirement")  # '@pip' must match configured pip hub_name
 load("@rules_multirun//:defs.bzl", "command", "multirun")
 load("@rules_mypy//mypy:mypy.bzl", "mypy_cli")
-load("@rules_proto//proto:defs.bzl", "proto_library")
 load("//bzl:py.bzl", "proto_py_library", "py_library")
 
 package(default_visibility = ["//visibility:private"])

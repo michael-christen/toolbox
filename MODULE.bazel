@@ -209,9 +209,9 @@ bazel_dep(name = "toolchains_llvm", version = "1.5.0")
 # workspace auto-discovery, so behavior is unchanged.
 single_version_override(
     module_name = "flatbuffers",
-    version = "25.12.19",
-    patches = ["//third_party/flatbuffers:flatbuffers_root_package.patch"],
     patch_strip = 1,
+    patches = ["//third_party/flatbuffers:flatbuffers_root_package.patch"],
+    version = "25.12.19",
 )
 
 # grpc (transitively, via envoy_api) pulls in googleapis, whose BCR overlay
@@ -224,9 +224,9 @@ single_version_override(
 # dead use_repo call.
 single_version_override(
     module_name = "envoy_api",
-    version = "0.0.0-20251216-6ef568c",
-    patches = ["//third_party/envoy_api:drop_switched_rules_use_repo.patch"],
     patch_strip = 1,
+    patches = ["//third_party/envoy_api:drop_switched_rules_use_repo.patch"],
+    version = "0.0.0-20251216-6ef568c",
 )
 
 # build_stack_rules_proto (transitively, for its unused scalafmt toolchain)
