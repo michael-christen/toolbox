@@ -100,10 +100,6 @@ common --@pigweed//pw_system:io_backend=@pigweed//pw_system:socket_target_io
 # My rules
 # ========
 #
-# Avoid incompatible_sandbox_hermetic_tmp causing relative paths to change.
-# https://github.com/aspect-build/gcc-toolchain/issues/161
-build --noincompatible_sandbox_hermetic_tmp
-
 # Prevent python use of ~/.local/lib
 build --action_env=PYTHONNOUSERSITE=1
 build --test_env=PYTHONNOUSERSITE=1

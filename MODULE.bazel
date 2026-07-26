@@ -58,7 +58,7 @@ bazel_dep(name = "protobuf", version = "33.1", repo_name = "com_google_protobuf"
 bazel_dep(name = "rules_cc", version = "0.2.14")
 bazel_dep(name = "rules_multirun", version = "0.13.0")
 bazel_dep(name = "rules_multitool", version = "1.11.1")
-bazel_dep(name = "rules_mypy", version = "0.40.0")
+bazel_dep(name = "rules_mypy", version = "0.41.0")
 bazel_dep(name = "rules_oci", version = "2.2.6")
 bazel_dep(name = "rules_jvm_external", version = "6.8")
 bazel_dep(name = "rules_platform", version = "0.1.0")
@@ -200,6 +200,14 @@ bazel_dep(name = "toolchains_llvm", version = "1.5.0")
 ##########################################
 # (NOTE: We don't put the overrides in-line with the bazel_dep for readability)
 # order to keep them clean / immediately viewable)
+
+# build_stack_rules_proto (transitively, for its unused scalafmt toolchain)
+# pulls in rules_scala 7.0.0, which references the native JavaInfo global
+# removed in Bazel 9. 7.2.6 loads JavaInfo explicitly from rules_java.
+single_version_override(
+    module_name = "rules_scala",
+    version = "7.2.6",
+)
 
 git_override(
     module_name = "emboss",
