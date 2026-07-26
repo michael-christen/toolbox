@@ -1,6 +1,8 @@
 load("@rules_shell//shell:sh_binary.bzl", "sh_binary")
 load("//bzl:py.bzl", "py_binary")
 
+package(default_visibility = ["//visibility:private"])
+
 exports_files([
     "pytest_main.py",
 ])

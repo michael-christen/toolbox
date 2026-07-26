@@ -43,12 +43,12 @@ bazel_dep(name = "bazel_skylib_gazelle_plugin", version = "1.8.2")
 bazel_dep(name = "bazel_skylib", version = "1.8.2")
 bazel_dep(name = "buildifier_prebuilt", version = "8.2.1")
 bazel_dep(name = "build_stack_rules_proto", version = "4.1.2")
-bazel_dep(name = "emboss", repo_name = "com_google_emboss")
+bazel_dep(name = "emboss", version = "2025.1003.000719", repo_name = "com_google_emboss")
 bazel_dep(name = "freertos", version = "10.5.1.bcr.2")
 bazel_dep(name = "gazelle", version = "0.47.0", repo_name = "bazel_gazelle")
 bazel_dep(name = "gazelle_cc", version = "0.5.0")
-bazel_dep(name = "googletest", version = "1.15.2")
-bazel_dep(name = "grpc", version = "1.76.0", repo_name = "com_github_grpc_grpc")
+bazel_dep(name = "googletest", version = "1.17.0.bcr.2")
+bazel_dep(name = "grpc", version = "1.83.0", repo_name = "com_github_grpc_grpc")
 bazel_dep(name = "hedron_compile_commands")
 bazel_dep(name = "nanopb", version = "0.4.9.1", repo_name = "com_github_nanopb_nanopb")
 bazel_dep(name = "pico-sdk", version = "2.0.0")
@@ -58,13 +58,14 @@ bazel_dep(name = "protobuf", version = "33.1", repo_name = "com_google_protobuf"
 bazel_dep(name = "rules_cc", version = "0.2.14")
 bazel_dep(name = "rules_multirun", version = "0.13.0")
 bazel_dep(name = "rules_multitool", version = "1.11.1")
-bazel_dep(name = "rules_mypy", version = "0.40.0")
+bazel_dep(name = "rules_mypy", version = "0.41.0")
 bazel_dep(name = "rules_oci", version = "2.2.6")
 bazel_dep(name = "rules_jvm_external", version = "6.8")
 bazel_dep(name = "rules_platform", version = "0.1.0")
 bazel_dep(name = "rules_proto", version = "7.1.0")
 bazel_dep(name = "rules_python_gazelle_plugin", version = "1.7.0-rc4")
-bazel_dep(name = "rules_python", version = "1.7.0")
+bazel_dep(name = "rules_python", version = "1.8.5")
+bazel_dep(name = "rules_go", version = "0.60.0", repo_name = "io_bazel_rules_go")
 bazel_dep(name = "rules_rust", version = "0.70.0")
 bazel_dep(name = "rules_shell", version = "0.6.1")
 bazel_dep(name = "rules_uv", version = "0.88.0")
@@ -201,14 +202,45 @@ bazel_dep(name = "toolchains_llvm", version = "1.5.0")
 # (NOTE: We don't put the overrides in-line with the bazel_dep for readability)
 # order to keep them clean / immediately viewable)
 
-git_override(
-    module_name = "emboss",
-    commit = "f595908cba6f366746d6834a2e885868d1a836cd",
-    # LINT.IfChange(emboss)
-    remote = "https://pigweed.googlesource.com/third_party/github/google/emboss",
-    # tag = "v2024.0809.170004",
-    # LINT.ThenChange(/pw_package/py/pw_package/packages/emboss.py:emboss)
+# Pigweed transitively pulls in flatbuffers, whose npm_translate_lock() call
+# still passes the `root_package` attribute, which aspect_rules_js dropped in
+# its 3.x line (we pin 3.2.3 for our own JS tooling). Patch it out; the
+# pnpm_lock label's package ("ts") is inferred as the root by rules_js 3.x's
+# workspace auto-discovery, so behavior is unchanged.
+single_version_override(
+    module_name = "flatbuffers",
+    patch_strip = 1,
+    patches = ["//third_party/flatbuffers:flatbuffers_root_package.patch"],
+    version = "25.12.19",
 )
+
+# grpc (transitively, via envoy_api) pulls in googleapis, whose BCR overlay
+# ships a no-op `switched_rules` extension (its own MODULE.bazel comment:
+# "This extension is no longer used, but provided for compatibility").
+# envoy_api's pin still does use_repo(switched_rules, "com_google_googleapis_imports")
+# on it, which `bazel mod deps`/`bazel mod graph` fail to resolve since the
+# no-op impl generates nothing (real builds never touch that repo, so this
+# only breaks the lockfile-update workflow, not actual builds). Drop the
+# dead use_repo call.
+single_version_override(
+    module_name = "envoy_api",
+    patch_strip = 1,
+    patches = ["//third_party/envoy_api:drop_switched_rules_use_repo.patch"],
+    version = "0.0.0-20251216-6ef568c",
+)
+
+# build_stack_rules_proto (transitively, for its unused scalafmt toolchain)
+# pulls in rules_scala 7.0.0, which references the native JavaInfo global
+# removed in Bazel 9. 7.2.6 loads JavaInfo explicitly from rules_java.
+single_version_override(
+    module_name = "rules_scala",
+    version = "7.2.6",
+)
+
+# emboss is now available in the BCR (pigweed switched to it in
+# c98647dba, "bazel: Roll picotool, emboss for Bazel 9 compat") with the
+# Bazel 9 CcInfo fix bundled, so no override is needed anymore; pigweed's
+# own bazel_dep declaration resolves it via MVS.
 
 # ================
 # TODO: https://pwbug.dev/349880767 - Point this back to the upstream repo once this PR is merged.
@@ -223,7 +255,7 @@ git_override(
     module_name = "pigweed",
     # ROLL: Warning: this entry is automatically updated by
     # ROLL: https://cr-buildbucket.appspot.com/builder/pigweed/quickstart.roll/pigweed-quickstart-bazel-roller
-    commit = "6e6d54426b139c4044dc9a5ccf635e1531ca16f2",
+    commit = "62bd30d9d8a0f9098fc57910c67fe89acf65c286",
     remote = "https://pigweed.googlesource.com/pigweed/pigweed",
 )
 
@@ -341,6 +373,16 @@ oci.pull(
 
 # For each oci.pull call, repeat the "name" here to expose them as dependencies.
 use_repo(oci, "distroless_base", "distroless_base_linux_amd64", "distroless_base_linux_arm64_v8", "ubuntu_base", "ubuntu_base_linux_amd64", "ubuntu_base_linux_arm64_v8")
+
+############
+# rules_go
+############
+# gazelle's own bootstrap tooling (bazel_gazelle_go_repository_tools) requires
+# a Go >= 1.24.12 toolchain as of gazelle 0.48.0 (pulled in transitively by
+# pigweed). Register a matching SDK explicitly; the default resolved by
+# rules_go alone was still 1.23.1.
+go_sdk = use_extension("@io_bazel_rules_go//go:extensions.bzl", "go_sdk")
+go_sdk.download(version = "1.24.12")
 
 ###############
 # rules_python
