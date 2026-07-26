@@ -214,6 +214,21 @@ single_version_override(
     patch_strip = 1,
 )
 
+# grpc (transitively, via envoy_api) pulls in googleapis, whose BCR overlay
+# ships a no-op `switched_rules` extension (its own MODULE.bazel comment:
+# "This extension is no longer used, but provided for compatibility").
+# envoy_api's pin still does use_repo(switched_rules, "com_google_googleapis_imports")
+# on it, which `bazel mod deps`/`bazel mod graph` fail to resolve since the
+# no-op impl generates nothing (real builds never touch that repo, so this
+# only breaks the lockfile-update workflow, not actual builds). Drop the
+# dead use_repo call.
+single_version_override(
+    module_name = "envoy_api",
+    version = "0.0.0-20251216-6ef568c",
+    patches = ["//third_party/envoy_api:drop_switched_rules_use_repo.patch"],
+    patch_strip = 1,
+)
+
 # build_stack_rules_proto (transitively, for its unused scalafmt toolchain)
 # pulls in rules_scala 7.0.0, which references the native JavaInfo global
 # removed in Bazel 9. 7.2.6 loads JavaInfo explicitly from rules_java.

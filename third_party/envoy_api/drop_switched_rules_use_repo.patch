@@ -1,0 +1,10 @@
+--- a/MODULE.bazel
++++ b/MODULE.bazel
+@@ -48,7 +48,6 @@
+     go = True,
+     java = True,
+ )
+-use_repo(switched_rules, "com_google_googleapis_imports")
+
+ # Non-BCR dependencies extension
+ # These dependencies are not yet available in BCR or require custom build files
