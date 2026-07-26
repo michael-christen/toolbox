@@ -51,7 +51,7 @@ void ToggleIo(DigitalInOut& io) {
 
 }  // namespace
 
-Coro<Status> Blinky::BlinkLoop(CoroContext&, uint32_t blink_count,
+Coro<Status> Blinky::BlinkLoop(CoroContext, uint32_t blink_count,
                                pw::chrono::SystemClock::duration interval) {
   for (uint32_t blinked = 0; blinked < blink_count || blink_count == 0;
        ++blinked) {

@@ -1,0 +1,12 @@
+--- a/MODULE.bazel
++++ b/MODULE.bazel
+@@ -62,9 +62,6 @@
+     name = "flatbuffers_npm",
+     npmrc = "//:.npmrc",
+     pnpm_lock = "//ts:pnpm-lock.yaml",
+-    # Override the Bazel package where pnpm-lock.yaml is located and link
+-    # to the specified package instead.
+-    root_package = "ts",
+     verify_node_modules_ignored = "//:.bazelignore",
+ )
+ use_repo(npm, "flatbuffers_npm")

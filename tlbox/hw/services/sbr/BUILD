@@ -24,7 +24,7 @@ cc_library(
     ],
     deps = [
         ":sbr_nanopb_rpc",
-        "@pigweed//pw_allocator:allocator",
+        "@pigweed//pw_allocator:pw_allocator",
         "@pigweed//pw_assert:check",
         "@pigweed//pw_async2:dispatcher",
         "@pigweed//pw_i2c:register_device",

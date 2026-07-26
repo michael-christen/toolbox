@@ -65,7 +65,7 @@ class Blinky final {
  private:
   /// Creates a blinking coroutine.
   pw::async2::Coro<pw::Status> BlinkLoop(
-      pw::async2::CoroContext&, uint32_t blink_count,
+      pw::async2::CoroContext, uint32_t blink_count,
       pw::chrono::SystemClock::duration interval) PW_LOCKS_EXCLUDED(lock_);
 
   pw::async2::Dispatcher* dispatcher_;

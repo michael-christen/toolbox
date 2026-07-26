@@ -63,6 +63,12 @@ common --experimental_exclude_starlark_flags_from_exec_config
 # "@rules_python//python:exec_tools_toolchain_type").
 build --@rules_python//python/config_settings:exec_tools_toolchain=enabled
 
+# rules_python's default venv-symlink bootstrap leaves dangling symlinks in
+# py_binary runfiles that py_wheel can't dereference when packaging
+# (https://github.com/bazel-contrib/rules_python/issues/2489).
+build --@rules_python//python/config_settings:bootstrap_impl=script
+build --@rules_python//python/config_settings:venvs_use_declare_symlink=no
+
 # C++ toolchain configuration
 # ===========================
 

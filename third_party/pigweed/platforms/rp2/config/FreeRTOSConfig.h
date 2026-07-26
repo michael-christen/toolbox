@@ -24,11 +24,11 @@ extern uint32_t SystemCoreClock;
 #define xPortPendSVHandler      PendSV_Handler
 #define xPortSysTickHandler     SysTick_Handler
 
-#if __ARM_FP
+#if defined(__ARM_FP) && __ARM_FP
 #define configENABLE_FPU                        1
 #else
 #define configENABLE_FPU                        0
-#endif  // __ARM_FP
+#endif  // defined(__ARM_FP) && __ARM_FP
 
 // TODO: Set up the MPU.
 #define configENABLE_MPU                        0
