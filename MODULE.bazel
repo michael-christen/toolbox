@@ -51,7 +51,7 @@ bazel_dep(name = "googletest", version = "1.17.0.bcr.2")
 bazel_dep(name = "grpc", version = "1.83.0", repo_name = "com_github_grpc_grpc")
 bazel_dep(name = "hedron_compile_commands")
 bazel_dep(name = "nanopb", version = "0.4.9.1", repo_name = "com_github_nanopb_nanopb")
-bazel_dep(name = "pico-sdk", version = "2.0.0")
+bazel_dep(name = "pico-sdk")
 bazel_dep(name = "pigweed")
 bazel_dep(name = "platforms", version = "1.0.0")
 bazel_dep(name = "protobuf", version = "33.1", repo_name = "com_google_protobuf")
@@ -257,6 +257,26 @@ git_override(
     # ROLL: https://cr-buildbucket.appspot.com/builder/pigweed/quickstart.roll/pigweed-quickstart-bazel-roller
     commit = "62bd30d9d8a0f9098fc57910c67fe89acf65c286",
     remote = "https://pigweed.googlesource.com/pigweed/pigweed",
+)
+
+# pico-sdk 2.3.0's BCR module is broken: src/rp2_common/pico_stdio_usb/BUILD.bazel
+# references //src/rp2_common/pico_usb_reset_interface, but that package has no
+# BUILD.bazel in the 2.3.0 release (see #395). RyanDraves/pico-sdk's
+# bazel-2.3.0-patch branch is 2.3.0 plus exactly that fix (drops the dead
+# reference). Revert to a BCR-hosted version once upstream/BCR carries the fix.
+#
+# Separately, sections.h uses PICO_COMBINED_DOCS/PICO_XIP_RAM/LIB_PICO_LOW_POWER
+# in #if/#elif without ever giving them a default definition anywhere in the
+# SDK (unlike PICO_USE_XIP_CACHE_AS_RAM, which does get one) -- confirmed still
+# present on pico-sdk's main branch too, so this is a genuine, separate
+# upstream oversight, not something the fork above addresses. Patch in the
+# same #ifndef/#define 0 guard pattern the SDK already uses elsewhere.
+git_override(
+    module_name = "pico-sdk",
+    commit = "ef9ddf906bdee7de0ffe62bdab7d74cc67ae9c5d",
+    patch_strip = 1,
+    patches = ["//third_party/pico-sdk:undef_macro_guards.patch"],
+    remote = "https://github.com/RyanDraves/pico-sdk",
 )
 
 # `python.toolchain(python_version = "3.12.12", configure_coverage_tool = True)`
