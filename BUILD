@@ -4,11 +4,11 @@
 # ruleset. When the symbol is loaded you can use the rule.
 load("@bazel_gazelle//:def.bzl", "gazelle", "gazelle_binary")
 load("@npm//:defs.bzl", "npm_link_all_packages")
-load("@pip//:requirements.bzl", "all_whl_requirements")
 load("@rules_python_gazelle_plugin//manifest:defs.bzl", "gazelle_python_manifest")
 load("@rules_python_gazelle_plugin//modules_mapping:def.bzl", "modules_mapping")
 load("@rules_uv//uv:pip.bzl", "pip_compile")
 load("@rules_uv//uv:venv.bzl", "create_venv")
+load("@toolbox_pip//:requirements.bzl", "all_whl_requirements")
 load("//:copts_transition.bzl", "executable_with_copts")
 
 package(default_visibility = ["//visibility:private"])
@@ -75,7 +75,7 @@ modules_mapping(
 gazelle_python_manifest(
     name = "gazelle_python_manifest",
     modules_mapping = ":modules_map",
-    pip_repository_name = "pip",
+    pip_repository_name = "toolbox_pip",
     # NOTE: We can pass a list just like in `bzlmod_build_file_generation` example
     # but we keep a single target here for regression testing.
     requirements = "//:requirements_lock.txt",

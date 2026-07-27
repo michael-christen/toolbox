@@ -7,10 +7,10 @@ py_binary(
     srcs = ["gmail_analysis.py"],
     visibility = ["//:__subpackages__"],
     deps = [
-        "@pip//google_api_python_client",
-        "@pip//google_auth",
-        "@pip//google_auth_oauthlib",
-        "@pip//matplotlib",
-        "@pip//pandas",
+        "@toolbox_pip//google_api_python_client",
+        "@toolbox_pip//google_auth",
+        "@toolbox_pip//google_auth_oauthlib",
+        "@toolbox_pip//matplotlib",
+        "@toolbox_pip//pandas",
     ],
 )

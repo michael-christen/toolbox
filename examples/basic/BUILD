@@ -107,7 +107,7 @@ py_binary(
     deps = [
         "//examples/basic:hello_grpc_py_library",
         "//examples/basic:hello_py_library",
-        "@pip//grpcio",
+        "@toolbox_pip//grpcio",
     ],
 )
 
@@ -127,7 +127,7 @@ py_binary(
     deps = [
         "//examples/basic:hello_grpc_py_library",
         "//examples/basic:hello_py_library",
-        "@pip//grpcio",
+        "@toolbox_pip//grpcio",
     ],
 )
 

@@ -7,8 +7,8 @@ py_library(
     srcs = ["graph_algorithms.py"],
     visibility = ["//:__subpackages__"],
     deps = [
-        "@pip//networkx",
-        "@pip//tqdm",
+        "@toolbox_pip//networkx",
+        "@toolbox_pip//tqdm",
     ],
 )
 
@@ -17,7 +17,7 @@ py_test(
     srcs = ["graph_algorithms_test.py"],
     deps = [
         ":graph_algorithms",
-        "@pip//networkx",
+        "@toolbox_pip//networkx",
     ],
 )
 
@@ -29,8 +29,8 @@ py_binary(
         "//third_party/bazel/proto:build_event_stream_py_library",
         "//third_party/bazel/proto:spawn_py_library",
         "//third_party/delimited_protobuf",
-        "@pip//tabulate",
-        "@pip//zstandard",
+        "@toolbox_pip//tabulate",
+        "@toolbox_pip//zstandard",
     ],
 )
 
