@@ -2451,15 +2451,15 @@ pluggy==1.6.0 \
     --hash=sha256:7dcc130b76258d33b90f61b658791dede3486c3e6bfb003ee5c9bfb396dd22f3 \
     --hash=sha256:e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746
     # via pytest
-posthog==7.29.0 \
-    --hash=sha256:673f201e2d204f0664bb0cec86f8adfca97ba3a94488fb7857bb11c4a35fb017 \
-    --hash=sha256:8269afec8439e0177fd9d660b88d0a580497b617ee6aa213850ae9244ad46111
+posthog==7.30.0 \
+    --hash=sha256:b59d3f69e34579a1be3b473eee2d5482259d99abfa9ffffedc3c8cd02eea08aa \
+    --hash=sha256:ffac13b1366637f152ac94902ef9b651c25ce97d46e2aa29ddedabd8c5fa7650
     # via tofupilot
 prometheus-client==0.26.0 \
     --hash=sha256:04a91bcf94e2cf74a44a1a874d651a2e853ed354b6e822f3b7487751465d5c2b \
     --hash=sha256:fa93d06737aa02bacd05794768508bb97d2fbee28cb3bca04eaae92f0ca953d6
     # via jupyter-server
-prompt-toolkit==3.0.52 \
+prompt-toolkit==3.0.53 \
     --hash=sha256:28cde192929c8e7321de85de1ddbe736f1375148b02f2e17edd840042b1be855 \
     --hash=sha256:9aac639a3bbd33284347de5ad8d68ecc044b91a762dc39b7c21095fcd6a19955
     # via
