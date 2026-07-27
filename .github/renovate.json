@@ -72,11 +72,6 @@
     },
     {
       "matchManagers": ["bazel-module"],
-      "matchPackageNames": ["grpc"],
-      "allowedVersions": "<1.76.0"
-    },
-    {
-      "matchManagers": ["bazel-module"],
       "matchPackageNames": ["rules_python"],
       "postUpgradeTasks": {
         "commands": [
