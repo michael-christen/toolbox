@@ -6,7 +6,7 @@ py_binary(
     name = "pocket_export_html_to_csv",
     srcs = ["pocket_export_html_to_csv.py"],
     visibility = ["//:__subpackages__"],
-    deps = ["@pip//beautifulsoup4"],
+    deps = ["@toolbox_pip//beautifulsoup4"],
 )
 
 py_binary(

@@ -1659,15 +1659,15 @@
     "@@rules_mypy+//mypy:types.bzl%types": {
       "general": {
         "bzlTransitiveDigest": "NRCQLKlh6DMNV8O7wtrrgFwoxCrepDJ64vJWgl4xKIo=",
-        "usagesDigest": "VQtlosoIEjw4qRsLJc07jRq+h07EMDe4XfWbwNlOQrE=",
+        "usagesDigest": "wewhQJ9zu0o2pLoIXr3E/b2PanMKJ7+yyNH56fmlw58=",
         "recordedInputs": [
-          "REPO_MAPPING:,pip rules_python++pip+pip"
+          "REPO_MAPPING:,toolbox_pip rules_python++pip+toolbox_pip"
         ],
         "generatedRepoSpecs": {
           "pip_types": {
             "repoRuleId": "@@rules_mypy+//mypy/private:types.bzl%generate",
             "attributes": {
-              "pip_requirements": "@@rules_python++pip+pip//:requirements.bzl",
+              "pip_requirements": "@@rules_python++pip+toolbox_pip//:requirements.bzl",
               "requirements_txt": "@@//:requirements_lock.txt",
               "exclude_requirements": []
             }

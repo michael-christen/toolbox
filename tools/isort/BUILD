@@ -9,6 +9,6 @@ py_binary(
     visibility = ["//:__subpackages__"],
     deps = [
         "//tools:utils",
-        "@pip//isort",
+        "@toolbox_pip//isort",
     ],
 )

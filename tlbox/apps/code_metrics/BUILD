@@ -10,10 +10,10 @@ py_binary(
         ":models",
         "//tlbox/utils:bazel_utils",
         "//tlbox/utils:git_utils",
-        "@pip//click",
-        "@pip//psycopg2_binary",
-        "@pip//sqlalchemy",
-        "@pip//tabulate",
+        "@toolbox_pip//click",
+        "@toolbox_pip//psycopg2_binary",
+        "@toolbox_pip//sqlalchemy",
+        "@toolbox_pip//tabulate",
     ],
 )
 
@@ -22,7 +22,7 @@ py_binary(
     srcs = ["models.py"],
     visibility = ["//:__subpackages__"],
     deps = [
-        "@pip//psycopg2_binary",
-        "@pip//sqlalchemy",
+        "@toolbox_pip//psycopg2_binary",
+        "@toolbox_pip//sqlalchemy",
     ],
 )

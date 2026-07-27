@@ -6,12 +6,12 @@ py_binary(
     name = "car_tutorial",
     srcs = ["car_tutorial.py"],
     visibility = ["//:__subpackages__"],
-    deps = ["@pip//simpy"],
+    deps = ["@toolbox_pip//simpy"],
 )
 
 py_binary(
     name = "thermostat_example",
     srcs = ["thermostat_example.py"],
     visibility = ["//:__subpackages__"],
-    deps = ["@pip//simpy"],
+    deps = ["@toolbox_pip//simpy"],
 )

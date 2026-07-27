@@ -21,7 +21,7 @@ def py_library(**kwargs):
 
 def py_test(srcs, deps = [], args = [], data = [], timeout = "short", **kwargs):
     deps = deps + [
-        "@pip//pytest",
+        "@toolbox_pip//pytest",
     ]
     unique_deps = {d: None for d in deps}
 

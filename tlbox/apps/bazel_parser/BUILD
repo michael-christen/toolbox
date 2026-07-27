@@ -18,9 +18,9 @@ py_library(
     ],
     visibility = ["//:__subpackages__"],
     deps = [
-        "@pip//bokeh",
-        "@pip//networkx",
-        "@pip//panel",
+        "@toolbox_pip//bokeh",
+        "@toolbox_pip//networkx",
+        "@toolbox_pip//panel",
     ],
 )
 
@@ -30,8 +30,8 @@ py_library(
     visibility = ["//:__subpackages__"],
     deps = [
         ":repo_graph_data",
-        "@pip//numpy",
-        "@pip//pandas",
+        "@toolbox_pip//numpy",
+        "@toolbox_pip//pandas",
     ],
 )
 
@@ -41,9 +41,9 @@ py_library(
     visibility = ["//:__subpackages__"],
     deps = [
         "//tlbox/utils:graph_algorithms",
-        "@pip//networkx",
-        "@pip//pandas",
-        "@pip//tqdm",
+        "@toolbox_pip//networkx",
+        "@toolbox_pip//pandas",
+        "@toolbox_pip//tqdm",
     ],
 )
 
@@ -52,7 +52,7 @@ py_test(
     srcs = ["repo_graph_data_test.py"],
     deps = [
         ":repo_graph_data",
-        "@pip//networkx",
+        "@toolbox_pip//networkx",
     ],
 )
 
@@ -64,7 +64,7 @@ py_library(
         ":repo_graph_data",
         "//third_party/bazel/src/main/protobuf:build_py_library",
         "//tlbox/utils:git_utils",
-        "@pip//networkx",
+        "@toolbox_pip//networkx",
     ],
 )
 
@@ -80,10 +80,10 @@ py_binary(
         "//tlbox/utils:bep_reader",
         "//tlbox/utils:git_utils",
         "//tools:git_py_library",
-        "@pip//click",
-        "@pip//networkx",
-        "@pip//pandas",
-        "@pip//pydantic",
-        "@pip//pyyaml",
+        "@toolbox_pip//click",
+        "@toolbox_pip//networkx",
+        "@toolbox_pip//pandas",
+        "@toolbox_pip//pydantic",
+        "@toolbox_pip//pyyaml",
     ],
 )

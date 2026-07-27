@@ -365,9 +365,9 @@ use_repo(multitool, "multitool")
 types = use_extension("@rules_mypy//mypy:types.bzl", "types")
 types.requirements(
     name = "pip_types",
-    # `@pip` in the next line corresponds to the `hub_name` when using
-    # rules_python's `pip.parse(...)`.
-    pip_requirements = "@pip//:requirements.bzl",
+    # `@toolbox_pip` in the next line corresponds to the `hub_name` when
+    # using rules_python's `pip.parse(...)`.
+    pip_requirements = "@toolbox_pip//:requirements.bzl",
     # also legal to pass a `requirements.in` here
     requirements_txt = "//:requirements_lock.txt",
 )
@@ -466,6 +466,11 @@ python.single_version_platform_override(
 )
 
 pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip")
+
+# NOTE: hub_name is "toolbox_pip" rather than the more obvious "pip" because
+# pip hub names must be unique across the whole module graph, and some
+# dependencies (e.g. newer emboss releases) declare their own "pip" hub --
+# see #402.
 pip.parse(
     # TODO(#209)
     # Avoid building wheels with system compiler
@@ -500,7 +505,7 @@ pip.parse(
             "panel-material-ui",
         ],
     },
-    hub_name = "pip",
+    hub_name = "toolbox_pip",
     python_version = PYTHON_VERSION,
     requirements_lock = "//:requirements_lock.txt",
 )
@@ -511,7 +516,7 @@ pip.parse(
 # --python-version
 # --implementation
 # --abi
-use_repo(pip, "pip")
+use_repo(pip, "toolbox_pip")
 
 #############
 # rules_rust

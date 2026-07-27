@@ -7,7 +7,7 @@ py_binary(
     srcs = ["tofupilot_example.py"],
     visibility = ["//:__subpackages__"],
     deps = [
-        "@pip//openhtf",
-        "@pip//tofupilot",
+        "@toolbox_pip//openhtf",
+        "@toolbox_pip//tofupilot",
     ],
 )
