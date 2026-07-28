@@ -10,13 +10,13 @@ jobs:
   renovate:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           lfs: true
       - uses: ./.github/actions/bazel-setup
         with:
           buildbuddy_api_key: ${{ secrets.BUILDBUDDY_API_KEY }}
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
           node-version: "24"
       - name: Install hashin
