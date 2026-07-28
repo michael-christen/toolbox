@@ -80,6 +80,13 @@ common --host_per_file_copt=external/.*@-w
 common --per_file_copt=external.*picotool.*@-fexceptions,-frtti
 common --host_per_file_copt=external.*picotool.*@-fexceptions,-frtti
 
+# pico-sdk's pico_cxx_options::new_delete.cpp provides its own operator
+# new/delete overrides, which collide (duplicate symbol at link time) with
+# pigweed's pw_libcxx/operator_new.cc. Tell pico-sdk to skip its own
+# overrides via its documented escape hatch (its own new_delete.cpp comment:
+# "Let user override").
+common --per_file_copt=external.*pico_cxx_options.*@-DPICO_CXX_DISABLE_ALLOCATION_OVERRIDES=1
+
 # Keep debugging symbols, but don't send them when flashing.
 build --strip=never
 
