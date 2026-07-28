@@ -273,7 +273,7 @@ git_override(
 # same #ifndef/#define 0 guard pattern the SDK already uses elsewhere.
 git_override(
     module_name = "pico-sdk",
-    commit = "ef9ddf906bdee7de0ffe62bdab7d74cc67ae9c5d",
+    commit = "a1438dff1d38bd9c65dbd693f0e5db4b9ae91779",
     patch_strip = 1,
     patches = ["//third_party/pico-sdk:undef_macro_guards.patch"],
     remote = "https://github.com/RyanDraves/pico-sdk",
@@ -403,7 +403,7 @@ oci.pull(
     # During the build we print a WARNING message that includes recommended 'digest' and 'platforms'
     # values which you can use here in place of 'tag' to pin for reproducibility.
     # tag = "latest",
-    digest = "sha256:9d4e5680d67c984ac9c957f66405de25634012e2d5d6dc396c4bdd2ba6ae569f",
+    digest = "sha256:f4a335ca209e1d2ee873102c17c389ad0142e3d5b21aee2817e9cc9c01d87d20",
     image = "gcr.io/distroless/base",
     platforms = [
         "linux/amd64",
@@ -413,7 +413,7 @@ oci.pull(
 oci.pull(
     name = "ubuntu_base",
     # tag = "24.04",
-    digest = "sha256:723ad8033f109978f8c7e6421ee684efb624eb5b9251b70c6788fdb2405d050b",
+    digest = "sha256:3131b4cc82a783df6c9df078f86e01819a13594b865c2cad47bd1bca2b7063bb",
     image = "ubuntu",
     platforms = [
         "linux/amd64",
