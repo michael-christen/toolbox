@@ -11,7 +11,7 @@
   "minimumReleaseAge": "3 days",
   "prCreation": "not-pending",
   "internalChecksFilter": "strict",
-  "platformCommit": "always",
+  "platformCommit": "enabled",
   "customManagers": [
     {
       "customType": "regex",
