@@ -77,6 +77,14 @@
     },
     {
       "matchManagers": ["bazel-module"],
+      "matchPackageNames": ["pico-sdk"],
+      "description": [
+        "pico-sdk is git_override'd to a specific, manually-vetted commit on a community fork (RyanDraves/pico-sdk#bazel-2.3.0-patch) that fixes BCR pico-sdk 2.3.0's broken Bazel packaging plus two more issues we found (see #395, #437). Renovate's bazel-module manager tracks git_override commits like any other dependency and will happily bump it to whatever the fork's branch tip is, which isn't validated and broke #395's rebase once. Disable tracking entirely; this override should only move via a manual, tested bump, and ideally gets removed once upstream/BCR ships a real fix."
+      ],
+      "enabled": false
+    },
+    {
+      "matchManagers": ["bazel-module"],
       "matchPackageNames": ["rules_python"],
       "postUpgradeTasks": {
         "commands": [
