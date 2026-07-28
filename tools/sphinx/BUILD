@@ -8,19 +8,19 @@ py_binary(
     tags = ["no-mypy"],
     visibility = ["//visibility:public"],
     deps = [
-        "@pip//furo",  # keep
-        "@pip//linkify_it_py",  # keep
-        "@pip//myst_parser",  # keep
-        "@pip//sphinx",  # keep
-        "@pip//sphinx_autoapi",  # keep
-        "@pip//sphinx_copybutton",  # keep
-        "@pip//sphinx_design",  # keep
-        "@pip//sphinx_pyscript",  # keep
-        "@pip//sphinx_rtd_theme",  # keep
-        "@pip//sphinx_tippy",  # keep
-        "@pip//sphinx_togglebutton",  # keep
-        "@pip//sphinxcontrib_mermaid",  # keep
-        "@pip//sphinxext_opengraph",  # keep
-        "@pip//sphinxext_rediraffe",  # keep
+        "@toolbox_pip//furo",  # keep
+        "@toolbox_pip//linkify_it_py",  # keep
+        "@toolbox_pip//myst_parser",  # keep
+        "@toolbox_pip//sphinx",  # keep
+        "@toolbox_pip//sphinx_autoapi",  # keep
+        "@toolbox_pip//sphinx_copybutton",  # keep
+        "@toolbox_pip//sphinx_design",  # keep
+        "@toolbox_pip//sphinx_pyscript",  # keep
+        "@toolbox_pip//sphinx_rtd_theme",  # keep
+        "@toolbox_pip//sphinx_tippy",  # keep
+        "@toolbox_pip//sphinx_togglebutton",  # keep
+        "@toolbox_pip//sphinxcontrib_mermaid",  # keep
+        "@toolbox_pip//sphinxext_opengraph",  # keep
+        "@toolbox_pip//sphinxext_rediraffe",  # keep
     ],
 )

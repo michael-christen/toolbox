@@ -7,6 +7,10 @@
     "python": "3.11.9"
   },
   "constraintsFiltering": "strict",
+  "dependencyDashboard": true,
+  "minimumReleaseAge": "3 days",
+  "prCreation": "not-pending",
+  "internalChecksFilter": "strict",
   "customManagers": [
     {
       "customType": "regex",
@@ -23,6 +27,7 @@
   ],
   "vulnerabilityAlerts": {
     "groupName": "security updates",
+    "minimumReleaseAge": null,
     "postUpgradeTasks": {
       "commands": [
         "bazel run //:requirements.update",

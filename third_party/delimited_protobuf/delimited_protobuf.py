@@ -28,7 +28,7 @@ from google.protobuf import message
 from google.protobuf.internal import decoder
 from google.protobuf.internal import encoder
 
-# Gazelle pulls this in as @pip//protobuf instead of
+# Gazelle pulls this in as @toolbox_pip//protobuf instead of
 # @com_google_protobuf//:protobuf_python, which causes a type-hinting issue
 # gazelle:ignore google.protobuf.internal
 

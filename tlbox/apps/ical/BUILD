@@ -6,5 +6,5 @@ py_binary(
     name = "read_ical_rrules",
     srcs = ["read_ical_rrules.py"],
     visibility = ["//:__subpackages__"],
-    deps = ["@pip//icalendar"],
+    deps = ["@toolbox_pip//icalendar"],
 )

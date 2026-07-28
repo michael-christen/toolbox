@@ -16,7 +16,7 @@ py_library(
     visibility = ["//visibility:public"],
     deps = [
         ":pkg_resources",
-        "@pip//vpython",
+        "@toolbox_pip//vpython",
     ],
 )
 
@@ -40,6 +40,6 @@ py_binary(
     visibility = ["//:__subpackages__"],
     deps = [
         "//examples/vpython:vpython_stub",
-        "@pip//numpy",
+        "@toolbox_pip//numpy",
     ],
 )
