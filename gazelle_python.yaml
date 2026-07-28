@@ -363,4 +363,4 @@ manifest:
     zstandard: zstandard
   pip_repository:
     name: toolbox_pip
-integrity: 2b22763730f0bf59ca4b6f5f9a7abdd915adb902ca327af42e5e3847d31ba24b
+integrity: 3339080a0d0402ce2e8d24a062fbb317e3f5c03e5924da3546c18bd9a7729804
