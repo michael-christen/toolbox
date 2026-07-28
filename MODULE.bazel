@@ -273,7 +273,7 @@ git_override(
 # same #ifndef/#define 0 guard pattern the SDK already uses elsewhere.
 git_override(
     module_name = "pico-sdk",
-    commit = "a1438dff1d38bd9c65dbd693f0e5db4b9ae91779",
+    commit = "ef9ddf906bdee7de0ffe62bdab7d74cc67ae9c5d",
     patch_strip = 1,
     patches = ["//third_party/pico-sdk:undef_macro_guards.patch"],
     remote = "https://github.com/RyanDraves/pico-sdk",

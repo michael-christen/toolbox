@@ -1814,7 +1814,7 @@
     "@@rules_oci+//oci:extensions.bzl%oci": {
       "general": {
         "bzlTransitiveDigest": "TO0sjSNkDsRNtKiwgPJW4ogKM/yK77iip7GpQtVYt44=",
-        "usagesDigest": "IvIM6W+yXMSN0LVe8CkY3Nxunu31SVsKvX+uMfBQ0Aw=",
+        "usagesDigest": "mT46sYdHI+v9ztrwJe9CpXR4DrFi5Tv3o85RiRpjyBY=",
         "recordedInputs": [
           "REPO_MAPPING:aspect_bazel_lib+,bazel_tools bazel_tools",
           "REPO_MAPPING:bazel_features+,bazel_tools bazel_tools",
@@ -1830,7 +1830,7 @@
               "scheme": "https",
               "registry": "gcr.io",
               "repository": "distroless/base",
-              "identifier": "sha256:9d4e5680d67c984ac9c957f66405de25634012e2d5d6dc396c4bdd2ba6ae569f",
+              "identifier": "sha256:f4a335ca209e1d2ee873102c17c389ad0142e3d5b21aee2817e9cc9c01d87d20",
               "platform": "linux/amd64",
               "target_name": "distroless_base_linux_amd64",
               "bazel_tags": []
@@ -1843,7 +1843,7 @@
               "scheme": "https",
               "registry": "gcr.io",
               "repository": "distroless/base",
-              "identifier": "sha256:9d4e5680d67c984ac9c957f66405de25634012e2d5d6dc396c4bdd2ba6ae569f",
+              "identifier": "sha256:f4a335ca209e1d2ee873102c17c389ad0142e3d5b21aee2817e9cc9c01d87d20",
               "platform": "linux/arm64/v8",
               "target_name": "distroless_base_linux_arm64_v8",
               "bazel_tags": []
@@ -1857,7 +1857,7 @@
               "scheme": "https",
               "registry": "gcr.io",
               "repository": "distroless/base",
-              "identifier": "sha256:9d4e5680d67c984ac9c957f66405de25634012e2d5d6dc396c4bdd2ba6ae569f",
+              "identifier": "sha256:f4a335ca209e1d2ee873102c17c389ad0142e3d5b21aee2817e9cc9c01d87d20",
               "platforms": {
                 "@@platforms//cpu:x86_64": "@distroless_base_linux_amd64",
                 "@@platforms//cpu:arm64": "@distroless_base_linux_arm64_v8"
@@ -1873,7 +1873,7 @@
               "scheme": "https",
               "registry": "index.docker.io",
               "repository": "library/ubuntu",
-              "identifier": "sha256:723ad8033f109978f8c7e6421ee684efb624eb5b9251b70c6788fdb2405d050b",
+              "identifier": "sha256:3131b4cc82a783df6c9df078f86e01819a13594b865c2cad47bd1bca2b7063bb",
               "platform": "linux/amd64",
               "target_name": "ubuntu_base_linux_amd64",
               "bazel_tags": []
@@ -1886,7 +1886,7 @@
               "scheme": "https",
               "registry": "index.docker.io",
               "repository": "library/ubuntu",
-              "identifier": "sha256:723ad8033f109978f8c7e6421ee684efb624eb5b9251b70c6788fdb2405d050b",
+              "identifier": "sha256:3131b4cc82a783df6c9df078f86e01819a13594b865c2cad47bd1bca2b7063bb",
               "platform": "linux/arm64/v8",
               "target_name": "ubuntu_base_linux_arm64_v8",
               "bazel_tags": []
@@ -1900,7 +1900,7 @@
               "scheme": "https",
               "registry": "index.docker.io",
               "repository": "library/ubuntu",
-              "identifier": "sha256:723ad8033f109978f8c7e6421ee684efb624eb5b9251b70c6788fdb2405d050b",
+              "identifier": "sha256:3131b4cc82a783df6c9df078f86e01819a13594b865c2cad47bd1bca2b7063bb",
               "platforms": {
                 "@@platforms//cpu:x86_64": "@ubuntu_base_linux_amd64",
                 "@@platforms//cpu:arm64": "@ubuntu_base_linux_arm64_v8"
