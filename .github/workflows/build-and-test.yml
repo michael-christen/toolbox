@@ -16,7 +16,7 @@ jobs:
       pull-requests: write
     steps:
       - run: echo "The job was triggered by a ${{ github.event_name }} event, running on ${{ runner.os }}, ${{ github.ref }} @ ${{ github.repository }}."
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           # Enable getting history of git for stats collection
           fetch-depth: 0
@@ -85,7 +85,7 @@ jobs:
           bazel run //tlbox/apps/code_metrics:main -- --pr_comment=/tmp/collect_stats_pr_diff.md --archive=/tmp/collect_stats_archive.json
       # See https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/storing-workflow-data-as-artifacts
       - name: Archive Dev Products
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: dev_products
           path: |
@@ -102,7 +102,7 @@ jobs:
           comment-tag: automated-build-status
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload coverage report to Codecov
-        uses: codecov/codecov-action@v4.0.1
+        uses: codecov/codecov-action@v7.0.0
         with:
           verbose: true
           token: ${{ secrets.CODECOV_TOKEN }}
@@ -120,7 +120,7 @@ jobs:
       contents: read
     steps:
       - run: echo "The job was triggered by a ${{ github.event_name }} event, running on ${{ runner.os }}, ${{ github.ref }} @ ${{ github.repository }}."
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
           # NOTE: lfs: false + manual git lfs pull because git-lfs is
