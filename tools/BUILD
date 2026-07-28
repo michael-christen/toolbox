@@ -3,9 +3,9 @@ load("@build_stack_rules_proto//rules:proto_compile.bzl", "proto_compile")
 load("@com_google_protobuf//bazel:cc_proto_library.bzl", "cc_proto_library")
 load("@com_google_protobuf//bazel:proto_library.bzl", "proto_library")
 load("@multitool//:tools.bzl", MULTITOOL_TOOLS = "TOOLS")
-load("@pip//:requirements.bzl", "requirement")  # '@pip' must match configured pip hub_name
 load("@rules_multirun//:defs.bzl", "command", "multirun")
 load("@rules_mypy//mypy:mypy.bzl", "mypy_cli")
+load("@toolbox_pip//:requirements.bzl", "requirement")  # '@toolbox_pip' must match configured pip hub_name
 load("//bzl:py.bzl", "proto_py_library", "py_library")
 
 package(default_visibility = ["//visibility:private"])
@@ -109,7 +109,7 @@ mypy_cli(
     # LINK(7e463bc3_e4d9_4464_ba39_3217c4a86004)
     python_version = "3.12.12",
     deps = [
-        "@pip//types_protobuf",
+        "@toolbox_pip//types_protobuf",
     ],
 )
 

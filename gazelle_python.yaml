@@ -362,5 +362,5 @@ manifest:
     zmq: pyzmq
     zstandard: zstandard
   pip_repository:
-    name: pip
-integrity: 56844c3c4aecdcd342bc9429ee229af403f925f70615d50226a2d034521fde61
+    name: toolbox_pip
+integrity: 3339080a0d0402ce2e8d24a062fbb317e3f5c03e5924da3546c18bd9a7729804

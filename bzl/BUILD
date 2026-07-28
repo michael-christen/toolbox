@@ -11,7 +11,7 @@ py_binary(
     name = "pytest_main",
     srcs = ["pytest_main.py"],
     visibility = ["//:__subpackages__"],
-    deps = ["@pip//pytest"],
+    deps = ["@toolbox_pip//pytest"],
 )
 
 sh_binary(

@@ -12,6 +12,6 @@ py_binary(
     visibility = ["//:__subpackages__"],
     deps = [
         "//tools:utils",
-        "@pip//flake8",
+        "@toolbox_pip//flake8",
     ],
 )

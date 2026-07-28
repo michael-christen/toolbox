@@ -7,7 +7,7 @@ py_binary(
     srcs = ["csv2sheets.py"],
     visibility = ["//:__subpackages__"],
     deps = [
-        "@pip//gspread",
-        "@pip//oauth2client",
+        "@toolbox_pip//gspread",
+        "@toolbox_pip//oauth2client",
     ],
 )
