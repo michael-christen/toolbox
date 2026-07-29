@@ -23,6 +23,7 @@ documentation for details.
    structure
    cpp_testing
    issue_management
+   renovate_faq
    myst
    examples
    myst_extensions

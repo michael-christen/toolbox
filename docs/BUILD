@@ -29,6 +29,7 @@ sphinx_html(
         "issue_management.md",
         "myst.md",
         "myst_extensions.md",
+        "renovate_faq.md",
         "sbr_components.md",
         "structure.md",
         "useful_commands.md",
