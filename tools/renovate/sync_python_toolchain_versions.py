@@ -25,7 +25,7 @@ RENOVATE_JSON = REPO_ROOT / ".github/renovate.json"
 
 VERSIONS_BZL_URL = (
     "https://raw.githubusercontent.com/bazelbuild/rules_python/"
-    "{version}/python/versions.bzl"
+    "{version}/python/private/runtimes_manifest_workspace.bzl"
 )
 PIGWEED_MODULE_BAZEL_URL = (
     "https://pigweed.googlesource.com/pigweed/pigweed/+/"
@@ -58,9 +58,12 @@ def available_python_versions(rules_python_version: str) -> list[str]:
     url = VERSIONS_BZL_URL.format(version=rules_python_version)
     with urllib.request.urlopen(url) as response:
         text = response.read().decode()
-    # TOOL_VERSIONS keys, e.g. `    "3.12.8": {`. Skip pre-releases
-    # (e.g. "3.15.0a1") since those aren't valid pins.
-    versions = re.findall(r'^ {4}"(\d+\.\d+\.\d+)":\s*\{', text, re.MULTILINE)
+    # rules_python 2.2.0 dropped the TOOL_VERSIONS dict that used to live in
+    # python/versions.bzl in favor of a flat manifest of individual release
+    # archives, e.g. `cpython-3.12.8+20241016-x86_64-unknown-linux-gnu-
+    # install_only.tar.gz`. Skip pre-releases (e.g. "3.15.0a1") since those
+    # aren't valid pins.
+    versions = re.findall(r"cpython-(\d+\.\d+\.\d+)\+", text)
     return sorted(set(versions), key=lambda v: tuple(map(int, v.split("."))))
 
 
