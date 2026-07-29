@@ -1,0 +1,497 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta property="og:title" content="Renovate FAQ" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="renovate_faq.html" />
+<meta property="og:site_name" content="toolbox" />
+<meta property="og:description" content="Common problems seen when a Renovate PR goes red in this repo, and how they’ve been resolved. For an automated triage flow, see the renovate-debug Claude Code skill (.claude/skills/renovate-debug/S..." />
+<meta name="description" content="Common problems seen when a Renovate PR goes red in this repo, and how they’ve been resolved. For an automated triage flow, see the renovate-debug Claude Code skill (.claude/skills/renovate-debug/S..." />
+<link rel="index" title="Index" href="genindex.html"><link rel="search" title="Search" href="search.html"><link rel="next" title="MyST" href="myst.html"><link rel="prev" title="Issue Management" href="issue_management.html">
+
+    <link rel="shortcut icon" href="_static/wrench.png"><!-- Generated with Sphinx 9.0.4 and Furo 2025.12.19 -->
+        <title>Renovate FAQ - toolbox documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=d111a655" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=8dab3a3b" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f2f2f2;
+  --color-code-foreground: #1e1e1e;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">toolbox  documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  <span class="sidebar-brand-text">toolbox  documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="development.html">Development Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="structure.html">Repository Structure</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cpp_testing.html">C++ Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="issue_management.html">Issue Management</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Renovate FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="myst.html">MyST</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples.html">My nifty title</a></li>
+<li class="toctree-l1"><a class="reference internal" href="myst_extensions.html">Syntax Extensions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bringup.html">Log for How I am Bringing up This Repo and My New Server</a></li>
+<li class="toctree-l1"><a class="reference internal" href="useful_commands.html">Useful Commands</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="common_references.html">Common References</a><input aria-label="Toggle navigation of Common References" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="common/python_references.html">Python References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="sbr_components.html">SBR Components</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="autoapi/index.html">API Reference</a><input aria-label="Toggle navigation of API Reference" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/examples/basic/client/index.html">examples.basic.client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/examples/basic/grpc_test/index.html">examples.basic.grpc_test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/examples/basic/hello_pb2/index.html">examples.basic.hello_pb2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/examples/basic/hello_pb2_grpc/index.html">examples.basic.hello_pb2_grpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/examples/basic/hello_test/index.html">examples.basic.hello_test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/examples/basic/main/index.html">examples.basic.main</a></li>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/examples/basic/server/index.html">examples.basic.server</a></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="_sources/renovate_faq.md.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section class="tex2jax_ignore mathjax_ignore" id="renovate-faq">
+<h1>Renovate FAQ<a class="headerlink" href="#renovate-faq" title="Link to this heading"></a></h1>
+<p>Common problems seen when a Renovate PR goes red in this repo, and how they’ve
+been resolved. For an automated triage flow, see the <code class="docutils literal notranslate"><span class="pre">renovate-debug</span></code> Claude
+Code skill (<code class="docutils literal notranslate"><span class="pre">.claude/skills/renovate-debug/SKILL.md</span></code>), which covers the same
+ground in a format meant to be followed step-by-step.</p>
+<section id="why-did-my-bazel-module-renovate-pr-fail-with-a-weird-bzlmod-module-graph-error">
+<h2>Why did my <code class="docutils literal notranslate"><span class="pre">bazel-module</span></code> Renovate PR fail with a weird bzlmod/module-graph error?<a class="headerlink" href="#why-did-my-bazel-module-renovate-pr-fail-with-a-weird-bzlmod-module-graph-error" title="Link to this heading"></a></h2>
+<p>Most likely a <strong>module extension namespace collision</strong>. Extensions like
+<code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">=</span> <span class="pre">use_extension(...)</span></code> are evaluated once across the whole module graph, so
+every module’s tags (e.g. <code class="docutils literal notranslate"><span class="pre">pip.parse(hub_name=&quot;pip&quot;)</span></code>) share one flat namespace.
+If a dependency declares the same <code class="docutils literal notranslate"><span class="pre">hub_name</span></code> (or similar) we do, bzlmod fails or
+silently picks one. This happened when emboss’s BCR module declared its own
+<code class="docutils literal notranslate"><span class="pre">pip</span></code> hub, colliding with ours
+(<a class="reference external" href="https://github.com/michael-christen/toolbox/pull/436">#436</a>) — fixed by
+renaming our hub to <code class="docutils literal notranslate"><span class="pre">toolbox_pip</span></code>.</p>
+</section>
+<section id="i-patched-a-dependency-with-single-version-override-but-the-patch-doesnt-seem-to-apply-why">
+<h2>I patched a dependency with <code class="docutils literal notranslate"><span class="pre">single_version_override</span></code>, but the patch doesn’t seem to apply. Why?<a class="headerlink" href="#i-patched-a-dependency-with-single-version-override-but-the-patch-doesnt-seem-to-apply-why" title="Link to this heading"></a></h2>
+<p>bzlmod reads a module’s <code class="docutils literal notranslate"><span class="pre">MODULE.bazel</span></code> <strong>twice</strong>: once during graph discovery
+(straight from the registry, ignoring overrides) and once during fetch (where
+<code class="docutils literal notranslate"><span class="pre">single_version_override</span></code> patches are actually applied). If your patch changes
+anything discovery cares about — a <code class="docutils literal notranslate"><span class="pre">bazel_dep</span></code>, an extension tag call, the
+module’s own declared name/version — discovery already built the graph without
+it, and the patch never has a chance to matter.</p>
+<p>Fix: use <code class="docutils literal notranslate"><span class="pre">archive_override</span></code> or <code class="docutils literal notranslate"><span class="pre">git_override</span></code> instead, which replace the entire
+source before either phase runs. To confirm this is what’s happening, check
+<code class="docutils literal notranslate"><span class="pre">MODULE.bazel.lock</span></code> for the module’s <code class="docutils literal notranslate"><span class="pre">registryFileHashes</span></code> entry — if it matches
+the stock (unpatched) registry file, that confirms discovery bypassed the patch.</p>
+</section>
+<section id="bazel-says-content-does-not-match-target-on-my-patch-but-patch-git-apply-applies-it-fine-locally-why">
+<h2>Bazel says <code class="docutils literal notranslate"><span class="pre">CONTENT_DOES_NOT_MATCH_TARGET</span></code> on my patch, but <code class="docutils literal notranslate"><span class="pre">patch</span></code>/<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">apply</span></code> applies it fine locally. Why?<a class="headerlink" href="#bazel-says-content-does-not-match-target-on-my-patch-but-patch-git-apply-applies-it-fine-locally-why" title="Link to this heading"></a></h2>
+<p>Bazel doesn’t use system <code class="docutils literal notranslate"><span class="pre">patch</span></code> — it has its own, stricter unified-diff
+applier. Two known trip-ups:</p>
+<ul class="simple">
+<li><p>Blank context lines in the diff need a literal leading space character.
+Hand-typed patches often omit this; GNU tools tolerate it, Bazel’s applier
+doesn’t.</p></li>
+<li><p>A single patch file touching multiple unrelated files can fail even when each
+hunk is individually well-formed. Splitting it into one patch file per target
+file (multiple entries in <code class="docutils literal notranslate"><span class="pre">patches</span> <span class="pre">=</span> <span class="pre">[...]</span></code>) has reliably fixed this in
+practice, even though the root cause isn’t fully understood.</p></li>
+</ul>
+</section>
+<section id="renovate-keeps-re-bumping-a-git-override-commit-i-deliberately-fixed-how-do-i-stop-that">
+<h2>Renovate keeps re-bumping a <code class="docutils literal notranslate"><span class="pre">git_override</span></code> commit I deliberately fixed. How do I stop that?<a class="headerlink" href="#renovate-keeps-re-bumping-a-git-override-commit-i-deliberately-fixed-how-do-i-stop-that" title="Link to this heading"></a></h2>
+<p>Renovate’s <code class="docutils literal notranslate"><span class="pre">bazel-module</span></code> manager tracks <code class="docutils literal notranslate"><span class="pre">git_override</span></code>/<code class="docutils literal notranslate"><span class="pre">archive_override</span></code>
+commits like any other dependency version, and will bump a manually-vetted pin
+to whatever the tracked remote’s branch tip is — unvalidated. This broke
+<a class="reference external" href="https://github.com/michael-christen/toolbox/pull/395">#395</a> twice: once on the
+original bad bump, and again when Renovate silently re-bumped the fork pin we’d
+just fixed.</p>
+<p>Fix: add a <code class="docutils literal notranslate"><span class="pre">packageRules</span></code> entry in <code class="docutils literal notranslate"><span class="pre">.github/renovate.json</span></code> disabling tracking
+for that package, with a <code class="docutils literal notranslate"><span class="pre">description</span></code> explaining why it’s pinned:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;matchManagers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;bazel-module&quot;</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;matchPackageNames&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;pico-sdk&quot;</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;...&quot;</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;enabled&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>See <a class="reference external" href="https://github.com/michael-christen/toolbox/pull/439">#439</a> for the worked
+example.</p>
+</section>
+<section id="a-pip-dependency-bump-broke-the-lockfile-even-though-the-pr-looked-fine-why">
+<h2>A pip dependency bump broke the lockfile even though the PR looked fine. Why?<a class="headerlink" href="#a-pip-dependency-bump-broke-the-lockfile-even-though-the-pr-looked-fine-why" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">hashin</span></code> (which Renovate uses under the hood for <code class="docutils literal notranslate"><span class="pre">pip_requirements</span></code>) patches one
+package’s pin without checking whether a <em>sibling</em> package requires it at a
+specific version. Two cases seen so far:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">pydantic-core</span></code> is always exact-pinned by whichever <code class="docutils literal notranslate"><span class="pre">pydantic</span></code> release is
+installed (<code class="docutils literal notranslate"><span class="pre">Requires-Dist:</span> <span class="pre">pydantic-core==...</span></code>) — a standalone bump is never
+valid on its own.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docutils</span></code> is capped by <code class="docutils literal notranslate"><span class="pre">sphinx</span></code>, <code class="docutils literal notranslate"><span class="pre">myst-parser</span></code>, and <code class="docutils literal notranslate"><span class="pre">sphinx-rtd-theme</span></code>
+simultaneously; a bump past their shared ceiling breaks the build even though
+nothing else in the diff looks wrong.</p></li>
+</ul>
+<p>Both are handled in <code class="docutils literal notranslate"><span class="pre">.github/renovate.json</span></code> — <code class="docutils literal notranslate"><span class="pre">pydantic-core</span></code> is disabled
+entirely (it should only ever move as a side effect of a <code class="docutils literal notranslate"><span class="pre">pydantic</span></code> bump, via a
+full recompile), <code class="docutils literal notranslate"><span class="pre">docutils</span></code> is capped with <code class="docutils literal notranslate"><span class="pre">allowedVersions</span></code> documenting the
+exact sibling constraints. See
+<a class="reference external" href="https://github.com/michael-christen/toolbox/issues/424">#424</a> and
+<a class="reference external" href="https://github.com/michael-christen/toolbox/pull/426">#426</a>.</p>
+<p>Related: a same-day PyPI release once shipped a bad sha256 that <code class="docutils literal notranslate"><span class="pre">hashin</span></code> fetched
+before it stabilized, breaking the lockfile
+(<a class="reference external" href="https://github.com/michael-christen/toolbox/pull/435">#435</a>). A global
+<code class="docutils literal notranslate"><span class="pre">minimumReleaseAge:</span> <span class="pre">3</span> <span class="pre">days</span></code> (with security updates exempted) now gives releases
+a short soak period before Renovate picks them up.</p>
+</section>
+<section id="where-do-i-look-before-assuming-a-renovate-failure-is-new">
+<h2>Where do I look before assuming a Renovate failure is new?<a class="headerlink" href="#where-do-i-look-before-assuming-a-renovate-failure-is-new" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">.github/renovate.json</span></code> — most hard-won rules carry a <code class="docutils literal notranslate"><span class="pre">description</span></code> field
+explaining exactly why they exist; read it before re-deriving the same
+conclusion.</p></li>
+<li><p>Open tracking issues:
+<a class="reference external" href="https://github.com/michael-christen/toolbox/issues/236">#236</a> (umbrella
+bazel-module-updates issue),
+<a class="reference external" href="https://github.com/michael-christen/toolbox/issues/412">#412</a>
+(postUpgradeTasks can’t handle a brand-new transitive dependency),
+<a class="reference external" href="https://github.com/michael-christen/toolbox/issues/413">#413</a>
+(postUpgradeTasks lacks BuildBuddy credentials),
+<a class="reference external" href="https://github.com/michael-christen/toolbox/issues/414">#414</a>
+(grpc/googleapis <code class="docutils literal notranslate"><span class="pre">switched_rules</span></code> skew, patched but not fixed upstream),
+<a class="reference external" href="https://github.com/michael-christen/toolbox/issues/434">#434</a> (C++ coverage
+instrumentation gap in the Pigweed toolchain).</p></li>
+<li><p>Worked examples: <a class="reference external" href="https://github.com/michael-christen/toolbox/pull/395">#395</a>,
+<a class="reference external" href="https://github.com/michael-christen/toolbox/pull/402">#402</a>,
+<a class="reference external" href="https://github.com/michael-christen/toolbox/pull/431">#431</a>,
+<a class="reference external" href="https://github.com/michael-christen/toolbox/pull/436">#436</a>,
+<a class="reference external" href="https://github.com/michael-christen/toolbox/pull/437">#437</a>,
+<a class="reference external" href="https://github.com/michael-christen/toolbox/pull/439">#439</a>.</p></li>
+</ul>
+</section>
+<section id="decision-guide-cap-patch-override-or-disable-tracking">
+<h2>Decision guide: cap, patch, override, or disable tracking?<a class="headerlink" href="#decision-guide-cap-patch-override-or-disable-tracking" title="Link to this heading"></a></h2>
+<p>In order of preference:</p>
+<ol class="arabic simple">
+<li><p><strong>Fix/patch the root cause</strong> when it’s a small, genuine upstream bug.</p></li>
+<li><p><strong>Override to a fork or specific commit</strong> (<code class="docutils literal notranslate"><span class="pre">archive_override</span></code>/<code class="docutils literal notranslate"><span class="pre">git_override</span></code>)
+when upstream/BCR hasn’t shipped a fix yet — leave a comment in
+<code class="docutils literal notranslate"><span class="pre">MODULE.bazel</span></code> explaining what it fixes and when it can be reverted.</p></li>
+<li><p><strong>Cap a version range</strong> only for a real, currently unresolvable
+incompatibility, with a <code class="docutils literal notranslate"><span class="pre">description</span></code> citing the specific conflict.</p></li>
+<li><p><strong>Disable tracking</strong> only for a deliberately pinned override, or a genuinely
+unfixable case.</p></li>
+</ol>
+<p>Whichever you choose, add a <code class="docutils literal notranslate"><span class="pre">description</span></code> to the <code class="docutils literal notranslate"><span class="pre">packageRules</span></code> entry. It’s the
+cheapest, most durable form of institutional memory this repo has for Renovate
+behavior.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="myst.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">MyST</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="issue_management.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Issue Management</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Michael Christen
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Renovate FAQ</a><ul>
+<li><a class="reference internal" href="#why-did-my-bazel-module-renovate-pr-fail-with-a-weird-bzlmod-module-graph-error">Why did my <code class="docutils literal notranslate"><span class="pre">bazel-module</span></code> Renovate PR fail with a weird bzlmod/module-graph error?</a></li>
+<li><a class="reference internal" href="#i-patched-a-dependency-with-single-version-override-but-the-patch-doesnt-seem-to-apply-why">I patched a dependency with <code class="docutils literal notranslate"><span class="pre">single_version_override</span></code>, but the patch doesn’t seem to apply. Why?</a></li>
+<li><a class="reference internal" href="#bazel-says-content-does-not-match-target-on-my-patch-but-patch-git-apply-applies-it-fine-locally-why">Bazel says <code class="docutils literal notranslate"><span class="pre">CONTENT_DOES_NOT_MATCH_TARGET</span></code> on my patch, but <code class="docutils literal notranslate"><span class="pre">patch</span></code>/<code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">apply</span></code> applies it fine locally. Why?</a></li>
+<li><a class="reference internal" href="#renovate-keeps-re-bumping-a-git-override-commit-i-deliberately-fixed-how-do-i-stop-that">Renovate keeps re-bumping a <code class="docutils literal notranslate"><span class="pre">git_override</span></code> commit I deliberately fixed. How do I stop that?</a></li>
+<li><a class="reference internal" href="#a-pip-dependency-bump-broke-the-lockfile-even-though-the-pr-looked-fine-why">A pip dependency bump broke the lockfile even though the PR looked fine. Why?</a></li>
+<li><a class="reference internal" href="#where-do-i-look-before-assuming-a-renovate-failure-is-new">Where do I look before assuming a Renovate failure is new?</a></li>
+<li><a class="reference internal" href="#decision-guide-cap-patch-override-or-disable-tracking">Decision guide: cap, patch, override, or disable tracking?</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/jquery.js?v=5d32c60e"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=fd6eb6e6"></script>
+    <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
+    <script src="_static/scripts/furo.js?v=46bd48cc"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=b8b12719"></script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script defer="defer" src="https://unpkg.com/@popperjs/core@2"></script>
+    <script defer="defer" src="https://unpkg.com/tippy.js@6"></script>
+    <script defer="defer" src="_static/tippy/renovate_faq.ed999cbf-d0f1-4b5c-a3fe-6eafa4fba49b.js"></script>
+    </body>
+</html>
