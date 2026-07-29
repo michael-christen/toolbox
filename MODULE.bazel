@@ -59,6 +59,7 @@ bazel_dep(name = "rules_cc", version = "0.2.14")
 bazel_dep(name = "rules_multirun", version = "0.13.0")
 bazel_dep(name = "rules_multitool", version = "1.11.1")
 bazel_dep(name = "rules_mypy", version = "0.41.0")
+bazel_dep(name = "rules_nodejs", version = "6.7.4")
 bazel_dep(name = "rules_oci", version = "2.2.6")
 bazel_dep(name = "rules_jvm_external", version = "7.1")
 bazel_dep(name = "rules_platform", version = "0.1.0")
@@ -359,6 +360,13 @@ use_repo(maven, "maven")
 ###########
 # rules_js
 ###########
+# rules_js's default hermetic Node (from DEFAULT_NODE_VERSION in
+# @rules_nodejs//nodejs:repositories.bzl) is too old to run current
+# Renovate releases (tools/renovate:renovate needs >=24.11.0); pin to the
+# same major version CI's actions/setup-node resolves to.
+node = use_extension("@rules_nodejs//nodejs:extensions.bzl", "node", dev_dependency = True)
+node.toolchain(node_version = "24.14.1")
+
 npm = use_extension("@aspect_rules_js//npm:extensions.bzl", "npm", dev_dependency = True)
 
 pnpm = use_extension("@aspect_rules_js//npm:extensions.bzl", "pnpm", dev_dependency = True)
