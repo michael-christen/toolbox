@@ -65,7 +65,7 @@ bazel_dep(name = "rules_jvm_external", version = "7.1")
 bazel_dep(name = "rules_platform", version = "0.1.0")
 bazel_dep(name = "rules_proto", version = "7.1.0")
 bazel_dep(name = "rules_python_gazelle_plugin", version = "2.2.0")
-bazel_dep(name = "rules_python", version = "1.8.5")
+bazel_dep(name = "rules_python", version = "2.2.0")
 bazel_dep(name = "rules_go", version = "0.60.0", repo_name = "io_bazel_rules_go")
 bazel_dep(name = "rules_rust", version = "0.70.0")
 bazel_dep(name = "rules_shell", version = "0.6.1")
@@ -294,20 +294,11 @@ git_override(
 # `coverage_tool` attr expects a plain string, so passing the label through
 # unconverted fails with a "expected value of type 'string'" error. Patch
 # the one line that's missing str(...).
-#
-# `version` here must match whatever MVS actually resolves rules_python to
-# (currently 2.0.2, pulled up by pigweed's own bazel_dep) -- a
-# single_version_override pins to an exact version, so if some other dep
-# bump raises that resolved version again, this needs to move with it or
-# it'll silently force a *downgrade* instead (which is what broke pigweed's
-# newer pip.parse(requirements_by_platform = ...) API the first time this
-# was tried at "1.7.0"). Check `bazel mod graph | grep rules_python@` if
-# this needs updating.
 single_version_override(
     module_name = "rules_python",
     patch_strip = 1,
     patches = ["//third_party/patches:rules_python_coverage_tool_override_str.patch"],
-    version = "2.0.2",
+    version = "2.2.0",
 )
 
 ##########################################
