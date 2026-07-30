@@ -107,7 +107,7 @@ mypy_cli(
     mypy_requirement = requirement("mypy"),
     # Must match PYTHON_VERSION in MODULE.bazel
     # LINK(7e463bc3_e4d9_4464_ba39_3217c4a86004)
-    python_version = "3.12.12",
+    python_version = "3.12.13",
     deps = [
         "@toolbox_pip//types_protobuf",
     ],
