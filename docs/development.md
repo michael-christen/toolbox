@@ -26,8 +26,8 @@ bazel coverage //... --combined_report=lcov  # generate coverage
 ## Linting and Formatting
 
 ```bash
-./lint.sh --mode check   # check formatting (CI runs this)
-./lint.sh --mode format  # auto-format code
+aspect check   # check formatting (CI runs this)
+aspect fmt     # auto-format code
 ```
 
 ## CI

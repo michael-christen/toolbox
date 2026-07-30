@@ -11,7 +11,7 @@ actions:
     steps:
       # TODO(#209): Don't require installing graphviz
       - run: 'sudo apt-get update && sudo apt-get install -y --no-install-recommends graphviz graphviz-dev libtinfo5'
-      # `aspect check` wraps ./lint.sh --mode check (//.aspect/tasks/repo.axl),
+      # `aspect check` runs the lint pipeline in //.aspect/tasks/lint.axl,
       # sharing one entrypoint with local dev and the GitHub Actions job.
       - run: './tools/aspect check'
       - run: 'bazel build //...'

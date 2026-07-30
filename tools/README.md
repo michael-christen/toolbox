@@ -37,8 +37,8 @@ Repo automation lives in AXL (a typed Starlark dialect):
 Each registered task becomes a subcommand:
 
 ```
-aspect check       # wraps ./lint.sh --mode check
-aspect fmt         # wraps ./lint.sh --mode format
+aspect check       # verify formatting + lint (//.aspect/tasks/lint.axl)
+aspect fmt         # auto-format + fix lint in place
 aspect test-all    # ctx.bazel.test over //... (accepts target patterns)
 ```
 

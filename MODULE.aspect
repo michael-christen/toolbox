@@ -13,6 +13,6 @@
 
 # Register our repo tasks. use_task(<path relative to this file>, <symbol>)
 # exposes the named `task(...)` as an `aspect <symbol>` subcommand.
-use_task(".aspect/tasks/repo.axl", "check")
-use_task(".aspect/tasks/repo.axl", "fmt")
+use_task(".aspect/tasks/lint.axl", "check")
+use_task(".aspect/tasks/lint.axl", "fmt")
 use_task(".aspect/tasks/repo.axl", "test_all")

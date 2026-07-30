@@ -2,40 +2,12 @@
 # in //MODULE.aspect via use_task(). AXL is a typed Starlark dialect; see the
 # `ctx` API (ctx.bazel.*, ctx.std.*, ctx.args.*) at https://docs.aspect.build/cli.
 #
-# Two patterns are demonstrated below:
-#   - Shelling out to an existing script/binary (`check`, `fmt` wrap ./lint.sh).
-#   - Driving Bazel natively through the first-class API (`test_all`).
-
-def _run_lint(ctx, mode):
-    """Invoke the repo's lint.sh orchestrator in the given mode."""
-    # lint.sh derives its own REPO_ROOT, so it works from any cwd inside the
-    # workspace. bazel_root_dir() is the Bazel workspace root (where lint.sh
-    # lives). Older Aspect CLIs called this ctx.std.env.root_dir().
-    script = ctx.std.env.bazel_root_dir() + "/lint.sh"
-    proc = ctx.std.process.command(script).args(["--mode", mode])
-    return proc.spawn().wait().code
-
-def _check_impl(ctx):
-    return _run_lint(ctx, "check")
-
-check = task(
-    description = "Check formatting and lint (wraps ./lint.sh --mode check).",
-    implementation = _check_impl,
-    args = {},
-)
-
-def _fmt_impl(ctx):
-    return _run_lint(ctx, "format")
-
-fmt = task(
-    description = "Auto-format the tree (wraps ./lint.sh --mode format).",
-    implementation = _fmt_impl,
-    args = {},
-)
+# Formatting/lint tasks (`check`, `fmt`) live in //.aspect/tasks/lint.axl.
 
 def _test_all_impl(ctx):
     # ctx.bazel.test drives Bazel directly (honoring .bazelrc). Not named `test`
-    # because the CLI ships a built-in `test` task already.
+    # because the CLI ships a built-in `test` task already. Invoked as
+    # `aspect test-all` (the CLI hyphenates underscore task names).
     return ctx.bazel.test(*ctx.args.target_pattern).wait().code
 
 test_all = task(

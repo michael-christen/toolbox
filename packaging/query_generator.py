@@ -7,7 +7,7 @@ import os
 import pathlib
 import subprocess
 
-_FIX_COMMAND = "./lint.sh --mode format"
+_FIX_COMMAND = "aspect fmt"
 
 
 @dataclasses.dataclass

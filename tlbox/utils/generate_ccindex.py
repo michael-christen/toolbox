@@ -11,7 +11,7 @@ Usage:
     python tools/generate_ccindex.py --mode format  # regenerate
     python tools/generate_ccindex.py --mode check   # verify up to date
 
-lint.sh calls this automatically.
+The `aspect check`/`aspect fmt` tasks call this automatically.
 """
 
 import argparse
@@ -23,7 +23,7 @@ import subprocess
 
 from third_party.bazel.src.main.protobuf import build_pb2
 
-FIX_COMMAND = "./lint.sh --mode format"
+FIX_COMMAND = "aspect fmt"
 PIGWEED_CCINDEX = pathlib.Path("tools/pigweed.ccindex")
 EMBOSS_CCINDEX = pathlib.Path("tools/emboss.ccindex")
 NANOPB_CCINDEX = pathlib.Path("tools/nanopb.ccindex")
