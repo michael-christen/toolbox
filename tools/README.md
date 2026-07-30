@@ -39,7 +39,7 @@ Each registered task becomes a subcommand:
 ```
 aspect check       # wraps ./lint.sh --mode check
 aspect fmt         # wraps ./lint.sh --mode format
-aspect test_all    # ctx.bazel.test over //... (accepts target patterns)
+aspect test-all    # ctx.bazel.test over //... (accepts target patterns)
 ```
 
 Add a task by writing a `task(...)` in an `.axl` file and adding a `use_task`

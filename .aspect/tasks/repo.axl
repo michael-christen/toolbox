@@ -9,8 +9,9 @@
 def _run_lint(ctx, mode):
     """Invoke the repo's lint.sh orchestrator in the given mode."""
     # lint.sh derives its own REPO_ROOT, so it works from any cwd inside the
-    # workspace. root_dir() is the directory containing MODULE.aspect.
-    script = ctx.std.env.root_dir() + "/lint.sh"
+    # workspace. bazel_root_dir() is the Bazel workspace root (where lint.sh
+    # lives). Older Aspect CLIs called this ctx.std.env.root_dir().
+    script = ctx.std.env.bazel_root_dir() + "/lint.sh"
     proc = ctx.std.process.command(script).args(["--mode", mode])
     return proc.spawn().wait().code
 
