@@ -1,0 +1,19 @@
+# Repo-level AXL tasks. These become `aspect <name>` subcommands once registered
+# in //MODULE.aspect via use_task(). AXL is a typed Starlark dialect; see the
+# `ctx` API (ctx.bazel.*, ctx.std.*, ctx.args.*) at https://docs.aspect.build/cli.
+#
+# Formatting/lint tasks (`check`, `fmt`) live in //.aspect/tasks/lint.axl.
+
+def _test_all_impl(ctx):
+    # ctx.bazel.test drives Bazel directly (honoring .bazelrc). Not named `test`
+    # because the CLI ships a built-in `test` task already. Invoked as
+    # `aspect test-all` (the CLI hyphenates underscore task names).
+    return ctx.bazel.test(*ctx.args.target_pattern).wait().code
+
+test_all = task(
+    description = "Run tests via Bazel (defaults to //...).",
+    implementation = _test_all_impl,
+    args = {
+        "target_pattern": args.positional(minimum = 0, maximum = 512, default = ["//..."]),
+    },
+)

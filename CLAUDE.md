@@ -24,9 +24,12 @@ bazel coverage //... --combined_report=lcov  # Generate coverage
 ### Linting and Formatting
 
 ```bash
-./lint.sh --mode check   # Check formatting (CI runs this)
-./lint.sh --mode format  # Auto-format code
+aspect check   # Check formatting (CI runs this)
+aspect fmt     # Auto-format code
 ```
+
+These are AXL tasks defined in `//.aspect/tasks/lint.axl` (registered in
+`//MODULE.aspect`). `./tools/aspect` runs the pinned CLI without direnv.
 
 ### Python Dependencies
 

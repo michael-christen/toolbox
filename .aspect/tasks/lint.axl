@@ -1,0 +1,155 @@
+# Native AXL port of the former lint.sh. Orchestrates the repo's formatting and
+# lint pipeline: generated query/ccindex files, buildifier (Bazel files),
+# the //tools check/format aggregate, prettier (Markdown), gazelle, rules_lint,
+# a forbidden-placeholder scan, and a lockfile-freshness check.
+#
+# `aspect check` verifies (CI); `aspect fmt` fixes in place. Both share _lint().
+#
+# Bazel is invoked as a subprocess (ctx.bazel exposes build/test/query but not
+# `run`/`mod`), exactly as lint.sh did, so `bazel` must resolve on PATH.
+
+# git pathspecs identifying Bazel-ish files (buildifier's default search list).
+# Literal (non-glob) names need both the bare and "**/" forms because git
+# pathspec only matches wildcard patterns at any depth.
+_BAZEL_PATHSPECS = [
+    "*.bzl",
+    "*.sky",
+    "BUILD.bazel",
+    "**/BUILD.bazel",
+    "BUILD",
+    "**/BUILD",
+    "*.BUILD",
+    "BUILD.*.bazel",
+    "BUILD.*.oss",
+    "MODULE.bazel",
+    "**/MODULE.bazel",
+    "WORKSPACE",
+    "**/WORKSPACE",
+    "WORKSPACE.bazel",
+    "**/WORKSPACE.bazel",
+    "WORKSPACE.oss",
+    "**/WORKSPACE.oss",
+    "WORKSPACE.*.bazel",
+    "WORKSPACE.*.oss",
+]
+
+def _git_files(ctx, root, pathspecs):
+    """Absolute paths of git-tracked files matching the pathspecs (may be []).
+
+    NOTE: unlike lint.sh's `xargs`, the file list is passed to a single bazel
+    invocation rather than chunked. Fine for this repo's file counts; revisit if
+    argv ever approaches the OS limit.
+    """
+    out = ctx.std.process.command("git") \
+        .args(["-C", root, "ls-files", "--"] + pathspecs) \
+        .stdout("piped").stderr("piped").spawn().wait_with_output()
+    if not out.status.success:
+        fail("git ls-files failed: " + out.stderr)
+    return [root + "/" + line for line in out.stdout.split("\n") if line]
+
+def _bazel(ctx, root, argv):
+    """Run bazel with inherited stdio (streams to the console); return exit code."""
+    return ctx.std.process.command("bazel").args(argv).current_dir(root).spawn().wait().code
+
+def _fail(ctx, step):
+    ctx.std.io.stderr.write("\n⛔️  lint step failed: " + step + "\n")
+
+def _grep_forbidden(ctx, root):
+    """Fail if the forbidden placeholder marker appears in tracked source."""
+    # Build the marker at runtime so this file never contains it literally.
+    marker = "X" * 3
+    out = ctx.std.process.command("git") \
+        .args(["-C", root, "grep", "-In", marker]) \
+        .stdout("piped").stderr("null").spawn().wait_with_output()
+    # git grep exits non-zero when there are no matches -> clean.
+    if out.status.code != 0:
+        return 0
+    ctx.std.io.stdout.write(marker + " found in source\n")
+    for line in out.stdout.split("\n"):
+        if not line:
+            continue
+        ctx.std.io.stdout.write(line + "\n")
+        # `git grep -In` format: <file>:<line>:<text>
+        parts = line.split(":")
+        ctx.std.io.stdout.write(
+            "::error file=" + parts[0] + ",line=" + parts[1] + "::" + marker + " comment found\n",
+        )
+    return 1
+
+def _lint(ctx, mode):
+    root = ctx.std.env.bazel_root_dir()
+
+    if mode == "check":
+        buildifier_args = ["-lint=off", "-mode=check", "-v=false"]
+        prettier_args = ["--check"]
+        bazel_tool = "//tools:check"
+        gazelle_args = ["-mode", "diff"]
+        rules_lint_cmd = "//tools/format:format.check"
+    else:  # "format"
+        buildifier_args = ["-lint=fix", "-mode=fix", "-v=false"]
+        prettier_args = ["--write"]
+        bazel_tool = "//tools:format"
+        gazelle_args = ["-mode", "fix"]
+        rules_lint_cmd = "//tools/format:format"
+
+    prettier_args = prettier_args + [
+        "--config",
+        root + "/.prettierrc",
+        "--ignore-path",
+        root + "/.prettierignore",
+        "--ignore-path",
+        root + "/.gitignore",
+    ]
+
+    bazel_files = _git_files(ctx, root, _BAZEL_PATHSPECS)
+    markdown_files = _git_files(ctx, root, ["*.md"])
+
+    quiet = ["--config", "quiet"]
+
+    # (label, bazel argv) in lint.sh order; --config quiet keeps output terse.
+    steps = [
+        ("query_generator", ["run"] + quiet + ["--output_groups=-mypy", "//packaging:query_generator", "--", "--mode", mode]),
+        ("generate_ccindex", ["run"] + quiet + ["--output_groups=-mypy", "//tools:generate_ccindex", "--", "--mode", mode]),
+        ("buildifier", ["run"] + quiet + ["--", "//tools/buildifier"] + buildifier_args + bazel_files),
+        (bazel_tool, ["run"] + quiet + ["--", bazel_tool]),
+        ("prettier", ["run"] + quiet + ["--", "//tools/prettier"] + prettier_args + markdown_files),
+        ("gazelle", ["run"] + quiet + ["--", "//:gazelle"] + gazelle_args),
+        (rules_lint_cmd, ["run", rules_lint_cmd]),
+    ]
+    for step in steps:
+        code = _bazel(ctx, root, step[1])
+        if code != 0:
+            _fail(ctx, step[0])
+            return code
+
+    code = _grep_forbidden(ctx, root)
+    if code != 0:
+        _fail(ctx, "forbidden-marker scan")
+        return code
+
+    # Verify MODULE.bazel.lock is up to date.
+    code = _bazel(ctx, root, ["mod", "deps", "--lockfile_mode=error"])
+    if code != 0:
+        _fail(ctx, "bazel mod deps (lockfile freshness)")
+        return code
+
+    ctx.std.io.stdout.write("\n✨ Linting completed successfully! ✨\n")
+    return 0
+
+def _check_impl(ctx):
+    return _lint(ctx, "check")
+
+check = task(
+    description = "Check formatting and lint across the repo (verify only).",
+    implementation = _check_impl,
+    args = {},
+)
+
+def _fmt_impl(ctx):
+    return _lint(ctx, "format")
+
+fmt = task(
+    description = "Auto-format and fix lint across the repo.",
+    implementation = _fmt_impl,
+    args = {},
+)

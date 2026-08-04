@@ -39,12 +39,12 @@ The target repository is **michael-christen/toolbox**. The working directory is
    - Bazel: buildifier formatting
 5. After changes, run the appropriate checks from inside the worktree:
    ```
-   ./lint.sh --mode check
+   aspect check
    bazel test //...          # or a targeted subset if the full suite is slow
    ```
 6. Fix any lint/test failures before continuing.
    ```
-   ./lint.sh --mode format
+   aspect fmt
    ```
    may help fix some of the lint failures
 

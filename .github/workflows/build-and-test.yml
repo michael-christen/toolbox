@@ -148,7 +148,10 @@ jobs:
           sudo apt-get install -y libncurses5
       - name: Lint
         run: |
-          ./lint.sh --mode check
+          # Share the entrypoint with local dev: `aspect check` runs the lint
+          # pipeline defined in //.aspect/tasks/lint.axl. ./tools/aspect resolves
+          # the pinned CLI via multitool without needing direnv.
+          ./tools/aspect check
       - name: Build
         run: |
           bazel build //...

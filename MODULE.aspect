@@ -1,0 +1,18 @@
+# MODULE.aspect is to the Aspect CLI what MODULE.bazel is to Bazel: it declares
+# AXL (Aspect eXtension Language) dependencies and registers the tasks that
+# become `aspect <task>` subcommands.
+#
+# Docs: https://docs.aspect.build/cli
+# The pinned CLI version lives in //multitool.lock.json (the `aspect` entry),
+# which is the single source of truth for which binary we run. See
+# tools/README.md for how it lands on PATH via bazel_env + direnv.
+#
+# To add a third-party AXL dependency from a GitHub release, prefer:
+#   aspect axl add <owner>/<repo>@<tag>
+# which appends an axl_archive_dep(...) call here for you.
+
+# Register our repo tasks. use_task(<path relative to this file>, <symbol>)
+# exposes the named `task(...)` as an `aspect <symbol>` subcommand.
+use_task(".aspect/tasks/lint.axl", "check")
+use_task(".aspect/tasks/lint.axl", "fmt")
+use_task(".aspect/tasks/repo.axl", "test_all")
