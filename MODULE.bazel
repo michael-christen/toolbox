@@ -280,7 +280,7 @@ git_override(
     remote = "https://github.com/RyanDraves/pico-sdk",
 )
 
-# `python.toolchain(python_version = "3.12.12", configure_coverage_tool = True)`
+# `python.toolchain(python_version = "3.12.13", configure_coverage_tool = True)`
 # below silently loses that coverage config: multiple deps (grpc, pigweed)
 # also register unpinned `python_version = "3.12"` toolchains, which
 # rules_python's MINOR_MAPPING resolves to the same "3.12.12", and
@@ -444,7 +444,7 @@ python = use_extension("@rules_python//python/extensions:python.bzl", "python")
 # Must match interpreter_version in .bazelrc
 # & mypy_cli in //:BUILD
 # LINK(7e463bc3_e4d9_4464_ba39_3217c4a86004)
-PYTHON_VERSION = "3.12.12"
+PYTHON_VERSION = "3.12.13"
 
 python.toolchain(
     configure_coverage_tool = True,
