@@ -1,0 +1,66 @@
+[ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/source/garmin_hello_worldView.mc"; @line = 1; @symbol_importdef<0> = [Toybox,1,7,13]; @symbol_importdef<1> = [Graphics,1,14,22]; ]
+import Toybox.Graphics;
+[ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/source/garmin_hello_worldView.mc"; @line = 2; @symbol_importdef<0> = [Toybox,2,7,13]; @symbol_importdef<1> = [WatchUi,2,14,21]; ]
+import Toybox.WatchUi;
+[ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/source/garmin_hello_worldView.mc"; @line = 4; @symbol_classdef = [garmin_hello_worldView,4,6,28]; @symbol_extends<0> = [WatchUi,4,37,44]; @symbol_extends<1> = [View,4,45,49]; ]
+class garmin_hello_worldView extends WatchUi.View {
+    [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/source/garmin_hello_worldView.mc"; @line = 4; ]
+    <init> {
+    }
+    [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/source/garmin_hello_worldView.mc"; @line = 4; ]
+    static
+    <init> {
+    }
+    [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/source/garmin_hello_worldView.mc"; @line = 6; @symbol_functiondef = [initialize,6,13,23]; ]
+    function initialize() as Void {
+_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_source_garmin_hello_worldView_mc_6_26_8_4_start:
+[ "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/source/garmin_hello_worldView.mc" 7 8 ]
+        symbol [ View %tmp.2 7 8 12 ];
+        %tmp.2 = getv ? :View;
+        symbol [ initialize %tmp.3 7 13 23 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_source_garmin_hello_worldView_mc_6_26_8_4_stop:
+    }
+    [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/source/garmin_hello_worldView.mc"; @line = 11; @symbol_functiondef = [onLayout,11,13,21]; @symbol_param<0> = [dc,11,22,24]; @symbol_param<0>_type<0> = [Dc,11,28,30]; ]
+    function onLayout(dc as Dc) as Void {
+_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_source_garmin_hello_worldView_mc_11_40_13_4_start:
+[ "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/source/garmin_hello_worldView.mc" 12 8 ]
+        %tmp.1 = self;
+        symbol [ setLayout %tmp.2 12 8 17 ];
+        %tmp.2 = getv function %tmp.1 :setLayout;
+        symbol [ Rez %tmp.4 12 18 21 ];
+        %tmp.4 = getv ? :Rez;
+        symbol [ Layouts %tmp.5 12 22 29 ];
+        %tmp.5 = getv %tmp.4 :Layouts;
+        symbol [ MainLayout %tmp.6 12 30 40 ];
+        %tmp.6 = getv function %tmp.5 :MainLayout;
+        %tmp.7 = lgetv %dc;
+        symbol [ dc %tmp.7 12 41 43 ];
+        %tmp.8 = invoke %tmp.5 %tmp.6(%tmp.7);
+        invoke %tmp.1 %tmp.2(%tmp.8);
+_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_source_garmin_hello_worldView_mc_11_40_13_4_stop:
+    }
+    [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/source/garmin_hello_worldView.mc"; @line = 18; @symbol_functiondef = [onShow,18,13,19]; ]
+    function onShow() as Void {
+    }
+    [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/source/garmin_hello_worldView.mc"; @line = 22; @symbol_functiondef = [onUpdate,22,13,21]; @symbol_param<0> = [dc,22,22,24]; @symbol_param<0>_type<0> = [Dc,22,28,30]; ]
+    function onUpdate(dc as Dc) as Void {
+_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_source_garmin_hello_worldView_mc_22_40_25_4_start:
+[ "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/source/garmin_hello_worldView.mc" 24 8 ]
+        symbol [ View %tmp.2 24 8 12 ];
+        %tmp.2 = getv ? :View;
+        symbol [ onUpdate %tmp.3 24 13 21 ];
+        %tmp.3 = getv function %tmp.2 :onUpdate;
+        %tmp.4 = lgetv %dc;
+        symbol [ dc %tmp.4 24 22 24 ];
+        invoke %tmp.2 %tmp.3(%tmp.4);
+_home_mchristen_devel_toolbox_nobazel_garmin_example_hello_world_garmin_hello_world_source_garmin_hello_worldView_mc_22_40_25_4_stop:
+    }
+    [ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/source/garmin_hello_worldView.mc"; @line = 30; @symbol_functiondef = [onHide,30,13,19]; ]
+    function onHide() as Void {
+    }
+}
+[ @file = "/home/mchristen/devel/toolbox/nobazel/garmin_example/hello_world/garmin_hello_world/source/garmin_hello_worldView.mc"; @line = 1; ]
+<init> {
+}
