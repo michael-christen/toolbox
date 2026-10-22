@@ -10,7 +10,7 @@ jobs:
   # Coverage and code metrics are the required checks for this workflow.
   # Lint, build, and test run in BuildBuddy (buildbuddy.yaml) which is faster.
   coverage_and_metrics:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
       pull-requests: write
@@ -31,7 +31,7 @@ jobs:
       - run: |
           git fetch origin ${{ github.base_ref }}
       - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@v1.3.1
+        uses: jlumbroso/free-disk-space@v2.0.0
         with:
           # this might remove tools that are actually needed,
           # if set to "true" but frees about 6 GB
@@ -115,7 +115,7 @@ jobs:
   # Non-required: lint, build, and test also run in BuildBuddy (buildbuddy.yaml).
   # This job exists for visibility but should not be a required branch protection check.
   build_and_test:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-26.04
     permissions:
       contents: read
     steps:
@@ -129,7 +129,7 @@ jobs:
           lfs: false
       - run: git lfs pull
       - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@v1.3.1
+        uses: jlumbroso/free-disk-space@v2.0.0
         with:
           tool-cache: false
           android: false
