@@ -31,7 +31,7 @@ jobs:
       - run: |
           git fetch origin ${{ github.base_ref }}
       - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@v1.3.1
+        uses: jlumbroso/free-disk-space@v1.3.2
         with:
           # this might remove tools that are actually needed,
           # if set to "true" but frees about 6 GB
@@ -102,7 +102,7 @@ jobs:
           comment-tag: automated-build-status
           github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload coverage report to Codecov
-        uses: codecov/codecov-action@v7.0.0
+        uses: codecov/codecov-action@v7.1.1
         with:
           verbose: true
           token: ${{ secrets.CODECOV_TOKEN }}
@@ -129,7 +129,7 @@ jobs:
           lfs: false
       - run: git lfs pull
       - name: Free Disk Space (Ubuntu)
-        uses: jlumbroso/free-disk-space@v1.3.1
+        uses: jlumbroso/free-disk-space@v1.3.2
         with:
           tool-cache: false
           android: false
